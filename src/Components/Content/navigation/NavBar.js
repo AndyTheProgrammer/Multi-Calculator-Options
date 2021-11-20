@@ -66,6 +66,12 @@ const NavBar = (props) => {
       idx: 6,
       onClick: handleClick(6, "/other_calculators"),
     },
+    {
+      linkName: "Currency",
+      tag: "div",
+      idx: 7,
+      onClick: handleClick(6, "/CurrencyConveter"),
+    },
   ];
 
   return (

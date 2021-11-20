@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import CurrencyConveter from "../Components/Pages/Main/CurrencyConveter";
 
 import {
   Volume,
@@ -47,6 +48,11 @@ function AppRoutes() {
       component: Other,
       path: "/other_calculators",
       name: "Other Calculators",
+    },
+    {
+      component: CurrencyConveter,
+      path: "/CurrencyConveter",
+      name: "Currency Conveter",
     },
   ];
 
