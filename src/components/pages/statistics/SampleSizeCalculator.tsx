@@ -1,19 +1,27 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Typography, Grid } from '@material-ui/core'
-import { useSelector } from 'react-redux'
 
 import { SampleSizeI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
 import { calculateStatistics } from '../../../services/AppCalculatorsApi'
-import { CustomBtn, Label, CustomForm } from '../../custom'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const SampleSizeCalculator = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     confience_level: '',
     population_proportion: '',
@@ -67,7 +75,7 @@ const SampleSizeCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.confienceLevel} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="confience_level"
                 placeholder={PLACEHOLDERS.number}
@@ -78,7 +86,7 @@ const SampleSizeCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.standardDeviation} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="population_proportion"
                 placeholder={PLACEHOLDERS.number}
@@ -89,7 +97,7 @@ const SampleSizeCalculator = () => {
 
             <div className="form-row">
               <Label title={LABELS.marginOfError} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="margin_of_error"
                 placeholder={PLACEHOLDERS.number}

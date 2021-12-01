@@ -1,0 +1,31 @@
+[
+  {
+    "type": "weight",
+    "units": [
+      {
+        "name": "milligram",
+        "unit": "mg"
+      },
+      {
+        "name": "gram",
+        "unit": "g"
+      },
+      {
+        "name": "kilogram",
+        "unit": "kg"
+      },
+      {
+        "name": "ounce",
+        "unit": "oz"
+      },
+      {
+        "name": "pound",
+        "unit": "lb"
+      },
+      {
+        "name": "ton",
+        "unit": "t"
+      }
+    ]
+  }
+]

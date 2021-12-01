@@ -1,0 +1,114 @@
+[
+  {
+    "type": "length",
+    "units": [
+      {
+        "name": "millimeter",
+        "unit": "mm"
+      },
+      {
+        "name": "centimeter",
+        "unit": "cm"
+      },
+      {
+        "name": "meter",
+        "unit": "m"
+      },
+      {
+        "name": "kilometer",
+        "unit": "km"
+      },
+      {
+        "name": "inch",
+        "unit": "in"
+      },
+      {
+        "name": "foot",
+        "unit": "ft"
+      },
+      {
+        "name": "yard",
+        "unit": "yd"
+      },
+      {
+        "name": "mile",
+        "unit": "mi"
+      }
+    ]
+  },
+  {
+    "type": "weight",
+    "units": [
+      {
+        "name": "milligram",
+        "unit": "mg"
+      },
+      {
+        "name": "gram",
+        "unit": "g"
+      },
+      {
+        "name": "kilogram",
+        "unit": "kg"
+      },
+      {
+        "name": "ounce",
+        "unit": "oz"
+      },
+      {
+        "name": "pound",
+        "unit": "lb"
+      },
+      {
+        "name": "ton",
+        "unit": "ton"
+      }
+    ]
+  },
+  {
+    "type": "capacity",
+    "units": [
+      {
+        "name": "milliliter",
+        "unit": "ml"
+      },
+      {
+        "name": "liter",
+        "unit": "l"
+      }
+    ]
+  },
+  {
+    "type": "time",
+    "units": [
+      {
+        "name": "second",
+        "unit": "s"
+      },
+      {
+        "name": "minute",
+        "unit": "min"
+      },
+      {
+        "name": "hour",
+        "unit": "hr"
+      },
+      {
+        "name": "day",
+        "unit": "D"
+      },
+      {
+        "name": "week",
+        "unit": "W"
+      },
+      {
+        "name": "month",
+        "unit": "M"
+      },
+      {
+        "name": "year",
+        "unit": "Y"
+      }
+    ]
+  }
+]

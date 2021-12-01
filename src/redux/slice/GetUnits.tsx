@@ -23,7 +23,7 @@ export const fetchGetUnits = createAsyncThunk('getUnits/fetchGetUnits', async ()
 })
 
 export const getUnitsSlice = createSlice({
-    name: 'getUnits',
+    name: 'getUnitsSlice',
     initialState,
     reducers: {
         setGetUnits: (state, action: PayloadAction<any[]>) => {
@@ -38,5 +38,6 @@ export const getUnitsSlice = createSlice({
     }
 })
 
+export const { setGetUnits } = getUnitsSlice.actions
+export const selectUnits = (state: RootState) => state.getUnitsSlice;
 export default getUnitsSlice.reducer
-export const {setGetUnits} = getUnitsSlice.actions

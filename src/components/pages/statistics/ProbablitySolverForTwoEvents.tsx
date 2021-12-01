@@ -1,19 +1,27 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Typography, Grid } from '@material-ui/core'
-import { useSelector } from 'react-redux'
 
 import { ProbablitySolverForTwoEventsI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
 import { calculateStatistics } from '../../../services/AppCalculatorsApi'
-import { CustomBtn, Label, CustomForm } from '../../custom'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const ProbablitySolverForTwoEvents = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     probability_of_a: '',
     probability_of_b: '',
@@ -82,7 +90,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfA} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_a"
                 placeholder={PLACEHOLDERS.number}
@@ -93,7 +101,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfB} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_b"
                 placeholder={PLACEHOLDERS.number}
@@ -104,7 +112,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfANotOccuring} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_a_not_occuring"
                 placeholder={PLACEHOLDERS.number}
@@ -115,7 +123,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfBNotOccuring} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_b_not_occuring"
                 placeholder={PLACEHOLDERS.number}
@@ -126,7 +134,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfAAndBBothOccuring} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_a_and_b_both_occuring"
                 placeholder={PLACEHOLDERS.number}
@@ -137,7 +145,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityThatAOrBOrBothOccur} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_that_a_or_b_or_both_occur"
                 placeholder={PLACEHOLDERS.number}
@@ -148,7 +156,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityThatAOrBOccursButNotBoth} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_that_a_or_b_occurs_but_not_both"
                 placeholder={PLACEHOLDERS.number}
@@ -159,7 +167,7 @@ const ProbablitySolverForTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.probabilityOfNeitherANorBOccuring} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="probability_of_neither_a_nor_b_occuring"
                 placeholder={PLACEHOLDERS.number}

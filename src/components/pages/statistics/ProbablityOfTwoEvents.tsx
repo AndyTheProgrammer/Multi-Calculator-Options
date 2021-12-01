@@ -1,19 +1,27 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Typography, Grid } from '@material-ui/core'
-import { useSelector } from 'react-redux'
 
 import { ProbablityOfTwoEventsI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
 import { calculateStatistics } from '../../../services/AppCalculatorsApi'
-import { CustomBtn, Label, CustomForm } from '../../custom'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const ProbablityOfTwoEvents = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     event_a: '',
     event_b: '',
@@ -64,7 +72,7 @@ const ProbablityOfTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.eventA} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="event_a"
                 placeholder={PLACEHOLDERS.number}
@@ -75,7 +83,7 @@ const ProbablityOfTwoEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.eventB} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="event_b"
                 placeholder={PLACEHOLDERS.number}

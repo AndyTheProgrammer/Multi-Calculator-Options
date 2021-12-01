@@ -1,19 +1,27 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
 import { CurbAndGutterBarrierI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
-import { CustomForm, CustomSelect, Label, CustomBtn } from '../../custom'
 import { calculateOthers } from '../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const CurbAndGutterBarrier = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     curb_depth: '',
     curb_depth_unit: '',
@@ -91,7 +99,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.curbDepth} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="curb_depth"
                 placeholder={PLACEHOLDERS.number}
@@ -108,7 +116,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.curbHeight} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="curb_height"
                 placeholder={PLACEHOLDERS.number}
@@ -125,7 +133,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.flagThickness} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="flag_thickness"
                 placeholder={PLACEHOLDERS.number}
@@ -142,7 +150,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.gutterWidth} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="gutter_width"
                 placeholder={PLACEHOLDERS.number}
@@ -159,7 +167,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.length} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -176,7 +184,7 @@ const CurbAndGutterBarrier = () => {
 
             <div className="form-row">
               <Label title={LABELS.quantity} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="quantity"
                 placeholder={PLACEHOLDERS.number}

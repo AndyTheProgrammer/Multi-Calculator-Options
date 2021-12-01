@@ -1,10 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import getUnitMeasure from './slice/GetUnits'
+import rootReducer from "./slice/RootReducer";
 
 export const store = configureStore({
-    reducer: {
-        unitMeasures: getUnitMeasure
-    },
+    reducer: rootReducer
 })
 
 export type RootState = ReturnType<typeof store.getState>;

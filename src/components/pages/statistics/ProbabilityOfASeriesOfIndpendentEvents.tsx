@@ -1,19 +1,27 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Typography, Grid } from '@material-ui/core'
-import { useSelector } from 'react-redux'
 
 import { ProbabilityOfASeriesOfIndpendentEventsI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateStatistics } from '../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const ProbabilityOfASeriesOfIndpendentEvents = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     event_a: '',
     a_repeat_times: '',
@@ -69,7 +77,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.eventA} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="event_a"
                 placeholder={PLACEHOLDERS.number}
@@ -80,7 +88,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.aRepeatTimes} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="a_repeat_times"
                 placeholder={PLACEHOLDERS.number}
@@ -91,7 +99,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.eventB} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="event_b"
                 placeholder={PLACEHOLDERS.number}
@@ -102,7 +110,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = () => {
 
             <div className="form-row">
               <Label title={LABELS.bRepeatTimes} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="b_repeat_times"
                 placeholder={PLACEHOLDERS.number}

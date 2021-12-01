@@ -1,19 +1,27 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Typography, Grid } from '@material-ui/core'
-import { useSelector } from 'react-redux'
 
 import { EllipsoidSurfaceAreaI } from '../../../../types'
-import { RootState } from '../../../../redux/store'
-import useStyles from '../../../../styling/CustomStyles'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../common/shared'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const EllipsoidSurfaceArea = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     axis1: '',
     axis1_unit: '',
@@ -82,7 +90,7 @@ const EllipsoidSurfaceArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.axis1} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="axis1"
                 placeholder={PLACEHOLDERS.number}
@@ -99,7 +107,7 @@ const EllipsoidSurfaceArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.axis2} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="axis2"
                 placeholder={PLACEHOLDERS.number}
@@ -116,7 +124,7 @@ const EllipsoidSurfaceArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.axis3} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="axis3"
                 placeholder={PLACEHOLDERS.number}

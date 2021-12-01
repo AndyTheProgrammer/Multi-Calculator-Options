@@ -1,0 +1,35 @@
+[
+  {
+    "type": "time",
+    "units": [
+      {
+        "name": "second",
+        "unit": "s"
+      },
+      {
+        "name": "minute",
+        "unit": "min"
+      },
+      {
+        "name": "hour",
+        "unit": "hr"
+      },
+      {
+        "name": "day",
+        "unit": "D"
+      },
+      {
+        "name": "week",
+        "unit": "W"
+      },
+      {
+        "name": "month",
+        "unit": "M"
+      },
+      {
+        "name": "year",
+        "unit": "Y"
+      }
+    ]
+  }
+]

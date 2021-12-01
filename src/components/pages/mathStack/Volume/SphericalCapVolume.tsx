@@ -4,16 +4,25 @@ import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { SphericalCapVolumeI } from '../../../../types'
-import { RootState } from '../../../../redux/store'
-import useStyles from '../../../../styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const SphericalCapVolume = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -74,7 +83,7 @@ const SphericalCapVolume = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.radius} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}
@@ -91,7 +100,7 @@ const SphericalCapVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.height} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}

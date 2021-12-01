@@ -1,19 +1,27 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Typography, Grid } from '@material-ui/core'
-import { useSelector } from 'react-redux'
 
 import { SinglePointWithKnownSlopeI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
-import { CustomForm, CustomSelect, CustomBtn, Label } from '../../custom'
 import { calculateOthers } from '../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const SinglePointWithKnownSlope = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     x_1: '',
     y_1: '',
@@ -67,7 +75,7 @@ const SinglePointWithKnownSlope = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.x1} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="x_1"
                 placeholder={PLACEHOLDERS.number}
@@ -78,7 +86,7 @@ const SinglePointWithKnownSlope = () => {
 
             <div className="form-row">
               <Label title={LABELS.y1} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="y_1"
                 placeholder={PLACEHOLDERS.number}
@@ -89,7 +97,7 @@ const SinglePointWithKnownSlope = () => {
 
             <div className="form-row">
               <Label title={LABELS.slope} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="slope"
                 placeholder={PLACEHOLDERS.number}
@@ -100,7 +108,7 @@ const SinglePointWithKnownSlope = () => {
 
             <div className="form-row">
               <Label title={LABELS.distance} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="distance"
                 placeholder={PLACEHOLDERS.number}

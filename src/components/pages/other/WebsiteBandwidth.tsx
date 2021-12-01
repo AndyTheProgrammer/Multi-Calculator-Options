@@ -1,19 +1,27 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
 import { WebsiteBandwidthI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
 import { calculateOthers } from '../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const WebsiteBandwidth = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     page_views: "",
     page_views_unit: "",
@@ -79,7 +87,7 @@ const WebsiteBandwidth = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.pageViews} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="page_views"
                 placeholder={PLACEHOLDERS.number}
@@ -96,7 +104,7 @@ const WebsiteBandwidth = () => {
 
             <div className="form-row">
               <Label title={LABELS.pageSize} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="page_size"
                 placeholder={PLACEHOLDERS.number}
@@ -114,7 +122,7 @@ const WebsiteBandwidth = () => {
 
             <div className="form-row">
               <Label title={LABELS.redundancyFactor} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="redundancy_factor"
                 placeholder={PLACEHOLDERS.number}

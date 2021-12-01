@@ -1,19 +1,27 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
 import { StairsConcreateI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
 import { calculateOthers } from '../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const StairsConcreate = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     run: '',
     run_unit: '',
@@ -85,7 +93,7 @@ const StairsConcreate = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.run} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="run"
                 placeholder={PLACEHOLDERS.number}
@@ -102,7 +110,7 @@ const StairsConcreate = () => {
 
             <div className="form-row">
               <Label title={LABELS.rise} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="rise"
                 placeholder={PLACEHOLDERS.number}
@@ -119,7 +127,7 @@ const StairsConcreate = () => {
 
             <div className="form-row">
               <Label title={LABELS.width} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="width"
                 placeholder={PLACEHOLDERS.number}
@@ -136,7 +144,7 @@ const StairsConcreate = () => {
 
             <div className="form-row">
               <Label title={LABELS.platformDepth} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="platform_depth"
                 placeholder={PLACEHOLDERS.number}
@@ -153,7 +161,7 @@ const StairsConcreate = () => {
 
             <div className="form-row">
               <Label title={LABELS.steps} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="steps"
                 placeholder={PLACEHOLDERS.number}

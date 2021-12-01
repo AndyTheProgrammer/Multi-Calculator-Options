@@ -4,16 +4,25 @@ import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { CubeVolumeCalculatorI } from '../../../../types'
-import { RootState } from '../../../../redux/store'
-import useStyles from '../../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const CubeVolume = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     edge_length: "",
     edge_unit: "",
@@ -66,7 +75,7 @@ const CubeVolume = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.edgeLength} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="edge_length"
                 placeholder={PLACEHOLDERS.number}

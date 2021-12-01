@@ -1,5 +1,5 @@
-import FIGURE from './../../common/assets/images/image-placeholder.jpg'
-import useStyles from '../../styling/CustomStyles'
+import FIGURE from './../../common/assets/image-placeholder.jpg'
+import useStyles from './../../styling/CustomStyles'
 
 function Figure() {
   const classes = useStyles();

@@ -97,6 +97,7 @@ export const CALCULATORS = {
 
 export const BUTTONS = {
   calculate: "Calculate",
+  clear: "Clear",
 };
 
 export const PLACEHOLDERS = {
@@ -106,6 +107,7 @@ export const PLACEHOLDERS = {
   type: "Type",
   method: "Method",
   date: "Date",
+  search: "Search here...",
 };
 
 export const LABELS = {
@@ -230,6 +232,7 @@ export const IDS = {
 };
 
 export const INPUT_TYPE = {
+  email: "email",
   text: "text",
   number: "number",
   button: "button",
@@ -239,12 +242,15 @@ export const INPUT_TYPE = {
 };
 
 export const COLORS = {
-  primary: "#58C4A0",
-  secondary: "#F1EFE8",
+  gradient: "linear-gradient(90deg, #3128AF 0%, #499FB8 100%)",
+  primary: "#353DB0",
+  secondary: "#e4e4e4",
   light_text_color: "#F0ECEC",
   background: "#F0ECEC",
+  gradientBackground: "linear-gradient(90deg, #fbfbfb 0%, #d1d1d1 100%)",
   paper_background: "#A8A79F",
-  text: "#595959",
+  text: "#8591b0",
+  onGradient: "#ffffff",
 };
 
 export const CALC_LABELS = {

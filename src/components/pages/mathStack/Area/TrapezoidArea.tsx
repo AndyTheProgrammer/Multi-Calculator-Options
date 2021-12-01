@@ -1,19 +1,27 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
 import { TrapezoidAreaI } from '../../../../types'
-import { RootState } from '../../../../redux/store'
-import useStyles from '../../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const TrapezoidArea = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     base1: "",
     base1_unit: "",
@@ -82,7 +90,7 @@ const TrapezoidArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.base1} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="base1"
                 placeholder={PLACEHOLDERS.number}
@@ -99,7 +107,7 @@ const TrapezoidArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.base2} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="base2"
                 placeholder={PLACEHOLDERS.number}
@@ -116,7 +124,7 @@ const TrapezoidArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.height} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}

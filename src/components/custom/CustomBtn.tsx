@@ -7,21 +7,23 @@ import { BUTTONS, COLORS } from '../../common/shared'
 const ColorButton = withStyles((theme) => ({
   root: {
     color: COLORS.background,
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.gradient,
     '&:hover': {
       backgroundColor: green[400],
     },
   },
-}))(Button);
+}))((props: any) => <Button {...props} />);
 
-const CustomBtn = () => {
+const CustomBtn = (props: any) => {
   return (
-    <div className="form d-grid gap-2 d-md-flex justify-content-md-end">
+    <div className="form d-grid gap-2 d-md-flex justify-content-md-start">
       <ColorButton
+        size="small"
         variant="contained"
         color="primary"
         type="submit"
         className="btn btn-primary"
+        {...props}
       >
         {BUTTONS.calculate}
       </ColorButton>

@@ -4,16 +4,25 @@ import { Typography, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
 import { ConicalFrustrumSurfaceAreaI } from '../../../../types'
-import { RootState } from '../../../../redux/store'
-import useStyles from '../../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const ConicalFrustrumSurfaceArea = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     top_radius: '',
     top_radius_unit: '',
@@ -82,7 +91,7 @@ const ConicalFrustrumSurfaceArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.topRadius} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="top_radius"
                 placeholder={PLACEHOLDERS.number}
@@ -99,7 +108,7 @@ const ConicalFrustrumSurfaceArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.bottomRadius} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="bottom_radius"
                 placeholder={PLACEHOLDERS.number}
@@ -116,7 +125,7 @@ const ConicalFrustrumSurfaceArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.height} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}

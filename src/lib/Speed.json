@@ -1,0 +1,15 @@
+[
+  {
+    "type": "speed",
+    "units": [
+      {
+        "name": "meters/second",
+        "unit": "ms"
+      },
+      {
+        "name": "kilometers/hour",
+        "unit": "km"
+      }
+    ]
+  }
+]

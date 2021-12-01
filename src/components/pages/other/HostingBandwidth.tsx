@@ -1,19 +1,28 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
+
 
 import { HostingBandwidthI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
 import { calculateOthers } from '../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const HostingBandwidth = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     monthly_usage: '',
     monthly_usage_unit: '',
@@ -64,7 +73,7 @@ const HostingBandwidth = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.resistanceValues} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="monthly_usage"
                 placeholder={PLACEHOLDERS.number}

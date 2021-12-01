@@ -1,27 +1,34 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
 import { ConeAreaI } from '../../../../types'
-import { RootState } from '../../../../redux/store'
-import useStyles from '../../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
-import { ConeAreaResultI } from '../../../../types/PaylaodResponeI'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const ConeSurfArea = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
     height: "",
     height_unit: "",
   })
-  const [Result, setResult] = React.useState<ConeAreaResultI>({
+  const [Result, setResult] = React.useState({
     $lateralSurfaceArea: 0,
     baseSurfaceSrea: 0,
     totalConeSurfaceArea: 0,
@@ -56,7 +63,7 @@ const ConeSurfArea = () => {
             const { payload: coneArea } = await calculateMath(payload)
             console.log('=====>', coneArea)
             if (typeof coneArea === 'object') {
-              const { $lateralSurfaceArea, totalConeSurfaceArea, baseSurfaceSrea, units }: ConeAreaResultI = coneArea
+              const { $lateralSurfaceArea, totalConeSurfaceArea, baseSurfaceSrea, units } = coneArea
               setResult({
                 $lateralSurfaceArea: $lateralSurfaceArea,
                 baseSurfaceSrea: baseSurfaceSrea,
@@ -75,7 +82,7 @@ const ConeSurfArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.radius} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="radius"
                 placeholder={PLACEHOLDERS.number}
@@ -92,7 +99,7 @@ const ConeSurfArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.height} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="height"
                 placeholder={PLACEHOLDERS.number}

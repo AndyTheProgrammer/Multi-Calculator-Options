@@ -1,0 +1,47 @@
+[
+  {
+    "type": "storage",
+    "units": [
+      {
+        "name": "bit",
+        "unit": "b"
+      },
+      {
+        "name": "byte",
+        "unit": "B"
+      },
+      {
+        "name": "kilobyte",
+        "unit": "KB"
+      },
+      {
+        "name": "megabyte",
+        "unit": "MB"
+      },
+      {
+        "name": "gigabyte",
+        "unit": "GB"
+      },
+      {
+        "name": "terabyte",
+        "unit": "TB"
+      },
+      {
+        "name": "petabyte",
+        "unit": "PB"
+      },
+      {
+        "name": "exabyte",
+        "unit": "EB"
+      },
+      {
+        "name": "zettabyte",
+        "unit": "ZB"
+      },
+      {
+        "name": "yottabyte",
+        "unit": "YB"
+      }
+    ]
+  }
+]

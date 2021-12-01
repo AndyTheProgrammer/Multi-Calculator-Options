@@ -4,13 +4,25 @@ import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
 
 import { CubeAreaI } from '../../../../types'
-import useStyles from '../../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const CubeSurfArea = () => {
-  const classes = useStyles();
   const [initialFormValues] = React.useState({
     edge_length: '',
     edge_unit: ''
@@ -64,7 +76,7 @@ const CubeSurfArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.edgeLength} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="edge_length"
                 placeholder={PLACEHOLDERS.number}

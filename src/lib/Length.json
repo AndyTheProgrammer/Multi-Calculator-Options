@@ -1,0 +1,39 @@
+[
+  {
+    "type": "length",
+    "units": [
+      {
+        "name": "millimeter",
+        "unit": "mm"
+      },
+      {
+        "name": "centimeter",
+        "unit": "cm"
+      },
+      {
+        "name": "meter",
+        "unit": "m"
+      },
+      {
+        "name": "kilometer",
+        "unit": "km"
+      },
+      {
+        "name": "inch",
+        "unit": "in"
+      },
+      {
+        "name": "foot",
+        "unit": "ft"
+      },
+      {
+        "name": "yard",
+        "unit": "yd"
+      },
+      {
+        "name": "mile",
+        "unit": "mi"
+      }
+    ]
+  }
+]

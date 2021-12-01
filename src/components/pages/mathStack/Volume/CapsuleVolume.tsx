@@ -1,19 +1,27 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
 import { CapsuleVolumeCalculatorI } from '../../../../types'
-import { RootState } from '../../../../redux/store'
-import useStyles from '../../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../common/shared'
-import { CustomForm, CustomSelect, Figure, Label, CustomBtn } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const CapsuleVolume = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -81,54 +89,45 @@ const CapsuleVolume = () => {
       >
         {({ values, handleChange, handleSubmit, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <Grid container xs>
-              <Grid item xs={4}>
-                <div className='form-row'>
-                  <Figure />
-                </div>
-              </Grid>
+            <div className="form-row">
 
-              <Grid item xs>
-                <div className="form-row">
+              <Label title={LABELS.radius} />
 
-                  <Label title={LABELS.radius} />
+              <CustomTextInput
+                type={INPUT_TYPE.number}
+                id="radius"
+                placeholder={PLACEHOLDERS.number}
+                value={values.radius}
+                onChange={handleChange}
+              />
 
-                  <CustomForm
-                    type={INPUT_TYPE.number}
-                    id="radius"
-                    placeholder={PLACEHOLDERS.number}
-                    value={values.radius}
-                    onChange={handleChange}
-                  />
+              <CustomSelect
+                id="radius_unit"
+                value={values.radius_unit}
+                onChange={handleChange('radius_unit')}
+              />
+            </div>
 
-                  <CustomSelect
-                    id="radius_unit"
-                    value={values.radius_unit}
-                    onChange={handleChange('radius_unit')}
-                  />
-                </div>
+            <div className="form-row">
+              <Label title={LABELS.height} />
 
-                <div className="form-row">
-                  <Label title={LABELS.height} />
+              <CustomTextInput
+                type={INPUT_TYPE.number}
+                id="height"
+                placeholder={PLACEHOLDERS.number}
+                value={values.height}
+                onChange={handleChange}
+              />
 
-                  <CustomForm
-                    type={INPUT_TYPE.number}
-                    id="height"
-                    placeholder={PLACEHOLDERS.number}
-                    value={values.height}
-                    onChange={handleChange}
-                  />
+              <CustomSelect
+                id="height_unit"
+                value={values.height_unit}
+                onChange={handleChange('height_unit')}
+              />
+            </div>
 
-                  <CustomSelect
-                    id="height_unit"
-                    value={values.height_unit}
-                    onChange={handleChange('height_unit')}
-                  />
-                </div>
+            <CustomBtn />
 
-                <CustomBtn />
-              </Grid>
-            </Grid>
             <div className="text-center mb-3">
               <Typography variant="subtitle1"> Volume in Radius: {Result.volumeInRadiusUnit}</Typography>
               <Typography variant="subtitle1"> Volume in Height: {Result.volumeInHeightUnit}</Typography>
@@ -140,7 +139,6 @@ const CapsuleVolume = () => {
 
           </form>
         )}
-
       </Formik>
     </div>
   )

@@ -4,16 +4,25 @@ import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { TubeVolumeCalculatorI } from '../../../../types'
-import { RootState } from '../../../../redux/store'
-import useStyles from '../../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const TubeVolume = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     outer_diameter: "",
     outer_diameter_unit: "",
@@ -81,7 +90,7 @@ const TubeVolume = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.outerDiameter} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="outer_diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -98,7 +107,7 @@ const TubeVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.innerDiameter} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="inner_diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -115,7 +124,7 @@ const TubeVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.length} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}

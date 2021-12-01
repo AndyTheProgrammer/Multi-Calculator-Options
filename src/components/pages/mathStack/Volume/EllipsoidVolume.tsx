@@ -4,16 +4,25 @@ import { Formik } from 'formik'
 import { useSelector } from 'react-redux'
 
 import { EllipsoidVolumeCalculatorI } from '../../../../types'
-import { RootState } from '../../../../redux/store'
-import useStyles from '../../../../styling/CustomStyles'
-import { CALCULATORS, BUTTONS, LABELS, PLACEHOLDERS, IDS, INPUT_TYPE } from '../../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const EllipsoidVolume = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     axis1: "",
     axis1_unit: "",
@@ -81,7 +90,7 @@ const EllipsoidVolume = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.axis1} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="axis1"
                 placeholder={PLACEHOLDERS.number}
@@ -98,7 +107,7 @@ const EllipsoidVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.axis2} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="axis2"
                 placeholder={PLACEHOLDERS.number}
@@ -115,7 +124,7 @@ const EllipsoidVolume = () => {
 
             <div className="form-row">
               <Label title={LABELS.axis3} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="axis3"
                 placeholder={PLACEHOLDERS.number}

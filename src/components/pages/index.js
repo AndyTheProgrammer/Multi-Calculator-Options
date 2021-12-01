@@ -99,11 +99,11 @@ export { default as ProfitMarginCalculator } from "./financial/ProfitMarginCalcu
 export { default as StockTradingMargin } from "./financial/StockTradingMargin";
 
 export { default as Home } from "./Home";
-export { default as Math } from "./main/Math";
-export { default as Area } from "./main/Area";
-export { default as SurfaceArea } from "./main/SurfaceArea";
-export { default as Volume } from "./main/Volume";
-export { default as Statistics } from "./main/Statistics";
-export { default as Health } from "./main/Health";
-export { default as Finance } from "./main/Finance";
-export { default as Other } from "./main/Other";
+export { default as MathPageView } from "./mainPages/Math";
+export { default as AreaPageView } from "./mainPages/Area";
+export { default as SurfaceAreaPageView } from "./mainPages/SurfaceArea";
+export { default as VolumePageView } from "./mainPages/Volume";
+export { default as StatisticsPageView } from "./mainPages/Statistics";
+export { default as FitnessAndHealthPageView } from "./mainPages/Health";
+export { default as FinancePageView } from "./mainPages/Finance";
+export { default as OtherPageView } from "./mainPages/Other";

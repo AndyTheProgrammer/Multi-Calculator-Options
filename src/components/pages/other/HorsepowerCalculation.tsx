@@ -1,19 +1,27 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
 import { HorsepowerCalculationI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
 import { calculateOthers } from '../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const HorsepowerCalculation = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     force: "",
     force_unit: "",
@@ -76,7 +84,7 @@ const HorsepowerCalculation = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.force} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="force"
                 placeholder={PLACEHOLDERS.number}
@@ -93,7 +101,7 @@ const HorsepowerCalculation = () => {
 
             <div className="form-row">
               <Label title={LABELS.distance} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="distance"
                 placeholder={PLACEHOLDERS.number}
@@ -110,7 +118,7 @@ const HorsepowerCalculation = () => {
 
             <div className="form-row">
               <Label title={LABELS.time} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="time"
                 placeholder={PLACEHOLDERS.number}

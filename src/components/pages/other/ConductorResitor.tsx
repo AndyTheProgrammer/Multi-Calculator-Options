@@ -1,19 +1,27 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
 import { ConductorResitorI } from '../../../types'
-import { RootState } from '../../../redux/store'
-import useStyles from '../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../custom'
 import { calculateOthers } from '../../../services/AppCalculatorsApi'
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../custom'
 
 const ConductorResitor = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     length: "",
     length_unit: "",
@@ -73,7 +81,7 @@ const ConductorResitor = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.length} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="length"
                 placeholder={PLACEHOLDERS.number}
@@ -90,7 +98,7 @@ const ConductorResitor = () => {
 
             <div className="form-row">
               <Label title={LABELS.diameter} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="diameter"
                 placeholder={PLACEHOLDERS.number}
@@ -108,7 +116,7 @@ const ConductorResitor = () => {
 
             <div className="form-row">
               <Label title={LABELS.conductivity} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="conductivity"
                 placeholder={PLACEHOLDERS.number}

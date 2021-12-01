@@ -1,20 +1,27 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSelector } from 'react-redux'
 
 import { EllipseAreaI } from '../../../../types'
-import { RootState } from '../../../../redux/store'
-import useStyles from '../../../../styling/CustomStyles'
-import { CALCULATORS, LABELS, PLACEHOLDERS, INPUT_TYPE } from '../../../../common/shared'
-import { CustomBtn, CustomForm, CustomSelect, Label } from '../../../custom'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
-
+import {
+  CALCULATORS,
+  LABELS,
+  PLACEHOLDERS,
+  INPUT_TYPE,
+  COLORS
+} from '../../../../common/shared'
+import {
+  CustomTextInput,
+  CustomSelect,
+  CustomBtn,
+  CustomResetBtn,
+  Label,
+  StyledTabs,
+  NoIndexTabPanel,
+} from '../../../custom'
 
 const EllipseArea = () => {
-  const classes = useStyles()
-  const measures = useSelector((state: RootState) => state.unitMeasures)
-  console.log(measures)
   const [initialFormValues] = React.useState({
     semi_major_axes_a: "",
     semi_major_axes_a_unit: "",
@@ -75,7 +82,7 @@ const EllipseArea = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-row">
               <Label title={LABELS.semiMajorAxesA} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="semi_major_axes_a"
                 placeholder={PLACEHOLDERS.number}
@@ -92,7 +99,7 @@ const EllipseArea = () => {
 
             <div className="form-row">
               <Label title={LABELS.semiMajorAxesB} />
-              <CustomForm
+              <CustomTextInput
                 type={INPUT_TYPE.number}
                 id="semi_major_axes_b"
                 placeholder={PLACEHOLDERS.number}
