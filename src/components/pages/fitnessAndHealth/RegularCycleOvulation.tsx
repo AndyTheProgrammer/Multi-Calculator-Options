@@ -72,117 +72,115 @@ const RegularCycleOvulation = () => {
 
   return (
     <>
-      <Grid container item xs={12} sm={10}>
-        {/* Form grid */}
-        <Grid item xs={12} sm={8}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography className="text-center">
-                    {CALCULATORS.regularCycleOvulation}
-                  </Typography>
-                </div>
-              </StyledTabs>
+      {/* Form grid */}
+      <Grid item xs={12} sm={8}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography className="text-center">
+                  {CALCULATORS.regularCycleOvulation}
+                </Typography>
+              </div>
+            </StyledTabs>
 
-              <NoIndexTabPanel>
-                <Formik
-                  initialValues={initialFormValues}
-                  onSubmit={async ({
+            <NoIndexTabPanel>
+              <Formik
+                initialValues={initialFormValues}
+                onSubmit={async ({
+                  cycle_days,
+                  previous_cycle_start_date
+                }, { setSubmitting }) => {
+                  const payload: RegularCycleOvulationI = {
                     cycle_days,
-                    previous_cycle_start_date
-                  }, { setSubmitting }) => {
-                    const payload: RegularCycleOvulationI = {
-                      cycle_days,
-                      previous_cycle_start_date,
-                      method: 'regularCycleOvulationCalculator'
+                    previous_cycle_start_date,
+                    method: 'regularCycleOvulationCalculator'
+                  }
+                  console.log(JSON.stringify(payload))
+                  try {
+                    const { payload: regularOvulationCycle } = await calculateHealth(payload)
+                    console.log('=====>', regularOvulationCycle)
+                    if (typeof regularOvulationCycle === 'object') {
+                      const { importantDatesForCurrentCycle, importantDatesNextSixCycles } = regularOvulationCycle
+                      setResult({
+                        importantDatesForCurrentCycle: importantDatesForCurrentCycle,
+                        importantDatesNextSixCycles: importantDatesNextSixCycles
+                      })
                     }
-                    console.log(JSON.stringify(payload))
-                    try {
-                      const { payload: regularOvulationCycle } = await calculateHealth(payload)
-                      console.log('=====>', regularOvulationCycle)
-                      if (typeof regularOvulationCycle === 'object') {
-                        const { importantDatesForCurrentCycle, importantDatesNextSixCycles } = regularOvulationCycle
-                        setResult({
-                          importantDatesForCurrentCycle: importantDatesForCurrentCycle,
-                          importantDatesNextSixCycles: importantDatesNextSixCycles
-                        })
-                      }
-                    } catch (err) {
-                      console.log('====>', err)
-                    }
-                  }}
-                >
-                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                    <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
-                        <Label title={LABELS.previousCycleStartDate} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.date}
-                          id="previous_cycle_start_date"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.previous_cycle_start_date}
-                          onChange={handleChange}
-                        />
-                      </div>
+                  } catch (err) {
+                    console.log('====>', err)
+                  }
+                }}
+              >
+                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                  <form onSubmit={handleSubmit} className="form-container">
+                    <div className="form-row">
+                      <Label title={LABELS.previousCycleStartDate} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.date}
+                        id="previous_cycle_start_date"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.previous_cycle_start_date}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.cycleDays} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="cycle_days"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.cycle_days}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.cycleDays} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="cycle_days"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.cycle_days}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-                        <CustomBtn />
-                        <CustomResetBtn
-                          onHandleClick={() => resetForm()}
-                        />
-                      </div>
-                    </form>
-                  )}
-                </Formik>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
+                    <div
+                      className="form-row"
+                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                    >
+                      <CustomBtn />
+                      <CustomResetBtn
+                        onHandleClick={() => resetForm()}
+                      />
+                    </div>
+                  </form>
+                )}
+              </Formik>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
+      </Grid>
 
-        {/* Result grid */}
-        <Grid item xs={12} sm={4}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography>Result</Typography>
-                </div>
-              </StyledTabs>
+      {/* Result grid */}
+      <Grid item xs={12} sm={4}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography>Result</Typography>
+              </div>
+            </StyledTabs>
 
-              <NoIndexTabPanel>
-                <div className="text-center mb-3">
-                  <Typography variant="subtitle1">
-                    Important dates for current cycle: {Result.importantDatesForCurrentCycle}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Important dates for next 6 cycles: {Result.importantDatesNextSixCycles}
-                  </Typography>
-                </div>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
+            <NoIndexTabPanel>
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1">
+                  Important dates for current cycle: {Result.importantDatesForCurrentCycle}
+                </Typography>
+                <Typography variant="subtitle1">
+                  Important dates for next 6 cycles: {Result.importantDatesNextSixCycles}
+                </Typography>
+              </div>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
       </Grid>
     </>
   )

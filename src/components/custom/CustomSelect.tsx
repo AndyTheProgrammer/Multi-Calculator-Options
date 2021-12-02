@@ -13,6 +13,21 @@ import Weight from './../../lib/Weight.json'
 const CustomSelect = (props: any) => {
   const { id, value, measurement } = props
 
+  const genders = [
+    {
+      type: "male",
+      label: "Male"
+    },
+    {
+      type: "female",
+      label: "Female"
+    },
+    {
+      type: "other",
+      label: "Other"
+    }
+  ]
+
   // If you have a better way to make this happen, have at it using the Units file, comparing the `measurement` to the `type`, and return the units for that object.
   if (measurement === "capacity") {
     return (
@@ -152,6 +167,27 @@ const CustomSelect = (props: any) => {
                 {name}
               </option>
             ))
+          ))}
+        </Field>
+      </div>
+    )
+  } if (measurement === "gender") {
+    return (
+      <div className="form-group col">
+        <Field
+          as="select"
+          id={id}
+          className="form-control"
+          value={value}
+        >
+          <option selected style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Select gender</option>
+          {genders.map(({ type, label }) => (
+            <option
+              key={type}
+              value={type}
+            >
+              {label}
+            </option>
           ))}
         </Field>
       </div>

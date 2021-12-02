@@ -15,6 +15,7 @@ import {
 import {
   CustomTextInput,
   CustomBtn,
+  CustomSelect,
   CustomResetBtn,
   Label,
   StyledTabs,
@@ -74,155 +75,148 @@ const InternationalSystemBfc = () => {
 
   return (
     <>
-      <Grid container item xs={12} sm={10}>
-        {/* Form grid */}
-        <Grid item xs={12} sm={8}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography className="text-center">
-                    {CALCULATORS.internationalSystemBfc}
-                  </Typography>
-                </div>
-              </StyledTabs>
+      {/* Form grid */}
+      <Grid item xs={12} sm={8}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography className="text-center">
+                  {CALCULATORS.internationalSystemBfc}
+                </Typography>
+              </div>
+            </StyledTabs>
 
-              <NoIndexTabPanel>
-                <Formik
-                  initialValues={initialFormValues}
-                  onSubmit={async ({
+            <NoIndexTabPanel>
+              <Formik
+                initialValues={initialFormValues}
+                onSubmit={async ({
+                  height,
+                  neck,
+                  gender,
+                  hip,
+                  waist,
+                }, { setSubmitting }) => {
+                  const payload: InternationalSystemBfcI = {
                     height,
                     neck,
                     gender,
                     hip,
                     waist,
-                  }, { setSubmitting }) => {
-                    const payload: InternationalSystemBfcI = {
-                      height,
-                      neck,
-                      gender,
-                      hip,
-                      waist,
-                      method: 'InternationalSystemUnitBFP'
+                    method: 'InternationalSystemUnitBFP'
+                  }
+                  console.log(JSON.stringify(payload))
+                  try {
+                    const { payload: internationalSystemBFC } = await calculateHealth(payload)
+                    console.log('=====>', internationalSystemBFC)
+                    if (typeof internationalSystemBFC === 'object') {
+                      const { bfc } = internationalSystemBFC
+                      setResult({
+                        bfc: bfc,
+                      })
                     }
-                    console.log(JSON.stringify(payload))
-                    try {
-                      const { payload: internationalSystemBFC } = await calculateHealth(payload)
-                      console.log('=====>', internationalSystemBFC)
-                      if (typeof internationalSystemBFC === 'object') {
-                        const { bfc } = internationalSystemBFC
-                        setResult({
-                          bfc: bfc,
-                        })
-                      }
-                    } catch (err) {
-                      console.log('====>', err)
-                    }
-                  }}
-                >
-                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                    <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
-                        <Label title={LABELS.height} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="height"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.height}
-                          onChange={handleChange}
-                        />
-                      </div>
+                  } catch (err) {
+                    console.log('====>', err)
+                  }
+                }}
+              >
+                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                  <form onSubmit={handleSubmit} className="form-container">
+                    <div className="form-row">
+                      <Label title={LABELS.height} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="height"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.height}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.neck} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="neck"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.neck}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.neck} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="neck"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.neck}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.hip} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="hip"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.hip}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.hip} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="hip"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.hip}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.waist} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="waist"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.waist}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.waist} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="waist"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.waist}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.gender} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.text}
-                          id="gender"
-                          placeholder={PLACEHOLDERS.gender}
-                          value={values.gender}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.gender} />
+                      <CustomSelect
+                        id="gender"
+                        measurement="gender"
+                        value={values.gender}
+                        onChange={handleChange('gender')}
+                      />
+                    </div>
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-                        <CustomBtn />
-                        <CustomResetBtn
-                          onHandleClick={() => resetForm()}
-                        />
-                      </div>
-                    </form>
-                  )}
-                </Formik>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
-
-        {/* Result grid */}
-        <Grid item xs={12} sm={4}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography>Result</Typography>
-                </div>
-              </StyledTabs>
-
-              <NoIndexTabPanel>
-                <div className="text-center mb-3">
-                  <Typography variant="subtitle1">BFC: {Result.bfc}</Typography>
-                </div>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
+                    <div
+                      className="form-row"
+                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                    >
+                      <CustomBtn />
+                      <CustomResetBtn
+                        onHandleClick={() => resetForm()}
+                      />
+                    </div>
+                  </form>
+                )}
+              </Formik>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
       </Grid>
 
+      {/* Result grid */}
+      <Grid item xs={12} sm={4}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography>Result</Typography>
+              </div>
+            </StyledTabs>
 
-
-
+            <NoIndexTabPanel>
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1">BFC: {Result.bfc}</Typography>
+              </div>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
+      </Grid>
     </>
   )
 }

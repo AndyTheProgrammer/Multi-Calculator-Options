@@ -80,153 +80,144 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
 
   return (
     <>
-      <Grid container item xs={12} sm={10}>
-        {/* Form grid */}
-        <Grid item xs={12} sm={8}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography className="text-center">
-                    {CALCULATORS.defearedPaymentsLumpsumAtMaturity}
-                  </Typography>
-                </div>
-              </StyledTabs>
+      {/* Form grid */}
+      <Grid item xs={12} sm={8}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography className="text-center">
+                  {CALCULATORS.defearedPaymentsLumpsumAtMaturity}
+                </Typography>
+              </div>
+            </StyledTabs>
 
-              <NoIndexTabPanel>
-                <Formik
-                  initialValues={initialFormValues}
-                  onSubmit={async ({
+            <NoIndexTabPanel>
+              <Formik
+                initialValues={initialFormValues}
+                onSubmit={async ({
+                  interest_rate,
+                  loan_amount,
+                  number_of_months,
+                  number_of_years,
+                }, { setSubmitting }) => {
+                  const payload: DefearedPaymentsLumpsumAtMaturityI = {
                     interest_rate,
                     loan_amount,
                     number_of_months,
                     number_of_years,
-                  }, { setSubmitting }) => {
-                    const payload: DefearedPaymentsLumpsumAtMaturityI = {
-                      interest_rate,
-                      loan_amount,
-                      number_of_months,
-                      number_of_years,
-                      method: 'DeferedPaymentLumpSumAtMaturity'
+                    method: 'DeferedPaymentLumpSumAtMaturity'
+                  }
+                  console.log(JSON.stringify(payload))
+                  try {
+                    const { payload: deferedPaymentLumpsumAtMaturity } = await calculateFinances(payload)
+                    console.log('=====>', deferedPaymentLumpsumAtMaturity)
+                    const { amountDueAtLoanMaturity, totalInterest, currency } = deferedPaymentLumpsumAtMaturity
+                    if (typeof deferedPaymentLumpsumAtMaturity === 'object') {
+                      setResult({
+                        amountDueAtLoanMaturity: amountDueAtLoanMaturity,
+                        totalInterest: totalInterest,
+                        currency: currency
+                      })
                     }
-                    console.log(JSON.stringify(payload))
-                    try {
-                      const { payload: deferedPaymentLumpsumAtMaturity } = await calculateFinances(payload)
-                      console.log('=====>', deferedPaymentLumpsumAtMaturity)
-                      const { amountDueAtLoanMaturity, totalInterest, currency } = deferedPaymentLumpsumAtMaturity
-                      if (typeof deferedPaymentLumpsumAtMaturity === 'object') {
-                        setResult({
-                          amountDueAtLoanMaturity: amountDueAtLoanMaturity,
-                          totalInterest: totalInterest,
-                          currency: currency
-                        })
-                      }
-                    } catch (err) {
-                      console.log('====>', err)
-                    }
-                  }}
-                >
-                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                    <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
-                        <Label title={LABELS.interestRate} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="interest_rate"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.interest_rate}
-                          onChange={handleChange}
-                        />
-                      </div>
+                  } catch (err) {
+                    console.log('====>', err)
+                  }
+                }}
+              >
+                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                  <form onSubmit={handleSubmit} className="form-container">
+                    <div className="form-row">
+                      <Label title={LABELS.interestRate} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="interest_rate"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.interest_rate}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.creditCardBalance} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="loan_amount"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.loan_amount}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.creditCardBalance} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="loan_amount"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.loan_amount}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.numberOfMonths} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="number_of_months"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.number_of_months}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.numberOfMonths} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="number_of_months"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.number_of_months}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.numberOfYears} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="number_of_years"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.number_of_years}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.numberOfYears} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="number_of_years"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.number_of_years}
+                        onChange={handleChange}
+                      />
+                    </div>
 
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-                        <CustomBtn />
-                        <CustomResetBtn
-                          onHandleClick={() => resetForm()}
-                        />
-                      </div>
-                    </form>
-                  )}
-                </Formik>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
-
-        {/* Result grid */}
-        <Grid item xs={12} sm={4}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography>Result</Typography>
-                </div>
-              </StyledTabs>
-
-              <NoIndexTabPanel>
-                <div className="text-center mb-3">
-                  <Typography variant="subtitle1">
-                    Amount due at loan maturity: {Result.currency}{Result.amountDueAtLoanMaturity}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Total interest: {Result.currency}{Result.totalInterest}
-                  </Typography>
-                </div>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
+                    <div
+                      className="form-row"
+                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                    >
+                      <CustomBtn />
+                      <CustomResetBtn
+                        onHandleClick={() => resetForm()}
+                      />
+                    </div>
+                  </form>
+                )}
+              </Formik>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
       </Grid>
 
+      {/* Result grid */}
+      <Grid item xs={12} sm={4}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography>Result</Typography>
+              </div>
+            </StyledTabs>
 
-
-
-
-
-
+            <NoIndexTabPanel>
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1">
+                  Amount due at loan maturity: {Result.currency}{Result.amountDueAtLoanMaturity}
+                </Typography>
+                <Typography variant="subtitle1">
+                  Total interest: {Result.currency}{Result.totalInterest}
+                </Typography>
+              </div>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
+      </Grid>
     </>
   )
 }

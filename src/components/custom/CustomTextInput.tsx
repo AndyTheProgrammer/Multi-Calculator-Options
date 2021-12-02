@@ -5,21 +5,27 @@ interface CustomTextInputProps {
   type: string | any;
   id: string;
   name: string;
-  placeholder: any,
+  placeholder: any;
+  value: any;
+  onChange: {
+    (e: React.ChangeEvent<any>): void;
+    <T_1 = string | React.ChangeEvent<any>>(field: T_1): T_1 extends React.ChangeEvent<any> ? void : (e: string | React.ChangeEvent<any>) => void;
+  };
 }
 
 const CustomTextInput = (props: any) => {
-  const { type, id, name, placeholder } = props
+  const { type, id, name, placeholder, value, onChange } = props
   return (
     <div className="form-group col">
       <Field
-        className="form-control"
         type={type}
-        id={id}
+        className="form-control"
         name={name}
+        id={id}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
-      <ErrorMessage name={name} component="div" />
     </div>
   )
 }

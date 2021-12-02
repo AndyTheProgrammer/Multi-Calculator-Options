@@ -72,126 +72,124 @@ const PeroidCalculator = () => {
 
   return (
     <>
-      <Grid container item xs={12} sm={10}>
-        {/* Form grid */}
-        <Grid item xs={12} sm={8}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography className="text-center">
-                    {CALCULATORS.peroidCalculator}
-                  </Typography>
-                </div>
-              </StyledTabs>
+      {/* Form grid */}
+      <Grid item xs={12} sm={8}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography className="text-center">
+                  {CALCULATORS.peroidCalculator}
+                </Typography>
+              </div>
+            </StyledTabs>
 
-              <NoIndexTabPanel>
-                <Formik
-                  initialValues={initialFormValues}
-                  onSubmit={async ({
+            <NoIndexTabPanel>
+              <Formik
+                initialValues={initialFormValues}
+                onSubmit={async ({
+                  start_date_of_last_cycle,
+                  cycle_length,
+                  last_period_days,
+                }, { setSubmitting }) => {
+                  const payload: PeroidCalculatorI = {
                     start_date_of_last_cycle,
                     cycle_length,
                     last_period_days,
-                  }, { setSubmitting }) => {
-                    const payload: PeroidCalculatorI = {
-                      start_date_of_last_cycle,
-                      cycle_length,
-                      last_period_days,
-                      method: 'PeriodCalculator'
+                    method: 'PeriodCalculator'
+                  }
+                  console.log(JSON.stringify(payload))
+                  try {
+                    const { payload: periodCalculator } = await calculateHealth(payload)
+                    console.log('=====>', periodCalculator)
+                    if (typeof periodCalculator === 'object') {
+                      const { period } = periodCalculator
+                      setResult({
+                        period: period,
+                      })
                     }
-                    console.log(JSON.stringify(payload))
-                    try {
-                      const { payload: periodCalculator } = await calculateHealth(payload)
-                      console.log('=====>', periodCalculator)
-                      if (typeof periodCalculator === 'object') {
-                        const { period } = periodCalculator
-                        setResult({
-                          period: period,
-                        })
-                      }
-                    } catch (err) {
-                      console.log('====>', err)
-                    }
-                  }}
-                >
-                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                    <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
-                        <Label title={LABELS.previousCycleStartDate} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.date}
-                          id="start_date_of_last_cycle"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.start_date_of_last_cycle}
-                          onChange={handleChange}
-                        />
-                      </div>
+                  } catch (err) {
+                    console.log('====>', err)
+                  }
+                }}
+              >
+                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                  <form onSubmit={handleSubmit} className="form-container">
+                    <div className="form-row">
+                      <Label title={LABELS.previousCycleStartDate} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.date}
+                        id="start_date_of_last_cycle"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.start_date_of_last_cycle}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.cycleLength} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="cycle_length"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.cycle_length}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.cycleLength} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="cycle_length"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.cycle_length}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.lastPeriodDays} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="last_period_days"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.last_period_days}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.lastPeriodDays} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="last_period_days"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.last_period_days}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-                        <CustomBtn />
-                        <CustomResetBtn
-                          onHandleClick={() => resetForm()}
-                        />
-                      </div>
-                    </form>
-                  )}
-                </Formik>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
+                    <div
+                      className="form-row"
+                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                    >
+                      <CustomBtn />
+                      <CustomResetBtn
+                        onHandleClick={() => resetForm()}
+                      />
+                    </div>
+                  </form>
+                )}
+              </Formik>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
+      </Grid>
 
-        {/* Result grid */}
-        <Grid item xs={12} sm={4}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography>Result</Typography>
-                </div>
-              </StyledTabs>
+      {/* Result grid */}
+      <Grid item xs={12} sm={4}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography>Result</Typography>
+              </div>
+            </StyledTabs>
 
-              <NoIndexTabPanel>
-                <div className="text-center mb-3">
-                  <Typography variant="subtitle1">
-                    Period: {Result.period}
-                  </Typography>
-                </div>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
+            <NoIndexTabPanel>
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1">
+                  Period: {Result.period}
+                </Typography>
+              </div>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
       </Grid>
     </>
   )
