@@ -21,6 +21,8 @@ import {
   NoIndexTabPanel,
 } from '../../../custom'
 
+//Needs to be Refactored. Waiting on Martin's End!
+
 const TriangleArea = () => {
   const [initialFormValues] = React.useState({
     sideA: "",

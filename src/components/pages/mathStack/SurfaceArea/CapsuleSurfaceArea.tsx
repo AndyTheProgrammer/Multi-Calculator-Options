@@ -32,10 +32,22 @@ const CapsuleSurfaceArea = () => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    radius: 0,
-    height: 0,
-    unit: ''
+    submittedradius: 0,
+    submitted_height: 0,
+    units: ''
   })
+
+  const [resultTwo, setResultTwo] = React.useState({
+    surfaceAreaInradiusUnit: 0,
+    surfaceAreaInheightUnit: 0,
+    radiusInheightUnit: 0,
+    $heightInradiusUnit: 0,
+    submittedradius: '',
+    submitted_height: '',
+  })
+
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
 
   return (
     <div>
@@ -64,16 +76,39 @@ const CapsuleSurfaceArea = () => {
           try {
             const { payload: CapsuleSurfaceArea } = await calculateMath(payload)
             console.log('=====>', CapsuleSurfaceArea)
-            const { surfaceArea, radius, height, unit
+            const {
+              surfaceArea,
+              submittedradius,
+              submitted_height,
+              units,
+              unitType,
+              surfaceAreaInradiusUnit,
+              surfaceAreaInheightUnit,
+              radiusInheightUnit,
+              $heightInradiusUnit,
             } = CapsuleSurfaceArea
-            if (typeof CapsuleSurfaceArea === 'object') {
+            if (typeof CapsuleSurfaceArea === 'object' && unitType === true) {
+              setSelectedResult(unitType)
               setResult({
                 surfaceArea: surfaceArea,
-                radius: radius,
-                height: height,
-                unit: unit
+                submittedradius: submittedradius,
+                submitted_height: submitted_height,
+                units: units,
               })
             }
+
+            if (typeof CapsuleSurfaceArea === 'object' && unitType === false) {
+              setSelectedResult(unitType)
+              setResultTwo({
+                surfaceAreaInheightUnit: surfaceAreaInheightUnit,
+                surfaceAreaInradiusUnit: surfaceAreaInradiusUnit,
+                radiusInheightUnit: radiusInheightUnit,
+                $heightInradiusUnit: $heightInradiusUnit,
+                submitted_height: submitted_height,
+                submittedradius: submittedradius
+              })
+            }
+
             resetForm()
           } catch (err) {
             console.log('====>', err)
@@ -117,13 +152,25 @@ const CapsuleSurfaceArea = () => {
             </div>
 
             <CustomBtn />
+            {selectedResult ? (
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
+                <Typography variant="subtitle1"> Radius: {Result.submitted_height} </Typography>
+                <Typography variant="subtitle1"> Height: {Result.submittedradius} </Typography>
+                <Typography variant="subtitle1"> Unit: {Result.units} </Typography>
+              </div>
+            ) : (
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1">surfaceAreaInradiusUnit: {resultTwo.surfaceAreaInradiusUnit}</Typography>
+                <Typography variant="subtitle1"> surfaceAreaInheightUnit: {resultTwo.surfaceAreaInheightUnit} </Typography>
+                <Typography variant="subtitle1"> submittedradius: {resultTwo.submittedradius} </Typography>
+                <Typography variant="subtitle1"> submitted_height: {resultTwo.submitted_height} </Typography>
+                <Typography variant="subtitle1"> submitted_height: {resultTwo.radiusInheightUnit} </Typography>
+                <Typography variant="subtitle1"> submitted_height: {resultTwo.$heightInradiusUnit} </Typography>
 
-            <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Radius: {Result.radius} </Typography>
-              <Typography variant="subtitle1"> Height: {Result.height} </Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit} </Typography>
-            </div>
+              </div>
+            )}
+
 
           </form>
         )}

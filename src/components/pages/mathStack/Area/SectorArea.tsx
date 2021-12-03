@@ -30,10 +30,18 @@ const SectorArea = () => {
   })
   const [Result, setResult] = React.useState({
     area: 0,
-    radius: 0,
-    angle: 0,
-    unit: ''
+    radiusUnits: 0,
+    angleUnit: 0,
+    submittedradius: '',
+    submitted_angle: '',
   })
+
+  const [resultTwo, setResultTwo] = React.useState({
+   
+  })
+
+
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
   return (
     <div>
@@ -62,15 +70,22 @@ const SectorArea = () => {
           try {
             const { payload: sectorArea } = await calculateMath(payload)
             console.log('=====>', sectorArea)
-            const { area, unit, radius, angle
+            const { area, unitType, radiusUnits, angleUnit, submittedradius, submitted_angle
             } = sectorArea
-            if (typeof sectorArea === 'object') {
+            if (typeof sectorArea === 'object' && unitType === true) {
+              setSelectedResult(unitType)
               setResult({
                 area: area,
-                radius: radius,
-                angle: angle,
-                unit: unit
+                radiusUnits: radiusUnits,
+                angleUnit: angleUnit,
+                submitted_angle: submitted_angle,
+                submittedradius: submittedradius,
+
               })
+            }
+            if (typeof sectorArea === 'object' && unitType === true) {
+              setSelectedResult(unitType)
+
             }
             resetForm()
           } catch (err) {
@@ -116,12 +131,12 @@ const SectorArea = () => {
 
             <CustomBtn />
 
-            <div className="text-center mb-3">
+            {/* <div className="text-center mb-3">
               <Typography variant="subtitle1"> Area: {Result.area}</Typography>
               <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
               <Typography variant="subtitle1"> Angle: {Result.angle}</Typography>
               <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-            </div>
+            </div> */}
 
           </form>
         )}

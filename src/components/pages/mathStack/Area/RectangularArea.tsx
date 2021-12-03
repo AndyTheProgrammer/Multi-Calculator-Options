@@ -20,6 +20,7 @@ import {
   StyledTabs,
   NoIndexTabPanel,
 } from '../../../custom'
+import { RectangleAreaI } from '../../../../types/MathInterfaces'
 
 const RectangularArea = () => {
   const [initialFormValues] = React.useState({
@@ -32,11 +33,22 @@ const RectangularArea = () => {
   })
   const [Result, setResult] = React.useState({
     area: 0,
-    length: 0,
-    width: 0,
-    height: 0,
-    unit: ''
+    submittedLength: 0,
+    submitted_width: 0,
+    units: ''
   })
+
+  const [resultTwo, setResultTwo] = React.useState({
+    areaInLengthUnit: 0,
+    areaInWidthUnit: 0,
+    lengthInWidthUnit: 0,
+    $widthInlengthUnit: 0,
+    submittedLength: '',
+    submitted_width: ''
+  })
+
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
 
   return (
     <div>
@@ -56,30 +68,49 @@ const RectangularArea = () => {
           height,
           height_unit
         }, { setSubmitting, resetForm }) => {
-          const payload: RectangularAreaI = {
+          const payload: RectangleAreaI = {
             length,
             length_unit,
             width,
             width_unit,
-            height,
-            height_unit,
             method: 'rectangleArea'
           }
           console.log(JSON.stringify(payload))
           try {
             const { payload: rectangleArea } = await calculateMath(payload)
             console.log('=====>', rectangleArea)
-            const { area, unit, length, width, height
+            const { area,
+              units,
+              submittedLength,
+              submitted_width,
+              unitType,
+              areaInLengthUnit,
+              areaInWidthUnit,
+              lengthInWidthUnit,
+              $widthInlengthUnit,
             } = rectangleArea
-            if (typeof rectangleArea === 'object') {
+            if (typeof rectangleArea === 'object' && unitType === true) {
+              setSelectedResult(unitType)
               setResult({
                 area: area,
-                length: length,
-                width: width,
-                height: height,
-                unit: unit
+                submittedLength: submittedLength,
+                submitted_width: submitted_width,
+                units: units
               })
             }
+
+            if (typeof rectangleArea === 'object' && unitType === false) {
+              setSelectedResult(unitType)
+              setResultTwo({
+                areaInLengthUnit: areaInLengthUnit,
+                areaInWidthUnit: areaInWidthUnit,
+                lengthInWidthUnit: lengthInWidthUnit,
+                $widthInlengthUnit: $widthInlengthUnit,
+                submittedLength: submittedLength,
+                submitted_width: submitted_width
+              })
+            }
+
             resetForm()
           } catch (err) {
             console.log('====>', err)
@@ -143,14 +174,21 @@ const RectangularArea = () => {
 
 
             <CustomBtn />
-
-            <div className="text-center mb-3">
+            {selectedResult ? (<div className="text-center mb-3">
               <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-              <Typography variant="subtitle1"> Length: {Result.length}</Typography>
-              <Typography variant="subtitle1"> Width: {Result.width}</Typography>
-              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-            </div>
+              <Typography variant="subtitle1"> Length: {Result.submittedLength}</Typography>
+              <Typography variant="subtitle1"> Width: {Result.submitted_width}</Typography>
+              <Typography variant="subtitle1"> Unit: {Result.units}</Typography>
+            </div>) : (<div className="text-center mb-3">
+              <Typography variant="subtitle1"> areaInLengthUnit: {resultTwo.areaInLengthUnit}</Typography>
+              <Typography variant="subtitle1"> areaInWidthUnit: {resultTwo.areaInWidthUnit}</Typography>
+              <Typography variant="subtitle1"> lengthInWidthUnit: {resultTwo.lengthInWidthUnit}</Typography>
+              <Typography variant="subtitle1"> submittedLength: {resultTwo.submittedLength}</Typography>              <Typography variant="subtitle1"> submittedLength: {resultTwo.submittedLength}</Typography>
+              <Typography variant="subtitle1"> submitted_width: {resultTwo.submitted_width}</Typography>
+              <Typography variant="subtitle1"> widthInlengthUnit: {resultTwo.$widthInlengthUnit}</Typography>
+
+            </div>)}
+
 
           </form>
         )}

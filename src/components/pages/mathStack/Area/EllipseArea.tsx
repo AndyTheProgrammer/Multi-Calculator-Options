@@ -34,6 +34,16 @@ const EllipseArea = () => {
     area: 0,
     unit: ''
   })
+  const [resultTwo, setResultTwo] = React.useState({
+    areaInsemi_major_axes_aUnit: 0,
+    areaInsemi_major_axes_bUnit: 0,
+    semi_major_axes_aInsemi_major_axes_bUnit: 0,
+    $semi_major_axes_bInsemi_major_axes_aUnit: 0,
+    submittedsemi_major_axes_a: 0,
+    submitted_semi_major_axes_b: 0,
+
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(false)
 
   return (
     <div>
@@ -62,15 +72,39 @@ const EllipseArea = () => {
           try {
             const { payload: ellipseArea } = await calculateMath(payload)
             console.log('=====>', ellipseArea)
-            const { area, unit, semi_major_axes_a, semi_major_axes_b, height
+            const {
+              area,
+              unit,
+              semi_major_axes_a,
+              semi_major_axes_b, unitType,
+              areaInsemi_major_axes_aUnit,
+              areaInsemi_major_axes_bUnit,
+              semi_major_axes_aInsemi_major_axes_bUnit,
+              $semi_major_axes_bInsemi_major_axes_aUnit,
+              submittedsemi_major_axes_a,
+              submitted_semi_major_axes_b,
+
             } = ellipseArea
-            if (typeof ellipseArea === 'object') {
+            if (typeof ellipseArea === 'object' && unitType === true) {
+              setSelectedResult(unitType)
               setResult({
                 area: area,
                 semi_major_axes_a: semi_major_axes_a,
                 semi_major_axes_b: semi_major_axes_b,
                 unit: unit
               })
+            }
+            if (typeof ellipseArea === 'object' && unitType === false) {
+              setSelectedResult(unitType)
+              setResultTwo({
+                areaInsemi_major_axes_aUnit: areaInsemi_major_axes_aUnit,
+                areaInsemi_major_axes_bUnit: areaInsemi_major_axes_bUnit,
+                semi_major_axes_aInsemi_major_axes_bUnit: semi_major_axes_aInsemi_major_axes_bUnit,
+                $semi_major_axes_bInsemi_major_axes_aUnit: $semi_major_axes_bInsemi_major_axes_aUnit,
+                submitted_semi_major_axes_b: submitted_semi_major_axes_b,
+                submittedsemi_major_axes_a: submittedsemi_major_axes_a
+              })
+
             }
             resetForm()
           } catch (err) {
@@ -115,14 +149,23 @@ const EllipseArea = () => {
             </div>
 
             <CustomBtn />
-
-            <div className="text-center mb-3">
+            {selectedResult ? (<div className="text-center mb-3">
               <Typography variant="subtitle1">Area: {Result.area}</Typography>
               <Typography variant="subtitle1">Semi major axes A: {Result.semi_major_axes_a}</Typography>
               <Typography variant="subtitle1">Semi major axes B: {Result.semi_major_axes_b}</Typography>
               <Typography variant="subtitle1">Units: {Result.unit}</Typography>
 
-            </div>
+            </div>) : (<div className="text-center mb-3">
+              <Typography variant="subtitle1">semi_major_axes_bInsemi_major_axes_aUnit: {resultTwo.$semi_major_axes_bInsemi_major_axes_aUnit}</Typography>
+              <Typography variant="subtitle1">areaInsemi_major_axes_aUnit: {resultTwo.areaInsemi_major_axes_aUnit}</Typography>
+              <Typography variant="subtitle1">areaInsemi_major_axes_bUnit: {resultTwo.areaInsemi_major_axes_bUnit}</Typography>
+              <Typography variant="subtitle1">semi_major_axes_aInsemi_major_axes_bUnit: {resultTwo.semi_major_axes_aInsemi_major_axes_bUnit}</Typography>
+              <Typography variant="subtitle1">submitted_semi_major_axes_b: {resultTwo.submitted_semi_major_axes_b}</Typography>
+              <Typography variant="subtitle1">submittedsemi_major_axes_a: {resultTwo.submittedsemi_major_axes_a}</Typography>
+
+
+            </div>)}
+
 
           </form>
         )}

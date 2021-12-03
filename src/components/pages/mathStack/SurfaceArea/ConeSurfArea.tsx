@@ -35,6 +35,24 @@ const ConeSurfArea = () => {
     units: ''
   })
 
+  const [resultTwo, setResultTwo] = React.useState({
+    submitedRadius: '',
+    radiusUnit: '',
+    radiusToHeightUnit: 0,
+    height: '',
+    heightUnit: '',
+    heightToRadiusUnit: 0,
+    radiusUnitBaseSurfaceArea: 0,
+    radiusUnitlateralSurfaceArea: 0,
+    radiusUnitTotalSurfaceArea: 0,
+    heightUnitBaseSurfaceArea: 0,
+    heightUnitlateralSurfaceArea: 0,
+    heightUnitTotalSurfaceArea: 0
+  })
+
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
+
   return (
     <div>
       <Grid item xs={12}>
@@ -62,8 +80,28 @@ const ConeSurfArea = () => {
           try {
             const { payload: coneArea } = await calculateMath(payload)
             console.log('=====>', coneArea)
-            if (typeof coneArea === 'object') {
-              const { $lateralSurfaceArea, totalConeSurfaceArea, baseSurfaceSrea, units } = coneArea
+            const {
+              $lateralSurfaceArea,
+              totalConeSurfaceArea,
+              baseSurfaceSrea,
+              units,
+              unitType,
+              submitedRadius,
+              radiusUnit,
+              radiusToHeightUnit,
+              height,
+              heightUnit,
+              heightToRadiusUnit,
+              radiusUnitBaseSurfaceArea,
+              radiusUnitlateralSurfaceArea,
+              radiusUnitTotalSurfaceArea,
+              heightUnitBaseSurfaceArea,
+              heightUnitlateralSurfaceArea,
+              heightUnitTotalSurfaceArea
+            } = coneArea
+
+            if (typeof coneArea === 'object' && unitType === true) {
+              setSelectedResult(unitType)
               setResult({
                 $lateralSurfaceArea: $lateralSurfaceArea,
                 baseSurfaceSrea: baseSurfaceSrea,
@@ -72,6 +110,25 @@ const ConeSurfArea = () => {
               })
 
             }
+
+            if (typeof coneArea === 'object' && unitType === false) {
+              setSelectedResult(unitType)
+              setResultTwo({
+                submitedRadius: submitedRadius,
+                radiusUnit: radiusUnit,
+                radiusToHeightUnit: radiusToHeightUnit,
+                height: height,
+                heightUnit: heightUnit,
+                heightToRadiusUnit: heightToRadiusUnit,
+                radiusUnitBaseSurfaceArea: radiusUnitBaseSurfaceArea,
+                radiusUnitlateralSurfaceArea: radiusUnitlateralSurfaceArea,
+                radiusUnitTotalSurfaceArea: radiusUnitTotalSurfaceArea,
+                heightUnitBaseSurfaceArea: heightUnitBaseSurfaceArea,
+                heightUnitlateralSurfaceArea: heightUnitlateralSurfaceArea,
+                heightUnitTotalSurfaceArea: heightUnitTotalSurfaceArea
+              })
+            }
+
             resetForm()
           } catch (err) {
             console.log('====>', err)
@@ -115,13 +172,29 @@ const ConeSurfArea = () => {
             </div>
 
             <CustomBtn />
-
-            <div className="text-center mb-3">
+            {selectedResult ? (<div className="text-center mb-3">
               <Typography variant="subtitle1">LateralSurfaceArea: {Result.$lateralSurfaceArea} </Typography>
               <Typography variant="subtitle1">BaseSurfaceArea: {Result.baseSurfaceSrea} </Typography>
               <Typography variant="subtitle1">TotalConeSurfaceArea: {Result.totalConeSurfaceArea} </Typography>
               <Typography variant="subtitle1">Units: {Result.units} </Typography>
-            </div>
+            </div>) : (<div className="text-center mb-3">
+              <Typography variant="subtitle1">radiusUnitlateralSurfaceArea: {resultTwo.radiusUnitlateralSurfaceArea} </Typography>
+              <Typography variant="subtitle1">radiusUnitTotalSurfaceArea: {resultTwo.radiusUnitTotalSurfaceArea} </Typography>
+              <Typography variant="subtitle1">radiusUnitBaseSurfaceArea: {resultTwo.radiusUnitBaseSurfaceArea} </Typography>
+              <Typography variant="subtitle1">radiusUnit: {resultTwo.radiusUnit} </Typography>
+              <Typography variant="subtitle1">radiusUnit: {resultTwo.radiusToHeightUnit} </Typography>
+              <Typography variant="subtitle1">heightUnitlateralSurfaceArea: {resultTwo.heightUnitlateralSurfaceArea} </Typography>
+              <Typography variant="subtitle1">heightUnitTotalSurfaceArea: {resultTwo.heightUnitTotalSurfaceArea} </Typography>
+              <Typography variant="subtitle1">heightUnitBaseSurfaceArea: {resultTwo.heightUnitBaseSurfaceArea} </Typography>
+              <Typography variant="subtitle1">heightUnit: {resultTwo.heightUnit} </Typography>
+              <Typography variant="subtitle1">heightUnit: {resultTwo.heightToRadiusUnit} </Typography>
+              <Typography variant="subtitle1">heightUnit: {resultTwo.height} </Typography>
+
+
+
+
+            </div>)}
+
 
           </form>
         )}

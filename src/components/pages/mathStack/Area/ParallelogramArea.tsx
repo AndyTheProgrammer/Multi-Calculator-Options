@@ -35,6 +35,18 @@ const ParallelogramArea = () => {
     unit: ''
   })
 
+  const [resultTwo, setResultTwo] = React.useState({
+    areaInbreadthUnit: 0,
+    areaInheightUnit: 0,
+    breadthInheightUnit: 0,
+    $heightInbreadthUnit: 0,
+    submittedbreadth: 0,
+    submitted_height: 0
+  })
+
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
+
   return (
     <div>
       <Grid item xs={12}>
@@ -62,16 +74,40 @@ const ParallelogramArea = () => {
           try {
             const { payload: parallelogramArea } = await calculateMath(payload)
             console.log('=====>', parallelogramArea)
-            const { area, unit, breadth, height
+            const {
+              area,
+              unit,
+              submittedbreadth,
+              submitted_height,
+              unitType,
+              areaInbreadthUnit,
+              areaInheightUnit,
+              breadthInheightUnit,
+              $heightInbreadthUnit,
+
             } = parallelogramArea
-            if (typeof parallelogramArea === 'object') {
+            if (typeof parallelogramArea === 'object' && unitType === true) {
+              setSelectedResult(unitType)
               setResult({
                 area: area,
-                breadth: breadth,
-                height: height,
+                breadth: submittedbreadth,
+                height: submitted_height,
                 unit: unit
               })
             }
+
+            if (typeof parallelogramArea === 'object' && unitType === false) {
+              setSelectedResult(unitType)
+              setResultTwo({
+                areaInbreadthUnit: areaInbreadthUnit,
+                areaInheightUnit: areaInheightUnit,
+                breadthInheightUnit: breadthInheightUnit,
+                $heightInbreadthUnit: $heightInbreadthUnit,
+                submitted_height: submitted_height,
+                submittedbreadth: submittedbreadth
+              })
+            }
+
             resetForm()
           } catch (err) {
             console.log('====>', err)
@@ -115,14 +151,23 @@ const ParallelogramArea = () => {
             </div>
 
             <CustomBtn />
-
-            <div className="text-center mb-3">
+            {selectedResult ? (<div className="text-center mb-3">
               <Typography variant="subtitle1"> Area: {Result.area}</Typography>
               <Typography variant="subtitle1"> Breadth: {Result.breadth}</Typography>
               <Typography variant="subtitle1"> Height: {Result.height}</Typography>
               <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
 
-            </div>
+            </div>) : (<div className="text-center mb-3">
+              <Typography variant="subtitle1"> areaInbreadthUnit: {resultTwo.areaInbreadthUnit}</Typography>
+              <Typography variant="subtitle1"> areaInheightUnit: {resultTwo.areaInheightUnit}</Typography>
+              <Typography variant="subtitle1"> breadthInheightUnit: {resultTwo.breadthInheightUnit}</Typography>
+              <Typography variant="subtitle1"> heightInbreadthUnit: {resultTwo.$heightInbreadthUnit}</Typography>
+              <Typography variant="subtitle1"> submitted_height: {resultTwo.submitted_height}</Typography>
+              <Typography variant="subtitle1"> submittedbreadth: {resultTwo.submittedbreadth}</Typography>
+
+
+            </div>)}
+
 
           </form>
         )}

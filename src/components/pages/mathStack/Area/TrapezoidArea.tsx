@@ -38,6 +38,19 @@ const TrapezoidArea = () => {
     unit: ''
   })
 
+  const [resultTwo, setResultTwo] = React.useState({
+    areaInm: 0,
+    base1tom: 0,
+    base2tom: 0,
+    heighttom: 0,
+    areaIncm: 0,
+    base1tocm: 0,
+    base2tocm: 0,
+    heighttocm: 0,
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
+
   return (
     <div>
       <Grid item xs={12}>
@@ -69,15 +82,44 @@ const TrapezoidArea = () => {
           try {
             const { payload: TrapezoidArea } = await calculateMath(payload)
             console.log('=====>', TrapezoidArea)
-            const { area, unit, base1, base2, height
+            const {
+              area,
+              units,
+              unitType,
+              submittedbase1,
+              submitted_base2,
+              submitted_height,
+              areaInm,
+              base1tom,
+              base2tom,
+              heighttom,
+              areaIncm,
+              base1tocm,
+              base2tocm,
+              heighttocm
             } = TrapezoidArea
-            if (typeof TrapezoidArea === 'object') {
+            if (typeof TrapezoidArea === 'object' && unitType === true) {
+              setSelectedResult(unitType)
               setResult({
                 area: area,
-                base1: base1,
-                base2: base2,
-                height: height,
-                unit: unit
+                base1: submittedbase1,
+                base2: submitted_base2,
+                height: submitted_height,
+                unit: units
+              })
+            }
+            if (typeof TrapezoidArea === 'object' && unitType === false) {
+              setSelectedResult(unitType)
+              setResultTwo({
+                areaIncm: areaIncm,
+                base1tocm: base1tocm,
+                base2tocm: base2tocm,
+                heighttocm: heighttocm,
+                areaInm: areaInm,
+                base1tom: base1tom,
+                base2tom: base2tom,
+                heighttom: heighttom
+
               })
             }
             resetForm()
@@ -140,15 +182,31 @@ const TrapezoidArea = () => {
             </div>
 
             <CustomBtn />
+            {selectedResult ? (
 
-            <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-              <Typography variant="subtitle1"> Base 1: {Result.base1}</Typography>
-              <Typography variant="subtitle1"> Base 2: {Result.base2}</Typography>
-              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1"> Area: {Result.area}</Typography>
+                <Typography variant="subtitle1"> Base 1: {Result.base1}</Typography>
+                <Typography variant="subtitle1"> Base 2: {Result.base2}</Typography>
+                <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+                <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
 
-            </div>
+              </div>
+            ) : (
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1"> areaIncm: {resultTwo.areaIncm}</Typography>
+                <Typography variant="subtitle1"> areaInm: {resultTwo.areaInm}</Typography>
+                <Typography variant="subtitle1"> base1tocm: {resultTwo.base1tocm}</Typography>
+                <Typography variant="subtitle1"> base1tom: {resultTwo.base1tom}</Typography>
+                <Typography variant="subtitle1"> base2tocm: {resultTwo.base2tocm}</Typography>
+                <Typography variant="subtitle1"> base2tom: {resultTwo.base2tom}</Typography>
+                <Typography variant="subtitle1"> heighttocm: {resultTwo.heighttocm}</Typography>
+                <Typography variant="subtitle1"> heighttom: {resultTwo.heighttom}</Typography>
+
+
+              </div>
+            )}
+
 
           </form>
         )}

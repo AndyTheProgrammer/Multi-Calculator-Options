@@ -32,12 +32,33 @@ const ConicalFrustrumSurfaceArea = () => {
     height_unit: ''
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
-    top_radius: 0,
-    bottom_radius: 0,
-    height: 0,
-    unit: ''
+    totalSurfaceArea: 0,
+    lateralSurfaceArea: 0,
+    circularEndSurfaceArea: 0,
+    r: '',
+    R: '',
+    h: '',
+    units: ''
   })
+
+  const [resultTwo, setResultTwo] = React.useState({
+    circularEndSurfaceAreaInm: 0,
+    lateralSurfaceAreaInm: 0,
+    totalSurfaceAreaInm: 0,
+    top_radiusInm: 0,
+    bottom_radiusInm: 0,
+    heightInm: 0,
+    circularEndSurfaceAreaInin: 0,
+    lateralSurfaceAreaInin: 0,
+    totalSurfaceAreaInin: 0,
+    top_radiusInin: 0,
+    bottom_radiusInin: 0,
+    heightInin: 0
+
+  })
+
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
 
   return (
     <div>
@@ -70,17 +91,36 @@ const ConicalFrustrumSurfaceArea = () => {
           try {
             const { payload: ConicalFrustumSurfaceArea } = await calculateMath(payload)
             console.log('=====>', ConicalFrustumSurfaceArea)
-            const { surfaceArea, top_radius, bottom_radius, height, unit
+            const {
+              totalSurfaceArea,
+              lateralSurfaceArea,
+              circularEndSurfaceArea,
+              r,
+              R,
+              h,
+              height,
+              units,
+              unitType
             } = ConicalFrustumSurfaceArea
-            if (typeof ConicalFrustumSurfaceArea === 'object') {
+            if (typeof ConicalFrustumSurfaceArea === 'object' && unitType === true) {
+              setSelectedResult(unitType)
               setResult({
-                surfaceArea: surfaceArea,
-                top_radius: top_radius,
-                bottom_radius: bottom_radius,
-                height: height,
-                unit: unit
+                totalSurfaceArea,
+                lateralSurfaceArea,
+                circularEndSurfaceArea,
+                r,
+                R,
+                h,
+                units
               })
             }
+
+
+            if (typeof ConicalFrustumSurfaceArea === 'object' && unitType === false) {
+              setSelectedResult(unitType)
+              se
+            }
+
             resetForm()
           } catch (err) {
             console.log('====>', err)
@@ -143,11 +183,13 @@ const ConicalFrustrumSurfaceArea = () => {
             <CustomBtn />
 
             <div className="text-center mb-3">
-              <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-              <Typography variant="subtitle1"> Top Radius: {Result.top_radius}</Typography>
-              <Typography variant="subtitle1"> Bottom Radius: {Result.bottom_radius}</Typography>
-              <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+              <Typography variant="subtitle1">lateralSurfaceArea: {Result.lateralSurfaceArea}</Typography>
+              <Typography variant="subtitle1"> circularEndSurfaceArea: {Result.circularEndSurfaceArea}</Typography>
+              <Typography variant="subtitle1"> totalSurfaceArea: {Result.totalSurfaceArea}</Typography>
+              <Typography variant="subtitle1"> R: {Result.R}</Typography>
+              <Typography variant="subtitle1"> h: {Result.h}</Typography>
+              <Typography variant="subtitle1"> r: {Result.r}</Typography>
+
 
             </div>
 
