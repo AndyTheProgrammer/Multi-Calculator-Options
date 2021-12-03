@@ -233,6 +233,7 @@ export const IDS = {
 
 export const INPUT_TYPE = {
   email: "email",
+  radio: "radio",
   text: "text",
   number: "number",
   button: "button",

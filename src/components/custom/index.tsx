@@ -1,6 +1,7 @@
 export { default as CalculatorLayout } from "./CalculatorLayout";
 export { default as CalculatorLayout2 } from "./CalculatorLayout2";
 export { default as CustomBtn } from "./CustomBtn";
+export { default as CustomDivider } from "./CustomDivider";
 export { default as CustomResetBtn } from "./CustomResetBtn";
 export { default as CustomSearchInput } from "./CustomSearchInput";
 export { default as CustomSelect } from "./CustomSelect";

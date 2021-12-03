@@ -40,7 +40,7 @@ function Finance() {
       <Container>
         <Grid container xs={12}>
           {/* Calculator grid here */}
-          <AmortizedLoanFixedAmount />
+          <Grid container item xs={12} sm={10}></Grid>
 
           {/* Ad & menu grid */}
           <Grid item xs={12} sm={2}>

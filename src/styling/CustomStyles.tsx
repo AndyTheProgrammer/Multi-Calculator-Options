@@ -1,8 +1,7 @@
-import { alpha, makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { COLORS } from "../common/shared";
-const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => createStyles({
   // Navigation bar
   root: {
     display: "flex",
@@ -16,13 +15,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginBottom: theme.spacing(2),
     backgroundColor: COLORS.primary,
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -67,21 +59,47 @@ const useStyles = makeStyles((theme) => ({
   paper2: {
     padding: theme.spacing(2),
     margin: theme.spacing(2),
-    textAlign: "none",
     color: theme.palette.text.secondary,
   },
   paperBackground: {
-    padding: theme.spacing(2),
-    margin: theme.spacing(2),
-    textAlign: "none",
+    margin: theme.spacing(1),
     color: theme.palette.text.secondary,
-    backgroundColor: COLORS.paper_background,
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: 20,
   },
   formControl: {
     padding: theme.spacing(2),
   },
   image: {
     height: theme.spacing(3),
+  },
+  tabRoot: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: 20,
+  },
+  leftTabContainer: {
+    display: "flex",
+    justifyContent: "center",
+    width: "50%",
+    height: "10%",
+    float: "inline-start",
+  },
+  rightTabContainer: {
+    display: "flex",
+    background: COLORS.gradient,
+    color: COLORS.light_text_color,
+    justifyContent: "center",
+    width: "50%",
+    height: "10%",
+    float: "inline-end",
+    borderBottomLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  sideBarPaperBackground: {
+    margin: theme.spacing(1),
+    backgroundColor: "transparent",
+    borderRadius: 20,
   },
 }));
 

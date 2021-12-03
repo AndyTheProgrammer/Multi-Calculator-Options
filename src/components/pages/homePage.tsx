@@ -18,7 +18,7 @@ function HomePage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    async function initialize(){
+    async function initialize() {
       // if(!localStorage.webdata){
       //   console.log("initialize")
       //   var data = await dataInit()
@@ -26,14 +26,14 @@ function HomePage() {
       //     setIsLoading(true)
       //   }
       // }
-      if(true){
+      if (true) {
         console.log("initialize")
         var data = await dataInit()
-        if(data){
+        if (data) {
           setIsLoading(true)
         }
       }
-      else{
+      else {
         setIsLoading(true)
         // console.log("When localstorage has data")
         // console.log(JSON.parse(localStorage.webdata))
@@ -41,35 +41,35 @@ function HomePage() {
     }
 
     initialize()
-  });
+  }, []);
 
-    if(!isLoading){
-      return(
-        <Box sx={{ display: 'flex' }}>
-          <Box sx={{ position: 'absolute', display: 'flex', left: '47%', top: '45%' }}>
-            <CircularProgress />
-          </Box>
+  if (!isLoading) {
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <Box sx={{ position: 'absolute', display: 'flex', left: '47%', top: '45%' }}>
+          <CircularProgress />
         </Box>
-      );
-    }
-
-    return(
-      <div>
-        <NavBar />
-        <Typography component="div">
-          <Box
-            sx={{
-              textAlign: 'center',
-              fontSize: 28,
-              color: '#8591B0',
-              marginBottom: 3,
-            }}>
-            Calculator Categories
-          </Box>
-        </Typography>
-        <CalcOptions />
-      </div>
+      </Box>
     );
+  }
+
+  return (
+    <div>
+      <NavBar />
+      <Typography component="div">
+        <Box
+          sx={{
+            textAlign: 'center',
+            fontSize: 28,
+            color: '#8591B0',
+            marginBottom: 3,
+          }}>
+          Calculator Categories
+        </Box>
+      </Typography>
+      <CalcOptions />
+    </div>
+  );
 }
 
 export { HomePage };

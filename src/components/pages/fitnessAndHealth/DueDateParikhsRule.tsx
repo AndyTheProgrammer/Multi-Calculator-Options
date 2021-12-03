@@ -72,116 +72,110 @@ const DueDateParikhsRule = () => {
 
   return (
     <>
-      <Grid container item xs={12} sm={10}>
-        {/* Form grid */}
-        <Grid item xs={12} sm={8}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography className="text-center">
-                    {CALCULATORS.dueDateParikhsRule}
-                  </Typography>
-                </div>
-              </StyledTabs>
+      {/* Form grid */}
+      <Grid item xs={12} sm={8}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography className="text-center">
+                  {CALCULATORS.dueDateParikhsRule}
+                </Typography>
+              </div>
+            </StyledTabs>
 
-              <NoIndexTabPanel>
-                <Formik
-                  initialValues={initialFormValues}
-                  onSubmit={async ({
+            <NoIndexTabPanel>
+              <Formik
+                initialValues={initialFormValues}
+                onSubmit={async ({
+                  first_date_of_last_period,
+                  days,
+                }, { setSubmitting }) => {
+                  const payload: DueDateParikhsRuleI = {
                     first_date_of_last_period,
                     days,
-                  }, { setSubmitting }) => {
-                    const payload: DueDateParikhsRuleI = {
-                      first_date_of_last_period,
-                      days,
-                      method: 'DueDateParikhsRule'
+                    method: 'DueDateParikhsRule'
+                  }
+                  console.log(JSON.stringify(payload))
+                  try {
+                    const { payload: dueDateParikhsRule } = await calculateHealth(payload)
+                    console.log('=====>', dueDateParikhsRule)
+                    if (typeof dueDateParikhsRule === 'object') {
+                      const { dueDate } = dueDateParikhsRule
+                      setResult({
+                        dueDate: dueDate,
+                      })
                     }
-                    console.log(JSON.stringify(payload))
-                    try {
-                      const { payload: dueDateParikhsRule } = await calculateHealth(payload)
-                      console.log('=====>', dueDateParikhsRule)
-                      if (typeof dueDateParikhsRule === 'object') {
-                        const { dueDate } = dueDateParikhsRule
-                        setResult({
-                          dueDate: dueDate,
-                        })
-                      }
-                    } catch (err) {
-                      console.log('====>', err)
-                    }
-                  }}
-                >
-                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                    <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
-                        <Label title={LABELS.firstDateofLastPeriod} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.date}
-                          id="first_date_of_last_period"
-                          placeholder={PLACEHOLDERS.date}
-                          value={values.first_date_of_last_period}
-                          onChange={handleChange}
-                        />
-                      </div>
+                  } catch (err) {
+                    console.log('====>', err)
+                  }
+                }}
+              >
+                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                  <form onSubmit={handleSubmit} className="form-container">
+                    <div className="form-row">
+                      <Label title={LABELS.firstDateofLastPeriod} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.date}
+                        id="first_date_of_last_period"
+                        placeholder={PLACEHOLDERS.date}
+                        value={values.first_date_of_last_period}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.days} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="days"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.days}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.days} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="days"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.days}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-                        <CustomBtn />
-                        <CustomResetBtn
-                          onHandleClick={() => resetForm()}
-                        />
-                      </div>
-                    </form>
-                  )}
-                </Formik>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
-
-        {/* Result grid */}
-        <Grid item xs={12} sm={4}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography>Result</Typography>
-                </div>
-              </StyledTabs>
-
-              <NoIndexTabPanel>
-                <div className="text-center mb-3">
-                  <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
-                </div>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
+                    <div
+                      className="form-row"
+                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                    >
+                      <CustomBtn />
+                      <CustomResetBtn
+                        onHandleClick={() => resetForm()}
+                      />
+                    </div>
+                  </form>
+                )}
+              </Formik>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
       </Grid>
 
+      {/* Result grid */}
+      <Grid item xs={12} sm={4}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography>Result</Typography>
+              </div>
+            </StyledTabs>
 
-
-
+            <NoIndexTabPanel>
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
+              </div>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
+      </Grid>
     </>
   )
 }

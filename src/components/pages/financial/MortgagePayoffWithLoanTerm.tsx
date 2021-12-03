@@ -79,138 +79,136 @@ const MortgagePayoffWithLoanTerm = () => {
 
   return (
     <>
-      <Grid container item xs={12} sm={10}>
-        {/* Form grid */}
-        <Grid item xs={12} sm={8}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography className="text-center">
-                    {CALCULATORS.mortgagePayoffWithLoanTerm}
-                  </Typography>
-                </div>
-              </StyledTabs>
+      {/* Form grid */}
+      <Grid item xs={12} sm={8}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography className="text-center">
+                  {CALCULATORS.mortgagePayoffWithLoanTerm}
+                </Typography>
+              </div>
+            </StyledTabs>
 
-              <NoIndexTabPanel>
-                <Formik
-                  initialValues={initialFormValues}
-                  onSubmit={async ({
+            <NoIndexTabPanel>
+              <Formik
+                initialValues={initialFormValues}
+                onSubmit={async ({
+                  interest_rate,
+                  total_payments_years,
+                  payments_made_years,
+                  loan_amount,
+                }, { setSubmitting }) => {
+                  const payload: MortgagePayoffWithLoanTermI = {
                     interest_rate,
                     total_payments_years,
                     payments_made_years,
                     loan_amount,
-                  }, { setSubmitting }) => {
-                    const payload: MortgagePayoffWithLoanTermI = {
-                      interest_rate,
-                      total_payments_years,
-                      payments_made_years,
-                      loan_amount,
-                      method: 'mortagePayOffCalculatorWithLoanTerm'
+                    method: 'mortagePayOffCalculatorWithLoanTerm'
+                  }
+                  console.log(JSON.stringify(payload))
+                  try {
+                    const { payload: mortgagePayoffWithLoanTerm } = await calculateFinances(payload)
+                    console.log('=====>', mortgagePayoffWithLoanTerm)
+                    const { balance, currency } = mortgagePayoffWithLoanTerm
+                    if (typeof mortgagePayoffWithLoanTerm === 'object') {
+                      setResult({
+                        balance: balance,
+                        currency: currency
+                      })
                     }
-                    console.log(JSON.stringify(payload))
-                    try {
-                      const { payload: mortgagePayoffWithLoanTerm } = await calculateFinances(payload)
-                      console.log('=====>', mortgagePayoffWithLoanTerm)
-                      const { balance, currency } = mortgagePayoffWithLoanTerm
-                      if (typeof mortgagePayoffWithLoanTerm === 'object') {
-                        setResult({
-                          balance: balance,
-                          currency: currency
-                        })
-                      }
-                    } catch (err) {
-                      console.log('====>', err)
-                    }
-                  }}
-                >
-                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                    <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
-                        <Label title={LABELS.interestRate} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="interest_rate"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.interest_rate}
-                          onChange={handleChange}
-                        />
-                      </div>
+                  } catch (err) {
+                    console.log('====>', err)
+                  }
+                }}
+              >
+                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                  <form onSubmit={handleSubmit} className="form-container">
+                    <div className="form-row">
+                      <Label title={LABELS.interestRate} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="interest_rate"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.interest_rate}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.paymentsMade} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="payments_made_years"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.payments_made_years}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.paymentsMade} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="payments_made_years"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.payments_made_years}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.totalPaymentsperYear} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="total_payments_years"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.total_payments_years}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.totalPaymentsperYear} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="total_payments_years"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.total_payments_years}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div className="form-row">
-                        <Label title={LABELS.loanAmount} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="loan_amount"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.loan_amount}
-                          onChange={handleChange}
-                        />
-                      </div>
+                    <div className="form-row">
+                      <Label title={LABELS.loanAmount} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="loan_amount"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.loan_amount}
+                        onChange={handleChange}
+                      />
+                    </div>
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-                        <CustomBtn />
-                        <CustomResetBtn
-                          onHandleClick={() => resetForm()}
-                        />
-                      </div>
-                    </form>
-                  )}
-                </Formik>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
+                    <div
+                      className="form-row"
+                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                    >
+                      <CustomBtn />
+                      <CustomResetBtn
+                        onHandleClick={() => resetForm()}
+                      />
+                    </div>
+                  </form>
+                )}
+              </Formik>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
+      </Grid>
 
-        {/* Result grid */}
-        <Grid item xs={12} sm={4}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <div className={leftTabContainer}>
-                  <Typography></Typography>
-                </div>
-                <div className={rightTabContainer}>
-                  <Typography>Result</Typography>
-                </div>
-              </StyledTabs>
+      {/* Result grid */}
+      <Grid item xs={12} sm={4}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <div className={leftTabContainer}>
+                <Typography></Typography>
+              </div>
+              <div className={rightTabContainer}>
+                <Typography>Result</Typography>
+              </div>
+            </StyledTabs>
 
-              <NoIndexTabPanel>
-                <div className="text-center mb-3">
-                  <Typography variant="subtitle1"> Balance: {Result.currency}{Result.balance}</Typography>
-                </div>
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
+            <NoIndexTabPanel>
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1"> Balance: {Result.currency}{Result.balance}</Typography>
+              </div>
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
       </Grid>
     </>
   )
