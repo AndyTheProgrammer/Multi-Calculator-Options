@@ -28,7 +28,7 @@ const CubeSurfArea = () => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    edge_length: 0,
+    area: 0,
     unit: ''
   })
   return (
@@ -50,14 +50,14 @@ const CubeSurfArea = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: cubeSurfaceArea } = await calculateMath(payload)
-              console.log('=====>', cubeSurfaceArea)
-              const { surfaceArea, unit, edge_length,
-              } = cubeSurfaceArea
-              if (typeof cubeSurfaceArea === 'object') {
+              const { payload: CubeSurfaceArea } = await calculateMath(payload)
+              console.log('=====>', CubeSurfaceArea)
+              const { cubeSurfaceArea, unit, edge_length, unitType, area
+              } = CubeSurfaceArea
+              if (typeof CubeSurfaceArea === 'object') {
                 setResult({
-                  surfaceArea: surfaceArea,
-                  edge_length: edge_length,
+                  surfaceArea: cubeSurfaceArea,
+                  area: area,
                   unit: unit
                 })
               }
@@ -102,8 +102,8 @@ const CubeSurfArea = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Surface area: {Result.surfaceArea}</Typography>
-          <Typography variant="subtitle1"> Edge length: {Result.edge_length}</Typography>
+          <Typography variant="subtitle1"> Cube Surface area: {Result.surfaceArea}</Typography>
+          <Typography variant="subtitle1"> area: {Result.area}</Typography>
           <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
         </div>
       </ResultTabsContainer>

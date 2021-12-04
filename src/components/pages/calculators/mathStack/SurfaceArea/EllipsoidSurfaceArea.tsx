@@ -37,6 +37,21 @@ const EllipsoidSurfaceArea = () => {
     unit: ''
   })
 
+  const [resultTwo, setResultTwo] = React.useState({
+    surfaceAreaInmm: 0,
+    axis1tomm: 0,
+    axis2tomm: 0,
+    axis3tomm: 0,
+    surfaceAreaInft: 0,
+    axis1toft: 0,
+    axis2toft: 0,
+    axis3toft: 0,
+    surfaceAreaInin: 0
+  })
+
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
+
   return (
     <>
       {/* Form grid */}

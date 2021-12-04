@@ -29,10 +29,21 @@ const SphericalCapSurfaceArea = () => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    radius: 0,
-    height: 0,
-    unit: '',
+    submittedradius: 0,
+    submitted_height: 0,
+    units: '',
   })
+
+  const [resultTwo, setResultTwo] = React.useState({
+    surfaceAreaInradiusUnit: 0,
+    surfaceAreaInheightUnit: 0,
+    radiusInheightUnit: 0,
+    heightInradiusUnit: 0,
+    submittedradius: 0,
+    submitted_height: 0
+  })
+
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
   return (
     <>
@@ -57,14 +68,38 @@ const SphericalCapSurfaceArea = () => {
             try {
               const { payload: CapSurfaceArea } = await calculateMath(payload)
               console.log('=====>', CapSurfaceArea)
-              const { surfaceArea, radius, height, unit
+              const {
+                surfaceArea,
+                radius,
+                height,
+                units,
+                surfaceAreaInradiusUnit,
+                surfaceAreaInheightUnit,
+                radiusInheightUnit,
+                $heightInradiusUnit,
+                submittedradius,
+                submitted_height,
+                unitType
               } = CapSurfaceArea
-              if (typeof CapSurfaceArea === 'object') {
+              if (typeof CapSurfaceArea === 'object' && unitType === true) {
+                setSelectedResult(unitType)
                 setResult({
                   surfaceArea: surfaceArea,
-                  radius: radius,
-                  height: height,
-                  unit: unit
+                  submitted_height,
+                  submittedradius,
+                  units,
+                })
+              }
+
+              if (typeof CapSurfaceArea === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  surfaceAreaInradiusUnit,
+                  surfaceAreaInheightUnit,
+                  radiusInheightUnit,
+                  heightInradiusUnit: $heightInradiusUnit,
+                  submittedradius,
+                  submitted_height,
                 })
               }
             } catch (err) {
@@ -123,14 +158,29 @@ const SphericalCapSurfaceArea = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle2={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-          <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-          <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-          <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-        </div>
-      </ResultTabsContainer>
+      {selectedResult ? (
+        <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
+            <Typography variant="subtitle1"> submittedradius: {Result.submittedradius}</Typography>
+            <Typography variant="subtitle1"> submitted_height: {Result.submitted_height}</Typography>
+            <Typography variant="subtitle1"> units: {Result.units}</Typography>
+          </div>
+        </ResultTabsContainer>
+      ) : (
+        <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">surfaceAreaInradiusUnit: {resultTwo.surfaceAreaInradiusUnit}</Typography>
+            <Typography variant="subtitle1"> surfaceAreaInheightUnit: {resultTwo.surfaceAreaInheightUnit}</Typography>
+            <Typography variant="subtitle1"> submittedradius: {resultTwo.submittedradius}</Typography>
+            <Typography variant="subtitle1"> submitted_height: {resultTwo.submitted_height}</Typography>
+            <Typography variant="subtitle1"> radiusInheightUnit: {resultTwo.radiusInheightUnit}</Typography>
+            <Typography variant="subtitle1"> heightInradiusUnit: {resultTwo.heightInradiusUnit}</Typography>
+
+          </div>
+        </ResultTabsContainer>
+      )}
+
     </>
   )
 }

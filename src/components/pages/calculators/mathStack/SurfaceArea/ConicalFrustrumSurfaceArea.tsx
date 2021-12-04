@@ -93,7 +93,19 @@ const ConicalFrustrumSurfaceArea = () => {
                 h,
                 height,
                 units,
-                unitType
+                unitType,
+                circularEndSurfaceAreaInm,
+                lateralSurfaceAreaInm,
+                totalSurfaceAreaInm,
+                top_radiusInm,
+                bottom_radiusInm,
+                heightInm,
+                circularEndSurfaceAreaInin,
+                lateralSurfaceAreaInin,
+                totalSurfaceAreaInin,
+                top_radiusInin,
+                bottom_radiusInin,
+                heightInin,
               } = ConicalFrustumSurfaceArea
               if (typeof ConicalFrustumSurfaceArea === 'object' && unitType === true) {
                 setSelectedResult(unitType)
@@ -110,6 +122,20 @@ const ConicalFrustrumSurfaceArea = () => {
 
               if (typeof ConicalFrustumSurfaceArea === 'object' && unitType === false) {
                 setSelectedResult(unitType)
+                setResultTwo({
+                  circularEndSurfaceAreaInm,
+                  lateralSurfaceAreaInm,
+                  totalSurfaceAreaInm,
+                  top_radiusInm,
+                  bottom_radiusInm,
+                  heightInm,
+                  circularEndSurfaceAreaInin,
+                  lateralSurfaceAreaInin,
+                  totalSurfaceAreaInin,
+                  top_radiusInin,
+                  bottom_radiusInin,
+                  heightInin,
+                })
               }
             } catch (err) {
               console.log('====>', err)
@@ -184,7 +210,7 @@ const ConicalFrustrumSurfaceArea = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+      {selectedResult ? (<ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">lateralSurfaceArea: {Result.lateralSurfaceArea}</Typography>
           <Typography variant="subtitle1"> circularEndSurfaceArea: {Result.circularEndSurfaceArea}</Typography>
@@ -193,7 +219,25 @@ const ConicalFrustrumSurfaceArea = () => {
           <Typography variant="subtitle1"> h: {Result.h}</Typography>
           <Typography variant="subtitle1"> r: {Result.r}</Typography>
         </div>
-      </ResultTabsContainer>
+      </ResultTabsContainer>) : (
+        <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">circularEndSurfaceAreaInin: {resultTwo.circularEndSurfaceAreaInin}</Typography>
+            <Typography variant="subtitle1"> circularEndSurfaceAreaInm: {resultTwo.circularEndSurfaceAreaInm}</Typography>
+            <Typography variant="subtitle1"> heightInin: {resultTwo.heightInin}</Typography>
+            <Typography variant="subtitle1"> heightInm: {resultTwo.heightInm}</Typography>
+            <Typography variant="subtitle1"> lateralSurfaceAreaInin: {resultTwo.lateralSurfaceAreaInin}</Typography>
+            <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.lateralSurfaceAreaInm}</Typography>
+            <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.top_radiusInin}</Typography>
+            <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.top_radiusInm}</Typography>
+            <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.totalSurfaceAreaInin}</Typography>
+            <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.totalSurfaceAreaInm}</Typography>
+
+
+          </div>
+        </ResultTabsContainer>
+      )}
+
 
 
     </>
