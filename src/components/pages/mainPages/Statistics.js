@@ -4,6 +4,10 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
+import TestNavBar from "../../navbar/TestNavBar";
+import { CollapsibleMenu, Carousel } from "../../content";
+import { PLACEHOLDERS, INPUT_TYPE, COLORS } from "../../../common/shared";
+import { CustomSearchInput, CustomDivider } from "../../custom";
 import useStyles from "../../../styling/CustomStyles";
 import {
   MarginOfErrorCalculator,
@@ -14,48 +18,69 @@ import {
 } from "../index";
 
 const Statistics = () => {
-  const classes = useStyles();
+  const { container, sideBarPaperBackground, paperBackground } = useStyles();
+  const [searchText, setSearchText] = React.useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchText(event.target.value);
+  };
   return (
-    <Container className={classes.container}>
-      <Typography variant="h6" className="text-center">
-        STATISTICS CALCULATORS
-      </Typography>
-      <hr />
-
-      <Grid container xs={12} spacing={2}>
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+    <>
+      <TestNavBar />
+      <Container>
+        <Grid container xs={12}>
+          {/* Calculator grid here */}
+          <Grid container item xs={12} sm={10}>
             <MarginOfErrorCalculator />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <ProbabilityOfASeriesOfIndpendentEvents />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <ProbablityOfTwoEvents />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <ProbablitySolverForTwoEvents />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <SampleSizeCalculator />
-          </Paper>
-        </Grid>
-      </Grid>
+          </Grid>
 
-      <div style={{ marginBottom: 40 }}></div>
-    </Container>
+          {/* Ad & menu grid */}
+          <Grid item xs={12} sm={2}>
+            {/* Carousel */}
+            <Grid item xs={12}>
+              <Paper elevation={0} className={sideBarPaperBackground}>
+                <Carousel />
+              </Paper>
+            </Grid>
+
+            {/* Search input */}
+            <Grid>
+              <CustomSearchInput
+                type={INPUT_TYPE.text}
+                id="search"
+                name="search"
+                placeholder={PLACEHOLDERS.search}
+                value={searchText}
+                onChange={handleSearchChange}
+              />
+            </Grid>
+
+            {/* Menu */}
+            <Grid item xs={12}>
+              <Paper elevation={0} className={sideBarPaperBackground}>
+                <CollapsibleMenu />
+              </Paper>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
 };
 

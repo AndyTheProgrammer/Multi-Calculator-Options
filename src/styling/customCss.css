@@ -2,236 +2,238 @@
     This is custom css
 */
 
-.themeColor{
-    background-color: #58C4A0;
+.themeColor {
+  background-color: #58c4a0;
 }
 
-.calcankground{
-    background-color: #C4C4C4;
+.calcankground {
+  background-color: #c4c4c4;
 }
 
-.displayBackground{
-    background-color: #F0ECEC;
+.displayBackground {
+  background-color: #f0ecec;
 }
 
-.calcInputDisplay{
-    width: 100%;
-    height: 50px;
-    font-size: 28px;
+.calcInputDisplay {
+  width: 100%;
+  height: 50px;
+  font-size: 28px;
 }
 
 .calcInput {
-    border: 0;
-    width: 100%;
-    direction: rtl;
-    padding: 5px;
-  }
-
-.btnPanel{
-    width: 500px;
+  border: 0;
+  width: 100%;
+  direction: rtl;
+  padding: 5px;
 }
 
-.displayScreen{
-    width: 100%;
-    font-size: 14px;
-}
-p.resultDisplay{
-    text-align: right;
+.btnPanel {
+  width: 500px;
 }
 
-.justText{
-    text-align: justify;
-    text-justify: inter-word;
-    font-size: 30px;
+.displayScreen {
+  width: 100%;
+  font-size: 14px;
+}
+p.resultDisplay {
+  text-align: right;
+}
+
+.justText {
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: 30px;
 }
 
 /* div style with bottom left rounded corner*/
-.blRoundedCorner{
-    border: 1px solid #58C4A0;
-    border-radius: 0 0 0 330px;
+.blRoundedCorner {
+  border: 1px solid #58c4a0;
+  border-radius: 0 0 0 330px;
 }
-
-
-
 
 /* custome margins */
-.cm-left-1{
-    margin-left: 100px;
+.cm-left-1 {
+  margin-left: 100px;
 }
 
-.cm-top-1{
-    margin-top: 100px;
+.cm-top-1 {
+  margin-top: 100px;
 }
 
 /* custome paddings */
-.cp-all-1{
-    padding: 10px;
-    background-color: transparent;
-    background: transparent;
+.cp-all-1 {
+  padding: 10px;
+  background-color: transparent;
+  background: transparent;
 }
 
-.cp-all-2{
-    padding: 5px;
+.cp-all-2 {
+  padding: 5px;
 }
 
 /*custom rounded borders*/
-.cm-rounded-1{
-    border-radius: 5px;
+.cm-rounded-1 {
+  border-radius: 5px;
 }
 
-.cm-rounded-2{
-    border-radius: 3px;
+.cm-rounded-2 {
+  border-radius: 3px;
 }
 
-.cm-rounded-all{
-    border-radius: 3px;
+.cm-rounded-all {
+  border-radius: 3px;
 }
 
-.search-input{
-    border: 0 solid red;
-    outline: none;
-    width: 100%;
-    padding-top: 2px;
-    margin-left: 16px;
-    margin-right:16px;
-    color:#707070;
-    font-weight: 300;
-    font-size: 18px;
+.search-input {
+  border: 0 solid red;
+  outline: none;
+  width: 100%;
+  padding-top: 2px;
+  margin-left: 16px;
+  margin-right: 16px;
+  color: #707070;
+  font-weight: 300;
+  font-size: 18px;
 }
 
-.submit-button{
-    border: 0 solid;
-    border-radius: 5px;
-    margin-right: 8px;
-    background-color: white;
-    color:#313131
+.submit-button {
+  border: 0 solid;
+  border-radius: 5px;
+  margin-right: 8px;
+  background-color: white;
+  color: #313131;
 }
 
-.submit-button:hover{
-    background-color: #313131;
-    color: white;
+.submit-button:hover {
+  background-color: #313131;
+  color: white;
 }
 
 ::placeholder {
-    color: #707070;
-    font-size: 16px;
-    font-weight: 500;
-  }
+  color: #707070;
+  font-size: 16px;
+  font-weight: 500;
+}
 
-  /* Custom form style*/
-  .custom-form-control{
-      border: 1px solid #adadad;
-      border-radius: 5px;
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 0;
-  }
+/* Custom form style*/
+.custom-form-control {
+  border: 1px solid #adadad;
+  border-radius: 5px;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 0;
+}
 
-  .custom-form-control:focus{
-    outline: none !important;
-    border: 1px solid #f0f0f0;
-    padding: 8px;
-    box-shadow: 0 0 10px #b8b8b8;
-  }
+.custom-form-control:focus {
+  outline: none !important;
+  border: 1px solid #f0f0f0;
+  padding: 8px;
+  box-shadow: 0 0 10px #b8b8b8;
+}
 
-  /*Select Options styling*/
+/*Select Options styling*/
 
-  .select-options-styling{
-    border: 1px solid #adadad;
-    border-radius: 5px;
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 0;
-}  
-.select-options-styling:focus{
-    outline: none !important;
-    border: 1px solid #f0f0f0;
-    padding: 8px;
-    box-shadow: 0 0 10px #b8b8b8;
-  }
+.select-options-styling {
+  border: 1px solid #adadad;
+  border-radius: 5px;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 0;
+}
+.select-options-styling:focus {
+  outline: none !important;
+  border: 1px solid #f0f0f0;
+  padding: 8px;
+  box-shadow: 0 0 10px #b8b8b8;
+}
 
-  #app-gradient-color{
-    /* height: 100vh; */
-    /* background-image: linear-gradient(160deg, red, red, yellow); */
-    background-image: linear-gradient(to right, #FBFBFB,  #D1D1D1);
-  }
+#app-gradient-color {
+  /* height: 100vh; */
+  /* background-image: linear-gradient(160deg, red, red, yellow); */
+  background-image: linear-gradient(to right, #fbfbfb, #d1d1d1);
+}
 
-
-  /*
+/*
   This is for search button
   */
-  #search-button{
-    border: 1px solid #adadad;
-    border-radius: 10px;
-    padding-left: 10px;
-    padding-right: 24px;
-    background-image: linear-gradient(to right, #3128AF, #499FB8);
-    color: white;
-  }
-
-  .search-button-2{
-    border: 0 solid #adadad;
-    background-color: transparent;
-    border-radius: 10px;
-    padding-left: 10px;
-    padding-right: 24px;
-    color: #8591B0
-  }
-
-  .search-button-2:hover{
-    border: 0 solid #adadad;
-    background-color: transparent;
-    border-radius: 10px;
-    padding-left: 10px;
-    padding-right: 24px;
-    background-image: linear-gradient(to right, #3128AF, #499FB8);
-    color: #ffffff
-  }
-
-  .search-button-3{
-    border: 0 solid #adadad;
-    background-color: transparent;
-    border-radius: 10px;
-    padding-left: 10px;
-    padding-right: 24px;
-    font-size: 18px;
-    font-weight: bold;
-    color: black
-  }
-
-  .search-button-5{
-    border: 0 solid #adadad;
-    background-color: transparent;
-    border-radius: 10px;
-    padding-right: 24px;
-    font-size: 18px;
-    font-weight: bold;
-    color: black
-  }
-
-.div-link:hover{
-    cursor: pointer;
+#search-button {
+  border: 1px solid #adadad;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 24px;
+  background-image: linear-gradient(to right, #3128af, #499fb8);
+  color: white;
 }
 
-.app-over-lay{
-    position: fixed;
-    top: calc(100vh - 80vh);
-    left: 0;
-    width: 100%;
-    height: 80vh;
-    background-image: linear-gradient(rgba(73,157,184,0),  rgba(51,47,175,1.0));
-    z-index: 10
+/* modified to center text inside button */
+.search-button-2 {
+  border: 0 solid #adadad;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #8591b0;
+  align-items: center;
+  justify-content: center;
 }
 
-.app-over-lay-display{
-    position: absolute;
-    border-radius: 5px;
-    left: 50vw;
-    top: 100px;
-    background-color: white;
-    width: 350px;
-    height: 200px;
-    z-index:20;
+.search-button-2:hover {
+  background-image: linear-gradient(to right, #3128af, #499fb8);
+  color: #ffffff;
+}
+
+.search-button-2:active {
+  background-image: linear-gradient(to right, #3128af, #499fb8);
+  color: #ffffff;
+}
+
+.search-button-3 {
+  border: 0 solid #adadad;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 24px;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+}
+
+.search-button-5 {
+  border: 0 solid #adadad;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-right: 24px;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+}
+
+.div-link:hover {
+  cursor: pointer;
+}
+
+.app-over-lay {
+  position: fixed;
+  top: calc(100vh - 80vh);
+  left: 0;
+  width: 100%;
+  height: 80vh;
+  background-image: linear-gradient(
+    rgba(73, 157, 184, 0),
+    rgba(51, 47, 175, 1)
+  );
+  z-index: 10;
+}
+
+.app-over-lay-display {
+  position: absolute;
+  border-radius: 5px;
+  left: 50vw;
+  top: 100px;
+  background-color: white;
+  width: 350px;
+  height: 200px;
+  z-index: 20;
 }
 /* 
 .app-over-lay-display{
@@ -242,27 +244,26 @@ p.resultDisplay{
     display: block;
 } */
 
-.rela{
+.rela {
 }
 
-.general-text-box{
-    margin-top: 10px;
-    width: 230px;
-    height: 200px;
-    overflow-x: hidden; 
-    overflow-y: auto;
+.general-text-box {
+  margin-top: 10px;
+  width: 230px;
+  height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 ::-webkit-scrollbar {
-    display: none;
-    width: 8px;
-  }
+  display: none;
+  width: 8px;
+}
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
-    border-radius: 10px;
-  }
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background-image: linear-gradient( #3128AF, #499FB8);
-    border-radius: 10px;
-  }
-  
+  background-image: linear-gradient(#3128af, #499fb8);
+  border-radius: 10px;
+}

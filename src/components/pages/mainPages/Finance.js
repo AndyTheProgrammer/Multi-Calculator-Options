@@ -1,9 +1,11 @@
 import React from "react";
-import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Typography, Grid, Container, Paper } from "@material-ui/core";
 
+import TestNavBar from "../../navbar/TestNavBar";
 import { CollapsibleMenu, Carousel } from "../../content";
 import { PLACEHOLDERS, INPUT_TYPE, COLORS } from "../../../common/shared";
+import { CustomSearchInput, CustomDivider } from "../../custom";
+import useStyles from "../../../styling/CustomStyles";
 import {
   AmortizedLoanFixedAmount,
   BondPayBackPredetermined,
@@ -11,25 +13,16 @@ import {
   InflationCalculatorCpiData,
   MortgagePayOffWithoutLoanTerm,
   MortgagePayoffWithLoanTerm,
-  PayBackACertainAmount,
+  PaybackACertainAmount,
   PaybackWithinTimeframe,
   PresentValue,
   PresentValueOfPeriodicalDeposit,
   ProfitMarginCalculator,
   StockTradingMargin,
 } from "../index";
-import { Label, CustomBtn, CustomSearchInput } from "../../custom";
-
-const useStyles = makeStyles((theme) => ({
-  sideBarPaperBackground: {
-    margin: theme.spacing(1),
-    backgroundColor: "transparent",
-    borderRadius: 20,
-  },
-}));
 
 function Finance() {
-  const { sideBarPaperBackground } = useStyles();
+  const { container, sideBarPaperBackground, paperBackground } = useStyles();
   const [searchText, setSearchText] = React.useState("");
 
   const handleSearchChange = (event) => {
@@ -37,10 +30,59 @@ function Finance() {
   };
   return (
     <>
+      <TestNavBar />
       <Container>
         <Grid container xs={12}>
           {/* Calculator grid here */}
-          <Grid container item xs={12} sm={10}></Grid>
+          <Grid container item xs={12} sm={10}>
+            <AmortizedLoanFixedAmount />
+
+            <CustomDivider />
+
+            <BondPayBackPredetermined />
+
+            <CustomDivider />
+
+            <DefearedPaymentsLumpsumAtMaturity />
+
+            <CustomDivider />
+
+            <InflationCalculatorCpiData />
+
+            <CustomDivider />
+
+            <MortgagePayOffWithoutLoanTerm />
+
+            <CustomDivider />
+
+            <MortgagePayoffWithLoanTerm />
+
+            <CustomDivider />
+
+            <PaybackACertainAmount />
+
+            <CustomDivider />
+
+            <PaybackWithinTimeframe />
+
+            <CustomDivider />
+
+            <PresentValue />
+
+            <CustomDivider />
+
+            <PresentValueOfPeriodicalDeposit />
+
+            <CustomDivider />
+
+            <ProfitMarginCalculator />
+
+            <CustomDivider />
+
+            <StockTradingMargin />
+
+            <CustomDivider />
+          </Grid>
 
           {/* Ad & menu grid */}
           <Grid item xs={12} sm={2}>

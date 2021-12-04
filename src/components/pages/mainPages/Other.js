@@ -4,6 +4,11 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
+import TestNavBar from "../../navbar/TestNavBar";
+import { CollapsibleMenu, Carousel } from "../../content";
+import { PLACEHOLDERS, INPUT_TYPE, COLORS } from "../../../common/shared";
+import { CustomSearchInput, CustomDivider } from "../../custom";
+import useStyles from "../../../styling/CustomStyles";
 import {
   CircularSlap,
   ConcreteSquareFooting,
@@ -21,113 +26,111 @@ import {
   TrapSpeedMethod,
   WebsiteBandwidth,
 } from "../index";
-import useStyles from "../../../styling/CustomStyles";
 
 function Other() {
-  const classes = useStyles();
+  const { container, sideBarPaperBackground, paperBackground } = useStyles();
+  const [searchText, setSearchText] = React.useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchText(event.target.value);
+  };
   return (
-    <Container className={classes.container}>
-      <Grid item xs={12}>
-        <Typography variant="h6" className="text-center">
-          OTHER CALCULATORS
-        </Typography>
-        <hr />
-      </Grid>
-
-      <Grid container xs={12} spacing={2}>
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+    <>
+      <TestNavBar />
+      <Container>
+        <Grid container xs={12}>
+          {/* Calculator grid here */}
+          <Grid container item xs={12} sm={10}>
             <CircularSlap />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <ConcreteSquareFooting />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <ConductorResitor />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <CurbAndGutterBarrier />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <ElapsedTimeMethod />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <HoleColumn />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <HorsepowerCalculation />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <HostingBandwidth />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <ParrallelResitor />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <SeriesResistor />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <SinglePointWithKnownSlope />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <SlopeCalculatorForTwoKnownPoints />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <StairsConcreate />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <TrapSpeedMethod />
-          </Paper>
-        </Grid>
 
-        <Grid item xs={6}>
-          <Paper className={classes.paper2}>
+            <CustomDivider />
+
             <WebsiteBandwidth />
-          </Paper>
-        </Grid>
-      </Grid>
+          </Grid>
 
-      <div style={{ marginBottom: 40 }}></div>
-    </Container>
+          {/* Ad & menu grid */}
+          <Grid item xs={12} sm={2}>
+            {/* Carousel */}
+            <Grid item xs={12}>
+              <Paper elevation={0} className={sideBarPaperBackground}>
+                <Carousel />
+              </Paper>
+            </Grid>
+
+            {/* Search input */}
+            <Grid>
+              <CustomSearchInput
+                type={INPUT_TYPE.text}
+                id="search"
+                name="search"
+                placeholder={PLACEHOLDERS.search}
+                value={searchText}
+                onChange={handleSearchChange}
+              />
+            </Grid>
+
+            {/* Menu */}
+            <Grid item xs={12}>
+              <Paper elevation={0} className={sideBarPaperBackground}>
+                <CollapsibleMenu />
+              </Paper>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
 }
 

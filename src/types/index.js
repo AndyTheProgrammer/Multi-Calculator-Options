@@ -3,6 +3,7 @@ export {
   CubeAreaI,
   ConeAreaI,
   RectangularAreaI,
+  RectangleAreaI,
   CapsuleSurfaceAreaI,
   CylindricalTankAreaI,
   SphericalCapSurfaceAreaI,

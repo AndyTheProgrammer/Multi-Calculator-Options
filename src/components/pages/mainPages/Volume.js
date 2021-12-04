@@ -2,10 +2,12 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 
+import TestNavBar from "../../navbar/TestNavBar";
+import { CollapsibleMenu, Carousel } from "../../content";
+import { PLACEHOLDERS, INPUT_TYPE } from "../../../common/shared";
+import { CustomSearchInput, CustomDivider } from "../../custom";
 import useStyles from "../../../styling/CustomStyles";
-import { CollapsibleMenu } from "../../content";
 import {
   CapsuleVolume,
   ConeVolume,
@@ -21,93 +23,93 @@ import {
 } from "../index";
 
 function Volume() {
-  const classes = useStyles();
+  const { sideBarPaperBackground } = useStyles();
+  const [searchText, setSearchText] = React.useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchText(event.target.value);
+  };
   return (
-    <Container className={classes.container}>
-      <Typography variant="subtitle2" className="text-center">
-        | Volume Calculator
-      </Typography>
-      <hr />
-      <Grid container xs={12}>
-        {/* Calculator Grid */}
-        <Grid item xs={8}>
-          <Paper className={classes.paperBackground}>
+    <>
+      <TestNavBar />
+      <Container>
+        <Grid container xs={12}>
+          {/* Calculator grid here */}
+          <Grid container item xs={12} sm={10}>
+            <CapsuleVolume />
+
+            <CustomDivider />
+
+            <ConeVolume />
+
+            <CustomDivider />
+
+            <ConicalFrustumVolume />
+
+            <CustomDivider />
+
+            <CubeVolume />
+
+            <CustomDivider />
+
+            <CylinderVolume />
+
+            <CustomDivider />
+
+            <EllipsoidVolume />
+
+            <CustomDivider />
+
+            <RectangularTankVolume />
+
+            <CustomDivider />
+
+            <SphereVolume />
+
+            <CustomDivider />
+
+            <SphericalCapVolume />
+
+            <CustomDivider />
+
+            <SquarePyramidVolume />
+
+            <CustomDivider />
+
+            <TubeVolume />
+          </Grid>
+
+          {/* Ad & menu grid */}
+          <Grid item xs={12} sm={2}>
+            {/* Carousel */}
             <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <CapsuleVolume />
+              <Paper elevation={0} className={sideBarPaperBackground}>
+                <Carousel />
               </Paper>
             </Grid>
 
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <ConeVolume />
-              </Paper>
+            {/* Search input */}
+            <Grid>
+              <CustomSearchInput
+                type={INPUT_TYPE.text}
+                id="search"
+                name="search"
+                placeholder={PLACEHOLDERS.search}
+                value={searchText}
+                onChange={handleSearchChange}
+              />
             </Grid>
 
+            {/* Menu */}
             <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <ConicalFrustumVolume />
+              <Paper elevation={0} className={sideBarPaperBackground}>
+                <CollapsibleMenu />
               </Paper>
             </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <CubeVolume />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <CylinderVolume />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <EllipsoidVolume />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <RectangularTankVolume />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <SphereVolume />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <SphericalCapVolume />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <SquarePyramidVolume />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <TubeVolume />
-              </Paper>
-            </Grid>
-          </Paper>
+          </Grid>
         </Grid>
-
-        {/* Ad Grid */}
-        <Grid item xs={4}>
-          <Paper className={classes.paper2}>
-            <CollapsibleMenu />
-          </Paper>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 }
 

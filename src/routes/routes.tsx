@@ -6,7 +6,15 @@ import { MathCategories } from '../components/pages/mathCategories'
 import { AllCalculators } from '../components/pages/allCalculators'
 import { FinancePage } from '../components/pages/financepage'
 import { OtherPage } from '../components/pages/otherPage'
-import { FitnessAndHealthPageView } from '../components/pages'
+import {
+    AreaPageView,
+    FinancePageView,
+    FitnessAndHealthPageView,
+    OtherPageView,
+    StatisticsPageView,
+    SurfaceAreaPageView,
+    VolumePageView
+} from '../components/pages'
 
 
 // converter components
@@ -57,6 +65,36 @@ const routes = [
         name: "AllCalculators",
         path: "/allcalculators",
         component: AllCalculators
+    },
+    {
+        name: "Area",
+        path: "/testpage",
+        component: AreaPageView
+    },
+    {
+        name: "Finance",
+        path: "/finance",
+        component: FinancePageView
+    },
+    {
+        name: "Other",
+        path: "/other",
+        component: OtherPageView
+    },
+    {
+        name: "Statistics",
+        path: "/statistics",
+        component: StatisticsPageView
+    },
+    {
+        name: "SurfaceArea",
+        path: "/surfaceArea",
+        component: SurfaceAreaPageView
+    },
+    {
+        name: "Volume",
+        path: "/volume",
+        component: VolumePageView
     }
 ]
 

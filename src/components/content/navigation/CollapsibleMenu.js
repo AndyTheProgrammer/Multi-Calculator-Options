@@ -11,8 +11,9 @@ function CollapsibleMenu() {
   let history = useHistory();
   const getMenus = [
     {
-      key: "intro",
-      label: "Introduction",
+      key: "home",
+      label: "Home",
+      onClick: () => history.push("/"),
     },
     {
       key: "math",

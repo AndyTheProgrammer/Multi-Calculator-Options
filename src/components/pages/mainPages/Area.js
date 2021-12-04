@@ -2,8 +2,11 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 
+import TestNavBar from "../../navbar/TestNavBar";
+import { CollapsibleMenu, Carousel } from "../../content";
+import { PLACEHOLDERS, INPUT_TYPE, COLORS } from "../../../common/shared";
+import { CustomSearchInput, CustomDivider } from "../../custom";
 import useStyles from "../../../styling/CustomStyles";
 import {
   CircleArea,
@@ -16,67 +19,79 @@ import {
 } from "../index";
 
 function Area() {
-  const classes = useStyles();
+  const { container, sideBarPaperBackground, paperBackground } = useStyles();
+  const [searchText, setSearchText] = React.useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchText(event.target.value);
+  };
   return (
-    <Container className={classes.container}>
-      <Typography variant="subtitle2" className="text-center">
-        | Area Calculator
-      </Typography>
-      <hr />
-      <Grid container xs={12}>
-        {/* Calculator Grid */}
-        <Grid item xs={8}>
-          <Paper className={classes.paperBackground}>
+    <>
+      <TestNavBar />
+      <Container>
+        <Grid container xs={12}>
+          {/* Calculator grid here */}
+          <Grid container item xs={12} sm={10}>
+            <CircleArea />
+
+            <CustomDivider />
+
+            <EllipseArea />
+
+            <CustomDivider />
+
+            <ParallelogramArea />
+
+            <CustomDivider />
+
+            <RectangularArea />
+
+            <CustomDivider />
+
+            <SectorArea />
+
+            <CustomDivider />
+
+            <TrapezoidArea />
+
+            <CustomDivider />
+
+            <TriangleArea />
+
+            <CustomDivider />
+          </Grid>
+
+          {/* Ad & menu grid */}
+          <Grid item xs={12} sm={2}>
+            {/* Carousel */}
             <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <CircleArea />
+              <Paper elevation={0} className={sideBarPaperBackground}>
+                <Carousel />
               </Paper>
             </Grid>
 
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <EllipseArea />
-              </Paper>
+            {/* Search input */}
+            <Grid>
+              <CustomSearchInput
+                type={INPUT_TYPE.text}
+                id="search"
+                name="search"
+                placeholder={PLACEHOLDERS.search}
+                value={searchText}
+                onChange={handleSearchChange}
+              />
             </Grid>
 
+            {/* Menu */}
             <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <ParallelogramArea />
+              <Paper elevation={0} className={sideBarPaperBackground}>
+                <CollapsibleMenu />
               </Paper>
             </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <RectangularArea />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <SectorArea />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <TrapezoidArea />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paper2}>
-                <TriangleArea />
-              </Paper>
-            </Grid>
-          </Paper>
+          </Grid>
         </Grid>
-
-        {/* Ad Grid */}
-        <Grid item xs={4}>
-          <Paper className={classes.paper2}>Ad</Paper>
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 }
 
