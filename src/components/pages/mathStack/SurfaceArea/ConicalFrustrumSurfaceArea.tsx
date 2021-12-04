@@ -118,7 +118,6 @@ const ConicalFrustrumSurfaceArea = () => {
 
             if (typeof ConicalFrustumSurfaceArea === 'object' && unitType === false) {
               setSelectedResult(unitType)
-              se
             }
 
             resetForm()
