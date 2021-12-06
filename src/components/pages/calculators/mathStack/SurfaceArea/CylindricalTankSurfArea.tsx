@@ -28,13 +28,24 @@ const CylindricalTankSurfArea = () => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    surfaceArea: 0,
     baseSurfaceArea: 0,
     lateralSurfaceArea: 0,
-    radius: 0,
-    height: 0,
-    unit: ''
+    cylindricalTankSurfaceArea: 0,
+    units: ''
   })
+  const [resultTwo, setResultTwo] = React.useState({
+    submitedRadius: 0,
+    radiusUnit: '',
+    radiusToHeightUnit: 0,
+    height: 0,
+    heightUnit: '',
+    heightToRadiusUnit: 0,
+    radiusUnitBaseSurfaceArea: 0,
+    radiusUnitLateralSurfaceArea: 0,
+    radiusUnitTotalArea: 0
+  })
+
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
   return (
     <>
@@ -59,17 +70,47 @@ const CylindricalTankSurfArea = () => {
             try {
               const { payload: cylindricalTank } = await calculateMath(payload)
               console.log('=====>', cylindricalTank)
-              if (typeof cylindricalTank === 'object') {
-                const { surfaceArea, base_surface_area, lateral_surface_area, radius, height, unit } = cylindricalTank
+              const {
+                base_surface_area,
+                lateral_surface_area,
+                cylindricalTankSurfaceArea,
+                units,
+                unitType,
+                submitedRadius,
+                radiusUnit,
+                radiusToHeightUnit,
+                height,
+                heightUnit,
+                heightToRadiusUnit,
+                radiusUnitBaseSurfaceArea,
+                radiusUnitLateralSurfaceArea,
+                radiusUnitTotalArea,
+              } = cylindricalTank
+              if (typeof cylindricalTank === 'object' && unitType === true) {
+                setSelectedResult(unitType)
                 setResult({
-                  surfaceArea: surfaceArea,
                   baseSurfaceArea: base_surface_area,
                   lateralSurfaceArea: lateral_surface_area,
-                  radius: radius,
-                  height: height,
-                  unit: unit
+                  cylindricalTankSurfaceArea,
+                  units
                 })
               }
+
+              if (typeof cylindricalTank === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  submitedRadius,
+                  radiusUnit,
+                  radiusToHeightUnit,
+                  height,
+                  heightUnit,
+                  heightToRadiusUnit,
+                  radiusUnitBaseSurfaceArea,
+                  radiusUnitLateralSurfaceArea,
+                  radiusUnitTotalArea,
+                })
+              }
+
             } catch (err) {
               console.log('====>', err)
             }
@@ -128,16 +169,30 @@ const CylindricalTankSurfArea = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+      {selectedResult ? (<ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">Tank Surface Area: {Result.surfaceArea}</Typography>
           <Typography variant="subtitle1">Base Surface Area: {Result.baseSurfaceArea}</Typography>
           <Typography variant="subtitle1">Lateral Surface Area: {Result.lateralSurfaceArea}</Typography>
-          <Typography variant="subtitle1">Radius: {Result.radius}</Typography>
-          <Typography variant="subtitle1">Height: {Result.height}</Typography>
-          <Typography variant="subtitle1">Unit: {Result.unit}</Typography>
+          <Typography variant="subtitle1">cylindricalTankSurfaceArea: {Result.cylindricalTankSurfaceArea}</Typography>
+          <Typography variant="subtitle1">Unit: {Result.units}</Typography>
         </div>
-      </ResultTabsContainer>
+      </ResultTabsContainer>) : (
+        <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">Base Surface Area: {resultTwo.radiusUnitBaseSurfaceArea}</Typography>
+            <Typography variant="subtitle1">Lateral Surface Area: {resultTwo.radiusUnitLateralSurfaceArea}</Typography>
+            <Typography variant="subtitle1">radiusUnitTotalArea: {resultTwo.radiusUnitTotalArea}</Typography>
+            <Typography variant="subtitle1">submitedRadius: {resultTwo.submitedRadius}</Typography>
+            <Typography variant="subtitle1">radiusUnit: {resultTwo.radiusUnit}</Typography>
+            <Typography variant="subtitle1">radiusToHeightUnit: {resultTwo.radiusToHeightUnit}</Typography>
+            <Typography variant="subtitle1">heightUnit: {resultTwo.heightUnit}</Typography>
+            <Typography variant="subtitle1">heightToRadiusUnit: {resultTwo.heightToRadiusUnit}</Typography>
+            <Typography variant="subtitle1">height: {resultTwo.height}</Typography>
+
+          </div>
+        </ResultTabsContainer>
+      )}
+
 
 
     </>
