@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { MostellerBodySurfaceAreaI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { HaycockBodySurfaceAreaI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,7 +20,7 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const MostellerBodySurfaceArea = () => {
+const HaycockBodySurfaceArea = () => {
 
   const [initialFormValues] = React.useState({
     height: '',
@@ -35,7 +35,7 @@ const MostellerBodySurfaceArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.mostellerBodySurfaceArea} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.haycockBodySurfaceArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -44,19 +44,19 @@ const MostellerBodySurfaceArea = () => {
             weight,
             weight_unit
           }, { setSubmitting }) => {
-            const payload: MostellerBodySurfaceAreaI = {
+            const payload: HaycockBodySurfaceAreaI = {
               height,
               height_unit,
               weight,
               weight_unit,
-              method: 'MostellerFormulaBodySurfaceArea'
+              method: 'HaycockFormulaBodySurfaceArea'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: mostellerBodySurfaceArea } = await calculateHealth(payload)
-              console.log('=====>', mostellerBodySurfaceArea)
-              if (typeof mostellerBodySurfaceArea === 'object') {
-                const { bodySurfaceArea } = mostellerBodySurfaceArea
+              const { payload: haycockFormula } = await calculateOthers(payload)
+              console.log('=====>', haycockFormula)
+              if (typeof haycockFormula === 'object') {
+                const { bodySurfaceArea } = haycockFormula
                 setResult({
                   bodySurfaceArea: bodySurfaceArea,
                 })
@@ -80,6 +80,7 @@ const MostellerBodySurfaceArea = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />
@@ -97,6 +98,7 @@ const MostellerBodySurfaceArea = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
                 />
@@ -128,4 +130,4 @@ const MostellerBodySurfaceArea = () => {
   )
 }
 
-export default MostellerBodySurfaceArea
+export default HaycockBodySurfaceArea

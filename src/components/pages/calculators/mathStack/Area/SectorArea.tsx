@@ -102,6 +102,7 @@ const SectorArea = () => {
 
                 <CustomSelect
                   id="radius_unit"
+                  measurement="length"
                   value={values.radius_unit}
                   onChange={handleChange('radius_unit')}
                 />
@@ -119,6 +120,7 @@ const SectorArea = () => {
 
                 <CustomSelect
                   id="angle_unit"
+                  measurement="angle"
                   value={values.angle_unit}
                   onChange={handleChange('angle_unit')}
                 />

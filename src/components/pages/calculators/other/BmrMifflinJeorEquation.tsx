@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { LeanBodyMassPeterFormulaI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { BmrMifflinJeorEquationI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,23 +20,28 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const LeanBodyMassPeterFormula = () => {
+const BmrMifflinJeorEquation = () => {
 
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
     weight: '',
     weight_unit: '',
-    gender: ''
+    gender: '',
+    age: 0
   })
   const [Result, setResult] = React.useState({
-    leanBodyMass: 0
+    step1: 0,
+    step2: 0,
+    step3: 0,
+    BMR: 0,
+    unit: ''
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.leanBodyMassPetersFormula} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.bmrMifflinJeorEquation} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -44,24 +49,30 @@ const LeanBodyMassPeterFormula = () => {
             height_unit,
             weight,
             weight_unit,
-            gender
-          }, { setSubmitting }) => {
-            const payload: LeanBodyMassPeterFormulaI = {
+            gender,
+            age
+          }, { setSubmitting, resetForm }) => {
+            const payload: BmrMifflinJeorEquationI = {
               height,
               height_unit,
               weight,
               weight_unit,
               gender,
-              method: 'LeanBodyMassPeterFormular'
+              age,
+              method: 'BMRMifflinStJeor'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: leanBodyMassPeterFormula } = await calculateHealth(payload)
-              console.log('=====>', leanBodyMassPeterFormula)
-              if (typeof leanBodyMassPeterFormula === 'object') {
-                const { leanBodyMass } = leanBodyMassPeterFormula
+              const { payload: MifflinJeor } = await calculateOthers(payload)
+              console.log('=====>', MifflinJeor)
+              if (typeof MifflinJeor === 'object') {
+                const { step1, step2, step3, BMR, unit } = MifflinJeor
                 setResult({
-                  leanBodyMass: leanBodyMass,
+                  step1: step1,
+                  step2: step2,
+                  step3: step3,
+                  BMR: BMR,
+                  unit: unit
                 })
               }
             } catch (err) {
@@ -83,6 +94,7 @@ const LeanBodyMassPeterFormula = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />
@@ -100,6 +112,7 @@ const LeanBodyMassPeterFormula = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
                 />
@@ -112,6 +125,17 @@ const LeanBodyMassPeterFormula = () => {
                   measurement="gender"
                   value={values.gender}
                   onChange={handleChange('gender')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.age} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="age"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.age}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -132,13 +156,14 @@ const LeanBodyMassPeterFormula = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Lean body mass: {Result.leanBodyMass}
-          </Typography>
+          <Typography variant="subtitle1">step1:{Result.step1} </Typography>
+          <Typography variant="subtitle1">step2: {Result.step2}</Typography>
+          <Typography variant="subtitle1">step3: {Result.step3}</Typography>
+          <Typography variant="subtitle1">BMR: {Result.BMR}{Result.unit}</Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default LeanBodyMassPeterFormula
+export default BmrMifflinJeorEquation

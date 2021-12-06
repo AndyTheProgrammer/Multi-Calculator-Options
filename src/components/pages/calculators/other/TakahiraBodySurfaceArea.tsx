@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { TakaSchlichBodySurfaceAreaI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { TakahiraBodySurfaceAreaI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,14 +20,13 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const TakaSchlichBodySurfaceArea = () => {
+const TakahiraBodySurfaceArea = () => {
 
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
     weight: '',
-    weight_unit: '',
-    gender: '',
+    weight_unit: ''
   })
   const [Result, setResult] = React.useState({
     bodySurfaceArea: 0,
@@ -37,30 +36,28 @@ const TakaSchlichBodySurfaceArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.takaSchlichBodySurfaceArea} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.takahiraBodySurfaceArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
             height,
             height_unit,
             weight,
-            weight_unit,
-            gender,
+            weight_unit
           }, { setSubmitting }) => {
-            const payload: TakaSchlichBodySurfaceAreaI = {
+            const payload: TakahiraBodySurfaceAreaI = {
               height,
               height_unit,
               weight,
               weight_unit,
-              gender,
-              method: 'SchlichFormulaBodySurfaceArea'
+              method: 'TakahiraFormulaBodySurfaceArea'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: takaSchlichBodySurfaceArea } = await calculateHealth(payload)
-              console.log('=====>', takaSchlichBodySurfaceArea)
-              if (typeof takaSchlichBodySurfaceArea === 'object') {
-                const { bodySurfaceArea, unit } = takaSchlichBodySurfaceArea
+              const { payload: MifflinHarris } = await calculateOthers(payload)
+              console.log('=====>', MifflinHarris)
+              if (typeof MifflinHarris === 'object') {
+                const { bodySurfaceArea, unit } = MifflinHarris
                 setResult({
                   bodySurfaceArea: bodySurfaceArea,
                   unit: unit
@@ -85,6 +82,7 @@ const TakaSchlichBodySurfaceArea = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />
@@ -102,18 +100,9 @@ const TakaSchlichBodySurfaceArea = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.gender} />
-                <CustomSelect
-                  id="gender"
-                  measurement="gender"
-                  value={values.gender}
-                  onChange={handleChange('gender')}
                 />
               </div>
 
@@ -135,7 +124,7 @@ const TakaSchlichBodySurfaceArea = () => {
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Body surface area: {Result.bodySurfaceArea}
+            Body surface area: {Result.bodySurfaceArea}{Result.unit}
           </Typography>
         </div>
       </ResultTabsContainer>
@@ -143,4 +132,4 @@ const TakaSchlichBodySurfaceArea = () => {
   )
 }
 
-export default TakaSchlichBodySurfaceArea
+export default TakahiraBodySurfaceArea

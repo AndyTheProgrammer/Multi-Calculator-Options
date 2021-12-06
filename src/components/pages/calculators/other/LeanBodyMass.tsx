@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
 import { LeanBodyMassI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -56,7 +56,7 @@ const LeanBodyMass = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: leanBodyMassFormula } = await calculateHealth(payload)
+              const { payload: leanBodyMassFormula } = await calculateOthers(payload)
               console.log('=====>', leanBodyMassFormula)
               if (typeof leanBodyMassFormula === 'object') {
                 const { leanBodyMass } = leanBodyMassFormula
@@ -84,6 +84,7 @@ const LeanBodyMass = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />
@@ -102,6 +103,7 @@ const LeanBodyMass = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
                 />

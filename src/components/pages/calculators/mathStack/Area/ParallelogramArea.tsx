@@ -122,6 +122,7 @@ const ParallelogramArea = () => {
 
                 <CustomSelect
                   id="breadth_unit"
+                  measurement="length"
                   value={values.breadth_unit}
                   onChange={handleChange('breadth_unit')}
                 />
@@ -139,6 +140,7 @@ const ParallelogramArea = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />

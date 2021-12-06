@@ -3,7 +3,6 @@ import axios, { AxiosError } from 'axios'
 import { BASE_URL } from '../common/AppUrl'
 import * as FinancialFormulas from '../types/FinanceInterfaces'
 import * as MatheMaticalFormulas from '../types/MathInterfaces'
-import * as HealthFormulas from '../types/HealthInterfaces'
 import * as OtherFormulas from '../types/OtherCalculatorInterfaces'
 import * as StatisticalFormulas from '../types/StatisticsInterfaces'
 
@@ -41,48 +40,6 @@ export const calculateMath = async (calculateArea: MatheMaticalFormulas.AllMathC
       }
     }
 
-
-    return {
-      success: false,
-      payload: 'Unexpected Error',
-    };
-  }
-};
-
-// Changed the below functions to match the calculateMath function
-export const calculateHealth = async (calculateHealthPayload: HealthFormulas.AllHealthCalculators) => {
-  try {
-    const { data } = await axios.post(`${BASE_URL}/api/calculator/health`, calculateHealthPayload)
-
-    const { statusCode, message } = data;
-    if (statusCode === 100) {
-      // console.log('This is ', message)
-      return { success: true, payload: message };
-    }
-
-    throw new Error('Responded with unexpected Error');
-  } catch (err) {
-    console.log(JSON.stringify({ err }, null, 2))
-    const { response } = err as AxiosError
-
-    if (response && typeof response.data.statusCode === 'number') {
-
-      const { data: { statusCode, message }, } = response
-
-      if (statusCode === 401) {
-        return {
-          success: false,
-          payload: message
-        }
-      }
-
-      if (statusCode === 404) {
-        return {
-          success: false,
-          payload: message
-        }
-      }
-    }
 
     return {
       success: false,

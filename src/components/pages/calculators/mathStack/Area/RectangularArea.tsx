@@ -124,6 +124,7 @@ const RectangularArea = () => {
 
                 <CustomSelect
                   id="length_unit"
+                  measurement="length"
                   value={values.length_unit}
                   onChange={handleChange('length_unit')}
                 />
@@ -142,6 +143,7 @@ const RectangularArea = () => {
 
                 <CustomSelect
                   id="width_unit"
+                  measurement="length"
                   value={values.width_unit}
                   onChange={handleChange('width_unit')}
                 />
@@ -159,6 +161,7 @@ const RectangularArea = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />

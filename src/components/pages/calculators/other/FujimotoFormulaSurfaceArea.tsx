@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { DueDateParikhsRuleI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { FujimotoFormulaSurfaceAreaI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -12,6 +12,7 @@ import {
 } from '../../../../common/shared'
 import {
   CustomTextInput,
+  CustomSelect,
   CustomBtn,
   CustomResetBtn,
   Label,
@@ -19,39 +20,45 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const DueDateParikhsRule = () => {
+const FujimotoFormulaSurfaceArea = () => {
 
   const [initialFormValues] = React.useState({
-    first_date_of_last_period: '',
-    days: ''
+    height: '',
+    height_unit: '',
+    weight: '',
+    weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    dueDate: 0
+    bodySurfaceArea: 0
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.dueDateParikhsRule} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.fujimotoFormulaSurfaceArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            first_date_of_last_period,
-            days,
+            height,
+            height_unit,
+            weight,
+            weight_unit
           }, { setSubmitting }) => {
-            const payload: DueDateParikhsRuleI = {
-              first_date_of_last_period,
-              days,
-              method: 'DueDateParikhsRule'
+            const payload: FujimotoFormulaSurfaceAreaI = {
+              height,
+              height_unit,
+              weight,
+              weight_unit,
+              method: 'FujimotoFormulaBodySurfaceArea'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: dueDateParikhsRule } = await calculateHealth(payload)
-              console.log('=====>', dueDateParikhsRule)
-              if (typeof dueDateParikhsRule === 'object') {
-                const { dueDate } = dueDateParikhsRule
+              const { payload: fujimotoFormulaBodySurfaceArea } = await calculateOthers(payload)
+              console.log('=====>', fujimotoFormulaBodySurfaceArea)
+              if (typeof fujimotoFormulaBodySurfaceArea === 'object') {
+                const { bodySurfaceArea } = fujimotoFormulaBodySurfaceArea
                 setResult({
-                  dueDate: dueDate,
+                  bodySurfaceArea: bodySurfaceArea,
                 })
               }
             } catch (err) {
@@ -62,24 +69,38 @@ const DueDateParikhsRule = () => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.firstDateofLastPeriod} />
+                <Label title={LABELS.height} />
                 <CustomTextInput
-                  type={INPUT_TYPE.date}
-                  id="first_date_of_last_period"
-                  placeholder={PLACEHOLDERS.date}
-                  value={values.first_date_of_last_period}
+                  type={INPUT_TYPE.number}
+                  id="height"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.height}
                   onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="height_unit"
+                  measurement="length"
+                  value={values.height_unit}
+                  onChange={handleChange('height_unit')}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.days} />
+                <Label title={LABELS.weight} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="days"
+                  id="weight"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.days}
+                  value={values.weight}
                   onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="weight_unit"
+                  measurement="weight"
+                  value={values.weight_unit}
+                  onChange={handleChange('weight_unit')}
                 />
               </div>
 
@@ -100,11 +121,13 @@ const DueDateParikhsRule = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
+          <Typography variant="subtitle1">
+            Body surface area: {Result.bodySurfaceArea}
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default DueDateParikhsRule
+export default FujimotoFormulaSurfaceArea

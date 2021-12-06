@@ -93,6 +93,7 @@ const TubeVolume = () => {
 
                 <CustomSelect
                   id="outer_diameter_unit"
+                  measurement="length"
                   value={values.outer_diameter_unit}
                   onChange={handleChange('outer_diameter_unit')}
                 />
@@ -110,6 +111,7 @@ const TubeVolume = () => {
 
                 <CustomSelect
                   id="inner_diameter_unit"
+                  measurement="length"
                   value={values.inner_diameter_unit}
                   onChange={handleChange('inner_diameter_unit')}
                 />
@@ -127,6 +129,7 @@ const TubeVolume = () => {
 
                 <CustomSelect
                   id="length_unit"
+                  measurement="length"
                   value={values.length_unit}
                   onChange={handleChange('length_unit')}
                 />

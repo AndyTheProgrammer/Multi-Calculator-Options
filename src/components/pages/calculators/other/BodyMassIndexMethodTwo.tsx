@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { BodyMassIndexI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { BodyMassIndexMethodTwoI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,7 +20,7 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const BodyMassIndex = () => {
+const BodyMassIndexMethodTwo = () => {
 
   const [initialFormValues] = React.useState({
     height: '',
@@ -29,8 +29,8 @@ const BodyMassIndex = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    weightInKg: 0,
-    heightToMeter: 0,
+    weightInlbs: 0,
+    heightToIn: 0,
     bmi: 0,
     unit: ''
   })
@@ -38,7 +38,7 @@ const BodyMassIndex = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.bodyMassIndex} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.bodyMassIndexMethodTwo} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -46,24 +46,24 @@ const BodyMassIndex = () => {
             height_unit,
             weight,
             weight_unit
-          }, { setSubmitting, resetForm }) => {
-            const payload: BodyMassIndexI = {
+          }, { setSubmitting }) => {
+            const payload: BodyMassIndexMethodTwoI = {
               height,
               height_unit,
               weight,
               weight_unit,
-              method: 'bodyMassIndex'
+              method: 'bodyMassIndexTwo'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: bodyMass } = await calculateHealth(payload)
-              console.log('=====>', bodyMass)
-              if (typeof bodyMass === 'object') {
-                const { weightInKg, heightToMeter, bmi, unit } = bodyMass
+              const { payload: bodyMassTwo } = await calculateOthers(payload)
+              console.log('=====>', bodyMassTwo)
+              if (typeof bodyMassTwo === 'object') {
+                const { bmi, unit, heightToIn, weightInlbs } = bodyMassTwo
                 setResult({
-                  weightInKg: weightInKg,
-                  heightToMeter: heightToMeter,
                   bmi: bmi,
+                  heightToIn: heightToIn,
+                  weightInlbs: weightInlbs,
                   unit: unit
                 })
               }
@@ -86,6 +86,7 @@ const BodyMassIndex = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />
@@ -103,6 +104,7 @@ const BodyMassIndex = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
                 />
@@ -125,13 +127,13 @@ const BodyMassIndex = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">BMI: {Result.bmi}{Result.unit}</Typography>
-          <Typography variant="subtitle1">Weight : {Result.weightInKg}</Typography>
-          <Typography variant="subtitle1">Height : {Result.heightToMeter}</Typography>
+          <Typography variant="subtitle1">BMI:{Result.bmi}{Result.unit} </Typography>
+          <Typography variant="subtitle1">Height:{Result.heightToIn} </Typography>
+          <Typography variant="subtitle1">Weight:{Result.weightInlbs} </Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default BodyMassIndex
+export default BodyMassIndexMethodTwo

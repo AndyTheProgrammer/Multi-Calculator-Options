@@ -85,6 +85,7 @@ const SquarePyramidVolume = () => {
 
                 <CustomSelect
                   id="base_unit"
+                  measurement="length"
                   value={values.base_unit}
                   onChange={handleChange('base_unit')}
                 />
@@ -102,6 +103,7 @@ const SquarePyramidVolume = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />

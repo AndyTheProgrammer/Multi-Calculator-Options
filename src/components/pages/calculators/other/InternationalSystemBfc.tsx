@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { BodyMassIndexMethodTwoI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { InternationalSystemBfcI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -12,59 +12,56 @@ import {
 } from '../../../../common/shared'
 import {
   CustomTextInput,
-  CustomSelect,
   CustomBtn,
+  CustomSelect,
   CustomResetBtn,
   Label,
   FormTabsContainer,
   ResultTabsContainer
 } from '../../../custom'
 
-const BodyMassIndexMethodTwo = () => {
+const InternationalSystemBfc = () => {
 
   const [initialFormValues] = React.useState({
     height: '',
-    height_unit: '',
-    weight: '',
-    weight_unit: ''
+    neck: '',
+    gender: '',
+    hip: '',
+    waist: '',
   })
   const [Result, setResult] = React.useState({
-    weightInlbs: 0,
-    heightToIn: 0,
-    bmi: 0,
-    unit: ''
+    bfc: 0
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.bodyMassIndexMethodTwo} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.internationalSystemBfc} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
             height,
-            height_unit,
-            weight,
-            weight_unit
+            neck,
+            gender,
+            hip,
+            waist,
           }, { setSubmitting }) => {
-            const payload: BodyMassIndexMethodTwoI = {
+            const payload: InternationalSystemBfcI = {
               height,
-              height_unit,
-              weight,
-              weight_unit,
-              method: 'bodyMassIndexTwo'
+              neck,
+              gender,
+              hip,
+              waist,
+              method: 'InternationalSystemUnitBFP'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: bodyMassTwo } = await calculateHealth(payload)
-              console.log('=====>', bodyMassTwo)
-              if (typeof bodyMassTwo === 'object') {
-                const { bmi, unit, heightToIn, weightInlbs } = bodyMassTwo
+              const { payload: internationalSystemBFC } = await calculateOthers(payload)
+              console.log('=====>', internationalSystemBFC)
+              if (typeof internationalSystemBFC === 'object') {
+                const { bfc } = internationalSystemBFC
                 setResult({
-                  bmi: bmi,
-                  heightToIn: heightToIn,
-                  weightInlbs: weightInlbs,
-                  unit: unit
+                  bfc: bfc,
                 })
               }
             } catch (err) {
@@ -83,28 +80,48 @@ const BodyMassIndexMethodTwo = () => {
                   value={values.height}
                   onChange={handleChange}
                 />
+              </div>
 
-                <CustomSelect
-                  id="height_unit"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
+              <div className="form-row">
+                <Label title={LABELS.neck} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="neck"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.neck}
+                  onChange={handleChange}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.weight} />
+                <Label title={LABELS.hip} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="weight"
+                  id="hip"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.weight}
+                  value={values.hip}
                   onChange={handleChange}
                 />
+              </div>
 
+              <div className="form-row">
+                <Label title={LABELS.waist} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="waist"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.waist}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.gender} />
                 <CustomSelect
-                  id="weight_unit"
-                  value={values.weight_unit}
-                  onChange={handleChange('weight_unit')}
+                  id="gender"
+                  measurement="gender"
+                  value={values.gender}
+                  onChange={handleChange('gender')}
                 />
               </div>
 
@@ -125,13 +142,11 @@ const BodyMassIndexMethodTwo = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">BMI:{Result.bmi}{Result.unit} </Typography>
-          <Typography variant="subtitle1">Height:{Result.heightToIn} </Typography>
-          <Typography variant="subtitle1">Weight:{Result.weightInlbs} </Typography>
+          <Typography variant="subtitle1">BFC: {Result.bfc}</Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default BodyMassIndexMethodTwo
+export default InternationalSystemBfc

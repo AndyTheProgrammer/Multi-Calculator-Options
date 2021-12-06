@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { RegularCycleOvulationI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { MostellerBodySurfaceAreaI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -12,6 +12,7 @@ import {
 } from '../../../../common/shared'
 import {
   CustomTextInput,
+  CustomSelect,
   CustomBtn,
   CustomResetBtn,
   Label,
@@ -19,41 +20,45 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const RegularCycleOvulation = () => {
+const MostellerBodySurfaceArea = () => {
 
   const [initialFormValues] = React.useState({
-    cycle_days: '',
-    previous_cycle_start_date: ''
+    height: '',
+    height_unit: '',
+    weight: '',
+    weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    importantDatesForCurrentCycle: "",
-    importantDatesNextSixCycles: ""
+    bodySurfaceArea: 0
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.regularCycleOvulation} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.mostellerBodySurfaceArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            cycle_days,
-            previous_cycle_start_date
+            height,
+            height_unit,
+            weight,
+            weight_unit
           }, { setSubmitting }) => {
-            const payload: RegularCycleOvulationI = {
-              cycle_days,
-              previous_cycle_start_date,
-              method: 'regularCycleOvulationCalculator'
+            const payload: MostellerBodySurfaceAreaI = {
+              height,
+              height_unit,
+              weight,
+              weight_unit,
+              method: 'MostellerFormulaBodySurfaceArea'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: regularOvulationCycle } = await calculateHealth(payload)
-              console.log('=====>', regularOvulationCycle)
-              if (typeof regularOvulationCycle === 'object') {
-                const { importantDatesForCurrentCycle, importantDatesNextSixCycles } = regularOvulationCycle
+              const { payload: mostellerBodySurfaceArea } = await calculateOthers(payload)
+              console.log('=====>', mostellerBodySurfaceArea)
+              if (typeof mostellerBodySurfaceArea === 'object') {
+                const { bodySurfaceArea } = mostellerBodySurfaceArea
                 setResult({
-                  importantDatesForCurrentCycle: importantDatesForCurrentCycle,
-                  importantDatesNextSixCycles: importantDatesNextSixCycles
+                  bodySurfaceArea: bodySurfaceArea,
                 })
               }
             } catch (err) {
@@ -64,24 +69,38 @@ const RegularCycleOvulation = () => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.previousCycleStartDate} />
+                <Label title={LABELS.height} />
                 <CustomTextInput
-                  type={INPUT_TYPE.date}
-                  id="previous_cycle_start_date"
+                  type={INPUT_TYPE.number}
+                  id="height"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.previous_cycle_start_date}
+                  value={values.height}
                   onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="height_unit"
+                  measurement="length"
+                  value={values.height_unit}
+                  onChange={handleChange('height_unit')}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.cycleDays} />
+                <Label title={LABELS.weight} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="cycle_days"
+                  id="weight"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.cycle_days}
+                  value={values.weight}
                   onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="weight_unit"
+                  measurement="weight"
+                  value={values.weight_unit}
+                  onChange={handleChange('weight_unit')}
                 />
               </div>
 
@@ -103,10 +122,7 @@ const RegularCycleOvulation = () => {
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Important dates for current cycle: {Result.importantDatesForCurrentCycle}
-          </Typography>
-          <Typography variant="subtitle1">
-            Important dates for next 6 cycles: {Result.importantDatesNextSixCycles}
+            Body surface area: {Result.bodySurfaceArea}
           </Typography>
         </div>
       </ResultTabsContainer>
@@ -114,4 +130,4 @@ const RegularCycleOvulation = () => {
   )
 }
 
-export default RegularCycleOvulation
+export default MostellerBodySurfaceArea

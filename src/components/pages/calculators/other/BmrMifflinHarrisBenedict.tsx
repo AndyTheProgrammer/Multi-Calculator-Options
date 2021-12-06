@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { BoydFormulaSurfaceAreaI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { BmrMifflinHarrisBenedictI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,50 +20,52 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const BoydFormulaSurfaceArea = () => {
+const BmrMifflinHarrisBenedict = () => {
 
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
     weight: '',
-    weight_unit: ''
+    weight_unit: '',
+    gender: '',
+    age: 0
   })
   const [Result, setResult] = React.useState({
-    weightInKg: 0,
-    heightToMeter: 0,
-    bsa: 0,
-    unit: 0,
+    BMR: 0,
+    unit: ''
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.boydFormulaSurfaceArea} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.bmrMifflinHarrisBenedict} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
             height,
             height_unit,
             weight,
-            weight_unit
+            weight_unit,
+            gender,
+            age,
           }, { setSubmitting, resetForm }) => {
-            const payload: BoydFormulaSurfaceAreaI = {
+            const payload: BmrMifflinHarrisBenedictI = {
               height,
               height_unit,
               weight,
               weight_unit,
-              method: 'BoydFormulaBodySurfaceArea'
+              gender,
+              age,
+              method: 'BMRHarrisBenedict'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: boydFormula } = await calculateHealth(payload)
-              console.log('=====>', boydFormula)
-              if (typeof boydFormula === 'object') {
-                const { weightInKg, heightToMeter, bsa, unit } = boydFormula
+              const { payload: MifflinHarris } = await calculateOthers(payload)
+              console.log('=====>', MifflinHarris)
+              if (typeof MifflinHarris === 'object') {
+                const { BMR, unit } = MifflinHarris
                 setResult({
-                  bsa: bsa,
-                  heightToMeter: heightToMeter,
-                  weightInKg: weightInKg,
+                  BMR: BMR,
                   unit: unit
                 })
               }
@@ -86,6 +88,7 @@ const BoydFormulaSurfaceArea = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />
@@ -103,8 +106,30 @@ const BoydFormulaSurfaceArea = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.gender} />
+                <CustomSelect
+                  id="gender"
+                  measurement="gender"
+                  value={values.gender}
+                  onChange={handleChange('gender')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.age} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="age"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.age}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -125,13 +150,13 @@ const BoydFormulaSurfaceArea = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">Boyd formula surface area: {Result.bsa}{Result.unit}</Typography>
-          <Typography variant="subtitle1">Weight: {Result.weightInKg}</Typography>
-          <Typography variant="subtitle1">Height: {Result.heightToMeter}</Typography>
+          <Typography variant="subtitle1">
+            BMR: {Result.BMR}{Result.unit}
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default BoydFormulaSurfaceArea
+export default BmrMifflinHarrisBenedict

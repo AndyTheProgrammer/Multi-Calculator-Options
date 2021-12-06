@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { GehanAndGeorgeSurfaceAreaI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { DueDateNaegeleRuleI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -12,7 +12,6 @@ import {
 } from '../../../../common/shared'
 import {
   CustomTextInput,
-  CustomSelect,
   CustomBtn,
   CustomResetBtn,
   Label,
@@ -20,45 +19,41 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const GehanAndGeorgeSurfaceArea = () => {
+const DueDateNaegeleRule = () => {
 
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
-    weight: '',
-    weight_unit: ''
+    first_date_of_last_period: '',
+    days: '',
+    method: '',
   })
   const [Result, setResult] = React.useState({
-    bodySurfaceArea: 0
+    dueDate: 0
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.gehanAndGeorgeSurfaceArea} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.dueDateNaegeleRule} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            height,
-            height_unit,
-            weight,
-            weight_unit
+            first_date_of_last_period,
+            days,
+            method,
           }, { setSubmitting }) => {
-            const payload: GehanAndGeorgeSurfaceAreaI = {
-              height,
-              height_unit,
-              weight,
-              weight_unit,
-              method: 'GehanAndGeorgeFormulaBodySurfaceArea'
+            const payload: DueDateNaegeleRuleI = {
+              first_date_of_last_period,
+              days,
+              method: 'DueDateNaegeleRule'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: gehanAndGeorgeFormula } = await calculateHealth(payload)
-              console.log('=====>', gehanAndGeorgeFormula)
-              if (typeof gehanAndGeorgeFormula === 'object') {
-                const { bodySurfaceArea } = gehanAndGeorgeFormula
+              const { payload: dueDateNaegeleRule } = await calculateOthers(payload)
+              console.log('=====>', dueDateNaegeleRule)
+              if (typeof dueDateNaegeleRule === 'object') {
+                const { dueDate } = dueDateNaegeleRule
                 setResult({
-                  bodySurfaceArea: bodySurfaceArea,
+                  dueDate: dueDate
                 })
               }
             } catch (err) {
@@ -69,36 +64,35 @@ const GehanAndGeorgeSurfaceArea = () => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.height} />
+                <Label title={LABELS.firstDateofLastPeriod} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="height"
+                  type={INPUT_TYPE.date}
+                  id="first_date_of_last_period"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.height}
+                  value={values.first_date_of_last_period}
                   onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="height_unit"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.weight} />
+                <Label title={LABELS.days} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="weight"
+                  id="days"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.weight}
+                  value={values.days}
                   onChange={handleChange}
                 />
+              </div>
 
-                <CustomSelect
-                  id="weight_unit"
-                  value={values.weight_unit}
-                  onChange={handleChange('weight_unit')}
+              <div className="form-row">
+                <Label title={LABELS.method} />
+                <CustomTextInput
+                  type={INPUT_TYPE.text}
+                  id="method"
+                  placeholder={PLACEHOLDERS.method}
+                  value={values.method}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -119,13 +113,11 @@ const GehanAndGeorgeSurfaceArea = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Body surface area: {Result.bodySurfaceArea}
-          </Typography>
+          <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default GehanAndGeorgeSurfaceArea
+export default DueDateNaegeleRule

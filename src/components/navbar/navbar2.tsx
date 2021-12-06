@@ -73,13 +73,6 @@ function NavBar2(props: any) {
                                 <Font>Mathematics</Font>
                             </button>
                             <button
-                                onClick={() => { history.push("/fitness&healthpage") }}
-                                className="search-button-2"
-                                type="button"
-                            >
-                                <Font>Fitness and Health</Font>
-                            </button>
-                            <button
                                 onClick={() => { history.push("/otherpage") }}
                                 className="search-button-2"
                                 type="button"

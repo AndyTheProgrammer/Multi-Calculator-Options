@@ -1,0 +1,15 @@
+[
+  {
+    "type": "angle",
+    "units": [
+      {
+        "name": "degree",
+        "unit": "deg"
+      },
+      {
+        "name": "radian",
+        "unit": "rad"
+      }
+    ]
+  }
+]

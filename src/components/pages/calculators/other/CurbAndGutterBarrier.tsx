@@ -103,6 +103,7 @@ const CurbAndGutterBarrier = () => {
 
                 <CustomSelect
                   id="curb_depth_unit"
+                  measurement="length"
                   value={values.curb_depth_unit}
                   onChange={handleChange('curb_depth_unit')}
                 />
@@ -120,6 +121,7 @@ const CurbAndGutterBarrier = () => {
 
                 <CustomSelect
                   id="curb_height_unit"
+                  measurement="length"
                   value={values.curb_height_unit}
                   onChange={handleChange('curb_height_unit')}
                 />
@@ -137,6 +139,7 @@ const CurbAndGutterBarrier = () => {
 
                 <CustomSelect
                   id="flag_thickness_unit"
+                  measurement="length"
                   value={values.flag_thickness_unit}
                   onChange={handleChange('flag_thickness_unit')}
                 />
@@ -154,6 +157,7 @@ const CurbAndGutterBarrier = () => {
 
                 <CustomSelect
                   id="gutter_width_unit"
+                  measurement="length"
                   value={values.gutter_width_unit}
                   onChange={handleChange('gutter_width_unit')}
                 />
@@ -171,6 +175,7 @@ const CurbAndGutterBarrier = () => {
 
                 <CustomSelect
                   id="length_unit"
+                  measurement="length"
                   value={values.length_unit}
                   onChange={handleChange('length_unit')}
                 />

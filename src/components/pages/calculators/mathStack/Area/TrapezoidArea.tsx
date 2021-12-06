@@ -137,6 +137,7 @@ const TrapezoidArea = () => {
 
                 <CustomSelect
                   id="base1_unit"
+                  measurement="length"
                   value={values.base1_unit}
                   onChange={handleChange('base1_unit')}
                 />
@@ -154,6 +155,7 @@ const TrapezoidArea = () => {
 
                 <CustomSelect
                   id="base2_unit"
+                  measurement="length"
                   value={values.base2_unit}
                   onChange={handleChange('base2_unit')}
                 />
@@ -171,6 +173,7 @@ const TrapezoidArea = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />

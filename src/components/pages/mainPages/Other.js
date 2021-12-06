@@ -25,6 +25,32 @@ import {
   StairsConcreate,
   TrapSpeedMethod,
   WebsiteBandwidth,
+  BloodAlcoholContent,
+  BMRKatchMcArdle,
+  BmrMifflinHarrisBenedict,
+  BmrMifflinJeorEquation,
+  BodyFatPercentageBmi,
+  BodyMassIndex,
+  BodyMassIndexMethodTwo,
+  BoydFormulaSurfaceArea,
+  DuBoisBodySurfaceArea,
+  DueDateMittendorfWilliam,
+  DueDateNaegeleRule,
+  DueDateParikhsRule,
+  DueDateWoodsRule,
+  FujimotoFormulaSurfaceArea,
+  GehanAndGeorgeSurfaceArea,
+  HaycockBodySurfaceArea,
+  InternationalSystemBfc,
+  LeanBodyMass,
+  LeanBodyMassPeterFormula,
+  MostellerBodySurfaceArea,
+  PeroidCalculator,
+  RegularCycleOvulation,
+  TakaSchlichBodySurfaceArea,
+  TakahiraBodySurfaceArea,
+  USCustomarySystemBfc,
+  WholeBodyMassFormula,
 } from "../index";
 
 function Other() {
@@ -98,6 +124,110 @@ function Other() {
             <CustomDivider />
 
             <WebsiteBandwidth />
+
+            <CustomDivider />
+
+            <BloodAlcoholContent />
+
+            <CustomDivider />
+
+            <BMRKatchMcArdle />
+
+            <CustomDivider />
+
+            <BmrMifflinHarrisBenedict />
+
+            <CustomDivider />
+
+            <BmrMifflinJeorEquation />
+
+            <CustomDivider />
+
+            <BodyFatPercentageBmi />
+
+            <CustomDivider />
+
+            <BodyMassIndex />
+
+            <CustomDivider />
+
+            <BodyMassIndexMethodTwo />
+
+            <CustomDivider />
+
+            <BoydFormulaSurfaceArea />
+
+            <CustomDivider />
+
+            <DuBoisBodySurfaceArea />
+
+            <CustomDivider />
+
+            <DueDateMittendorfWilliam />
+
+            <CustomDivider />
+
+            <DueDateNaegeleRule />
+
+            <CustomDivider />
+
+            <DueDateParikhsRule />
+
+            <CustomDivider />
+
+            <DueDateWoodsRule />
+
+            <CustomDivider />
+
+            <FujimotoFormulaSurfaceArea />
+
+            <CustomDivider />
+
+            <GehanAndGeorgeSurfaceArea />
+
+            <CustomDivider />
+
+            <HaycockBodySurfaceArea />
+
+            <CustomDivider />
+
+            <InternationalSystemBfc />
+
+            <CustomDivider />
+
+            <LeanBodyMass />
+
+            <CustomDivider />
+
+            <LeanBodyMassPeterFormula />
+
+            <CustomDivider />
+
+            <MostellerBodySurfaceArea />
+
+            <CustomDivider />
+
+            <PeroidCalculator />
+
+            <CustomDivider />
+
+            <RegularCycleOvulation />
+
+            <CustomDivider />
+
+            <TakaSchlichBodySurfaceArea />
+
+            <CustomDivider />
+
+            <TakahiraBodySurfaceArea />
+
+            <CustomDivider />
+
+            <USCustomarySystemBfc />
+
+            <CustomDivider />
+
+            <WholeBodyMassFormula />
           </Grid>
 
           {/* Ad & menu grid */}

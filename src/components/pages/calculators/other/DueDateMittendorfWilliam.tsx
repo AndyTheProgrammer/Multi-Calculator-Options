@@ -2,8 +2,7 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-
-import { HostingBandwidthI } from '../../../../types'
+import { DueDateMittendorfWilliamI } from '../../../../types'
 import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
@@ -13,7 +12,6 @@ import {
 } from '../../../../common/shared'
 import {
   CustomTextInput,
-  CustomSelect,
   CustomBtn,
   CustomResetBtn,
   Label,
@@ -21,41 +19,39 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const HostingBandwidth = () => {
+const DueDateMittendorfWilliam = () => {
+
   const [initialFormValues] = React.useState({
-    monthly_usage: '',
-    monthly_usage_unit: '',
+    first_date_of_last_period: '',
+    type: ''
   })
   const [Result, setResult] = React.useState({
-    hostingBandwidthPerMonth: 0,
-    unit: ''
+    dueDate: 0
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.hostingBandwidth} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.dueDateMittendorfWilliam} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            monthly_usage,
-            monthly_usage_unit,
-          }, { setSubmitting, resetForm }) => {
-            const payload: HostingBandwidthI = {
-              monthly_usage,
-              monthly_usage_unit,
-              method: 'HostingBandwidthConverter'
+            first_date_of_last_period,
+            type,
+          }, { setSubmitting }) => {
+            const payload: DueDateMittendorfWilliamI = {
+              first_date_of_last_period,
+              type,
+              method: 'DueDateMittendorfWilliamRule'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: hostingBandwidthConverter } = await calculateOthers(payload)
-              console.log('=====>', hostingBandwidthConverter)
-              const { hostingBandwidthPerMonth, unit,
-              } = hostingBandwidthConverter
-              if (typeof hostingBandwidthConverter === 'object') {
+              const { payload: dueDateMittendorf } = await calculateOthers(payload)
+              console.log('=====>', dueDateMittendorf)
+              if (typeof dueDateMittendorf === 'object') {
+                const { dueDate } = dueDateMittendorf
                 setResult({
-                  hostingBandwidthPerMonth: hostingBandwidthPerMonth,
-                  unit: unit
+                  dueDate: dueDate
                 })
               }
             } catch (err) {
@@ -66,20 +62,24 @@ const HostingBandwidth = () => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.resistanceValues} />
+                <Label title={LABELS.firstDateofLastPeriod} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="monthly_usage"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.monthly_usage}
+                  type={INPUT_TYPE.date}
+                  id="first_date_of_last_period"
+                  placeholder={PLACEHOLDERS.date}
+                  value={values.first_date_of_last_period}
                   onChange={handleChange}
                 />
+              </div>
 
-                <CustomSelect
-                  id="monthly_usage_unit"
-                  measurement="data"
-                  value={values.monthly_usage_unit}
-                  onChange={handleChange('monthly_usage_unit')}
+              <div className="form-row">
+                <Label title={LABELS.type} />
+                <CustomTextInput
+                  type={INPUT_TYPE.text}
+                  id="type"
+                  placeholder={PLACEHOLDERS.type}
+                  value={values.type}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -100,13 +100,11 @@ const HostingBandwidth = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Hosting bandwidth per month: {Result.hostingBandwidthPerMonth}{Result.unit}</Typography>
+          <Typography variant="subtitle1">Due Date: {Result.dueDate} </Typography>
         </div>
       </ResultTabsContainer>
-
-
     </>
   )
 }
 
-export default HostingBandwidth
+export default DueDateMittendorfWilliam

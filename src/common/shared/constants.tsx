@@ -250,8 +250,9 @@ export const COLORS = {
   background: "#F0ECEC",
   gradientBackground: "linear-gradient(90deg, #fbfbfb 0%, #d1d1d1 100%)",
   paper_background: "#A8A79F",
-  text: "#8591b0",
+  text: "#3128AF",
   onGradient: "#ffffff",
+  input: "#dde9ec"
 };
 
 export const CALC_LABELS = {

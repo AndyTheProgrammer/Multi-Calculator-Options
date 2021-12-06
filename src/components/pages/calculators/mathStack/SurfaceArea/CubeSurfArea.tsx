@@ -80,6 +80,7 @@ const CubeSurfArea = () => {
 
                 <CustomSelect
                   id="edge_unit"
+                  measurement="length"
                   value={values.edge_unit}
                   onChange={handleChange('edge_unit')}
                 />

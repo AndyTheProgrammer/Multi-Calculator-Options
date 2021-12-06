@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { DueDateWoodsRuleI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { WholeBodyMassFormulaI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -12,6 +12,7 @@ import {
 } from '../../../../common/shared'
 import {
   CustomTextInput,
+  CustomSelect,
   CustomBtn,
   CustomResetBtn,
   Label,
@@ -19,42 +20,47 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const DueDateWoodsRule = () => {
+const WholeBodyMassFormula = () => {
 
   const [initialFormValues] = React.useState({
-    first_date_of_last_period: '',
-    days: '',
-    type: '',
+    height: '',
+    height_unit: '',
+    weight: '',
+    weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    dueDate: 0
+    bodyMass: 0,
+    unit: ''
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.dueDateWoodsRule} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.wholeBodyMassFormula} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            first_date_of_last_period,
-            days,
-            type,
+            height,
+            height_unit,
+            weight,
+            weight_unit
           }, { setSubmitting }) => {
-            const payload: DueDateWoodsRuleI = {
-              first_date_of_last_period,
-              days,
-              type,
-              method: 'DueDateWoodsRule'
+            const payload: WholeBodyMassFormulaI = {
+              height,
+              height_unit,
+              weight,
+              weight_unit,
+              method: 'allBodyMassFormulars'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: dueDateWoodsRule } = await calculateHealth(payload)
-              console.log('=====>', dueDateWoodsRule)
-              if (typeof dueDateWoodsRule === 'object') {
-                const { dueDate } = dueDateWoodsRule
+              const { payload: allBodyMassFormulas } = await calculateOthers(payload)
+              console.log('=====>', allBodyMassFormulas)
+              if (typeof allBodyMassFormulas === 'object') {
+                const { bodyMass, unit } = allBodyMassFormulas
                 setResult({
-                  dueDate: dueDate,
+                  bodyMass: bodyMass,
+                  unit: unit
                 })
               }
             } catch (err) {
@@ -65,35 +71,38 @@ const DueDateWoodsRule = () => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.firstDateofLastPeriod} />
-                <CustomTextInput
-                  type={INPUT_TYPE.date}
-                  id="first_date_of_last_period"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.first_date_of_last_period}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.days} />
+                <Label title={LABELS.height} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="days"
+                  id="height"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.days}
+                  value={values.height}
                   onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="height_unit"
+                  measurement="length"
+                  value={values.height_unit}
+                  onChange={handleChange('height_unit')}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.type} />
+                <Label title={LABELS.weight} />
                 <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="type"
-                  placeholder={PLACEHOLDERS.type}
-                  value={values.type}
+                  type={INPUT_TYPE.number}
+                  id="weight"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.weight}
                   onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="weight_unit"
+                  measurement="weight"
+                  value={values.weight_unit}
+                  onChange={handleChange('weight_unit')}
                 />
               </div>
 
@@ -114,11 +123,13 @@ const DueDateWoodsRule = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
+          <Typography variant="subtitle1">
+            Body mass: {Result.bodyMass}{Result.unit}
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default DueDateWoodsRule
+export default WholeBodyMassFormula

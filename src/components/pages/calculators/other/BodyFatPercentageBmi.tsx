@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { BmrMifflinJeorEquationI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { BodyFatPercentageBmiI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,7 +20,7 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const BmrMifflinJeorEquation = () => {
+const BodyFatPercentageBmi = () => {
 
   const [initialFormValues] = React.useState({
     height: '',
@@ -28,20 +28,17 @@ const BmrMifflinJeorEquation = () => {
     weight: '',
     weight_unit: '',
     gender: '',
-    age: 0
+    age: '',
   })
   const [Result, setResult] = React.useState({
-    step1: 0,
-    step2: 0,
-    step3: 0,
-    BMR: 0,
-    unit: ''
+    BFI: 0,
+    BMI: 0
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.bmrMifflinJeorEquation} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.bodyFatPercentageBmi} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -50,29 +47,26 @@ const BmrMifflinJeorEquation = () => {
             weight,
             weight_unit,
             gender,
-            age
+            age,
           }, { setSubmitting, resetForm }) => {
-            const payload: BmrMifflinJeorEquationI = {
+            const payload: BodyFatPercentageBmiI = {
               height,
               height_unit,
               weight,
               weight_unit,
               gender,
               age,
-              method: 'BMRMifflinStJeor'
+              method: 'BodyMassIndexBFP'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: MifflinJeor } = await calculateHealth(payload)
-              console.log('=====>', MifflinJeor)
-              if (typeof MifflinJeor === 'object') {
-                const { step1, step2, step3, BMR, unit } = MifflinJeor
+              const { payload: BodyFatPercentage } = await calculateOthers(payload)
+              console.log('=====>', BodyFatPercentage)
+              if (typeof BodyFatPercentage === 'object') {
+                const { BMI, BFI } = BodyFatPercentage
                 setResult({
-                  step1: step1,
-                  step2: step2,
-                  step3: step3,
-                  BMR: BMR,
-                  unit: unit
+                  BMI: BMI,
+                  BFI: BFI
                 })
               }
             } catch (err) {
@@ -94,6 +88,7 @@ const BmrMifflinJeorEquation = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />
@@ -111,6 +106,7 @@ const BmrMifflinJeorEquation = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
                 />
@@ -154,14 +150,12 @@ const BmrMifflinJeorEquation = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">step1:{Result.step1} </Typography>
-          <Typography variant="subtitle1">step2: {Result.step2}</Typography>
-          <Typography variant="subtitle1">step3: {Result.step3}</Typography>
-          <Typography variant="subtitle1">BMR: {Result.BMR}{Result.unit}</Typography>
+          <Typography variant="subtitle1">BFI: {Result.BFI}</Typography>
+          <Typography variant="subtitle1">BMI: {Result.BMI}</Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default BmrMifflinJeorEquation
+export default BodyFatPercentageBmi

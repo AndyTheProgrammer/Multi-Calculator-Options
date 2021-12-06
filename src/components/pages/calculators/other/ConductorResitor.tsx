@@ -85,6 +85,7 @@ const ConductorResitor = () => {
 
                 <CustomSelect
                   id="length_unit"
+                  measurement="length"
                   value={values.length_unit}
                   onChange={handleChange('length_unit')}
                 />
@@ -102,6 +103,7 @@ const ConductorResitor = () => {
 
                 <CustomSelect
                   id="diameter_unit"
+                  measurement="length"
                   value={values.diameter_unit}
                   onChange={handleChange('diameter_unit')}
                 />

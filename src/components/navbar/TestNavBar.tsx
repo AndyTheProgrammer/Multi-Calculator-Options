@@ -85,13 +85,6 @@ const TestNavBar = () => {
               <button
                 className="search-button-2"
                 type="button"
-                onClick={() => history.push('/fitness&healthpage')}
-              >
-                <Font>Health</Font>
-              </button>
-              <button
-                className="search-button-2"
-                type="button"
                 onClick={() => history.push('/other')}
               >
                 <Font>Other</Font>

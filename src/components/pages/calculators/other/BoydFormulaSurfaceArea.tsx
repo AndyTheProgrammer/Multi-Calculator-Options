@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { InternationalSystemBfcI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { BoydFormulaSurfaceAreaI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -12,56 +12,59 @@ import {
 } from '../../../../common/shared'
 import {
   CustomTextInput,
-  CustomBtn,
   CustomSelect,
+  CustomBtn,
   CustomResetBtn,
   Label,
   FormTabsContainer,
   ResultTabsContainer
 } from '../../../custom'
 
-const InternationalSystemBfc = () => {
+const BoydFormulaSurfaceArea = () => {
 
   const [initialFormValues] = React.useState({
     height: '',
-    neck: '',
-    gender: '',
-    hip: '',
-    waist: '',
+    height_unit: '',
+    weight: '',
+    weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    bfc: 0
+    weightInKg: 0,
+    heightToMeter: 0,
+    bsa: 0,
+    unit: 0,
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.internationalSystemBfc} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.boydFormulaSurfaceArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
             height,
-            neck,
-            gender,
-            hip,
-            waist,
-          }, { setSubmitting }) => {
-            const payload: InternationalSystemBfcI = {
+            height_unit,
+            weight,
+            weight_unit
+          }, { setSubmitting, resetForm }) => {
+            const payload: BoydFormulaSurfaceAreaI = {
               height,
-              neck,
-              gender,
-              hip,
-              waist,
-              method: 'InternationalSystemUnitBFP'
+              height_unit,
+              weight,
+              weight_unit,
+              method: 'BoydFormulaBodySurfaceArea'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: internationalSystemBFC } = await calculateHealth(payload)
-              console.log('=====>', internationalSystemBFC)
-              if (typeof internationalSystemBFC === 'object') {
-                const { bfc } = internationalSystemBFC
+              const { payload: boydFormula } = await calculateOthers(payload)
+              console.log('=====>', boydFormula)
+              if (typeof boydFormula === 'object') {
+                const { weightInKg, heightToMeter, bsa, unit } = boydFormula
                 setResult({
-                  bfc: bfc,
+                  bsa: bsa,
+                  heightToMeter: heightToMeter,
+                  weightInKg: weightInKg,
+                  unit: unit
                 })
               }
             } catch (err) {
@@ -80,48 +83,30 @@ const InternationalSystemBfc = () => {
                   value={values.height}
                   onChange={handleChange}
                 />
-              </div>
 
-              <div className="form-row">
-                <Label title={LABELS.neck} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="neck"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.neck}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.hip} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="hip"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.hip}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.waist} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="waist"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.waist}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.gender} />
                 <CustomSelect
-                  id="gender"
-                  measurement="gender"
-                  value={values.gender}
-                  onChange={handleChange('gender')}
+                  id="height_unit"
+                  measurement="length"
+                  value={values.height_unit}
+                  onChange={handleChange('height_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.weight} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="weight"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.weight}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="weight_unit"
+                  measurement="weight"
+                  value={values.weight_unit}
+                  onChange={handleChange('weight_unit')}
                 />
               </div>
 
@@ -142,11 +127,13 @@ const InternationalSystemBfc = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">BFC: {Result.bfc}</Typography>
+          <Typography variant="subtitle1">Boyd formula surface area: {Result.bsa}{Result.unit}</Typography>
+          <Typography variant="subtitle1">Weight: {Result.weightInKg}</Typography>
+          <Typography variant="subtitle1">Height: {Result.heightToMeter}</Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default InternationalSystemBfc
+export default BoydFormulaSurfaceArea

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import { Typography, Box } from '@material-ui/core'
 
 import { Font, FontProvider } from '../font'
 
@@ -8,9 +8,13 @@ function StaticTab(props: any) {
   return (
     <div className={className}>
       <FontProvider fonts={[{ font: 'Varela Round' }]}>
-        <Typography className="text-center" variant="subtitle2">
-          <Font>{label}</Font>
-        </Typography>
+        {label !== null || undefined ?
+          (< Typography className="text-center" variant="subtitle2">
+            <Font>{label}</Font>
+          </Typography>)
+          :
+          (<Box style={{ height: '20' }}>{" "}</Box>)
+        }
       </FontProvider>
     </div>
 

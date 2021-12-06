@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { FujimotoFormulaSurfaceAreaI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { BMRKatchMcArdleI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,45 +20,44 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const FujimotoFormulaSurfaceArea = () => {
+const BMRKatchMcArdle = () => {
 
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
+    fat: '',
     weight: '',
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    bodySurfaceArea: 0
+    BMR: 0,
+    unit: ''
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.fujimotoFormulaSurfaceArea} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.bMRKatchMcArdle} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            height,
-            height_unit,
+            fat,
             weight,
             weight_unit
-          }, { setSubmitting }) => {
-            const payload: FujimotoFormulaSurfaceAreaI = {
-              height,
-              height_unit,
+          }, { setSubmitting, resetForm }) => {
+            const payload: BMRKatchMcArdleI = {
+              fat,
               weight,
               weight_unit,
-              method: 'FujimotoFormulaBodySurfaceArea'
+              method: 'BMRKatchMcArdle'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: fujimotoFormulaBodySurfaceArea } = await calculateHealth(payload)
-              console.log('=====>', fujimotoFormulaBodySurfaceArea)
-              if (typeof fujimotoFormulaBodySurfaceArea === 'object') {
-                const { bodySurfaceArea } = fujimotoFormulaBodySurfaceArea
+              const { payload: katchMcArdle } = await calculateOthers(payload)
+              console.log('=====>', katchMcArdle)
+              if (typeof katchMcArdle === 'object') {
+                const { BMR, unit } = katchMcArdle
                 setResult({
-                  bodySurfaceArea: bodySurfaceArea,
+                  BMR: BMR,
+                  unit: unit
                 })
               }
             } catch (err) {
@@ -69,19 +68,13 @@ const FujimotoFormulaSurfaceArea = () => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.height} />
+                <Label title={LABELS.fat} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="height"
+                  id="fat"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.height}
+                  value={values.fat}
                   onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="height_unit"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
                 />
               </div>
 
@@ -97,6 +90,7 @@ const FujimotoFormulaSurfaceArea = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
                 />
@@ -120,7 +114,7 @@ const FujimotoFormulaSurfaceArea = () => {
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Body surface area: {Result.bodySurfaceArea}
+            BMR: {Result.BMR}{Result.unit}
           </Typography>
         </div>
       </ResultTabsContainer>
@@ -128,4 +122,4 @@ const FujimotoFormulaSurfaceArea = () => {
   )
 }
 
-export default FujimotoFormulaSurfaceArea
+export default BMRKatchMcArdle

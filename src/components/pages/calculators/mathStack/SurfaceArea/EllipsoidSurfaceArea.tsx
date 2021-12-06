@@ -94,6 +94,7 @@ const EllipsoidSurfaceArea = () => {
 
                 <CustomSelect
                   id="axis1_unit"
+                  measurement="length"
                   value={values.axis1_unit}
                   onChange={handleChange('axis1_unit')}
                 />
@@ -111,6 +112,7 @@ const EllipsoidSurfaceArea = () => {
 
                 <CustomSelect
                   id="axis2_unit"
+                  measurement="length"
                   value={values.axis2_unit}
                   onChange={handleChange('axis2_unit')}
                 />
@@ -128,6 +130,7 @@ const EllipsoidSurfaceArea = () => {
 
                 <CustomSelect
                   id="axis3_unit"
+                  measurement="length"
                   value={values.axis3_unit}
                   onChange={handleChange('axis3_unit')}
                 />

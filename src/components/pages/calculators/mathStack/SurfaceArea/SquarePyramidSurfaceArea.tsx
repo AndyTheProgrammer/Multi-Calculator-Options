@@ -87,6 +87,7 @@ const SquarePyramidSurfaceArea = () => {
 
                 <CustomSelect
                   id="base_edge_unit"
+                  measurement="length"
                   value={values.base_edge_unit}
                   onChange={handleChange('base_edge_unit')}
                 />
@@ -104,6 +105,7 @@ const SquarePyramidSurfaceArea = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />

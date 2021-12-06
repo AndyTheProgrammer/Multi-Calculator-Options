@@ -119,6 +119,7 @@ const EllipseArea = () => {
 
                 <CustomSelect
                   id="semi_major_axes_a_unit"
+                  measurement="length"
                   value={values.semi_major_axes_a_unit}
                   onChange={handleChange('semi_major_axes_a_unit')}
                 />
@@ -136,6 +137,7 @@ const EllipseArea = () => {
 
                 <CustomSelect
                   id="semi_major_axes_b_unit"
+                  measurement="length"
                   value={values.semi_major_axes_b_unit}
                   onChange={handleChange('semi_major_axes_b_unit')}
                 />

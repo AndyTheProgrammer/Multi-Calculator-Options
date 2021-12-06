@@ -85,6 +85,7 @@ const HoleColumn = () => {
 
                 <CustomSelect
                   id="diameter_unit"
+                  measurement="length"
                   value={values.diameter_unit}
                   onChange={handleChange('diameter_unit')}
                 />
@@ -102,6 +103,7 @@ const HoleColumn = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />

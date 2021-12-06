@@ -31,33 +31,33 @@ export { default as SphericalCapVolume } from "./calculators/mathStack/Volume/Sp
 export { default as SquarePyramidVolume } from "./calculators/mathStack/Volume/SquarePyramidVolume";
 export { default as TubeVolume } from "./calculators/mathStack/Volume/TubeVolume";
 
-// Fitness & Health
-export { default as BloodAlcoholContent } from "./calculators/fitnessAndHealth/BloodAlcoholContent";
-export { default as BMRKatchMcArdle } from "./calculators/fitnessAndHealth/BMRKatchMcArdle";
-export { default as BmrMifflinHarrisBenedict } from "./calculators/fitnessAndHealth/BmrMifflinHarrisBenedict";
-export { default as BmrMifflinJeorEquation } from "./calculators/fitnessAndHealth/BmrMifflinJeorEquation";
-export { default as BodyFatPercentageBmi } from "./calculators/fitnessAndHealth/BodyFatPercentageBmi";
-export { default as BodyMassIndex } from "./calculators/fitnessAndHealth/BodyMassIndex";
-export { default as BodyMassIndexMethodTwo } from "./calculators/fitnessAndHealth/BodyMassIndexMethodTwo";
-export { default as BoydFormulaSurfaceArea } from "./calculators/fitnessAndHealth/BoydFormulaSurfaceArea";
-export { default as DuBoisBodySurfaceArea } from "./calculators/fitnessAndHealth/DuBoisBodySurfaceArea";
-export { default as DueDateMittendorfWilliam } from "./calculators/fitnessAndHealth/DueDateMittendorfWilliam";
-export { default as DueDateNaegeleRule } from "./calculators/fitnessAndHealth/DueDateNaegeleRule";
-export { default as DueDateParikhsRule } from "./calculators/fitnessAndHealth/DueDateParikhsRule";
-export { default as DueDateWoodsRule } from "./calculators/fitnessAndHealth/DueDateWoodsRule";
-export { default as FujimotoFormulaSurfaceArea } from "./calculators/fitnessAndHealth/FujimotoFormulaSurfaceArea";
-export { default as GehanAndGeorgeSurfaceArea } from "./calculators/fitnessAndHealth/GehanAndGeorgeSurfaceArea";
-export { default as HaycockBodySurfaceArea } from "./calculators/fitnessAndHealth/HaycockBodySurfaceArea";
-export { default as InternationalSystemBfc } from "./calculators/fitnessAndHealth/InternationalSystemBfc";
-export { default as LeanBodyMass } from "./calculators/fitnessAndHealth/LeanBodyMass";
-export { default as LeanBodyMassPeterFormula } from "./calculators/fitnessAndHealth/LeanBodyMassPeterFormula";
-export { default as MostellerBodySurfaceArea } from "./calculators/fitnessAndHealth/MostellerBodySurfaceArea";
-export { default as PeroidCalculator } from "./calculators/fitnessAndHealth/PeroidCalculator";
-export { default as RegularCycleOvulation } from "./calculators/fitnessAndHealth/RegularCycleOvulation";
-export { default as TakaSchlichBodySurfaceArea } from "./calculators/fitnessAndHealth/TakaSchlichBodySurfaceArea";
-export { default as TakahiraBodySurfaceArea } from "./calculators/fitnessAndHealth/TakahiraBodySurfaceArea";
-export { default as USCustomarySystemBfc } from "./calculators/fitnessAndHealth/USCustomarySystemBfc";
-export { default as WholeBodyMassFormula } from "./calculators/fitnessAndHealth/WholeBodyMassFormula";
+// Other > Fitness & Health
+export { default as BloodAlcoholContent } from "./calculators/other/BloodAlcoholContent";
+export { default as BMRKatchMcArdle } from "./calculators/other/BMRKatchMcArdle";
+export { default as BmrMifflinHarrisBenedict } from "./calculators/other/BmrMifflinHarrisBenedict";
+export { default as BmrMifflinJeorEquation } from "./calculators/other/BmrMifflinJeorEquation";
+export { default as BodyFatPercentageBmi } from "./calculators/other/BodyFatPercentageBmi";
+export { default as BodyMassIndex } from "./calculators/other/BodyMassIndex";
+export { default as BodyMassIndexMethodTwo } from "./calculators/other/BodyMassIndexMethodTwo";
+export { default as BoydFormulaSurfaceArea } from "./calculators/other/BoydFormulaSurfaceArea";
+export { default as DuBoisBodySurfaceArea } from "./calculators/other/DuBoisBodySurfaceArea";
+export { default as DueDateMittendorfWilliam } from "./calculators/other/DueDateMittendorfWilliam";
+export { default as DueDateNaegeleRule } from "./calculators/other/DueDateNaegeleRule";
+export { default as DueDateParikhsRule } from "./calculators/other/DueDateParikhsRule";
+export { default as DueDateWoodsRule } from "./calculators/other/DueDateWoodsRule";
+export { default as FujimotoFormulaSurfaceArea } from "./calculators/other/FujimotoFormulaSurfaceArea";
+export { default as GehanAndGeorgeSurfaceArea } from "./calculators/other/GehanAndGeorgeSurfaceArea";
+export { default as HaycockBodySurfaceArea } from "./calculators/other/HaycockBodySurfaceArea";
+export { default as InternationalSystemBfc } from "./calculators/other/InternationalSystemBfc";
+export { default as LeanBodyMass } from "./calculators/other/LeanBodyMass";
+export { default as LeanBodyMassPeterFormula } from "./calculators/other/LeanBodyMassPeterFormula";
+export { default as MostellerBodySurfaceArea } from "./calculators/other/MostellerBodySurfaceArea";
+export { default as PeroidCalculator } from "./calculators/other/PeroidCalculator";
+export { default as RegularCycleOvulation } from "./calculators/other/RegularCycleOvulation";
+export { default as TakaSchlichBodySurfaceArea } from "./calculators/other/TakaSchlichBodySurfaceArea";
+export { default as TakahiraBodySurfaceArea } from "./calculators/other/TakahiraBodySurfaceArea";
+export { default as USCustomarySystemBfc } from "./calculators/other/USCustomarySystemBfc";
+export { default as WholeBodyMassFormula } from "./calculators/other/WholeBodyMassFormula";
 
 // Statistics
 export { default as MarginOfErrorCalculator } from "./calculators/statistics/MarginOfErrorCalculator";
@@ -103,7 +103,6 @@ export { default as AreaPageView } from "./mainPages/Area";
 export { default as SurfaceAreaPageView } from "./mainPages/SurfaceArea";
 export { default as VolumePageView } from "./mainPages/Volume";
 export { default as StatisticsPageView } from "./mainPages/Statistics";
-export { default as FitnessAndHealthPageView } from "./mainPages/Health";
 export { default as FinancePageView } from "./mainPages/Finance";
 export { default as OtherPageView } from "./mainPages/Other";
 

@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { WholeBodyMassFormulaI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { DuBoisBodySurfaceAreaI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,7 +20,7 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const WholeBodyMassFormula = () => {
+const DuBoisBodySurfaceArea = () => {
 
   const [initialFormValues] = React.useState({
     height: '',
@@ -29,14 +29,16 @@ const WholeBodyMassFormula = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    bodyMass: 0,
+    weightInKg: 0,
+    heightToMeter: 0,
+    bsa: 0,
     unit: ''
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.wholeBodyMassFormula} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.duBoisBodySurfaceArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -45,21 +47,23 @@ const WholeBodyMassFormula = () => {
             weight,
             weight_unit
           }, { setSubmitting }) => {
-            const payload: WholeBodyMassFormulaI = {
+            const payload: DuBoisBodySurfaceAreaI = {
               height,
               height_unit,
               weight,
               weight_unit,
-              method: 'allBodyMassFormulars'
+              method: 'DuBoisFormulaBodySurfaceArea'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: allBodyMassFormulas } = await calculateHealth(payload)
-              console.log('=====>', allBodyMassFormulas)
-              if (typeof allBodyMassFormulas === 'object') {
-                const { bodyMass, unit } = allBodyMassFormulas
+              const { payload: duboisFormula } = await calculateOthers(payload)
+              console.log('=====>', duboisFormula)
+              if (typeof duboisFormula === 'object') {
+                const { weightInKg, heightToMeter, bsa, unit } = duboisFormula
                 setResult({
-                  bodyMass: bodyMass,
+                  weightInKg: weightInKg,
+                  heightToMeter: heightToMeter,
+                  bsa: bsa,
                   unit: unit
                 })
               }
@@ -82,6 +86,7 @@ const WholeBodyMassFormula = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />
@@ -99,6 +104,7 @@ const WholeBodyMassFormula = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
                 />
@@ -121,13 +127,13 @@ const WholeBodyMassFormula = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Body mass: {Result.bodyMass}{Result.unit}
-          </Typography>
+          <Typography variant="subtitle1">Body surface area: {Result.bsa}{Result.unit}</Typography>
+          <Typography variant="subtitle1">Weight: {Result.weightInKg} </Typography>
+          <Typography variant="subtitle1">Height: {Result.heightToMeter} </Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default WholeBodyMassFormula
+export default DuBoisBodySurfaceArea

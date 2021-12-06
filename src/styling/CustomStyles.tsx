@@ -80,10 +80,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   leftTabContainer: {
     display: "flex",
+    color: COLORS.text,
     justifyContent: "center",
     width: "50%",
     height: "10%",
     float: "inline-start",
+    borderTopLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   rightTabContainer: {
     display: "flex",

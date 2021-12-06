@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { HaycockBodySurfaceAreaI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { LeanBodyMassPeterFormulaI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,45 +20,48 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const HaycockBodySurfaceArea = () => {
+const LeanBodyMassPeterFormula = () => {
 
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
     weight: '',
-    weight_unit: ''
+    weight_unit: '',
+    gender: ''
   })
   const [Result, setResult] = React.useState({
-    bodySurfaceArea: 0
+    leanBodyMass: 0
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.haycockBodySurfaceArea} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.leanBodyMassPetersFormula} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
             height,
             height_unit,
             weight,
-            weight_unit
+            weight_unit,
+            gender
           }, { setSubmitting }) => {
-            const payload: HaycockBodySurfaceAreaI = {
+            const payload: LeanBodyMassPeterFormulaI = {
               height,
               height_unit,
               weight,
               weight_unit,
-              method: 'HaycockFormulaBodySurfaceArea'
+              gender,
+              method: 'LeanBodyMassPeterFormular'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: haycockFormula } = await calculateHealth(payload)
-              console.log('=====>', haycockFormula)
-              if (typeof haycockFormula === 'object') {
-                const { bodySurfaceArea } = haycockFormula
+              const { payload: leanBodyMassPeterFormula } = await calculateOthers(payload)
+              console.log('=====>', leanBodyMassPeterFormula)
+              if (typeof leanBodyMassPeterFormula === 'object') {
+                const { leanBodyMass } = leanBodyMassPeterFormula
                 setResult({
-                  bodySurfaceArea: bodySurfaceArea,
+                  leanBodyMass: leanBodyMass,
                 })
               }
             } catch (err) {
@@ -80,6 +83,7 @@ const HaycockBodySurfaceArea = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />
@@ -97,8 +101,19 @@ const HaycockBodySurfaceArea = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.gender} />
+                <CustomSelect
+                  id="gender"
+                  measurement="gender"
+                  value={values.gender}
+                  onChange={handleChange('gender')}
                 />
               </div>
 
@@ -120,7 +135,7 @@ const HaycockBodySurfaceArea = () => {
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Body surface area: {Result.bodySurfaceArea}
+            Lean body mass: {Result.leanBodyMass}
           </Typography>
         </div>
       </ResultTabsContainer>
@@ -128,4 +143,4 @@ const HaycockBodySurfaceArea = () => {
   )
 }
 
-export default HaycockBodySurfaceArea
+export default LeanBodyMassPeterFormula

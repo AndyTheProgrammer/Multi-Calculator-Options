@@ -9,7 +9,6 @@ import { OtherPage } from '../components/pages/otherPage'
 import {
     AreaPageView,
     FinancePageView,
-    FitnessAndHealthPageView,
     OtherPageView,
     StatisticsPageView,
     SurfaceAreaPageView,
@@ -50,11 +49,6 @@ const routes = [
         name: "MathCategories",
         path: "/mathcategories",
         component: MathCategories
-    },
-    {
-        name: "FitnessAndHealthPage",
-        path: "/fitness&healthpage",
-        component: FitnessAndHealthPageView
     },
     {
         name: "OtherPage",

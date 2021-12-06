@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Field, ErrorMessage } from 'formik';
 
+import { COLORS } from "../../common/shared";
+
 interface CustomTextInputProps {
   type: string | any;
   id: string;
@@ -19,12 +21,13 @@ const CustomTextInput = (props: any) => {
     <div className="form-group col">
       <Field
         type={type}
-        className="form-control"
+        className="form-control form-control-sm"
         name={name}
         id={id}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        style={{ backgroundColor: COLORS.input }}
       />
     </div>
   )

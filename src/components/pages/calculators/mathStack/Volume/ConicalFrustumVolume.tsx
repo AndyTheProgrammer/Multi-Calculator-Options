@@ -93,6 +93,7 @@ const ConicalFrustumVolume = () => {
 
                 <CustomSelect
                   id="top_radius_unit"
+                  measurement="length"
                   value={values.top_radius_unit}
                   onChange={handleChange('top_radius_unit')}
                 />
@@ -110,6 +111,7 @@ const ConicalFrustumVolume = () => {
 
                 <CustomSelect
                   id="bottom_radius_unit"
+                  measurement="length"
                   value={values.bottom_radius_unit}
                   onChange={handleChange('bottom_radius_unit')}
                 />
@@ -127,6 +129,7 @@ const ConicalFrustumVolume = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />

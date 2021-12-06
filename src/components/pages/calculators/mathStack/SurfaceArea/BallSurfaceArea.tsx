@@ -80,6 +80,7 @@ const BallSurfaceArea = () => {
 
                 <CustomSelect
                   id="radius_unit"
+                  measurement="length"
                   value={values.radius_unit}
                   onChange={handleChange('radius_unit')}
                 />

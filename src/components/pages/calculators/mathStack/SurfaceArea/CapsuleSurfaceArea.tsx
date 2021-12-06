@@ -121,6 +121,7 @@ const CapsuleSurfaceArea = () => {
 
                 <CustomSelect
                   id="radius_unit"
+                  measurement="length"
                   value={values.radius_unit}
                   onChange={handleChange('radius_unit')}
                 />
@@ -138,6 +139,7 @@ const CapsuleSurfaceArea = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />

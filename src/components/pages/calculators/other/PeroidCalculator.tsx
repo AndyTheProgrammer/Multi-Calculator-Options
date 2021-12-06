@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { DueDateNaegeleRuleI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { PeroidCalculatorI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -19,41 +19,42 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const DueDateNaegeleRule = () => {
+const PeroidCalculator = () => {
 
   const [initialFormValues] = React.useState({
-    first_date_of_last_period: '',
-    days: '',
-    method: '',
+    start_date_of_last_cycle: '',
+    cycle_length: '',
+    last_period_days: ''
   })
   const [Result, setResult] = React.useState({
-    dueDate: 0
+    period: 0
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.dueDateNaegeleRule} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.peroidCalculator} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            first_date_of_last_period,
-            days,
-            method,
+            start_date_of_last_cycle,
+            cycle_length,
+            last_period_days,
           }, { setSubmitting }) => {
-            const payload: DueDateNaegeleRuleI = {
-              first_date_of_last_period,
-              days,
-              method: 'DueDateNaegeleRule'
+            const payload: PeroidCalculatorI = {
+              start_date_of_last_cycle,
+              cycle_length,
+              last_period_days,
+              method: 'PeriodCalculator'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: dueDateNaegeleRule } = await calculateHealth(payload)
-              console.log('=====>', dueDateNaegeleRule)
-              if (typeof dueDateNaegeleRule === 'object') {
-                const { dueDate } = dueDateNaegeleRule
+              const { payload: periodCalculator } = await calculateOthers(payload)
+              console.log('=====>', periodCalculator)
+              if (typeof periodCalculator === 'object') {
+                const { period } = periodCalculator
                 setResult({
-                  dueDate: dueDate
+                  period: period,
                 })
               }
             } catch (err) {
@@ -64,34 +65,34 @@ const DueDateNaegeleRule = () => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.firstDateofLastPeriod} />
+                <Label title={LABELS.previousCycleStartDate} />
                 <CustomTextInput
                   type={INPUT_TYPE.date}
-                  id="first_date_of_last_period"
+                  id="start_date_of_last_cycle"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.first_date_of_last_period}
+                  value={values.start_date_of_last_cycle}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.days} />
+                <Label title={LABELS.cycleLength} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="days"
+                  id="cycle_length"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.days}
+                  value={values.cycle_length}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.method} />
+                <Label title={LABELS.lastPeriodDays} />
                 <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="method"
-                  placeholder={PLACEHOLDERS.method}
-                  value={values.method}
+                  type={INPUT_TYPE.number}
+                  id="last_period_days"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.last_period_days}
                   onChange={handleChange}
                 />
               </div>
@@ -113,11 +114,13 @@ const DueDateNaegeleRule = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
+          <Typography variant="subtitle1">
+            Period: {Result.period}
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default DueDateNaegeleRule
+export default PeroidCalculator

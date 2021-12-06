@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
 import { USCustomarySystemBfcI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -71,7 +71,7 @@ const USCustomarySystemBfc = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: usCustomarySystemBFC } = await calculateHealth(payload)
+              const { payload: usCustomarySystemBFC } = await calculateOthers(payload)
               console.log('=====>', usCustomarySystemBFC)
               if (typeof usCustomarySystemBFC === 'object') {
                 const { bfc } = usCustomarySystemBFC
@@ -98,6 +98,7 @@ const USCustomarySystemBfc = () => {
 
                 <CustomSelect
                   id="height_unit"
+                  measurement="length"
                   value={values.height_unit}
                   onChange={handleChange('height_unit')}
                 />
@@ -115,6 +116,7 @@ const USCustomarySystemBfc = () => {
 
                 <CustomSelect
                   id="neck_unit"
+                  measurement="length"
                   value={values.neck_unit}
                   onChange={handleChange('neck_unit')}
                 />
@@ -132,6 +134,7 @@ const USCustomarySystemBfc = () => {
 
                 <CustomSelect
                   id="hip_unit"
+                  measurement="length"
                   value={values.hip_unit}
                   onChange={handleChange('hip_unit')}
                 />
@@ -149,6 +152,7 @@ const USCustomarySystemBfc = () => {
 
                 <CustomSelect
                   id="waist_unit"
+                  measurement="length"
                   value={values.waist_unit}
                   onChange={handleChange('waist_unit')}
                 />

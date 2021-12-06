@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { BMRKatchMcArdleI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { TakaSchlichBodySurfaceAreaI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,43 +20,49 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const BMRKatchMcArdle = () => {
+const TakaSchlichBodySurfaceArea = () => {
 
   const [initialFormValues] = React.useState({
-    fat: '',
+    height: '',
+    height_unit: '',
     weight: '',
-    weight_unit: ''
+    weight_unit: '',
+    gender: '',
   })
   const [Result, setResult] = React.useState({
-    BMR: 0,
+    bodySurfaceArea: 0,
     unit: ''
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.bMRKatchMcArdle} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.takaSchlichBodySurfaceArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            fat,
+            height,
+            height_unit,
             weight,
-            weight_unit
-          }, { setSubmitting, resetForm }) => {
-            const payload: BMRKatchMcArdleI = {
-              fat,
+            weight_unit,
+            gender,
+          }, { setSubmitting }) => {
+            const payload: TakaSchlichBodySurfaceAreaI = {
+              height,
+              height_unit,
               weight,
               weight_unit,
-              method: 'BMRKatchMcArdle'
+              gender,
+              method: 'SchlichFormulaBodySurfaceArea'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: katchMcArdle } = await calculateHealth(payload)
-              console.log('=====>', katchMcArdle)
-              if (typeof katchMcArdle === 'object') {
-                const { BMR, unit } = katchMcArdle
+              const { payload: takaSchlichBodySurfaceArea } = await calculateOthers(payload)
+              console.log('=====>', takaSchlichBodySurfaceArea)
+              if (typeof takaSchlichBodySurfaceArea === 'object') {
+                const { bodySurfaceArea, unit } = takaSchlichBodySurfaceArea
                 setResult({
-                  BMR: BMR,
+                  bodySurfaceArea: bodySurfaceArea,
                   unit: unit
                 })
               }
@@ -68,13 +74,20 @@ const BMRKatchMcArdle = () => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.fat} />
+                <Label title={LABELS.height} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="fat"
+                  id="height"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.fat}
+                  value={values.height}
                   onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="height_unit"
+                  measurement="length"
+                  value={values.height_unit}
+                  onChange={handleChange('height_unit')}
                 />
               </div>
 
@@ -90,8 +103,19 @@ const BMRKatchMcArdle = () => {
 
                 <CustomSelect
                   id="weight_unit"
+                  measurement="weight"
                   value={values.weight_unit}
                   onChange={handleChange('weight_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.gender} />
+                <CustomSelect
+                  id="gender"
+                  measurement="gender"
+                  value={values.gender}
+                  onChange={handleChange('gender')}
                 />
               </div>
 
@@ -113,7 +137,7 @@ const BMRKatchMcArdle = () => {
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            BMR: {Result.BMR}{Result.unit}
+            Body surface area: {Result.bodySurfaceArea}
           </Typography>
         </div>
       </ResultTabsContainer>
@@ -121,4 +145,4 @@ const BMRKatchMcArdle = () => {
   )
 }
 
-export default BMRKatchMcArdle
+export default TakaSchlichBodySurfaceArea

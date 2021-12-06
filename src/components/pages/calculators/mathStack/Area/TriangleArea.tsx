@@ -97,6 +97,7 @@ const TriangleArea = () => {
 
                 <CustomSelect
                   id="sideA_unit"
+                  measurement="length"
                   value={values.sideA_unit}
                   onChange={handleChange('sideA_unit')}
                 />
@@ -114,6 +115,7 @@ const TriangleArea = () => {
 
                 <CustomSelect
                   id="sideB_unit"
+                  measurement="length"
                   value={values.sideB_unit}
                   onChange={handleChange('sideB_unit')}
                 />
@@ -131,6 +133,7 @@ const TriangleArea = () => {
 
                 <CustomSelect
                   id="sideC_unit"
+                  measurement="length"
                   value={values.sideC_unit}
                   onChange={handleChange('sideC_unit')}
                 />

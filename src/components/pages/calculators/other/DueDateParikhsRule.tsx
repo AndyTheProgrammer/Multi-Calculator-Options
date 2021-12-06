@@ -2,8 +2,8 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { DueDateMittendorfWilliamI } from '../../../../types'
-import { calculateHealth } from '../../../../services/AppCalculatorsApi'
+import { DueDateParikhsRuleI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -19,11 +19,11 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const DueDateMittendorfWilliam = () => {
+const DueDateParikhsRule = () => {
 
   const [initialFormValues] = React.useState({
     first_date_of_last_period: '',
-    type: ''
+    days: ''
   })
   const [Result, setResult] = React.useState({
     dueDate: 0
@@ -32,26 +32,26 @@ const DueDateMittendorfWilliam = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.dueDateMittendorfWilliam} sm={6}>
+      <FormTabsContainer tabTitle2={CALCULATORS.dueDateParikhsRule} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
             first_date_of_last_period,
-            type,
+            days,
           }, { setSubmitting }) => {
-            const payload: DueDateMittendorfWilliamI = {
+            const payload: DueDateParikhsRuleI = {
               first_date_of_last_period,
-              type,
-              method: 'DueDateMittendorfWilliamRule'
+              days,
+              method: 'DueDateParikhsRule'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: dueDateMittendorf } = await calculateHealth(payload)
-              console.log('=====>', dueDateMittendorf)
-              if (typeof dueDateMittendorf === 'object') {
-                const { dueDate } = dueDateMittendorf
+              const { payload: dueDateParikhsRule } = await calculateOthers(payload)
+              console.log('=====>', dueDateParikhsRule)
+              if (typeof dueDateParikhsRule === 'object') {
+                const { dueDate } = dueDateParikhsRule
                 setResult({
-                  dueDate: dueDate
+                  dueDate: dueDate,
                 })
               }
             } catch (err) {
@@ -73,12 +73,12 @@ const DueDateMittendorfWilliam = () => {
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.type} />
+                <Label title={LABELS.days} />
                 <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="type"
-                  placeholder={PLACEHOLDERS.type}
-                  value={values.type}
+                  type={INPUT_TYPE.number}
+                  id="days"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.days}
                   onChange={handleChange}
                 />
               </div>
@@ -100,11 +100,11 @@ const DueDateMittendorfWilliam = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">Due Date: {Result.dueDate} </Typography>
+          <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default DueDateMittendorfWilliam
+export default DueDateParikhsRule

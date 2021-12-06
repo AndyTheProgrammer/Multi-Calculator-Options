@@ -88,6 +88,7 @@ const HorsepowerCalculation = () => {
 
                 <CustomSelect
                   id="force_unit"
+                  measurement="force"
                   value={values.force_unit}
                   onChange={handleChange('force_unit')}
                 />
@@ -105,6 +106,7 @@ const HorsepowerCalculation = () => {
 
                 <CustomSelect
                   id="distance_unit"
+                  measurement="length"
                   value={values.distance_unit}
                   onChange={handleChange('distance_unit')}
                 />
@@ -122,6 +124,7 @@ const HorsepowerCalculation = () => {
 
                 <CustomSelect
                   id="time_unit"
+                  measurement="time"
                   value={values.time_unit}
                   onChange={handleChange('time_unit')}
                 />

@@ -79,6 +79,7 @@ const CircleArea = () => {
 
                 <CustomSelect
                   id="radius_unit"
+                  measurement="length"
                   value={values.radius_unit}
                   onChange={handleChange('radius_unit')}
                 />
@@ -100,7 +101,7 @@ const CircleArea = () => {
 
       {/* Result grid */}
       <ResultTabsContainer tabTitle2={"Result"} sm={6}>
-        <div className="text-center mb-3">
+        <div className="text-center mb-3 text-wrap">
           <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
           <Typography variant="subtitle1"> Submitted Radius: {Result.Submitted_radius}</Typography>
           <Typography variant="subtitle1"> Submitted Unit: {Result.Submitted_unit}</Typography>
