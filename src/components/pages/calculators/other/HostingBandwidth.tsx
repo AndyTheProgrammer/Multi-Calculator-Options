@@ -34,7 +34,7 @@ const HostingBandwidth = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.hostingBandwidth} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.hostingBandwidth} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -98,7 +98,7 @@ const HostingBandwidth = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1"> Hosting bandwidth per month: {Result.hostingBandwidthPerMonth}{Result.unit}</Typography>
         </div>

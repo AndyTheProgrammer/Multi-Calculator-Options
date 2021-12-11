@@ -35,7 +35,7 @@ const CircleArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.circleArea} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.circleArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -100,7 +100,7 @@ const CircleArea = () => {
       </FormTabsContainer>
 
       {/* Result grid */}
-      <ResultTabsContainer tabTitle2={"Result"} sm={6}>
+      <ResultTabsContainer tabTitle1={"Result"} sm={6}>
         <div className="text-center mb-3 text-wrap">
           <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
           <Typography variant="subtitle1"> Submitted Radius: {Result.Submitted_radius}</Typography>

@@ -48,7 +48,7 @@ const SphericalCapSurfaceArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.sphericalCapSurfArea} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.sphericalCapSurfArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -161,7 +161,7 @@ const SphericalCapSurfaceArea = () => {
 
       {/* Results grid */}
       {selectedResult ? (
-        <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+        <ResultTabsContainer tabTitle1={'Result'} sm={6}>
           <div className="text-center mb-3">
             <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
             <Typography variant="subtitle1"> submittedradius: {Result.submittedradius}</Typography>
@@ -170,7 +170,7 @@ const SphericalCapSurfaceArea = () => {
           </div>
         </ResultTabsContainer>
       ) : (
-        <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+        <ResultTabsContainer tabTitle1={'Result'} sm={6}>
           <div className="text-center mb-3">
             <Typography variant="subtitle1">surfaceAreaInradiusUnit: {resultTwo.surfaceAreaInradiusUnit}</Typography>
             <Typography variant="subtitle1"> surfaceAreaInheightUnit: {resultTwo.surfaceAreaInheightUnit}</Typography>

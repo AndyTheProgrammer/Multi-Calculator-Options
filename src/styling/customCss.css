@@ -267,3 +267,10 @@ p.resultDisplay {
   background-image: linear-gradient(#3128af, #499fb8);
   border-radius: 10px;
 }
+
+.MuiTab-root {
+  min-height: 29px !important;
+  max-height: 29px !important;
+  text-transform: none !important;
+  line-height: 1.1 !important;
+}

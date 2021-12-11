@@ -6,6 +6,7 @@ import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
 import { Grid, Paper } from '@material-ui/core';
 import useStyles from '../../styling/CustomStyles'
+import { Font, FontProvider } from '../font'
 
 interface ResultsProps {
   children?: React.ReactNode;
@@ -19,7 +20,7 @@ function a11yProps(index: any) {
   };
 }
 
-const ResultTabs = (props: any) => {
+const ResultTabsContainer = (props: any) => {
   const { children, tabTitle1, tabTitle2, sm } = props;
   const {
     tabRoot,
@@ -57,4 +58,4 @@ const ResultTabs = (props: any) => {
   );
 }
 
-export default ResultTabs
+export default ResultTabsContainer

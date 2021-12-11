@@ -6,6 +6,7 @@ import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
 import { Grid, Paper } from '@material-ui/core';
 import useStyles from '../../styling/CustomStyles'
+import { Font, FontProvider } from '../font'
 
 interface FormProps {
   children?: React.ReactNode;
@@ -36,20 +37,19 @@ function FormTabsContainer(props: any) {
     <Grid item xs={12} sm={sm}>
       <Paper className={paperBackground}>
         <div className={tabRoot}>
-          <StyledTabs>
-            <StaticTab
-              className={leftTabContainer}
+          <StyledTabs value={value} onChange={handleChange} >
+            <StyledTab
               label={tabTitle1}
+              {...a11yProps(0)}
             />
-            <StaticTab
-              className={rightTabContainer}
+            <StyledTab
               label={tabTitle2}
             />
           </StyledTabs>
 
-          <NoIndexTabPanel>
+          <TabPanel value={value} index={0}>
             {children}
-          </NoIndexTabPanel>
+          </TabPanel>
         </div>
       </Paper>
     </Grid>

@@ -43,7 +43,7 @@ const BloodAlcoholContent = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.bloodAlcoholContent} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.bloodAlcoholContent} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -163,7 +163,7 @@ const BloodAlcoholContent = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
             Blood alcohol content: {Result.BAC}
