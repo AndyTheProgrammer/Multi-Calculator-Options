@@ -3,6 +3,7 @@ import { makeStyles, withStyles, Theme, createStyles } from '@material-ui/core/s
 import Tab from '@material-ui/core/Tab';
 
 import { COLORS } from './../../common/shared'
+import { fontSize } from '@mui/system';
 
 interface StyledTabProps {
   label: string;
@@ -11,29 +12,36 @@ interface StyledTabProps {
 const StyledTab = withStyles((theme: Theme) =>
   createStyles({
     root: {
-      color: COLORS.primary,
-      height: '10%',
-      background: theme.palette.background.paper,
-      '&:focus': {
-        opacity: 1,
-      },
-      '&:nth-child(1)': {
+      color: COLORS.light_text_color,
+      background: COLORS.gradient,
+      opacity: 1,
+      fontFamily: [
+        'Varela Round',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(','),
+      '&:nth-child(odd)': {
         borderTopLeftRadius: 20,
         borderBottomRightRadius: 20,
       },
-      '&:nth-child(2)': {
-        borderBottomRightRadius: 20,
+      '&:nth-child(even)': {
         borderBottomLeftRadius: 20,
-      },
-      '&:nth-child(3)': {
         borderTopRightRadius: 20,
-        borderBottomLeftRadius: 20,
       },
     },
     selected: {
-      color: COLORS.light_text_color,
-      background: COLORS.gradient,
+      color: COLORS.text,
+      background: theme.palette.background.paper,
     },
+
   }),
 )((props: StyledTabProps) => <Tab disableRipple  {...props} />);
 

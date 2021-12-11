@@ -41,7 +41,7 @@ const BmrMifflinJeorEquation = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.bmrMifflinJeorEquation} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.bmrMifflinJeorEquation} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -154,7 +154,7 @@ const BmrMifflinJeorEquation = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">step1:{Result.step1} </Typography>
           <Typography variant="subtitle1">step2: {Result.step2}</Typography>

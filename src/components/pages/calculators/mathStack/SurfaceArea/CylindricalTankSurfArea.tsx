@@ -50,7 +50,7 @@ const CylindricalTankSurfArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.cylindricalTankSurfArea} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.cylindricalTankSurfArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -169,7 +169,7 @@ const CylindricalTankSurfArea = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      {selectedResult ? (<ResultTabsContainer tabTitle2={'Result'} sm={6}>
+      {selectedResult ? (<ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">Base Surface Area: {Result.baseSurfaceArea}</Typography>
           <Typography variant="subtitle1">Lateral Surface Area: {Result.lateralSurfaceArea}</Typography>
@@ -177,7 +177,7 @@ const CylindricalTankSurfArea = () => {
           <Typography variant="subtitle1">Unit: {Result.units}</Typography>
         </div>
       </ResultTabsContainer>) : (
-        <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+        <ResultTabsContainer tabTitle1={'Result'} sm={6}>
           <div className="text-center mb-3">
             <Typography variant="subtitle1">Base Surface Area: {resultTwo.radiusUnitBaseSurfaceArea}</Typography>
             <Typography variant="subtitle1">Lateral Surface Area: {resultTwo.radiusUnitLateralSurfaceArea}</Typography>

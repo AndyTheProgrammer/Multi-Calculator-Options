@@ -38,7 +38,7 @@ const CircularSlap = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.circularSlap} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.circularSlap} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -158,7 +158,7 @@ const CircularSlap = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1"> Amount of concrete needed: {Result.concreteNeeded}{Result.unit}</Typography>
         </div>

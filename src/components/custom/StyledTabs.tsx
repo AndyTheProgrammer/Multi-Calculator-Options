@@ -8,9 +8,6 @@ interface StyledTabsProps {
 }
 
 const StyledTabs = withStyles((theme: Theme) => ({
-  root: {
-    height: 20
-  },
   indicator: {
     display: 'block',
     justifyContent: 'center',

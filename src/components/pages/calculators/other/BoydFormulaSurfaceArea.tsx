@@ -38,7 +38,7 @@ const BoydFormulaSurfaceArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.boydFormulaSurfaceArea} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.boydFormulaSurfaceArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -125,7 +125,7 @@ const BoydFormulaSurfaceArea = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">Boyd formula surface area: {Result.bsa}{Result.unit}</Typography>
           <Typography variant="subtitle1">Weight: {Result.weightInKg}</Typography>

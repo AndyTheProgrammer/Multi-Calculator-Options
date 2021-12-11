@@ -47,7 +47,7 @@ const CapsuleVolume = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle2={CALCULATORS.capsuleVol} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.capsuleVol} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

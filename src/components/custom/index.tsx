@@ -12,7 +12,7 @@ export { default as FormTabsContainer } from "./FormTabsContainer";
 
 export { default as Label } from "./Label";
 export { default as NoIndexTabPanel } from "./NoIndexTabPanel";
-export { default as ResultTabsContainer } from "./ResultTabs";
+export { default as ResultTabsContainer } from "./ResultTabsContainer";
 export { default as StaticTab } from "./StaticTab";
 export { default as StyledTab } from "./StyledTab";
 export { default as StyledTabs } from "./StyledTabs";

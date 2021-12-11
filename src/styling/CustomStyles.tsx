@@ -77,13 +77,17 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     borderRadius: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    wordBreak: 'break-all'
   },
   leftTabContainer: {
     display: "flex",
+    backgroundColor: theme.palette.background.paper,
     color: COLORS.text,
+    alignItems: 'center',
     justifyContent: "center",
     width: "50%",
-    height: "10%",
     float: "inline-start",
     borderTopLeftRadius: 20,
     borderBottomRightRadius: 20,
