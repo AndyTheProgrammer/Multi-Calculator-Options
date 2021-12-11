@@ -21,7 +21,7 @@ function a11yProps(index: any) {
 }
 
 const ResultTabsContainer = (props: any) => {
-  const { children, tabTitle1, tabTitle2, sm } = props;
+  const { children, tabTitle1, tabTitle2, sm, type } = props;
   const {
     tabRoot,
     rightTabContainer,
@@ -34,28 +34,53 @@ const ResultTabsContainer = (props: any) => {
     setValue(newValue);
   };
 
-  return (
-    <Grid item xs={12} sm={sm}>
-      <Paper className={paperBackground}>
-        <div className={tabRoot}>
-          <StyledTabs>
-            <StaticTab
-              className={leftTabContainer}
-              label={tabTitle1}
-            />
-            <StaticTab
-              className={rightTabContainer}
-              label={tabTitle2}
-            />
-          </StyledTabs>
+  if (type === "styled") {
+    return (
+      <Grid item xs={12} sm={sm}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs value={value} onChange={handleChange} >
+              <StyledTab
+                label={tabTitle1}
+                {...a11yProps(0)}
+              />
+              <StyledTab
+                label={tabTitle2}
+                {...a11yProps(1)}
+              />
+            </StyledTabs>
 
-          <NoIndexTabPanel>
-            {children}
-          </NoIndexTabPanel>
-        </div>
-      </Paper>
-    </Grid>
-  );
+            <TabPanel value={value} index={0}>
+              {children}
+            </TabPanel>
+          </div>
+        </Paper>
+      </Grid>
+    )
+  } else {
+    return (
+      <Grid item xs={12} sm={sm}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <StaticTab
+                className={leftTabContainer}
+                label={tabTitle1}
+              />
+              <StaticTab
+                className={rightTabContainer}
+                label={tabTitle2}
+              />
+            </StyledTabs>
+
+            <NoIndexTabPanel>
+              {children}
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
+      </Grid>
+    )
+  }
 }
 
 export default ResultTabsContainer
