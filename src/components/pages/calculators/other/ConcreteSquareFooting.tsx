@@ -31,8 +31,11 @@ const ConcreteSquareFooting = () => {
     quantity: ""
   })
   const [Result, setResult] = React.useState({
-    concreteNeeded: 0,
-    unit: ''
+    volume: 0,
+    length: 0,
+    width: 0,
+    breadth: 0,
+    units: ''
   })
 
   return (
@@ -64,11 +67,14 @@ const ConcreteSquareFooting = () => {
             try {
               const { payload: slabsSquareFootingsOrWallsConcreteCalculator } = await calculateOthers(payload)
               console.log('=====>', slabsSquareFootingsOrWallsConcreteCalculator)
-              const { concreteNeeded, unit } = slabsSquareFootingsOrWallsConcreteCalculator
+              const { concreteNeeded, units, volume, length, width, breadth } = slabsSquareFootingsOrWallsConcreteCalculator
               if (typeof slabsSquareFootingsOrWallsConcreteCalculator === 'object') {
                 setResult({
-                  concreteNeeded: concreteNeeded,
-                  unit: unit
+                  volume,
+                  length,
+                  width,
+                  breadth,
+                  units,
                 })
               }
             } catch (err) {
@@ -160,7 +166,11 @@ const ConcreteSquareFooting = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Amount of concrete needed: {Result.concreteNeeded}{Result.unit}</Typography>
+          <Typography variant="subtitle1"> Volume: {Result.volume}</Typography>
+          <Typography variant="subtitle1">  Breath: {Result.breadth}</Typography>
+          <Typography variant="subtitle1"> length: {Result.length}</Typography>
+          <Typography variant="subtitle1"> Width: {Result.width}</Typography>
+          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
         </div>
       </ResultTabsContainer>
 

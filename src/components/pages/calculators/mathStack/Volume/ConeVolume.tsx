@@ -34,6 +34,19 @@ const ConeVolume = () => {
     units: ''
   })
 
+  const [resultTwo, setResultTwo] = React.useState({
+    radiusUnit: "",
+    radiusToHeightUnit: 0,
+    height: 2,
+    heightUnit: "",
+    heightToRadiusUnit: 0,
+    volumeInRadiusUnit: 0,
+    volumeInHeightUnit: 0,
+    submitedRadius: ''
+
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
   return (
     <>
       {/* Form grid */}
@@ -56,14 +69,34 @@ const ConeVolume = () => {
             console.log(JSON.stringify(payload))
             try {
               const { payload: coneVolume } = await calculateMath(payload)
-              const { volume, units, radius, height } = coneVolume
+              const { volume, units, radius, height, unitType, submitedRadius,
+                radiusUnit,
+                radiusToHeightUnit,
+                heightUnit,
+                heightToRadiusUnit,
+                volumeInRadiusUnit,
+                volumeInHeightUnit, } = coneVolume
               console.log('=====>', coneVolume)
-              if (typeof coneVolume === 'object') {
+              if (typeof coneVolume === 'object' && unitType === true) {
+                setResultTwo(unitType)
                 setResult({
                   Volume: volume,
                   radius: radius,
                   height: height,
                   units: units
+                })
+              }
+              if (typeof coneVolume === 'object' && unitType === false) {
+                setResultTwo(unitType)
+                setResultTwo({
+                  submitedRadius,
+                  radiusUnit,
+                  radiusToHeightUnit,
+                  height,
+                  heightUnit,
+                  heightToRadiusUnit,
+                  volumeInRadiusUnit,
+                  volumeInHeightUnit,
                 })
               }
             } catch (err) {

@@ -28,6 +28,13 @@ const CapsuleVolume = () => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
+    volume: 0,
+    radius: 0,
+    height: 0,
+    units: ''
+  })
+
+  const [resultTwo, setResultTwo] = React.useState({
     volumeInRadiusUnit: 0,
     volumeInHeightUnit: 0,
     radiusInheightUnit: 0,
@@ -35,6 +42,7 @@ const CapsuleVolume = () => {
     submittedradius: 0,
     submitted_height: 0,
   })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
   return (
     <>
@@ -59,21 +67,37 @@ const CapsuleVolume = () => {
             try {
               const { payload: capsuleVolume } = await calculateMath(payload)
               console.log('=====>', capsuleVolume)
-              if (typeof capsuleVolume === 'object') {
+              const { volumeInRadiusUnit,
+                volumeInHeightUnit,
+                radiusInheightUnit,
+                heightInradiusUnit,
+                submittedradius,
+                submitted_height,
+                volume,
+                radius,
+                height,
+                units,
+                unitType,
+              } = capsuleVolume
+              if (typeof capsuleVolume === 'object' && unitType === true) {
                 //For now only working if you use different units
-                const { volumeInRadiusUnit,
+                setSelectedResult(unitType)
+                setResult({
+                  volume,
+                  radius,
+                  height,
+                  units,
+                })
+              }
+              if (typeof capsuleVolume === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  volumeInRadiusUnit,
                   volumeInHeightUnit,
                   radiusInheightUnit,
                   heightInradiusUnit,
                   submittedradius,
-                  submitted_height } = capsuleVolume
-                setResult({
-                  volumeInHeightUnit: volumeInHeightUnit,
-                  volumeInRadiusUnit: volumeInRadiusUnit,
-                  radiusInheightUnit: radiusInheightUnit,
-                  submitted_height: submitted_height,
-                  submittedradius: submittedradius,
-                  heightInradiusUnit: heightInradiusUnit
+                  submitted_height,
                 })
               }
             } catch (err) {
@@ -138,14 +162,24 @@ const CapsuleVolume = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle2={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume in Radius: {Result.volumeInRadiusUnit}</Typography>
-          <Typography variant="subtitle1"> Volume in Height: {Result.volumeInHeightUnit}</Typography>
-          <Typography variant="subtitle1"> Submitted Radius: {Result.submittedradius}</Typography>
-          <Typography variant="subtitle1"> Submitted Height: {Result.submitted_height}</Typography>
-          <Typography variant="subtitle1"> Radius in Height: {Result.radiusInheightUnit}</Typography>
-          <Typography variant="subtitle1"> Height in Radius: {Result.heightInradiusUnit}</Typography>
-        </div>
+        {selectedResult ? (
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1"> Volume : {Result.volume}</Typography>
+            <Typography variant="subtitle1"> Radius {Result.radius}</Typography>
+            <Typography variant="subtitle1"> Height: {Result.height}</Typography>
+            <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+          </div>
+        ) : (
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1"> Volume in Radius: {resultTwo.volumeInRadiusUnit}</Typography>
+            <Typography variant="subtitle1"> Volume in Height: {resultTwo.volumeInHeightUnit}</Typography>
+            <Typography variant="subtitle1"> Submitted Radius: {resultTwo.submittedradius}</Typography>
+            <Typography variant="subtitle1"> Submitted Height: {resultTwo.submitted_height}</Typography>
+            <Typography variant="subtitle1"> Radius in Height: {resultTwo.radiusInheightUnit}</Typography>
+            <Typography variant="subtitle1"> Height in Radius: {resultTwo.heightInradiusUnit}</Typography>
+          </div>
+        )}
+
       </ResultTabsContainer>
     </>
   )
