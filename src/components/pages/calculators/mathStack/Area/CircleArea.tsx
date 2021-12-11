@@ -19,6 +19,7 @@ import {
   ResultTabsContainer,
   FormTabsContainer
 } from '../../../../custom'
+import FormContainer from '../../../../custom/FormContainer'
 
 const CircleArea = () => {
   const [initialFormValues] = React.useState({
@@ -35,7 +36,7 @@ const CircleArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.circleArea} sm={6}>
+      <FormContainer tabTitle1={CALCULATORS.circleArea} sm={6}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -97,7 +98,7 @@ const CircleArea = () => {
             </form>
           )}
         </Formik>
-      </FormTabsContainer>
+      </FormContainer>
 
       {/* Result grid */}
       <ResultTabsContainer tabTitle1={"Result"} sm={6}>
