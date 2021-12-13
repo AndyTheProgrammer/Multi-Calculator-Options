@@ -19,7 +19,8 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const MarginOfErrorCalculator = () => {
+const MarginOfErrorCalculator = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     confience_level: '',
     sample_size: '',
@@ -33,90 +34,97 @@ const MarginOfErrorCalculator = () => {
   return (
     <>
       {/* Form grid */}
-      <Formik
-        initialValues={initialFormValues}
-        onSubmit={async ({
-          confience_level,
-          sample_size,
-          population_proportion
-        }, { setSubmitting }) => {
-          const payload: MarginErrorI = {
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.marginOfError}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
+        <Formik
+          initialValues={initialFormValues}
+          onSubmit={async ({
             confience_level,
             sample_size,
-            population_proportion,
-            method: 'FindOuttheMarginofError'
-          }
-          console.log(JSON.stringify(payload))
-          try {
-            const { payload: marginOfErrorCalculator } = await calculateStatistics(payload)
-            console.log('=====>', marginOfErrorCalculator)
-            const { marginOfError, unit } = marginOfErrorCalculator
-            if (typeof marginOfErrorCalculator === 'object') {
-              setResult({
-                marginOfError: marginOfError,
-                unit: unit
-              })
+            population_proportion
+          }, { setSubmitting }) => {
+            const payload: MarginErrorI = {
+              confience_level,
+              sample_size,
+              population_proportion,
+              method: 'FindOuttheMarginofError'
             }
-          } catch (err) {
-            console.log('====>', err)
-          }
-        }}
-      >
-        {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-          <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
-              <Label title={LABELS.confienceLevel} />
-              <CustomTextInput
-                type={INPUT_TYPE.number}
-                id="confience_level"
-                placeholder={PLACEHOLDERS.number}
-                value={values.confience_level}
-                onChange={handleChange}
-              />
-            </div>
+            console.log(JSON.stringify(payload))
+            try {
+              const { payload: marginOfErrorCalculator } = await calculateStatistics(payload)
+              console.log('=====>', marginOfErrorCalculator)
+              const { marginOfError, unit } = marginOfErrorCalculator
+              if (typeof marginOfErrorCalculator === 'object') {
+                setResult({
+                  marginOfError: marginOfError,
+                  unit: unit
+                })
+              }
+            } catch (err) {
+              console.log('====>', err)
+            }
+          }}
+        >
+          {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+            <form onSubmit={handleSubmit} className="form-container">
+              <div className="form-row">
+                <Label title={LABELS.confienceLevel} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="confience_level"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.confience_level}
+                  onChange={handleChange}
+                />
+              </div>
 
-            <div className="form-row">
-              <Label title={LABELS.populationProportion} />
-              <CustomTextInput
-                type={INPUT_TYPE.number}
-                id="population_proportion"
-                placeholder={PLACEHOLDERS.number}
-                value={values.population_proportion}
-                onChange={handleChange}
-              />
-            </div>
+              <div className="form-row">
+                <Label title={LABELS.populationProportion} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="population_proportion"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.population_proportion}
+                  onChange={handleChange}
+                />
+              </div>
 
-            <div className="form-row">
-              <Label title={LABELS.sampleSize} />
-              <CustomTextInput
-                type={INPUT_TYPE.number}
-                id="sample_size"
-                placeholder={PLACEHOLDERS.number}
-                value={values.sample_size}
-                onChange={handleChange}
-              />
-            </div>
+              <div className="form-row">
+                <Label title={LABELS.sampleSize} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="sample_size"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.sample_size}
+                  onChange={handleChange}
+                />
+              </div>
 
-            <div
-              className="form-row"
-              style={{ alignItems: 'center', justifyContent: 'space-between' }}
-            >
-              <CustomBtn />
-              <CustomResetBtn
-                onHandleClick={() => resetForm()}
-              />
-            </div>
-          </form>
-        )}
+              <div
+                className="form-row"
+                style={{ alignItems: 'center', justifyContent: 'space-between' }}
+              >
+                <CustomBtn />
+                <CustomResetBtn
+                  onHandleClick={() => resetForm()}
+                />
+              </div>
+            </form>
+          )}
 
-      </Formik>
+        </Formik>
+      </FormTabsContainer>
 
       {/* Results grid */}
-      {/* <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">Margin of error: {Result.marginOfError}{Result.unit}</Typography>
         </div>
-      </ResultTabsContainer> */}
+      </ResultTabsContainer>
     </>
   )
 }

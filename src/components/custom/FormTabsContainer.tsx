@@ -21,7 +21,7 @@ function a11yProps(index: any) {
 }
 
 function FormTabsContainer(props: any) {
-  const { children, tabTitle1, tabTitle2, sm, type } = props;
+  const { children, tabTitle1, tabTitle2, sm, type, dropDown, openDrop } = props;
   const {
     tabRoot,
     rightTabContainer,
@@ -57,8 +57,32 @@ function FormTabsContainer(props: any) {
         </Paper>
       </Grid>
     )
-  }
-  else {
+  } else if (dropDown === true) {
+    return (
+      <Grid item xs={12} sm={sm}>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <StaticTab
+                className={leftTabContainer}
+                label={tabTitle1}
+                dropDown={true}
+                openDrop={openDrop}
+              />
+              <StaticTab
+                className={rightTabContainer}
+                label={tabTitle2}
+              />
+            </StyledTabs>
+
+            <NoIndexTabPanel>
+              {children}
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
+      </Grid>
+    )
+  } else {
     return (
       <Grid item xs={12} sm={sm}>
         <Paper className={paperBackground}>
