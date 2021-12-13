@@ -28,6 +28,8 @@ export {
   EllipsoidVolumeCalculatorI,
   TubeVolumeCalculatorI,
   ConicalFrustumVolumeI,
+  SinglePointWithKnownSlopeI,
+  SlopeCalculatorForTwoKnownPointsI,
 } from "./MathInterfaces";
 
 export {
@@ -59,7 +61,6 @@ export {
   CurbAndGutterBarrierI,
   StairsConcreateI,
   HoleColumnI,
-  SlopeCalculatorForTwoKnownPointsI,
   ElapsedTimeMethodI,
   TrapSpeedMethodI,
   ParrallelResitorI,
@@ -68,7 +69,6 @@ export {
   HorsepowerCalculationI,
   WebsiteBandwidthI,
   HostingBandwidthI,
-  SinglePointWithKnownSlopeI,
   LeanBodyMassI,
   BodyMassIndexI,
   RegularCycleOvulationI,
@@ -78,7 +78,7 @@ export {
   BloodAlcoholContentI,
   USCustomarySystemBfcI,
   InternationalSystemBfcI,
-  BodyFatPercentageBmiI,
+  BodyFatPercentageI,
   DueDateNaegeleRuleI,
   PeroidCalculatorI,
   DueDateMittendorfWilliamI,

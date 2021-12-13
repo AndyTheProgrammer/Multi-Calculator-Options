@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const StairsConcreate = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     run: '',
     run_unit: '',

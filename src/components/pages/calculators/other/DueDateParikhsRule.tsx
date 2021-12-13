@@ -20,7 +20,6 @@ import {
 } from '../../../custom'
 
 const DueDateParikhsRule = () => {
-
   const [initialFormValues] = React.useState({
     first_date_of_last_period: '',
     days: ''

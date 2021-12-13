@@ -87,7 +87,9 @@ const SeriesResistor = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Total series resistance: {Result.totalResistance}{Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            Total series resistance: {Result.totalResistance}{Result.unit}
+          </Typography>
         </div>
       </ResultTabsContainer>
 

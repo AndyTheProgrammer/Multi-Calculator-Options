@@ -21,7 +21,7 @@ import {
 } from '../../../custom'
 
 const LeanBodyMass = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
@@ -30,7 +30,9 @@ const LeanBodyMass = () => {
     gender: ''
   })
   const [Result, setResult] = React.useState({
-    leanBodyMass: 0
+    BoerFormular: 0,
+    JamesFormular: 0,
+    HumFormular: 0
   })
 
   return (
@@ -59,9 +61,15 @@ const LeanBodyMass = () => {
               const { payload: leanBodyMassFormula } = await calculateOthers(payload)
               console.log('=====>', leanBodyMassFormula)
               if (typeof leanBodyMassFormula === 'object') {
-                const { leanBodyMass } = leanBodyMassFormula
+                const {
+                  BoerFormular,
+                  JamesFormular,
+                  HumFormular
+                } = leanBodyMassFormula
                 setResult({
-                  leanBodyMass: leanBodyMass,
+                  BoerFormular: BoerFormular,
+                  JamesFormular: JamesFormular,
+                  HumFormular: HumFormular
                 })
               }
             } catch (err) {
@@ -137,7 +145,15 @@ const LeanBodyMass = () => {
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Lean body mass: {Result.leanBodyMass}
+            Boer formular: {Result.BoerFormular}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            James formular: {Result.JamesFormular}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Hum formular: {Result.HumFormular}
           </Typography>
         </div>
       </ResultTabsContainer>

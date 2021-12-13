@@ -3,7 +3,7 @@ import { Formik } from 'formik'
 import { Typography } from '@material-ui/core'
 
 import { SinglePointWithKnownSlopeI } from '../../../../types'
-import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import { calculateMath } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,6 +20,7 @@ import {
 } from '../../../custom'
 
 const SinglePointWithKnownSlope = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     x_1: '',
     y_1: '',
@@ -27,7 +28,17 @@ const SinglePointWithKnownSlope = () => {
     distance: ''
   })
   const [Result, setResult] = React.useState({
-    equation: 0,
+    x_2: 0,
+    y_2: 0,
+    Δx: 0,
+    Δy: 0,
+    angle: 0,
+    left_x_2: 0,
+    left_y_2: 0,
+    left_Δx: 0,
+    left_Δy: 0,
+    angle_left: 0,
+    angle_unit: '',
   })
 
   return (
@@ -51,12 +62,33 @@ const SinglePointWithKnownSlope = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: singlePointWithKnowPoint } = await calculateOthers(payload)
+              const { payload: singlePointWithKnowPoint } = await calculateMath(payload)
               console.log('=====>', singlePointWithKnowPoint)
               if (typeof singlePointWithKnowPoint === 'object') {
-                const { equation } = singlePointWithKnowPoint
+                const {
+                  x_2,
+                  y_2,
+                  Δx,
+                  Δy,
+                  angel,
+                  left_x_2,
+                  left_y_2,
+                  left_Δx,
+                  left_Δy,
+                  angle_left,
+                } = singlePointWithKnowPoint
                 setResult({
-                  equation: equation,
+                  x_2: x_2,
+                  y_2: y_2,
+                  Δx: Δx,
+                  Δy: Δy,
+                  angle: angel,
+                  left_x_2: left_x_2,
+                  left_y_2: left_y_2,
+                  left_Δx: left_Δx,
+                  left_Δy: left_Δy,
+                  angle_left: angle_left,
+                  angle_unit: '°'
                 })
               }
             } catch (err) {
@@ -89,23 +121,23 @@ const SinglePointWithKnownSlope = () => {
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.slope} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="slope"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.slope}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="form-row">
                 <Label title={LABELS.distance} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
                   id="distance"
                   placeholder={PLACEHOLDERS.number}
                   value={values.distance}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.slope} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="slope"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.slope}
                   onChange={handleChange}
                 />
               </div>
@@ -127,7 +159,19 @@ const SinglePointWithKnownSlope = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">Equation: {Result.equation}</Typography>
+          <Typography variant="subtitle1">X2: {Result.x_2}</Typography>
+          <Typography variant="subtitle1">Y2: {Result.y_2}</Typography>
+          <Typography variant="subtitle1">ΔX: {Result.Δx}</Typography>
+          <Typography variant="subtitle1">ΔY: {Result.Δy}</Typography>
+          <Typography variant="subtitle1" gutterBottom>θ: {Result.angle}{Result.angle_unit}</Typography>
+
+          <Typography variant="subtitle1" component='h6' gutterBottom>OR</Typography>
+
+          <Typography variant="subtitle1">X2: {Result.left_x_2}</Typography>
+          <Typography variant="subtitle1">Y2: {Result.left_y_2}</Typography>
+          <Typography variant="subtitle1">ΔX: {Result.left_Δx}</Typography>
+          <Typography variant="subtitle1">ΔY: {Result.left_Δy}</Typography>
+          <Typography variant="subtitle1">θ: {Result.angle_left}{Result.angle_unit}</Typography>
         </div>
       </ResultTabsContainer>
     </>

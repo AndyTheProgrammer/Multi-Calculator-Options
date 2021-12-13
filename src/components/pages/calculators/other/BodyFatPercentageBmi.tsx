@@ -2,7 +2,7 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { BodyFatPercentageBmiI } from '../../../../types'
+import { BodyFatPercentageI } from '../../../../types'
 import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
@@ -21,18 +21,19 @@ import {
 } from '../../../custom'
 
 const BodyFatPercentageBmi = () => {
-
   const [initialFormValues] = React.useState({
+    neck: '',
+    neck_unit: '',
     height: '',
     height_unit: '',
-    weight: '',
-    weight_unit: '',
+    waist: '',
+    waist_unit: '',
     gender: '',
-    age: '',
+    hip: '',
+    hip_unit: ''
   })
   const [Result, setResult] = React.useState({
-    BFI: 0,
-    BMI: 0
+    BFP: 0,
   })
 
   return (
@@ -42,31 +43,36 @@ const BodyFatPercentageBmi = () => {
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
+            neck,
+            neck_unit,
             height,
             height_unit,
-            weight,
-            weight_unit,
+            waist,
+            waist_unit,
             gender,
-            age,
+            hip,
+            hip_unit
           }, { setSubmitting, resetForm }) => {
-            const payload: BodyFatPercentageBmiI = {
+            const payload: BodyFatPercentageI = {
+              neck,
+              neck_unit,
               height,
               height_unit,
-              weight,
-              weight_unit,
+              waist,
+              waist_unit,
               gender,
-              age,
-              method: 'BodyMassIndexBFP'
+              hip,
+              hip_unit,
+              method: 'BodyFatCalculator'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: BodyFatPercentage } = await calculateOthers(payload)
-              console.log('=====>', BodyFatPercentage)
-              if (typeof BodyFatPercentage === 'object') {
-                const { BMI, BFI } = BodyFatPercentage
+              const { payload: bodyFatPercentage } = await calculateOthers(payload)
+              console.log('=====>', bodyFatPercentage)
+              if (typeof bodyFatPercentage === 'object') {
+                const { BFP } = bodyFatPercentage
                 setResult({
-                  BMI: BMI,
-                  BFI: BFI
+                  BFP: BFP
                 })
               }
             } catch (err) {
@@ -95,20 +101,56 @@ const BodyFatPercentageBmi = () => {
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.weight} />
+                <Label title={LABELS.waist} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="weight"
+                  id="waist"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.weight}
+                  value={values.waist}
                   onChange={handleChange}
                 />
 
                 <CustomSelect
-                  id="weight_unit"
-                  measurement="weight"
-                  value={values.weight_unit}
-                  onChange={handleChange('weight_unit')}
+                  id="waist_unit"
+                  measurement="length"
+                  value={values.waist_unit}
+                  onChange={handleChange('waist_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.neck} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="neck"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.neck}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="neck_unit"
+                  measurement="length"
+                  value={values.neck_unit}
+                  onChange={handleChange('neck_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.hip} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="hip"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.hip}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="hip_unit"
+                  measurement="length"
+                  value={values.hip_unit}
+                  onChange={handleChange('hip_unit')}
                 />
               </div>
 
@@ -119,17 +161,6 @@ const BodyFatPercentageBmi = () => {
                   measurement="gender"
                   value={values.gender}
                   onChange={handleChange('gender')}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.age} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="age"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.age}
-                  onChange={handleChange}
                 />
               </div>
 
@@ -150,8 +181,7 @@ const BodyFatPercentageBmi = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">BFI: {Result.BFI}</Typography>
-          <Typography variant="subtitle1">BMI: {Result.BMI}</Typography>
+          <Typography variant="subtitle1">Body Fat Percentage: {Result.BFP}</Typography>
         </div>
       </ResultTabsContainer>
     </>

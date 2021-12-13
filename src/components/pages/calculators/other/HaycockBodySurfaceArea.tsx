@@ -21,7 +21,7 @@ import {
 } from '../../../custom'
 
 const HaycockBodySurfaceArea = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
@@ -29,7 +29,8 @@ const HaycockBodySurfaceArea = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    bodySurfaceArea: 0
+    bodySurfaceArea: 0,
+    unit: ''
   })
 
   return (
@@ -56,9 +57,10 @@ const HaycockBodySurfaceArea = () => {
               const { payload: haycockFormula } = await calculateOthers(payload)
               console.log('=====>', haycockFormula)
               if (typeof haycockFormula === 'object') {
-                const { bodySurfaceArea } = haycockFormula
+                const { bsa, unit } = haycockFormula
                 setResult({
-                  bodySurfaceArea: bodySurfaceArea,
+                  bodySurfaceArea: bsa,
+                  unit: unit
                 })
               }
             } catch (err) {
@@ -122,7 +124,7 @@ const HaycockBodySurfaceArea = () => {
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Body surface area: {Result.bodySurfaceArea}
+            Body surface area: {Result.bodySurfaceArea}{Result.unit}
           </Typography>
         </div>
       </ResultTabsContainer>

@@ -38,7 +38,7 @@ const ResultTabsContainer = (props: any) => {
     return (
       <Grid item xs={12} sm={sm}>
         <Paper className={paperBackground}>
-          <div className={tabRoot}>
+          <div className={tabRoot} style={{ maxHeight: '30' }}>
             <StyledTabs value={value} onChange={handleChange} >
               <StyledTab
                 label={tabTitle1}

@@ -21,7 +21,6 @@ import {
 } from '../../../custom'
 
 const BmrMifflinJeorEquation = () => {
-
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',

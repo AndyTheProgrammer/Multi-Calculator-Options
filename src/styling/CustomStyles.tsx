@@ -98,7 +98,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     color: COLORS.light_text_color,
     justifyContent: "center",
     width: "50%",
-    height: "10%",
     float: "inline-end",
     borderBottomLeftRadius: 20,
     borderTopRightRadius: 20,

@@ -20,14 +20,17 @@ import {
 } from '../../../custom'
 
 const RegularCycleOvulation = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     cycle_days: '',
     previous_cycle_start_date: ''
   })
   const [Result, setResult] = React.useState({
-    importantDatesForCurrentCycle: "",
-    importantDatesNextSixCycles: ""
+    ovulationDay: "",
+    ovulationPeriod: "",
+    pregnancyTestDate: '',
+    nextPeriodStarts: '',
+    dueDate: ''
   })
 
   return (
@@ -50,10 +53,18 @@ const RegularCycleOvulation = () => {
               const { payload: regularOvulationCycle } = await calculateOthers(payload)
               console.log('=====>', regularOvulationCycle)
               if (typeof regularOvulationCycle === 'object') {
-                const { importantDatesForCurrentCycle, importantDatesNextSixCycles } = regularOvulationCycle
+                const {
+                  ovulationDay,
+                  ovulationPeriod,
+                  pregnancyTestDate,
+                  NextPeriodStarts,
+                  dueDate } = regularOvulationCycle
                 setResult({
-                  importantDatesForCurrentCycle: importantDatesForCurrentCycle,
-                  importantDatesNextSixCycles: importantDatesNextSixCycles
+                  ovulationDay: ovulationDay,
+                  ovulationPeriod: ovulationPeriod,
+                  pregnancyTestDate: pregnancyTestDate,
+                  nextPeriodStarts: NextPeriodStarts,
+                  dueDate: dueDate
                 })
               }
             } catch (err) {
@@ -103,10 +114,23 @@ const RegularCycleOvulation = () => {
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Important dates for current cycle: {Result.importantDatesForCurrentCycle}
+            Ovulation day: {Result.ovulationDay}
           </Typography>
+
           <Typography variant="subtitle1">
-            Important dates for next 6 cycles: {Result.importantDatesNextSixCycles}
+            Ovulation period: {Result.ovulationPeriod}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Pregnancy test date: {Result.pregnancyTestDate}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Next period starts: {Result.nextPeriodStarts}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Due date: {Result.dueDate}
           </Typography>
         </div>
       </ResultTabsContainer>

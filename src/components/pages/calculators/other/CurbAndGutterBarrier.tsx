@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const CurbAndGutterBarrier = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     curb_depth: '',
     curb_depth_unit: '',

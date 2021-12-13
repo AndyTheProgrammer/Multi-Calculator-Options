@@ -20,14 +20,14 @@ import {
 } from '../../../custom'
 
 const DueDateWoodsRule = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     first_date_of_last_period: '',
     days: '',
     type: '',
   })
   const [Result, setResult] = React.useState({
-    dueDate: 0
+    expectedDueDate: 0
   })
 
   return (
@@ -52,9 +52,9 @@ const DueDateWoodsRule = () => {
               const { payload: dueDateWoodsRule } = await calculateOthers(payload)
               console.log('=====>', dueDateWoodsRule)
               if (typeof dueDateWoodsRule === 'object') {
-                const { dueDate } = dueDateWoodsRule
+                const { expectedDueDate } = dueDateWoodsRule
                 setResult({
-                  dueDate: dueDate,
+                  expectedDueDate: expectedDueDate,
                 })
               }
             } catch (err) {
@@ -114,7 +114,7 @@ const DueDateWoodsRule = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
+          <Typography variant="subtitle1">Expected due date: {Result.expectedDueDate}</Typography>
         </div>
       </ResultTabsContainer>
     </>

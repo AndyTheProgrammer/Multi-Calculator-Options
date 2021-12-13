@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const HoleColumn = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     diameter: "",
     diameter_unit: "",
@@ -29,8 +30,8 @@ const HoleColumn = () => {
     quantity: ""
   })
   const [Result, setResult] = React.useState({
-    holeColumn: 0,
-    unit: ''
+    volumeInDiameterUnit: 0,
+    volumeInHeightUnit: 0,
   })
 
   return (
@@ -58,12 +59,14 @@ const HoleColumn = () => {
             try {
               const { payload: trapSpeedMethod } = await calculateOthers(payload)
               console.log('=====>', trapSpeedMethod)
-              const { holeColumn, unit,
+              const {
+                volumeInDiameterUnit,
+                volumeInHeightUnit,
               } = trapSpeedMethod
               if (typeof trapSpeedMethod === 'object') {
                 setResult({
-                  holeColumn: holeColumn,
-                  unit: unit
+                  volumeInDiameterUnit: volumeInDiameterUnit,
+                  volumeInHeightUnit: volumeInHeightUnit,
                 })
               }
             } catch (err) {
@@ -138,7 +141,13 @@ const HoleColumn = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Hole Column: {Result.holeColumn}{Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            Volume in diameter unit: {Result.volumeInDiameterUnit}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Volume in height unit: {Result.volumeInHeightUnit}
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>

@@ -3,11 +3,17 @@ import { Button, withStyles, } from '@material-ui/core'
 import { red } from '@material-ui/core/colors';
 
 import { BUTTONS, COLORS } from '../../common/shared'
+import { Font, FontProvider } from '../font'
 
 const ColorButton = withStyles((theme) => ({
   root: {
     color: COLORS.light_text_color,
-    backgroundColor: COLORS.gradient,
+    height: 25,
+    textTransform: 'none',
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundImage: COLORS.gradient,
     '&:hover': {
       backgroundColor: red[400],
     },
@@ -17,17 +23,20 @@ const ColorButton = withStyles((theme) => ({
 const CustomResetBtn = (props: any) => {
   const { onHandleClick } = props
   return (
-    <div className="form d-grid gap-2 d-md-flex justify-content-md-end">
-      <ColorButton
-        size="small"
-        variant="contained"
-        color="primary"
-        className="btn btn-primary"
-        onClick={onHandleClick}
-      >
-        {BUTTONS.clear}
-      </ColorButton>
-    </div>
+    <FontProvider fonts={[{ font: 'Varela Round' }]}>
+      <div className="form d-grid gap-2 d-md-flex justify-content-md-end">
+        <ColorButton
+          size="small"
+          variant="contained"
+          color="primary"
+          className="btn btn-primary"
+          onClick={onHandleClick}
+        >
+          <Font>{BUTTONS.clear}</Font>
+        </ColorButton>
+      </div>
+    </FontProvider>
+
   )
 }
 

@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const WebsiteBandwidth = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     page_views: "",
     page_views_unit: "",
@@ -30,10 +31,11 @@ const WebsiteBandwidth = () => {
   })
   const [Result, setResult] = React.useState({
     website_bandwidth: '',
-    page_views: '',
-    page_size: '',
-    redundancy_factor: '',
-    unit: ''
+    MbitsPerMonth: '',
+    GBsPerMonth: '',
+    withRedundancyFactor: '',
+    MbitsPerMonthwithRedundancyFactor: '',
+    GBsPerMonthwithRedundancyFactor: '',
   })
 
   return (
@@ -61,15 +63,22 @@ const WebsiteBandwidth = () => {
             try {
               const { payload: websiteBandwidth } = await calculateOthers(payload)
               console.log('=====>', websiteBandwidth)
-              const { website_bandwidth, unit, page_views, page_size, redundancy_factor
+              const {
+                $actualBandwidth,
+                MbitsPerMonth,
+                GBsPerMonth,
+                withRedundancyFactor,
+                MbitsPerMonthwithRedundancyFactor,
+                GBsPerMonthwithRedundancyFactor,
               } = websiteBandwidth
               if (typeof websiteBandwidth === 'object') {
                 setResult({
-                  website_bandwidth: website_bandwidth,
-                  page_views: page_views,
-                  page_size: page_size,
-                  redundancy_factor: redundancy_factor,
-                  unit: unit
+                  website_bandwidth: $actualBandwidth,
+                  MbitsPerMonth: MbitsPerMonth,
+                  GBsPerMonth: GBsPerMonth,
+                  withRedundancyFactor: withRedundancyFactor,
+                  MbitsPerMonthwithRedundancyFactor: MbitsPerMonthwithRedundancyFactor,
+                  GBsPerMonthwithRedundancyFactor: GBsPerMonthwithRedundancyFactor
                 })
               }
             } catch (err) {
@@ -144,11 +153,29 @@ const WebsiteBandwidth = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Website bandwidth: {Result.website_bandwidth}</Typography>
-          <Typography variant="subtitle1"> Page views: {Result.page_views}</Typography>
-          <Typography variant="subtitle1"> Page size: {Result.page_size}</Typography>
-          <Typography variant="subtitle1"> Redanduncy factor: {Result.redundancy_factor}</Typography>
-          <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            Website bandwidth: {Result.website_bandwidth}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            MBits per month: {Result.MbitsPerMonth}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            GBs per month: {Result.GBsPerMonth}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Redanduncy factor: {Result.withRedundancyFactor}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            MBits per month with redundancy factor: {Result.MbitsPerMonthwithRedundancyFactor}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            GBs per month with redundancy factor: {Result.GBsPerMonthwithRedundancyFactor}
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>

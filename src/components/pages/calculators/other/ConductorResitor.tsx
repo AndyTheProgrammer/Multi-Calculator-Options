@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const ConductorResitor = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     length: "",
     length_unit: "",
@@ -30,6 +31,8 @@ const ConductorResitor = () => {
   })
   const [Result, setResult] = React.useState({
     resistance: 0,
+    length: 0,
+    diameter: 0,
     unit: ''
   })
 
@@ -58,11 +61,17 @@ const ConductorResitor = () => {
             try {
               const { payload: resistanceOfAConductor } = await calculateOthers(payload)
               console.log('=====>', resistanceOfAConductor)
-              const { resistance, unit,
+              const {
+                resistance,
+                length,
+                diameter,
+                unit,
               } = resistanceOfAConductor
               if (typeof resistanceOfAConductor === 'object') {
                 setResult({
                   resistance: resistance,
+                  length: length,
+                  diameter: diameter,
                   unit: unit
                 })
               }
@@ -139,7 +148,17 @@ const ConductorResitor = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Resistance: {Result.resistance}{Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            Resistance: {Result.resistance}{Result.unit}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Length: {Result.length}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Diameter: {Result.diameter}
+          </Typography>
         </div>
       </ResultTabsContainer>
 

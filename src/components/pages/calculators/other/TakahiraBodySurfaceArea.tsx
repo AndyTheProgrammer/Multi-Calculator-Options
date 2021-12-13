@@ -21,7 +21,7 @@ import {
 } from '../../../custom'
 
 const TakahiraBodySurfaceArea = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
@@ -57,9 +57,9 @@ const TakahiraBodySurfaceArea = () => {
               const { payload: MifflinHarris } = await calculateOthers(payload)
               console.log('=====>', MifflinHarris)
               if (typeof MifflinHarris === 'object') {
-                const { bodySurfaceArea, unit } = MifflinHarris
+                const { bsa, unit } = MifflinHarris
                 setResult({
-                  bodySurfaceArea: bodySurfaceArea,
+                  bodySurfaceArea: bsa,
                   unit: unit
                 })
               }

@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const HorsepowerCalculation = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     force: "",
     force_unit: "",
@@ -31,6 +32,9 @@ const HorsepowerCalculation = () => {
   })
   const [Result, setResult] = React.useState({
     horsepower: 0,
+    force: 0,
+    distance: 0,
+    time: 0,
     unit: ''
   })
 
@@ -61,11 +65,19 @@ const HorsepowerCalculation = () => {
             try {
               const { payload: horsepowerCalculation } = await calculateOthers(payload)
               console.log('=====>', horsepowerCalculation)
-              const { horsepower, unit,
+              const {
+                answer,
+                force,
+                distance,
+                time,
+                unit,
               } = horsepowerCalculation
               if (typeof horsepowerCalculation === 'object') {
                 setResult({
-                  horsepower: horsepower,
+                  horsepower: answer,
+                  force: force,
+                  distance: distance,
+                  time: time,
                   unit: unit
                 })
               }
@@ -147,7 +159,21 @@ const HorsepowerCalculation = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Horsepower: {Result.horsepower}{Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            Horsepower: {Result.horsepower}{Result.unit}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Force: {Result.force}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Distance: {Result.distance}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Time: {Result.time}
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>

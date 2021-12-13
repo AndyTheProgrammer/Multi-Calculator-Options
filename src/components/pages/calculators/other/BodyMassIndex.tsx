@@ -21,7 +21,7 @@ import {
 } from '../../../custom'
 
 const BodyMassIndex = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
@@ -29,6 +29,12 @@ const BodyMassIndex = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
+    weight: 0,
+    height: 0,
+    bmi: 0,
+    unit: ''
+  })
+  const [Result2, setResult2] = React.useState({
     weightInKg: 0,
     heightToMeter: 0,
     bmi: 0,
@@ -59,10 +65,10 @@ const BodyMassIndex = () => {
               const { payload: bodyMass } = await calculateOthers(payload)
               console.log('=====>', bodyMass)
               if (typeof bodyMass === 'object') {
-                const { weightInKg, heightToMeter, bmi, unit } = bodyMass
+                const { weight, height, bmi, unit } = bodyMass
                 setResult({
-                  weightInKg: weightInKg,
-                  heightToMeter: heightToMeter,
+                  weight: weight,
+                  height: height,
                   bmi: bmi,
                   unit: unit
                 })
@@ -128,8 +134,8 @@ const BodyMassIndex = () => {
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">BMI: {Result.bmi}{Result.unit}</Typography>
-          <Typography variant="subtitle1">Weight : {Result.weightInKg}</Typography>
-          <Typography variant="subtitle1">Height : {Result.heightToMeter}</Typography>
+          <Typography variant="subtitle1">Weight : {Result.weight}</Typography>
+          <Typography variant="subtitle1">Height : {Result.height}</Typography>
         </div>
       </ResultTabsContainer>
     </>

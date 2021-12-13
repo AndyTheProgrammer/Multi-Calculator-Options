@@ -21,7 +21,7 @@ import {
 } from '../../../custom'
 
 const TakaSchlichBodySurfaceArea = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
@@ -31,6 +31,7 @@ const TakaSchlichBodySurfaceArea = () => {
   })
   const [Result, setResult] = React.useState({
     bodySurfaceArea: 0,
+    gender: '',
     unit: ''
   })
 
@@ -60,9 +61,10 @@ const TakaSchlichBodySurfaceArea = () => {
               const { payload: takaSchlichBodySurfaceArea } = await calculateOthers(payload)
               console.log('=====>', takaSchlichBodySurfaceArea)
               if (typeof takaSchlichBodySurfaceArea === 'object') {
-                const { bodySurfaceArea, unit } = takaSchlichBodySurfaceArea
+                const { bsa, gendere, unit } = takaSchlichBodySurfaceArea
                 setResult({
-                  bodySurfaceArea: bodySurfaceArea,
+                  bodySurfaceArea: bsa,
+                  gender: gendere,
                   unit: unit
                 })
               }
@@ -137,7 +139,10 @@ const TakaSchlichBodySurfaceArea = () => {
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Body surface area: {Result.bodySurfaceArea}
+            Body surface area: {Result.bodySurfaceArea}{Result.unit}
+          </Typography>
+          <Typography variant="subtitle1">
+            Gender: {Result.gender}
           </Typography>
         </div>
       </ResultTabsContainer>

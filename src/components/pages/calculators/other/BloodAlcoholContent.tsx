@@ -21,7 +21,6 @@ import {
 } from '../../../custom'
 
 const BloodAlcoholContent = () => {
-
   const [initialFormValues] = React.useState({
     weight: '',
     weight_unit: '',
@@ -167,6 +166,24 @@ const BloodAlcoholContent = () => {
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
             Blood alcohol content: {Result.BAC}
+          </Typography>
+          <Typography variant="subtitle1">
+            Number of average hours: {Result.numberOfHoursAverage}
+          </Typography>
+          <Typography variant="subtitle1">
+            Divident: {Result.divident}
+          </Typography>
+          <Typography variant="subtitle1">
+            Divisor: {Result.divisor}
+          </Typography>
+          <Typography variant="subtitle1">
+            M: {Result.M}
+          </Typography>
+          <Typography variant="subtitle1">
+            N: {Result.N}
+          </Typography>
+          <Typography variant="subtitle1">
+            H: {Result.H}
           </Typography>
         </div>
       </ResultTabsContainer>

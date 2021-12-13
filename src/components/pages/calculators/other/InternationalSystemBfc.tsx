@@ -21,7 +21,7 @@ import {
 } from '../../../custom'
 
 const InternationalSystemBfc = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
     neck: '',
@@ -59,9 +59,9 @@ const InternationalSystemBfc = () => {
               const { payload: internationalSystemBFC } = await calculateOthers(payload)
               console.log('=====>', internationalSystemBFC)
               if (typeof internationalSystemBFC === 'object') {
-                const { bfc } = internationalSystemBFC
+                const { BFP } = internationalSystemBFC
                 setResult({
-                  bfc: bfc,
+                  bfc: BFP,
                 })
               }
             } catch (err) {

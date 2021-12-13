@@ -3,11 +3,17 @@ import { Button, withStyles, } from '@material-ui/core'
 import { green, purple } from '@material-ui/core/colors';
 
 import { BUTTONS, COLORS } from '../../common/shared'
+import { Font, FontProvider } from '../font'
 
 const ColorButton = withStyles((theme) => ({
   root: {
     color: COLORS.background,
-    backgroundColor: COLORS.gradient,
+    height: 25,
+    textTransform: 'none',
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundImage: COLORS.gradient,
     '&:hover': {
       backgroundColor: green[400],
     },
@@ -16,18 +22,21 @@ const ColorButton = withStyles((theme) => ({
 
 const CustomBtn = (props: any) => {
   return (
-    <div className="form d-grid gap-2 d-md-flex justify-content-md-start">
-      <ColorButton
-        size="small"
-        variant="contained"
-        color="primary"
-        type="submit"
-        className="btn btn-primary"
-        {...props}
-      >
-        {BUTTONS.calculate}
-      </ColorButton>
-    </div>
+    <FontProvider fonts={[{ font: 'Varela Round' }]}>
+      <div className="form d-grid gap-2 d-md-flex justify-content-md-start">
+        <ColorButton
+          size="small"
+          variant="contained"
+          color="primary"
+          type="submit"
+          className="btn btn-primary"
+          {...props}
+        >
+          <Font>{BUTTONS.calculate}</Font>
+        </ColorButton>
+      </div>
+    </FontProvider>
+
   )
 }
 

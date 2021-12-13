@@ -20,14 +20,14 @@ import {
 } from '../../../custom'
 
 const PeroidCalculator = () => {
-
   const [initialFormValues] = React.useState({
     start_date_of_last_cycle: '',
     cycle_length: '',
     last_period_days: ''
   })
   const [Result, setResult] = React.useState({
-    period: 0
+    startdateForNextPeriod: '',
+    endDateForNextPeriod: ''
   })
 
   return (
@@ -52,9 +52,10 @@ const PeroidCalculator = () => {
               const { payload: periodCalculator } = await calculateOthers(payload)
               console.log('=====>', periodCalculator)
               if (typeof periodCalculator === 'object') {
-                const { period } = periodCalculator
+                const { startDateForNextperid, endDateForNextPerid } = periodCalculator
                 setResult({
-                  period: period,
+                  startdateForNextPeriod: startDateForNextperid,
+                  endDateForNextPeriod: endDateForNextPerid
                 })
               }
             } catch (err) {
@@ -115,7 +116,11 @@ const PeroidCalculator = () => {
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Period: {Result.period}
+            Start date for next peroid: {Result.startdateForNextPeriod}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            End date for next peroid: {Result.endDateForNextPeriod}
           </Typography>
         </div>
       </ResultTabsContainer>

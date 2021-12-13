@@ -244,6 +244,21 @@ export interface ConicalFrustumVolumeI {
 }
 
 //end 11/04/2021
+export interface SinglePointWithKnownSlopeI {
+  y_1: string;
+  distance: string;
+  x_1: string;
+  slope: string;
+  method: string;
+}
+
+export interface SlopeCalculatorForTwoKnownPointsI {
+  y_1: string;
+  y_2: string;
+  x_1: string;
+  x_2: string;
+  method: string;
+}
 
 export type AllMathCalculators =
   | BallSurfaceArea
@@ -272,4 +287,6 @@ export type AllMathCalculators =
   | CapsuleVolumeCalculatorI
   | SphericalCapVolumeI
   | ConicalFrustrumSurfaceAreaI
-  | TubeVolumeCalculatorI;
+  | TubeVolumeCalculatorI
+  | SlopeCalculatorForTwoKnownPointsI
+  | SinglePointWithKnownSlopeI;

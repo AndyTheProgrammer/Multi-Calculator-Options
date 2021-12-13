@@ -21,7 +21,7 @@ import {
 } from '../../../custom'
 
 const LeanBodyMassPeterFormula = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
@@ -59,9 +59,9 @@ const LeanBodyMassPeterFormula = () => {
               const { payload: leanBodyMassPeterFormula } = await calculateOthers(payload)
               console.log('=====>', leanBodyMassPeterFormula)
               if (typeof leanBodyMassPeterFormula === 'object') {
-                const { leanBodyMass } = leanBodyMassPeterFormula
+                const { eLBM } = leanBodyMassPeterFormula
                 setResult({
-                  leanBodyMass: leanBodyMass,
+                  leanBodyMass: eLBM,
                 })
               }
             } catch (err) {

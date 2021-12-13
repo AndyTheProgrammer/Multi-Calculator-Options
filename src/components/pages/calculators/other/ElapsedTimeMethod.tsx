@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const ElapsedTimeMethod = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     weight: "",
     weight_unit: "",
@@ -28,8 +29,9 @@ const ElapsedTimeMethod = () => {
     time_unit: "",
   })
   const [Result, setResult] = React.useState({
-    elapsedTime: 0,
-    unit: ''
+    weight: 0,
+    time: 0,
+    horsePower: 0,
   })
 
   return (
@@ -55,12 +57,16 @@ const ElapsedTimeMethod = () => {
             try {
               const { payload: elapsedTimeMethod } = await calculateOthers(payload)
               console.log('=====>', elapsedTimeMethod)
-              const { elapsedTime, unit,
+              const {
+                weight,
+                time,
+                horsePower,
               } = elapsedTimeMethod
               if (typeof elapsedTimeMethod === 'object') {
                 setResult({
-                  elapsedTime: elapsedTime,
-                  unit: unit
+                  weight: weight,
+                  time: time,
+                  horsePower: horsePower
                 })
               }
             } catch (err) {
@@ -123,7 +129,17 @@ const ElapsedTimeMethod = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Elapsed Time: {Result.elapsedTime}{Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            Horsepower: {Result.horsePower}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            weight: {Result.weight}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Time: {Result.time}
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>

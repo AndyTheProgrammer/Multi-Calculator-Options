@@ -21,7 +21,6 @@ import {
 } from '../../../custom'
 
 const BMRKatchMcArdle = () => {
-
   const [initialFormValues] = React.useState({
     fat: '',
     weight: '',

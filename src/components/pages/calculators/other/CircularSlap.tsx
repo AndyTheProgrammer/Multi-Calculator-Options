@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const CircularSlap = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     length: "",
     length_unit: "",

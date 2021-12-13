@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
 import { SlopeCalculatorForTwoKnownPointsI } from '../../../../types'
-import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import { calculateMath } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
@@ -20,6 +20,7 @@ import {
 } from '../../../custom'
 
 const SlopeCalculatorForTwoKnownPoints = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     y_1: '',
     y_2: '',
@@ -28,7 +29,8 @@ const SlopeCalculatorForTwoKnownPoints = () => {
   })
   const [Result, setResult] = React.useState({
     slope: 0,
-    unit: ''
+    distance: 0,
+    angle: 0,
   })
 
   return (
@@ -52,13 +54,14 @@ const SlopeCalculatorForTwoKnownPoints = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: slopeWithTwoKnownPoints } = await calculateOthers(payload)
+              const { payload: slopeWithTwoKnownPoints } = await calculateMath(payload)
               console.log('=====>', slopeWithTwoKnownPoints)
-              const { slope, unit } = slopeWithTwoKnownPoints
+              const { d, m, angle, } = slopeWithTwoKnownPoints
               if (typeof slopeWithTwoKnownPoints === 'object') {
                 setResult({
-                  slope: slope,
-                  unit: unit
+                  slope: m,
+                  distance: d,
+                  angle: angle,
                 })
               }
             } catch (err) {
@@ -129,7 +132,17 @@ const SlopeCalculatorForTwoKnownPoints = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Slope: {Result.slope}{Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            Slope: {Result.slope}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Distance: {Result.distance}
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Angle: {Result.angle}
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>

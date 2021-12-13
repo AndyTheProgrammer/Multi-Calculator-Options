@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const TrapSpeedMethod = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     weight: "",
     weight_unit: "",
@@ -28,7 +29,7 @@ const TrapSpeedMethod = () => {
     speed_unit: "",
   })
   const [Result, setResult] = React.useState({
-    trap_speed: 0,
+    horsePower: 0,
     weight: 0,
     speed: 0,
     unit: '',
@@ -57,11 +58,15 @@ const TrapSpeedMethod = () => {
             try {
               const { payload: trapSpeedMethod } = await calculateOthers(payload)
               console.log('=====>', trapSpeedMethod)
-              const { trap_speed, unit, weight, speed,
+              const {
+                horsePower,
+                unit,
+                weight,
+                speed,
               } = trapSpeedMethod
               if (typeof trapSpeedMethod === 'object') {
                 setResult({
-                  trap_speed: trap_speed,
+                  horsePower: horsePower,
                   weight: weight,
                   speed: speed,
                   unit: unit
@@ -127,10 +132,11 @@ const TrapSpeedMethod = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Trap speed: {Result.trap_speed}</Typography>
+          <Typography variant="subtitle1">
+            Horsepower: {Result.horsePower}{Result.unit}
+          </Typography>
           <Typography variant="subtitle1"> Weight: {Result.weight}</Typography>
           <Typography variant="subtitle1"> Speed: {Result.speed}</Typography>
-          <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
         </div>
       </ResultTabsContainer>
     </>

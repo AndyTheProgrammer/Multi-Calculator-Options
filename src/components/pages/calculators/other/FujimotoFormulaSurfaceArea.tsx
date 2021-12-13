@@ -21,7 +21,7 @@ import {
 } from '../../../custom'
 
 const FujimotoFormulaSurfaceArea = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
@@ -29,7 +29,8 @@ const FujimotoFormulaSurfaceArea = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    bodySurfaceArea: 0
+    bodySurfaceArea: 0,
+    unit: ''
   })
 
   return (
@@ -56,9 +57,10 @@ const FujimotoFormulaSurfaceArea = () => {
               const { payload: fujimotoFormulaBodySurfaceArea } = await calculateOthers(payload)
               console.log('=====>', fujimotoFormulaBodySurfaceArea)
               if (typeof fujimotoFormulaBodySurfaceArea === 'object') {
-                const { bodySurfaceArea } = fujimotoFormulaBodySurfaceArea
+                const { bsa, unit } = fujimotoFormulaBodySurfaceArea
                 setResult({
-                  bodySurfaceArea: bodySurfaceArea,
+                  bodySurfaceArea: bsa,
+                  unit: unit
                 })
               }
             } catch (err) {
@@ -122,7 +124,7 @@ const FujimotoFormulaSurfaceArea = () => {
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Body surface area: {Result.bodySurfaceArea}
+            Body surface area: {Result.bodySurfaceArea}{Result.unit}
           </Typography>
         </div>
       </ResultTabsContainer>

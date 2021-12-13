@@ -22,12 +22,13 @@ import {
 } from '../../../custom'
 
 const HostingBandwidth = () => {
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     monthly_usage: '',
     monthly_usage_unit: '',
   })
   const [Result, setResult] = React.useState({
-    hostingBandwidthPerMonth: 0,
+    hostingBandwidth: 0,
     unit: ''
   })
 
@@ -50,11 +51,11 @@ const HostingBandwidth = () => {
             try {
               const { payload: hostingBandwidthConverter } = await calculateOthers(payload)
               console.log('=====>', hostingBandwidthConverter)
-              const { hostingBandwidthPerMonth, unit,
+              const { HostingBandwidth, unit,
               } = hostingBandwidthConverter
               if (typeof hostingBandwidthConverter === 'object') {
                 setResult({
-                  hostingBandwidthPerMonth: hostingBandwidthPerMonth,
+                  hostingBandwidth: HostingBandwidth,
                   unit: unit
                 })
               }
@@ -100,7 +101,9 @@ const HostingBandwidth = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Hosting bandwidth per month: {Result.hostingBandwidthPerMonth}{Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            Hosting bandwidth per month: {Result.hostingBandwidth}{Result.unit}
+          </Typography>
         </div>
       </ResultTabsContainer>
 

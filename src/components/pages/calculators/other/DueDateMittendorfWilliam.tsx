@@ -20,7 +20,6 @@ import {
 } from '../../../custom'
 
 const DueDateMittendorfWilliam = () => {
-
   const [initialFormValues] = React.useState({
     first_date_of_last_period: '',
     type: ''

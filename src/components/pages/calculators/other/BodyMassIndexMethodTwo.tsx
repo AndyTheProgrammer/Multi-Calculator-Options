@@ -21,7 +21,6 @@ import {
 } from '../../../custom'
 
 const BodyMassIndexMethodTwo = () => {
-
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',

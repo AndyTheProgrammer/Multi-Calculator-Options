@@ -21,7 +21,7 @@ import {
 } from '../../../custom'
 
 const DuBoisBodySurfaceArea = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',

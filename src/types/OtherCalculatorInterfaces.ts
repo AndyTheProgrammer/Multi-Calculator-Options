@@ -58,14 +58,6 @@ export interface HoleColumnI {
 }
 
 // new
-export interface SlopeCalculatorForTwoKnownPointsI {
-  y_1: string;
-  y_2: string;
-  x_1: string;
-  x_2: string;
-  method: string;
-}
-
 export interface ElapsedTimeMethodI {
   weight: string;
   weight_unit: string;
@@ -126,15 +118,6 @@ export interface HostingBandwidthI {
   method: string;
 }
 // end 11/04/2021
-
-//note: endpoint called if 1 point and the slope are known
-export interface SinglePointWithKnownSlopeI {
-  y_1: string;
-  distance: string;
-  x_1: string;
-  slope: string;
-  method: string;
-}
 
 export interface BodyMassIndexI {
   height: string;
@@ -217,13 +200,16 @@ export interface InternationalSystemBfcI {
   method: string;
 }
 
-export interface BodyFatPercentageBmiI {
+export interface BodyFatPercentageI {
+  neck: string;
+  neck_unit: string;
   height: string;
   height_unit: string;
-  weight: string;
-  weight_unit: string;
+  waist: string;
+  waist_unit: string;
   gender: string;
-  age: string;
+  hip: string;
+  hip_unit: string;
   method: string;
 }
 
@@ -364,7 +350,6 @@ export type AllOtherCalculators =
   | CurbAndGutterBarrierI
   | StairsConcreateI
   | HoleColumnI
-  | SlopeCalculatorForTwoKnownPointsI
   | ElapsedTimeMethodI
   | TrapSpeedMethodI
   | ParrallelResitorI
@@ -373,7 +358,6 @@ export type AllOtherCalculators =
   | HorsepowerCalculationI
   | WebsiteBandwidthI
   | HostingBandwidthI
-  | SinglePointWithKnownSlopeI
   | BodyMassIndexI
   | LeanBodyMassI
   | RegularCycleOvulationI

@@ -21,7 +21,7 @@ import {
 } from '../../../custom'
 
 const MostellerBodySurfaceArea = () => {
-
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
@@ -29,7 +29,8 @@ const MostellerBodySurfaceArea = () => {
     weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    bodySurfaceArea: 0
+    bodySurfaceArea: 0,
+    unit: ''
   })
 
   return (
@@ -56,9 +57,10 @@ const MostellerBodySurfaceArea = () => {
               const { payload: mostellerBodySurfaceArea } = await calculateOthers(payload)
               console.log('=====>', mostellerBodySurfaceArea)
               if (typeof mostellerBodySurfaceArea === 'object') {
-                const { bodySurfaceArea } = mostellerBodySurfaceArea
+                const { bsa, unit } = mostellerBodySurfaceArea
                 setResult({
-                  bodySurfaceArea: bodySurfaceArea,
+                  bodySurfaceArea: bsa,
+                  unit: unit
                 })
               }
             } catch (err) {
@@ -122,7 +124,7 @@ const MostellerBodySurfaceArea = () => {
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
-            Body surface area: {Result.bodySurfaceArea}
+            Body surface area: {Result.bodySurfaceArea}{Result.unit}
           </Typography>
         </div>
       </ResultTabsContainer>
