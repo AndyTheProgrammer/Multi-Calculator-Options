@@ -51,7 +51,7 @@ const ParallelogramArea = (props: any) => {
     <>
       {/* Form grid */}
       <FormTabsContainer
-        tabTitle1={CALCULATORS.capsuleSurfArea}
+        tabTitle1={CALCULATORS.parallelogramArea}
         sm={6}
         dropDown={true}
         openDrop={openDrop}
@@ -169,15 +169,12 @@ const ParallelogramArea = (props: any) => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         {selectedResult ? (
-          <div className="text-center mb-3">
-            <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-            <Typography variant="subtitle1"> Breadth: {Result.breadth}</Typography>
-            <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-            <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-
+          <div className="text-wrap">
+            <Typography variant="subtitle1"> Area = b x h</Typography>
+            <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
           </div>
         ) : (
-          <div className="text-center mb-3">
+          <div className="text-wrap">
             <Typography variant="subtitle1"> areaInbreadthUnit: {resultTwo.areaInbreadthUnit}</Typography>
             <Typography variant="subtitle1"> areaInheightUnit: {resultTwo.areaInheightUnit}</Typography>
             <Typography variant="subtitle1"> breadthInheightUnit: {resultTwo.breadthInheightUnit}</Typography>

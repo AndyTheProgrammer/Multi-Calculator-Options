@@ -220,7 +220,16 @@ const ConicalFrustrumSurfaceArea = (props: any) => {
 
       {/* Results grid */}
       {selectedResult ? (<ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
+        <div className="text-wrap">
+          <Typography variant="subtitle1">
+            Top Surface Area = π x r<sup>2</sup>
+          </Typography>
+          <Typography variant="subtitle1">
+            Bottom Surface Area = π x R<sup>2</sup>
+          </Typography>
+          <Typography variant="subtitle1">
+            Lateral Surface Area = π x (R + r) x √(R - r)<sup>2</sup> + h<sup>2</sup>
+          </Typography>
           <Typography variant="subtitle1">lateralSurfaceArea: {Result.lateralSurfaceArea}</Typography>
           <Typography variant="subtitle1"> circularEndSurfaceArea: {Result.circularEndSurfaceArea}</Typography>
           <Typography variant="subtitle1"> totalSurfaceArea: {Result.totalSurfaceArea}</Typography>
@@ -230,7 +239,7 @@ const ConicalFrustrumSurfaceArea = (props: any) => {
         </div>
       </ResultTabsContainer>) : (
         <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-          <div className="text-center mb-3">
+          <div className="text-wrap">
             <Typography variant="subtitle1">circularEndSurfaceAreaInin: {resultTwo.circularEndSurfaceAreaInin}</Typography>
             <Typography variant="subtitle1"> circularEndSurfaceAreaInm: {resultTwo.circularEndSurfaceAreaInm}</Typography>
             <Typography variant="subtitle1"> heightInin: {resultTwo.heightInin}</Typography>

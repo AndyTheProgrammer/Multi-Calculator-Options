@@ -107,11 +107,9 @@ const CircleArea = (props: any) => {
 
       {/* Result grid */}
       <ResultTabsContainer tabTitle1={"Result"} sm={6}>
-        <div className="text-center mb-3 text-wrap">
-          <Typography variant="subtitle1"> Area: {Result.Area}</Typography>
-          <Typography variant="subtitle1"> Submitted Radius: {Result.Submitted_radius}</Typography>
-          <Typography variant="subtitle1"> Submitted Unit: {Result.Submitted_unit}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+        <div className="text-wrap">
+          <Typography variant="subtitle1"> Area = π x r<sup>2</sup></Typography>
+          <Typography variant="subtitle1"> = {Result.Area}{Result.units}<sup>2</sup></Typography>
         </div>
       </ResultTabsContainer>
     </>

@@ -133,7 +133,12 @@ const SquarePyramidSurfaceArea = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
+        <div className="text-wrap">
+          <Typography variant="subtitle1">Base Surface Area = a<sup>2</sup></Typography>
+          <Typography variant="subtitle1">
+            Lateral Surface Area = a x a √(a/a)<sup>2</sup> + h<sup>2</sup>
+          </Typography>
+
           <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
           <Typography variant="subtitle1"> Base Edge: {Result.base_edge}</Typography>
           <Typography variant="subtitle1"> Height: {Result.height}</Typography>

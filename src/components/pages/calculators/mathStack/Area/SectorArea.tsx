@@ -35,6 +35,7 @@ const SectorArea = (props: any) => {
     angleUnit: 0,
     submittedradius: '',
     submitted_angle: '',
+    unit: ''
   })
 
   const [resultTwo, setResultTwo] = React.useState({
@@ -71,7 +72,14 @@ const SectorArea = (props: any) => {
             try {
               const { payload: sectorArea } = await calculateMath(payload)
               console.log('=====>', sectorArea)
-              const { area, unitType, radiusUnits, angleUnit, submittedradius, submitted_angle
+              const {
+                area,
+                unitType,
+                radiusUnits,
+                angleUnit,
+                submittedradius,
+                submitted_angle,
+                unit
               } = sectorArea
               if (typeof sectorArea === 'object' && unitType === true) {
                 setSelectedResult(unitType)
@@ -81,12 +89,11 @@ const SectorArea = (props: any) => {
                   angleUnit: angleUnit,
                   submitted_angle: submitted_angle,
                   submittedradius: submittedradius,
-
+                  unit: unit,
                 })
               }
               if (typeof sectorArea === 'object' && unitType === true) {
                 setSelectedResult(unitType)
-
               }
             } catch (err) {
               console.log('====>', err)
@@ -147,12 +154,10 @@ const SectorArea = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        {/* <div className="text-center mb-3">
-              <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-              <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-              <Typography variant="subtitle1"> Angle: {Result.angle}</Typography>
-              <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-            </div> */}
+        <div className="text-wrap">
+          <Typography variant="subtitle1"> Area = (A/360) x π x r<sup>2</sup></Typography>
+          <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
+        </div>
       </ResultTabsContainer>
 
 

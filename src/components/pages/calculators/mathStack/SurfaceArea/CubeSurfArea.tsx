@@ -108,7 +108,8 @@ const CubeSurfArea = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
+        <div className="text-wrap">
+          <Typography variant="subtitle1">Surface Area = 6 x a<sup>2</sup></Typography>
           <Typography variant="subtitle1"> Cube Surface area: {Result.surfaceArea}</Typography>
           <Typography variant="subtitle1"> area: {Result.area}</Typography>
           <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>

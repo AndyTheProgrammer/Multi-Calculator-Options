@@ -21,7 +21,7 @@ export const CALCULATORS = {
   coneVol: "Cone Volume",
   cubeVol: "Cube Volume",
   cylinderVol: "Cylinder Volume",
-  rectangleVol: "Rectangle Volume",
+  rectangularTankVol: "Rectangular Tank Volume",
   capsuleVol: "Capsule Volume",
   sphericalCapVol: "Spherical Cap Volume",
   squarePyramidVol: "Square Pyramid Volume",

@@ -167,14 +167,25 @@ const CapsuleSurfaceArea = (props: any) => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         {selectedResult ? (
-          <div className="text-center mb-3">
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              Top Surface Area = 2 x π x r<sup>2</sup>
+            </Typography>
+            <Typography variant="subtitle1">
+              Bottom Surface Area = 2 x π x r<sup>2</sup>
+            </Typography>
+            <Typography variant="subtitle1">
+              Lateral Surface Area = 2 x π x r x h
+            </Typography>
+
+
             <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
             <Typography variant="subtitle1"> Radius: {Result.submitted_height} </Typography>
             <Typography variant="subtitle1"> Height: {Result.submittedradius} </Typography>
             <Typography variant="subtitle1"> Unit: {Result.units} </Typography>
           </div>
         ) : (
-          <div className="text-center mb-3">
+          <div className="text-wrap">
             <Typography variant="subtitle1">surfaceAreaInradiusUnit: {resultTwo.surfaceAreaInradiusUnit}</Typography>
             <Typography variant="subtitle1"> surfaceAreaInheightUnit: {resultTwo.surfaceAreaInheightUnit} </Typography>
             <Typography variant="subtitle1"> submittedradius: {resultTwo.submittedradius} </Typography>

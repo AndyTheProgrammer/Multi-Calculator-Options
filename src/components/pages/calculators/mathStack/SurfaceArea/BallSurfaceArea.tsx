@@ -107,7 +107,8 @@ const BallSurfaceArea = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
+        <div className="text-wrap">
+          <Typography variant="subtitle1">Surface Area = 4 x π x r<sup>2</sup></Typography>
           <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
           <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
           <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>

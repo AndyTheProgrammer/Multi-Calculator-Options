@@ -27,8 +27,6 @@ const RectangularArea = (props: any) => {
     length_unit: '',
     width: '',
     width_unit: '',
-    height: '',
-    height_unit: ''
   })
   const [Result, setResult] = React.useState({
     area: 0,
@@ -64,8 +62,6 @@ const RectangularArea = (props: any) => {
             length_unit,
             width,
             width_unit,
-            height,
-            height_unit
           }, { setSubmitting, resetForm }) => {
             const payload: RectangleAreaI = {
               length,
@@ -155,24 +151,6 @@ const RectangularArea = (props: any) => {
                 />
               </div>
 
-              <div className="form-row">
-                <Label title={LABELS.height} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.height}
-                  onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="height_unit"
-                  measurement="length"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
-                />
-              </div>
-
               <div
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
@@ -190,14 +168,12 @@ const RectangularArea = (props: any) => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         {selectedResult ? (
-          <div className="text-center mb-3">
-            <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-            <Typography variant="subtitle1"> Length: {Result.submittedLength}</Typography>
-            <Typography variant="subtitle1"> Width: {Result.submitted_width}</Typography>
-            <Typography variant="subtitle1"> Unit: {Result.units}</Typography>
+          <div className="text-wrap">
+            <Typography variant="subtitle1"> Area = l x w</Typography>
+            <Typography variant="subtitle1"> = {Result.area}{Result.units}<sup>2</sup></Typography>
           </div>
         ) : (
-          <div className="text-center mb-3">
+          <div className="text-wrap">
             <Typography variant="subtitle1"> areaInLengthUnit: {resultTwo.areaInLengthUnit}</Typography>
             <Typography variant="subtitle1"> areaInWidthUnit: {resultTwo.areaInWidthUnit}</Typography>
             <Typography variant="subtitle1"> lengthInWidthUnit: {resultTwo.lengthInWidthUnit}</Typography>

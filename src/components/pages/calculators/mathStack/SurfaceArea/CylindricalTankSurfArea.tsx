@@ -176,7 +176,11 @@ const CylindricalTankSurfArea = (props: any) => {
 
       {/* Results grid */}
       {selectedResult ? (<ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
+        <div className="text-wrap">
+          <Typography variant="subtitle1"> Top Surface Area = π x r<sup>2</sup></Typography>
+          <Typography variant="subtitle1"> Bottom Surface Area = π x r<sup>2</sup></Typography>
+          <Typography variant="subtitle1"> Lateral Surface Area = 2 x π x 2 x 3</Typography>
+
           <Typography variant="subtitle1">Base Surface Area: {Result.baseSurfaceArea}</Typography>
           <Typography variant="subtitle1">Lateral Surface Area: {Result.lateralSurfaceArea}</Typography>
           <Typography variant="subtitle1">cylindricalTankSurfaceArea: {Result.cylindricalTankSurfaceArea}</Typography>
@@ -184,7 +188,7 @@ const CylindricalTankSurfArea = (props: any) => {
         </div>
       </ResultTabsContainer>) : (
         <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-          <div className="text-center mb-3">
+          <div className="text-wrap">
             <Typography variant="subtitle1">Base Surface Area: {resultTwo.radiusUnitBaseSurfaceArea}</Typography>
             <Typography variant="subtitle1">Lateral Surface Area: {resultTwo.radiusUnitLateralSurfaceArea}</Typography>
             <Typography variant="subtitle1">radiusUnitTotalArea: {resultTwo.radiusUnitTotalArea}</Typography>

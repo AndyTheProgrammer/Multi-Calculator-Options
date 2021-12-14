@@ -203,15 +203,14 @@ const TrapezoidArea = (props: any) => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         {selectedResult ? (
-          <div className="text-center mb-3">
-            <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-            <Typography variant="subtitle1"> Base 1: {Result.base1}</Typography>
-            <Typography variant="subtitle1"> Base 2: {Result.base2}</Typography>
-            <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-            <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              Area = ((b<sub>1</sub> + b<sub>2</sub>) / 2) x h
+            </Typography>
+            <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
           </div>
         ) : (
-          <div className="text-center mb-3">
+          <div className="text-wrap">
             <Typography variant="subtitle1"> areaIncm: {resultTwo.areaIncm}</Typography>
             <Typography variant="subtitle1"> areaInm: {resultTwo.areaInm}</Typography>
             <Typography variant="subtitle1"> base1tocm: {resultTwo.base1tocm}</Typography>

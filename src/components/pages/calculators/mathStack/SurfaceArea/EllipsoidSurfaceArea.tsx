@@ -173,7 +173,10 @@ const EllipsoidSurfaceArea = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
+        <div className="text-wrap">
+          <Typography variant="subtitle1">
+            Surface Area = a x π x <sup>1.6</sup>√(a x b)<sup>1.6</sup> + (a x c)<sup>1.6</sup> + (b x c)<sup>1.6</sup> / c
+          </Typography>
           <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
           <Typography variant="subtitle1"> Axis 1: {Result.axis1}</Typography>
           <Typography variant="subtitle1"> Axis 2: {Result.axis2}</Typography>

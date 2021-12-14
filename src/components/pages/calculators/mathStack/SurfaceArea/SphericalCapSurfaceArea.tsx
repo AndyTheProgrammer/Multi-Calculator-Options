@@ -168,7 +168,8 @@ const SphericalCapSurfaceArea = (props: any) => {
       {/* Results grid */}
       {selectedResult ? (
         <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-          <div className="text-center mb-3">
+          <div className="text-wrap">
+            <Typography variant="subtitle1">Surface Area = 2 x π x r x h</Typography>
             <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
             <Typography variant="subtitle1"> submittedradius: {Result.submittedradius}</Typography>
             <Typography variant="subtitle1"> submitted_height: {Result.submitted_height}</Typography>
@@ -177,7 +178,7 @@ const SphericalCapSurfaceArea = (props: any) => {
         </ResultTabsContainer>
       ) : (
         <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-          <div className="text-center mb-3">
+          <div className="text-wrap">
             <Typography variant="subtitle1">surfaceAreaInradiusUnit: {resultTwo.surfaceAreaInradiusUnit}</Typography>
             <Typography variant="subtitle1"> surfaceAreaInheightUnit: {resultTwo.surfaceAreaInheightUnit}</Typography>
             <Typography variant="subtitle1"> submittedradius: {resultTwo.submittedradius}</Typography>

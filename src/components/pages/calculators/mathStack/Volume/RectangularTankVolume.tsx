@@ -42,7 +42,7 @@ const RectangularTankVolume = (props: any) => {
     <>
       {/* Form grid */}
       <FormTabsContainer
-        tabTitle1={CALCULATORS.rectangleVol}
+        tabTitle1={CALCULATORS.rectangularTankVol}
         sm={6}
         dropDown={true}
         openDrop={openDrop}

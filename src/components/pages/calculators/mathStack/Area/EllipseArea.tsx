@@ -165,20 +165,23 @@ const EllipseArea = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        {selectedResult ? (<div className="text-center mb-3">
-          <Typography variant="subtitle1">Area: {Result.area}</Typography>
-          <Typography variant="subtitle1">Semi major axes A: {Result.semi_major_axes_a}</Typography>
-          <Typography variant="subtitle1">Semi major axes B: {Result.semi_major_axes_b}</Typography>
-          <Typography variant="subtitle1">Units: {Result.unit}</Typography>
-
-        </div>) : (<div className="text-center mb-3">
-          <Typography variant="subtitle1">semi_major_axes_bInsemi_major_axes_aUnit: {resultTwo.$semi_major_axes_bInsemi_major_axes_aUnit}</Typography>
-          <Typography variant="subtitle1">areaInsemi_major_axes_aUnit: {resultTwo.areaInsemi_major_axes_aUnit}</Typography>
-          <Typography variant="subtitle1">areaInsemi_major_axes_bUnit: {resultTwo.areaInsemi_major_axes_bUnit}</Typography>
-          <Typography variant="subtitle1">semi_major_axes_aInsemi_major_axes_bUnit: {resultTwo.semi_major_axes_aInsemi_major_axes_bUnit}</Typography>
-          <Typography variant="subtitle1">submitted_semi_major_axes_b: {resultTwo.submitted_semi_major_axes_b}</Typography>
-          <Typography variant="subtitle1">submittedsemi_major_axes_a: {resultTwo.submittedsemi_major_axes_a}</Typography>
-        </div>)}
+        {selectedResult ? (
+          <div className="text-wrap">
+            <Typography variant="subtitle1"> Area = π x a x b</Typography>
+            <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
+          </div>
+        ) : (
+          <div className="text-wrap">
+            <Typography variant="subtitle1"> Area = π x a x b</Typography>
+            <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
+            <Typography variant="subtitle1">semi_major_axes_bInsemi_major_axes_aUnit: {resultTwo.$semi_major_axes_bInsemi_major_axes_aUnit}</Typography>
+            <Typography variant="subtitle1">areaInsemi_major_axes_aUnit: {resultTwo.areaInsemi_major_axes_aUnit}</Typography>
+            <Typography variant="subtitle1">areaInsemi_major_axes_bUnit: {resultTwo.areaInsemi_major_axes_bUnit}</Typography>
+            <Typography variant="subtitle1">semi_major_axes_aInsemi_major_axes_bUnit: {resultTwo.semi_major_axes_aInsemi_major_axes_bUnit}</Typography>
+            <Typography variant="subtitle1">submitted_semi_major_axes_b: {resultTwo.submitted_semi_major_axes_b}</Typography>
+            <Typography variant="subtitle1">submittedsemi_major_axes_a: {resultTwo.submittedsemi_major_axes_a}</Typography>
+          </div>
+        )}
       </ResultTabsContainer>
 
 

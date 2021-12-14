@@ -161,12 +161,16 @@ const TriangleArea = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Area: {Result.area}</Typography>
-          <Typography variant="subtitle1"> Side A: {Result.sideA}</Typography>
-          <Typography variant="subtitle1"> Side B: {Result.sideB}</Typography>
-          <Typography variant="subtitle1"> Side C: {Result.sideC}</Typography>
-          <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+        <div className="text-wrap">
+          <Typography variant="subtitle1">
+            s = (a + b + c) / 2
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Area = √s(s - a)(s - b)(s - c)
+          </Typography>
+
+          <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
         </div>
       </ResultTabsContainer>
 
