@@ -1,23 +1,22 @@
-import React from "react";
+import React from 'react'
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 
-import TestNavBar from "../../navbar/TestNavBar";
-import { CollapsibleMenu, Carousel, SimpleDialog } from "../../content";
-import { PLACEHOLDERS, INPUT_TYPE, COLORS } from "../../../common/shared";
-import useStyles from "../../../styling/CustomStyles";
+import TestNavBar from "../../../navbar/TestNavBar";
+import { CollapsibleMenu, Carousel, SimpleDialog } from "../../../content";
+import { PLACEHOLDERS, INPUT_TYPE, COLORS } from "../../../../common/shared";
+import useStyles from "../../../../styling/CustomStyles";
 import {
   MarginOfErrorCalculator,
   ProbabilityOfASeriesOfIndpendentEvents,
   ProbablityOfTwoEvents,
   ProbablitySolverForTwoEvents,
   SampleSizeCalculator,
-} from "../index";
-import { CustomSearchInput } from "../../custom";
+} from "../../index";
+import { CustomSearchInput } from "../../../custom";
 
-const Statistics = () => {
+function StatisticsCalculators() {
   const { sideBarPaperBackground } = useStyles();
   const [searchText, setSearchText] = React.useState("");
   const [open, setOpen] = React.useState(false);
@@ -28,14 +27,14 @@ const Statistics = () => {
     setOpen(true);
   };
 
-  const handleClose = (value) => {
+  const handleClose = (value: any) => {
     setOpen(false);
     if (value) {
       setSelectedCalc(value);
 
       // find calcName that matches the selected calc
       const getCalc = calculators.find(({ calcName }) => calcName === value);
-      setCurrentCalc(getCalc);
+      setCurrentCalc(getCalc!);
     }
   };
 
@@ -45,7 +44,7 @@ const Statistics = () => {
     component: <MarginOfErrorCalculator openDrop={handleClickOpen} />,
   });
 
-  const handleSearchChange = (event) => {
+  const handleSearchChange = (event: any) => {
     setSearchText(event.target.value);
   };
 
@@ -73,7 +72,6 @@ const Statistics = () => {
       component: <SampleSizeCalculator openDrop={handleClickOpen} />,
     },
   ];
-
   return (
     <>
       <TestNavBar />
@@ -121,7 +119,7 @@ const Statistics = () => {
         </Grid>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default Statistics;
+export default StatisticsCalculators

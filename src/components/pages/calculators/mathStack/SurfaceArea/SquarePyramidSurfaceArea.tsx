@@ -20,7 +20,8 @@ import {
   ResultTabsContainer
 } from '../../../../custom'
 
-const SquarePyramidSurfaceArea = () => {
+const SquarePyramidSurfaceArea = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     base_edge: '',
     base_edge_unit: '',
@@ -37,7 +38,12 @@ const SquarePyramidSurfaceArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.squarePyramidSurfArea} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.squarePyramidSurfArea}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

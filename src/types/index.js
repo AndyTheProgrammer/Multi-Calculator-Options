@@ -57,7 +57,7 @@ export {
 
 export {
   ConcreteSquareFootingI,
-  CircularSlapI,
+  CircularSlabI,
   CurbAndGutterBarrierI,
   StairsConcreateI,
   HoleColumnI,

@@ -10,7 +10,7 @@ import { PLACEHOLDERS, INPUT_TYPE, COLORS } from "../../../common/shared";
 import { CustomSearchInput, CustomDivider } from "../../custom";
 import useStyles from "../../../styling/CustomStyles";
 import {
-  CircularSlap,
+  CircularSlab,
   ConcreteSquareFooting,
   ConductorResitor,
   CurbAndGutterBarrier,
@@ -56,10 +56,57 @@ import {
 function Other() {
   const { container, sideBarPaperBackground, paperBackground } = useStyles();
   const [searchText, setSearchText] = React.useState("");
-
+  const [open, setOpen] = React.useState(false);
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
   };
+
+  // state that changes using the dropdown
+  const [selectedCalc, setSelectedCalc] = React.useState("marginOfError");
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+    if (value) {
+      setSelectedCalc(value);
+
+      // find calcName that matches the selected calc
+      const getCalc = calculators.find(({ calcName }) => calcName === value);
+      setCurrentCalc(getCalc);
+    }
+  };
+
+  // main state
+  const [currentCalc, setCurrentCalc] = React.useState({
+    calcName: "Circular Slab or Tube",
+    component: <CircularSlab openDrop={handleClickOpen} />,
+  });
+
+  const calculators = [
+    {
+      calcName: "Circular Slab or Tube",
+      component: <CircularSlab openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Slabs, Square Footings, or Walls",
+      component: <ConcreteSquareFooting openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Probablity of Two Events",
+      component: <ConductorResitor openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Curb and Gutter Barrier",
+      component: <CurbAndGutterBarrier openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Sample Size",
+      component: <ElapsedTimeMethod openDrop={handleClickOpen} />,
+    },
+  ];
   return (
     <>
       <TestNavBar />
@@ -67,22 +114,6 @@ function Other() {
         <Grid container xs={12}>
           {/* Calculator grid here */}
           <Grid container item xs={12} sm={10}>
-            <CircularSlap />
-
-            <CustomDivider />
-
-            <ConcreteSquareFooting />
-
-            <CustomDivider />
-
-            <ConductorResitor />
-
-            <CustomDivider />
-
-            <CurbAndGutterBarrier />
-
-            <CustomDivider />
-
             <ElapsedTimeMethod />
 
             <CustomDivider />

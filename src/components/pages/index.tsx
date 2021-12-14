@@ -67,7 +67,7 @@ export { default as ProbablitySolverForTwoEvents } from "./calculators/statistic
 export { default as SampleSizeCalculator } from "./calculators/statistics/SampleSizeCalculator";
 
 // Other
-export { default as CircularSlap } from "./calculators/other/CircularSlap";
+export { default as CircularSlab } from "./calculators/other/CircularSlab";
 export { default as ConcreteSquareFooting } from "./calculators/other/ConcreteSquareFooting";
 export { default as ConductorResitor } from "./calculators/other/ConductorResitor";
 export { default as CurbAndGutterBarrier } from "./calculators/other/CurbAndGutterBarrier";
@@ -108,10 +108,28 @@ export { default as OtherPageView } from "./mainPages/Other";
 
 // Categories
 export { default as InvestmentAndSavings } from "./categories/financial/InvestmentAndSavings";
-export { default as LoanCalculator } from "./categories/financial/LoanCalculators";
+export { default as LoanCalculators } from "./categories/financial/LoanCalculators";
 export { default as MoneyPayExpenditure } from "./categories/financial/MoneyPayExpenditure";
 export { default as RetirementCalculators } from "./categories/financial/RetirementCalculators";
-export { default as SalesAndRetai } from "./categories/financial/SalesAndRetail";
-//export { default as  } from "";
+export { default as SalesAndRetail } from "./categories/financial/SalesAndRetail";
 
+export { default as AlgebraCalculators } from './categories/math/AlgebraCalculators';
+export { default as FractionsCalculators } from './categories/math/FractionsCalculators';
+export { default as GeneralMathCalculators } from './categories/math/GeneralMathCalculators';
+export { default as GeometryCalculators } from './categories/math/GeometryCalculators';
+export { default as MeasurementCalculators } from './categories/math/MeasurementCalculators';
+export { default as StatisticsCalculators } from "./categories/math/StatisticsCalculators";
 
+export { default as ElectronicsOrCircuitsCalculators } from './categories/other/ElectronicsOrCircuitsCalculators';
+export { default as FitnessCalculators } from './categories/other/FitnessCalculators';
+export { default as HealthCalculators } from './categories/other/HealthCalculators';
+export { default as InternetCalculators } from './categories/other/InternetCalculators';
+export { default as TechnologyCalculators } from './categories/other/TechnologyCalculators';
+export { default as TimeAndDateCalculators } from './categories/other/TimeAndDateCalculators';
+export { default as TransportAndUtilitiesCalculators } from './categories/other/TransportAndUtilitiesCalculators';
+export { default as UnitConversionCalculators } from './categories/other/UnitConversionCalculators';
+//export { default as } from '';
+
+//Sub categories
+//export { default as } from '';
+export { default as ConcreteCalculator } from './categories/other/subCategory/ConcreteCalculator';

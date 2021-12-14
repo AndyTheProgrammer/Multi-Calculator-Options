@@ -2,7 +2,7 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { CircularSlapI } from '../../../../types'
+import { CircularSlabI } from '../../../../types'
 import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
@@ -20,7 +20,8 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const CircularSlap = () => {
+const CircularSlab = (props: any) => {
+  const { openDrop } = props
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     length: "",
@@ -32,14 +33,23 @@ const CircularSlap = () => {
     quantity: ""
   })
   const [Result, setResult] = React.useState({
-    concreteNeeded: 0,
-    unit: ''
+    volume1: 0,
+    volume2: 0,
+    volume3: 0,
+    unit1: '',
+    unit2: '',
+    unit3: '',
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.circularSlap} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.circularSlab}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -51,7 +61,7 @@ const CircularSlap = () => {
             inner_diameter_unit,
             quantity,
           }, { setSubmitting }) => {
-            const payload: CircularSlapI = {
+            const payload: CircularSlabI = {
               length,
               length_unit,
               outer_diameter,
@@ -65,13 +75,34 @@ const CircularSlap = () => {
             try {
               const { payload: circularSlabOrTubeConcrete } = await calculateOthers(payload)
               console.log('=====>', circularSlabOrTubeConcrete)
-              const { concreteNeeded, unit } = circularSlabOrTubeConcrete
+              const {
+                volumeInOuterDiameterUnit,
+                volumeInInnerDiameterUnit,
+                volumeInLengthUnit,
+                outerDiameterUnit,
+                innerDiameterUnit,
+                lengthUnit
+              } = circularSlabOrTubeConcrete
               if (typeof circularSlabOrTubeConcrete === 'object') {
                 setResult({
-                  concreteNeeded: concreteNeeded,
-                  unit: unit
+                  volume1: volumeInOuterDiameterUnit,
+                  volume2: volumeInInnerDiameterUnit,
+                  volume3: volumeInLengthUnit,
+                  unit1: outerDiameterUnit,
+                  unit2: innerDiameterUnit,
+                  unit3: lengthUnit,
                 })
               }
+              /*  if (typeof circularSlabOrTubeConcrete === 'object') {
+                 setResult({
+                   volume1: volume1,
+                   volume2: volume2,
+                   volume3: volume3,
+                   unit1: unit1,
+                   unit2: unit2,
+                   unit3: unit3,
+                 })
+               } */
             } catch (err) {
               console.log('====>', err)
             }
@@ -161,11 +192,13 @@ const CircularSlap = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Amount of concrete needed: {Result.concreteNeeded}{Result.unit}</Typography>
+          <Typography variant="subtitle1"> Volume: {Result.volume1}{Result.unit1}</Typography>
+          <Typography variant="subtitle1"> or {Result.volume2}{Result.unit2}</Typography>
+          <Typography variant="subtitle1"> or {Result.volume3}{Result.unit3}</Typography>
         </div>
       </ResultTabsContainer>
     </>
   )
 }
 
-export default CircularSlap
+export default CircularSlab

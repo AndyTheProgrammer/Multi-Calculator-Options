@@ -20,7 +20,8 @@ import {
   FormTabsContainer
 } from '../../../../custom'
 
-const ParallelogramArea = () => {
+const ParallelogramArea = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     breadth: '',
     breadth_unit: '',
@@ -49,7 +50,12 @@ const ParallelogramArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.capsuleSurfArea} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.capsuleSurfArea}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

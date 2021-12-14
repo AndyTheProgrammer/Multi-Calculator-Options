@@ -20,7 +20,8 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const HoleColumn = () => {
+const HoleColumn = (props: any) => {
+  const { openDrop } = props
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     diameter: "",
@@ -37,7 +38,12 @@ const HoleColumn = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.holeColumn} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.holeColumn}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

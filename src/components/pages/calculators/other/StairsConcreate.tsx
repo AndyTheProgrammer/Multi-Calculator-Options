@@ -20,7 +20,8 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const StairsConcreate = () => {
+const StairsConcreate = (props: any) => {
+  const { openDrop } = props
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     run: '',
@@ -41,7 +42,12 @@ const StairsConcreate = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.stairsConcrete} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.stairsConcrete}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

@@ -20,7 +20,8 @@ import {
   ResultTabsContainer
 } from '../../../../custom'
 
-const ConicalFrustumVolume = () => {
+const ConicalFrustumVolume = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     top_radius: "",
     top_radius_unit: "",
@@ -40,7 +41,12 @@ const ConicalFrustumVolume = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.conicalFrustrumVol} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.conicalFrustrumVol}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

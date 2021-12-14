@@ -20,7 +20,8 @@ import {
   ResultTabsContainer
 } from '../../../../custom'
 
-const RectangularTankVolume = () => {
+const RectangularTankVolume = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     length: "",
     length_unit: "",
@@ -40,7 +41,12 @@ const RectangularTankVolume = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.rectangleVol} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.rectangleVol}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

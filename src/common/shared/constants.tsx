@@ -60,7 +60,7 @@ export const CALCULATORS = {
   probablitySolverForTwoEvents: "Probablity Solver For Two Events",
 
   concreteSquareFooting: "Concrete Square Footing",
-  circularSlap: "Circular Slap",
+  circularSlab: "Circular Slap",
   curbAndGutterBarrier: "Curb And Gutter Barrier",
   stairsConcrete: "Stairs Concrete",
   holeColumn: "Hole Column",

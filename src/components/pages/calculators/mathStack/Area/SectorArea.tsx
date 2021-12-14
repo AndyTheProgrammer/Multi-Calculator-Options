@@ -21,7 +21,8 @@ import {
   FormTabsContainer
 } from '../../../../custom'
 
-const SectorArea = () => {
+const SectorArea = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -40,13 +41,17 @@ const SectorArea = () => {
 
   })
 
-
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.sectorArea} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.sectorArea}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

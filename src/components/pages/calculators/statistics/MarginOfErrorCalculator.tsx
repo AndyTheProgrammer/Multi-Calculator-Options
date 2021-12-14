@@ -57,10 +57,10 @@ const MarginOfErrorCalculator = (props: any) => {
             try {
               const { payload: marginOfErrorCalculator } = await calculateStatistics(payload)
               console.log('=====>', marginOfErrorCalculator)
-              const { marginOfError, unit } = marginOfErrorCalculator
+              const { margin_of_error, unit } = marginOfErrorCalculator
               if (typeof marginOfErrorCalculator === 'object') {
                 setResult({
-                  marginOfError: marginOfError,
+                  marginOfError: margin_of_error,
                   unit: unit
                 })
               }
@@ -122,7 +122,9 @@ const MarginOfErrorCalculator = (props: any) => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">Margin of error: {Result.marginOfError}{Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            Margin of error: {Result.marginOfError}{Result.unit}
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>

@@ -20,7 +20,8 @@ import {
   ResultTabsContainer
 } from '../../../../custom'
 
-const SphericalCapSurfaceArea = () => {
+const SphericalCapSurfaceArea = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     radius: '',
     radius_unit: '',
@@ -48,7 +49,12 @@ const SphericalCapSurfaceArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.sphericalCapSurfArea} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.sphericalCapSurfArea}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

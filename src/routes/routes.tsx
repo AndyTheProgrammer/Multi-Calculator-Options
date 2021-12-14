@@ -12,9 +12,28 @@ import {
     OtherPageView,
     StatisticsPageView,
     SurfaceAreaPageView,
-    VolumePageView
+    VolumePageView,
+    ConcreteCalculator,
+    ElectronicsOrCircuitsCalculators,
+    FitnessCalculators,
+    HealthCalculators,
+    InternetCalculators,
+    TechnologyCalculators,
+    TimeAndDateCalculators,
+    TransportAndUtilitiesCalculators,
+    UnitConversionCalculators,
+    AlgebraCalculators,
+    FractionsCalculators,
+    GeneralMathCalculators,
+    GeometryCalculators,
+    MeasurementCalculators,
+    StatisticsCalculators,
+    InvestmentAndSavings,
+    MoneyPayExpenditure,
+    RetirementCalculators,
+    SalesAndRetail,
+    LoanCalculators
 } from '../components/pages'
-
 
 // converter components
 import { AreaConverter, HorsePowerConverter, DataUnitConverter } from '../components/converterComponents/converters/index'
@@ -92,9 +111,116 @@ const routes = [
     }
 ]
 
-const financialRoutes = {
+const financialRoutes = {}
 
-}
+const financial = [
+    {
+        name: "Volume",
+        path: "/investment-and-savings-calculators",
+        component: InvestmentAndSavings
+    },
+    {
+        name: "Volume",
+        path: "/loan-calculators",
+        component: LoanCalculators
+    },
+    {
+        name: "Volume",
+        path: "/money-pay-expenditure-and-tax-calculators",
+        component: MoneyPayExpenditure
+    },
+    {
+        name: "Volume",
+        path: "/retirement-calculators",
+        component: RetirementCalculators
+    },
+    {
+        name: "Volume",
+        path: "/sales-and-retial-calculators",
+        component: SalesAndRetail
+    }
+]
+
+const other = [
+    {
+        name: "Volume",
+        path: "/concrete-calculators",
+        component: ConcreteCalculator
+    },
+    {
+        name: "Volume",
+        path: "/electronics-or-circuits-calculators",
+        component: ElectronicsOrCircuitsCalculators
+    },
+    {
+        name: "Volume",
+        path: "/fitness-calculators",
+        component: FitnessCalculators
+    },
+    {
+        name: "Volume",
+        path: "/health-calculators",
+        component: HealthCalculators
+    },
+    {
+        name: "Volume",
+        path: "/internet-calculators",
+        component: InternetCalculators
+    },
+    {
+        name: "Volume",
+        path: "/technology-calculators",
+        component: TechnologyCalculators
+    },
+    {
+        name: "Volume",
+        path: "/time-and-date-calculators",
+        component: TimeAndDateCalculators
+    },
+    {
+        name: "Volume",
+        path: "/transport-and-utilities-calculators",
+        component: TransportAndUtilitiesCalculators
+    },
+    {
+        name: "Volume",
+        path: "/unit-conversion-calculators",
+        component: UnitConversionCalculators
+    },
+]
+
+const math = [
+    {
+        name: "Volume",
+        path: "/algebra-calculators",
+        component: AlgebraCalculators
+    },
+    {
+        name: "Volume",
+        path: "/fractions-calculators",
+        component: FractionsCalculators
+    },
+    {
+        name: "Volume",
+        path: "/general-math-calculators",
+        component: GeneralMathCalculators
+    },
+    {
+        name: "Volume",
+        path: "/geometry-calculators",
+        component: GeometryCalculators
+    },
+    {
+        name: "Volume",
+        path: "/measurement-calculators",
+        component: MeasurementCalculators
+    },
+    {
+        name: "Volume",
+        path: "/statistics-calculators",
+        component: StatisticsCalculators
+    }
+]
 
 const otherPageRouteName = "/otherpage"
 const otherRoutes = [

@@ -20,7 +20,8 @@ import {
   ResultTabsContainer
 } from '../../../../custom'
 
-const EllipsoidSurfaceArea = () => {
+const EllipsoidSurfaceArea = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     axis1: '',
     axis1_unit: '',
@@ -55,7 +56,12 @@ const EllipsoidSurfaceArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.ellipsoidSurfArea} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.ellipsoidSurfArea}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

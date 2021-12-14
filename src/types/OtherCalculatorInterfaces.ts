@@ -9,7 +9,7 @@ export interface ConcreteSquareFootingI {
   method: string;
 }
 
-export interface CircularSlapI {
+export interface CircularSlabI {
   length: string;
   length_unit: string;
   outer_diameter: string;
@@ -346,7 +346,7 @@ export interface BmrMifflinHarrisBenedictI {
 
 export type AllOtherCalculators =
   | ConcreteSquareFootingI
-  | CircularSlapI
+  | CircularSlabI
   | CurbAndGutterBarrierI
   | StairsConcreateI
   | HoleColumnI

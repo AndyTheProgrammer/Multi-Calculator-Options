@@ -4,10 +4,10 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import TestNavBar from "../../navbar/TestNavBar";
-import { CollapsibleMenu, Carousel } from "../../content";
+import { CollapsibleMenu, Carousel, SimpleDialog } from "../../content";
 import { PLACEHOLDERS, INPUT_TYPE, COLORS } from "../../../common/shared";
-import { CustomSearchInput, CustomDivider } from "../../custom";
 import useStyles from "../../../styling/CustomStyles";
+import { CustomSearchInput } from "../../custom";
 import {
   CircleArea,
   EllipseArea,
@@ -19,12 +19,68 @@ import {
 } from "../index";
 
 function Area() {
-  const { container, sideBarPaperBackground, paperBackground } = useStyles();
+  const { sideBarPaperBackground } = useStyles();
   const [searchText, setSearchText] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  // state that changes using the dropdown
+  const [selectedCalc, setSelectedCalc] = React.useState("marginOfError");
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+    if (value) {
+      setSelectedCalc(value);
+
+      // find calcName that matches the selected calc
+      const getCalc = calculators.find(({ calcName }) => calcName === value);
+      setCurrentCalc(getCalc);
+    }
+  };
+
+  // main state
+  const [currentCalc, setCurrentCalc] = React.useState({
+    calcName: "Circle Area",
+    component: <CircleArea openDrop={handleClickOpen} />,
+  });
 
   const handleSearchChange = (event) => {
     setSearchText(event.target.value);
   };
+
+  const calculators = [
+    {
+      calcName: "Circle Area",
+      component: <CircleArea openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Ellipse Area",
+      component: <EllipseArea openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Parallelogram Area",
+      component: <ParallelogramArea openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Rectangle Area",
+      component: <RectangularArea openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Sector Area",
+      component: <SectorArea openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Trapezoid Area",
+      component: <TrapezoidArea openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Triangle Area",
+      component: <TriangleArea openDrop={handleClickOpen} />,
+    },
+  ];
+
   return (
     <>
       <TestNavBar />
@@ -32,33 +88,13 @@ function Area() {
         <Grid container xs={12}>
           {/* Calculator grid here */}
           <Grid container item xs={12} sm={10}>
-            <CircleArea />
-
-            <CustomDivider />
-
-            <EllipseArea />
-
-            <CustomDivider />
-
-            <ParallelogramArea />
-
-            <CustomDivider />
-
-            <RectangularArea />
-
-            <CustomDivider />
-
-            <SectorArea />
-
-            <CustomDivider />
-
-            <TrapezoidArea />
-
-            <CustomDivider />
-
-            <TriangleArea />
-
-            <CustomDivider />
+            {currentCalc.component}
+            <SimpleDialog
+              dropOptions={calculators}
+              selectedValue={selectedCalc}
+              open={open}
+              onClose={handleClose}
+            />
           </Grid>
 
           {/* Ad & menu grid */}

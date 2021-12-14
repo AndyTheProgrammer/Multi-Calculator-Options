@@ -1,26 +1,33 @@
-import React from "react";
+import React from 'react'
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 
-import TestNavBar from "../../navbar/TestNavBar";
-import { CollapsibleMenu, Carousel, SimpleDialog } from "../../content";
-import { PLACEHOLDERS, INPUT_TYPE, COLORS } from "../../../common/shared";
-import useStyles from "../../../styling/CustomStyles";
+import TestNavBar from "../../../../navbar/TestNavBar";
+import { CollapsibleMenu, Carousel, SimpleDialog } from "../../../../content";
+import useStyles from "../../../../../styling/CustomStyles";
 import {
-  MarginOfErrorCalculator,
-  ProbabilityOfASeriesOfIndpendentEvents,
-  ProbablityOfTwoEvents,
-  ProbablitySolverForTwoEvents,
-  SampleSizeCalculator,
-} from "../index";
-import { CustomSearchInput } from "../../custom";
+  PLACEHOLDERS,
+  INPUT_TYPE,
+} from '../../../../../common/shared'
+import {
+  CustomSearchInput
+} from '../../../../custom'
+import {
+  CircularSlab,
+  ConcreteSquareFooting,
+  CurbAndGutterBarrier,
+  HoleColumn,
+  StairsConcreate
+} from "../../../index";
 
-const Statistics = () => {
+function ConcreteCalculator() {
   const { sideBarPaperBackground } = useStyles();
   const [searchText, setSearchText] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const handleSearchChange = (event: any) => {
+    setSearchText(event.target.value);
+  };
   // state that changes using the dropdown
   const [selectedCalc, setSelectedCalc] = React.useState("marginOfError");
 
@@ -28,55 +35,49 @@ const Statistics = () => {
     setOpen(true);
   };
 
-  const handleClose = (value) => {
+  const handleClose = (value: any) => {
     setOpen(false);
     if (value) {
       setSelectedCalc(value);
 
       // find calcName that matches the selected calc
       const getCalc = calculators.find(({ calcName }) => calcName === value);
-      setCurrentCalc(getCalc);
+      setCurrentCalc(getCalc!);
     }
   };
 
   // main state
   const [currentCalc, setCurrentCalc] = React.useState({
-    calcName: "Margin of Error",
-    component: <MarginOfErrorCalculator openDrop={handleClickOpen} />,
+    calcName: "Circular Slab or Tube",
+    component: <CircularSlab openDrop={handleClickOpen} />,
   });
-
-  const handleSearchChange = (event) => {
-    setSearchText(event.target.value);
-  };
 
   const calculators = [
     {
-      calcName: "Margin of Error",
-      component: <MarginOfErrorCalculator openDrop={handleClickOpen} />,
+      calcName: "Circular Slab or Tube",
+      component: <CircularSlab openDrop={handleClickOpen} />,
     },
     {
-      calcName: "Probability of a Series of Independent Events",
-      component: (
-        <ProbabilityOfASeriesOfIndpendentEvents openDrop={handleClickOpen} />
-      ),
+      calcName: "Slabs, Square Footings, or Walls",
+      component: <ConcreteSquareFooting openDrop={handleClickOpen} />,
     },
     {
-      calcName: "Probablity of Two Events",
-      component: <ProbablityOfTwoEvents openDrop={handleClickOpen} />,
+      calcName: "Hole, Column, or Round Footings",
+      component: <HoleColumn openDrop={handleClickOpen} />,
     },
     {
-      calcName: "Probablity Solver For Two Events",
-      component: <ProbablitySolverForTwoEvents openDrop={handleClickOpen} />,
+      calcName: "Curb and Gutter Barrier",
+      component: <CurbAndGutterBarrier openDrop={handleClickOpen} />,
     },
     {
       calcName: "Sample Size",
-      component: <SampleSizeCalculator openDrop={handleClickOpen} />,
+      component: <StairsConcreate openDrop={handleClickOpen} />,
     },
   ];
-
   return (
     <>
       <TestNavBar />
+
       <Container>
         <Grid container xs={12}>
           {/* Calculator grid here */}
@@ -120,8 +121,9 @@ const Statistics = () => {
           </Grid>
         </Grid>
       </Container>
-    </>
-  );
-};
 
-export default Statistics;
+    </>
+  )
+}
+
+export default ConcreteCalculator

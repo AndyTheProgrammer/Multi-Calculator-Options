@@ -23,7 +23,8 @@ import {
 
 //Needs to be Refactored. Waiting on Martin's End!
 
-const TriangleArea = () => {
+const TriangleArea = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     sideA: "",
     sideA_unit: "",
@@ -43,7 +44,12 @@ const TriangleArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.triangleArea} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.triangleArea}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

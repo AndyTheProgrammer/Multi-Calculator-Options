@@ -21,7 +21,8 @@ import {
   FormTabsContainer
 } from '../../../../custom'
 
-const TrapezoidArea = () => {
+const TrapezoidArea = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     base1: "",
     base1_unit: "",
@@ -54,7 +55,12 @@ const TrapezoidArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.trapezoidArea} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.trapezoidArea}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

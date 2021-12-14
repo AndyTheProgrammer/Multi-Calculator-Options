@@ -20,7 +20,8 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const CurbAndGutterBarrier = () => {
+const CurbAndGutterBarrier = (props: any) => {
+  const { openDrop } = props
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     curb_depth: '',
@@ -43,7 +44,12 @@ const CurbAndGutterBarrier = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.curbAndGutterBarrier} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.curbAndGutterBarrier}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

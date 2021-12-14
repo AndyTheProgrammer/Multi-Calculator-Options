@@ -20,7 +20,8 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const ConcreteSquareFooting = () => {
+const ConcreteSquareFooting = (props: any) => {
+  const { openDrop } = props
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     length: "",
@@ -32,7 +33,9 @@ const ConcreteSquareFooting = () => {
     quantity: ""
   })
   const [Result, setResult] = React.useState({
-    volume: 0,
+    volume1: 0,
+    volume2: 0,
+    volume3: 0,
     length: 0,
     width: 0,
     breadth: 0,
@@ -42,7 +45,12 @@ const ConcreteSquareFooting = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.concreteSquareFooting} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.concreteSquareFooting}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -68,10 +76,19 @@ const ConcreteSquareFooting = () => {
             try {
               const { payload: slabsSquareFootingsOrWallsConcreteCalculator } = await calculateOthers(payload)
               console.log('=====>', slabsSquareFootingsOrWallsConcreteCalculator)
-              const { concreteNeeded, units, volume, length, width, breadth } = slabsSquareFootingsOrWallsConcreteCalculator
+              const {
+                volumeInm,
+                units,
+                volumeInin,
+                length,
+                width,
+                breadth
+              } = slabsSquareFootingsOrWallsConcreteCalculator
               if (typeof slabsSquareFootingsOrWallsConcreteCalculator === 'object') {
                 setResult({
-                  volume,
+                  volume1: volumeInm,
+                  volume2: volumeInin,
+                  volume3: volumeInin,
                   length,
                   width,
                   breadth,
@@ -167,7 +184,26 @@ const ConcreteSquareFooting = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.volume}</Typography>
+          <Typography variant="subtitle1">
+            Volume: {Result.volume1}{Result.units}<sup>3</sup>,
+          </Typography>
+
+          <Typography variant="subtitle1">
+            or
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Volume: {Result.volume2}{Result.units}<sup>3</sup>
+          </Typography>
+
+          <Typography variant="subtitle1">
+            or
+          </Typography>
+
+          <Typography variant="subtitle1">
+            Volume: {Result.volume2}{Result.units}<sup>3</sup>
+          </Typography>
+
           <Typography variant="subtitle1">  Breath: {Result.breadth}</Typography>
           <Typography variant="subtitle1"> length: {Result.length}</Typography>
           <Typography variant="subtitle1"> Width: {Result.width}</Typography>

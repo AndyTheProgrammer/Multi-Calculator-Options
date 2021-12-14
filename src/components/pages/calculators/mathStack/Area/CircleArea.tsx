@@ -19,9 +19,9 @@ import {
   ResultTabsContainer,
   FormTabsContainer
 } from '../../../../custom'
-import FormContainer from '../../../../custom/FormContainer'
 
-const CircleArea = () => {
+const CircleArea = (props: any) => {
+  const { openDrop } = props
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -36,7 +36,12 @@ const CircleArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormContainer tabTitle1={CALCULATORS.circleArea} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.circleArea}
+        sm={6}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -98,7 +103,7 @@ const CircleArea = () => {
             </form>
           )}
         </Formik>
-      </FormContainer>
+      </FormTabsContainer>
 
       {/* Result grid */}
       <ResultTabsContainer tabTitle1={"Result"} sm={6}>
