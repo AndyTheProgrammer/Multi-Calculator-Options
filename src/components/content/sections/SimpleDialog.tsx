@@ -23,12 +23,13 @@ function SimpleDialog(props: any) {
       onClose={handleClose}
       aria-labelledby="simple-dialog-title"
       open={open}
-      style={{ alignItems: "center", justifyContent: "center" }}
+      fullWidth
+      maxWidth='xs'
     >
       <FontProvider fonts={[{ font: "Raleway" }]}>
         <Font>
           <DialogTitle id="simple-dialog-title">
-            Select Statistic Calculator
+            Select Calculator
           </DialogTitle>
         </Font>
         <List>
