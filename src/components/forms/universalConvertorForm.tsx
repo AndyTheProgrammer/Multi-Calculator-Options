@@ -1,3 +1,8 @@
+/**
+ * 
+ * Universal form used by converters
+ */
+
 import React, { useState, useEffect, useRef } from 'react'
 import { Button, Grid, Box, Typography, LinearProgress } from '@mui/material'
 import { Field, Form, Formik, FormikProps } from 'formik';

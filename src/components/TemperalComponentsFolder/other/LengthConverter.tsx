@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react'
-import { UniversalConverterForm } from '../../forms/UniversalConvertorForm'
+import { UniversalConverterForm } from '../../forms/universalConvertorForm'
 import { test } from '../../../services/convertersUnits'
 import { allConverter } from '../../../services/converterService/convert'
 import { methodLengthConverter } from '../../../services/methodNames/methods'
