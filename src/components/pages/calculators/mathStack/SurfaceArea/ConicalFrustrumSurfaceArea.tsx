@@ -250,8 +250,6 @@ const ConicalFrustrumSurfaceArea = (props: any) => {
             <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.top_radiusInm}</Typography>
             <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.totalSurfaceAreaInin}</Typography>
             <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.totalSurfaceAreaInm}</Typography>
-
-
           </div>
         </ResultTabsContainer>
       )}
