@@ -3,7 +3,7 @@
  * Form input for the area converter
  */
  import React, { useState } from 'react'
- import { UniversalConverterForm } from '../../forms/universalConvertorForm'
+ import { UniversalConverterForm } from '../../forms/UniversalConvertorForm'
  import { volumeConverterUnit } from '../../../services/convertersUnits' // gets units
  import { allConverter } from '../../../services/converterService/convert'
  import { methodVolumeConverter } from '../../../services/methodNames/methods'
