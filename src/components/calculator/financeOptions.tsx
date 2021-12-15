@@ -18,13 +18,7 @@ import Slider from "react-slick";
 import { financialRoutes } from '../../routes/routes'
 
 function FinanceOptions(){
-    const localStorageData = JSON.parse(localStorage.webdata)
-    const history = useHistory()
-
-    const financialCategoriesData = localStorageData[0].sub_categories
-    
-    console.log("Finance Data")
-    console.log(financialCategoriesData)
+      const history = useHistory()
 
       const boxStyle = {
         marginBottom: 2,

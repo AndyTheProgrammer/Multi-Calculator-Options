@@ -41,60 +41,7 @@ function MathCategories(){
               <Slide />
             </Box>
           </Route>
-          {
-            mathRoutes.subCategories[0].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                    <r.component />
-                </Route>
-              );
-            })
-          }
-          {
-            mathRoutes.subCategories[1].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-           {
-            mathRoutes.subCategories[2].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-           {
-            mathRoutes.subCategories[3].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-           {
-            mathRoutes.subCategories[4].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-           {
-            mathRoutes.subCategories[5].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
+     
         </Switch>
         
       </div>

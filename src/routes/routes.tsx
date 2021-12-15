@@ -21,11 +21,11 @@ const othersUrl = "/otherpage"
 
 // Page routes
 const routes = [
-    {
-        name:"TestPage",
-        path: "/testpage",
-        component: TestPage
-    },
+    // {
+    //     name:"TestPage",
+    //     path: "/testpage",
+    //     component: TestPage
+    // },
     {
         name:"HomePage",
         path:"/home",
@@ -73,14 +73,14 @@ const mathRoutes = {
               {
                 name: "Fractions Calculators",
                 sub_calculator: [
+                  // {
+                  //   name:"TestPage",
+                  //   path: "/testpage",
+                  //   component: TestPage
+                  // },
                   {
-                    name:"TestPage",
-                    path: "/testpage",
-                    component: TestPage
-                  },
-                  {
-                    name: "Fractions Calculator",
-                    path: `${mathUrl}/fractionscalculator`,
+                    name: "FractionsCalculator",
+                    path: `${mathUrl}/fractifdgfdgonscalculator`,
                     component: TPC.FractionCalculator
                   },
                   {

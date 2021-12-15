@@ -58,7 +58,6 @@ function SearchForm(){
         for(let i = 0; i < dataArray.length; i++){
             var a = dataArray[i].name;
             if(a.toLocaleLowerCase().indexOf(value) > -1 && value !== ""){
-                console.log("VALUES MATCH ", a.toLocaleLowerCase().indexOf(value))
                 dataToArray[i] = dataArray[i];
             }
             else{
@@ -66,7 +65,6 @@ function SearchForm(){
             }
             setResultArray(dataToArray)
         }
-        console.log(resultArray)
     }, [value])
 
 

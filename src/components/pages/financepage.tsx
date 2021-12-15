@@ -47,24 +47,7 @@ function FinancePage(){
               <Slide />
             </Box>
           </Route>
-          {
-            financialRoutes.subCategories[0].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-          {
-            financialRoutes.subCategories[1].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
+
         </Switch>
       </div>
     );

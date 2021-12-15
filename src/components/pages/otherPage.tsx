@@ -40,11 +40,7 @@ function OtherPage(){
               <Slide />
             </Box>
           </Route>
-          {othersRoutes.subCategories[5].sub_calculator.map((route, i) => (
-                <Route key={route.name} path={route.path} >{
-                      <route.component />
-                }</Route>
-            ))}
+          
         </Switch>
         
       </div>

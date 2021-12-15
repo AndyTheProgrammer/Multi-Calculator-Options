@@ -16,7 +16,6 @@ import stats from '../../common/assets/stats_icon.svg';
 import geometry_icon from '../../common/assets/geometry_icon.svg';
 
 function MathOptions(){
-    const localStorageData = JSON.parse(localStorage.webdata)
     const history = useHistory()
 
     const boxStyle = {
@@ -75,7 +74,8 @@ function MathOptions(){
                 <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
                     {
                         mathRoutes.subCategories[0].sub_calculator.map((r:any) => {
-                            return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                            
+                            return (<Box key={r.name} className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
                         })
                     }
                 </Box>
@@ -275,7 +275,7 @@ function MathOptions(){
                     }
                 </Box>
             </Box>
-        </Slider>
+        </Slider> 
         <Box >
             <Box sx={{
                         display: 'flex',

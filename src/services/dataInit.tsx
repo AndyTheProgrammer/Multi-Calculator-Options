@@ -13,7 +13,6 @@
          var msg:any = data.statusDescription;
 
          if(msg === "success"){
-            localStorage.webdata = JSON.stringify(data.message);
           
             // const webdata = JSON.parse(localStorage.webdata)
             // console.log("Localstorage data")

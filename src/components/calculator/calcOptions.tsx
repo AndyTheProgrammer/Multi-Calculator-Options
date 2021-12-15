@@ -8,7 +8,6 @@ import other_icon from '../../common/assets/other_icon.svg';
 import iconLine from '../../common/assets/line.svg';
 
 function CalcOptions(){
-    const localStorageData = JSON.parse(localStorage.webdata)
     const history = useHistory();
 
     const boxStyle = {

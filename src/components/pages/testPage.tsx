@@ -41,7 +41,7 @@ import ExponentForm from '../forms/math/ExponentForm'
 export default function TestPage(){
     return(
         <>
-          <ArithmeticSequenceCalculator />
+          <h1>Hello World</h1>
         </>
     );
 }

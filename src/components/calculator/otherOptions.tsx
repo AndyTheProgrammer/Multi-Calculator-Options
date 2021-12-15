@@ -21,10 +21,8 @@ import transport_util_icon from '../../common/assets/others_icons/transport_util
 
 
 function OtherOptions(){
-    const localStorageData = JSON.parse(localStorage.webdata)
     const history = useHistory()
 
-    const financialCategoriesData = localStorageData[2].sub_categories
 
       const boxStyle = {
         marginBottom: 2,
