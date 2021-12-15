@@ -1,27 +1,7 @@
-import { alpha, makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { COLORS } from "../common/shared";
 
-export const labelStyle = {
-  color:'#4072B5',
-}
-
-export const formCardStyle={
-  height:25, width: '100%', 
-  backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-  borderRadius: '0 20px 3px', 
-}
-
-export const formDisplay = {
-    width: 400,
-    height: '100%',
-    borderRadius: '20px',
-    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-    backgroundColor: 'white',
-    paddingBottom: 2,
-}
-
-const drawerWidth = 240;
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => createStyles({
   // Navigation bar
   root: {
     display: "flex",
@@ -35,13 +15,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginBottom: theme.spacing(2),
     backgroundColor: COLORS.primary,
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -86,15 +59,13 @@ const useStyles = makeStyles((theme) => ({
   paper2: {
     padding: theme.spacing(2),
     margin: theme.spacing(2),
-    textAlign: "none",
     color: theme.palette.text.secondary,
   },
   paperBackground: {
-    padding: theme.spacing(2),
-    margin: theme.spacing(2),
-    textAlign: "none",
+    margin: theme.spacing(1),
     color: theme.palette.text.secondary,
-    backgroundColor: COLORS.paper_background,
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: 20,
   },
   formControl: {
     padding: theme.spacing(2),
@@ -102,6 +73,61 @@ const useStyles = makeStyles((theme) => ({
   image: {
     height: theme.spacing(3),
   },
+  tabRoot: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    wordBreak: 'break-all'
+  },
+  leftTabContainer: {
+    display: "flex",
+    backgroundColor: theme.palette.background.paper,
+    color: COLORS.text,
+    alignItems: 'center',
+    justifyContent: "center",
+    width: "70%",
+    float: "inline-start",
+    borderTopLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  rightTabContainer: {
+    display: "flex",
+    background: COLORS.gradient,
+    color: COLORS.light_text_color,
+    justifyContent: "center",
+    width: "30%",
+    float: "inline-end",
+    borderBottomLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  sideBarPaperBackground: {
+    margin: theme.spacing(1),
+    backgroundColor: "transparent",
+    borderRadius: 20,
+  },
 }));
 
 export default useStyles;
+
+
+export const labelStyle = {
+  color:'#4072B5',
+}
+
+export const formCardStyle={
+  height:25, width: '100%', 
+  backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+  borderRadius: '0 20px 3px', 
+}
+
+export const formDisplay = {
+    width: 400,
+    height: '100%',
+    borderRadius: '20px',
+    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+    backgroundColor: 'white',
+    paddingBottom: 2,
+}
+

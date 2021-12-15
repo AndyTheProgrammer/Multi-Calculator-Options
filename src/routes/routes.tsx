@@ -277,7 +277,7 @@ const mathRoutes = {
                   {
                     name: "Area Calculator",
                     path: `${mathUrl}/areacalculator`,
-                    component: PC.Area
+                    component: PC.NoComponent
                   },
                   {
                     name: "Distance Calculator",
@@ -292,7 +292,7 @@ const mathRoutes = {
                   {
                     name: "Surface Area Calculator",
                     path:`${mathUrl}/surfaceareacalculator`,
-                    component: PC.SurfaceArea
+                    component: PC.NoComponent
                   },
                   {
                     name: "Pythagoras Theorem Calculator",

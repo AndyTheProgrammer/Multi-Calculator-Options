@@ -21,13 +21,13 @@ function a11yProps(index: any) {
 }
 
 function FormTabsContainer(props: any) {
-  const { children, tabTitle1, tabTitle2, sm, type, dropDown, openDrop } = props;
+  const { children, tabTitle1, tabTitle2, sm, type, dropDown, openDrop }:any = props;
   const {
     tabRoot,
     rightTabContainer,
     leftTabContainer,
     paperBackground,
-  } = useStyles()
+  }:any = useStyles()
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {

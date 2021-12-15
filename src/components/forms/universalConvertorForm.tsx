@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Button, Grid, Box, Typography, LinearProgress } from '@mui/material'
 import { Field, Form, Formik, FormikProps } from 'formik';
 import { CustomFormBtn } from '../custom/CustomFormBtn';
-import CustomForm from '../forms/CustomForm'
+import CustomForm from './CustomForm'
 import { NavBar2 } from '../navbar/navbar2'
 import AddLayout from '../layouts/AddLayout'
 import Anime from 'react-animejs-wrapper'
-import { CustomFormikForm, CustomFormikOptions } from '../forms/CustomForm'
+import { CustomFormikForm, CustomFormikOptions } from './CustomForm'
 const Latex = require('react-latex');
 
  const innerBoxStyle = {
