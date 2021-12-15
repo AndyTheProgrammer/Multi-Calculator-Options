@@ -1,21 +1,21 @@
 import React from 'react'
-import { PopulationStandardDeviationCalculator } from '../mathComponents/populationStandardDeviationCalculator'
-import { StatisticsCalculator } from '../mathComponents/statisticsCalculator'
-import { AverageCalculator } from '../mathComponents/averageCalculator'
-import { SampleStandardDeviationCalculator } from '../mathComponents/sampleStandardDeviationCalculator'
-import { ConfidenceIntervalCalculator } from '../mathComponents/confidenceIntervalCalculator'
-import { PercentageCalculator } from '../mathComponents/percentageCalculator'
-import { PercentageChangeCalculator } from '../mathComponents/percentageChangeCalculator'
-import { PercentageDifferenceCalculator } from '../mathComponents/percentageDifferenceCalculator'
-import { PercentErrorCalculator  } from '../mathComponents/percentErrorCalculator'
-import { LogCalculator  } from '../mathComponents/logCalculator'
-import { ExponentCalculator  } from '../mathComponents/exponentCalculator'
-import { SquareRootCalculator  } from '../mathComponents/squareRootCalculator'
-import { CubeRootCalculator  } from '../mathComponents/cubeRootCalculator'
-import { GeneralRootCalculator  } from '../mathComponents/generalRootCalculator'
-import { GeometricSequencestCalculator  } from '../mathComponents/geometricSequencestCalculator'
-import { PythagoreanTheoremCalculator  } from '../mathComponents/pythagoreanTheoremCalculator'
-import { PermutationCalculator  } from '../mathComponents/permutationCalculator'
+import PopulationStandardDeviationCalculator from '../TemperalComponentsFolder/math/PopulationStandardDeviationCalculator'
+import StatisticsCalculator from '../TemperalComponentsFolder/math/StatisticsCalculator'
+import AverageCalculator from '../TemperalComponentsFolder/math/AverageCalculator'
+import SampleStandardDeviationCalculator from '../TemperalComponentsFolder/math/SampleStandardDeviationCalculator'
+import ConfidenceIntervalCalculator from '../TemperalComponentsFolder/math/ConfidenceIntervalCalculator'
+import PercentageCalculator from '../TemperalComponentsFolder/math/PercentageCalculator'
+import PercentageChangeCalculator from '../TemperalComponentsFolder/math/PercentageChangeCalculator'
+import PercentageDifferenceCalculator from '../TemperalComponentsFolder/math/PercentageDifferenceCalculator'
+import PercentErrorCalculator from '../TemperalComponentsFolder/math/PercentErrorCalculator'
+import LogCalculator from '../TemperalComponentsFolder/math/LogCalculator'
+import ExponentCalculator from '../TemperalComponentsFolder/math/ExponentCalculator'
+import SquareRootCalculator from '../TemperalComponentsFolder/math/SquareRootCalculator'
+import CubeRootCalculator from '../TemperalComponentsFolder/math/CubeRootCalculator'
+import GeneralRootCalculator from '../TemperalComponentsFolder/math/GeneralRootCalculator'
+import GeometricSequencestCalculator from '../TemperalComponentsFolder/math/GeometricSequencestCalculator'
+import PythagoreanTheoremCalculator from '../TemperalComponentsFolder/math/PythagoreanTheoremCalculator'
+import PermutationCalculator from '../TemperalComponentsFolder/math/PermutationCalculator'
 
 
 function MathPage(){
@@ -24,9 +24,9 @@ function MathPage(){
             <div className="container d-flex justify-content-center mb-4">
                 <h4>Math Page</h4>
             </div>
-            <StatisticsCalculator/>
+            {/* <StatisticsCalculator/> */}
             <AverageCalculator />
-            <PopulationStandardDeviationCalculator />
+            {/* <PopulationStandardDeviationCalculator />
             <SampleStandardDeviationCalculator/>
             <ConfidenceIntervalCalculator />
             <PercentageCalculator/>
@@ -40,7 +40,7 @@ function MathPage(){
             <GeneralRootCalculator />
             <GeometricSequencestCalculator />
             <PythagoreanTheoremCalculator />
-            <PermutationCalculator />
+            <PermutationCalculator /> */}
         </div>
     );
 }

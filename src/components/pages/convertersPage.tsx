@@ -1,12 +1,12 @@
 import React from 'react'
-import { LengthConverter } from '../converterComponents/converters/lengthConverter'
-import { AreaConverter } from '../converterComponents/converters/areaConverter'
-import { TemperatureConverter } from '../converterComponents/converters/temperatureConverter'
-import { VolumeConverter } from '../converterComponents/converters/volumeConverter'
-import { TimeConverter } from '../converterComponents/converters/timeConverter'
-import { WeightConverter } from '../converterComponents/converters/weightConverter'
-import { HorsePowerConverter } from '../converterComponents/converters/horsePowerConverter'
-import { DataUnitConverter } from '../converterComponents/converters/dataUnitConverter'
+import LengthConverter from '../TemperalComponentsFolder/other/LengthConverter'
+import AreaConverter from '../TemperalComponentsFolder/other/AreaConverter'
+import TemperatureConverter from '../TemperalComponentsFolder/other/TemperatureConverter'
+import VolumeConverter from '../TemperalComponentsFolder/other/VolumeConverter'
+import TimeConverter from '../TemperalComponentsFolder/other/TimeConverter'
+import WeightConverter from '../TemperalComponentsFolder/other/WeightConverter'
+import HorsePowerConverter from '../TemperalComponentsFolder/other/HorsePowerConverter'
+import DataUnitConverter from '../TemperalComponentsFolder/other/DataUnitConverter'
 
 function ConvertersPage(){
 

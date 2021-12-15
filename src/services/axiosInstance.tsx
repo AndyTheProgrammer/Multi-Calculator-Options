@@ -10,5 +10,6 @@ const axiosInstance:any = axios.create({
 
 const converterRoute = "./converter"
 const mathRoute = './math'
+const othersRoute = '/other'
 
-export { axiosInstance, converterRoute, mathRoute }
+export { axiosInstance, converterRoute, mathRoute, othersRoute }

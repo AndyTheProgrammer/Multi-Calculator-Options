@@ -38,7 +38,6 @@ const methodPythagoreanTheoremCalculator = "PythagoreanTheoremCalculator"
 
 
 
-
 export const methodPermutationCalculator = "PermutationCalculator"
 export const methodCombinationsCalculator = "CombinationsCalculator"
 export const methodQuadraticFormulaCalculator = "QuadraticFormulaCalculator"
@@ -74,10 +73,18 @@ export const methodZscoreCalculator = "ZscoreCalculator"
 export const methodGPACalculator = "GPACalculator"
 export const methodGradeCalculator = "GradeCalculator"
 export const methodFinalGradeCalculator = "FinalGradeCalculator"
+export const methodFractionCalculator = "FractionCalculator"
+export const methodTDEECalculator = "TDEECalculator"
+export const methodProteinCalculator = "ProteinCalculator"
 
 
-
-
+//Others Method Names
+export const methodAgeCalculator = "AgeCalculator"
+export const methodTimeZoneCalculator = "TimeZoneCalculator"
+export const methodTimeZoneUnit = "TimeZoneUnit"
+export const methodDayOfTheWeekCalculator = "DayOfTheWeekCalculator"
+export const methodRandomPasswordGenerator = "RandomPasswordGenerator"
+export const methodFindMyIPAddress = "FindMyIPAddress"
 
 
 

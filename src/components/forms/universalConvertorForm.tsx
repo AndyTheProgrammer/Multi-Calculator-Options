@@ -1,13 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import { Container, Grid, Box, Typography, LinearProgress } from '@mui/material'
+import React, { useState, useEffect, useRef } from 'react'
+import { Button, Grid, Box, Typography, LinearProgress } from '@mui/material'
 import { Field, Form, Formik, FormikProps } from 'formik';
-import { UniversalDisplay} from '../displays/universalDisplay'
+import { CustomFormBtn } from '../custom/CustomFormBtn';
+import CustomForm from '../forms/CustomForm'
+import { NavBar2 } from '../navbar/navbar2'
+import AddLayout from '../layouts/AddLayout'
+import Anime from 'react-animejs-wrapper'
+import { CustomFormikForm, CustomFormikOptions } from '../forms/CustomForm'
+const Latex = require('react-latex');
+
+ const innerBoxStyle = {
+    width: 400,
+    height: 300,
+    borderRadius: 10,
+    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+    backgroundColor: 'white'
+ }
+
+
 
 function UniversalConverterForm(props:any){
     // using the useState ehook
     const [optionsData, setData] = useState([]); //for getting units
-    const [results, setResult] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
 
     //using the useEffect hook
     useEffect(() => {
@@ -21,41 +35,88 @@ function UniversalConverterForm(props:any){
         fetchData();
     }, [])
 
-    return(
-        <div className="container d-flex justify-content-center ">
-            <Box sx={{
-                width: '100',
-                borderRadius: 3, 
-                display: 'flex',
-                justifyContent: 'center',
-                paddingLeft: 5,
-                paddingRight: 5
-                }}>
+      const [value, setValue] = useState("")
+      const animatedSquaresRef1 = useRef(null)
+      const animatedSquaresRef2= useRef(null)
+    
+      // @ts-ignore: Object is possibly 'null'.
+      const play1 = () => animatedSquaresRef1.current.play();
+      // @ts-ignore: Object is possibly 'null'.
+      const play2 = () => animatedSquaresRef2.current.play();
 
-                  
-                <Box sx={{width: 400, m: 4,}}> 
-                <Formik
+      useEffect(()=>{
+          if(value){
+              play1();
+              play2();
+          }
+      },[value])
+
+    const CustomFormikOptions = (props:any) => ( 
+        <Box sx={{
+          display: 'flex',
+        }}>
+          <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
+          <select 
+          style={{
+            width:'100%',
+            backgroundColor:'#F0F3F6',
+            border: 'none',
+            borderColor: 'red',
+            borderRadius: 7,
+            outline: 'none',
+            color:'black' 
+          }}
+          {...props} >
+            {optionsData.map((data, i) => (
+                <option key={data} >{
+                    data
+                }</option>
+            ))}
+          </select>
+        </Box>
+    );
+
+    return(
+      <>
+      <NavBar2 pagename={props.pagename} />
+      <AddLayout>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Anime
+              style={{
+                  position: 'absolute',
+              }}
+              ref={animatedSquaresRef1}
+              config={{
+                  translateX: -250,
+              //   direction: 'alternate',
+                  easing: 'easeInOutSine',
+                  autoplay: false,
+              }}>
+              <div style={innerBoxStyle}>
+                  <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                      <Box sx={{height:30, width: '100%' }}></Box>
+                      <Box sx={{
+                              height:30, width: '100%', 
+                              backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+                              borderRadius: '0 10px 3px', 
+                          }}></Box>
+                  </Box>
+                  <Formik
                     initialValues={{ value: '1', fromUnit: "", toUnit: "" }}
                     onSubmit={(values, actions) => {
-                      console.log("This is from unit", values)
-                       const postData = async () => {
                         const data = {
                           value: values.value,
                           from_unit: values.fromUnit,
                           to_unit: values.toUnit,
                           method: props.convertMethod
-                          
                         }
-
-                        setIsLoading(true)
+                       const postData = async () => {
+                        
                         const dataReturned = await props.convertFunction(data);
                         var status:any = dataReturned.statusDescription;
                         if(status === "success"){
-                          setIsLoading(false)
-                          setResult(dataReturned.message.convertionValue)
-                        }
-                        else{
-                          setIsLoading(false)
+                          setValue(dataReturned.message.convertionValue)
+                          
                         }
                        }
 
@@ -64,71 +125,108 @@ function UniversalConverterForm(props:any){
                     >
                     {(props: FormikProps<any>) => (
                     <Form >
-                      
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} md={4}> 
-                                <Typography component="div">
-                                    <Box sx={{ fontSize: 18, fontWeight: 500}}>
-                                        Value
-                                    </Box>
-                                </Typography>
-                                <Field className="custom-form-control" type="text" name="value" />
-                            </Grid>
-                            <Grid item xs={12} md={4}>
-                                <Typography component="div">
-                                    <Box sx={{ fontSize: 18, fontWeight: 500}}>
-                                        From 
-                                    </Box>
-                                </Typography>
-                                <Field className="select-options-styling" as="select" name="fromUnit" >
-                                  <option>Select Convertion Unit</option>
-                                  {optionsData.map((data, i) => (
-                                    <option key={data} >{
-                                        data
-                                    }</option>
-                                  ))}
-                                                    
-                                </Field>                            
-                                </Grid>
-                            <Grid item xs={12} md={4}>
-                            <Typography component="div">
-                                    <Box sx={{ fontSize: 18, fontWeight: 500}}>
-                                        To 
-                                    </Box>
-                                </Typography>
-                                <Field className="select-options-styling" as="select" name="toUnit">
-                                  <option >Select ConVertion Unit</option>
-                                  {optionsData.map((data, i) => (
-                                    <option key={data} >{
-                                        data
-                                    }</option>
-                                  ))}
-                                </Field>
-                            </Grid>
-                            <Grid item xs={12} md={12}>
-                            {
-                              isLoading ? 
-                              ( <Box sx={{  width: 1, }}>
-                              <LinearProgress  />
-                              </Box> ):
-                            (<div></div>)
-                            }
-                            </Grid>
-                            <Grid item xs={12} md={12}>
-                              <UniversalDisplay displayData={results} />
-                            </Grid>
-                            
-  
+                    
+                      <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
+                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+
+                          <Grid item xs={5} ><Box>Value</Box></Grid>
+                          <Grid item xs={7} > 
+                              <Field  
+                                type="text" 
+                                name="value"
+                                component={CustomFormikForm} 
+                                />
+                          </Grid>
+
+                          <Grid item xs={5} ><Box>From</Box></Grid>
+                          <Grid item xs={7} >
+                                <Field as={CustomFormikOptions} name="fromUnit" />                           
+                          </Grid>
+
+                          <Grid item xs={5} ><Box>To</Box></Grid>
+                          <Grid item xs={7}>
+                                <Field as={CustomFormikOptions} name="toUnit" />
+                          </Grid>
+                                              
                         </Grid>
-                        <button className="btn btn-secondary mt-4"  type="submit">Submit</button>
+                        <Box sx={{ flexGrow: 1}}>
+                            {/* 
+                                Flex box pushes submit button down
+                            */}
+                        </Box>
+
+                        <Grid container rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                          <Grid item xs={4}>
+                                  <Box sx={{display:"flex", justifyContent:"start"}}>
+                                      <CustomFormBtn 
+                                      type="button" 
+                                      handleClick={()=>{ 
+                                          play1();
+                                          play2();
+                                      }} 
+                                      name="Clear"/>
+                                  </Box>
+                          </Grid>
+                          <Grid item xs={4}></Grid>
+                          <Grid item xs={4}>
+                                  <Box sx={{display:"flex", justifyContent:"end"}}>
+                                      <CustomFormBtn type="submit" name="Calculate"/>
+                                  </Box>
+                          </Grid>
+                        </Grid>
+                    </Box>
                     </Form>
                     )}
                     </Formik>
-                </Box>
-                
-            </Box>
-        </div>
+              </div>
+          </Anime>
+
+
+          {/*
+              Component displays the results 
+          
+          */}
+
+          <Anime
+              style={{
+                  position: 'absolute',
+                  zIndex: -5
+              }}
+              ref={animatedSquaresRef2}
+              config={{
+                  translateX: 200,
+              //   direction: 'alternate',
+                  easing: 'easeInOutSine',
+                  autoplay: false,
+              }}>
+               <Box style={innerBoxStyle} >
+                  <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                      <Box sx={{height:30, width: '100%' }}></Box>
+                      <Box sx={{
+                              height:30, width: '100%', 
+                              // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+                              borderRadius: '0 10px 3px', 
+                          }}></Box>
+                  </Box>
+                  <Box sx={{marginLeft: 5}}>
+                      {/* <Box sx={{marginBottom: 2}}>
+                          <Latex displayMode={false}>{`$a_{n} = a+(n-1)d$`}</Latex>
+                      </Box>
+                      <Box sx={{marginBottom: 2}}>
+                          <Latex displayMode={false}>{`$S_{n} = \\displaystyle \\sum_{i=1}^{10} t_i$`}</Latex>
+                      </Box> */}
+                      <Box sx={{marginBottom: 2}}>
+                          <Latex displayMode={false}>{`$answer = ${value}$`}</Latex>
+                      </Box>
+                  </Box>
+              </Box>
+          </Anime>
+          </Box>
+      </AddLayout>
+      </>
     );
 }
 
 export {UniversalConverterForm}
+
+                 
