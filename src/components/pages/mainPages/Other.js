@@ -51,6 +51,7 @@ import {
   TakahiraBodySurfaceArea,
   USCustomarySystemBfc,
   WholeBodyMassFormula,
+  ProbabilityCalculator,
 } from "../index";
 
 function Other() {
@@ -114,6 +115,10 @@ function Other() {
         <Grid container xs={12}>
           {/* Calculator grid here */}
           <Grid container item xs={12} sm={10}>
+            <ProbabilityCalculator />
+
+            <CustomDivider />
+
             <ElapsedTimeMethod />
 
             <CustomDivider />

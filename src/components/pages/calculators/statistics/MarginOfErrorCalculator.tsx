@@ -22,7 +22,7 @@ import {
 const MarginOfErrorCalculator = (props: any) => {
   const { openDrop } = props
   const [initialFormValues] = React.useState({
-    confience_level: '',
+    confidence_level: '',
     sample_size: '',
     population_proportion: ''
   })
@@ -43,12 +43,12 @@ const MarginOfErrorCalculator = (props: any) => {
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            confience_level,
+            confidence_level,
             sample_size,
             population_proportion
           }, { setSubmitting }) => {
             const payload: MarginErrorI = {
-              confience_level,
+              confidence_level,
               sample_size,
               population_proportion,
               method: 'FindOuttheMarginofError'
@@ -72,12 +72,12 @@ const MarginOfErrorCalculator = (props: any) => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.confienceLevel} />
+                <Label title={LABELS.confidenceLevel} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="confience_level"
+                  id="confidence_level"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.confience_level}
+                  value={values.confidence_level}
                   onChange={handleChange}
                 />
               </div>
@@ -122,6 +122,9 @@ const MarginOfErrorCalculator = (props: any) => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
+          <Typography variant="subtitle1">
+
+          </Typography>
           <Typography variant="subtitle1">
             Margin of error: {Result.marginOfError}{Result.unit}
           </Typography>

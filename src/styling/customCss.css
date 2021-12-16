@@ -270,7 +270,8 @@ p.resultDisplay {
 
 .MuiTab-root {
   min-height: 29px !important;
-  max-height: 29px !important;
+  max-height: 38px !important;
   text-transform: none !important;
   line-height: 1.1 !important;
+  /* font-size: 12px !important; */
 }

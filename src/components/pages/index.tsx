@@ -133,3 +133,4 @@ export { default as UnitConversionCalculators } from './categories/other/UnitCon
 //Sub categories
 //export { default as } from '';
 export { default as ConcreteCalculator } from './categories/other/subCategory/ConcreteCalculator';
+export { default as ProbabilityCalculator } from './calculators/mathStack/ProbabilityCalculator';

@@ -23,7 +23,7 @@ import {
 const SampleSizeCalculator = (props: any) => {
   const { openDrop } = props
   const [initialFormValues] = React.useState({
-    confience_level: '',
+    confidence_level: '',
     population_proportion: '',
     margin_of_error: ''
   })
@@ -44,12 +44,12 @@ const SampleSizeCalculator = (props: any) => {
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            confience_level,
+            confidence_level,
             population_proportion,
             margin_of_error
           }, { setSubmitting, resetForm }) => {
             const payload: SampleSizeI = {
-              confience_level,
+              confidence_level,
               population_proportion,
               margin_of_error,
               method: 'FindOutTheSampleSize'
@@ -58,10 +58,10 @@ const SampleSizeCalculator = (props: any) => {
             try {
               const { payload: circularSlabOrTubeConcrete } = await calculateStatistics(payload)
               console.log('=====>', circularSlabOrTubeConcrete)
-              const { sampleSize, unit } = circularSlabOrTubeConcrete
+              const { sample_size, unit } = circularSlabOrTubeConcrete
               if (typeof circularSlabOrTubeConcrete === 'object') {
                 setResult({
-                  sampleSize: sampleSize,
+                  sampleSize: sample_size,
                   unit: unit
                 })
               }
@@ -74,18 +74,18 @@ const SampleSizeCalculator = (props: any) => {
             <form onSubmit={handleSubmit} className="form-container">
 
               <div className="form-row">
-                <Label title={LABELS.confienceLevel} />
+                <Label title={LABELS.confidenceLevel} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="confience_level"
+                  id="confidence_level"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.confience_level}
+                  value={values.confidence_level}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.standardDeviation} />
+                <Label title={LABELS.populationProportion} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
                   id="population_proportion"
@@ -123,6 +123,9 @@ const SampleSizeCalculator = (props: any) => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
         <div className="text-center mb-3">
+          <Typography variant="subtitle1">
+            n = z^2 x p̂(1- p̂) / ε^2
+          </Typography>
           <Typography variant="subtitle1">
             Sample size: {Result.sampleSize}{Result.unit}
           </Typography>
