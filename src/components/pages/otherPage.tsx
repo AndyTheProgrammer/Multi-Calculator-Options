@@ -3,7 +3,9 @@ import { NavBar2 } from '../navbar/navbar2'
 import { Box, Typography } from '@mui/material'
 import { OtherOptions } from '../calculator/otherOptions'
 import { Slide } from '../slider/slider'
-import { otherRoutes } from '../../routes/routes'
+import { othersRoutes } from '../../routes/routes'
+import { SearchForm } from '../forms/searchForm'
+import AddLayout from '../layouts/AddLayout';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +15,7 @@ import {
   useRouteMatch
 } from "react-router-dom";
 
+import other_icon from '../../common/assets/other_icon.svg';
 
 
 function OtherPage(){
@@ -21,17 +24,23 @@ function OtherPage(){
 
     return(
         <div>
-          <NavBar2 />
-          <Switch>
+         
+          <Switch>  
           <Route exact path={path}>
+            <NavBar2 pageimage={other_icon} pagename="Other Calculators" otherHighLight={true}/>
+            <Box
+              sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              }}>
+                <SearchForm />
+            </Box>
             <OtherOptions />
-            <Slide />
+            <Box sx={{ marginTop: 5 }}>
+              <Slide />
+            </Box>
           </Route>
-          {otherRoutes.map((route, i) => (
-                <Route key={route.name} path={route.path} >{
-                    <route.component />
-                }</Route>
-            ))}
+          
         </Switch>
         
       </div>

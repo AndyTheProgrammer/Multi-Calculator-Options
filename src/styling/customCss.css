@@ -110,9 +110,9 @@ p.resultDisplay {
 }
 
 ::placeholder {
-  color: #707070;
+  color: #b8b5b5;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 200;
 }
 
 /* Custom form style*/
@@ -157,32 +157,124 @@ p.resultDisplay {
   This is for search button
   */
 #search-button {
+  width: 100px;
+  height: 30px;
   border: 1px solid #adadad;
-  border-radius: 10px;
-  padding-left: 10px;
-  padding-right: 24px;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
   background-image: linear-gradient(to right, #3128af, #499fb8);
   color: white;
 }
 
-/* modified to center text inside button */
-.search-button-2 {
+/* .search-button-2{
+    font-size: 14px;
+    height: 24px;
+    border: 0 solid #adadad;
+    background-color: transparent;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 24px;
+    padding-bottom: 10px;
+    margin-right: 10px;
+    color: #8591B0
+  } */
+
+.search-button-1 {
+  width: 100px;
+  font-size: 14px;
+  text-align: center;
+  height: 24px;
   border: 0 solid #adadad;
   background-color: transparent;
   border-radius: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-bottom: 10px;
   color: #8591b0;
-  align-items: center;
-  justify-content: center;
 }
 
-.search-button-2:hover {
+.search-button-1:hover {
+  border: 0 solid #adadad;
+  background-color: transparent;
+  width: 100px;
+  font-size: 14px;
+  text-align: center;
+  height: 24px;
   background-image: linear-gradient(to right, #3128af, #499fb8);
   color: #ffffff;
 }
 
-.search-button-2:active {
+.search-button-2 {
+  width: 100px;
+  font-size: 14px;
+  text-align: center;
+  height: 24px;
+  border: 0 solid #adadad;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-bottom: 10px;
+  margin-right: 10px;
+  color: #8591b0;
+}
+
+.search-button-2:hover {
+  border: 0 solid #adadad;
+  background-color: transparent;
+  width: 100px;
+  font-size: 14px;
+  text-align: center;
+  height: 24px;
+  margin-right: 10px;
+  background-image: linear-gradient(to right, #3128af, #499fb8);
+  color: #ffffff;
+}
+
+/* .search-button-2:hover{
+    border: 0 solid #adadad;
+    background-color: transparent;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 24px;
+    background-image: linear-gradient(to right, #3128AF, #499FB8);
+    color: #ffffff
+  } */
+
+.search-button-financial {
+  border: 0 solid #adadad;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 24px;
+  background-image: linear-gradient(to right, #3128af, #499fb8);
+  color: #ffffff;
+}
+
+.search-button-math {
+  border: 0 solid #adadad;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 24px;
+  background-image: linear-gradient(to right, #3128af, #499fb8);
+  color: #ffffff;
+}
+
+.search-button-other {
+  border: 0 solid #adadad;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 24px;
+  background-image: linear-gradient(to right, #3128af, #499fb8);
+  color: #ffffff;
+}
+
+.search-button-actve {
+  border: 0 solid #adadad;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 24px;
   background-image: linear-gradient(to right, #3128af, #499fb8);
   color: #ffffff;
 }
@@ -228,12 +320,17 @@ p.resultDisplay {
 .app-over-lay-display {
   position: absolute;
   border-radius: 5px;
-  left: 50vw;
-  top: 100px;
   background-color: white;
   width: 350px;
   height: 200px;
   z-index: 20;
+  overflow-y: auto;
+  margin-left: -120px;
+  margin-top: 15px;
+}
+.app-over-lay-display::-webkit-scrollbar {
+  display: block;
+  width: 8px;
 }
 /* 
 .app-over-lay-display{
@@ -243,9 +340,6 @@ p.resultDisplay {
     z-index:20;
     display: block;
 } */
-
-.rela {
-}
 
 .general-text-box {
   margin-top: 10px;
@@ -274,4 +368,13 @@ p.resultDisplay {
   text-transform: none !important;
   line-height: 1.1 !important;
   /* font-size: 12px !important; */
+}
+
+.link-search {
+  padding: 5px;
+}
+
+.link-search:hover {
+  background-color: #e2e2e2;
+  padding: 10px;
 }

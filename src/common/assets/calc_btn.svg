@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="38" height="38" viewBox="0 0 38 38">
+  <defs>
+    <filter id="Icon_awesome-calculator" x="0" y="0" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Icon_awesome-calculator-2" data-name="Icon awesome-calculator" transform="translate(9 6)">
+    <g transform="matrix(1, 0, 0, 1, -9, -6)" filter="url(#Icon_awesome-calculator)">
+      <path id="Icon_awesome-calculator-3" data-name="Icon awesome-calculator" d="M17.857,0H2.143A2.074,2.074,0,0,0,0,1.875v16.25A2.074,2.074,0,0,0,2.143,20H17.857A2.074,2.074,0,0,0,20,18.125V1.875A2.074,2.074,0,0,0,17.857,0ZM5.714,17a.58.58,0,0,1-.571.5H3.429a.58.58,0,0,1-.571-.5V15.5a.58.58,0,0,1,.571-.5H5.143a.58.58,0,0,1,.571.5Zm0-5a.58.58,0,0,1-.571.5H3.429a.58.58,0,0,1-.571-.5V10.5a.58.58,0,0,1,.571-.5H5.143a.58.58,0,0,1,.571.5Zm5.714,5a.58.58,0,0,1-.571.5H9.143a.58.58,0,0,1-.571-.5V15.5a.58.58,0,0,1,.571-.5h1.714a.58.58,0,0,1,.571.5Zm0-5a.58.58,0,0,1-.571.5H9.143a.58.58,0,0,1-.571-.5V10.5a.58.58,0,0,1,.571-.5h1.714a.58.58,0,0,1,.571.5Zm5.714,5a.58.58,0,0,1-.571.5H14.857a.58.58,0,0,1-.571-.5V10.5a.58.58,0,0,1,.571-.5h1.714a.58.58,0,0,1,.571.5V17Zm0-10a.58.58,0,0,1-.571.5H3.429A.58.58,0,0,1,2.857,7V3a.58.58,0,0,1,.571-.5H16.571a.58.58,0,0,1,.571.5Z" transform="translate(9 6)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

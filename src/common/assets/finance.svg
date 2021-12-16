@@ -1,0 +1,19 @@
+<svg id="Component_147_1" data-name="Component 147 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="45" height="45" viewBox="0 0 45 45">
+  <defs>
+    <linearGradient id="linear-gradient" x2="1.02" y2="1.01" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3023ae"/>
+      <stop offset="1" stop-color="#4ba7b9"/>
+    </linearGradient>
+    <filter id="Icon_awesome-money-bill-wave" x="1.002" y="6.22" width="43" height="37" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path id="bg" d="M20,0H45V45H20A20,20,0,0,1,0,25V20A20,20,0,0,1,20,0Z" fill="url(#linear-gradient)"/>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Icon_awesome-money-bill-wave)">
+    <path id="Icon_awesome-money-bill-wave-2" data-name="Icon awesome-money-bill-wave" d="M24.264,3.2a10.773,10.773,0,0,0-4.547-.953c-4.811,0-9.622,2.644-14.433,2.644a10.989,10.989,0,0,1-3.619-.582,1.239,1.239,0,0,0-.4-.069A1.3,1.3,0,0,0,0,5.592V19.048A1.36,1.36,0,0,0,.736,20.3a10.767,10.767,0,0,0,4.547.953c4.811,0,9.623-2.644,14.434-2.644a10.989,10.989,0,0,1,3.619.582,1.239,1.239,0,0,0,.4.069A1.3,1.3,0,0,0,25,17.907V4.452A1.362,1.362,0,0,0,24.264,3.2ZM1.875,6.5a12.592,12.592,0,0,0,2.45.379,2.566,2.566,0,0,1-2.45,2.186Zm0,12.087V16.561a2.6,2.6,0,0,1,2.489,2.6A8.8,8.8,0,0,1,1.875,18.587ZM12.5,15.821c-1.726,0-3.125-1.823-3.125-4.071s1.4-4.071,3.125-4.071S15.625,9.5,15.625,11.75,14.225,15.821,12.5,15.821ZM23.125,17A12.452,12.452,0,0,0,21,16.642a2.583,2.583,0,0,1,2.122-2.09Zm0-10.014a2.635,2.635,0,0,1-2.18-2.61,8.767,8.767,0,0,1,2.18.537Z" transform="translate(10 9.97)" fill="#fff"/>
+  </g>
+</svg>

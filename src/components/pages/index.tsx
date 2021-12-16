@@ -1,3 +1,5 @@
+export { default as NoComponent } from './NoComponent';
+
 // Area
 export { default as CircleArea } from "./calculators/mathStack/Area/CircleArea";
 export { default as EllipseArea } from "./calculators/mathStack/Area/EllipseArea";

@@ -3,6 +3,9 @@ import { NavBar2 } from '../navbar/navbar2'
 import { Box, Typography } from '@mui/material'
 import { Slide } from '../slider/slider'
 import { FinanceOptions } from '../calculator/financeOptions'
+import { SearchForm } from '../forms/searchForm'
+import { financialRoutes } from '../../routes/routes'
+import AddLayout from '../layouts/AddLayout';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,6 +14,7 @@ import {
   useRouteMatch
 } from "react-router-dom";
 
+import fincance_icon from '../../common/assets/finance_icon.svg';
 
 
 function FinancePage(){
@@ -18,17 +22,33 @@ function FinancePage(){
 
     return(
         <div>
-          <NavBar2 />
+          
 
           <Switch>
           <Route exact path={path}>
+            <NavBar2 pageimage={fincance_icon} pagename="Financial Calculators" financialHighLight={true} />
+            {/* Hide search bar when screen is small */}
+            <Box
+              sx={{
+                display: {
+                  lg: 'flex',
+                  md: 'flex',
+                  sm: 'none',
+                  xs: 'none'
+                },
+                justifyContent: 'center',
+              }}>
+                <SearchForm />
+            </Box>
+
+            
             <FinanceOptions />
+            <Box sx={{ marginTop: 5 }}>
+              <Slide />
+            </Box>
           </Route>
-          <Route path={`${path}/test`}>
-          
-          </Route>
+
         </Switch>
-        <Slide />
       </div>
     );
 }
