@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useEffect } from "react"
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -11,9 +11,11 @@ import Slider from "react-slick";
 import AddLayout from '../layouts/AddLayout';
 
 import site_map_icon from '../../common/assets/site_map_icon.svg';
-import fincance_icon from '../../common/assets/finance_icon.svg';
-import other_icon from '../../common/assets/other_icon.svg';
-import math_icon from '../../common/assets/math_icon.svg';
+import fincance_icon from '../../common/assets/finance.svg';
+import other_icon from '../../common/assets/other.svg';
+import math_icon from '../../common/assets/math.svg';
+import { dataInit } from '../../services/dataInit';
+import { financialRoutes, othersRoutes, mathRoutes } from '../../routes/routes'
 
 function NavBar(){
         const history = useHistory();
@@ -62,12 +64,23 @@ function NavBar(){
     }
 
 
-function AllCalculators(){
-    const localStorageData = JSON.parse(localStorage.webdata)
 
-    const financialCalculators = localStorageData[0].all_calucators
-    const mathCalculatorsData = localStorageData[1].all_calucators
-    const otherCalculatorsData = localStorageData[2].all_calucators
+function AllCalculators(){
+
+    const financialCalculators = [
+        ...financialRoutes.subCategories[0].sub_calculator,
+        ...financialRoutes.subCategories[1].sub_calculator
+    ]
+    const mathCalculatorsData = [
+        ...mathRoutes.subCategories[0].sub_calculator,
+        ...mathRoutes.subCategories[1].sub_calculator,
+        ...mathRoutes.subCategories[2].sub_calculator
+    ]
+    const otherCalculatorsData = [
+        ...othersRoutes.subCategories[0].sub_calculator,
+        ...othersRoutes.subCategories[1].sub_calculator,
+        ...othersRoutes.subCategories[2].sub_calculator
+    ]
 
     const boxStyle = {
         backgroundColor: 'white',
@@ -78,6 +91,8 @@ function AllCalculators(){
         display: 'flex',
         alignItems: 'flex-start'
     }
+
+    
     return(
         <>
         <Box sx={{ marginBottom: 5 }}>
@@ -98,6 +113,8 @@ function AllCalculators(){
         
                             <Typography component="div">
                                 <Box sx={{
+                                        paddingTop: 0.5,
+                                        paddingLeft: 0.7,
                                         color: '#8591B0',
                                         fontSize: 16,
                                     }}> 
@@ -122,11 +139,13 @@ function AllCalculators(){
                         <Box >
                             <Box sx={{...boxStyle }}>
                                 <Box sx={{  width:30, height:30, borderRadius: 10, objectFit:'contain'}}>
-                                    <img style={{ width: '100%',height:'100%',  }} alt="icon" src={fincance_icon} />
+                                    <img style={{ width: '100%',height:'100%',  }} alt="icon" src={math_icon} />
                                 </Box>
             
                                 <Typography component="div">
                                     <Box sx={{
+                                            paddingTop: 0.5,
+                                            paddingLeft: 0.7,
                                             color: '#8591B0',
                                             fontSize: 16,
                                         }}> 
@@ -153,11 +172,13 @@ function AllCalculators(){
                         <Box >
                             <Box sx={{...boxStyle }}>
                                 <Box sx={{  width:30, height:30, borderRadius: 10, objectFit:'contain'}}>
-                                    <img style={{ width: '100%',height:'100%',  }} alt="icon" src={fincance_icon} />
+                                    <img style={{ width: '100%',height:'100%',  }} alt="icon" src={other_icon} />
                                 </Box>
             
                                 <Typography component="div">
                                     <Box sx={{
+                                            paddingTop: 0.5,
+                                            paddingLeft: 0.7,
                                             color: '#8591B0',
                                             fontSize: 16,
                                         }}> 

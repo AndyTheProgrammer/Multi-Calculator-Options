@@ -1,0 +1,19 @@
+<svg id="Component_148_1" data-name="Component 148 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="45" height="45" viewBox="0 0 45 45">
+  <defs>
+    <linearGradient id="linear-gradient" x2="1.02" y2="1.01" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3023ae"/>
+      <stop offset="1" stop-color="#4ba7b9"/>
+    </linearGradient>
+    <filter id="Icon_metro-calculator" x="1.5" y="7" width="43" height="37" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path id="bg" d="M20,0H45V45H20A20,20,0,0,1,0,25V20A20,20,0,0,1,20,0Z" fill="url(#linear-gradient)"/>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Icon_metro-calculator)">
+    <path id="Icon_metro-calculator-2" data-name="Icon metro-calculator" d="M12.571,3.856H4.237A1.513,1.513,0,0,0,2.571,5.123v6.333a1.513,1.513,0,0,0,1.667,1.267h8.333a1.513,1.513,0,0,0,1.667-1.267V5.123A1.513,1.513,0,0,0,12.571,3.856Zm0,5.067H4.237V7.656h8.333ZM25.9,3.856H17.571A1.513,1.513,0,0,0,15.9,5.123V21.589a1.513,1.513,0,0,0,1.667,1.267H25.9a1.513,1.513,0,0,0,1.667-1.267V5.123A1.513,1.513,0,0,0,25.9,3.856Zm0,11.4H17.571V13.989H25.9Zm0-3.8H17.571V10.189H25.9ZM12.571,13.989H4.237a1.513,1.513,0,0,0-1.667,1.267v6.333a1.513,1.513,0,0,0,1.667,1.267h8.333a1.513,1.513,0,0,0,1.667-1.267V15.256A1.513,1.513,0,0,0,12.571,13.989Zm0,5.067H9.237v2.533H7.571V19.056H4.237V17.789H7.571V15.256H9.237v2.533h3.333Z" transform="translate(7.93 9.14)" fill="#fff"/>
+  </g>
+</svg>

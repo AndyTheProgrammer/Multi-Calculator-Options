@@ -7,11 +7,6 @@ import { dataInit } from '../../services/dataInit'
 
 function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-   
-  });
-
     return(
       <div>
         <NavBar />

@@ -11,14 +11,15 @@
      try{
          const { data } = await axiosInstance.get('/general/getCategories');
          var msg:any = data.statusDescription;
-
+        // console.log(data)
          if(msg === "success"){
-          
-            // const webdata = JSON.parse(localStorage.webdata)
-            // console.log("Localstorage data")
-            // console.log(webdata);
+            console.log("Localstorage data ***************")
+            const webdata = JSON.parse(localStorage.webdata)
+            console.log(webdata);
+            
             return true
          }else{
+             console.log("something wron")
              return false
          }
      }

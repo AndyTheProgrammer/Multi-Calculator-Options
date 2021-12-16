@@ -47,7 +47,7 @@ function SpecifiedSearchForm(){
         borderRadius: 25,
         borderColor: '#707070', 
         color: '#707070',
-        display: 'bloc'
+        display: 'bloc',
       };
 
     return(

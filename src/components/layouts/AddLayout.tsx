@@ -21,7 +21,8 @@ export default function AddLayout({children}:any){
                             {children}
                         </Box>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={3} >
+                    <Grid item xs={12} sm={12} md={1} ></Grid>
+                    <Grid item xs={12} sm={12} md={2} >
                         <Box sx={{border: 0, borderColor: 'blue', width: 150, height:200 }}>
                             <SingleSlider/>
                         </Box>
