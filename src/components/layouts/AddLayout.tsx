@@ -30,12 +30,12 @@ export default function AddLayout({children}:any){
             </Box> */}
             <Box className="container"> 
                 <Box sx={{ display: 'flex'}}>
-                    <Box >
+                    <Box sx={{ border:'none', width: '100%' }}>
                         <Box sx={{minHeight: 350}}>
                             {children}
                         </Box>
                     </Box>
-                    <Box sx={{ border:'none', width: 230 }}>
+                    <Box sx={{ border:'none', width: 250 }}>
                         <Box >
                             <Box sx={{
                                     border: 'none',

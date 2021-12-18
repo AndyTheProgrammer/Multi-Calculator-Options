@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Typography, Box, Container } from '@mui/material'
-import { Slide } from '../slider/slider'
+import { AddSlider } from '../slider/AddSlider'
 import { useHistory } from "react-router-dom";
 import fincance_icon from '../../common/assets/finance_icon.svg';
 import math_icon from '../../common/assets/math_icon.svg';
@@ -352,7 +352,11 @@ function CalcOptions(){
                             <Box>
                                 <img style={{ width: '100%' }}  alt="lineIcon" src={iconLine} />
                             </Box>
-                            <p style={{ marginLeft: 30, marginRight: 30 }}>Advertisement</p>
+                            <Typography>
+                                <Box sx={{ fontSize: 20, marginLeft: 3, marginRight: 3, marginTop: 1 }}>
+                                    Advertisement
+                                </Box>
+                            </Typography>
                             <Box>
                                 <img style={{ width: '100%' }}  alt="lineIcon" src={iconLine} />
                             </Box>
@@ -360,7 +364,7 @@ function CalcOptions(){
                     </Grid>
                 </Grid>
             </Box>
-            <Slide/>
+            <AddSlider/>
             
         </Container>
     );
