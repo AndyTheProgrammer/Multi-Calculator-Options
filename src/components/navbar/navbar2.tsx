@@ -44,18 +44,15 @@ function NavBar2(props:any){
                 sx={{
                     width: '100%',
                     paddingTop: 2,
-                    marginBottom: 2
+                    marginBottom: 2,
                 }}>
                 <div>
                     <AppBar 
                         color="transparent"
-                        elevation={0} 
-                        sx={{
-                            
-                        }} 
+                        elevation={0}  
                         position="static">
 
-                        <Box  sx={{ display: 'flex', m: 1 }}>
+                        <Box sx={{ display: 'flex', m: 1 }}>
                             {
                                 (props.pageimage)?
                                 <Box

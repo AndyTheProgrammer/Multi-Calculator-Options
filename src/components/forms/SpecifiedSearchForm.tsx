@@ -48,28 +48,42 @@ function SpecifiedSearchForm(){
         borderColor: '#707070', 
         color: '#707070',
         display: 'bloc',
+        minHeight: 25,
+        paddingLeft: '10px',
+        paddingRight: '10px',
+        marginBottom: '10px'
       };
 
     return(
         <Box >
         <Box sx={{ ...commonStyles }}>
             
-            <div className="d-flex justify-content-center">
+            <div className="d-flex ">
                 <input
+                    style={{
+                        borderRadius: 25,
+                        width: '100%',
+                        border: 'none',
+                        borderWidth: 1,
+                        borderColor: 'red',
+                        outline: 'none',
+                        fontSize: 14,
+                        color:'#707070',
+                        height: 30,
+                    }}
                     id="calc-search"
                     list="data"
                     type="text"
-                    placeholder="search"
-                    className="search-input"
+                    placeholder="Search for Calculator"
                     value = {value}
                     onChange = {(e) => {
                         console.log("button is pressed ", e.target.value)
                         setValue(e.target.value)
                     }}
                     />
-                 <Button type="button">
+                 <Box>
                     <SearchIcon/>
-                </Button>
+                </Box>
             </div>
             
         </Box>
@@ -89,7 +103,7 @@ function SpecifiedSearchForm(){
                                 }
                             },
                             {
-                                fontSize: 16,
+                                fontSize: 15,
                             }
                         ]}
                             onClick={()=>{ 
