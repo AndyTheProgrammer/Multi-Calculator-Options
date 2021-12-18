@@ -34,6 +34,7 @@ const CurbAndGutterBarrier = (props: any) => {
     gutter_width_unit: '',
     length: '',
     length_unit: '',
+    rise: '',
     quantity: '',
   })
   const [Result, setResult] = React.useState({
@@ -63,6 +64,7 @@ const CurbAndGutterBarrier = (props: any) => {
             gutter_width_unit,
             length,
             length_unit,
+            rise,
             quantity,
           }, { setSubmitting }) => {
             const payload: CurbAndGutterBarrierI = {
@@ -76,6 +78,7 @@ const CurbAndGutterBarrier = (props: any) => {
               gutter_width_unit,
               length,
               length_unit,
+              rise,
               quantity,
               method: 'CurbAndGutterBarrierConcreteCalculator'
             }
@@ -185,6 +188,17 @@ const CurbAndGutterBarrier = (props: any) => {
                   measurement="length"
                   value={values.length_unit}
                   onChange={handleChange('length_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.rise} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="rise"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.rise}
+                  onChange={handleChange}
                 />
               </div>
 

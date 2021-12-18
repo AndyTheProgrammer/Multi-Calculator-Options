@@ -31,6 +31,7 @@ export interface CurbAndGutterBarrierI {
   gutter_width_unit: string;
   length: string;
   length_unit: string;
+  rise: string;
   quantity: string;
   method: string;
 }

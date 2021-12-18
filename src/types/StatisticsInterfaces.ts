@@ -1,12 +1,12 @@
 export interface SampleSizeI {
-  confience_level: string;
+  confidence_level: string;
   margin_of_error: string;
   population_proportion: string;
   method: string;
 }
 
 export interface MarginErrorI {
-  confience_level: string;
+  confidence_level: string;
   sample_size: string;
   population_proportion: string;
   method: string;

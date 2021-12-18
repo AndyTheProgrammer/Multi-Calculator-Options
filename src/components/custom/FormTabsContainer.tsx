@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
 import TabPanel from './TabPanel';
@@ -6,7 +6,6 @@ import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
 import { Grid, Paper } from '@material-ui/core';
 import useStyles from '../../styling/CustomStyles'
-import { Font, FontProvider } from '../font'
 
 interface FormProps {
   children?: React.ReactNode;
@@ -21,38 +20,48 @@ function a11yProps(index: any) {
 }
 
 function FormTabsContainer(props: any) {
-  const { children, tabTitle1, tabTitle2, sm, type, dropDown, openDrop }:any = props;
+  const { children, tabTitle1, tabTitle2, sm, type, dropDown, openDrop, calculators } = props;
   const {
     tabRoot,
     rightTabContainer,
     leftTabContainer,
     paperBackground,
-  }:any = useStyles()
+  }: any = useStyles()
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+
+    calculators.map((item: any, index: any) => {
+      console.log("INDEX: ", index)
+      console.log("TABTITLE: ", item.tabTitle)
+    })
   };
 
-  if (type === "Styled") {
+  if (type === "styled") {
     return (
       <Grid item xs={12} sm={sm}>
         <Paper className={paperBackground}>
           <div className={tabRoot}>
-            <StyledTabs value={value} onChange={handleChange} >
-              <StyledTab
-                label={tabTitle1}
-                {...a11yProps(0)}
-              />
-              <StyledTab
-                label={tabTitle2}
-                {...a11yProps(1)}
-              />
+            <StyledTabs value={value} onChange={handleChange}>
+              {calculators.map((item: any, index: number) => (
+                <StyledTab
+                  key={item.tabTitle}
+                  label={item.tabTitle}
+                  {...a11yProps(index)}
+                />
+              ))}
             </StyledTabs>
 
-            <TabPanel value={value} index={0}>
-              {children}
-            </TabPanel>
+            {calculators.map((item: any, index: number) => (
+              <TabPanel
+                key={item}
+                value={value}
+                index={index}
+              >
+                {item.calc}
+              </TabPanel>
+            ))}
           </div>
         </Paper>
       </Grid>

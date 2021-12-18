@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     borderRadius: 20,
     display: 'flex',
     flexDirection: 'column',
-    wordBreak: 'break-all'
+    wordBreak: 'break-word'
   },
   leftTabContainer: {
     display: "flex",
