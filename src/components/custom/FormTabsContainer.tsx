@@ -1,10 +1,12 @@
 import React from 'react'
+import Anime from 'react-animejs-wrapper'
+
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
 import TabPanel from './TabPanel';
 import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, Box } from '@mui/material';
 import useStyles from '../../styling/CustomStyles'
 
 interface FormProps {
@@ -20,12 +22,24 @@ function a11yProps(index: any) {
 }
 
 function FormTabsContainer(props: any) {
-  const { children, tabTitle1, tabTitle2, sm, type, dropDown, openDrop, calculators } = props;
+  const {
+    children,
+    tabTitle1,
+    tabTitle2,
+    sm,
+    type,
+    dropDown,
+    openDrop,
+    calculators,
+    ref,
+    config
+  } = props;
   const {
     tabRoot,
     rightTabContainer,
     leftTabContainer,
     paperBackground,
+    formDisplay
   }: any = useStyles()
   const [value, setValue] = React.useState(0);
 
@@ -38,81 +52,106 @@ function FormTabsContainer(props: any) {
     })
   };
 
+  // Animation is add to the containers, pass the values 'ref' and 'config'.
   if (type === "styled") {
     return (
-      <Grid item xs={12} sm={sm}>
-        <Paper className={paperBackground}>
-          <div className={tabRoot}>
-            <StyledTabs value={value} onChange={handleChange}>
-              {calculators.map((item: any, index: number) => (
-                <StyledTab
-                  key={item.tabTitle}
-                  label={item.tabTitle}
-                  {...a11yProps(index)}
-                />
-              ))}
-            </StyledTabs>
+      <Anime
+        style={{
+          position: 'absolute',
+        }}
+        ref={ref}
+        config={config}
+      >
+        <Grid item xs={12} sm={sm}>
+          <Paper className={paperBackground}>
+            <div className={tabRoot}>
+              <StyledTabs value={value} onChange={handleChange}>
+                {calculators.map((item: any, index: number) => (
+                  <StyledTab
+                    key={item.tabTitle}
+                    label={item.tabTitle}
+                    {...a11yProps(index)}
+                  />
+                ))}
+              </StyledTabs>
 
-            {calculators.map((item: any, index: number) => (
-              <TabPanel
-                key={item}
-                value={value}
-                index={index}
-              >
-                {item.calc}
-              </TabPanel>
-            ))}
-          </div>
-        </Paper>
-      </Grid>
+              {calculators.map((item: any, index: number) => (
+                <TabPanel
+                  key={item}
+                  value={value}
+                  index={index}
+                >
+                  {item.calc}
+                </TabPanel>
+              ))}
+            </div>
+          </Paper>
+        </Grid>
+      </Anime>
     )
   } else if (dropDown === true) {
     return (
-      <Grid item xs={12} sm={sm}>
-        <Paper className={paperBackground}>
-          <div className={tabRoot}>
-            <StyledTabs>
-              <StaticTab
-                className={leftTabContainer}
-                label={tabTitle1}
-                dropDown={true}
-                openDrop={openDrop}
-              />
-              <StaticTab
-                className={rightTabContainer}
-                label={tabTitle2}
-              />
-            </StyledTabs>
+      <Anime
+        style={{
+          position: 'absolute',
+        }}
+        ref={ref}
+        config={config}
+      >
+        <Box>
+          <Paper className={paperBackground}>
+            <div className={tabRoot}>
+              <StyledTabs>
+                <StaticTab
+                  className={leftTabContainer}
+                  label={tabTitle1}
+                  dropDown={true}
+                  openDrop={openDrop}
+                />
+                <StaticTab
+                  className={rightTabContainer}
+                  label={tabTitle2}
+                />
+              </StyledTabs>
 
-            <NoIndexTabPanel>
-              {children}
-            </NoIndexTabPanel>
-          </div>
-        </Paper>
-      </Grid>
+              <NoIndexTabPanel>
+                {children}
+              </NoIndexTabPanel>
+            </div>
+          </Paper>
+        </Box>
+      </Anime>
     )
   } else {
     return (
-      <Grid item xs={12} sm={sm}>
-        <Paper className={paperBackground}>
-          <div className={tabRoot}>
-            <StyledTabs>
-              <StaticTab
-                className={leftTabContainer}
-                label={tabTitle1}
-              />
-              <StaticTab
-                className={rightTabContainer}
-                label={tabTitle2}
-              />
-            </StyledTabs>
+      <Anime
+        style={{
+          position: 'absolute',
+        }}
+        ref={ref}
+        config={config}
+      >
+        <Grid item xs={12} sm={sm}>
+          <Paper className={paperBackground}>
+            <div className={tabRoot}>
+              <StyledTabs>
+                <StaticTab
+                  className={leftTabContainer}
+                  label={tabTitle1}
+                />
+                <StaticTab
+                  className={rightTabContainer}
+                  label={tabTitle2}
+                />
+              </StyledTabs>
 
-            <NoIndexTabPanel>
-              {children}
-            </NoIndexTabPanel>
-          </div>
-        </Paper>
-      </Grid>
+              <NoIndexTabPanel>
+                {children}
+              </NoIndexTabPanel>
+            </div>
+          </Paper>
+        </Grid>
+      </Anime>
     )
   }
 }

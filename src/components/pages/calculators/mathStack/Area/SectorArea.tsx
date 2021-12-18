@@ -9,7 +9,8 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
-  COLORS
+  COLORS,
+  LATEX
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -43,6 +44,22 @@ const SectorArea = (props: any) => {
   })
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+  const [value, setValue] = React.useState(false)
+  const animatedSquaresRef1 = React.useRef(null)
+  const animatedSquaresRef2 = React.useRef(null)
+  // @ts-ignore: Object is possibly 'null'.
+  const play1 = () => animatedSquaresRef1.current.play();
+  // @ts-ignore: Object is possibly 'null'.
+  const play2 = () => animatedSquaresRef2.current.play();
+
+  React.useEffect(() => {
+    if (value) {
+      play1();
+      play2();
+    }
+
+    return () => { }
+  })
 
   return (
     <>
@@ -52,6 +69,13 @@ const SectorArea = (props: any) => {
         sm={6}
         dropDown={true}
         openDrop={openDrop}
+        ref={animatedSquaresRef1}
+        config={{
+          translateX: -250,
+          easing: 'easeInOutSine',
+          autoplay: false,
+          duration: 250
+        }}
       >
         <Formik
           initialValues={initialFormValues}
@@ -153,9 +177,18 @@ const SectorArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle1={"Result"}
+        sm={6}
+        ref={animatedSquaresRef2}
+        config={{
+          translateX: 200,
+          easing: 'easeInOutSine',
+          autoplay: false,
+          duration: 250
+        }}
+        latex={LATEX.sectorArea}
+      >
         <div className="text-wrap">
-          <Typography variant="subtitle1"> Area = (A/360) x π x r<sup>2</sup></Typography>
           <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
         </div>
       </ResultTabsContainer>

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Field, ErrorMessage } from 'formik';
+import { Typography, Grid, Box } from '@mui/material'
 
 import { COLORS } from "../../common/shared";
 
@@ -19,17 +20,26 @@ const CustomTextInput = (props: any) => {
   const { type, id, name, placeholder, value, onChange } = props
   return (
     <div className="form-group col">
-      <Field
-        type={type}
-        className="form-control form-control-sm"
-        name={name}
-        id={id}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        style={{ backgroundColor: COLORS.input }}
-      />
+      <Box sx={{
+        display: 'flex',
+      }}>
+        <Box sx={{ marginRight: 1, color: '#4072B5' }}>:</Box>
+        <Field
+          className="form-control form-control-sm"
+          type={type}
+          name={name}
+          id={id}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          style={{ backgroundColor: COLORS.input }}
+        />
+      </Box>
     </div>
+
+
+
+
   )
 }
 
