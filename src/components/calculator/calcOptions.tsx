@@ -45,17 +45,18 @@ function CalcOptions(){
 
                                 <Box 
                                     sx={{ 
-                                        height: 50, 
+                                        height: 80, 
                                         fontSize: 22,
                                         display: 'flex',
                                         justifyContent: 'start'
                                     }}>
                                     <Box>
-                                        <img style={{ marginRight: 4, width: 40, }} alt="icon" src={fincance_icon} />
+                                        <img style={{ marginRight: 4, width: 65, }} alt="icon" src={fincance_icon} />
                                     </Box>
                                     <Typography>
                                         <Box
                                             sx={{
+                                                paddingTop: 3,
                                                 marginTop: 1,
                                                 verticalAlign: 'bottom',
                                                 marginLeft: 1,
@@ -140,17 +141,18 @@ function CalcOptions(){
                             {/* image and button name */}
                             <Box 
                                     sx={{ 
-                                        height: 50, 
+                                        height: 80, 
                                         fontSize: 22,
                                         display: 'flex',
                                         justifyContent: 'start'
                                     }}>
                                     <Box>
-                                        <img style={{ marginRight: 4, width: 40, }} alt="icon" src={math_icon} />
+                                        <img style={{ marginRight: 4, width: 65, }} alt="icon" src={math_icon} />
                                     </Box>
                                     <Typography>
                                         <Box
                                             sx={{
+                                                paddingTop: 3,
                                                 marginTop: 1,
                                                 verticalAlign: 'bottom',
                                                 marginLeft: 1,
@@ -243,17 +245,18 @@ function CalcOptions(){
                              {/* image and button name */}
                              <Box 
                                     sx={{ 
-                                        height: 50, 
+                                        height: 80, 
                                         fontSize: 22,
                                         display: 'flex',
                                         justifyContent: 'start'
                                     }}>
                                     <Box>
-                                        <img style={{ marginRight: 4, width: 40, }} alt="icon" src={other_icon} />
+                                        <img style={{ marginRight: 4, width: 65, }} alt="icon" src={other_icon} />
                                     </Box>
                                     <Typography>
                                         <Box
                                             sx={{
+                                                paddingTop: 3,
                                                 marginTop: 1,
                                                 verticalAlign: 'bottom',
                                                 marginLeft: 1,

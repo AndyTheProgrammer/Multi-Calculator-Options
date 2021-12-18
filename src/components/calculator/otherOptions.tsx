@@ -77,7 +77,7 @@ function OtherOptions(){
                     </Typography>
                     
                 </Box>
-                <Box className="general-text-box" sx={{ paddingLeft: 2 }}>
+                <Box className="general-text-box app-scroller" sx={{ paddingLeft: 2 }}>
                     {
                         othersRoutes.subCategories[5].sub_calculator.map((r:any) => {
                             return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);

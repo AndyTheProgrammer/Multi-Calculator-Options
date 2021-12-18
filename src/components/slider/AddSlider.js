@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'// requires a loader
 import Slider from "react-slick"
 import addimage from '../../common/assets/add_image.svg'
-import { Button, Paper, Box } from '@mui/material'
+import { Button, Paper, Box, Typography } from '@mui/material'
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -35,27 +35,132 @@ class AddSlider extends React.Component {
                 <div>
                     <Box sx={{
                         width: "100%",
-                        marginRight: 1,
-                        display: 'flex',
-                        justifyContent: 'start'
-                    }}> <img style={{ width: "100%" }} src={addimage} alt="add"  /></Box>
+                        height: 200,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'contain',
+                        justifyContent: 'start',
+                        backgroundImage: `url(${addimage})`,
+                        paddingTop: 3,
+                    }}> 
+                        <Typography>
+                            <Box sx={{ 
+                                    color: 'white',
+                                    marginLeft: '25px',
+                                    fontSize: 32
+                                 }}>
+                                Your Next Power Move
+                            </Box>
+                            <Box sx={{ 
+                                    color: 'white',
+                                    marginLeft: '25px',
+                                    fontSize: 16
+                                 }}>
+                                Here is your chance to win that move
+                            </Box>
+                        </Typography>
+                        <Box 
+                            sx={{ 
+                                color: 'white',
+                                marginTop: '1px',
+                                marginLeft: '25px',
+                            }}>
+                                <button
+                                    style={{
+                                        border:'none',
+                                        borderRadius: 5,
+                                        backgroundColor: 'white',
+                                        fontSize: 24
+                                    }} 
+                                    type="button"
+                                    >Subscribe Now</button>
+                            </Box>
+                    </Box>
                 </div>
-                <Box >
-                    <Box sx={{
+                <Box sx={{
                         width: "100%",
-                        marginRight: 1,
-                        display: 'flex',
-                        justifyContent: 'center'
-                    }}> <img style={{ width: "100%" }} src={addimage} alt="add"  /> </Box>
-                </Box>
+                        height: 200,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'contain',
+                        justifyContent: 'start',
+                        backgroundImage: `url(${addimage})`,
+                        paddingTop: 3,
+                    }}> 
+                        <Typography>
+                            <Box sx={{ 
+                                    color: 'white',
+                                    marginLeft: '25px',
+                                    fontSize: 32
+                                 }}>
+                                Your Next Power Move
+                            </Box>
+                            <Box sx={{ 
+                                    color: 'white',
+                                    marginLeft: '25px',
+                                    fontSize: 16
+                                 }}>
+                                Here is your chance to win that move
+                            </Box>
+                        </Typography>
+                        <Box 
+                            sx={{ 
+                                color: 'white',
+                                marginTop: '1px',
+                                marginLeft: '25px',
+                            }}>
+                                <button
+                                    style={{
+                                        border:'none',
+                                        borderRadius: 5,
+                                        backgroundColor: 'white',
+                                        fontSize: 24
+                                    }} 
+                                    type="button"
+                                    >Subscribe Now</button>
+                            </Box>
+                    </Box>
                 <div>
                 <Box sx={{
                         width: "100%",
-                        marginRight: 1,
-                        textAlign: 'end',
-                        display: 'flex',
-                        justifyContent: 'end'
-                    }}> <img style={{ width: "100%" }} src={addimage} alt="add" /> </Box>
+                        height: 200,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'contain',
+                        justifyContent: 'start',
+                        backgroundImage: `url(${addimage})`,
+                        paddingTop: 3,
+                    }}> 
+                        <Typography>
+                            <Box sx={{ 
+                                    color: 'white',
+                                    marginLeft: '25px',
+                                    fontSize: 32
+                                 }}>
+                                Your Next Power Move
+                            </Box>
+                            <Box sx={{ 
+                                    color: 'white',
+                                    marginLeft: '25px',
+                                    fontSize: 16
+                                 }}>
+                                Here is your chance to win that move
+                            </Box>
+                        </Typography>
+                        <Box 
+                            sx={{ 
+                                color: 'white',
+                                marginTop: '1px',
+                                marginLeft: '25px',
+                            }}>
+                                <button
+                                    style={{
+                                        border:'none',
+                                        borderRadius: 5,
+                                        backgroundColor: 'white',
+                                        fontSize: 24
+                                    }} 
+                                    type="button"
+                                    >Subscribe Now</button>
+                            </Box>
+                    </Box>
                 </div>
             </Slider>
       );
