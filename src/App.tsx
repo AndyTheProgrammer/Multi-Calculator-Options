@@ -8,9 +8,9 @@ function App(){
         left: 0,
         width: '100vw',
         height: '100vh',
-        backgroundImage: 'linear-gradient(146deg, #FBFBFB, #D1D1D1)',
+        // background: 'rgb(251,251,251)',
+        background: 'linear-gradient(146deg, rgba(251,251,251,1) 0%, rgba(209,209,209,1) 100%)',
         zIndex: -100,
-        
       }}>
     </div>
   );
