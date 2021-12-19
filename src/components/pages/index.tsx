@@ -99,15 +99,6 @@ export { default as PresentValueOfPeriodicalDeposit } from "./calculators/financ
 export { default as ProfitMarginCalculator } from "./calculators/financial/ProfitMarginCalculator";
 export { default as StockTradingMargin } from "./calculators/financial/StockTradingMargin";
 
-export { default as Home } from "./Home";
-export { default as MathPageView } from "./mainPages/Math";
-export { default as AreaPageView } from "./mainPages/Area";
-export { default as SurfaceAreaPageView } from "./mainPages/SurfaceArea";
-export { default as VolumePageView } from "./mainPages/Volume";
-export { default as StatisticsPageView } from "./mainPages/Statistics";
-export { default as FinancePageView } from "./mainPages/Finance";
-export { default as OtherPageView } from "./mainPages/Other";
-
 // Categories
 export { default as InvestmentAndSavings } from "./categories/financial/InvestmentAndSavings";
 export { default as LoanCalculators } from "./categories/financial/LoanCalculators";
@@ -132,7 +123,9 @@ export { default as TransportAndUtilitiesCalculators } from './categories/other/
 export { default as UnitConversionCalculators } from './categories/other/UnitConversionCalculators';
 //export { default as } from '';
 
-//Sub categories
+//Calculator Pages
 //export { default as } from '';
-export { default as ConcreteCalculator } from './categories/other/subCategory/ConcreteCalculator';
-export { default as ProbabilityCalculator } from './calculators/mathStack/ProbabilityCalculator';
+export { default as ConcreteCalculator } from './mainPages/ConcreteCalculator';
+export { default as ProbabilityCalculator } from './mainPages/ProbabilityCalculator';
+export { default as AreaCalculator } from './mainPages/AreaCalculator';
+

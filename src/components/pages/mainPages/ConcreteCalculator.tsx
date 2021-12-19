@@ -1,25 +1,23 @@
 import React from 'react'
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
 
-import TestNavBar from "../../../../navbar/TestNavBar";
-import { CollapsibleMenu, Carousel, SimpleDialog } from "../../../../content";
-import useStyles from "../../../../../styling/CustomStyles";
+import { NavBar2 } from '../../navbar/navbar2'
+import AddLayout from '../../layouts/AddLayout'
+import { SimpleDialog } from "../../content";
+import useStyles from "../../../styling/CustomStyles";
 import {
   PLACEHOLDERS,
   INPUT_TYPE,
-} from '../../../../../common/shared'
-import {
-  CustomSearchInput
-} from '../../../../custom'
+} from '../../../common/shared'
 import {
   CircularSlab,
   ConcreteSquareFooting,
   CurbAndGutterBarrier,
   HoleColumn,
   StairsConcreate
-} from "../../../index";
+} from "../index";
 
 function ConcreteCalculator() {
   const { sideBarPaperBackground } = useStyles();
@@ -76,52 +74,18 @@ function ConcreteCalculator() {
   ];
   return (
     <>
-      <TestNavBar />
-
-      <Container>
-        <Grid container xs={12}>
-          {/* Calculator grid here */}
-          <Grid container item xs={12} sm={10}>
-            {currentCalc.component}
-            <SimpleDialog
-              dropOptions={calculators}
-              selectedValue={selectedCalc}
-              open={open}
-              onClose={handleClose}
-            />
-          </Grid>
-
-          {/* Ad & menu grid */}
-          <Grid item xs={12} sm={2}>
-            {/* Carousel */}
-            <Grid item xs={12}>
-              <Paper elevation={0} className={sideBarPaperBackground}>
-                <Carousel />
-              </Paper>
-            </Grid>
-
-            {/* Search input */}
-            <Grid>
-              <CustomSearchInput
-                type={INPUT_TYPE.text}
-                id="search"
-                name="search"
-                placeholder={PLACEHOLDERS.search}
-                value={searchText}
-                onChange={handleSearchChange}
-              />
-            </Grid>
-
-            {/* Menu */}
-            <Grid item xs={12}>
-              <Paper elevation={0} className={sideBarPaperBackground}>
-                <CollapsibleMenu />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Container>
-
+      <NavBar2 pagename="Concrete Calculator" />
+      <AddLayout>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          {currentCalc.component}
+          <SimpleDialog
+            dropOptions={calculators}
+            selectedValue={selectedCalc}
+            open={open}
+            onClose={handleClose}
+          />
+        </Box>
+      </AddLayout>
     </>
   )
 }

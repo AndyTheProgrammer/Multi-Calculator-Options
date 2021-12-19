@@ -1,12 +1,16 @@
-import React, { FC } from 'react'
+import React from 'react'
+import Anime from 'react-animejs-wrapper'
+
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
 import TabPanel from './TabPanel';
 import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, Box } from '@mui/material';
 import useStyles from '../../styling/CustomStyles'
 import { Font, FontProvider } from '../font'
+
+const Latex = require('react-latex');
 
 interface ResultsProps {
   children?: React.ReactNode;
@@ -21,12 +25,13 @@ function a11yProps(index: any) {
 }
 
 const ResultTabsContainer = (props: any) => {
-  const { children, tabTitle1, tabTitle2, sm, type } = props;
+  const { children, tabTitle1, tabTitle2, sm, type, ref, config, latex } = props;
   const {
     tabRoot,
     rightTabContainer,
     leftTabContainer,
     paperBackground,
+    formDisplay
   } = useStyles()
   const [value, setValue] = React.useState(0);
 
@@ -36,49 +41,69 @@ const ResultTabsContainer = (props: any) => {
 
   if (type === "styled") {
     return (
-      <Grid item xs={12} sm={sm}>
-        <Paper className={paperBackground}>
-          <div className={tabRoot} style={{ maxHeight: '30' }}>
-            <StyledTabs value={value} onChange={handleChange} >
-              <StyledTab
-                label={tabTitle1}
-                {...a11yProps(0)}
-              />
-              <StyledTab
-                label={tabTitle2}
-                {...a11yProps(1)}
-              />
-            </StyledTabs>
+      <Anime
+        style={{
+          position: 'absolute',
+          zIndex: -5
+        }}
+        ref={ref}
+        config={config}
+      >
+        <Box>
+          <Paper className={paperBackground}>
+            <div className={tabRoot} style={{ maxHeight: '30' }}>
+              <StyledTabs value={value} onChange={handleChange} >
+                <StyledTab
+                  label={tabTitle1}
+                  {...a11yProps(0)}
+                />
+                <StyledTab
+                  label={tabTitle2}
+                  {...a11yProps(1)}
+                />
+              </StyledTabs>
 
-            <TabPanel value={value} index={0}>
-              {children}
-            </TabPanel>
-          </div>
-        </Paper>
-      </Grid>
+              <TabPanel value={value} index={0}>
+                <Latex displayMode={false}>{latex}</Latex>
+                {children}
+              </TabPanel>
+            </div>
+          </Paper>
+        </Box>
+      </Anime>
     )
   } else {
     return (
-      <Grid item xs={12} sm={sm}>
-        <Paper className={paperBackground}>
-          <div className={tabRoot}>
-            <StyledTabs>
-              <StaticTab
-                className={leftTabContainer}
-                label={tabTitle1}
-              />
-              <StaticTab
-                className={rightTabContainer}
-                label={tabTitle2}
-              />
-            </StyledTabs>
+      <Anime
+        style={{
+          position: 'absolute',
+          zIndex: -5
+        }}
+        ref={ref}
+        config={config}
+      >
+        <Box>
+          <Paper className={paperBackground}>
+            <div className={tabRoot}>
+              <StyledTabs>
+                <StaticTab
+                  className={leftTabContainer}
+                  label={tabTitle1}
+                />
+                <StaticTab
+                  className={rightTabContainer}
+                  label={tabTitle2}
+                />
+              </StyledTabs>
 
-            <NoIndexTabPanel>
-              {children}
-            </NoIndexTabPanel>
-          </div>
-        </Paper>
-      </Grid>
+              <NoIndexTabPanel>
+                <Latex displayMode={false}>{latex}</Latex>
+                {children}
+              </NoIndexTabPanel>
+            </div>
+          </Paper>
+        </Box>
+      </Anime>
     )
   }
 }

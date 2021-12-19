@@ -7,4 +7,5 @@ export {
   INPUT_TYPE,
   COLORS,
   CALC_LABELS,
+  LATEX,
 } from "./constants";

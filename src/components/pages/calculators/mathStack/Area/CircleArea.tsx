@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -19,6 +20,8 @@ import {
   ResultTabsContainer,
   FormTabsContainer
 } from '../../../../custom'
+
+const Latex = require('react-latex');
 
 const CircleArea = (props: any) => {
   const { openDrop } = props
@@ -33,6 +36,23 @@ const CircleArea = (props: any) => {
     Submitted_unit: ''
   })
 
+  const [value, setValue] = React.useState(false)
+  const animatedSquaresRef1 = React.useRef(null)
+  const animatedSquaresRef2 = React.useRef(null)
+  // @ts-ignore: Object is possibly 'null'.
+  const play1 = () => animatedSquaresRef1.current.play();
+  // @ts-ignore: Object is possibly 'null'.
+  const play2 = () => animatedSquaresRef2.current.play();
+
+  React.useEffect(() => {
+    if (value) {
+      play1();
+      play2();
+    }
+
+    return () => { }
+  })
+
   return (
     <>
       {/* Form grid */}
@@ -41,6 +61,13 @@ const CircleArea = (props: any) => {
         sm={6}
         dropDown={true}
         openDrop={openDrop}
+        ref={animatedSquaresRef1}
+        config={{
+          translateX: -250,
+          easing: 'easeInOutSine',
+          autoplay: false,
+          duration: 250
+        }}
       >
         <Formik
           initialValues={initialFormValues}
@@ -57,6 +84,14 @@ const CircleArea = (props: any) => {
             try {
               const { payload: circleArea } = await calculateMath(payload)
               console.log('=====>', circleArea)
+
+              // The code below is responsible for making the animation work after the calculate button is clicked, based on his payload code.
+              /* var msg: any = responseData.statusDescription;
+              if (msg === "success") {
+                setValue(responseData.message.answer)
+                console.log(responseData)
+              } */
+
               if (typeof circleArea === 'object') {
                 const { area, units, submittedradius, submittedunit } = circleArea
                 setResult({
@@ -66,6 +101,7 @@ const CircleArea = (props: any) => {
                   Submitted_unit: submittedunit
                 })
               }
+              console.log("VALUE: ", value)
             } catch (err) {
               console.log('====>', err)
             }
@@ -106,9 +142,19 @@ const CircleArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Result grid */}
-      <ResultTabsContainer tabTitle1={"Result"} sm={6}>
+      <ResultTabsContainer
+        tabTitle1={"Result"}
+        sm={6}
+        ref={animatedSquaresRef2}
+        config={{
+          translateX: 200,
+          easing: 'easeInOutSine',
+          autoplay: false,
+          duration: 250
+        }}
+        latex={LATEX.cirleArea}
+      >
         <div className="text-wrap">
-          <Typography variant="subtitle1"> Area = π x r<sup>2</sup></Typography>
           <Typography variant="subtitle1"> = {Result.Area}{Result.units}<sup>2</sup></Typography>
         </div>
       </ResultTabsContainer>

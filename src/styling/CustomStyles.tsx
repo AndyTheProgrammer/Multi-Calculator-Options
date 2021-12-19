@@ -107,27 +107,43 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     backgroundColor: "transparent",
     borderRadius: 20,
   },
-}));
-
-export default useStyles;
-
-
-export const labelStyle = {
-  color:'#4072B5',
-}
-
-export const formCardStyle={
-  height:25, width: '100%', 
-  backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-  borderRadius: '0 20px 3px', 
-}
-
-export const formDisplay = {
+  labelStyle: {
+    color: '#4072B5',
+  },
+  formCardStyle: {
+    height: 25, width: '100%',
+    backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+    borderRadius: '0 20px 3px',
+  },
+  formDisplay: {
     width: 400,
     height: '100%',
     borderRadius: '20px',
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     backgroundColor: 'white',
     paddingBottom: 2,
+  },
+}));
+
+export default useStyles;
+
+
+export const labelStyle = {
+  color: '#4072B5',
+}
+
+export const formCardStyle = {
+  height: 25, width: '100%',
+  backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+  borderRadius: '0 20px 3px',
+}
+
+export const formDisplay = {
+  width: 400,
+  height: '100%',
+  borderRadius: '20px',
+  boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+  backgroundColor: 'white',
+  paddingBottom: 2,
 }
 
