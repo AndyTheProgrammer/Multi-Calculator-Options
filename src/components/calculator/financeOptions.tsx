@@ -20,6 +20,17 @@ import { financialRoutes } from '../../routes/routes'
 function FinanceOptions(){
       const history = useHistory()
 
+      const categoryHeaderShadow = {
+        width:'100%',
+        height: 30, 
+        fontSize: 22,
+        display: 'flex',
+        justifyContent: 'start',
+        backgroundColor: 'white',
+        borderRadius: 5,
+        boxShadow: '0px 0px 20px 1px rgba(0, 0, 0, 0.1)',
+      }
+
       const boxStyle = {
         marginBottom: 2,
         backgroundColor: 'transparent',
@@ -69,25 +80,10 @@ function FinanceOptions(){
         <div style={{ height: 300, }} className="container mt-4">
         <Slider  {...settings}>
             <Box sx={{...boxStyle }}>
-                {/* <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Investment and Saving Calculators</p>
-                </Box> */}
+                
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
-                        boxShadow: ' 0px 0px 20px 2px rgba(0, 0, 0, 0.1)',
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={invest_and_saving_icon} />
@@ -119,25 +115,10 @@ function FinanceOptions(){
             </Box>
            
             <Box sx={{...boxStyle }}>
-                {/* <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Money, Pay, & Tax Calculators</p>
-                </Box> */}
+                
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
-                        boxShadow: ' 0px 0px 20px 2px rgba(0, 0, 0, 0.1)',
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={money_tax_icon} />
@@ -163,24 +144,9 @@ function FinanceOptions(){
 
             </Box>
             <Box sx={{...boxStyle }}>
-                {/* <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Loan Calculators</p>
-                </Box> */}
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,boxShadow: ' 0px 0px 20px 2px rgba(0, 0, 0, 0.1)',
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={mortage_icon} />
@@ -204,26 +170,9 @@ function FinanceOptions(){
                 </Box>
             </Box>
             <Box sx={{...boxStyle }}>
-                {/* <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Retirement Calculators</p>
-                </Box> */}
-
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
-                        boxShadow: ' 0px 0px 20px 2px rgba(0, 0, 0, 0.1)',
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={retirement_calc_icon} />
@@ -248,26 +197,9 @@ function FinanceOptions(){
 
             </Box>
             <Box sx={{...boxStyle }}>
-                {/* <Box sx={{ 
-                    paddingLeft: 2,
-                    width: '100',
-                    backgroundColor: 'white',
-                    borderRadius: 5, 
-                    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-                    }} >  
-                    <p style={{ marginTop: 5 }}>Sales and Retail Calculators</p>
-                </Box> */}
-
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
-                        boxShadow: ' 0px 0px 20px 2px rgba(0, 0, 0, 0.1)',
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={sales} />
@@ -303,7 +235,6 @@ function FinanceOptions(){
                         textAlign: 'center',
                         fontSize: 24,
                         color: '#8591B0',
-                        // boxShadow: ' 0 8px 8px 0 rgba(0, 0, 0, 0.2)'
                     }}>
                 <Box>
                     <img style={{ width: '100%' }}  alt="lineIcon" src={iconLine} />
