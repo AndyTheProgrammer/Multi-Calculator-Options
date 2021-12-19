@@ -5,7 +5,7 @@
 
 import React, { useRef, useState, useEffect } from 'react'
 import CustomForm from '../../forms/CustomForm'
-import { Field, Form, Formik, FormikProps } from 'formik'
+import { Field, Form, Formik, FormikProps,  useFormik } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../layouts/AddLayout'
@@ -28,6 +28,8 @@ import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomS
 
 export default function ArithmeticSequenceCalculator(){
     const [value, setValue] = useState("")
+    const [inputValue, setInputValue] = useState([""])
+
     const animatedSquaresRef1 = useRef(null)
     const animatedSquaresRef2= useRef(null)
   
@@ -37,6 +39,7 @@ export default function ArithmeticSequenceCalculator(){
     const play2 = () => animatedSquaresRef2.current.play();
 
     useEffect(()=>{
+
         if(value){
             play1();
             play2();
@@ -72,22 +75,32 @@ export default function ArithmeticSequenceCalculator(){
                             number_of_observation: "",
                             method: "ArithmeticSequenceCalculator"
                         }}
-                        onSubmit = {(values)=>{
+                        onSubmit = {(values, actions)=>{
                             const data = {
                                 first_term: values.first_term,
                                 common_difference: values.common_difference,
                                 number_of_observation: values.number_of_observation,
                                 method: values.method
                             }
+
+                            actions.resetForm({
+                                values: {
+                                  // the type of `values` inferred to be Blog
+                                  first_term: "Banana",
+                                  common_difference: "Moneky",
+                                  number_of_observation: "Apple",
+                                  method: values.method
+                                },
+                                // you can also set the other form states here
+                              });
                             
+
                             const postData = async () => {
                                 console.log(data)
                                 const responseData = await mathMainService(data)
-                                console.log(responseData)
                                 var msg:any = responseData.statusDescription;
                                 if(msg === "success"){
-                                    setValue(responseData.message.answer)
-                                    console.log(responseData)
+                                    // setValue(responseData.message.answer)
                                 }
                             }
                             postData()
