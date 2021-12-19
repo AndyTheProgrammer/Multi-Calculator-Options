@@ -6,7 +6,7 @@
  import React, { useRef, useState, useEffect } from 'react'
  import CustomForm from '../../forms/CustomForm'
  import { Field, Form, Formik, FormikProps } from 'formik'
- import { otherMainService } from '../../../services/mathService/mathMainService'
+ import { otherMainService, mathMainService } from '../../../services/mathService/mathMainService'
  import Anime from 'react-animejs-wrapper'
  import AddLayout from '../../layouts/AddLayout'
  import { Box, Grid } from '@mui/material'
@@ -17,7 +17,9 @@
  
  const Latex = require('react-latex');
  
- const DistanceUnit = (props:any) => ( 
+
+
+const HeightUnit = (props:any) => ( 
     <Box sx={{
       display: 'flex',
     }}>
@@ -33,12 +35,12 @@
         color:'black' 
       }}
       {...props} >
-        <option value="mi">mi</option>
+        <option value="cm">cm</option>
       </select>
     </Box>
 );
 
-const FuelUnit = (props:any) => ( 
+const WeightUnit = (props:any) => ( 
     <Box sx={{
       display: 'flex',
     }}>
@@ -54,14 +56,13 @@ const FuelUnit = (props:any) => (
         color:'black' 
       }}
       {...props} >
-        <option value="liter">liter</option>
+        <option value="kg">kg</option>
       </select>
     </Box>
 );
-
 
  
- export default function GasMileageCalculator(){
+ export default function IdealWeightCalculator(){
      const [value, setValue] = useState("")
      const animatedSquaresRef1 = useRef(null)
      const animatedSquaresRef2= useRef(null)
@@ -80,7 +81,7 @@ const FuelUnit = (props:any) => (
  
      return(
          <>
-         <NavBar2 pagename="Gas Mileage Calculator" />
+         <NavBar2 pagename="Ideal Weight Calculator" />
          <AddLayout>
              <Box sx={{ display: "flex", justifyContent: "center" }}>
              <Anime
@@ -90,7 +91,6 @@ const FuelUnit = (props:any) => (
                  ref={animatedSquaresRef1}
                  config={{
                      translateX: -250,
-                 //   direction: 'alternate',
                      easing: 'easeInOutSine',
                      autoplay: false,
                  }}>
@@ -101,23 +101,21 @@ const FuelUnit = (props:any) => (
                      </Box>
                      <Formik
                          initialValues={{ 
-                            fuel:"",
-                            fuel_unit: "Liter",
-                            distance: "",
-                            distance_unit:"KiloMeter",
-                            price_per_gallon: "",
-                            method: "GasMileageCalculator"
+                            height:"",
+                            height_unit: "cm",
+                            gender: "",
+                            method: "IdealWeightCalculator"
                          }}
                          onSubmit = {(values)=>{
+
                              const data = {
-                                fuel: values.fuel,
-                                fuel_unit: values.fuel_unit,
-                                distance: values.distance,
-                                distance_unit: values.distance_unit,
-                                price_per_gallon: values.price_per_gallon,
-                                 method: values.method
+                                height: values.height,
+                                height_unit: values.height_unit,
+                                gender: values.gender,
+                                method: values.method
                              }
-                             
+
+                             console.log(data)
                              const postData = async () => {
                                  console.log("**** DATA UNIT ****")
                                  const responseData = await otherMainService(data)
@@ -137,58 +135,39 @@ const FuelUnit = (props:any) => (
                                  <Box sx={{minHeight: 250, display:'flex', flexDirection:'column' }}>
                                      <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
                                          <Grid item={true} xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Fuel</Box>
+                                             <Box sx={{ ...labelStyle }}>Height</Box>
                                          </Grid>
                                          <Grid item={true} xs={5} sx={{
                                              display:'flex'}}>
                                              <Field
                                                  type="text"
-                                                 name="fuel"
+                                                 name="height"
                                                  component={CustomFormikForm}
                                              />
                                          </Grid>
                  
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Fuel unit</Box>
+                                             <Box sx={{ ...labelStyle }}>Height unit</Box>
                                          </Grid>
                                          <Grid item xs={5}>
                                          <Field
                                              type="text"
-                                             name="fuel_unit"
-                                             as={FuelUnit}
+                                             name="height_unit"
+                                             as={HeightUnit}
                                          />
                                          </Grid>
                                      
+
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Distance</Box>
+                                             <Box sx={{ ...labelStyle }}>Gender</Box>
                                          </Grid>
                                          <Grid item xs={5}>
                                              <Field
                                                  type="text"
-                                                 name="distance"
+                                                 name="gender"
                                                  component={CustomFormikForm}
                                              />
-                                         </Grid>  
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Distance unit</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="distance_unit"
-                                                 as={DistanceUnit}
-                                             />
-                                         </Grid>  
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Price per gallon</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="price_per_gallon"
-                                                 component={CustomFormikForm}
-                                             />
-                                         </Grid>                    
+                                         </Grid>                                                             
                                      </Grid>
                                      
                                      <Box sx={{flexGrow: 1}}>

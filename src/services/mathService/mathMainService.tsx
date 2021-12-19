@@ -44,7 +44,10 @@ export async function mathMainService(
     INTERFACES.StatisticsCalculator|
     INTERFACES.TwoDDistanceCalculator|
     INTERFACES.ZscoreCalculator|
-    INTERFACES.MassCalculator
+    INTERFACES.MassCalculator|
+    INTERFACES.MassCalculator|
+    INTERFACES.DensityCalculator
+   
     ){
     try{
         const { data } = await axiosInstance.post(mathRoute, dataObject);
@@ -72,7 +75,10 @@ export async function otherMainService(
     INTERFACES.GasMileageCalculator|
     INTERFACES.ElectricityCalculator|
     INTERFACES.PregnancyWeightGainCalculator|
-    INTERFACES.HeatIndexCalculatorUseRelativeHumidity
+    INTERFACES.HeatIndexCalculatorUseRelativeHumidity|
+    INTERFACES.CarbohydrateCalculator|
+    INTERFACES.IdealWeightCalculator|
+    INTERFACES.ArmyBodyFatCalculator
     
     ){
     try{
@@ -86,6 +92,26 @@ export async function otherMainService(
         }
     }
     catch(error){
+        console.log(error)
         return error
     }
 }
+
+// export async function financeService(
+//     dataObject
+    
+//     ){
+//     try{
+//         const { data } = await axiosInstance.post(othersRoute, dataObject);
+//         console.log(data)
+//         var msg:any = data.statusDescription;
+//         if(msg === "success"){
+//              return data
+//         }else{
+//             return false
+//         }
+//     }
+//     catch(error){
+//         return error
+//     }
+// }

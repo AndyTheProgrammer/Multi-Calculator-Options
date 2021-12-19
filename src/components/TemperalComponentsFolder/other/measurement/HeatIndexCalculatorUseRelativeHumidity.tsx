@@ -4,16 +4,16 @@
  */
 
  import React, { useRef, useState, useEffect } from 'react'
- import CustomForm from '../../forms/CustomForm'
+ import CustomForm from '../../../forms/CustomForm'
  import { Field, Form, Formik, FormikProps } from 'formik'
- import { otherMainService } from '../../../services/mathService/mathMainService'
+ import { otherMainService } from '../../../../services/mathService/mathMainService'
  import Anime from 'react-animejs-wrapper'
- import AddLayout from '../../layouts/AddLayout'
+ import AddLayout from '../../../layouts/AddLayout'
  import { Box, Grid } from '@mui/material'
- import { CustomFormBtn } from '../../custom/CustomFormBtn'
- import { NavBar2 } from '../../navbar/navbar2'
- import { CustomFormikForm } from '../../forms/CustomForm'
- import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+ import { CustomFormBtn } from '../../../custom/CustomFormBtn'
+ import { NavBar2 } from '../../../navbar/navbar2'
+ import { CustomFormikForm } from '../../../forms/CustomForm'
+ import { labelStyle, formCardStyle, formDisplay } from '../../../../styling/CustomStyles'
  
  const Latex = require('react-latex');
 

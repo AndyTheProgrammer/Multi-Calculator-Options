@@ -1,23 +1,22 @@
 /**
- * 
  * THIS MAKES THE Arithmetic Sequence Calculator FORM
  */
 
  import React, { useRef, useState, useEffect } from 'react'
- import CustomForm from '../../forms/CustomForm'
+ import CustomForm from '../../../forms/CustomForm'
  import { Field, Form, Formik, FormikProps } from 'formik'
- import { otherMainService } from '../../../services/mathService/mathMainService'
+ import { otherMainService } from '../../../../services/mathService/mathMainService'
  import Anime from 'react-animejs-wrapper'
- import AddLayout from '../../layouts/AddLayout'
+ import AddLayout from '../../../layouts/AddLayout'
  import { Box, Grid } from '@mui/material'
- import { CustomFormBtn } from '../../custom/CustomFormBtn'
- import { NavBar2 } from '../../navbar/navbar2'
- import { CustomFormikForm } from '../../forms/CustomForm'
- import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+ import { CustomFormBtn } from '../../../custom/CustomFormBtn'
+ import { NavBar2 } from '../../../navbar/navbar2'
+ import { CustomFormikForm } from '../../../forms/CustomForm'
+ import { labelStyle, formCardStyle, formDisplay } from '../../../../styling/CustomStyles'
  
  const Latex = require('react-latex');
  
- const WeightUnit = (props:any) => ( 
+ const TimeUnit = (props:any) => ( 
     <Box sx={{
       display: 'flex',
     }}>
@@ -33,12 +32,12 @@
         color:'black' 
       }}
       {...props} >
-        <option value="kg">kg</option>
+        <option value="Hour">Hour</option>
       </select>
     </Box>
 );
 
-const HeightUnit = (props:any) => ( 
+const PowerUnit = (props:any) => ( 
     <Box sx={{
       display: 'flex',
     }}>
@@ -54,35 +53,14 @@ const HeightUnit = (props:any) => (
         color:'black' 
       }}
       {...props} >
-        <option value="cm">cm</option>
+        <option value="Watt">Watt</option>
       </select>
     </Box>
 );
 
-const TwinsUnit = (props:any) => ( 
-    <Box sx={{
-      display: 'flex',
-    }}>
-      <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
-      <select 
-      style={{
-        width:'100%',
-        backgroundColor:'#F0F3F6',
-        border: 'none',
-        borderColor: 'red',
-        borderRadius: 7,
-        outline: 'none',
-        color:'black' 
-      }}
-      {...props} >
-        <option value="yes">yes</option>
-        <option value="yes">no</option>
-      </select>
-    </Box>
-);
 
  
- export default function PregnancyWeightGainCalculator(){
+ export default function ElectricityCalculator(){
      const [value, setValue] = useState("")
      const animatedSquaresRef1 = useRef(null)
      const animatedSquaresRef2= useRef(null)
@@ -101,7 +79,7 @@ const TwinsUnit = (props:any) => (
  
      return(
          <>
-         <NavBar2 pagename="Fuel Cost Calculator" />
+         <NavBar2 pagename="Electricity Calculator" />
          <AddLayout>
              <Box sx={{ display: "flex", justifyContent: "center" }}>
              <Anime
@@ -122,23 +100,22 @@ const TwinsUnit = (props:any) => (
                      </Box>
                      <Formik
                          initialValues={{ 
-                            height:"",
-                            height_unit: "cm",
-                            weight: "",
-                            weight_unit:"kg",
-                            twins: "yes",
-                            weeks: "",
-                            method: "PregnancyWeightGainCalculator"
+                            power:"",
+                            power_unit: "Watt",
+                            capacity: "",
+                            time:"",
+                            time_unit: "Hour",
+                            cost: "",
+                            method: "ElectricityCalculator"
                          }}
                          onSubmit = {(values)=>{
-                             var week = parseInt(values.weeks)
                              const data = {
-                                height: values.height,
-                                height_unit: values.height_unit,
-                                weight: values.weight,
-                                weight_unit: values.weight_unit,
-                                twins: values.twins,
-                                weeks: week,
+                                power: values.power,
+                                power_unit: values.power_unit,
+                                capacity: values.capacity,
+                                time: values.time,
+                                time_unit: values.time_unit,
+                                cost: values.cost,
                                 method: values.method
                              }
                              
@@ -161,69 +138,69 @@ const TwinsUnit = (props:any) => (
                                  <Box sx={{minHeight: 250, display:'flex', flexDirection:'column' }}>
                                      <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
                                          <Grid item={true} xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Height</Box>
+                                             <Box sx={{ ...labelStyle }}>Power</Box>
                                          </Grid>
                                          <Grid item={true} xs={5} sx={{
                                              display:'flex'}}>
                                              <Field
                                                  type="text"
-                                                 name="height"
+                                                 name="power"
                                                  component={CustomFormikForm}
                                              />
                                          </Grid>
                  
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Height unit</Box>
+                                             <Box sx={{ ...labelStyle }}>Power unit</Box>
                                          </Grid>
                                          <Grid item xs={5}>
                                          <Field
                                              type="text"
-                                             name="height_unit"
-                                             as={HeightUnit}
+                                             name="power_unit"
+                                             as={PowerUnit}
                                          />
                                          </Grid>
                                      
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Weight</Box>
+                                             <Box sx={{ ...labelStyle }}>Capacity</Box>
                                          </Grid>
                                          <Grid item xs={5}>
                                              <Field
                                                  type="text"
-                                                 name="weight"
+                                                 name="capacity"
                                                  component={CustomFormikForm}
                                              />
                                          </Grid>  
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Weight unit</Box>
+                                             <Box sx={{ ...labelStyle }}>Time</Box>
                                          </Grid>
                                          <Grid item xs={5}>
                                              <Field
                                                  type="text"
-                                                 name="weight_unit"
-                                                 as={WeightUnit}
+                                                 name="time"
+                                                 component={CustomFormikForm}
                                              />
                                          </Grid>  
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Twins</Box>
+                                             <Box sx={{ ...labelStyle }}>Time unit</Box>
                                          </Grid>
                                          <Grid item xs={5}>
                                              <Field
                                                  type="text"
-                                                 name="twins"
-                                                 as={TwinsUnit}
+                                                 name="time_unit"
+                                                 as={TimeUnit}
                                              />
-                                         </Grid>     
+                                         </Grid>      
 
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Weeks</Box>
+                                             <Box sx={{ ...labelStyle }}>Cost</Box>
                                          </Grid>
                                          <Grid item xs={5}>
                                              <Field
                                                  type="text"
-                                                 name="weeks"
+                                                 name="cost"
                                                  component={CustomFormikForm}
                                              />
-                                         </Grid>                
+                                         </Grid>              
                                      </Grid>
                                      
                                      <Box sx={{flexGrow: 1}}>

@@ -9,7 +9,7 @@ import { SearchForm } from '../forms/searchForm';
 import { useHistory } from 'react-router-dom'
 
 // 
-import ArithmeticSequenceCalculator from  '../TemperalComponentsFolder/math/ArithmeticSequenceCalculator'
+import ArmyBodyFatCalculator from  '../TemperalComponentsFolder/other/ArmyBodyFatCalculator'
 
 
 
@@ -41,7 +41,7 @@ import ExponentForm from '../forms/math/ExponentForm'
 export default function TestPage(){
     return(
         <>
-          <ArithmeticSequenceCalculator/>
+          <ArmyBodyFatCalculator/>
         </>
     );
 }

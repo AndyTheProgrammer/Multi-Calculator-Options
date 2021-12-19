@@ -23,6 +23,16 @@ import transport_util_icon from '../../common/assets/others_icons/transport_util
 function OtherOptions(){
     const history = useHistory()
 
+    const categoryHeaderShadow = {
+        width:'100%',
+        height: 30, 
+        fontSize: 22,
+        display: 'flex',
+        justifyContent: 'start',
+        backgroundColor: 'white',
+        borderRadius: 5,
+        boxShadow: '0px 0px 20px 1px rgba(0, 0, 0, 0.1)',
+      }
 
       const boxStyle = {
         marginBottom: 2,
@@ -49,13 +59,7 @@ function OtherOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={convertion_calc_icon} />
@@ -88,13 +92,7 @@ function OtherOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={fitness_calc_icon} />
@@ -119,13 +117,7 @@ function OtherOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={health_calc_icon} />
@@ -151,13 +143,7 @@ function OtherOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={time_calc_icon} />
@@ -183,13 +169,7 @@ function OtherOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={tech_calc_icon} />
@@ -215,13 +195,7 @@ function OtherOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={transport_util_icon} />
@@ -247,13 +221,7 @@ function OtherOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={measurement_calc_icon} />
