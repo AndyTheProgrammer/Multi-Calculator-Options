@@ -31,7 +31,7 @@ function OtherOptions(){
         justifyContent: 'start',
         backgroundColor: 'white',
         borderRadius: 5,
-        boxShadow: '0px 0px 20px 1px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0px 5px 20px 1px rgba(0, 0, 0, 0.1)',
       }
 
       const boxStyle = {
