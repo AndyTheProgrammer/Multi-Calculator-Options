@@ -71,6 +71,7 @@ function SpecifiedSearchForm(){
                         color:'#707070',
                         height: 30,
                     }}
+                    autoComplete='off'
                     id="calc-search"
                     list="data"
                     type="text"
@@ -82,7 +83,7 @@ function SpecifiedSearchForm(){
                     }}
                     />
                  <Box>
-                    <SearchIcon/>
+                    <SearchIcon sx={{ color: '#3128af' }}/>
                 </Box>
             </div>
             

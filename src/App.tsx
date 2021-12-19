@@ -9,7 +9,7 @@ function App(){
         width: '100vw',
         height: '100vh',
         // background: 'rgb(251,251,251)',
-        background: 'linear-gradient(146deg, rgba(251,251,251,1) 0%, rgba(243,243,243,1) 33%, rgba(209,209,209,1) 100%)',
+        background: 'linear-gradient(146deg, rgba(251,251,251,1) 0%, rgba(243,243,243,1) 45%, rgba(209,209,209,1) 100%)',
         zIndex: -100,
       }}>
     </div>
