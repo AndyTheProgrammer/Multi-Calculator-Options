@@ -128,4 +128,8 @@ export { default as UnitConversionCalculators } from './categories/other/UnitCon
 export { default as ConcreteCalculator } from './mainPages/ConcreteCalculator';
 export { default as ProbabilityCalculator } from './mainPages/ProbabilityCalculator';
 export { default as AreaCalculator } from './mainPages/AreaCalculator';
+export { default as SurfaceAreaCalculator } from './mainPages/SurfaceAreaCalculator';
+export { default as VolumeCalculator } from './mainPages/VolumeCalculator';
+
+
 

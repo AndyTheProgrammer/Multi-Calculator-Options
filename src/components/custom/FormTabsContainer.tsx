@@ -53,8 +53,46 @@ function FormTabsContainer(props: any) {
   };
 
   // Animation is add to the containers, pass the values 'ref' and 'config'.
-  if (type === "styled") {
+  /*  if (type === "styled") {
+     return (
+       <Anime
+         style={{
+           position: 'absolute',
+         }}
+         ref={ref}
+         config={config}
+       >
+         <Grid item xs={12} sm={sm}>
+           <Paper className={paperBackground}>
+             <div className={tabRoot}>
+               <StyledTabs value={value} onChange={handleChange}>
+                 {calculators.map((item: any, index: number) => (
+                   <StyledTab
+                     key={item.tabTitle}
+                     label={item.tabTitle}
+                     {...a11yProps(index)}
+                   />
+                 ))}
+               </StyledTabs>
+ 
+               {calculators.map((item: any, index: number) => (
+                 <TabPanel
+                   key={item}
+                   value={value}
+                   index={index}
+                 >
+                   {item.calc}
+                 </TabPanel>
+               ))}
+             </div>
+           </Paper>
+         </Grid>
+       </Anime>
+     )
+   } else */
+  if (dropDown === true) {
     return (
+
       <Anime
         style={{
           position: 'absolute',
@@ -62,68 +100,32 @@ function FormTabsContainer(props: any) {
         ref={ref}
         config={config}
       >
-        <Grid item xs={12} sm={sm}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs value={value} onChange={handleChange}>
-                {calculators.map((item: any, index: number) => (
-                  <StyledTab
-                    key={item.tabTitle}
-                    label={item.tabTitle}
-                    {...a11yProps(index)}
-                  />
-                ))}
-              </StyledTabs>
+        <Paper className={paperBackground}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <StaticTab
+                className={leftTabContainer}
+                label={tabTitle1}
+                dropDown={true}
+                openDrop={openDrop}
+              />
+              <StaticTab
+                className={rightTabContainer}
+                label={tabTitle2}
+              />
+            </StyledTabs>
 
-              {calculators.map((item: any, index: number) => (
-                <TabPanel
-                  key={item}
-                  value={value}
-                  index={index}
-                >
-                  {item.calc}
-                </TabPanel>
-              ))}
-            </div>
-          </Paper>
-        </Grid>
+            <NoIndexTabPanel>
+              {children}
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
       </Anime>
-    )
-  } else if (dropDown === true) {
-    return (
-      <Anime
-        style={{
-          position: 'absolute',
-        }}
-        ref={ref}
-        config={config}
-      >
-        <Box>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <StaticTab
-                  className={leftTabContainer}
-                  label={tabTitle1}
-                  dropDown={true}
-                  openDrop={openDrop}
-                />
-                <StaticTab
-                  className={rightTabContainer}
-                  label={tabTitle2}
-                />
-              </StyledTabs>
 
-              <NoIndexTabPanel>
-                {children}
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Box>
-      </Anime>
     )
   } else {
     return (
+
       <Anime
         style={{
           position: 'absolute',
@@ -131,27 +133,26 @@ function FormTabsContainer(props: any) {
         ref={ref}
         config={config}
       >
-        <Grid item xs={12} sm={sm}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <StaticTab
-                  className={leftTabContainer}
-                  label={tabTitle1}
-                />
-                <StaticTab
-                  className={rightTabContainer}
-                  label={tabTitle2}
-                />
-              </StyledTabs>
+        <Box className={formDisplay}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <StaticTab
+                className={leftTabContainer}
+                label={tabTitle1}
+              />
+              <StaticTab
+                className={rightTabContainer}
+                label={tabTitle2}
+              />
+            </StyledTabs>
 
-              <NoIndexTabPanel>
-                {children}
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
+            <NoIndexTabPanel>
+              {children}
+            </NoIndexTabPanel>
+          </div>
+        </Box>
       </Anime>
+
     )
   }
 }

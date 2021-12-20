@@ -277,5 +277,16 @@ export const LATEX = {
   sectorArea: `$A = \\frac{{\\theta r^2 }}{2}$`,
   ellipseArea: `$A = \\pi r_1 r_2$`,
   parallelogramArea: `$A = bh$`,
+  capsuleVolume: `$V = \\pi r^{2}(\\frac{4}{3}r + h)$`,
+  coneVolume: `$V = \\frac{{Bh}}{3} = \\frac{{\\pi r^2 h}}{3}$`,
+  conicalFrustrumVolume: `$V = \\frac{1}{3} \\pi h (r^{2}+rR+R^{2})$`,
+  cubeVolume: `$V = x^{3}$`,
+  cylinderVolume: `$V = Bh = \\pi r^{2} h$`,
+  ellipsoidVolume: `$V = \\frac{4}{3} \\pi abc$`,
+  rectangularTankVolume: `$V = lwh$`,
+  sphereVolume: `$V = \\frac{{4\\pi r^{3}}}{3}$`,
+  sphericalCapVolume: `$V = \\frac{1}{3} \\pi h^{2}(3R - h)$`,
+  squarePyramidVolume: `$V = \\frac{1}{3}a^{2}h$`,
+  tubeVolume: `$V = \\pi frac{{d_1^{2} - d_2^{2}}}{4} l$`
 
 }

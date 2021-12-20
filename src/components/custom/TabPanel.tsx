@@ -30,9 +30,12 @@ const TabPanel = (props: TabPanelProps) => {
       {...other}
     >
       {value === index && (
-        <Container className={classes.container}>
+        <Box
+          p={5}
+        //className={classes.container}
+        >
           <Grid>{children}</Grid>
-        </Container>
+        </Box>
       )}
     </div>
   );

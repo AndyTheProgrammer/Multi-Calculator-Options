@@ -24,9 +24,12 @@ const NoIndexTabPanel = (props: TabPanelProps) => {
       role="tabpanel"
       {...other}
     >
-      <Container className={classes.container}>
+      <Box
+        p={5}
+      // className={classes.container}
+      >
         <Grid>{children}</Grid>
-      </Container>
+      </Box>
     </div>
   );
 }

@@ -47,6 +47,6 @@ const StyledTab = withStyles((theme: Theme) =>
     },
 
   }),
-)((props: StyledTabProps) => <Tab disableRipple  {...props} />);
+)((props: any) => <Tab disableRipple  {...props} />);
 
 export default StyledTab

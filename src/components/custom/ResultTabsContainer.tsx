@@ -1,12 +1,12 @@
 import React from 'react'
 import Anime from 'react-animejs-wrapper'
+import { Grid, Paper, Box, Typography } from '@mui/material';
 
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
 import TabPanel from './TabPanel';
 import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
-import { Grid, Paper, Box } from '@mui/material';
 import useStyles from '../../styling/CustomStyles'
 import { Font, FontProvider } from '../font'
 
@@ -17,95 +17,101 @@ interface ResultsProps {
   tabTitle: string;
 }
 
-function a11yProps(index: any) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
-const ResultTabsContainer = (props: any) => {
-  const { children, tabTitle1, tabTitle2, sm, type, ref, config, latex } = props;
+const ResultTabsContainer = React.forwardRef((props: any, ref) => {
+  const { children, tabTitle, sm, config, latex } = props;
   const {
     tabRoot,
     rightTabContainer,
     leftTabContainer,
     paperBackground,
+    formCardStyle,
     formDisplay
   } = useStyles()
-  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
+  return (
 
-  if (type === "styled") {
-    return (
-      <Anime
-        style={{
-          position: 'absolute',
-          zIndex: -5
-        }}
-        ref={ref}
-        config={config}
-      >
-        <Box>
-          <Paper className={paperBackground}>
-            <div className={tabRoot} style={{ maxHeight: '30' }}>
-              <StyledTabs value={value} onChange={handleChange} >
-                <StyledTab
-                  label={tabTitle1}
-                  {...a11yProps(0)}
-                />
-                <StyledTab
-                  label={tabTitle2}
-                  {...a11yProps(1)}
-                />
-              </StyledTabs>
-
-              <TabPanel value={value} index={0}>
-                <Latex displayMode={false}>{latex}</Latex>
-                {children}
-              </TabPanel>
-            </div>
-          </Paper>
+    <Anime
+      style={{
+        //position: 'absolute',
+        zIndex: -5
+      }}
+      ref={ref}
+      config={config}
+    >
+      <Box className={paperBackground}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ height: 40, width: '100%' }}>
+            <FontProvider fonts={[{ font: 'Varela Round' }]}>
+              <Typography>
+                <Box
+                  sx={{
+                    color: '#4072B5',
+                    fontWeight: 'bold',
+                    textAlign: 'center'
+                  }}>
+                  <Font>{tabTitle}</Font>
+                </Box>
+              </Typography>
+            </FontProvider>
+          </Box>
+          <Box className={rightTabContainer}></Box>
         </Box>
-      </Anime>
-    )
-  } else {
-    return (
-      <Anime
-        style={{
-          position: 'absolute',
-          zIndex: -5
-        }}
-        ref={ref}
-        config={config}
-      >
-        <Box>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <StaticTab
-                  className={leftTabContainer}
-                  label={tabTitle1}
-                />
-                <StaticTab
-                  className={rightTabContainer}
-                  label={tabTitle2}
-                />
-              </StyledTabs>
 
-              <NoIndexTabPanel>
-                <Latex displayMode={false}>{latex}</Latex>
-                {children}
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Box>
-      </Anime>
-    )
-  }
-}
+        <div>
+          <div className='overflow-auto p-3'>
+            <Latex displayMode={false}>{latex}</Latex>
+            {children}
+          </div>
+        </div>
+      </Box>
+
+
+
+    </Anime>
+
+  )
+})
 
 export default ResultTabsContainer
+
+/* const ResultTabsContainer = React.forwardRef((props: any, ref) => {
+  const { children, tabTitle1, tabTitle2, sm, config, latex } = props;
+  const {
+    tabRoot,
+    rightTabContainer,
+    leftTabContainer,
+    paperBackground,
+    resultContainer
+  } = useStyles()
+
+  return (
+    <Anime
+      style={{
+        position: 'absolute',
+        zIndex: -5
+      }}
+      ref={ref}
+      config={{ config }}
+    >
+      <Box className={resultContainer}>
+        <div className={tabRoot}>
+          <StyledTabs>
+            <StaticTab
+              className={leftTabContainer}
+              label={tabTitle1}
+            />
+            <StaticTab
+              className={rightTabContainer}
+              label={tabTitle2}
+            />
+          </StyledTabs>
+
+          <NoIndexTabPanel>
+            <Latex displayMode={false}>{latex}</Latex>
+            {children}
+          </NoIndexTabPanel>
+        </div>
+      </Box>
+    </Anime>
+  )
+}) */
