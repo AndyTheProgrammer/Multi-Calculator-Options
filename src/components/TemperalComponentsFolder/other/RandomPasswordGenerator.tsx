@@ -6,7 +6,7 @@
  import React, { useRef, useState, useEffect } from 'react'
  import CustomForm from '../../forms/CustomForm'
  import { Field, Form, Formik, FormikProps } from 'formik'
- import { otherMainService } from '../../../services/mathService/mathMainService'
+ import { otherMainService, mathMainService } from '../../../services/mathService/mathMainService'
  import Anime from 'react-animejs-wrapper'
  import AddLayout from '../../layouts/AddLayout'
  import { Box, Grid } from '@mui/material'
@@ -14,10 +14,10 @@
  import { NavBar2 } from '../../navbar/navbar2'
  import { CustomFormikForm } from '../../forms/CustomForm'
  import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
- 
+ import { DatePickerField } from '../../forms/DatePickerField'
  const Latex = require('react-latex');
  
- const CustomFormikOptionsForDistance = (props:any) => ( 
+const HeightUnit = (props:any) => ( 
     <Box sx={{
       display: 'flex',
     }}>
@@ -33,12 +33,12 @@
         color:'black' 
       }}
       {...props} >
-        <option value="mi">mi</option>
+        <option value="CentiMeter">CentiMeter</option>
       </select>
     </Box>
 );
 
-const CustomFormikOptionsUnit = (props:any) => ( 
+const WaistUnit = (props:any) => ( 
     <Box sx={{
       display: 'flex',
     }}>
@@ -54,14 +54,55 @@ const CustomFormikOptionsUnit = (props:any) => (
         color:'black' 
       }}
       {...props} >
-        <option value="liter">liter</option>
+        <option value="CentiMeter">CentiMeter</option>
       </select>
     </Box>
 );
 
+const NeckUnit = (props:any) => ( 
+    <Box sx={{
+      display: 'flex',
+    }}>
+      <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
+      <select 
+      style={{
+        width:'100%',
+        backgroundColor:'#F0F3F6',
+        border: 'none',
+        borderColor: 'red',
+        borderRadius: 7,
+        outline: 'none',
+        color:'black' 
+      }}
+      {...props} >
+        <option value="CentiMeter">CentiMeter</option>
+      </select>
+    </Box>
+);
+
+const HipUnit = (props:any) => ( 
+    <Box sx={{
+      display: 'flex',
+    }}>
+      <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
+      <select 
+      style={{
+        width:'100%',
+        backgroundColor:'#F0F3F6',
+        border: 'none',
+        borderColor: 'red',
+        borderRadius: 7,
+        outline: 'none',
+        color:'black' 
+      }}
+      {...props} >
+        <option value="CentiMeter">CentiMeter</option>
+      </select>
+    </Box>
+);
 
  
- export default function FuelCostCalculator(){
+ export default function RandomPasswordGenerator(){
      const [value, setValue] = useState("")
      const animatedSquaresRef1 = useRef(null)
      const animatedSquaresRef2= useRef(null)
@@ -80,7 +121,7 @@ const CustomFormikOptionsUnit = (props:any) => (
  
      return(
          <>
-         <NavBar2 pagename="Fuel Cost Calculator" />
+         <NavBar2 pagename="Random Password Generator" />
          <AddLayout>
              <Box sx={{ display: "flex", justifyContent: "center" }}>
              <Anime
@@ -90,7 +131,6 @@ const CustomFormikOptionsUnit = (props:any) => (
                  ref={animatedSquaresRef1}
                  config={{
                      translateX: -250,
-                 //   direction: 'alternate',
                      easing: 'easeInOutSine',
                      autoplay: false,
                  }}>
@@ -101,23 +141,16 @@ const CustomFormikOptionsUnit = (props:any) => (
                      </Box>
                      <Formik
                          initialValues={{ 
-                            distance:"",
-                            distance_unit: "mi",
-                            kilometer_per_liter: "",
-                            fuel_price:"",
-                            fuel_price_unit: "liter",
-                            method: "FuelCostCalculator"
+                            length:"",
+                            method: "RandomPasswordGenerator"
                          }}
                          onSubmit = {(values)=>{
                              const data = {
-                                distance: values.distance,
-                                distance_unit: values.distance_unit,
-                                kilometer_per_liter: values.kilometer_per_liter,
-                                fuel_price: values.fuel_price,
-                                fuel_price_unit: values.fuel_price_unit,
-                                 method: values.method
+                                length: values.length,
+                                method: values.method,
                              }
-                             
+
+                             console.log(data)
                              const postData = async () => {
                                  console.log("**** DATA UNIT ****")
                                  const responseData = await otherMainService(data)
@@ -137,58 +170,17 @@ const CustomFormikOptionsUnit = (props:any) => (
                                  <Box sx={{minHeight: 250, display:'flex', flexDirection:'column' }}>
                                      <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
                                          <Grid item={true} xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Distance</Box>
+                                             <Box sx={{ ...labelStyle }}>Password length</Box>
                                          </Grid>
                                          <Grid item={true} xs={5} sx={{
                                              display:'flex'}}>
                                              <Field
                                                  type="text"
-                                                 name="distance"
+                                                 name="length"
                                                  component={CustomFormikForm}
                                              />
                                          </Grid>
-                 
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Distance unit</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                         <Field
-                                             type="text"
-                                             name="distance_unit"
-                                             as={CustomFormikOptionsForDistance}
-                                         />
-                                         </Grid>
-                                     
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Kilometer per liter</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="kilometer_per_liter"
-                                                 component={CustomFormikForm}
-                                             />
-                                         </Grid>  
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Fuel price</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="fuel_price"
-                                                 component={CustomFormikForm}
-                                             />
-                                         </Grid>  
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Fuel price unit</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="fuel_price_unit"
-                                                 as={CustomFormikOptionsUnit}
-                                             />
-                                         </Grid>                    
+                                                         
                                      </Grid>
                                      
                                      <Box sx={{flexGrow: 1}}>

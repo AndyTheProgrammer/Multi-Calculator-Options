@@ -8,7 +8,7 @@ import { SearchForm } from '../forms/searchForm'
 import { useHistory } from "react-router-dom";
 import { Box, Grid } from '@mui/material'
 import Slider from "react-slick";
-import AddLayout from '../layouts/AddLayout';
+import LayoutWithoutSearchForm from '../layouts/LayoutWithoutSearchForm';
 import site_map_icon from '../../common/assets/site_map_icon.svg';
 import fincance_icon from '../../common/assets/finance.svg';
 import other_icon from '../../common/assets/other.svg';
@@ -117,7 +117,7 @@ function AllCalculators(){
         <Box sx={{ marginBottom: 5 }}>
             <NavBar />
         </Box>
-        <AddLayout>
+        <LayoutWithoutSearchForm>
         <Box >
             <Grid sx={{display: 'flex', justifyContent: 'center', paddingRight: 2 }}  container spacing={3}>
                 <Grid sx={{ display: 'flex',justifyContent: 'center'}} item xs={12} md={4}>
@@ -205,7 +205,7 @@ function AllCalculators(){
                
             </Grid>
         </Box>
-        </AddLayout>
+        </LayoutWithoutSearchForm>
         </>
     );
    

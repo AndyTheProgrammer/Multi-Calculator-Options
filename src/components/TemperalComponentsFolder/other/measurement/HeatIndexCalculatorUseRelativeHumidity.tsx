@@ -1,22 +1,23 @@
 /**
+ * 
  * THIS MAKES THE Arithmetic Sequence Calculator FORM
  */
 
  import React, { useRef, useState, useEffect } from 'react'
- import CustomForm from '../../forms/CustomForm'
+ import CustomForm from '../../../forms/CustomForm'
  import { Field, Form, Formik, FormikProps } from 'formik'
- import { otherMainService } from '../../../services/mathService/mathMainService'
+ import { otherMainService } from '../../../../services/mathService/mathMainService'
  import Anime from 'react-animejs-wrapper'
- import AddLayout from '../../layouts/AddLayout'
+ import AddLayout from '../../../layouts/AddLayout'
  import { Box, Grid } from '@mui/material'
- import { CustomFormBtn } from '../../custom/CustomFormBtn'
- import { NavBar2 } from '../../navbar/navbar2'
- import { CustomFormikForm } from '../../forms/CustomForm'
- import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+ import { CustomFormBtn } from '../../../custom/CustomFormBtn'
+ import { NavBar2 } from '../../../navbar/navbar2'
+ import { CustomFormikForm } from '../../../forms/CustomForm'
+ import { labelStyle, formCardStyle, formDisplay } from '../../../../styling/CustomStyles'
  
  const Latex = require('react-latex');
- 
- const TimeUnit = (props:any) => ( 
+
+const TemperatureUnit = (props:any) => ( 
     <Box sx={{
       display: 'flex',
     }}>
@@ -32,35 +33,14 @@
         color:'black' 
       }}
       {...props} >
-        <option value="Hour">Hour</option>
-      </select>
-    </Box>
-);
-
-const PowerUnit = (props:any) => ( 
-    <Box sx={{
-      display: 'flex',
-    }}>
-      <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
-      <select 
-      style={{
-        width:'100%',
-        backgroundColor:'#F0F3F6',
-        border: 'none',
-        borderColor: 'red',
-        borderRadius: 7,
-        outline: 'none',
-        color:'black' 
-      }}
-      {...props} >
-        <option value="Watt">Watt</option>
+        <option value="Kilogram">Kilogram</option>
       </select>
     </Box>
 );
 
 
  
- export default function ElectricityCalculator(){
+ export default function HeatIndexCalculatorUseRelativeHumidity(){
      const [value, setValue] = useState("")
      const animatedSquaresRef1 = useRef(null)
      const animatedSquaresRef2= useRef(null)
@@ -79,7 +59,7 @@ const PowerUnit = (props:any) => (
  
      return(
          <>
-         <NavBar2 pagename="Electricity Calculator" />
+         <NavBar2 pagename="Heat Index Calculator (use relative humidity)" />
          <AddLayout>
              <Box sx={{ display: "flex", justifyContent: "center" }}>
              <Anime
@@ -100,22 +80,16 @@ const PowerUnit = (props:any) => (
                      </Box>
                      <Formik
                          initialValues={{ 
-                            power:"",
-                            power_unit: "Watt",
-                            capacity: "",
-                            time:"",
-                            time_unit: "Hour",
-                            cost: "",
-                            method: "ElectricityCalculator"
+                            temperature: "",
+                            relative_humidity: "",
+                            temperature_unit: "",
+                            method: "HeatIndexCalculatorUseRelativeHumidity"
                          }}
                          onSubmit = {(values)=>{
                              const data = {
-                                power: values.power,
-                                power_unit: values.power_unit,
-                                capacity: values.capacity,
-                                time: values.time,
-                                time_unit: values.time_unit,
-                                cost: values.cost,
+                                temperature: values.temperature,
+                                relative_humidity: values.relative_humidity,
+                                temperature_unit: values.temperature_unit,
                                 method: values.method
                              }
                              
@@ -138,69 +112,39 @@ const PowerUnit = (props:any) => (
                                  <Box sx={{minHeight: 250, display:'flex', flexDirection:'column' }}>
                                      <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
                                          <Grid item={true} xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Power</Box>
+                                             <Box sx={{ ...labelStyle }}>Temperature</Box>
                                          </Grid>
                                          <Grid item={true} xs={5} sx={{
                                              display:'flex'}}>
                                              <Field
                                                  type="text"
-                                                 name="power"
+                                                 name="temperature"
                                                  component={CustomFormikForm}
                                              />
                                          </Grid>
                  
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Power unit</Box>
+                                             <Box sx={{ ...labelStyle }}>Relative humidity</Box>
                                          </Grid>
                                          <Grid item xs={5}>
                                          <Field
                                              type="text"
-                                             name="power_unit"
-                                             as={PowerUnit}
+                                             name="relative_humidity"
+                                             component={CustomFormikForm}
                                          />
                                          </Grid>
                                      
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Capacity</Box>
+                                             <Box sx={{ ...labelStyle }}>Temperature unit</Box>
                                          </Grid>
                                          <Grid item xs={5}>
                                              <Field
                                                  type="text"
-                                                 name="capacity"
-                                                 component={CustomFormikForm}
+                                                 name="temperature_unit"
+                                                 as={TemperatureUnit}
                                              />
                                          </Grid>  
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Time</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="time"
-                                                 component={CustomFormikForm}
-                                             />
-                                         </Grid>  
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Time unit</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="time_unit"
-                                                 as={TimeUnit}
-                                             />
-                                         </Grid>      
-
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Cost</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="cost"
-                                                 component={CustomFormikForm}
-                                             />
-                                         </Grid>              
+                                        
                                      </Grid>
                                      
                                      <Box sx={{flexGrow: 1}}>

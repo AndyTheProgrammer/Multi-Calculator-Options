@@ -88,7 +88,8 @@ p.resultDisplay {
   border: 0 solid red;
   outline: none;
   width: 100%;
-  padding-top: 2px;
+  height: 30px;
+  padding-top: 1px;
   margin-left: 16px;
   margin-right: 16px;
   color: #707070;
@@ -409,4 +410,14 @@ select.form-control-sm:not([size]):not([multiple]) {
 }
 
 .result {
+}
+
+.date-picker {
+  width: 100%;
+  background-color: #f0f3f6;
+  border: solid;
+  border-width: 0;
+  border-color: red;
+  border-radius: 7px;
+  outline: none;
 }

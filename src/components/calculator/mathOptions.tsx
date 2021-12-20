@@ -29,6 +29,17 @@ function MathOptions(){
         // boxShadow: ' 0 10px 8px 0px rgba(0, 0, 0, 0.2)'
       }
 
+      const categoryHeaderShadow = {
+        width:'100%',
+        height: 30, 
+        fontSize: 22,
+        display: 'flex',
+        justifyContent: 'start',
+        backgroundColor: 'white',
+        borderRadius: 5,
+        boxShadow: '0px 5px 20px 1px rgba(0, 0, 0, 0.1)',
+      }
+
       const settings = {
         dots: false,
         infinite: true,
@@ -43,13 +54,7 @@ function MathOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={fractions} />
@@ -83,13 +88,7 @@ function MathOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={general_math} />
@@ -122,13 +121,7 @@ function MathOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={algebra_icon} />
@@ -161,13 +154,7 @@ function MathOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={stats} />
@@ -200,13 +187,7 @@ function MathOptions(){
             <Box sx={{...boxStyle }}>
             <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={geometry_icon} />
@@ -239,13 +220,7 @@ function MathOptions(){
             <Box sx={{...boxStyle }}>
                 <Box 
                     sx={{ 
-                        width:'100%',
-                        height: 30, 
-                        fontSize: 22,
-                        display: 'flex',
-                        justifyContent: 'start',
-                        backgroundColor: 'white',
-                        borderRadius: 5,
+                        ...categoryHeaderShadow
                     }}>
                     <Box sx={{ height: 30, }}>
                         <img style={{ height: '100%', }} alt="icon" src={geometry_icon} />

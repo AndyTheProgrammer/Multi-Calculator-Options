@@ -95,7 +95,9 @@ function SearchForm(){
     })
 
     const commonStyles = {
+        marginTop: 0.5,
         width: 300,
+        height: 30,
         marginRight: 4,
         backgroundColor: '#FFFFFF',
         borderRadius: 25,
@@ -107,23 +109,28 @@ function SearchForm(){
             sm: 'none',
             xs: 'none'
         },
+        
       };
 
     return(
         <div>
             <div className={overLayStyleClasses} ></div>
-            <Box sx={{ ...commonStyles }}>
+            <Box sx={{ ...commonStyles, }}>
                 <Box sx={{
+                    width: '100%',
+                    paddingRight: 2,
                     display: {
                         lg: 'flex',
                         md: 'flex',
                         sm: 'none',
                         xs: 'none'
                     },
-                        justifyContent: 'center'
+                    flexDirection:'row' ,
+                    justifyContent: 'center'
                     }}>
 
                     <input
+                        autoComplete="off"
                         onFocus = { ()=> { setSearchOption(true) }}
                         id="calc-search"
                         list="data"
@@ -136,10 +143,12 @@ function SearchForm(){
                             setValue(e.target.value)
                         }}
                     />
+                    <Box sx={{ flexGrow: 1}}></Box>
 
-                    <Button type="button">
-                        <SearchIcon/>
-                    </Button>
+                    <Box sx={{ border: 'none',}}>
+                        <SearchIcon 
+                            sx={{ color: '#3128af' }}/>
+                    </Box>
                 </Box>
             </Box>
             <Box sx={{ 

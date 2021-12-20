@@ -4,44 +4,32 @@
  */
 
  import React, { useRef, useState, useEffect } from 'react'
- import CustomForm from '../../forms/CustomForm'
- import { Field, Form, Formik, FormikProps } from 'formik'
- import { otherMainService } from '../../../services/mathService/mathMainService'
+ import CustomForm from '../../../forms/CustomForm'
+ import { Field, Form, Formik, FormikProps,  useFormik } from 'formik'
+ import { financeService } from '../../../../services/mathService/mathMainService'
  import Anime from 'react-animejs-wrapper'
- import AddLayout from '../../layouts/AddLayout'
- import { Box, Grid } from '@mui/material'
- import { CustomFormBtn } from '../../custom/CustomFormBtn'
- import { NavBar2 } from '../../navbar/navbar2'
- import { CustomFormikForm } from '../../forms/CustomForm'
- import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+ import AddLayout from '../../../layouts/AddLayout'
+ import { Box, Grid, Typography } from '@mui/material'
+ import { CustomFormBtn, CustomFormImageBtn } from '../../../custom/CustomFormBtn'
+ import { NavBar2 } from '../../../navbar/navbar2'
  
- const Latex = require('react-latex');
-
-const TemperatureUnit = (props:any) => ( 
-    <Box sx={{
-      display: 'flex',
-    }}>
-      <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
-      <select 
-      style={{
-        width:'100%',
-        backgroundColor:'#F0F3F6',
-        border: 'none',
-        borderColor: 'red',
-        borderRadius: 7,
-        outline: 'none',
-        color:'black' 
-      }}
-      {...props} >
-        <option value="Kilogram">Kilogram</option>
-      </select>
-    </Box>
-);
-
-
+ import { labelStyle, formCardStyle, formDisplay } from '../../../../styling/CustomStyles'
  
- export default function HeatIndexCalculatorUseRelativeHumidity(){
+ 
+  const Latex = require('react-latex');
+  const innerBoxStyle = {
+     border:'solid',
+     width: 400,
+     height: 300,
+     borderRadius: '20px',
+     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+     backgroundColor: 'white'
+  }
+ 
+ export default function FutureValueCalculator(){
      const [value, setValue] = useState("")
+     const [inputValue, setInputValue] = useState([""])
+ 
      const animatedSquaresRef1 = useRef(null)
      const animatedSquaresRef2= useRef(null)
    
@@ -51,6 +39,7 @@ const TemperatureUnit = (props:any) => (
      const play2 = () => animatedSquaresRef2.current.play();
  
      useEffect(()=>{
+ 
          if(value){
              play1();
              play2();
@@ -59,9 +48,10 @@ const TemperatureUnit = (props:any) => (
  
      return(
          <>
-         <NavBar2 pagename="Heat Index Calculator (use relative humidity)" />
+         <NavBar2 pagename="Future Value Calculator" />
          <AddLayout>
              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                 
              <Anime
                  style={{
                      position: 'absolute',
@@ -69,9 +59,9 @@ const TemperatureUnit = (props:any) => (
                  ref={animatedSquaresRef1}
                  config={{
                      translateX: -250,
-                 //   direction: 'alternate',
                      easing: 'easeInOutSine',
                      autoplay: false,
+                     duration: 250
                  }}>
                  <Box sx={{ ...formDisplay }}>
                      <Box sx={{ display: 'flex', justifyContent: 'center'}}>
@@ -80,71 +70,107 @@ const TemperatureUnit = (props:any) => (
                      </Box>
                      <Formik
                          initialValues={{ 
-                            temperature: "",
-                            relative_humidity: "",
-                            temperature_unit: "",
-                            method: "HeatIndexCalculatorUseRelativeHumidity"
+                            interest_rate:"",
+                            starting_amount: "",
+                            numbe_of_periods: "",
+                            periodic_deposit:"",
+                            periodic_deposit_made_at: "",
+                            method: "FutureValue"
                          }}
-                         onSubmit = {(values)=>{
+                         onSubmit = {(values, actions)=>{
                              const data = {
-                                temperature: values.temperature,
-                                relative_humidity: values.relative_humidity,
-                                temperature_unit: values.temperature_unit,
-                                method: values.method
-                             }
-                             
+                                interest_rate: values.interest_rate,
+                                starting_amount: values.starting_amount,
+                                numbe_of_periods: values.numbe_of_periods,
+                                periodic_deposit: values.periodic_deposit,
+                                periodic_deposit_made_at: values.periodic_deposit_made_at,
+                                 method: values.method
+                             }                            
+ 
                              const postData = async () => {
-                                 console.log("**** DATA UNIT ****")
-                                 const responseData = await otherMainService(data)
-                                 console.log(responseData)
+                                 console.log(data)
+                                 const responseData = await financeService(data)
                                  var msg:any = responseData.statusDescription;
                                  if(msg === "success"){
-                                     //setValue(responseData.message.answer)
-                                     console.log(responseData)
+                                     // setValue(responseData.message.answer)
                                  }
                              }
                              postData()
                              
                          }}>
                              
-                         {(props: FormikProps<any>) => (
-                             <Form >
+                         {({
+                             values,
+                             handleChange,
+                             handleSubmit,
+                             isSubmitting
+                         }) => (
+                             <form onSubmit={handleSubmit}>
                                  <Box sx={{minHeight: 250, display:'flex', flexDirection:'column' }}>
                                      <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
                                          <Grid item={true} xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Temperature</Box>
+                                             <Box sx={{ ...labelStyle }}>Interest rate</Box>
                                          </Grid>
                                          <Grid item={true} xs={5} sx={{
                                              display:'flex'}}>
-                                             <Field
+                                             <CustomForm
                                                  type="text"
-                                                 name="temperature"
-                                                 component={CustomFormikForm}
+                                                 name="interest_rate"
+                                                 onChange={handleChange}
+                                                 value={values.interest_rate}
+                                                 placeholder=""
                                              />
                                          </Grid>
                  
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Relative humidity</Box>
+                                             <Box sx={{ ...labelStyle }}>Starting amount</Box>
                                          </Grid>
                                          <Grid item xs={5}>
-                                         <Field
+                                         <CustomForm
                                              type="text"
-                                             name="relative_humidity"
-                                             component={CustomFormikForm}
+                                             name="starting_amount"
+                                             onChange={handleChange}
+                                             value={values.starting_amount}
+                                             placeholder=""
                                          />
                                          </Grid>
                                      
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Temperature unit</Box>
+                                             <Box sx={{ ...labelStyle }}>number of periods</Box>
                                          </Grid>
                                          <Grid item xs={5}>
-                                             <Field
+                                             <CustomForm
                                                  type="text"
-                                                 name="temperature_unit"
-                                                 as={TemperatureUnit}
+                                                 name="numbe_of_periods"
+                                                 onChange={handleChange}
+                                                 value={values.numbe_of_periods}
+                                                 placeholder=""
                                              />
-                                         </Grid>  
-                                        
+                                         </Grid>    
+                                         <Grid item xs={7}>
+                                             <Box sx={{ ...labelStyle }}>Periodic deposit</Box>
+                                         </Grid>
+                                         <Grid item xs={5}>
+                                             <CustomForm
+                                                 type="text"
+                                                 name="periodic_deposit"
+                                                 onChange={handleChange}
+                                                 value={values.periodic_deposit}
+                                                 placeholder=""
+                                             />
+                                         </Grid> 
+                                         <Grid item xs={7}>
+                                             <Box sx={{ ...labelStyle }}>Periodic deposit made</Box>
+                                         </Grid>
+                                         <Grid item xs={5}>
+                                             <CustomForm
+                                                 type="text"
+                                                 name="periodic_deposit_made_at"
+                                                 onChange={handleChange}
+                                                 value={values.periodic_deposit_made_at}
+                                                 placeholder=""
+                                             />
+                                         </Grid>                 
                                      </Grid>
                                      
                                      <Box sx={{flexGrow: 1}}>
@@ -164,12 +190,12 @@ const TemperatureUnit = (props:any) => (
                                         <Grid item xs={4}></Grid>
                                         <Grid item xs={4}>
                                              <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                 <CustomFormBtn type="submit" name="Calculate"/>
+                                                 <CustomFormImageBtn type="submit" name="Calculate"/>
                                              </Box>
                                         </Grid>
                                     </Grid>
                                  </Box>
-                             </Form>
+                             </form>
                          )}
                      </Formik>
                  </Box>
@@ -189,19 +215,25 @@ const TemperatureUnit = (props:any) => (
                  ref={animatedSquaresRef2}
                  config={{
                      translateX: 200,
-                 //   direction: 'alternate',
                      easing: 'easeInOutSine',
                      autoplay: false,
+                     duration: 250
                  }}>
                   <Box style={formDisplay} >
                      <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                         <Box sx={{height:30, width: '100%' }}></Box>
-                         <Box sx={{
-                                 height:30, width: '100%', 
-                                 // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                 borderRadius: '0 10px 3px', 
-                             }}></Box>
+                         <Box sx={{height:25, width: '100%' }}>
+                             <Typography>
+                                 <Box
+                                     sx={{
+                                         color:'#4072B5',
+                                         fontWeight:'bold', 
+                                         textAlign:'center'
+                                     }}>Result</Box>
+                             </Typography>
+                         </Box>
+                         <Box sx={{ ...formCardStyle }}></Box>
                      </Box>
+ 
                      <Box sx={{marginLeft: 5}}>
                          <Box sx={{marginBottom: 2}}>
                              <Latex displayMode={false}>{`$a_{n} = a+(n-1)d$`}</Latex>
