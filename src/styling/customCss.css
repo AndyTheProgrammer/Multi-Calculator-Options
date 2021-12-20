@@ -380,3 +380,14 @@ p.resultDisplay {
   background-color: #e2e2e2;
   padding: 10px;
 }
+
+
+.date-picker{
+  width:100%;
+  background-color: #F0F3F6;
+  border: solid;
+  border-width: 0;
+  border-color: red;
+  border-radius: 7px;
+  outline: none;
+}

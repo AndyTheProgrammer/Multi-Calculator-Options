@@ -14,7 +14,7 @@
  import { NavBar2 } from '../../navbar/navbar2'
  import { CustomFormikForm } from '../../forms/CustomForm'
  import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
- 
+ import { DatePickerField } from '../../forms/DatePickerField'
  const Latex = require('react-latex');
  
 const HeightUnit = (props:any) => ( 
@@ -102,7 +102,7 @@ const HipUnit = (props:any) => (
 );
 
  
- export default function ArmyBodyFatCalculator(){
+ export default function DayOfTheWeekCalculator(){
      const [value, setValue] = useState("")
      const animatedSquaresRef1 = useRef(null)
      const animatedSquaresRef2= useRef(null)
@@ -121,7 +121,7 @@ const HipUnit = (props:any) => (
  
      return(
          <>
-         <NavBar2 pagename="Army Body Fat Calculator" />
+         <NavBar2 pagename="Day Of The Week Calculator" />
          <AddLayout>
              <Box sx={{ display: "flex", justifyContent: "center" }}>
              <Anime
@@ -141,32 +141,12 @@ const HipUnit = (props:any) => (
                      </Box>
                      <Formik
                          initialValues={{ 
-                            height:"",
-                            height_unit: "CentiMeter",
-                            waist: "",
-                            waist_unit:"CentiMeter",
-                            neck: "",
-                            neck_unit: "CentiMeter",
-                            hip: "",
-                            hip_unit: "CentiMeter",
-                            gender: "",
-                            age: "",
-                            method: " ArmyBodyFatCalculator"
+                            date:"",
+                            method: "DayOfTheWeekCalculator"
                          }}
                          onSubmit = {(values)=>{
-                             const objectAge = parseInt(values.age)
-                             console.log(values.waist)
                              const data = {
-                                height: values.height,
-                                height_unit: values.height_unit,
-                                waist: values.waist, //cant be less than 30
-                                waist_unit: values.waist_unit,
-                                neck: values.neck,
-                                neck_unit: values.neck_unit,
-                                hip: values.hip,
-                                hip_unit: values.hip_unit,
-                                age: objectAge,
-                                gender: values.gender,
+                                date: values.date,
                                 method: values.method,
                              }
 
@@ -190,114 +170,19 @@ const HipUnit = (props:any) => (
                                  <Box sx={{minHeight: 250, display:'flex', flexDirection:'column' }}>
                                      <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
                                          <Grid item={true} xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Height</Box>
+                                             <Box sx={{ ...labelStyle }}>Date</Box>
                                          </Grid>
-                                         <Grid item={true} xs={5} sx={{
+                                         {/* <Grid item={true} xs={5} sx={{
                                              display:'flex'}}>
                                              <Field
                                                  type="text"
-                                                 name="height"
+                                                 name="date"
                                                  component={CustomFormikForm}
                                              />
-                                         </Grid>
-                 
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Height unit</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                         <Field
-                                             type="text"
-                                             name="height_unit"
-                                             as={HeightUnit}
-                                         />
-                                         </Grid>
-
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Waist</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                         <Field
-                                             type="text"
-                                             name="waist"
-                                             component={CustomFormikForm}
-                                         />
-                                         </Grid>
-                                            
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Waist unit</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                         <Field
-                                             type="text"
-                                             name="waist_unit"
-                                             as={WaistUnit}
-                                         />
-                                         </Grid>
-
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Neck</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                         <Field
-                                             type="text"
-                                             name="neck"
-                                             component={CustomFormikForm}
-                                         />
-                                         </Grid>
-                                            
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Neck unit</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                         <Field
-                                             type="text"
-                                             name="neck_unit"
-                                             as={NeckUnit}
-                                         />
-                                         </Grid>
-
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Hip</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                         <Field
-                                             type="text"
-                                             name="hip"
-                                             component={CustomFormikForm}
-                                         />
-                                         </Grid>
-                                            
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Hip unit</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                         <Field
-                                             type="text"
-                                             name="hip_unit"
-                                             as={HipUnit}
-                                         />
-                                         </Grid>
-
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Age</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                         <Field
-                                             type="text"
-                                             name="age"
-                                             component={CustomFormikForm}
-                                         />
-                                         </Grid>
-
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Gender</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                         <Field
-                                             type="text"
-                                             name="gender"
-                                             component={CustomFormikForm}
-                                         />
+                                         </Grid> */}
+                                         <Grid item={true} xs={5} sx={{
+                                             display:'flex'}}>
+                                                <DatePickerField name="date"/>                                             
                                          </Grid>
                                                          
                                      </Grid>

@@ -78,7 +78,9 @@ export async function otherMainService(
     INTERFACES.HeatIndexCalculatorUseRelativeHumidity|
     INTERFACES.CarbohydrateCalculator|
     INTERFACES.IdealWeightCalculator|
-    INTERFACES.ArmyBodyFatCalculator
+    INTERFACES.ArmyBodyFatCalculator|
+    INTERFACES.DayOfTheWeekCalculator|
+    INTERFACES.RandomPasswordGenerator
     
     ){
     try{
@@ -115,3 +117,24 @@ export async function otherMainService(
 //         return error
 //     }
 // }
+
+
+export async function findIPService(
+    dataObject:
+    INTERFACES.FindMyIPAddress
+    ){
+    try{
+        const { data } = await axiosInstance.post('/get-ip-address', dataObject);
+        console.log(data)
+        var msg:any = data.statusDescription;
+        if(msg === "success"){
+             return data
+        }else{
+            return false
+        }
+    }
+    catch(error){
+        console.log(error)
+        return error
+    }
+}

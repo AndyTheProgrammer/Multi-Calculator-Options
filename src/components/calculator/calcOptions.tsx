@@ -18,7 +18,7 @@ function CalcOptions(){
         paddingLeft: 3,
         paddingRight: 3,
         paddingBottom: 0.5,
-        boxShadow: ' 0px 0px 25px 1px rgba(0, 0, 0, 0.2)',
+        boxShadow: ' 0px 3px 25px 1px rgba(0, 0, 0, 0.2)',
         display: 'flex',
         alignItems: 'flex-start',
         

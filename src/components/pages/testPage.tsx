@@ -9,7 +9,7 @@ import { SearchForm } from '../forms/searchForm';
 import { useHistory } from 'react-router-dom'
 
 // 
-import ArmyBodyFatCalculator from  '../TemperalComponentsFolder/other/ArmyBodyFatCalculator'
+import FindMyIPAddress from  '../TemperalComponentsFolder/other/FindMyIPAddress'
 
 
 
@@ -41,7 +41,7 @@ import ExponentForm from '../forms/math/ExponentForm'
 export default function TestPage(){
     return(
         <>
-          <ArmyBodyFatCalculator/>
+          <FindMyIPAddress/>
         </>
     );
 }

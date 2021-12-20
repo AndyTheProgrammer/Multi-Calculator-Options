@@ -8,8 +8,6 @@ import iconImage from '../../common/assets/icon.svg';
 import iconLine from '../../common/assets/line.svg';
 import Slider from "react-slick";
 import { othersRoutes } from '../../routes/routes'
-
-
 import convertion_calc_icon from '../../common/assets/others_icons/convertion_calc_icon.svg';
 import fitness_calc_icon from '../../common/assets/others_icons/fitness_calc_icon.svg';
 import health_calc_icon from '../../common/assets/others_icons/health_calc_icon.svg';
