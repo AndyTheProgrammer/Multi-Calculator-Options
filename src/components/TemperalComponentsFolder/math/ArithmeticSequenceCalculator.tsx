@@ -15,7 +15,6 @@ import { NavBar2 } from '../../navbar/navbar2'
 
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
 
-
  const Latex = require('react-latex');
  const innerBoxStyle = {
     border:'solid',

@@ -12,6 +12,7 @@ import { NavBar2 } from '../navbar/navbar2'
 import AddLayout from '../layouts/AddLayout'
 import Anime from 'react-animejs-wrapper'
 import { CustomFormikForm, CustomFormikOptions } from './CustomForm'
+import { labelStyle, formCardStyle, formDisplay } from '../../styling/CustomStyles'
 const Latex = require('react-latex');
 
  const innerBoxStyle = {
@@ -93,19 +94,15 @@ function UniversalConverterForm(props:any){
               ref={animatedSquaresRef1}
               config={{
                   translateX: -250,
-              //   direction: 'alternate',
                   easing: 'easeInOutSine',
                   autoplay: false,
+                  duration: 250
               }}>
-              <div style={innerBoxStyle}>
-                  <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                      <Box sx={{height:30, width: '100%' }}></Box>
-                      <Box sx={{
-                              height:30, width: '100%', 
-                              backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                              borderRadius: '0 10px 3px', 
-                          }}></Box>
-                  </Box>
+              <Box sx={{ ...formDisplay }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{height:25, width: '100%' }}></Box>
+                        <Box sx={{ ...formCardStyle }}></Box>
+                    </Box>
                   <Formik
                     initialValues={{ value: '1', fromUnit: "", toUnit: "" }}
                     onSubmit={(values, actions) => {
@@ -134,7 +131,9 @@ function UniversalConverterForm(props:any){
                       <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                          <Grid item xs={5} ><Box>Value</Box></Grid>
+                          <Grid item xs={5} >
+                            <Box sx={{ ...labelStyle }}>Value</Box>
+                          </Grid>
                           <Grid item xs={7} > 
                               <Field  
                                 type="text" 
@@ -143,12 +142,16 @@ function UniversalConverterForm(props:any){
                                 />
                           </Grid>
 
-                          <Grid item xs={5} ><Box>From</Box></Grid>
+                          <Grid item xs={5} >
+                            <Box sx={{ ...labelStyle }}>From</Box>
+                          </Grid>
                           <Grid item xs={7} >
                                 <Field as={CustomFormikOptions} name="fromUnit" />                           
                           </Grid>
 
-                          <Grid item xs={5} ><Box>To</Box></Grid>
+                          <Grid item xs={5} >
+                            <Box sx={{ ...labelStyle }}>To</Box>
+                          </Grid>
                           <Grid item xs={7}>
                                 <Field as={CustomFormikOptions} name="toUnit" />
                           </Grid>
@@ -183,7 +186,7 @@ function UniversalConverterForm(props:any){
                     </Form>
                     )}
                     </Formik>
-              </div>
+              </Box>
           </Anime>
 
 
@@ -200,19 +203,24 @@ function UniversalConverterForm(props:any){
               ref={animatedSquaresRef2}
               config={{
                   translateX: 200,
-              //   direction: 'alternate',
                   easing: 'easeInOutSine',
                   autoplay: false,
+                  duration: 250
               }}>
-               <Box style={innerBoxStyle} >
-                  <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                      <Box sx={{height:30, width: '100%' }}></Box>
-                      <Box sx={{
-                              height:30, width: '100%', 
-                              // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                              borderRadius: '0 10px 3px', 
-                          }}></Box>
-                  </Box>
+               <Box sx={{ ...formDisplay }} >
+                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{height:25, width: '100%' }}>
+                            <Typography>
+                                <Box
+                                    sx={{
+                                        color:'#4072B5',
+                                        fontWeight:'bold', 
+                                        textAlign:'center'
+                                    }}>Result</Box>
+                            </Typography>
+                        </Box>
+                        <Box sx={{ ...formCardStyle }}></Box>
+                    </Box>
                   <Box sx={{marginLeft: 5}}>
                       {/* <Box sx={{marginBottom: 2}}>
                           <Latex displayMode={false}>{`$a_{n} = a+(n-1)d$`}</Latex>
