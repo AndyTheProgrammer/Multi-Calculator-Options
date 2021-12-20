@@ -409,7 +409,9 @@ select.form-control-sm:not([size]):not([multiple]) {
   justify-content: center;
 }
 
-.result {
+.css-1al0n19-MuiGrid-root > .MuiGrid-item {
+  align-content: center !important;
+  justify-content: center !important;
 }
 
 .date-picker {

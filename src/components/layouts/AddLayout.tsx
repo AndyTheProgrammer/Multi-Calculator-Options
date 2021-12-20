@@ -31,9 +31,18 @@ export default function AddLayout({ children }: any) {
             <Container>
                 <Grid container xs={12} spacing={2}>
                     <Grid container item xs={12} sm={10} spacing={2}>
-                        <Box sx={{ minHeight: 350 }}>
-                            {children}
-                        </Box>
+                        <div
+                            className="d-flex justify-content-center"
+                        /* sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: 'center',
+                        }} */
+                        >
+                            <Box sx={{ minHeight: 350 }}>
+                                {children}
+                            </Box>
+                        </div>
                     </Grid>
 
                     <Grid item xs={12} sm={2}>
