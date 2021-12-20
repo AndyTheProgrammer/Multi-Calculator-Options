@@ -1,6 +1,6 @@
 import { axiosInstance, mathRoute, othersRoute } from "../axiosInstance";
 import * as INTERFACES from '../types/mathTypes'
-
+import * as FINANCE_INTERFACES from '../types/financeTypes'
 
 export async function mathMainService(
     dataObject:
@@ -125,6 +125,30 @@ export async function findIPService(
     ){
     try{
         const { data } = await axiosInstance.post('/get-ip-address', dataObject);
+        console.log(data)
+        var msg:any = data.statusDescription;
+        if(msg === "success"){
+             return data
+        }else{
+            return false
+        }
+    }
+    catch(error){
+        console.log(error)
+        return error
+    }
+}
+
+export async function financeService(
+    dataObject:
+        FINANCE_INTERFACES.FutureValue|
+        FINANCE_INTERFACES.ReturnOnInvestmentCalculator|
+        FINANCE_INTERFACES.IncomeTaxCalculator|
+        FINANCE_INTERFACES.SalesTaxCalculator|
+        FINANCE_INTERFACES.DebtToIncomeCalculator
+    ){
+    try{
+        const { data } = await axiosInstance.post('/finance', dataObject);
         console.log(data)
         var msg:any = data.statusDescription;
         if(msg === "success"){
