@@ -82,15 +82,18 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     wordBreak: 'break-word'
   },
   leftTabContainer: {
+    height: 25,
     backgroundColor: theme.palette.background.paper,
     color: COLORS.text,
     alignItems: 'center',
     justifyContent: "center",
+    float: "inline-start",
     width: "100%",
     borderTopLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
   rightTabContainer: {
+    height: 25,
     background: COLORS.gradient,
     color: COLORS.light_text_color,
     justifyContent: "center",

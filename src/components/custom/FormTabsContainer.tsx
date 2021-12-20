@@ -14,13 +14,6 @@ interface FormProps {
   tabTitle: string;
 }
 
-function a11yProps(index: any) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 function FormTabsContainer(props: any) {
   const {
     children,
@@ -92,67 +85,47 @@ function FormTabsContainer(props: any) {
    } else */
   if (dropDown === true) {
     return (
+      <Paper className={paperBackground}>
+        <div className={tabRoot}>
+          <StyledTabs>
+            <StaticTab
+              className={leftTabContainer}
+              label={tabTitle1}
+              dropDown={true}
+              openDrop={openDrop}
+            />
+            <StaticTab
+              className={rightTabContainer}
+              label={tabTitle2}
+            />
+          </StyledTabs>
 
-      <Anime
-        style={{
-          position: 'absolute',
-        }}
-        ref={ref}
-        config={config}
-      >
-        <Paper className={paperBackground}>
-          <div className={tabRoot}>
-            <StyledTabs>
-              <StaticTab
-                className={leftTabContainer}
-                label={tabTitle1}
-                dropDown={true}
-                openDrop={openDrop}
-              />
-              <StaticTab
-                className={rightTabContainer}
-                label={tabTitle2}
-              />
-            </StyledTabs>
-
-            <NoIndexTabPanel>
-              {children}
-            </NoIndexTabPanel>
-          </div>
-        </Paper>
-      </Anime>
-
+          <NoIndexTabPanel>
+            {children}
+          </NoIndexTabPanel>
+        </div>
+      </Paper>
     )
   } else {
     return (
+      <Paper className={paperBackground}>
+        <div className={tabRoot}>
+          <StyledTabs>
+            <StaticTab
+              className={leftTabContainer}
+              label={tabTitle1}
+            />
+            <StaticTab
+              className={rightTabContainer}
+              label={tabTitle2}
+            />
+          </StyledTabs>
 
-      <Anime
-        style={{
-          position: 'absolute',
-        }}
-        ref={ref}
-        config={config}
-      >
-        <Box className={formDisplay}>
-          <div className={tabRoot}>
-            <StyledTabs>
-              <StaticTab
-                className={leftTabContainer}
-                label={tabTitle1}
-              />
-              <StaticTab
-                className={rightTabContainer}
-                label={tabTitle2}
-              />
-            </StyledTabs>
-
-            <NoIndexTabPanel>
-              {children}
-            </NoIndexTabPanel>
-          </div>
-        </Box>
-      </Anime>
-
+          <NoIndexTabPanel>
+            {children}
+          </NoIndexTabPanel>
+        </div>
+      </Paper>
     )
   }
 }
