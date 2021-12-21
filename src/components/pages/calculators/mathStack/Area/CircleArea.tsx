@@ -149,7 +149,7 @@ const CircleArea = (props: any) => {
 
       <Anime
         style={{
-          position: 'absolute',
+          // position: 'absolute',
           zIndex: -5
         }}
         ref={animatedSquaresRef2}

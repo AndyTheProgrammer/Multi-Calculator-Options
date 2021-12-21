@@ -38,7 +38,7 @@ const ResultTabsContainer = React.forwardRef((props: any, ref) => {
       ref={ref}
       config={config}
     >
-      <Box className={paperBackground}>
+      <Paper className={formDisplay}>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Box sx={{ height: 40, width: '100%' }}>
             <FontProvider fonts={[{ font: 'Varela Round' }]}>
@@ -63,10 +63,7 @@ const ResultTabsContainer = React.forwardRef((props: any, ref) => {
             {children}
           </div>
         </div>
-      </Box>
-
-
-
+      </Paper>
     </Anime>
 
   )

@@ -15,6 +15,7 @@ import {
   PLACEHOLDERS,
   INPUT_TYPE,
   COLORS,
+  LATEX,
 } from '../../../common/shared'
 import {
   CustomTextInput,
@@ -36,13 +37,16 @@ function a11yProps(index: any) {
   };
 }
 
+const Latex = require('react-latex');
+
 function ProbabilityCalculator() {
   const {
     tabRoot,
     rightTabContainer,
     leftTabContainer,
     paperBackground,
-    formContainer
+    formContainer,
+    formDisplay2
   }: any = useStyles()
   // ProbabilityOfASeriesOfIndpendentEvents
   const [independentEventsInitialValues] = React.useState({
@@ -135,7 +139,7 @@ function ProbabilityCalculator() {
               duration: 250
             }}
           >
-            <Paper className={paperBackground}>
+            <Paper className={formDisplay2}>
               <div className={tabRoot}>
                 <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
                   <StyledTab

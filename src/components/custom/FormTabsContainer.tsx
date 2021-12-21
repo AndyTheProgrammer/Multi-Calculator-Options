@@ -85,7 +85,7 @@ function FormTabsContainer(props: any) {
    } else */
   if (dropDown === true) {
     return (
-      <Paper className={paperBackground}>
+      <Paper className={formDisplay}>
         <div className={tabRoot}>
           <StyledTabs>
             <StaticTab
@@ -108,7 +108,7 @@ function FormTabsContainer(props: any) {
     )
   } else {
     return (
-      <Paper className={paperBackground}>
+      <Paper className={formDisplay}>
         <div className={tabRoot}>
           <StyledTabs>
             <StaticTab

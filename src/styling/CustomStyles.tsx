@@ -118,10 +118,18 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   formDisplay: {
     width: 400,
     height: '100%',
-    borderRadius: 20,
-    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-    backgroundColor: 'white',
+    borderRadius: '20px !important',
+    backgroundColor: theme.palette.background.paper,
     paddingBottom: 2,
+    margin: theme.spacing(1),
+  },
+  formDisplay2: {
+    width: 500,
+    height: '100%',
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: '20px !important',
+    paddingBottom: 2,
+    margin: theme.spacing(1),
   },
 }));
 
