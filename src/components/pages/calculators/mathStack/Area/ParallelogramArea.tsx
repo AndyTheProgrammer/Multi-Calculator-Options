@@ -25,6 +25,7 @@ import {
 
 const ParallelogramArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     breadth: '',
     breadth_unit: '',
@@ -50,6 +51,7 @@ const ParallelogramArea = (props: any) => {
     formDisplay
   }: any = useStyles()
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
   const [value, setValue] = React.useState(false)
   const animatedSquaresRef1 = React.useRef(null)
   const animatedSquaresRef2 = React.useRef(null)
@@ -102,7 +104,7 @@ const ParallelogramArea = (props: any) => {
               }
               console.log(JSON.stringify(payload))
               try {
-                const { payload: parallelogramArea } = await calculateMath(payload)
+                const { success, payload: parallelogramArea } = await calculateMath(payload)
                 console.log('=====>', parallelogramArea)
                 const {
                   area,
@@ -137,7 +139,9 @@ const ParallelogramArea = (props: any) => {
                     submittedbreadth: submittedbreadth
                   })
                 }
-
+                if (success === true) {
+                  setAnswer(success)
+                }
               } catch (err) {
                 console.log('====>', err)
               }
@@ -214,23 +218,27 @@ const ParallelogramArea = (props: any) => {
           tabTitle={"Result"}
           latex={LATEX.parallelogramArea}
         >
-          <div className="text-wrap">
-            {selectedResult === true &&
-              <Typography variant="subtitle1">
-                = {Result.area}{Result.unit}<sup>2</sup>
-              </Typography>
-            }
-            {selectedResult === false &&
-              <div>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInbreadthUnit}{Result.unit}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInheightUnit}{Result.unit}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-          </div>
+          {answer === true &&
+            <div>
+              {selectedResult === true &&
+                <div className="text-wrap">
+                  <Typography variant="subtitle1">
+                    = {Result.area}{Result.unit}<sup>2</sup>
+                  </Typography>
+                </div>
+              }
+              {selectedResult === false &&
+                <div>
+                  <Typography variant="subtitle1">
+                    = {resultTwo.areaInbreadthUnit}{Result.unit}<sup>2</sup>
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    = {resultTwo.areaInheightUnit}{Result.unit}<sup>2</sup>
+                  </Typography>
+                </div>
+              }
+            </div>
+          }
         </ResultTabsContainer>
       </Anime>
 

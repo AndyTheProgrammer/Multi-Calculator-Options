@@ -23,6 +23,7 @@ import {
 
 const SquarePyramidVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     base: "",
     base_unit: "",
@@ -89,6 +90,9 @@ const SquarePyramidVolume = (props: any) => {
                   volumeInHeightUnit,
                 })
               }
+              if (success === true) {
+                setAnswer(success)
+              }
             } catch (err) {
               console.log('====>', err)
             }
@@ -148,20 +152,25 @@ const SquarePyramidVolume = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.squarePyramidVolume}>
-        {selectedResult === true &&
-          <div className="text-center mb-3">
-            <Typography variant="subtitle1">
-              Volume = {Result.volume}{Result.units}<sup>3</sup>
-            </Typography>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1"> Volume = {resultTwo.volumeInBaseUnit}</Typography>
+                <Typography variant="subtitle2"> or</Typography>
+                <Typography variant="subtitle1"> = {resultTwo.volumeInHeightUnit}</Typography>
+              </div>
+            }
           </div>
         }
-        {selectedResult === false &&
-          <div className="text-center mb-3">
-            <Typography variant="subtitle1"> Volume = {resultTwo.volumeInBaseUnit}</Typography>
-            <Typography variant="subtitle2"> or</Typography>
-            <Typography variant="subtitle1"> = {resultTwo.volumeInHeightUnit}</Typography>
-          </div>
-        }
+
       </ResultTabsContainer>
     </>
   )

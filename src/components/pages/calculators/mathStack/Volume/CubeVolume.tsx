@@ -23,6 +23,7 @@ import {
 
 const CubeVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     edge_length: "",
     edge_unit: "",
@@ -54,7 +55,7 @@ const CubeVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: cubeVolume } = await calculateMath(payload)
+              const { success, payload: cubeVolume } = await calculateMath(payload)
               console.log('=====>', cubeVolume)
               const { volume, unit } = cubeVolume
               if (typeof cubeVolume === 'object') {
@@ -62,6 +63,9 @@ const CubeVolume = (props: any) => {
                   volume: volume,
                   units: unit
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -104,11 +108,14 @@ const CubeVolume = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.cubeVolume}>
-        <div className="text-wrap">
-          <Typography variant="subtitle1">
-            Volume = {Result.volume}{Result.units}<sup>3</sup>
-          </Typography>
-        </div>
+        {answer === true &&
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              Volume = {Result.volume}{Result.units}<sup>3</sup>
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
 
 

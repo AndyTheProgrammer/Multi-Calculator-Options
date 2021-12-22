@@ -24,6 +24,7 @@ import {
 
 
 const AmortizedLoanFixedAmount = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     interest_rate: "",
     present_value: "",
@@ -77,7 +78,7 @@ const AmortizedLoanFixedAmount = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: amortizedLoanWithFixedAmount } = await calculateFinances(payload)
+              const { success, payload: amortizedLoanWithFixedAmount } = await calculateFinances(payload)
               console.log('=====>', amortizedLoanWithFixedAmount)
               const { totalRepayment, currency } = amortizedLoanWithFixedAmount
               if (typeof amortizedLoanWithFixedAmount === 'object') {
@@ -85,6 +86,9 @@ const AmortizedLoanFixedAmount = () => {
                   totalRepayment: totalRepayment,
                   currency: currency
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -153,11 +157,14 @@ const AmortizedLoanFixedAmount = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Total Repayment: {Result.currency}{Result.totalRepayment}
-          </Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">
+              Total Repayment: {Result.currency}{Result.totalRepayment}
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

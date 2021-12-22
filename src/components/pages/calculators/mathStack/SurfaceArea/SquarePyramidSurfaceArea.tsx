@@ -25,6 +25,7 @@ const Latex = require('react-latex');
 
 const SquarePyramidSurfaceArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     base_edge: '',
     base_edge_unit: '',
@@ -98,6 +99,9 @@ const SquarePyramidSurfaceArea = (props: any) => {
                   unit: units,
                 })
               }
+              if (success === true) {
+                setAnswer(success)
+              }
             } catch (err) {
               console.log('====>', err)
             }
@@ -160,40 +164,45 @@ const SquarePyramidSurfaceArea = (props: any) => {
         tabTitle={'Result'}
         sm={6}
       >
-        {selectedResult === true &&
-          <div className="text-wrap">
-            <Latex >{LATEX.squarePyramidSurfArea_base}</Latex>
-            <Latex >{LATEX.squarePyramidSurfArea_lateral}</Latex>
-            <Latex >{LATEX.squarePyramidSurfArea_total}</Latex>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-wrap">
+                <Latex >{LATEX.squarePyramidSurfArea_base}</Latex>
+                <Latex >{LATEX.squarePyramidSurfArea_lateral}</Latex>
+                <Latex >{LATEX.squarePyramidSurfArea_total}</Latex>
 
-            <Typography variant="subtitle1">
-              Base SA = {Result.baseSurfaceArea}{Result.unit}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle1">
-              Lateral SA = {Result.lateralSurfaceArea}{Result.unit}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle1">
-              Total SA = {Result.totalSurfaceArea}{Result.unit}<sup>2</sup>
-            </Typography>
+                <Typography variant="subtitle1">
+                  Base SA = {Result.baseSurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  Lateral SA = {Result.lateralSurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  Total SA = {Result.totalSurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-wrap">
+                <Latex >{LATEX.squarePyramidSurfArea_base}</Latex>
+                <Latex >{LATEX.squarePyramidSurfArea_lateral}</Latex>
+                <Latex >{LATEX.squarePyramidSurfArea_total}</Latex>
+
+                <Typography variant="subtitle1">
+                  SA = {resultTwo.areaInBaseUnit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle2">
+                  or
+                </Typography>
+                <Typography variant="subtitle1">
+                  = {resultTwo.areaInHeightUnit}<sup>2</sup>
+                </Typography>
+              </div>
+            }
           </div>
         }
-        {selectedResult === false &&
-          <div className="text-wrap">
-            <Latex >{LATEX.squarePyramidSurfArea_base}</Latex>
-            <Latex >{LATEX.squarePyramidSurfArea_lateral}</Latex>
-            <Latex >{LATEX.squarePyramidSurfArea_total}</Latex>
 
-            <Typography variant="subtitle1">
-              SA = {resultTwo.areaInBaseUnit}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle2">
-              or
-            </Typography>
-            <Typography variant="subtitle1">
-              = {resultTwo.areaInHeightUnit}<sup>2</sup>
-            </Typography>
-          </div>
-        }
       </ResultTabsContainer>
     </>
   )

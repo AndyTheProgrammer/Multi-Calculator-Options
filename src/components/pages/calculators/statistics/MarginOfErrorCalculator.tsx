@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../common/shared'
 import {
   CustomTextInput,
@@ -20,7 +21,7 @@ import {
 } from '../../../custom'
 
 const MarginOfErrorCalculator = (props: any) => {
-  const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     confidence_level: '',
     sample_size: '',
@@ -28,7 +29,6 @@ const MarginOfErrorCalculator = (props: any) => {
   })
   const [Result, setResult] = React.useState({
     marginOfError: 0,
-    unit: ''
   })
 
   return (
@@ -37,8 +37,6 @@ const MarginOfErrorCalculator = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.marginOfError}
         sm={6}
-        dropDown={true}
-        openDrop={openDrop}
       >
         <Formik
           initialValues={initialFormValues}
@@ -55,14 +53,16 @@ const MarginOfErrorCalculator = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: marginOfErrorCalculator } = await calculateStatistics(payload)
+              const { success, payload: marginOfErrorCalculator } = await calculateStatistics(payload)
               console.log('=====>', marginOfErrorCalculator)
-              const { margin_of_error, unit } = marginOfErrorCalculator
+              const { margin_of_error } = marginOfErrorCalculator
               if (typeof marginOfErrorCalculator === 'object') {
                 setResult({
                   marginOfError: margin_of_error,
-                  unit: unit
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -120,15 +120,14 @@ const MarginOfErrorCalculator = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-
-          </Typography>
-          <Typography variant="subtitle1">
-            Margin of error: {Result.marginOfError}{Result.unit}
-          </Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.marginOfError}>
+        {answer === true &&
+          <div className="text-center mb-3 text-wrap">
+            <Typography variant="subtitle1">
+              Margin of error: {Result.marginOfError}
+            </Typography>
+          </div>
+        }
       </ResultTabsContainer>
     </>
   )

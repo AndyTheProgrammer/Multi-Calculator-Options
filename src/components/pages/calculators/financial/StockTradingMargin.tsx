@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const StockTradingMargin = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
   const [initialFormValues] = React.useState({
     margin_requirement: "",
@@ -57,7 +58,7 @@ const StockTradingMargin = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: stockTradingMarginCalculator } = await calculateFinances(payload)
+              const { success, payload: stockTradingMarginCalculator } = await calculateFinances(payload)
               console.log('=====>', stockTradingMarginCalculator)
               const { amountRequired, currency } = stockTradingMarginCalculator
               if (typeof stockTradingMarginCalculator === 'object') {
@@ -65,6 +66,9 @@ const StockTradingMargin = () => {
                   amountRequired: amountRequired,
                   currency: currency
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -122,11 +126,14 @@ const StockTradingMargin = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Amount required: {Result.currency}{Result.amountRequired}
-          </Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">
+              Amount required: {Result.currency}{Result.amountRequired}
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

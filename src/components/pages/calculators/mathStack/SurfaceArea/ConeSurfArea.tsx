@@ -24,7 +24,8 @@ import {
 const Latex = require('react-latex');
 
 const ConeSurfArea = (props: any) => {
-  const { openDrop } = props
+  const { openDrop } = props;
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -77,7 +78,7 @@ const ConeSurfArea = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: coneArea } = await calculateMath(payload)
+              const { success, payload: coneArea } = await calculateMath(payload)
               console.log('=====>', coneArea)
               const {
                 $lateralSurfaceArea,
@@ -85,12 +86,8 @@ const ConeSurfArea = (props: any) => {
                 baseSurfaceSrea,
                 units,
                 unitType,
-                submitedRadius,
                 radiusUnit,
-                radiusToHeightUnit,
-                height,
                 heightUnit,
-                heightToRadiusUnit,
                 radiusUnitBaseSurfaceArea,
                 radiusUnitlateralSurfaceArea,
                 radiusUnitTotalSurfaceArea,
@@ -122,6 +119,9 @@ const ConeSurfArea = (props: any) => {
                   heightUnitlateralSurfaceArea: heightUnitlateralSurfaceArea,
                   heightUnitTotalSurfaceArea: heightUnitTotalSurfaceArea
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -182,53 +182,58 @@ const ConeSurfArea = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} sm={6}>
-        {selectedResult ? (
-          <div className="text-wrap">
-            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_circular}</Latex>
-            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_lateral}</Latex>
-            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_total}</Latex>
+        {answer === true &&
+          <div>
+            {selectedResult ? (
+              <div className="text-wrap">
+                <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_circular}</Latex>
+                <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_lateral}</Latex>
+                <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_total}</Latex>
 
-            <Typography variant="subtitle1">
-              Lateral SA = {Result.lateralSurfaceArea}{Result.units}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle1">
-              Base SA = {Result.baseSurfaceSrea}{Result.units}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle1">
-              Total SA = {Result.totalConeSurfaceArea}{Result.units}<sup>2</sup>
-            </Typography>
+                <Typography variant="subtitle1">
+                  Lateral SA = {Result.lateralSurfaceArea}{Result.units}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  Base SA = {Result.baseSurfaceSrea}{Result.units}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  Total SA = {Result.totalConeSurfaceArea}{Result.units}<sup>2</sup>
+                </Typography>
+              </div>
+            ) : (
+              <div className="text-wrap">
+                <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_circular}</Latex>
+                <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_lateral}</Latex>
+                <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_total}</Latex>
+
+                <Typography variant="subtitle1">
+                  Base SA = {resultTwo.radiusUnitBaseSurfaceArea}{resultTwo.radiusUnit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  Lateral SA =  {resultTwo.radiusUnitlateralSurfaceArea}{resultTwo.radiusUnit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  Total SA = {resultTwo.radiusUnitTotalSurfaceArea}{resultTwo.radiusUnit}<sup>2</sup>
+                </Typography>
+
+                <Typography variant="subtitle2">
+                  or
+                </Typography>
+
+                <Typography variant="subtitle1">
+                  Base SA = {resultTwo.heightUnitBaseSurfaceArea}{resultTwo.heightUnit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  Lateral SA = {resultTwo.heightUnitlateralSurfaceArea}{resultTwo.heightUnit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  Total SA = {resultTwo.heightUnitTotalSurfaceArea}{resultTwo.heightUnit}<sup>2</sup>
+                </Typography>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="text-wrap">
-            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_circular}</Latex>
-            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_lateral}</Latex>
-            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_total}</Latex>
+        }
 
-            <Typography variant="subtitle1">
-              Base SA = {resultTwo.radiusUnitBaseSurfaceArea}{resultTwo.radiusUnit}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle1">
-              Lateral SA =  {resultTwo.radiusUnitlateralSurfaceArea}{resultTwo.radiusUnit}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle1">
-              Total SA = {resultTwo.radiusUnitTotalSurfaceArea}{resultTwo.radiusUnit}<sup>2</sup>
-            </Typography>
-
-            <Typography variant="subtitle2">
-              or
-            </Typography>
-
-            <Typography variant="subtitle1">
-              Base SA = {resultTwo.heightUnitBaseSurfaceArea}{resultTwo.heightUnit}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle1">
-              Lateral SA = {resultTwo.heightUnitlateralSurfaceArea}{resultTwo.heightUnit}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle1">
-              Total SA = {resultTwo.heightUnitTotalSurfaceArea}{resultTwo.heightUnit}<sup>2</sup>
-            </Typography>
-          </div>
-        )}
       </ResultTabsContainer>
 
 

@@ -20,6 +20,7 @@ import {
 } from '../../../custom'
 
 const MortgagePayOffWithoutLoanTerm = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
   const [initialFormValues] = React.useState({
     interest_rate: "",
@@ -51,7 +52,7 @@ const MortgagePayOffWithoutLoanTerm = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: mortgagePayoffCalculator } = await calculateFinances(payload)
+              const { success, payload: mortgagePayoffCalculator } = await calculateFinances(payload)
               console.log('=====>', mortgagePayoffCalculator)
               const { answer, years, months } = mortgagePayoffCalculator
               if (typeof mortgagePayoffCalculator === 'object') {
@@ -60,6 +61,9 @@ const MortgagePayOffWithoutLoanTerm = () => {
                   years: years,
                   months: months
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -117,14 +121,17 @@ const MortgagePayOffWithoutLoanTerm = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Answer: {Result.answer}
-          </Typography>
-          <Typography variant="subtitle1">
-            Payoff in: {Result.years} years and {Result.months} months
-          </Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">
+              Answer: {Result.answer}
+            </Typography>
+            <Typography variant="subtitle1">
+              Payoff in: {Result.years} years and {Result.months} months
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

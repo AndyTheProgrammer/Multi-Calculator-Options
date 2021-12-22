@@ -26,6 +26,7 @@ const Latex = require('react-latex');
 
 const CircleArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -36,7 +37,6 @@ const CircleArea = (props: any) => {
     Submitted_radius: '',
     Submitted_unit: ''
   })
-
 
   const [value, setValue] = React.useState(false)
   const animatedSquaresRef1 = React.useRef()
@@ -97,6 +97,9 @@ const CircleArea = (props: any) => {
                     Submitted_radius: submittedradius,
                     Submitted_unit: submittedunit
                   })
+                }
+                if (success === true) {
+                  setAnswer(success)
                 }
                 if (success === true) {
                   play1()
@@ -166,11 +169,14 @@ const CircleArea = (props: any) => {
           tabTitle={"Result"}
           latex={LATEX.cirleArea}
         >
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              = {Result.area}{Result.units}<sup>2</sup>
-            </Typography>
-          </div>
+          {answer === true &&
+            <div className="text-wrap">
+              <Typography variant="subtitle1">
+                = {Result.area}{Result.units}<sup>2</sup>
+              </Typography>
+            </div>
+          }
+
         </ResultTabsContainer>
       </Anime>
     </>

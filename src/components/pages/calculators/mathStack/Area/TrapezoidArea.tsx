@@ -26,6 +26,7 @@ import {
 
 const TrapezoidArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     base1: "",
     base1_unit: "",
@@ -114,7 +115,7 @@ const TrapezoidArea = (props: any) => {
               console.log(JSON.stringify(payload))
               //Trapezoid needs aligning with martin
               try {
-                const { payload: TrapezoidArea } = await calculateMath(payload)
+                const { success, payload: TrapezoidArea } = await calculateMath(payload)
                 console.log('=====>', TrapezoidArea)
                 const {
                   area,
@@ -155,6 +156,9 @@ const TrapezoidArea = (props: any) => {
                     heighttom: heighttom
 
                   })
+                }
+                if (success === true) {
+                  setAnswer(success)
                 }
               } catch (err) {
                 console.log('====>', err)
@@ -250,23 +254,27 @@ const TrapezoidArea = (props: any) => {
           tabTitle={"Result"}
           latex={LATEX.trapezoidArea}
         >
-          <div className="text-wrap">
-            {selectedResult === true &&
-              <Typography variant="subtitle1">
-                = {Result.area}{Result.unit}<sup>2</sup>
-              </Typography>
-            }
-            {selectedResult === false &&
-              <div>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInm}{Result.unit}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaIncm}{Result.unit}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-          </div>
+          {answer === true &&
+            <div>
+              {selectedResult === true &&
+                <div className="text-wrap">
+                  <Typography variant="subtitle1">
+                    = {Result.area}{Result.unit}<sup>2</sup>
+                  </Typography>
+                </div>
+              }
+              {selectedResult === false &&
+                <div>
+                  <Typography variant="subtitle1">
+                    = {resultTwo.areaInm}{Result.unit}<sup>2</sup>
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    = {resultTwo.areaIncm}{Result.unit}<sup>2</sup>
+                  </Typography>
+                </div>
+              }
+            </div>
+          }
         </ResultTabsContainer>
       </Anime>
 

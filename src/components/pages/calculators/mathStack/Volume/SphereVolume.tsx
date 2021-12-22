@@ -23,6 +23,7 @@ import {
 
 const SphereVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -54,7 +55,7 @@ const SphereVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: sphereVolume } = await calculateMath(payload)
+              const { success, payload: sphereVolume } = await calculateMath(payload)
               console.log('=====>', sphereVolume)
               const {
                 volume,
@@ -65,6 +66,9 @@ const SphereVolume = (props: any) => {
                   volume: volume,
                   units: units
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -107,11 +111,14 @@ const SphereVolume = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.sphereVolume}>
-        <div className="text-wrap">
-          <Typography variant="subtitle1">
-            Volume = {Result.volume}{Result.units}<sup>3</sup>
-          </Typography>
-        </div>
+        {answer === true &&
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              Volume = {Result.volume}{Result.units}<sup>3</sup>
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

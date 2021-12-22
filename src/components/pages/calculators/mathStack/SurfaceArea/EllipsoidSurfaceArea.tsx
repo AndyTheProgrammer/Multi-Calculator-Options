@@ -24,6 +24,7 @@ import {
 
 const EllipsoidSurfaceArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     axis1: '',
     axis1_unit: '',
@@ -106,6 +107,9 @@ const EllipsoidSurfaceArea = (props: any) => {
                   surfaceAreaInin: surfaceAreaInin,
                 })
               }
+              if (success === true) {
+                setAnswer(success)
+              }
             } catch (err) {
               console.log('====>', err)
             }
@@ -187,20 +191,25 @@ const EllipsoidSurfaceArea = (props: any) => {
         sm={6}
         latex={LATEX.ellipsoidSurfArea}
       >
-        {selectedResult === true &&
-          < div className="text-wrap">3
-            <Typography variant="subtitle1">
-              Surface Area: {Result.surfaceArea}{Result.unit}<sup>2</sup>
-            </Typography>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              < div className="text-wrap">3
+                <Typography variant="subtitle1">
+                  Surface Area: {Result.surfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              < div className="text-wrap">3
+                <Typography variant="subtitle1">Surface Area = {resultTwo.surfaceAreaInm}</Typography>
+                <Typography variant="subtitle2">or</Typography>
+                <Typography variant="subtitle1"> = {resultTwo.surfaceAreaInin}</Typography>
+              </div>
+            }
           </div>
         }
-        {selectedResult === false &&
-          < div className="text-wrap">3
-            <Typography variant="subtitle1">Surface Area = {Result.surfaceArea}</Typography>
-            <Typography variant="subtitle2">or</Typography>
-            <Typography variant="subtitle1"> = {Result.surfaceArea}</Typography>
-          </div>
-        }
+
       </ResultTabsContainer >
 
 

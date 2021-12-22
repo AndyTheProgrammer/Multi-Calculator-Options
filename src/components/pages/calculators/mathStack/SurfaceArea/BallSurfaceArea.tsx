@@ -24,6 +24,7 @@ import {
 
 const BallSurfaceArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: '',
     radius_unit: ''
@@ -55,7 +56,7 @@ const BallSurfaceArea = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: ballSurfaceArea } = await calculateMath(payload)
+              const { success, payload: ballSurfaceArea } = await calculateMath(payload)
               console.log('=====>', ballSurfaceArea)
               if (typeof ballSurfaceArea === 'object') {
                 const { surfaceArea, area, unit } = ballSurfaceArea
@@ -65,6 +66,9 @@ const BallSurfaceArea = (props: any) => {
                   area: area,
                   unit: unit
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -111,11 +115,14 @@ const BallSurfaceArea = (props: any) => {
         sm={6}
         latex={LATEX.ballSurfArea}
       >
-        <div className="text-wrap">
-          <Typography variant="subtitle1">
-            = {Result.surfaceArea}{Result.unit}<sup>2</sup>
-          </Typography>
-        </div>
+        {answer === true &&
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              = {Result.surfaceArea}{Result.unit}<sup>2</sup>
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

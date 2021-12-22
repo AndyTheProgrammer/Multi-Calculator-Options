@@ -23,6 +23,7 @@ import {
 
 const CapsuleVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -90,6 +91,9 @@ const CapsuleVolume = (props: any) => {
                   volumeInHeightUnit: volumeInHeightUnit,
                 })
               }
+              if (success === true) {
+                setAnswer(success)
+              }
             } catch (err) {
               console.log('====>', err)
             }
@@ -156,26 +160,29 @@ const CapsuleVolume = (props: any) => {
         sm={6}
         latex={LATEX.capsuleVolume}
       >
-        {selectedResult ? (
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              Volume = {Result.volume}{Result.units}<sup>3</sup>
-            </Typography>
+        {answer === true &&
+          <div>
+            {selectedResult ? (
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            ) : (
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {resultTwo.volumeInRadiusUnit}
+                </Typography>
+                <Typography variant="subtitle2">
+                  or
+                </Typography>
+                <Typography variant="subtitle1">
+                  = {resultTwo.volumeInHeightUnit}
+                </Typography>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              Volume = {resultTwo.volumeInRadiusUnit}
-            </Typography>
-            <Typography variant="subtitle2">
-              or
-            </Typography>
-            <Typography variant="subtitle1">
-              = {resultTwo.volumeInHeightUnit}
-            </Typography>
-          </div>
-        )}
-
+        }
       </ResultTabsContainer>
     </>
   )

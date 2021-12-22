@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const DefearedPaymentsLumpsumAtMaturity = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
   const [initialFormValues] = React.useState({
     interest_rate: "",
@@ -61,7 +62,7 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: deferedPaymentLumpsumAtMaturity } = await calculateFinances(payload)
+              const { success, payload: deferedPaymentLumpsumAtMaturity } = await calculateFinances(payload)
               console.log('=====>', deferedPaymentLumpsumAtMaturity)
               const { amountDueAtLoanMaturity, totalInterest, currency } = deferedPaymentLumpsumAtMaturity
               if (typeof deferedPaymentLumpsumAtMaturity === 'object') {
@@ -70,6 +71,9 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
                   totalInterest: totalInterest,
                   currency: currency
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -139,14 +143,17 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Amount due at loan maturity: {Result.currency}{Result.amountDueAtLoanMaturity}
-          </Typography>
-          <Typography variant="subtitle1">
-            Total interest: {Result.currency}{Result.totalInterest}
-          </Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">
+              Amount due at loan maturity: {Result.currency}{Result.amountDueAtLoanMaturity}
+            </Typography>
+            <Typography variant="subtitle1">
+              Total interest: {Result.currency}{Result.totalInterest}
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

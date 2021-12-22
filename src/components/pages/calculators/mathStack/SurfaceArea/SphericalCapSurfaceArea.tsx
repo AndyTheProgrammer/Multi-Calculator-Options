@@ -20,12 +20,12 @@ import {
   FormTabsContainer,
   ResultTabsContainer
 } from '../../../../custom'
-import { getByLabelText } from '@testing-library/react'
 
 const Latex = require('react-latex');
 
 const SphericalCapSurfaceArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: '',
     radius_unit: '',
@@ -72,7 +72,7 @@ const SphericalCapSurfaceArea = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: CapSurfaceArea } = await calculateMath(payload)
+              const { success, payload: CapSurfaceArea } = await calculateMath(payload)
               console.log('=====>', CapSurfaceArea)
               const {
                 surfaceArea,
@@ -101,6 +101,9 @@ const SphericalCapSurfaceArea = (props: any) => {
                   surfaceAreaInradiusUnit: surfaceAreaInradiusUnit,
                   surfaceAreaInheightUnit: surfaceAreaInheightUnit,
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -164,32 +167,37 @@ const SphericalCapSurfaceArea = (props: any) => {
         tabTitle={'Result'}
         sm={6}
       >
-        {selectedResult ? (
-          <div className="text-wrap">
-            <Latex displayMode={true}>{LATEX.sphericalCapSurfArea}</Latex>
-            <Latex displayMode={true}>{LATEX.sphericalCapSurfArea_base}</Latex>
-            <Latex displayMode={true}>{LATEX.sphericalCapSurfArea_totalSolidSphere}</Latex>
+        {answer === true &&
+          <div>
+            {selectedResult ? (
+              <div className="text-wrap">
+                <Latex displayMode={true}>{LATEX.sphericalCapSurfArea}</Latex>
+                <Latex displayMode={true}>{LATEX.sphericalCapSurfArea_base}</Latex>
+                <Latex displayMode={true}>{LATEX.sphericalCapSurfArea_totalSolidSphere}</Latex>
 
-            <Typography variant="subtitle1">
-              SA = {Result.surfaceArea}{Result.unit}<sup>2</sup>
-            </Typography>
+                <Typography variant="subtitle1">
+                  SA = {Result.surfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+              </div>
+
+            ) : (
+
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  SA = {resultTwo.surfaceAreaInradiusUnit}
+                </Typography>
+                <Typography variant="subtitle2">
+                  or
+                </Typography>
+                <Typography variant="subtitle1">
+                  = {resultTwo.surfaceAreaInheightUnit}
+                </Typography>
+              </div>
+
+            )}
           </div>
+        }
 
-        ) : (
-
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              SA = {resultTwo.surfaceAreaInradiusUnit}
-            </Typography>
-            <Typography variant="subtitle2">
-              or
-            </Typography>
-            <Typography variant="subtitle1">
-              = {resultTwo.surfaceAreaInheightUnit}
-            </Typography>
-          </div>
-
-        )}
       </ResultTabsContainer>
     </>
   )

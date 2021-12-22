@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
-import { FastField, Formik } from 'formik'
+import { Formik } from 'formik'
 
 import { SphericalCapVolumeI } from '../../../../../types'
 import { calculateMath } from '../../../../../services/AppCalculatorsApi'
@@ -23,6 +23,7 @@ import {
 
 const SphericalCapVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -64,7 +65,7 @@ const SphericalCapVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: sphericalCapVolume } = await calculateMath(payload)
+              const { success, payload: sphericalCapVolume } = await calculateMath(payload)
               console.log('=====>', sphericalCapVolume)
               const {
                 volume,
@@ -87,6 +88,9 @@ const SphericalCapVolume = (props: any) => {
                   volumeInRadiusUnit: volumeInRadiusUnit,
                   volumeInHeightUnit: volumeInHeightUnit,
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -147,20 +151,25 @@ const SphericalCapVolume = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.sphericalCapVolume}>
-        {selectedResult === true &&
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              Volume = {Result.volume}{Result.units}<sup>3</sup>
-            </Typography>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1"> Volume = {resultTwo.volumeInHeightUnit}</Typography>
+                <Typography variant="subtitle2"> or</Typography>
+                <Typography variant="subtitle1"> = {resultTwo.volumeInRadiusUnit}</Typography>
+              </div>
+            }
           </div>
         }
-        {selectedResult === false &&
-          <div className="text-wrap">
-            <Typography variant="subtitle1"> Volume = {resultTwo.volumeInHeightUnit}</Typography>
-            <Typography variant="subtitle2"> or</Typography>
-            <Typography variant="subtitle1"> = {resultTwo.volumeInRadiusUnit}</Typography>
-          </div>
-        }
+
       </ResultTabsContainer>
     </>
   )

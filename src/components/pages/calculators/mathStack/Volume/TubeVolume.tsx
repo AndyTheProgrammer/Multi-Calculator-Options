@@ -23,6 +23,7 @@ import {
 
 const TubeVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     outer_diameter: "",
     outer_diameter_unit: "",
@@ -86,6 +87,9 @@ const TubeVolume = (props: any) => {
                   volumeInm: volumem,
                   volumeInin: volumein,
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -168,22 +172,25 @@ const TubeVolume = (props: any) => {
         sm={6}
         latex={LATEX.tubeVolume}
       >
-        {selectedResult === true &&
-          <div className="text-center mb-3">
-            <Typography variant="subtitle1">
-              Volume = {Result.volume}{Result.units}<sup>3</sup>
-            </Typography>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-center mb-3">
+                <Typography variant="subtitle1"> Volume = {resultTwo.volumeInm}</Typography>
+                <Typography variant="subtitle1">or</Typography>
+
+                <Typography variant="subtitle1"> = {resultTwo.volumeInin}</Typography>
+              </div>
+            }
           </div>
         }
-        {selectedResult === false &&
-          <div className="text-center mb-3">
-            <Typography variant="subtitle1"> Volume = {resultTwo.volumeInm}</Typography>
-            <Typography variant="subtitle1">or</Typography>
-
-            <Typography variant="subtitle1"> = {resultTwo.volumeInin}</Typography>
-          </div>
-        }
-
       </ResultTabsContainer>
     </>
   )

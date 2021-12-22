@@ -24,6 +24,7 @@ import {
 
 const CubeSurfArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     edge_length: '',
     edge_unit: ''
@@ -57,7 +58,7 @@ const CubeSurfArea = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: CubeSurfaceArea } = await calculateMath(payload)
+              const { success, payload: CubeSurfaceArea } = await calculateMath(payload)
               console.log('=====>', CubeSurfaceArea)
               const {
                 cubeSurfaceArea,
@@ -73,6 +74,9 @@ const CubeSurfArea = (props: any) => {
                   area: area,
                   unit: unit
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -119,11 +123,14 @@ const CubeSurfArea = (props: any) => {
         sm={6}
         latex={LATEX.cubeSurfArea}
       >
-        <div className="text-wrap">
-          <Typography variant="subtitle1">
-            SA = {Result.surfaceArea}{Result.unit}<sup>2</sup>
-          </Typography>
-        </div>
+        {answer === true &&
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              SA = {Result.surfaceArea}{Result.unit}<sup>2</sup>
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

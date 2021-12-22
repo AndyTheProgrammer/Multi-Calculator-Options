@@ -26,6 +26,7 @@ import {
 
 const SectorArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -49,6 +50,7 @@ const SectorArea = (props: any) => {
   }: any = useStyles()
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
   const [value, setValue] = React.useState(false)
   const animatedSquaresRef1 = React.useRef(null)
   const animatedSquaresRef2 = React.useRef(null)
@@ -107,7 +109,7 @@ const SectorArea = (props: any) => {
               }
               console.log(JSON.stringify(payload))
               try {
-                const { payload: sectorArea } = await calculateMath(payload)
+                const { success, payload: sectorArea } = await calculateMath(payload)
                 console.log('=====>', sectorArea)
                 const {
                   area,
@@ -131,6 +133,9 @@ const SectorArea = (props: any) => {
                 }
                 if (typeof sectorArea === 'object' && unitType === true) {
                   setSelectedResult(unitType)
+                }
+                if (success === true) {
+                  setAnswer(success)
                 }
               } catch (err) {
                 console.log('====>', err)
@@ -208,11 +213,14 @@ const SectorArea = (props: any) => {
           tabTitle={"Result"}
           latex={LATEX.sectorArea}
         >
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              = {Result.area}{Result.unit}<sup>2</sup>
-            </Typography>
-          </div>
+          {answer === true &&
+            <div className="text-wrap">
+              <Typography variant="subtitle1">
+                = {Result.area}{Result.unit}<sup>2</sup>
+              </Typography>
+            </div>
+          }
+
         </ResultTabsContainer>
       </Anime>
 

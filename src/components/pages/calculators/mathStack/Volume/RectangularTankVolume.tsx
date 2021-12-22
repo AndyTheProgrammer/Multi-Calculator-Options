@@ -23,6 +23,7 @@ import {
 
 const RectangularTankVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     length: "",
     length_unit: "",
@@ -92,6 +93,9 @@ const RectangularTankVolume = (props: any) => {
                   volumeInm: volumeInm,
                   volumeInin: volumeInin,
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -170,20 +174,25 @@ const RectangularTankVolume = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.rectangularTankVolume}>
-        {selectedResult === true &&
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              Volume = {Result.volume}{Result.units}<sup>3</sup>
-            </Typography>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1"> Volume = {resultTwo.volumeInm}</Typography>
+                <Typography variant="subtitle2"> or</Typography>
+                <Typography variant="subtitle1"> = {resultTwo.volumeInin}</Typography>
+              </div>
+            }
           </div>
         }
-        {selectedResult === false &&
-          <div className="text-wrap">
-            <Typography variant="subtitle1"> Volume = {resultTwo.volumeInm}</Typography>
-            <Typography variant="subtitle2"> or</Typography>
-            <Typography variant="subtitle1"> = {resultTwo.volumeInin}</Typography>
-          </div>
-        }
+
       </ResultTabsContainer>
     </>
   )

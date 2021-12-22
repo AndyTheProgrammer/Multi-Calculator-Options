@@ -54,8 +54,8 @@ export const CALCULATORS = {
   probabilityOfASeriesOfIndpendentEvents:
     "Probability of a Series of Indpendent Events",
 
-  marginOfError: "Margin of Error",
-  sampleSize: "Sample Size",
+  marginOfError: "Find Out the Margin of Error",
+  sampleSize: "Find Out The Sample Size",
   probablityOfTwoEvents: "Probablity of Two Events",
   probablitySolverForTwoEvents: "Probablity Solver For Two Events",
 

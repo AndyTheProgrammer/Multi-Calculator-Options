@@ -23,6 +23,7 @@ import {
 
 const EllipsoidVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     axis1: "",
     axis1_unit: "",
@@ -71,7 +72,7 @@ const EllipsoidVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: ellipsoidVolume } = await calculateMath(payload)
+              const { success, payload: ellipsoidVolume } = await calculateMath(payload)
               console.log('=====>', ellipsoidVolume)
               const {
                 volume,
@@ -94,6 +95,9 @@ const EllipsoidVolume = (props: any) => {
                   volumein: volumein,
                   volumem: volumem
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -172,20 +176,25 @@ const EllipsoidVolume = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.ellipsoidVolume}>
-        {selectedResult === true &&
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              Volume = {Result.volume}{Result.units}<sup>3</sup>
-            </Typography>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1"> Volume = {resultTwo.volumein}</Typography>
+                <Typography variant="subtitle2"> or</Typography>
+                <Typography variant="subtitle1"> = {resultTwo.volumein}</Typography>
+              </div>
+            }
           </div>
         }
-        {selectedResult === false &&
-          <div className="text-wrap">
-            <Typography variant="subtitle1"> Volume = {resultTwo.volumein}</Typography>
-            <Typography variant="subtitle2"> or</Typography>
-            <Typography variant="subtitle1"> = {resultTwo.volumein}</Typography>
-          </div>
-        }
+
       </ResultTabsContainer>
 
 

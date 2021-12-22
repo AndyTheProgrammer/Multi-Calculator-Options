@@ -41,6 +41,7 @@ function a11yProps(index: any) {
 const Latex = require('react-latex');
 
 function ProbabilityCalculator() {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const {
     tabRoot,
     rightTabContainer,
@@ -77,8 +78,14 @@ function ProbabilityCalculator() {
     event_b: '',
   })
   const [Result2, setResult2] = React.useState({
-    probability: 0,
-    unit: ''
+    prodabilityOfANotOccuring: 0,
+    prodabilityOfBNotOccuring: 0,
+    probabilityOfBothAandBOccuring: 0,
+    probabilityThatAorBorBothOccurs: 0,
+    probabilityThatAorBButNotBothOccurs: 0,
+    probabilityOfNeitherAnorBOccuring: 0,
+    probabilityOfAOccuringButNotB: 0,
+    probabilityOfBOccuringButNotA: 0,
   })
 
   // ProbablitySolverForTwoEvents
@@ -93,8 +100,14 @@ function ProbabilityCalculator() {
     probability_of_neither_a_nor_b_occuring: '',
   })
   const [Result3, setResult3] = React.useState({
-    probability: 0,
-    unit: ''
+    probability_of_a: 0,
+    probability_of_b: 0,
+    probability_that_a_or_b_or_both_occur: 0,
+    probability_of_a_and_b_both_occuring: 0,
+    probability_that_a_or_b_occurs_but_not_both: 0,
+    probability_of_a_not_occuring: 0,
+    probability_of_b_not_occuring: 0,
+    probability_of_neither_a_nor_b_occuring: 0,
   })
 
   // Tab value change
@@ -216,6 +229,9 @@ function ProbabilityCalculator() {
                         })
                       }
                       if (success === true) {
+                        setAnswer(success)
+                      }
+                      if (success === true) {
                         playForm()
                         playResult()
                       }
@@ -302,14 +318,32 @@ function ProbabilityCalculator() {
                     }
                     console.log(JSON.stringify(payload))
                     try {
-                      const { payload: probabilityOfTwoEvents } = await calculateStatistics(payload)
+                      const { success, payload: probabilityOfTwoEvents } = await calculateStatistics(payload)
                       console.log('=====>', probabilityOfTwoEvents)
-                      const { probability, unit } = probabilityOfTwoEvents
+                      const {
+                        prodabilityOfANotOccuring,
+                        prodabilityOfBNotOccuring,
+                        probabilityOfBothAandBOccuring,
+                        probabilityThatAorBorBothOccurs,
+                        probabilityThatAorBButNotBothOccurs,
+                        probabilityOfNeitherAnorBOccuring,
+                        probabilityOfAOccuringButNotB,
+                        probabilityOfBOccuringButNotA,
+                      } = probabilityOfTwoEvents
                       if (typeof probabilityOfTwoEvents === 'object') {
                         setResult2({
-                          probability: probability,
-                          unit: unit
+                          prodabilityOfANotOccuring,
+                          prodabilityOfBNotOccuring,
+                          probabilityOfBothAandBOccuring,
+                          probabilityThatAorBorBothOccurs,
+                          probabilityThatAorBButNotBothOccurs,
+                          probabilityOfNeitherAnorBOccuring,
+                          probabilityOfAOccuringButNotB,
+                          probabilityOfBOccuringButNotA,
                         })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
                       }
                     } catch (err) {
                       console.log('====>', err)
@@ -384,14 +418,33 @@ function ProbabilityCalculator() {
                     }
                     console.log(JSON.stringify(payload))
                     try {
-                      const { payload: probabilitySolverForTwoEvents } = await calculateStatistics(payload)
+                      const { success, payload: probabilitySolverForTwoEvents } = await calculateStatistics(payload)
                       console.log('=====>', probabilitySolverForTwoEvents)
-                      const { probability, unit } = probabilitySolverForTwoEvents
+                      const {
+                        probability_of_a,
+                        probability_of_b,
+                        probability_of_a_not_occuring,
+                        probability_of_b_not_occuring,
+                        probability_of_a_and_b_both_occuring,
+                        probability_that_a_or_b_or_both_occur,
+                        probability_that_a_or_b_occurs_but_not_both,
+                        probability_of_neither_a_nor_b_occuring,
+                      } = probabilitySolverForTwoEvents
+
                       if (typeof probabilitySolverForTwoEvents === 'object') {
                         setResult3({
-                          probability: probability,
-                          unit: unit
+                          probability_of_a,
+                          probability_of_b,
+                          probability_of_a_not_occuring,
+                          probability_of_b_not_occuring,
+                          probability_of_a_and_b_both_occuring,
+                          probability_that_a_or_b_or_both_occur,
+                          probability_that_a_or_b_occurs_but_not_both,
+                          probability_of_neither_a_nor_b_occuring,
                         })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
                       }
                     } catch (err) {
                       console.log('====>', err)
@@ -510,67 +563,108 @@ function ProbabilityCalculator() {
             <ResultTabsContainer
               tabTitle={'Result'}
             >
-              <Box className="text-wrap">
-                {tabValue === 0 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Typography variant="subtitle1">
-                      Probability of A occuring N times: {Result1.probabilityOfAOccuringNTimes}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A not occuring: {Result1.probabilityOfANotOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A occuring: {Result1.probabilityOfAOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B occuring N times: {Result1.probabilityOfBOccuringNTimes}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B not occuring: {Result1.probabilityOfBNotOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B occuring: {Result1.probabilityOfBOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A occuring N times and B occuring N times: {Result1.probabilityOfAOccuringNTimesAndBOccuringNTimes}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of neither A nor B occuring: {Result1.probabilityOfNeitherAnorBOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of both A and B occuring: {Result1.probabilityOfBothAandBOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A occuring N times but not B: {Result1.probabilityOfAOccuringNTimesButNotB}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B occuring N times but not A: {Result1.probabilityOfBOccuringNTimesButNotA}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A occuring but not B: {Result1.probabilityOfAOccuringButNotB}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B occuring but not A: {Result1.probabilityOfBOccuringButNotA}
-                    </Typography>
-                  </Box>
-                }
+              {answer === true &&
+                <Box className="text-wrap">
+                  {tabValue === 0 &&
+                    <Box sx={{ color: COLORS.text }}>
+                      <Typography variant="subtitle1">
+                        Probability of A occuring N times: {Result1.probabilityOfAOccuringNTimes}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of A not occuring: {Result1.probabilityOfANotOccuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of A occuring: {Result1.probabilityOfAOccuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of B occuring N times: {Result1.probabilityOfBOccuringNTimes}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of B not occuring: {Result1.probabilityOfBNotOccuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of B occuring: {Result1.probabilityOfBOccuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of A occuring N times and B occuring N times: {Result1.probabilityOfAOccuringNTimesAndBOccuringNTimes}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of neither A nor B occuring: {Result1.probabilityOfNeitherAnorBOccuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of both A and B occuring: {Result1.probabilityOfBothAandBOccuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of A occuring N times but not B: {Result1.probabilityOfAOccuringNTimesButNotB}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of B occuring N times but not A: {Result1.probabilityOfBOccuringNTimesButNotA}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of A occuring but not B: {Result1.probabilityOfAOccuringButNotB}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of B occuring but not A: {Result1.probabilityOfBOccuringButNotA}
+                      </Typography>
+                    </Box>
+                  }
 
-                {tabValue === 1 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Typography variant="subtitle1">
-                      Probability2: {Result2.probability}{Result2.unit}
-                    </Typography>
-                  </Box>
-                }
+                  {tabValue === 1 &&
+                    <Box sx={{ color: COLORS.text }}>
+                      <Typography variant="subtitle1">
+                        Probability of A not occurring: {Result2.prodabilityOfANotOccuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of B not occurring: {Result2.prodabilityOfBNotOccuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of both A and B occurring: {Result2.probabilityOfBothAandBOccuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability that A or B or both occurs: {Result2.probabilityThatAorBorBothOccurs}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability that A or B but not both occurs: {Result2.probabilityThatAorBButNotBothOccurs}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of neither A nor B occurring: {Result2.probabilityOfNeitherAnorBOccuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of A occurring but not B: {Result2.probabilityOfAOccuringButNotB}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of B occurring but not A: {Result2.probabilityOfBOccuringButNotA}
+                      </Typography>
+                    </Box>
+                  }
 
-                {tabValue === 2 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Typography variant="subtitle1">
-                      Probability3: {Result3.probability}{Result3.unit}
-                    </Typography>
-                  </Box>
-                }
-              </Box>
+                  {tabValue === 2 &&
+                    <Box sx={{ color: COLORS.text }}>
+                      <Typography variant="subtitle1">
+                        Probability of A: {Result3.probability_of_a}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of B: {Result3.probability_of_b}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability that A or B both occur: {Result3.probability_that_a_or_b_or_both_occur}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability that A or B occurs but not both: {Result3.probability_that_a_or_b_occurs_but_not_both}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of A not occurring: {Result3.probability_of_a_not_occuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of B not occurring: {Result3.probability_of_b_not_occuring}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Probability of neither A nor B occurring: {Result3.probability_of_neither_a_nor_b_occuring}
+                      </Typography>
+                    </Box>
+                  }
+                </Box>
+              }
             </ResultTabsContainer>
           </animated.div>
         </div>

@@ -25,6 +25,7 @@ import {
 
 const EllipseArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     semi_major_axes_a: "",
     semi_major_axes_a_unit: "",
@@ -50,6 +51,7 @@ const EllipseArea = (props: any) => {
     formDisplay
   }: any = useStyles()
   const [selectedResult, setSelectedResult] = React.useState<boolean>(false)
+
   const [value, setValue] = React.useState(false)
   const animatedSquaresRef1 = React.useRef(null)
   const animatedSquaresRef2 = React.useRef(null)
@@ -101,7 +103,7 @@ const EllipseArea = (props: any) => {
               }
               console.log(JSON.stringify(payload))
               try {
-                const { payload: ellipseArea } = await calculateMath(payload)
+                const { success, payload: ellipseArea } = await calculateMath(payload)
                 console.log('=====>', ellipseArea)
                 const {
                   area,
@@ -135,6 +137,9 @@ const EllipseArea = (props: any) => {
                     submitted_semi_major_axes_b: submitted_semi_major_axes_b,
                     submittedsemi_major_axes_a: submittedsemi_major_axes_a
                   })
+                }
+                if (success === true) {
+                  setAnswer(success)
                 }
               } catch (err) {
                 console.log('====>', err)
@@ -212,23 +217,27 @@ const EllipseArea = (props: any) => {
           tabTitle={"Result"}
           latex={LATEX.ellipseArea}
         >
-          <div className="text-wrap">
-            {selectedResult === true &&
-              <Typography variant="subtitle1">
-                = {Result.area}{Result.unit}<sup>2</sup>
-              </Typography>
-            }
-            {selectedResult === false &&
-              <div>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInsemi_major_axes_aUnit}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInsemi_major_axes_bUnit}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-          </div>
+          {answer === true &&
+            <div>
+              {selectedResult === true &&
+                <div className="text-wrap">
+                  <Typography variant="subtitle1">
+                    = {Result.area}{Result.unit}<sup>2</sup>
+                  </Typography>
+                </div>
+              }
+              {selectedResult === false &&
+                <div>
+                  <Typography variant="subtitle1">
+                    = {resultTwo.areaInsemi_major_axes_aUnit}<sup>2</sup>
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    = {resultTwo.areaInsemi_major_axes_bUnit}<sup>2</sup>
+                  </Typography>
+                </div>
+              }
+            </div>
+          }
 
         </ResultTabsContainer>
       </Anime>

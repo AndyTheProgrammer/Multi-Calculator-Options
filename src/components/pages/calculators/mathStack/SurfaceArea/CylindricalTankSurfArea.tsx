@@ -25,6 +25,7 @@ const Latex = require('react-latex');
 
 const CylindricalTankSurfArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -74,7 +75,7 @@ const CylindricalTankSurfArea = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: cylindricalTank } = await calculateMath(payload)
+              const { success, payload: cylindricalTank } = await calculateMath(payload)
               console.log('=====>', cylindricalTank)
               const {
                 base_surface_area,
@@ -110,7 +111,9 @@ const CylindricalTankSurfArea = (props: any) => {
                   radiusUnitTotalArea,
                 })
               }
-
+              if (success === true) {
+                setAnswer(success)
+              }
             } catch (err) {
               console.log('====>', err)
             }
@@ -170,51 +173,56 @@ const CylindricalTankSurfArea = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} sm={6}>
-        {selectedResult ? (
-          <div className="text-wrap">
-            <Latex displayMode={true}>{LATEX.cylinderSurfArea_base}</Latex>
-            <Latex displayMode={true}>{LATEX.cylinderSurfArea_lateral}</Latex>
-            <Latex displayMode={true}>{LATEX.cylinderSurfArea_total}</Latex>
+        {answer === true &&
+          <div>
+            {selectedResult ? (
+              <div className="text-wrap">
+                <Latex displayMode={true}>{LATEX.cylinderSurfArea_base}</Latex>
+                <Latex displayMode={true}>{LATEX.cylinderSurfArea_lateral}</Latex>
+                <Latex displayMode={true}>{LATEX.cylinderSurfArea_total}</Latex>
 
-            <Typography variant="subtitle1">
-              Base SA = {Result.baseSurfaceArea}{Result.units}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle1">
-              Lateral SA = {Result.lateralSurfaceArea}{Result.units}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle1">
-              Total SA = {Result.totalSurfaceArea}{Result.units}<sup>2</sup>
-            </Typography>
+                <Typography variant="subtitle1">
+                  Base SA = {Result.baseSurfaceArea}{Result.units}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  Lateral SA = {Result.lateralSurfaceArea}{Result.units}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  Total SA = {Result.totalSurfaceArea}{Result.units}<sup>2</sup>
+                </Typography>
+              </div>
+
+            ) : (
+
+              <div className="text-wrap">
+                <Latex displayMode={true}>{LATEX.cylinderSurfArea_base}</Latex>
+                <Latex displayMode={true}>{LATEX.cylinderSurfArea_lateral}</Latex>
+                <Latex displayMode={true}>{LATEX.cylinderSurfArea_total}</Latex>
+
+                <Typography variant="subtitle1">
+                  Base SA = {resultTwo.radiusUnitBaseSurfaceArea}
+                </Typography>
+                <Typography variant="subtitle1">
+                  Lateral SA = {resultTwo.radiusUnitLateralSurfaceArea}
+                </Typography>
+                <Typography variant="subtitle1">
+                  Total SA = {resultTwo.radiusUnitTotalArea}
+                </Typography>
+
+                <Typography variant="subtitle1">
+                  Base SA = {resultTwo.heightUnitBaseSurfaceArea}
+                </Typography>
+                <Typography variant="subtitle1">
+                  Lateral SA = {resultTwo.heightUnitLateralSurfaceArea}
+                </Typography>
+                <Typography variant="subtitle1">
+                  Total SA = {resultTwo.heightUnitTotalArea}
+                </Typography>
+              </div>
+            )}
           </div>
+        }
 
-        ) : (
-
-          <div className="text-wrap">
-            <Latex displayMode={true}>{LATEX.cylinderSurfArea_base}</Latex>
-            <Latex displayMode={true}>{LATEX.cylinderSurfArea_lateral}</Latex>
-            <Latex displayMode={true}>{LATEX.cylinderSurfArea_total}</Latex>
-
-            <Typography variant="subtitle1">
-              Base SA = {resultTwo.radiusUnitBaseSurfaceArea}
-            </Typography>
-            <Typography variant="subtitle1">
-              Lateral SA = {resultTwo.radiusUnitLateralSurfaceArea}
-            </Typography>
-            <Typography variant="subtitle1">
-              Total SA = {resultTwo.radiusUnitTotalArea}
-            </Typography>
-
-            <Typography variant="subtitle1">
-              Base SA = {resultTwo.heightUnitBaseSurfaceArea}
-            </Typography>
-            <Typography variant="subtitle1">
-              Lateral SA = {resultTwo.heightUnitLateralSurfaceArea}
-            </Typography>
-            <Typography variant="subtitle1">
-              Total SA = {resultTwo.heightUnitTotalArea}
-            </Typography>
-          </div>
-        )}
       </ResultTabsContainer>
 
     </>

@@ -22,7 +22,9 @@ import {
 } from '../../../../custom'
 
 const CapsuleSurfaceArea = (props: any) => {
-  const { openDrop } = props
+  const { openDrop } = props;
+  const [answer, setAnswer] = React.useState<boolean>(false);
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true);
   const [initialFormValues] = React.useState({
     radius: '',
     radius_unit: '',
@@ -44,9 +46,6 @@ const CapsuleSurfaceArea = (props: any) => {
     submittedradius: '',
     submitted_height: '',
   })
-
-  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
-
 
   return (
     <>
@@ -74,7 +73,7 @@ const CapsuleSurfaceArea = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: CapsuleSurfaceArea } = await calculateMath(payload)
+              const { success, payload: CapsuleSurfaceArea } = await calculateMath(payload)
               console.log('=====>', CapsuleSurfaceArea)
               const {
                 surfaceArea,
@@ -107,6 +106,9 @@ const CapsuleSurfaceArea = (props: any) => {
                   submitted_height: submitted_height,
                   submittedradius: submittedradius
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -170,23 +172,28 @@ const CapsuleSurfaceArea = (props: any) => {
         tabTitle={'Result'}
         latex={LATEX.capsuleSurfArea}
       >
-        {selectedResult ? (
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              SA = {Result.surfaceArea}{Result.units}<sup>2</sup>
-            </Typography>
+        {answer === true &&
+          <div>
+            {selectedResult ? (
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  SA = {Result.surfaceArea}{Result.units}<sup>2</sup>
+                </Typography>
+              </div>
+            ) : (
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  SA = {resultTwo.surfaceAreaInradiusUnit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle2">or</Typography>
+                <Typography variant="subtitle1">
+                  SA = {resultTwo.surfaceAreaInheightUnit}<sup>2</sup>
+                </Typography>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              SA = {resultTwo.surfaceAreaInradiusUnit}<sup>2</sup>
-            </Typography>
-            <Typography variant="subtitle2">or</Typography>
-            <Typography variant="subtitle1">
-              SA = {resultTwo.surfaceAreaInheightUnit}<sup>2</sup>
-            </Typography>
-          </div>
-        )}
+        }
+
       </ResultTabsContainer>
 
 
