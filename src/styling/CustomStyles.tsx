@@ -82,15 +82,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     wordBreak: 'break-word'
   },
   leftTabContainer: {
-    height: 25,
     backgroundColor: theme.palette.background.paper,
     color: COLORS.text,
-    alignItems: 'center',
-    justifyContent: "center",
-    float: "inline-start",
     width: "100%",
     borderTopLeftRadius: 20,
     borderBottomRightRadius: 20,
+    justifyContent: 'space-between',
   },
   rightTabContainer: {
     height: 25,
@@ -120,6 +117,16 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     height: '100%',
     borderRadius: '20px !important',
     backgroundColor: theme.palette.background.paper,
+    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
+    paddingBottom: 2,
+    margin: theme.spacing(1),
+  },
+  formResult: {
+    width: 400,
+    height: '100%',
+    borderRadius: '20px !important',
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     paddingBottom: 2,
     margin: theme.spacing(1),
   },
@@ -127,9 +134,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     width: 500,
     height: '100%',
     backgroundColor: theme.palette.background.paper,
+    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     borderRadius: '20px !important',
     paddingBottom: 2,
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
   },
 }));
 

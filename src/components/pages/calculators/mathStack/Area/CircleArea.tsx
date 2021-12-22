@@ -31,11 +31,12 @@ const CircleArea = (props: any) => {
     radius_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Area: 0,
+    area: 0,
     units: '',
     Submitted_radius: '',
     Submitted_unit: ''
   })
+
 
   const [value, setValue] = React.useState(false)
   const animatedSquaresRef1 = React.useRef()
@@ -91,7 +92,7 @@ const CircleArea = (props: any) => {
                 if (typeof circleArea === 'object') {
                   const { area, units, submittedradius, submittedunit } = circleArea
                   setResult({
-                    Area: area,
+                    area: area,
                     units: units,
                     Submitted_radius: submittedradius,
                     Submitted_unit: submittedunit
@@ -166,7 +167,9 @@ const CircleArea = (props: any) => {
           latex={LATEX.cirleArea}
         >
           <div className="text-wrap">
-            <Typography variant="subtitle1"> = {Result.Area}{Result.units}<sup>2</sup></Typography>
+            <Typography variant="subtitle1">
+              = {Result.area}{Result.units}<sup>2</sup>
+            </Typography>
           </div>
         </ResultTabsContainer>
       </Anime>

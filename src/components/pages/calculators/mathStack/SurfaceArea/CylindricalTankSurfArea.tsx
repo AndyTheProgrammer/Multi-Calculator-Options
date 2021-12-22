@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -19,6 +20,8 @@ import {
   FormTabsContainer,
   ResultTabsContainer
 } from '../../../../custom'
+
+const Latex = require('react-latex');
 
 const CylindricalTankSurfArea = (props: any) => {
   const { openDrop } = props
@@ -31,16 +34,13 @@ const CylindricalTankSurfArea = (props: any) => {
   const [Result, setResult] = React.useState({
     baseSurfaceArea: 0,
     lateralSurfaceArea: 0,
-    cylindricalTankSurfaceArea: 0,
+    totalSurfaceArea: 0,
     units: ''
   })
   const [resultTwo, setResultTwo] = React.useState({
-    submitedRadius: 0,
-    radiusUnit: '',
-    radiusToHeightUnit: 0,
-    height: 0,
-    heightUnit: '',
-    heightToRadiusUnit: 0,
+    heightUnitBaseSurfaceArea: 0,
+    heightUnitLateralSurfaceArea: 0,
+    heightUnitTotalArea: 0,
     radiusUnitBaseSurfaceArea: 0,
     radiusUnitLateralSurfaceArea: 0,
     radiusUnitTotalArea: 0
@@ -82,12 +82,9 @@ const CylindricalTankSurfArea = (props: any) => {
                 cylindricalTankSurfaceArea,
                 units,
                 unitType,
-                submitedRadius,
-                radiusUnit,
-                radiusToHeightUnit,
-                height,
-                heightUnit,
-                heightToRadiusUnit,
+                heightUnitBaseSurfaceArea,
+                heightUnitLateralSurfaceArea,
+                heightUnitTotalArea,
                 radiusUnitBaseSurfaceArea,
                 radiusUnitLateralSurfaceArea,
                 radiusUnitTotalArea,
@@ -97,20 +94,17 @@ const CylindricalTankSurfArea = (props: any) => {
                 setResult({
                   baseSurfaceArea: base_surface_area,
                   lateralSurfaceArea: lateral_surface_area,
-                  cylindricalTankSurfaceArea,
-                  units
+                  totalSurfaceArea: cylindricalTankSurfaceArea,
+                  units: units
                 })
               }
 
               if (typeof cylindricalTank === 'object' && unitType === false) {
                 setSelectedResult(unitType)
                 setResultTwo({
-                  submitedRadius,
-                  radiusUnit,
-                  radiusToHeightUnit,
-                  height,
-                  heightUnit,
-                  heightToRadiusUnit,
+                  heightUnitBaseSurfaceArea,
+                  heightUnitLateralSurfaceArea,
+                  heightUnitTotalArea,
                   radiusUnitBaseSurfaceArea,
                   radiusUnitLateralSurfaceArea,
                   radiusUnitTotalArea,
@@ -175,35 +169,53 @@ const CylindricalTankSurfArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      {selectedResult ? (<ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-wrap">
-          <Typography variant="subtitle1"> Top Surface Area = π x r<sup>2</sup></Typography>
-          <Typography variant="subtitle1"> Bottom Surface Area = π x r<sup>2</sup></Typography>
-          <Typography variant="subtitle1"> Lateral Surface Area = 2 x π x 2 x 3</Typography>
-
-          <Typography variant="subtitle1">Base Surface Area: {Result.baseSurfaceArea}</Typography>
-          <Typography variant="subtitle1">Lateral Surface Area: {Result.lateralSurfaceArea}</Typography>
-          <Typography variant="subtitle1">cylindricalTankSurfaceArea: {Result.cylindricalTankSurfaceArea}</Typography>
-          <Typography variant="subtitle1">Unit: {Result.units}</Typography>
-        </div>
-      </ResultTabsContainer>) : (
-        <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'} sm={6}>
+        {selectedResult ? (
           <div className="text-wrap">
-            <Typography variant="subtitle1">Base Surface Area: {resultTwo.radiusUnitBaseSurfaceArea}</Typography>
-            <Typography variant="subtitle1">Lateral Surface Area: {resultTwo.radiusUnitLateralSurfaceArea}</Typography>
-            <Typography variant="subtitle1">radiusUnitTotalArea: {resultTwo.radiusUnitTotalArea}</Typography>
-            <Typography variant="subtitle1">submitedRadius: {resultTwo.submitedRadius}</Typography>
-            <Typography variant="subtitle1">radiusUnit: {resultTwo.radiusUnit}</Typography>
-            <Typography variant="subtitle1">radiusToHeightUnit: {resultTwo.radiusToHeightUnit}</Typography>
-            <Typography variant="subtitle1">heightUnit: {resultTwo.heightUnit}</Typography>
-            <Typography variant="subtitle1">heightToRadiusUnit: {resultTwo.heightToRadiusUnit}</Typography>
-            <Typography variant="subtitle1">height: {resultTwo.height}</Typography>
+            <Latex displayMode={true}>{LATEX.cylinderSurfArea_base}</Latex>
+            <Latex displayMode={true}>{LATEX.cylinderSurfArea_lateral}</Latex>
+            <Latex displayMode={true}>{LATEX.cylinderSurfArea_total}</Latex>
 
+            <Typography variant="subtitle1">
+              Base SA = {Result.baseSurfaceArea}{Result.units}<sup>2</sup>
+            </Typography>
+            <Typography variant="subtitle1">
+              Lateral SA = {Result.lateralSurfaceArea}{Result.units}<sup>2</sup>
+            </Typography>
+            <Typography variant="subtitle1">
+              Total SA = {Result.totalSurfaceArea}{Result.units}<sup>2</sup>
+            </Typography>
           </div>
-        </ResultTabsContainer>
-      )}
 
+        ) : (
 
+          <div className="text-wrap">
+            <Latex displayMode={true}>{LATEX.cylinderSurfArea_base}</Latex>
+            <Latex displayMode={true}>{LATEX.cylinderSurfArea_lateral}</Latex>
+            <Latex displayMode={true}>{LATEX.cylinderSurfArea_total}</Latex>
+
+            <Typography variant="subtitle1">
+              Base SA = {resultTwo.radiusUnitBaseSurfaceArea}
+            </Typography>
+            <Typography variant="subtitle1">
+              Lateral SA = {resultTwo.radiusUnitLateralSurfaceArea}
+            </Typography>
+            <Typography variant="subtitle1">
+              Total SA = {resultTwo.radiusUnitTotalArea}
+            </Typography>
+
+            <Typography variant="subtitle1">
+              Base SA = {resultTwo.heightUnitBaseSurfaceArea}
+            </Typography>
+            <Typography variant="subtitle1">
+              Lateral SA = {resultTwo.heightUnitLateralSurfaceArea}
+            </Typography>
+            <Typography variant="subtitle1">
+              Total SA = {resultTwo.heightUnitTotalArea}
+            </Typography>
+          </div>
+        )}
+      </ResultTabsContainer>
 
     </>
   )

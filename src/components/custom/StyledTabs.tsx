@@ -8,15 +8,18 @@ interface StyledTabsProps {
 }
 
 const StyledTabs = withStyles((theme: Theme) => ({
+  root: {
+    maxHeight: 39,
+    minHeight: 39
+  },
   indicator: {
     display: 'block',
     justifyContent: 'center',
     backgroundColor: 'transparent',
     '& > span': {
-      maxWidth: 40,
+      maxWidth: 39,
       width: '100%',
     },
-
   },
 }))((props: any) => <Tabs variant="fullWidth" {...props} TabIndicatorProps={{ children: <span /> }} />);
 

@@ -78,16 +78,8 @@ const RectangularArea = (props: any) => {
         {/* Form grid */}
         <FormTabsContainer
           tabTitle1={CALCULATORS.rectangleArea}
-          sm={6}
           dropDown={true}
           openDrop={openDrop}
-          ref={animatedSquaresRef1}
-          config={{
-            translateX: -250,
-            easing: 'easeInOutSine',
-            autoplay: false,
-            duration: 250
-          }}
         >
           <Formik
             initialValues={initialFormValues}
@@ -108,7 +100,8 @@ const RectangularArea = (props: any) => {
               try {
                 const { payload: rectangleArea } = await calculateMath(payload)
                 console.log('=====>', rectangleArea)
-                const { area,
+                const {
+                  area,
                   units,
                   submittedLength,
                   submitted_width,
@@ -218,11 +211,23 @@ const RectangularArea = (props: any) => {
           tabTitle={"Result"}
           latex={LATEX.rectangleArea}
         >
-
           <div className="text-wrap">
-            <Typography variant="subtitle1"> = {Result.area}{Result.units}<sup>2</sup></Typography>
+            {selectedResult === true &&
+              <Typography variant="subtitle1">
+                = {Result.area}{Result.units}<sup>2</sup>
+              </Typography>
+            }
+            {selectedResult === false &&
+              <div>
+                <Typography variant="subtitle1">
+                  = {resultTwo.areaInLengthUnit}{Result.units}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  = {resultTwo.areaInWidthUnit}{Result.units}<sup>2</sup>
+                </Typography>
+              </div>
+            }
           </div>
-
         </ResultTabsContainer>
       </Anime>
 

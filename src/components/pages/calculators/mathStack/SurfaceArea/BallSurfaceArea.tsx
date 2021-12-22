@@ -10,6 +10,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -29,7 +30,7 @@ const BallSurfaceArea = (props: any) => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    radius: 0,
+    area: 0,
     unit: '',
   })
 
@@ -38,7 +39,6 @@ const BallSurfaceArea = (props: any) => {
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.ballSurfArea}
-        sm={6}
         dropDown={true}
         openDrop={openDrop}
       >
@@ -58,11 +58,11 @@ const BallSurfaceArea = (props: any) => {
               const { payload: ballSurfaceArea } = await calculateMath(payload)
               console.log('=====>', ballSurfaceArea)
               if (typeof ballSurfaceArea === 'object') {
-                const { surfaceArea, radius, unit } = ballSurfaceArea
+                const { surfaceArea, area, unit } = ballSurfaceArea
                 console.log(ballSurfaceArea)
                 setResult({
                   surfaceArea: surfaceArea,
-                  radius: radius,
+                  area: area,
                   unit: unit
                 })
               }
@@ -106,12 +106,15 @@ const BallSurfaceArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer
+        tabTitle={'Result'}
+        sm={6}
+        latex={LATEX.ballSurfArea}
+      >
         <div className="text-wrap">
-          <Typography variant="subtitle1">Surface Area = 4 x π x r<sup>2</sup></Typography>
-          <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-          <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-          <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            = {Result.surfaceArea}{Result.unit}<sup>2</sup>
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>

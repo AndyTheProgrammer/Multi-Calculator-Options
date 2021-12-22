@@ -5,6 +5,7 @@ import Anime from 'react-animejs-wrapper'
 
 import { SectorAreaI } from '../../../../../types'
 import { calculateMath } from '../../../../../services/AppCalculatorsApi'
+import useStyles from '../../../../../styling/CustomStyles'
 import {
   CALCULATORS,
   LABELS,
@@ -43,6 +44,9 @@ const SectorArea = (props: any) => {
   const [resultTwo, setResultTwo] = React.useState({
 
   })
+  const {
+    formDisplay
+  }: any = useStyles()
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [value, setValue] = React.useState(false)
@@ -76,7 +80,6 @@ const SectorArea = (props: any) => {
         {/* Form grid */}
         <FormTabsContainer
           tabTitle1={CALCULATORS.sectorArea}
-          sm={6}
           dropDown={true}
           openDrop={openDrop}
           ref={animatedSquaresRef1}
@@ -206,7 +209,9 @@ const SectorArea = (props: any) => {
           latex={LATEX.sectorArea}
         >
           <div className="text-wrap">
-            <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
+            <Typography variant="subtitle1">
+              = {Result.area}{Result.unit}<sup>2</sup>
+            </Typography>
           </div>
         </ResultTabsContainer>
       </Anime>

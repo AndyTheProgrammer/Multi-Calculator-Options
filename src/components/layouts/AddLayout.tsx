@@ -3,9 +3,11 @@ import { Box, Grid, Container } from '@mui/material'
 import SpecifiedSearchForm from '../forms/SpecifiedSearchForm'
 import { SingleSlider } from '../slider/SingleSlider'
 import { NavBar2 } from '../navbar/navbar2'
+import useStyles from '../../styling/CustomStyles'
 
 
 export default function AddLayout({ children }: any) {
+    const { container } = useStyles()
     return (
         <>
             {/* <Box
@@ -28,8 +30,8 @@ export default function AddLayout({ children }: any) {
                     </Grid>
                 </Grid>
             </Box> */}
-            <Container>
-                <Grid container xs={12} spacing={2}>
+            <Container className={container}>
+                <Grid container spacing={2}>
                     <Grid container item xs={12} sm={10} spacing={2}>
                         <div
                             className="d-flex justify-content-center"

@@ -5,6 +5,7 @@ import Anime from 'react-animejs-wrapper'
 
 import { EllipseAreaI } from '../../../../../types'
 import { calculateMath } from '../../../../../services/AppCalculatorsApi'
+import useStyles from '../../../../../styling/CustomStyles'
 import {
   CALCULATORS,
   LABELS,
@@ -45,6 +46,9 @@ const EllipseArea = (props: any) => {
     submitted_semi_major_axes_b: 0,
 
   })
+  const {
+    formDisplay
+  }: any = useStyles()
   const [selectedResult, setSelectedResult] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(false)
   const animatedSquaresRef1 = React.useRef(null)
@@ -77,16 +81,8 @@ const EllipseArea = (props: any) => {
       >
         <FormTabsContainer
           tabTitle1={CALCULATORS.ellipseArea}
-          sm={6}
           dropDown={true}
           openDrop={openDrop}
-          ref={animatedSquaresRef1}
-          config={{
-            translateX: -250,
-            easing: 'easeInOutSine',
-            autoplay: false,
-            duration: 250
-          }}
         >
           <Formik
             initialValues={initialFormValues}
@@ -109,7 +105,7 @@ const EllipseArea = (props: any) => {
                 console.log('=====>', ellipseArea)
                 const {
                   area,
-                  unit,
+                  units,
                   semi_major_axes_a,
                   semi_major_axes_b, unitType,
                   areaInsemi_major_axes_aUnit,
@@ -126,7 +122,7 @@ const EllipseArea = (props: any) => {
                     area: area,
                     semi_major_axes_a: semi_major_axes_a,
                     semi_major_axes_b: semi_major_axes_b,
-                    unit: unit
+                    unit: units
                   })
                 }
                 if (typeof ellipseArea === 'object' && unitType === false) {
@@ -217,7 +213,21 @@ const EllipseArea = (props: any) => {
           latex={LATEX.ellipseArea}
         >
           <div className="text-wrap">
-            <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
+            {selectedResult === true &&
+              <Typography variant="subtitle1">
+                = {Result.area}{Result.unit}<sup>2</sup>
+              </Typography>
+            }
+            {selectedResult === false &&
+              <div>
+                <Typography variant="subtitle1">
+                  = {resultTwo.areaInsemi_major_axes_aUnit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  = {resultTwo.areaInsemi_major_axes_bUnit}<sup>2</sup>
+                </Typography>
+              </div>
+            }
           </div>
 
         </ResultTabsContainer>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Anime from 'react-animejs-wrapper'
 import { Grid, Paper, Box, Typography } from '@mui/material';
 
@@ -17,57 +17,43 @@ interface ResultsProps {
   tabTitle: string;
 }
 
-const ResultTabsContainer = React.forwardRef((props: any, ref) => {
-  const { children, tabTitle, sm, config, latex } = props;
+const ResultTabsContainer = (props: any) => {
+  const { children, tabTitle, latex } = props;
   const {
     tabRoot,
     rightTabContainer,
-    leftTabContainer,
-    paperBackground,
     formCardStyle,
-    formDisplay
+    formResult
   } = useStyles()
 
   return (
-
-    <Anime
-      style={{
-        //position: 'absolute',
-        zIndex: -5
-      }}
-      ref={ref}
-      config={config}
-    >
-      <Paper className={formDisplay}>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Box sx={{ height: 40, width: '100%' }}>
-            <FontProvider fonts={[{ font: 'Varela Round' }]}>
+    <div className={formResult}>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ height: 40, width: '100%' }}>
+          <Box
+            sx={{
+              color: '#4072B5',
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}><FontProvider fonts={[{ font: 'Varela Round' }]}>
               <Typography>
-                <Box
-                  sx={{
-                    color: '#4072B5',
-                    fontWeight: 'bold',
-                    textAlign: 'center'
-                  }}>
-                  <Font>{tabTitle}</Font>
-                </Box>
+                <Font>{tabTitle}</Font>
               </Typography>
             </FontProvider>
           </Box>
-          <Box className={rightTabContainer}></Box>
         </Box>
+        <Box className={rightTabContainer}></Box>
+      </Box>
 
-        <div>
-          <div className='overflow-auto p-3'>
-            <Latex displayMode={false}>{latex}</Latex>
-            {children}
-          </div>
+      <div>
+        <div className='overflow-auto p-3'>
+          <Latex displayMode={true}>{latex}</Latex>
+          {children}
         </div>
-      </Paper>
-    </Anime>
-
+      </div>
+    </div>
   )
-})
+}
 
 export default ResultTabsContainer
 

@@ -10,6 +10,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -58,8 +59,14 @@ const CubeSurfArea = (props: any) => {
             try {
               const { payload: CubeSurfaceArea } = await calculateMath(payload)
               console.log('=====>', CubeSurfaceArea)
-              const { cubeSurfaceArea, unit, edge_length, unitType, area
+              const {
+                cubeSurfaceArea,
+                unit,
+                edge_length,
+                unitType,
+                area
               } = CubeSurfaceArea
+
               if (typeof CubeSurfaceArea === 'object') {
                 setResult({
                   surfaceArea: cubeSurfaceArea,
@@ -107,12 +114,15 @@ const CubeSurfArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer
+        tabTitle={'Result'}
+        sm={6}
+        latex={LATEX.cubeSurfArea}
+      >
         <div className="text-wrap">
-          <Typography variant="subtitle1">Surface Area = 6 x a<sup>2</sup></Typography>
-          <Typography variant="subtitle1"> Cube Surface area: {Result.surfaceArea}</Typography>
-          <Typography variant="subtitle1"> area: {Result.area}</Typography>
-          <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
+          <Typography variant="subtitle1">
+            SA = {Result.surfaceArea}{Result.unit}<sup>2</sup>
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>

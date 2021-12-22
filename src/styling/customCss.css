@@ -409,7 +409,13 @@ select.form-control-sm:not([size]):not([multiple]) {
   justify-content: center;
 }
 
+/* Center Form & Result containers */
 .css-1al0n19-MuiGrid-root > .MuiGrid-item {
+  align-content: center !important;
+  justify-content: center !important;
+}
+
+.MuiGrid-spacing-xs-2 > .MuiGrid-item {
   align-content: center !important;
   justify-content: center !important;
 }

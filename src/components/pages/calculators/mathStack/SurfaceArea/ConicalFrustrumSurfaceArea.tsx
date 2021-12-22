@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -19,6 +20,8 @@ import {
   FormTabsContainer,
   ResultTabsContainer
 } from '../../../../custom'
+
+const Latex = require('react-latex');
 
 const ConicalFrustrumSurfaceArea = (props: any) => {
   const { openDrop } = props
@@ -34,9 +37,6 @@ const ConicalFrustrumSurfaceArea = (props: any) => {
     totalSurfaceArea: 0,
     lateralSurfaceArea: 0,
     circularEndSurfaceArea: 0,
-    r: '',
-    R: '',
-    h: '',
     units: ''
   })
 
@@ -119,9 +119,6 @@ const ConicalFrustrumSurfaceArea = (props: any) => {
                   totalSurfaceArea,
                   lateralSurfaceArea,
                   circularEndSurfaceArea,
-                  r,
-                  R,
-                  h,
                   units
                 })
               }
@@ -219,43 +216,64 @@ const ConicalFrustrumSurfaceArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      {selectedResult ? (<ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-wrap">
-          <Typography variant="subtitle1">
-            Top Surface Area = π x r<sup>2</sup>
-          </Typography>
-          <Typography variant="subtitle1">
-            Bottom Surface Area = π x R<sup>2</sup>
-          </Typography>
-          <Typography variant="subtitle1">
-            Lateral Surface Area = π x (R + r) x √(R - r)<sup>2</sup> + h<sup>2</sup>
-          </Typography>
-          <Typography variant="subtitle1">lateralSurfaceArea: {Result.lateralSurfaceArea}</Typography>
-          <Typography variant="subtitle1"> circularEndSurfaceArea: {Result.circularEndSurfaceArea}</Typography>
-          <Typography variant="subtitle1"> totalSurfaceArea: {Result.totalSurfaceArea}</Typography>
-          <Typography variant="subtitle1"> R: {Result.R}</Typography>
-          <Typography variant="subtitle1"> h: {Result.h}</Typography>
-          <Typography variant="subtitle1"> r: {Result.r}</Typography>
-        </div>
-      </ResultTabsContainer>) : (
-        <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'} sm={6}>
+        {selectedResult ? (
           <div className="text-wrap">
-            <Typography variant="subtitle1">circularEndSurfaceAreaInin: {resultTwo.circularEndSurfaceAreaInin}</Typography>
-            <Typography variant="subtitle1"> circularEndSurfaceAreaInm: {resultTwo.circularEndSurfaceAreaInm}</Typography>
-            <Typography variant="subtitle1"> heightInin: {resultTwo.heightInin}</Typography>
-            <Typography variant="subtitle1"> heightInm: {resultTwo.heightInm}</Typography>
-            <Typography variant="subtitle1"> lateralSurfaceAreaInin: {resultTwo.lateralSurfaceAreaInin}</Typography>
-            <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.lateralSurfaceAreaInm}</Typography>
-            <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.top_radiusInin}</Typography>
-            <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.top_radiusInm}</Typography>
-            <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.totalSurfaceAreaInin}</Typography>
-            <Typography variant="subtitle1"> lateralSurfaceAreaInm: {resultTwo.totalSurfaceAreaInm}</Typography>
+            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_circular}</Latex>
+            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_lateral}</Latex>
+            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_total}</Latex>
+
+            <Typography variant="subtitle1">
+              Circular end SA = {Result.circularEndSurfaceArea}
+            </Typography>
+            <Typography variant="subtitle1">
+              Lateral SA = {Result.lateralSurfaceArea}
+            </Typography>
+            <Typography variant="subtitle1">
+              Total SA {Result.totalSurfaceArea}
+            </Typography>
           </div>
-        </ResultTabsContainer>
-      )}
 
+        ) : (
 
+          <div className="text-wrap">
+            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_circular}</Latex>
+            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_lateral}</Latex>
+            <Latex displayMode={true}>{LATEX.conicalFrustrumSurfArea_total}</Latex>
 
+            <Typography variant="subtitle1">
+              Circular end SA = {resultTwo.circularEndSurfaceAreaInin}
+            </Typography>
+            <Typography variant="subtitle2">
+              or
+            </Typography>
+            <Typography variant="subtitle1">
+              = {resultTwo.circularEndSurfaceAreaInm}
+            </Typography>
+
+            <Typography variant="subtitle1">
+              Lateral SA = {resultTwo.lateralSurfaceAreaInin}
+            </Typography>
+            <Typography variant="subtitle2">
+              or
+            </Typography>
+            <Typography variant="subtitle1">
+              = {resultTwo.lateralSurfaceAreaInm}
+            </Typography>
+
+            <Typography variant="subtitle1">
+              Total SA = {resultTwo.totalSurfaceAreaInin}
+            </Typography>
+            <Typography variant="subtitle2">
+              or
+            </Typography>
+            <Typography variant="subtitle1">
+              = {resultTwo.totalSurfaceAreaInm}
+            </Typography>
+          </div>
+
+        )}
+      </ResultTabsContainer>
     </>
   )
 }

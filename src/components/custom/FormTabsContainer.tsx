@@ -23,9 +23,6 @@ function FormTabsContainer(props: any) {
     type,
     dropDown,
     openDrop,
-    calculators,
-    ref,
-    config
   } = props;
   const {
     tabRoot,
@@ -34,55 +31,7 @@ function FormTabsContainer(props: any) {
     paperBackground,
     formDisplay
   }: any = useStyles()
-  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-
-    calculators.map((item: any, index: any) => {
-      console.log("INDEX: ", index)
-      console.log("TABTITLE: ", item.tabTitle)
-    })
-  };
-
-  // Animation is add to the containers, pass the values 'ref' and 'config'.
-  /*  if (type === "styled") {
-     return (
-       <Anime
-         style={{
-           position: 'absolute',
-         }}
-         ref={ref}
-         config={config}
-       >
-         <Grid item xs={12} sm={sm}>
-           <Paper className={paperBackground}>
-             <div className={tabRoot}>
-               <StyledTabs value={value} onChange={handleChange}>
-                 {calculators.map((item: any, index: number) => (
-                   <StyledTab
-                     key={item.tabTitle}
-                     label={item.tabTitle}
-                     {...a11yProps(index)}
-                   />
-                 ))}
-               </StyledTabs>
- 
-               {calculators.map((item: any, index: number) => (
-                 <TabPanel
-                   key={item}
-                   value={value}
-                   index={index}
-                 >
-                   {item.calc}
-                 </TabPanel>
-               ))}
-             </div>
-           </Paper>
-         </Grid>
-       </Anime>
-     )
-   } else */
   if (dropDown === true) {
     return (
       <Paper className={formDisplay}>
@@ -91,12 +40,12 @@ function FormTabsContainer(props: any) {
             <StaticTab
               className={leftTabContainer}
               label={tabTitle1}
-              dropDown={true}
-              openDrop={openDrop}
             />
             <StaticTab
               className={rightTabContainer}
               label={tabTitle2}
+              dropDown={true}
+              openDrop={openDrop}
             />
           </StyledTabs>
 

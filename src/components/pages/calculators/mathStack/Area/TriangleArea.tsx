@@ -42,6 +42,12 @@ const TriangleArea = (props: any) => {
     sideC: 0,
     unit: ''
   })
+  const [Result2, setResult2] = React.useState({
+    areaInLenghtUnit: 0,
+    areaInWidthUnit: 0,
+    unit: ''
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [value, setValue] = React.useState(false)
   const animatedSquaresRef1 = React.useRef(null)
   const animatedSquaresRef2 = React.useRef(null)
@@ -76,13 +82,6 @@ const TriangleArea = (props: any) => {
           sm={6}
           dropDown={true}
           openDrop={openDrop}
-          ref={animatedSquaresRef1}
-          config={{
-            translateX: -250,
-            easing: 'easeInOutSine',
-            autoplay: false,
-            duration: 250
-          }}
         >
           <Formik
             initialValues={initialFormValues}
@@ -105,17 +104,34 @@ const TriangleArea = (props: any) => {
               }
               console.log(JSON.stringify(payload))
               try {
-                const { payload: TriangleArea } = await calculateMath(payload)
-                console.log('=====>', TriangleArea)
-                const { area, unit, sideA, sideB, sideC
-                } = TriangleArea
-                if (typeof TriangleArea === 'object') {
+                const { payload: triangleArea } = await calculateMath(payload)
+                console.log('=====>', triangleArea)
+                const {
+                  unitType,
+                  area,
+                  units,
+                  sideA,
+                  sideB,
+                  sideC,
+                  areaInLengthUnit,
+                  areaInWidthUnit
+                } = triangleArea
+                if (typeof triangleArea === 'object' && unitType === true) {
+                  setSelectedResult(unitType)
                   setResult({
                     area: area,
                     sideA: sideA,
                     sideB: sideB,
                     sideC: sideC,
-                    unit: unit
+                    unit: units
+                  })
+                }
+                if (typeof triangleArea === 'object' && unitType === false) {
+                  setSelectedResult(unitType)
+                  setResult2({
+                    areaInLenghtUnit: areaInLengthUnit,
+                    areaInWidthUnit: areaInWidthUnit,
+                    unit: units
                   })
                 }
               } catch (err) {
@@ -213,7 +229,22 @@ const TriangleArea = (props: any) => {
           latex={LATEX.triangleArea}
         >
           <div className="text-wrap">
-            <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
+            {selectedResult === true &&
+              <Typography variant="subtitle1">
+                = {Result.area}{Result.unit}<sup>2</sup>
+              </Typography>
+            }
+            {selectedResult === false &&
+              <div>
+                <Typography variant="subtitle1">
+                  = {Result2.areaInLenghtUnit}{Result.unit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  = {Result2.areaInWidthUnit}{Result.unit}<sup>2</sup>
+                </Typography>
+              </div>
+            }
+
           </div>
         </ResultTabsContainer>
       </Anime>

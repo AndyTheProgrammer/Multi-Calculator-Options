@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -30,18 +31,12 @@ const CapsuleVolume = (props: any) => {
   })
   const [Result, setResult] = React.useState({
     volume: 0,
-    radius: 0,
-    height: 0,
     units: ''
   })
 
   const [resultTwo, setResultTwo] = React.useState({
     volumeInRadiusUnit: 0,
     volumeInHeightUnit: 0,
-    radiusInheightUnit: 0,
-    heightInradiusUnit: 0,
-    submittedradius: 0,
-    submitted_height: 0,
   })
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
@@ -71,17 +66,12 @@ const CapsuleVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: capsuleVolume } = await calculateMath(payload)
+              const { success, payload: capsuleVolume } = await calculateMath(payload)
               console.log('=====>', capsuleVolume)
-              const { volumeInRadiusUnit,
+              const {
+                volumeInRadiusUnit,
                 volumeInHeightUnit,
-                radiusInheightUnit,
-                heightInradiusUnit,
-                submittedradius,
-                submitted_height,
                 volume,
-                radius,
-                height,
                 units,
                 unitType,
               } = capsuleVolume
@@ -89,21 +79,15 @@ const CapsuleVolume = (props: any) => {
                 //For now only working if you use different units
                 setSelectedResult(unitType)
                 setResult({
-                  volume,
-                  radius,
-                  height,
-                  units,
+                  volume: volume,
+                  units: units,
                 })
               }
               if (typeof capsuleVolume === 'object' && unitType === false) {
                 setSelectedResult(unitType)
                 setResultTwo({
-                  volumeInRadiusUnit,
-                  volumeInHeightUnit,
-                  radiusInheightUnit,
-                  heightInradiusUnit,
-                  submittedradius,
-                  submitted_height,
+                  volumeInRadiusUnit: volumeInRadiusUnit,
+                  volumeInHeightUnit: volumeInHeightUnit,
                 })
               }
             } catch (err) {
@@ -167,22 +151,28 @@ const CapsuleVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle2={'Result'} sm={6}>
+      <ResultTabsContainer
+        tabTitle={'Result'}
+        sm={6}
+        latex={LATEX.capsuleVolume}
+      >
         {selectedResult ? (
-          <div className="text-center mb-3">
-            <Typography variant="subtitle1"> Volume : {Result.volume}</Typography>
-            <Typography variant="subtitle1"> Radius {Result.radius}</Typography>
-            <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-            <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              Volume = {Result.volume}{Result.units}<sup>3</sup>
+            </Typography>
           </div>
         ) : (
-          <div className="text-center mb-3">
-            <Typography variant="subtitle1"> Volume in Radius: {resultTwo.volumeInRadiusUnit}</Typography>
-            <Typography variant="subtitle1"> Volume in Height: {resultTwo.volumeInHeightUnit}</Typography>
-            <Typography variant="subtitle1"> Submitted Radius: {resultTwo.submittedradius}</Typography>
-            <Typography variant="subtitle1"> Submitted Height: {resultTwo.submitted_height}</Typography>
-            <Typography variant="subtitle1"> Radius in Height: {resultTwo.radiusInheightUnit}</Typography>
-            <Typography variant="subtitle1"> Height in Radius: {resultTwo.heightInradiusUnit}</Typography>
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              Volume = {resultTwo.volumeInRadiusUnit}
+            </Typography>
+            <Typography variant="subtitle2">
+              or
+            </Typography>
+            <Typography variant="subtitle1">
+              = {resultTwo.volumeInHeightUnit}
+            </Typography>
           </div>
         )}
 

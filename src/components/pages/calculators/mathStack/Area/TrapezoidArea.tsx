@@ -5,6 +5,7 @@ import Anime from 'react-animejs-wrapper'
 
 import { TrapezoidAreaI } from '../../../../../types'
 import { calculateMath } from '../../../../../services/AppCalculatorsApi'
+import useStyles from '../../../../../styling/CustomStyles'
 import {
   CALCULATORS,
   LABELS,
@@ -51,6 +52,9 @@ const TrapezoidArea = (props: any) => {
     base2tocm: 0,
     heighttocm: 0,
   })
+  const {
+    formDisplay
+  }: any = useStyles()
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [value, setValue] = React.useState(false)
   const animatedSquaresRef1 = React.useRef(null)
@@ -87,13 +91,6 @@ const TrapezoidArea = (props: any) => {
           sm={6}
           dropDown={true}
           openDrop={openDrop}
-          ref={animatedSquaresRef1}
-          config={{
-            translateX: -250,
-            easing: 'easeInOutSine',
-            autoplay: false,
-            duration: 250
-          }}
         >
           <Formik
             initialValues={initialFormValues}
@@ -253,11 +250,23 @@ const TrapezoidArea = (props: any) => {
           tabTitle={"Result"}
           latex={LATEX.trapezoidArea}
         >
-
           <div className="text-wrap">
-            <Typography variant="subtitle1"> = {Result.area}{Result.unit}<sup>2</sup></Typography>
+            {selectedResult === true &&
+              <Typography variant="subtitle1">
+                = {Result.area}{Result.unit}<sup>2</sup>
+              </Typography>
+            }
+            {selectedResult === false &&
+              <div>
+                <Typography variant="subtitle1">
+                  = {resultTwo.areaInm}{Result.unit}<sup>2</sup>
+                </Typography>
+                <Typography variant="subtitle1">
+                  = {resultTwo.areaIncm}{Result.unit}<sup>2</sup>
+                </Typography>
+              </div>
+            }
           </div>
-
         </ResultTabsContainer>
       </Anime>
 

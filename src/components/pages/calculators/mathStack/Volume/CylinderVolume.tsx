@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -29,12 +30,16 @@ const CylinderVolume = (props: any) => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    radius: 0,
-    height: 0,
+    volume: 0,
     units: ''
   })
-
+  const [resultTwo, setResultTwo] = React.useState({
+    radiusUnit: '',
+    heightUnit: '',
+    volumeInRadiusUnit: 0,
+    volumeInHeightUnit: 0,
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   return (
     <>
       {/* Form grid */}
@@ -63,13 +68,29 @@ const CylinderVolume = (props: any) => {
             try {
               const { payload: cylindricalVolume } = await calculateMath(payload)
               console.log('=====>', cylindricalVolume)
-              const { volume, units, radius, height } = cylindricalVolume
-              if (typeof cylindricalVolume === 'object') {
+              const {
+                unitType,
+                volume,
+                units,
+                radiusUnit,
+                heightUnit,
+                volumeInRadiusUnit,
+                volumeInHeightUnit,
+              } = cylindricalVolume
+              if (typeof cylindricalVolume === 'object' && unitType === true) {
+                setSelectedResult(unitType)
                 setResult({
-                  Volume: volume,
-                  radius: radius,
-                  height: height,
+                  volume: volume,
                   units: units
+                })
+              }
+              if (typeof cylindricalVolume === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  radiusUnit: radiusUnit,
+                  heightUnit: heightUnit,
+                  volumeInRadiusUnit: volumeInRadiusUnit,
+                  volumeInHeightUnit: volumeInHeightUnit,
                 })
               }
             } catch (err) {
@@ -130,13 +151,25 @@ const CylinderVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-          <Typography variant="subtitle1"> height: {Result.height}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.cylinderVolume}>
+        {selectedResult === true &&
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              Volume = {Result.volume}{Result.units}<sup>3</sup>
+            </Typography>
+          </div>
+        }
+        {selectedResult === false &&
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              Volume = {resultTwo.volumeInHeightUnit}{resultTwo.heightUnit}<sup>3</sup>
+            </Typography>
+            <Typography variant="subtitle2"> or</Typography>
+            <Typography variant="subtitle1">
+              = {resultTwo.volumeInRadiusUnit}{resultTwo.radiusUnit}<sup>3</sup>
+            </Typography>
+          </div>
+        }
       </ResultTabsContainer>
     </>
   )

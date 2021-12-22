@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -27,8 +28,7 @@ const SphereVolume = (props: any) => {
     radius_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    radius: '',
+    volume: 0,
     units: ''
   })
 
@@ -56,12 +56,13 @@ const SphereVolume = (props: any) => {
             try {
               const { payload: sphereVolume } = await calculateMath(payload)
               console.log('=====>', sphereVolume)
-              const { volume, units, radius
+              const {
+                volume,
+                units,
               } = sphereVolume
               if (typeof sphereVolume === 'object') {
                 setResult({
-                  Volume: volume,
-                  radius: radius,
+                  volume: volume,
                   units: units
                 })
               }
@@ -105,11 +106,11 @@ const SphereVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.sphereVolume}>
+        <div className="text-wrap">
+          <Typography variant="subtitle1">
+            Volume = {Result.volume}{Result.units}<sup>3</sup>
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>

@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -31,13 +32,14 @@ const TubeVolume = (props: any) => {
     length_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    outer_diameter: 0,
-    inner_diameter: 0,
-    length: 0,
+    volume: 0,
     units: ''
   })
-
+  const [resultTwo, setResultTwo] = React.useState({
+    volumeInm: 0,
+    volumeInin: 0,
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   return (
     <>
       {/* Form grid */}
@@ -68,16 +70,21 @@ const TubeVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: tubeVolume } = await calculateMath(payload)
+              const { success, payload: tubeVolume } = await calculateMath(payload)
               console.log('=====>', tubeVolume)
-              const { volume, units, outer_diameter, inner_diameter, length } = tubeVolume
-              if (typeof tubeVolume === 'object') {
+              const { volume, units, unitType, volumem, volumein } = tubeVolume
+              if (typeof tubeVolume === 'object' && unitType === true) {
+                setSelectedResult(unitType)
                 setResult({
-                  Volume: volume,
-                  outer_diameter: outer_diameter,
-                  inner_diameter: inner_diameter,
-                  length: length,
+                  volume: volume,
                   units: units
+                })
+              }
+              if (typeof tubeVolume === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  volumeInm: volumem,
+                  volumeInin: volumein,
                 })
               }
             } catch (err) {
@@ -156,13 +163,27 @@ const TubeVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Outer Diameter: {Result.outer_diameter}</Typography>
-          <Typography variant="subtitle1"> Inner Diameter: {Result.inner_diameter}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-        </div>
+      <ResultTabsContainer
+        tabTitle={'Result'}
+        sm={6}
+        latex={LATEX.tubeVolume}
+      >
+        {selectedResult === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">
+              Volume = {Result.volume}{Result.units}<sup>3</sup>
+            </Typography>
+          </div>
+        }
+        {selectedResult === false &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1"> Volume = {resultTwo.volumeInm}</Typography>
+            <Typography variant="subtitle1">or</Typography>
+
+            <Typography variant="subtitle1"> = {resultTwo.volumeInin}</Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

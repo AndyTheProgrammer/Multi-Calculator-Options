@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -29,11 +30,14 @@ const SquarePyramidVolume = (props: any) => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    base: 0,
-    height: 0,
+    volume: 0,
     units: '',
   })
+  const [resultTwo, setResultTwo] = React.useState({
+    volumeInBaseUnit: 0,
+    volumeInHeightUnit: 0,
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
   return (
     <>
@@ -61,15 +65,28 @@ const SquarePyramidVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: squarePyramidVolume } = await calculateMath(payload)
+              const { success, payload: squarePyramidVolume } = await calculateMath(payload)
               console.log('=====>', squarePyramidVolume)
-              const { volume, units, height, base } = squarePyramidVolume
-              if (typeof squarePyramidVolume === 'object') {
+              const {
+                volume,
+                units,
+                volumeInBaseUnit,
+                volumeInHeightUnit,
+                unitType,
+              } = squarePyramidVolume
+
+              if (typeof squarePyramidVolume === 'object' && unitType === true) {
+                setSelectedResult(unitType)
                 setResult({
-                  Volume: volume,
-                  base: base,
-                  height: height,
+                  volume: volume,
                   units: units
+                })
+              }
+              if (typeof squarePyramidVolume === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  volumeInBaseUnit,
+                  volumeInHeightUnit,
                 })
               }
             } catch (err) {
@@ -130,13 +147,21 @@ const SquarePyramidVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Base: {Result.base}</Typography>
-          <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.squarePyramidVolume}>
+        {selectedResult === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">
+              Volume = {Result.volume}{Result.units}<sup>3</sup>
+            </Typography>
+          </div>
+        }
+        {selectedResult === false &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1"> Volume = {resultTwo.volumeInBaseUnit}</Typography>
+            <Typography variant="subtitle2"> or</Typography>
+            <Typography variant="subtitle1"> = {resultTwo.volumeInHeightUnit}</Typography>
+          </div>
+        }
       </ResultTabsContainer>
     </>
   )
