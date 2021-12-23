@@ -20,6 +20,7 @@ import {
 } from '../../../custom'
 
 const ProfitMarginCalculator = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
   const [initialFormValues] = React.useState({
     sales_revenue: "",
@@ -49,7 +50,7 @@ const ProfitMarginCalculator = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: profitMarginCalculator } = await calculateFinances(payload)
+              const { success, payload: profitMarginCalculator } = await calculateFinances(payload)
               console.log('=====>', profitMarginCalculator)
               const { grossMargin, grossProfit, markUp, currency } = profitMarginCalculator
               if (typeof profitMarginCalculator === 'object') {
@@ -59,6 +60,9 @@ const ProfitMarginCalculator = () => {
                   markUp: markUp,
                   currency: currency
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -106,11 +110,14 @@ const ProfitMarginCalculator = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Gross margin: {Result.grossMargin}%</Typography>
-          <Typography variant="subtitle1"> Gross profit: {Result.currency}{Result.grossProfit}</Typography>
-          <Typography variant="subtitle1"> Mark up: {Result.markUp}%</Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1"> Gross margin: {Result.grossMargin}%</Typography>
+            <Typography variant="subtitle1"> Gross profit: {Result.currency}{Result.grossProfit}</Typography>
+            <Typography variant="subtitle1"> Mark up: {Result.markUp}%</Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

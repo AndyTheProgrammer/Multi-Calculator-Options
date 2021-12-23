@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Anime from 'react-animejs-wrapper'
+import { Grid, Paper, Box, Typography } from '@mui/material';
 
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
 import TabPanel from './TabPanel';
 import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
-import { Grid, Paper, Box } from '@mui/material';
 import useStyles from '../../styling/CustomStyles'
 import { Font, FontProvider } from '../font'
 
@@ -17,95 +17,84 @@ interface ResultsProps {
   tabTitle: string;
 }
 
-function a11yProps(index: any) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
+const ResultTabsContainer = (props: any) => {
+  const { children, tabTitle, latex } = props;
+  const {
+    tabRoot,
+    rightTabContainer,
+    formCardStyle,
+    formResult
+  } = useStyles()
+
+  return (
+    <div className={formResult}>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ height: 40, width: '100%' }}>
+          <Box
+            sx={{
+              color: '#4072B5',
+              fontWeight: 'bold',
+              textAlign: 'center',
+            }}><FontProvider fonts={[{ font: 'Varela Round' }]}>
+              <Typography>
+                <Font>{tabTitle}</Font>
+              </Typography>
+            </FontProvider>
+          </Box>
+        </Box>
+        <Box className={rightTabContainer}></Box>
+      </Box>
+
+      <div>
+        <div className='overflow-auto p-3'>
+          <Latex displayMode={true}>{latex}</Latex>
+          {children}
+        </div>
+      </div>
+    </div>
+  )
 }
 
-const ResultTabsContainer = (props: any) => {
-  const { children, tabTitle1, tabTitle2, sm, type, ref, config, latex } = props;
+export default ResultTabsContainer
+
+/* const ResultTabsContainer = React.forwardRef((props: any, ref) => {
+  const { children, tabTitle1, tabTitle2, sm, config, latex } = props;
   const {
     tabRoot,
     rightTabContainer,
     leftTabContainer,
     paperBackground,
-    formDisplay
+    resultContainer
   } = useStyles()
-  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
+  return (
+    <Anime
+      style={{
+        position: 'absolute',
+        zIndex: -5
+      }}
+      ref={ref}
+      config={{ config }}
+    >
+      <Box className={resultContainer}>
+        <div className={tabRoot}>
+          <StyledTabs>
+            <StaticTab
+              className={leftTabContainer}
+              label={tabTitle1}
+            />
+            <StaticTab
+              className={rightTabContainer}
+              label={tabTitle2}
+            />
+          </StyledTabs>
 
-  if (type === "styled") {
-    return (
-      <Anime
-        style={{
-          position: 'absolute',
-          zIndex: -5
-        }}
-        ref={ref}
-        config={config}
-      >
-        <Box>
-          <Paper className={paperBackground}>
-            <div className={tabRoot} style={{ maxHeight: '30' }}>
-              <StyledTabs value={value} onChange={handleChange} >
-                <StyledTab
-                  label={tabTitle1}
-                  {...a11yProps(0)}
-                />
-                <StyledTab
-                  label={tabTitle2}
-                  {...a11yProps(1)}
-                />
-              </StyledTabs>
-
-              <TabPanel value={value} index={0}>
-                <Latex displayMode={false}>{latex}</Latex>
-                {children}
-              </TabPanel>
-            </div>
-          </Paper>
-        </Box>
-      </Anime>
-    )
-  } else {
-    return (
-      <Anime
-        style={{
-          position: 'absolute',
-          zIndex: -5
-        }}
-        ref={ref}
-        config={config}
-      >
-        <Box>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <StaticTab
-                  className={leftTabContainer}
-                  label={tabTitle1}
-                />
-                <StaticTab
-                  className={rightTabContainer}
-                  label={tabTitle2}
-                />
-              </StyledTabs>
-
-              <NoIndexTabPanel>
-                <Latex displayMode={false}>{latex}</Latex>
-                {children}
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Box>
-      </Anime>
-    )
-  }
-}
-
-export default ResultTabsContainer
+          <NoIndexTabPanel>
+            <Latex displayMode={false}>{latex}</Latex>
+            {children}
+          </NoIndexTabPanel>
+        </div>
+      </Box>
+    </Anime>
+  )
+}) */

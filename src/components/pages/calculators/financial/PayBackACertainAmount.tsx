@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const PayBackACertainAmount = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
   const [initialFormValues] = React.useState({
     interest_rate: "",
@@ -53,7 +54,7 @@ const PayBackACertainAmount = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: paybackACertainAmount } = await calculateFinances(payload)
+              const { success, payload: paybackACertainAmount } = await calculateFinances(payload)
               console.log('=====>', paybackACertainAmount)
               const { monthlyPay, $profit, totalPayments, currency } = paybackACertainAmount
               if (typeof paybackACertainAmount === 'object') {
@@ -63,6 +64,9 @@ const PayBackACertainAmount = () => {
                   totalPayments: totalPayments,
                   currency: currency
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -120,17 +124,20 @@ const PayBackACertainAmount = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Monthly pay: {Result.currency}{Result.monthlyPay}
-          </Typography>
-          <Typography variant="subtitle1">
-            Profit: {Result.currency}{Result.$profit}
-          </Typography>
-          <Typography variant="subtitle1">
-            Total payments: {Result.currency}{Result.totalPayments}
-          </Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">
+              Monthly pay: {Result.currency}{Result.monthlyPay}
+            </Typography>
+            <Typography variant="subtitle1">
+              Profit: {Result.currency}{Result.$profit}
+            </Typography>
+            <Typography variant="subtitle1">
+              Total payments: {Result.currency}{Result.totalPayments}
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

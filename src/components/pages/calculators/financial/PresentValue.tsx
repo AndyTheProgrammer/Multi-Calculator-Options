@@ -20,6 +20,7 @@ import {
 } from '../../../custom'
 
 const PresentValue = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
   const [initialFormValues] = React.useState({
     interest_rate: "",
@@ -54,7 +55,7 @@ const PresentValue = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: presentValueOfFutureMoney } = await calculateFinances(payload)
+              const { success, payload: presentValueOfFutureMoney } = await calculateFinances(payload)
               console.log('=====>', presentValueOfFutureMoney)
               const { PV, totalInterest, currency } = presentValueOfFutureMoney
               if (typeof presentValueOfFutureMoney === 'object') {
@@ -63,6 +64,9 @@ const PresentValue = () => {
                   totalInterest: totalInterest,
                   currency: currency
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
               resetForm()
             } catch (err) {
@@ -132,10 +136,13 @@ const PresentValue = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Present value: {Result.currency}{Result.PV}</Typography>
-          <Typography variant="subtitle1"> Total interest: {Result.currency}{Result.totalInterest}</Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1"> Present value: {Result.currency}{Result.PV}</Typography>
+            <Typography variant="subtitle1"> Total interest: {Result.currency}{Result.totalInterest}</Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

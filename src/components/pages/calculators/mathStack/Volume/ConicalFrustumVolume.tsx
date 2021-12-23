@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,6 +23,7 @@ import {
 
 const ConicalFrustumVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     top_radius: "",
     top_radius_unit: "",
@@ -31,13 +33,14 @@ const ConicalFrustumVolume = (props: any) => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    topRadius: 0,
-    bottomRadius: 0,
-    height: 0,
+    volume: 0,
     units: ''
   })
-
+  const [resultTwo, setResultTwo] = React.useState({
+    volumeInm: 0,
+    volumeInin: 0,
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   return (
     <>
       {/* Form grid */}
@@ -68,17 +71,26 @@ const ConicalFrustumVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: conicalFrustrumVolume } = await calculateMath(payload)
+              const { success, payload: conicalFrustrumVolume } = await calculateMath(payload)
               console.log('=====>', conicalFrustrumVolume)
-              const { volume, units, topR, bottomR, height } = conicalFrustrumVolume
-              if (typeof conicalFrustrumVolume === 'object') {
+              const { volume, units, volumeInm, volumeInin, unitType } = conicalFrustrumVolume
+
+              if (typeof conicalFrustrumVolume === 'object' && unitType === true) {
+                setSelectedResult(unitType)
                 setResult({
-                  Volume: volume,
-                  topRadius: topR,
-                  bottomRadius: bottomR,
-                  height: height,
+                  volume: volume,
                   units: units
                 })
+              }
+              if (typeof conicalFrustrumVolume === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  volumeInm: volumeInm,
+                  volumeInin: volumeInin
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -156,14 +168,26 @@ const ConicalFrustumVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Top Radius: {Result.topRadius}</Typography>
-          <Typography variant="subtitle1"> Bottom Radius: {Result.bottomRadius}</Typography>
-          <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-          <Typography variant="subtitle1"> Units : {Result.units}</Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.conicalFrustrumVolume}>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1"> Volume = {resultTwo.volumeInm}</Typography>
+                <Typography variant="subtitle2"> or</Typography>
+                <Typography variant="subtitle1"> = {resultTwo.volumeInin}</Typography>
+              </div>
+            }
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

@@ -14,13 +14,6 @@ interface FormProps {
   tabTitle: string;
 }
 
-function a11yProps(index: any) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 function FormTabsContainer(props: any) {
   const {
     children,
@@ -30,9 +23,6 @@ function FormTabsContainer(props: any) {
     type,
     dropDown,
     openDrop,
-    calculators,
-    ref,
-    config
   } = props;
   const {
     tabRoot,
@@ -41,117 +31,50 @@ function FormTabsContainer(props: any) {
     paperBackground,
     formDisplay
   }: any = useStyles()
-  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-
-    calculators.map((item: any, index: any) => {
-      console.log("INDEX: ", index)
-      console.log("TABTITLE: ", item.tabTitle)
-    })
-  };
-
-  // Animation is add to the containers, pass the values 'ref' and 'config'.
-  if (type === "styled") {
+  if (dropDown === true) {
     return (
-      <Anime
-        style={{
-          position: 'absolute',
-        }}
-        ref={ref}
-        config={config}
-      >
-        <Grid item xs={12} sm={sm}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs value={value} onChange={handleChange}>
-                {calculators.map((item: any, index: number) => (
-                  <StyledTab
-                    key={item.tabTitle}
-                    label={item.tabTitle}
-                    {...a11yProps(index)}
-                  />
-                ))}
-              </StyledTabs>
+      <Paper className={formDisplay}>
+        <div className={tabRoot}>
+          <StyledTabs>
+            <StaticTab
+              className={leftTabContainer}
+              label={tabTitle1}
+            />
+            <StaticTab
+              className={rightTabContainer}
+              label={tabTitle2}
+              dropDown={true}
+              openDrop={openDrop}
+            />
+          </StyledTabs>
 
-              {calculators.map((item: any, index: number) => (
-                <TabPanel
-                  key={item}
-                  value={value}
-                  index={index}
-                >
-                  {item.calc}
-                </TabPanel>
-              ))}
-            </div>
-          </Paper>
-        </Grid>
-      </Anime>
-    )
-  } else if (dropDown === true) {
-    return (
-      <Anime
-        style={{
-          position: 'absolute',
-        }}
-        ref={ref}
-        config={config}
-      >
-        <Box>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <StaticTab
-                  className={leftTabContainer}
-                  label={tabTitle1}
-                  dropDown={true}
-                  openDrop={openDrop}
-                />
-                <StaticTab
-                  className={rightTabContainer}
-                  label={tabTitle2}
-                />
-              </StyledTabs>
-
-              <NoIndexTabPanel>
-                {children}
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Box>
-      </Anime>
+          <NoIndexTabPanel>
+            {children}
+          </NoIndexTabPanel>
+        </div>
+      </Paper>
     )
   } else {
     return (
-      <Anime
-        style={{
-          position: 'absolute',
-        }}
-        ref={ref}
-        config={config}
-      >
-        <Grid item xs={12} sm={sm}>
-          <Paper className={paperBackground}>
-            <div className={tabRoot}>
-              <StyledTabs>
-                <StaticTab
-                  className={leftTabContainer}
-                  label={tabTitle1}
-                />
-                <StaticTab
-                  className={rightTabContainer}
-                  label={tabTitle2}
-                />
-              </StyledTabs>
+      <Paper className={formDisplay}>
+        <div className={tabRoot}>
+          <StyledTabs>
+            <StaticTab
+              className={leftTabContainer}
+              label={tabTitle1}
+            />
+            <StaticTab
+              className={rightTabContainer}
+              label={tabTitle2}
+            />
+          </StyledTabs>
 
-              <NoIndexTabPanel>
-                {children}
-              </NoIndexTabPanel>
-            </div>
-          </Paper>
-        </Grid>
-      </Anime>
+          <NoIndexTabPanel>
+            {children}
+          </NoIndexTabPanel>
+        </div>
+      </Paper>
     )
   }
 }

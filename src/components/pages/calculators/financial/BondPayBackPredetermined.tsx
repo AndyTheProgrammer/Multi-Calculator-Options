@@ -22,6 +22,7 @@ import {
 } from '../../../custom'
 
 const BondPayBackPredetermined = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     interest_rate: "",
     predetermined_amount: "",
@@ -61,7 +62,7 @@ const BondPayBackPredetermined = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: bondPaybackWithPredeterminedAmount } = await calculateFinances(payload)
+              const { success, payload: bondPaybackWithPredeterminedAmount } = await calculateFinances(payload)
               console.log('=====>', bondPaybackWithPredeterminedAmount)
               const { monthlyRepayments, totalAmountRepayable, currency } = bondPaybackWithPredeterminedAmount
               if (typeof bondPaybackWithPredeterminedAmount === 'object') {
@@ -70,6 +71,9 @@ const BondPayBackPredetermined = () => {
                   totalAmountRepayable: totalAmountRepayable,
                   currency: currency
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -138,14 +142,17 @@ const BondPayBackPredetermined = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Your monthly repayments: {Result.currency}{Result.monthlyRepayments}
-          </Typography>
-          <Typography variant="subtitle1">
-            Total amount repayments: {Result.currency}{Result.totalAmountRepayable}
-          </Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">
+              Your monthly repayments: {Result.currency}{Result.monthlyRepayments}
+            </Typography>
+            <Typography variant="subtitle1">
+              Total amount repayments: {Result.currency}{Result.totalAmountRepayable}
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
 
     </>

@@ -1,13 +1,14 @@
 import React from 'react'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Container } from '@mui/material'
 import SpecifiedSearchForm from '../forms/SpecifiedSearchForm'
 import { SingleSlider } from '../slider/SingleSlider'
 import { NavBar2 } from '../navbar/navbar2'
 import { AddSlider } from '../slider/AddSlider'
 import ResponsiveSlider from '../slider/ResponsiveSlider'
 
-export default function AddLayout({children}:any){
-    return(
+export default function AddLayout({ children }: any) {
+    // const { container } = useStyles()
+    return (
         <>
             <Box className="container"> 
                 <Box sx={{ display: 'flex' }}>

@@ -381,10 +381,48 @@ p.resultDisplay {
   padding: 10px;
 }
 
+.input-group-sm > .input-group-append > select.btn:not([size]):not([multiple]),
+.input-group-sm
+  > .input-group-append
+  > select.input-group-text:not([size]):not([multiple]),
+.input-group-sm > .input-group-prepend > select.btn:not([size]):not([multiple]),
+.input-group-sm
+  > .input-group-prepend
+  > select.input-group-text:not([size]):not([multiple]),
+.input-group-sm > select.form-control:not([size]):not([multiple]),
+select.form-control-sm:not([size]):not([multiple]) {
+  height: calc(1.6rem + 2px) !important;
+}
 
-.date-picker{
-  width:100%;
-  background-color: #F0F3F6;
+.form-control-sm {
+  min-height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem !important;
+  border-radius: 0.2rem;
+}
+
+.form-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Center Form & Result containers */
+.css-1al0n19-MuiGrid-root > .MuiGrid-item {
+  align-content: center !important;
+  justify-content: center !important;
+}
+
+.MuiGrid-spacing-xs-2 > .MuiGrid-item {
+  align-content: center !important;
+  justify-content: center !important;
+}
+
+.date-picker {
+  width: 100%;
+  background-color: #f0f3f6;
   border: solid;
   border-width: 0;
   border-color: red;

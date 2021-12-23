@@ -20,6 +20,7 @@ import {
 } from '../../../custom'
 
 const PresentValueOfPeriodicalDeposit = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
   const [initialFormValues] = React.useState({
     interest_rate: "",
@@ -56,7 +57,7 @@ const PresentValueOfPeriodicalDeposit = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: presentValueOfPeriodicalDeposits } = await calculateFinances(payload)
+              const { success, payload: presentValueOfPeriodicalDeposits } = await calculateFinances(payload)
               console.log('=====>', presentValueOfPeriodicalDeposits)
               const { presentValue, futureValue, totalPricipal, totalInterest, currency } = presentValueOfPeriodicalDeposits
               if (typeof presentValueOfPeriodicalDeposits === 'object') {
@@ -67,6 +68,9 @@ const PresentValueOfPeriodicalDeposit = () => {
                   totalInterest: totalInterest,
                   currency: currency
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -135,12 +139,15 @@ const PresentValueOfPeriodicalDeposit = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Present value: {Result.currency}{Result.presentValue}</Typography>
-          <Typography variant="subtitle1"> Future value: {Result.currency}{Result.futureValue}</Typography>
-          <Typography variant="subtitle1"> Total principal: {Result.currency}{Result.totalPrincipal}</Typography>
-          <Typography variant="subtitle1"> Total interest: {Result.currency}{Result.totalInterest}</Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1"> Present value: {Result.currency}{Result.presentValue}</Typography>
+            <Typography variant="subtitle1"> Future value: {Result.currency}{Result.futureValue}</Typography>
+            <Typography variant="subtitle1"> Total principal: {Result.currency}{Result.totalPrincipal}</Typography>
+            <Typography variant="subtitle1"> Total interest: {Result.currency}{Result.totalInterest}</Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

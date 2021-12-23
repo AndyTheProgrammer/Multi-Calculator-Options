@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,6 +23,7 @@ import {
 
 const RectangularTankVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     length: "",
     length_unit: "",
@@ -31,13 +33,14 @@ const RectangularTankVolume = (props: any) => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    length: 0,
-    width: 0,
-    height: 0,
+    volume: 0,
     units: ''
   })
-
+  const [resultTwo, setResultTwo] = React.useState({
+    volumeInm: 0,
+    volumeInin: 0,
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   return (
     <>
       {/* Form grid */}
@@ -68,18 +71,31 @@ const RectangularTankVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: rectangularTankVolume } = await calculateMath(payload)
+              const { success, payload: rectangularTankVolume } = await calculateMath(payload)
               console.log('=====>', rectangularTankVolume)
-              const { volume, units, length, width, height
+              const {
+                volume,
+                units,
+                volumeInm,
+                volumeInin,
+                unitType,
               } = rectangularTankVolume
-              if (typeof rectangularTankVolume === 'object') {
+              if (typeof rectangularTankVolume === 'object' && unitType === true) {
+                setSelectedResult(unitType)
                 setResult({
-                  Volume: volume,
-                  length: length,
-                  width: width,
-                  height: height,
+                  volume: volume,
                   units: units
                 })
+              }
+              if (typeof rectangularTankVolume === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  volumeInm: volumeInm,
+                  volumeInin: volumeInin,
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -157,14 +173,26 @@ const RectangularTankVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Length: {Result.length}</Typography>
-          <Typography variant="subtitle1"> Width: {Result.width}</Typography>
-          <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.rectangularTankVolume}>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1"> Volume = {resultTwo.volumeInm}</Typography>
+                <Typography variant="subtitle2"> or</Typography>
+                <Typography variant="subtitle1"> = {resultTwo.volumeInin}</Typography>
+              </div>
+            }
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

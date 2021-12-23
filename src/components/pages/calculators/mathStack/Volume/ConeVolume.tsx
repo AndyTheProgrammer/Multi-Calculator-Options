@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,6 +23,7 @@ import {
 
 const ConeVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -29,22 +31,15 @@ const ConeVolume = (props: any) => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    radius: 0,
-    height: 0,
+    volume: 0,
     units: ''
   })
 
   const [resultTwo, setResultTwo] = React.useState({
     radiusUnit: "",
-    radiusToHeightUnit: 0,
-    height: 2,
     heightUnit: "",
-    heightToRadiusUnit: 0,
     volumeInRadiusUnit: 0,
     volumeInHeightUnit: 0,
-    submitedRadius: ''
-
   })
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
@@ -74,36 +69,36 @@ const ConeVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: coneVolume } = await calculateMath(payload)
-              const { volume, units, radius, height, unitType, submitedRadius,
+              const { success, payload: coneVolume } = await calculateMath(payload)
+              const {
+                volume,
+                units,
+                unitType,
                 radiusUnit,
-                radiusToHeightUnit,
                 heightUnit,
-                heightToRadiusUnit,
                 volumeInRadiusUnit,
-                volumeInHeightUnit, } = coneVolume
+                volumeInHeightUnit,
+              } = coneVolume
+
               console.log('=====>', coneVolume)
               if (typeof coneVolume === 'object' && unitType === true) {
-                setResultTwo(unitType)
+                setSelectedResult(unitType)
                 setResult({
-                  Volume: volume,
-                  radius: radius,
-                  height: height,
+                  volume: volume,
                   units: units
                 })
               }
               if (typeof coneVolume === 'object' && unitType === false) {
-                setResultTwo(unitType)
+                setSelectedResult(unitType)
                 setResultTwo({
-                  submitedRadius,
-                  radiusUnit,
-                  radiusToHeightUnit,
-                  height,
-                  heightUnit,
-                  heightToRadiusUnit,
-                  volumeInRadiusUnit,
-                  volumeInHeightUnit,
+                  radiusUnit: radiusUnit,
+                  heightUnit: heightUnit,
+                  volumeInRadiusUnit: volumeInRadiusUnit,
+                  volumeInHeightUnit: volumeInHeightUnit,
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -163,13 +158,32 @@ const ConeVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-          <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.coneVolume}>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {resultTwo.volumeInHeightUnit}{resultTwo.heightUnit}<sup>3</sup>
+                </Typography>
+                <Typography variant="subtitle2"> or</Typography>
+                <Typography variant="subtitle1">
+                  = {resultTwo.volumeInRadiusUnit}{resultTwo.radiusUnit}<sup>3</sup>
+                </Typography>
+                <Typography variant="subtitle1"> Units: </Typography>
+              </div>
+            }
+          </div>
+        }
+
+
       </ResultTabsContainer>
     </>
   )

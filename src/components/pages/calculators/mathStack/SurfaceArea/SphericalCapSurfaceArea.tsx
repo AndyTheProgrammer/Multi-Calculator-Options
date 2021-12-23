@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -20,8 +21,11 @@ import {
   ResultTabsContainer
 } from '../../../../custom'
 
+const Latex = require('react-latex');
+
 const SphericalCapSurfaceArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: '',
     radius_unit: '',
@@ -30,18 +34,14 @@ const SphericalCapSurfaceArea = (props: any) => {
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
-    submittedradius: 0,
-    submitted_height: 0,
-    units: '',
+    baseSurfaceArea: 0,
+    totalSolidSphereSurfaceArea: 0,
+    unit: '',
   })
 
   const [resultTwo, setResultTwo] = React.useState({
     surfaceAreaInradiusUnit: 0,
     surfaceAreaInheightUnit: 0,
-    radiusInheightUnit: 0,
-    heightInradiusUnit: 0,
-    submittedradius: 0,
-    submitted_height: 0
   })
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
@@ -72,12 +72,10 @@ const SphericalCapSurfaceArea = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: CapSurfaceArea } = await calculateMath(payload)
+              const { success, payload: CapSurfaceArea } = await calculateMath(payload)
               console.log('=====>', CapSurfaceArea)
               const {
                 surfaceArea,
-                radius,
-                height,
                 units,
                 surfaceAreaInradiusUnit,
                 surfaceAreaInheightUnit,
@@ -91,22 +89,21 @@ const SphericalCapSurfaceArea = (props: any) => {
                 setSelectedResult(unitType)
                 setResult({
                   surfaceArea: surfaceArea,
-                  submitted_height,
-                  submittedradius,
-                  units,
+                  baseSurfaceArea: surfaceArea,
+                  totalSolidSphereSurfaceArea: surfaceArea,
+                  unit: units,
                 })
               }
 
               if (typeof CapSurfaceArea === 'object' && unitType === false) {
                 setSelectedResult(unitType)
                 setResultTwo({
-                  surfaceAreaInradiusUnit,
-                  surfaceAreaInheightUnit,
-                  radiusInheightUnit,
-                  heightInradiusUnit: $heightInradiusUnit,
-                  submittedradius,
-                  submitted_height,
+                  surfaceAreaInradiusUnit: surfaceAreaInradiusUnit,
+                  surfaceAreaInheightUnit: surfaceAreaInheightUnit,
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -166,30 +163,42 @@ const SphericalCapSurfaceArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      {selectedResult ? (
-        <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-          <div className="text-wrap">
-            <Typography variant="subtitle1">Surface Area = 2 x π x r x h</Typography>
-            <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-            <Typography variant="subtitle1"> submittedradius: {Result.submittedradius}</Typography>
-            <Typography variant="subtitle1"> submitted_height: {Result.submitted_height}</Typography>
-            <Typography variant="subtitle1"> units: {Result.units}</Typography>
-          </div>
-        </ResultTabsContainer>
-      ) : (
-        <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-          <div className="text-wrap">
-            <Typography variant="subtitle1">surfaceAreaInradiusUnit: {resultTwo.surfaceAreaInradiusUnit}</Typography>
-            <Typography variant="subtitle1"> surfaceAreaInheightUnit: {resultTwo.surfaceAreaInheightUnit}</Typography>
-            <Typography variant="subtitle1"> submittedradius: {resultTwo.submittedradius}</Typography>
-            <Typography variant="subtitle1"> submitted_height: {resultTwo.submitted_height}</Typography>
-            <Typography variant="subtitle1"> radiusInheightUnit: {resultTwo.radiusInheightUnit}</Typography>
-            <Typography variant="subtitle1"> heightInradiusUnit: {resultTwo.heightInradiusUnit}</Typography>
+      <ResultTabsContainer
+        tabTitle={'Result'}
+        sm={6}
+      >
+        {answer === true &&
+          <div>
+            {selectedResult ? (
+              <div className="text-wrap">
+                <Latex displayMode={true}>{LATEX.sphericalCapSurfArea}</Latex>
+                <Latex displayMode={true}>{LATEX.sphericalCapSurfArea_base}</Latex>
+                <Latex displayMode={true}>{LATEX.sphericalCapSurfArea_totalSolidSphere}</Latex>
 
-          </div>
-        </ResultTabsContainer>
-      )}
+                <Typography variant="subtitle1">
+                  SA = {Result.surfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+              </div>
 
+            ) : (
+
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  SA = {resultTwo.surfaceAreaInradiusUnit}
+                </Typography>
+                <Typography variant="subtitle2">
+                  or
+                </Typography>
+                <Typography variant="subtitle1">
+                  = {resultTwo.surfaceAreaInheightUnit}
+                </Typography>
+              </div>
+
+            )}
+          </div>
+        }
+
+      </ResultTabsContainer>
     </>
   )
 }

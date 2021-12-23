@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -20,8 +21,10 @@ import {
   ResultTabsContainer
 } from '../../../../custom'
 
+
 const EllipsoidSurfaceArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     axis1: '',
     axis1_unit: '',
@@ -39,19 +42,11 @@ const EllipsoidSurfaceArea = (props: any) => {
   })
 
   const [resultTwo, setResultTwo] = React.useState({
-    surfaceAreaInmm: 0,
-    axis1tomm: 0,
-    axis2tomm: 0,
-    axis3tomm: 0,
-    surfaceAreaInft: 0,
-    axis1toft: 0,
-    axis2toft: 0,
-    axis3toft: 0,
+    surfaceAreaInm: 0,
     surfaceAreaInin: 0
   })
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
-
 
   return (
     <>
@@ -83,11 +78,20 @@ const EllipsoidSurfaceArea = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: EllipsoidSurfaceArea } = await calculateMath(payload)
+              const { success, payload: EllipsoidSurfaceArea } = await calculateMath(payload)
               console.log('=====>', EllipsoidSurfaceArea)
-              const { surfaceArea, axis1, axis2, axis3, unit
+              const {
+                surfaceArea,
+                axis1,
+                axis2,
+                axis3,
+                unit,
+                unitType,
+                surfaceAreaInm,
+                surfaceAreaInin
               } = EllipsoidSurfaceArea
-              if (typeof EllipsoidSurfaceArea === 'object') {
+              if (typeof EllipsoidSurfaceArea === 'object' && unitType === true) {
+                setSelectedResult(unitType)
                 setResult({
                   surfaceArea: surfaceArea,
                   axis1: axis1,
@@ -95,6 +99,16 @@ const EllipsoidSurfaceArea = (props: any) => {
                   axis3: axis3,
                   unit: unit
                 })
+              }
+              if (typeof EllipsoidSurfaceArea === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  surfaceAreaInm: surfaceAreaInm,
+                  surfaceAreaInin: surfaceAreaInin,
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -172,18 +186,31 @@ const EllipsoidSurfaceArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-wrap">
-          <Typography variant="subtitle1">
-            Surface Area = a x π x <sup>1.6</sup>√(a x b)<sup>1.6</sup> + (a x c)<sup>1.6</sup> + (b x c)<sup>1.6</sup> / c
-          </Typography>
-          <Typography variant="subtitle1">Surface Area: {Result.surfaceArea}</Typography>
-          <Typography variant="subtitle1"> Axis 1: {Result.axis1}</Typography>
-          <Typography variant="subtitle1"> Axis 2: {Result.axis2}</Typography>
-          <Typography variant="subtitle1"> Axis 3: {Result.axis3}</Typography>
-          <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-        </div>
-      </ResultTabsContainer>
+      <ResultTabsContainer
+        tabTitle={'Result'}
+        sm={6}
+        latex={LATEX.ellipsoidSurfArea}
+      >
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              < div className="text-wrap">3
+                <Typography variant="subtitle1">
+                  Surface Area: {Result.surfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              < div className="text-wrap">3
+                <Typography variant="subtitle1">Surface Area = {resultTwo.surfaceAreaInm}</Typography>
+                <Typography variant="subtitle2">or</Typography>
+                <Typography variant="subtitle1"> = {resultTwo.surfaceAreaInin}</Typography>
+              </div>
+            }
+          </div>
+        }
+
+      </ResultTabsContainer >
 
 
 

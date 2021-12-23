@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,13 +23,13 @@ import {
 
 const CubeVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     edge_length: "",
     edge_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    edge_length: 0,
+    volume: 0,
     units: '',
   })
 
@@ -54,16 +55,17 @@ const CubeVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: cubeVolume } = await calculateMath(payload)
+              const { success, payload: cubeVolume } = await calculateMath(payload)
               console.log('=====>', cubeVolume)
-              const { volume, units, edge_length
-              } = cubeVolume
+              const { volume, unit } = cubeVolume
               if (typeof cubeVolume === 'object') {
                 setResult({
-                  Volume: volume,
-                  edge_length: edge_length,
-                  units: units
+                  volume: volume,
+                  units: unit
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -105,12 +107,15 @@ const CubeVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Edge Length: {Result.edge_length}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.cubeVolume}>
+        {answer === true &&
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              Volume = {Result.volume}{Result.units}<sup>3</sup>
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
 
 

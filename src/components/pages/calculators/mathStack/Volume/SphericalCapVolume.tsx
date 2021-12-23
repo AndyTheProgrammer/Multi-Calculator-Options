@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,6 +23,7 @@ import {
 
 const SphericalCapVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
@@ -29,12 +31,14 @@ const SphericalCapVolume = (props: any) => {
     height_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    radius: 0,
-    height: 0,
+    volume: 0,
     units: '',
   })
-
+  const [resultTwo, setResultTwo] = React.useState({
+    volumeInRadiusUnit: 0,
+    volumeInHeightUnit: 0,
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   return (
     <>
       {/* Form grid */}
@@ -61,17 +65,32 @@ const SphericalCapVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: sphericalCapVolume } = await calculateMath(payload)
+              const { success, payload: sphericalCapVolume } = await calculateMath(payload)
               console.log('=====>', sphericalCapVolume)
-              const { volume, units, radius, height
+              const {
+                volume,
+                units,
+                unitType,
+                volumeInRadiusUnit,
+                volumeInHeightUnit,
               } = sphericalCapVolume
-              if (typeof sphericalCapVolume === 'object') {
+
+              if (typeof sphericalCapVolume === 'object' && unitType === true) {
+                setSelectedResult(unitType)
                 setResult({
-                  Volume: volume,
-                  radius: radius,
-                  height: height,
+                  volume: volume,
                   units: units
                 })
+              }
+              if (typeof sphericalCapVolume === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  volumeInRadiusUnit: volumeInRadiusUnit,
+                  volumeInHeightUnit: volumeInHeightUnit,
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -131,13 +150,26 @@ const SphericalCapVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-          <Typography variant="subtitle1"> Height: {Result.height}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.sphericalCapVolume}>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1"> Volume = {resultTwo.volumeInHeightUnit}</Typography>
+                <Typography variant="subtitle2"> or</Typography>
+                <Typography variant="subtitle1"> = {resultTwo.volumeInRadiusUnit}</Typography>
+              </div>
+            }
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

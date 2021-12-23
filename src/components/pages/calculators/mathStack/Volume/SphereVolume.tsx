@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,13 +23,13 @@ import {
 
 const SphereVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
     radius_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    radius: '',
+    volume: 0,
     units: ''
   })
 
@@ -54,16 +55,20 @@ const SphereVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: sphereVolume } = await calculateMath(payload)
+              const { success, payload: sphereVolume } = await calculateMath(payload)
               console.log('=====>', sphereVolume)
-              const { volume, units, radius
+              const {
+                volume,
+                units,
               } = sphereVolume
               if (typeof sphereVolume === 'object') {
                 setResult({
-                  Volume: volume,
-                  radius: radius,
+                  volume: volume,
                   units: units
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -105,12 +110,15 @@ const SphereVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Radius: {Result.radius}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.sphereVolume}>
+        {answer === true &&
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              Volume = {Result.volume}{Result.units}<sup>3</sup>
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

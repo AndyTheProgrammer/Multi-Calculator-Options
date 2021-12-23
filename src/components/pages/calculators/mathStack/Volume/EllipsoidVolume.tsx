@@ -9,6 +9,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,6 +23,7 @@ import {
 
 const EllipsoidVolume = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     axis1: "",
     axis1_unit: "",
@@ -31,12 +33,14 @@ const EllipsoidVolume = (props: any) => {
     axis3_unit: "",
   })
   const [Result, setResult] = React.useState({
-    Volume: 0,
-    submitted_axis3: 0,
-    submitted_axis2: 0,
-    submitted_axis1: 0,
+    volume: 0,
     units: '',
   })
+  const [resultTwo, setResultTwo] = React.useState({
+    volumem: 0,
+    volumein: 0,
+  })
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
   return (
     <>
@@ -68,17 +72,32 @@ const EllipsoidVolume = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: ellipsoidVolume } = await calculateMath(payload)
+              const { success, payload: ellipsoidVolume } = await calculateMath(payload)
               console.log('=====>', ellipsoidVolume)
-              const { volume, units, submittedaxis1, submitted_axis2, submitted_axis3 } = ellipsoidVolume
-              if (typeof ellipsoidVolume === 'object') {
+              const {
+                volume,
+                units,
+                unitType,
+                volumein,
+                volumem,
+              } = ellipsoidVolume
+
+              if (typeof ellipsoidVolume === 'object' && unitType === true) {
+                setSelectedResult(unitType)
                 setResult({
-                  Volume: volume,
-                  submitted_axis1: submittedaxis1,
-                  submitted_axis2: submitted_axis2,
-                  submitted_axis3: submitted_axis3,
+                  volume: volume,
                   units: units
                 })
+              }
+              if (typeof ellipsoidVolume === 'object' && unitType === false) {
+                setSelectedResult(unitType)
+                setResultTwo({
+                  volumein: volumein,
+                  volumem: volumem
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -156,14 +175,26 @@ const EllipsoidVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.Volume}</Typography>
-          <Typography variant="subtitle1"> Submitted axis 1: {Result.submitted_axis1}</Typography>
-          <Typography variant="subtitle1"> Submitted axis 2: {Result.submitted_axis2}</Typography>
-          <Typography variant="subtitle1"> Submitted axis 3: {Result.submitted_axis3}</Typography>
-          <Typography variant="subtitle1"> units: {Result.units}</Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.ellipsoidVolume}>
+        {answer === true &&
+          <div>
+            {selectedResult === true &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1">
+                  Volume = {Result.volume}{Result.units}<sup>3</sup>
+                </Typography>
+              </div>
+            }
+            {selectedResult === false &&
+              <div className="text-wrap">
+                <Typography variant="subtitle1"> Volume = {resultTwo.volumein}</Typography>
+                <Typography variant="subtitle2"> or</Typography>
+                <Typography variant="subtitle1"> = {resultTwo.volumein}</Typography>
+              </div>
+            }
+          </div>
+        }
+
       </ResultTabsContainer>
 
 

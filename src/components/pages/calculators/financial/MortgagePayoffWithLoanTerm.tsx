@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const MortgagePayoffWithLoanTerm = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
   const [initialFormValues] = React.useState({
     interest_rate: "",
@@ -54,7 +55,7 @@ const MortgagePayoffWithLoanTerm = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: mortgagePayoffWithLoanTerm } = await calculateFinances(payload)
+              const { success, payload: mortgagePayoffWithLoanTerm } = await calculateFinances(payload)
               console.log('=====>', mortgagePayoffWithLoanTerm)
               const { balance, currency } = mortgagePayoffWithLoanTerm
               if (typeof mortgagePayoffWithLoanTerm === 'object') {
@@ -62,6 +63,9 @@ const MortgagePayoffWithLoanTerm = () => {
                   balance: balance,
                   currency: currency
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -130,9 +134,12 @@ const MortgagePayoffWithLoanTerm = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Balance: {Result.currency}{Result.balance}</Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1"> Balance: {Result.currency}{Result.balance}</Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

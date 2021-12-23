@@ -10,6 +10,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -23,6 +24,7 @@ import {
 
 const CubeSurfArea = (props: any) => {
   const { openDrop } = props
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     edge_length: '',
     edge_unit: ''
@@ -56,16 +58,25 @@ const CubeSurfArea = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: CubeSurfaceArea } = await calculateMath(payload)
+              const { success, payload: CubeSurfaceArea } = await calculateMath(payload)
               console.log('=====>', CubeSurfaceArea)
-              const { cubeSurfaceArea, unit, edge_length, unitType, area
+              const {
+                cubeSurfaceArea,
+                unit,
+                edge_length,
+                unitType,
+                area
               } = CubeSurfaceArea
+
               if (typeof CubeSurfaceArea === 'object') {
                 setResult({
                   surfaceArea: cubeSurfaceArea,
                   area: area,
                   unit: unit
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -107,13 +118,19 @@ const CubeSurfArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-wrap">
-          <Typography variant="subtitle1">Surface Area = 6 x a<sup>2</sup></Typography>
-          <Typography variant="subtitle1"> Cube Surface area: {Result.surfaceArea}</Typography>
-          <Typography variant="subtitle1"> area: {Result.area}</Typography>
-          <Typography variant="subtitle1"> Unit: {Result.unit}</Typography>
-        </div>
+      <ResultTabsContainer
+        tabTitle={'Result'}
+        sm={6}
+        latex={LATEX.cubeSurfArea}
+      >
+        {answer === true &&
+          <div className="text-wrap">
+            <Typography variant="subtitle1">
+              SA = {Result.surfaceArea}{Result.unit}<sup>2</sup>
+            </Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

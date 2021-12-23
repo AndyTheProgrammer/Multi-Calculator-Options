@@ -21,6 +21,7 @@ import {
 } from '../../../custom'
 
 const InflationCalculatorCpiData = () => {
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
   const [initialFormValues] = React.useState({
     current_price: "",
@@ -48,7 +49,7 @@ const InflationCalculatorCpiData = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: inflationCalculator } = await calculateFinances(payload)
+              const { success, payload: inflationCalculator } = await calculateFinances(payload)
               console.log('=====>', inflationCalculator)
               const { inflation, currency } = inflationCalculator
               if (typeof inflationCalculator === 'object') {
@@ -56,6 +57,9 @@ const InflationCalculatorCpiData = () => {
                   inflation: inflation,
                   currency: currency
                 })
+              }
+              if (success === true) {
+                setAnswer(success)
               }
             } catch (err) {
               console.log('====>', err)
@@ -102,9 +106,12 @@ const InflationCalculatorCpiData = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Inflation: {Result.currency}{Result.inflation}</Typography>
-        </div>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1"> Inflation: {Result.currency}{Result.inflation}</Typography>
+          </div>
+        }
+
       </ResultTabsContainer>
     </>
   )

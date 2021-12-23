@@ -66,7 +66,7 @@ export { default as MarginOfErrorCalculator } from "./calculators/statistics/Mar
 export { default as ProbabilityOfASeriesOfIndpendentEvents } from "./calculators/statistics/ProbabilityOfASeriesOfIndpendentEvents";
 export { default as ProbablityOfTwoEvents } from "./calculators/statistics/ProbablityOfTwoEvents";
 export { default as ProbablitySolverForTwoEvents } from "./calculators/statistics/ProbablitySolverForTwoEvents";
-export { default as SampleSizeCalculator } from "./calculators/statistics/SampleSizeCalculator";
+
 
 // Other
 export { default as CircularSlab } from "./calculators/other/CircularSlab";
@@ -128,4 +128,9 @@ export { default as UnitConversionCalculators } from './categories/other/UnitCon
 export { default as ConcreteCalculator } from './mainPages/ConcreteCalculator';
 export { default as ProbabilityCalculator } from './mainPages/ProbabilityCalculator';
 export { default as AreaCalculator } from './mainPages/AreaCalculator';
+export { default as SurfaceAreaCalculator } from './mainPages/SurfaceAreaCalculator';
+export { default as VolumeCalculator } from './mainPages/VolumeCalculator';
+export { default as SampleSizeCalculator } from "./mainPages/SampleSizeCalculator";
+
+
 
