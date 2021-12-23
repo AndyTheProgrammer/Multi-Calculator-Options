@@ -5,7 +5,7 @@ import { Button } from '@mui/material'
 //icons
 import SearchIcon from '@mui/icons-material/Search';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
-
+import CloseIcon from '@mui/icons-material/Close';
 
 import { othersRoutes } from '../../routes/routes'
 import List from '@mui/material/List';
@@ -40,6 +40,10 @@ var classNames = require('classnames');
 // **********************************************************************
 
 function SearchForm(){
+    const [openDrawer, setOpenDrawer] = useState(false);
+    const toggleDrawer = () =>{
+        setOpenDrawer(!openDrawer)
+    }
 
     const history = useHistory();
 
@@ -113,7 +117,7 @@ function SearchForm(){
       };
 
     return(
-        <div>
+        <>
             <div className={overLayStyleClasses} ></div>
             <Box sx={{ ...commonStyles, }}>
                 <Box sx={{
@@ -161,7 +165,11 @@ function SearchForm(){
                     <Button type="button">
                         <SearchIcon/>
                     </Button>
-                    <Button type="button">
+                    <Button
+                        onClick={()=>{
+                            toggleDrawer();
+                        }} 
+                        type="button">
                         <DensityMediumIcon/>
                     </Button>
                 </Box>
@@ -181,7 +189,53 @@ function SearchForm(){
                     ): ""
                 }
             </Box>
-        </div>
+            <Box className={
+                    classNames({
+                        'drawer-close': !openDrawer,
+                        'drawer-open' : openDrawer
+                    })} 
+                    // sx={{ display: 'none' }}
+                    >
+                        <Box
+                            sx={{
+                                marginTop: 1,
+                                width: '100%',
+                                display: 'flex',
+                                justifyContent: 'end'
+                            }}>
+                            <Button
+                                onClick={()=>{
+                                    toggleDrawer();
+                                }} 
+                                type="button">
+                                <CloseIcon/>
+                            </Button>
+                        </Box>
+
+                        <Box
+                            className="drawer-button" 
+                            onClick={()=>{ history.push('/home') }} 
+                            >Home</Box>
+
+                        <Box 
+                            className="drawer-button"
+                            onClick={()=>{ history.push("/financepage") }} 
+                            >Financial</Box>
+                        <Box 
+                            className="drawer-button"
+                            onClick={()=>{ history.push("/mathcategories") }}
+                            >Mathematics</Box>
+                        <Box 
+                            className="drawer-button"
+                            onClick={()=>{ history.push("/otherpage") }} 
+                            >Other</Box>
+                        
+                        <Box 
+                            className="drawer-button" 
+                            onClick={()=>{ history.push("/allcalculators") }}
+                            >All Calculators</Box>
+                </Box>
+        </>
         );
 }
 

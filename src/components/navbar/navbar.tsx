@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -8,6 +8,7 @@ import { SearchForm } from '../forms/searchForm'
 import { useHistory } from "react-router-dom";
 import iconImage from '../../common/assets/calc_map.svg'
 import all_calc_icon from '../../common/assets/all_calc_icon.svg'
+const classNames = require('classnames');
 
 /**
  * Hides corresponding componenets when screen size reduced 
@@ -40,8 +41,10 @@ const generalHideStyle = {
 
 
 function NavBar(props:any){
+    
         const history = useHistory();
         return(
+            <>
             <Box
                 sx={{
                     width: '100%',
@@ -125,6 +128,8 @@ function NavBar(props:any){
                     </AppBar>
                 </div>
             </Box>
+            
+            </>
         );
     }
 

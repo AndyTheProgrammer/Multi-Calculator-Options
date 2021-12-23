@@ -28,17 +28,22 @@ function OtherPage(){
           <Switch>  
           <Route exact path={path}>
             <NavBar2 pageimage={other_icon} pagename="Other Calculators" otherHighLight={true}/>
+            
+            {/* Hide search bar when screen is small */}
             <Box
               sx={{
-              display: 'flex',
-              justifyContent: 'center',
+                display: {
+                  lg: 'flex',
+                  md: 'flex',
+                  sm: 'none',
+                  xs: 'none'
+                },
+                justifyContent: 'center',
               }}>
                 <SearchForm />
             </Box>
+
             <OtherOptions />
-            <Box sx={{ marginTop: 5 }}>
-              <Slide />
-            </Box>
           </Route>
           
         </Switch>

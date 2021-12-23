@@ -38,10 +38,8 @@ function a11yProps(index: any) {
 
 const Latex = require('react-latex');
 
-function SampleSizeCalculator() {
-  const [flip, set] = React.useState<boolean>(false);
+function SampleSizeCalculator(props: any) {
   const [answer, setAnswer] = React.useState<boolean>(false);
-
   const [tabValue, setTabValue] = React.useState(0);
   const {
     tabRoot,

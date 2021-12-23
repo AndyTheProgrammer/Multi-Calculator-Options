@@ -1,11 +1,11 @@
 import React from 'react'
 import { Grid, Typography, Box, Container } from '@mui/material'
-import { AddSlider } from '../slider/AddSlider'
+import { ResponsiveSliderHome } from '../slider/ResponsiveSlider'
 import { useHistory } from "react-router-dom";
 import fincance_icon from '../../common/assets/finance_icon.svg';
 import math_icon from '../../common/assets/math_icon.svg';
 import other_icon from '../../common/assets/other_icon.svg';
-import iconLine from '../../common/assets/line.svg';
+
 
 function CalcOptions(){
     const history = useHistory();
@@ -32,11 +32,12 @@ function CalcOptions(){
     
 
     return(
-        <Container className="container mt-4">
+        <>
+        <Box className="container">
             
             <Box className="d-flex justify-content-center">
                 <Grid container spacing={4}>
-                    <Grid sx={{ ...centerBoxStyle, }} item xs={12} sm={12} md={6} lg={4}>
+                    <Grid sx={{ ...centerBoxStyle, }} item xs={12} sm={6} md={6} lg={4}>
                             <Box 
                                 onClick={() =>  { history.push('/financepage') }} 
                                 className="div-link" sx={{ ...boxStyle,flexDirection: 'column', }}>
@@ -132,7 +133,7 @@ function CalcOptions(){
                                 </Box>
                             </Box>
                     </Grid>
-                    <Grid sx={{ ...centerBoxStyle }} item xs={12} sm={12} md={6} lg={4}>
+                    <Grid sx={{ ...centerBoxStyle }} item xs={12} sm={6} md={6} lg={4}>
                         <Box 
                             onClick ={ ()=> { history.push('/mathcategories') }} 
                             className="div-link" 
@@ -236,7 +237,7 @@ function CalcOptions(){
                                 </Box>
                         </Box>
                     </Grid>
-                    <Grid sx={{ ...centerBoxStyle }} item xs={12} sm={12} md={6} lg={4}>
+                    <Grid sx={{ ...centerBoxStyle }} item xs={12} sm={6} md={6} lg={4}>
                         <Box 
                             onClick ={ ()=> { history.push('/otherpage') }} 
                             className="div-link" 
@@ -341,35 +342,12 @@ function CalcOptions(){
                                 </Box>
                         </Box>
                     </Grid>
-                    <Grid className="container" item xs={12} md={12} >
-                        <Box sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    width: '100%',
-                                    borderRadius: 3,
-                                    textAlign: 'center',
-                                    fontSize: 24,
-                                    color: '#8591B0',
-                                    // boxShadow: ' 0 8px 8px 0 rgba(0, 0, 0, 0.2)'
-                                }}>
-                            <Box>
-                                <img style={{ width: '100%' }}  alt="lineIcon" src={iconLine} />
-                            </Box>
-                            <Typography>
-                                <Box sx={{ fontSize: 20, marginLeft: 3, marginRight: 3, marginTop: 1 }}>
-                                    Advertisement
-                                </Box>
-                            </Typography>
-                            <Box>
-                                <img style={{ width: '100%' }}  alt="lineIcon" src={iconLine} />
-                            </Box>
-                        </Box>
-                    </Grid>
+                    
                 </Grid>
             </Box>
-            <AddSlider/>
-            
-        </Container>
+        </Box>
+        <ResponsiveSliderHome/>
+        </>
     );
 }
 

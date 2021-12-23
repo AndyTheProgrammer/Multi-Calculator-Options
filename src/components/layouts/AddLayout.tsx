@@ -3,69 +3,66 @@ import { Box, Grid, Container } from '@mui/material'
 import SpecifiedSearchForm from '../forms/SpecifiedSearchForm'
 import { SingleSlider } from '../slider/SingleSlider'
 import { NavBar2 } from '../navbar/navbar2'
-import useStyles from '../../styling/CustomStyles'
-
+import { AddSlider } from '../slider/AddSlider'
+import ResponsiveSlider from '../slider/ResponsiveSlider'
 
 export default function AddLayout({ children }: any) {
-    const { container, root } = useStyles()
+    // const { container } = useStyles()
     return (
         <>
-            {/* <Box
-                className="container">
-                <Grid sx={{ width: '100%' }} container rowSpacing={2}>
-                    <Grid item xs={12} sm={12} md={9} >
+            <Box className="container">
+                <Box sx={{ display: 'flex' }}>
+                    <Box sx={{ border: '0px solid red', width: '100%' }}>
                         <Box sx={{ minHeight: 350 }}>
                             {children}
                         </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={3} >
-                        <Box>
-                            <Box sx={{ border: 0, borderColor: 'blue', width: 150, height: 200 }}>
-                                <SingleSlider />
-                            </Box>
-                            <Box>
-                                <SpecifiedSearchForm />
-                            </Box>
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Box> */}
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container sx={{ margin: 'auto' }}>
-                    <Grid
-                        container
-                        xs={12}
-                        sm={10}
-                        justifyContent="center"
-                        alignItems="center"
-
-                    >
-                        {children}
-
-                    </Grid>
-
-                    <Grid item xs={12} sm>
+                    </Box>
+                    <Box sx={{
+                        border: 'none',
+                        width: {
+                            lg: 250,
+                            md: '100%',
+                            sm: '100%',
+                            xs: '100%'
+                        },
+                        display: {
+                            lg: 'flex',
+                            md: 'none',
+                            sm: 'none',
+                            xs: 'none'
+                        }
+                    }}>
                         <Box >
-                            <Box
-                                sx={{
-                                    border: 'none',
-                                    borderWidth: 1,
-                                    borderColor: 'red',
-                                    width: 150,
-                                    height: 200,
-                                    display: 'flex',
-                                    justifyContent: 'center'
-                                }}
-                            >
+                            <Box sx={{
+                                border: 'none',
+                                borderWidth: 1,
+                                borderColor: 'green',
+                                width: {
+                                    lg: 250,
+                                    md: '100%',
+                                    sm: '100%',
+                                    xs: '100%'
+                                },
+                                justifyContent: 'center',
+
+                            }}>
                                 <SingleSlider />
                             </Box>
-                            <Box>
+                            <Box sx={{
+                                display: {
+                                    lg: 'block',
+                                    md: 'none',
+                                    sm: 'none',
+                                    xs: 'none'
+                                }
+                            }}>
                                 <SpecifiedSearchForm />
                             </Box>
                         </Box>
-                    </Grid>
-                </Grid>
+                    </Box>
+                </Box>
             </Box>
+            <ResponsiveSlider />
         </>
     )
 }
