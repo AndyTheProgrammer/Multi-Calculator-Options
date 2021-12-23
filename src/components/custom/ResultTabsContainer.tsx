@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import Anime from 'react-animejs-wrapper'
 import { Grid, Paper, Box, Typography } from '@mui/material';
+import { useSpring, animated } from 'react-spring'
 
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
@@ -23,11 +24,13 @@ const ResultTabsContainer = (props: any) => {
     tabRoot,
     rightTabContainer,
     formCardStyle,
-    formResult
+    paperBackground,
+    formResult,
+    formDisplay
   } = useStyles()
 
   return (
-    <div className={formResult}>
+    <div className={formDisplay}>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box sx={{ height: 40, width: '100%' }}>
           <Box

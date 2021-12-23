@@ -222,7 +222,7 @@ const mathRoutes = {
         {
           name: "Sample Size Calculator",
           path: `${mathUrl}/samplesizecalculator`,
-          component: TPC.SampleStandardDeviationCalculator
+          component: PC.SampleSizeCalculator
         },
         {
           name: "Probability Calculator",

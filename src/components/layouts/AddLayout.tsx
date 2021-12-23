@@ -7,7 +7,7 @@ import useStyles from '../../styling/CustomStyles'
 
 
 export default function AddLayout({ children }: any) {
-    const { container } = useStyles()
+    const { container, root } = useStyles()
     return (
         <>
             {/* <Box
@@ -30,34 +30,33 @@ export default function AddLayout({ children }: any) {
                     </Grid>
                 </Grid>
             </Box> */}
-            <Container className={container}>
-                <Grid container spacing={2}>
-                    <Grid container item xs={12} sm={10} spacing={2}>
-                        <div
-                            className="d-flex justify-content-center"
-                        /* sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: 'center',
-                        }} */
-                        >
-                            <Box sx={{ minHeight: 350 }}>
-                                {children}
-                            </Box>
-                        </div>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container sx={{ margin: 'auto' }}>
+                    <Grid
+                        container
+                        xs={12}
+                        sm={10}
+                        justifyContent="center"
+                        alignItems="center"
+
+                    >
+                        {children}
+
                     </Grid>
 
-                    <Grid item xs={12} sm={2}>
+                    <Grid item xs={12} sm>
                         <Box >
-                            <Box sx={{
-                                border: 'none',
-                                borderWidth: 1,
-                                borderColor: 'red',
-                                width: 150,
-                                height: 200,
-                                display: 'flex',
-                                justifyContent: 'center'
-                            }}>
+                            <Box
+                                sx={{
+                                    border: 'none',
+                                    borderWidth: 1,
+                                    borderColor: 'red',
+                                    width: 150,
+                                    height: 200,
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
                                 <SingleSlider />
                             </Box>
                             <Box>
@@ -66,7 +65,7 @@ export default function AddLayout({ children }: any) {
                         </Box>
                     </Grid>
                 </Grid>
-            </Container>
+            </Box>
         </>
     )
 }

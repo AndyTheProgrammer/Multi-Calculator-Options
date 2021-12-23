@@ -99,29 +99,6 @@ export { default as PresentValueOfPeriodicalDeposit } from "./calculators/financ
 export { default as ProfitMarginCalculator } from "./calculators/financial/ProfitMarginCalculator";
 export { default as StockTradingMargin } from "./calculators/financial/StockTradingMargin";
 
-// Categories
-export { default as InvestmentAndSavings } from "./categories/financial/InvestmentAndSavings";
-export { default as LoanCalculators } from "./categories/financial/LoanCalculators";
-export { default as MoneyPayExpenditure } from "./categories/financial/MoneyPayExpenditure";
-export { default as RetirementCalculators } from "./categories/financial/RetirementCalculators";
-export { default as SalesAndRetail } from "./categories/financial/SalesAndRetail";
-
-export { default as AlgebraCalculators } from './categories/math/AlgebraCalculators';
-export { default as FractionsCalculators } from './categories/math/FractionsCalculators';
-export { default as GeneralMathCalculators } from './categories/math/GeneralMathCalculators';
-export { default as GeometryCalculators } from './categories/math/GeometryCalculators';
-export { default as MeasurementCalculators } from './categories/math/MeasurementCalculators';
-export { default as StatisticsCalculators } from "./categories/math/StatisticsCalculators";
-
-export { default as ElectronicsOrCircuitsCalculators } from './categories/other/ElectronicsOrCircuitsCalculators';
-export { default as FitnessCalculators } from './categories/other/FitnessCalculators';
-export { default as HealthCalculators } from './categories/other/HealthCalculators';
-export { default as InternetCalculators } from './categories/other/InternetCalculators';
-export { default as TechnologyCalculators } from './categories/other/TechnologyCalculators';
-export { default as TimeAndDateCalculators } from './categories/other/TimeAndDateCalculators';
-export { default as TransportAndUtilitiesCalculators } from './categories/other/TransportAndUtilitiesCalculators';
-export { default as UnitConversionCalculators } from './categories/other/UnitConversionCalculators';
-//export { default as } from '';
 
 //Calculator Pages
 //export { default as } from '';

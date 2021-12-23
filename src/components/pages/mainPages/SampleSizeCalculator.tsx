@@ -1,7 +1,6 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Typography, Box, Grid, Paper } from '@material-ui/core'
-import Anime, { anime } from 'react-animejs-wrapper'
 import { useSpring, animated } from 'react-spring'
 
 import { NavBar2 } from '../../navbar/navbar2'
@@ -40,7 +39,9 @@ function a11yProps(index: any) {
 const Latex = require('react-latex');
 
 function SampleSizeCalculator() {
+  const [flip, set] = React.useState<boolean>(false);
   const [answer, setAnswer] = React.useState<boolean>(false);
+
   const [tabValue, setTabValue] = React.useState(0);
   const {
     tabRoot,
@@ -73,240 +74,243 @@ function SampleSizeCalculator() {
     setTabValue(newValue);
   };
 
-  const formProps = useSpring({
-    to: { opacity: 1 }, from: { opacity: 0 }
-  })
-  const resultProps = useSpring({
-    to: { opacity: 1 }, from: { opacity: 0 }
-  })
+  const [formAnimation, formApi] = useSpring(() => ({ translateX: 100 }));
+  const [resultAnimation, resultApi] = useSpring(() => ({ translateX: -200, zIndex: -5 }));
 
   return (
     <>
-      <NavBar2 pagename="Probability Calculator" />
+      <NavBar2 pagename="Sample Size Calculator" />
       <AddLayout>
-        <Grid item xs={12} className='d-flex flex-row justify-content-center'>
-          <button onClick={() => {
-            //  console.log("FORM: ", playForm, "RESULT: ", resultAnimationRef)
-          }}>
+        <Grid xs={12} sm={12}>
+          <button
+            style={{ alignItems: 'center', justifyContent: 'center' }}
+            onClick={() => {
+              formApi.start({ translateX: 0 });
+              resultApi.start({ translateX: 0, zIndex: -5 })
+            }}>
             Animate
           </button>
         </Grid>
 
-        <div className='d-flex flex-row justify-content-center'>
-          <animated.div style={formProps}>
-            <Box className={formDisplay2} >
-              <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
-                <StyledTab
-                  wrapped
-                  label={CALCULATORS.sampleSize}
-                  {...a11yProps(0)}
-                />
-                <StyledTab
-                  wrapped
-                  label={CALCULATORS.marginOfError}
-                  {...a11yProps(1)}
-                />
-              </StyledTabs>
 
-              <TabPanel
-                value={tabValue}
-                index={0}
-              >
-                <Formik
-                  initialValues={sampleSizeInitialValues}
-                  onSubmit={async ({
+        <animated.div
+          style={formAnimation}
+        >
+          <Box className={formDisplay2} >
+            <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
+              <StyledTab
+                wrapped
+                label={CALCULATORS.sampleSize}
+                {...a11yProps(0)}
+              />
+              <StyledTab
+                wrapped
+                label={CALCULATORS.marginOfError}
+                {...a11yProps(1)}
+              />
+            </StyledTabs>
+
+            <TabPanel
+              value={tabValue}
+              index={0}
+            >
+              <Formik
+                initialValues={sampleSizeInitialValues}
+                onSubmit={async ({
+                  confidence_level,
+                  population_proportion,
+                  margin_of_error
+                }, { setSubmitting, resetForm }) => {
+                  const payload: SampleSizeI = {
                     confidence_level,
                     population_proportion,
-                    margin_of_error
-                  }, { setSubmitting, resetForm }) => {
-                    const payload: SampleSizeI = {
-                      confidence_level,
-                      population_proportion,
-                      margin_of_error,
-                      method: 'FindOutTheSampleSize'
+                    margin_of_error,
+                    method: 'FindOutTheSampleSize'
+                  }
+                  console.log(JSON.stringify(payload))
+                  try {
+                    const { success, payload: circularSlabOrTubeConcrete } = await calculateStatistics(payload)
+                    console.log('=====>', circularSlabOrTubeConcrete)
+                    const { size } = circularSlabOrTubeConcrete
+                    if (typeof circularSlabOrTubeConcrete === 'object') {
+                      setResult1({
+                        sampleSize: size,
+                      })
                     }
-                    console.log(JSON.stringify(payload))
-                    try {
-                      const { success, payload: circularSlabOrTubeConcrete } = await calculateStatistics(payload)
-                      console.log('=====>', circularSlabOrTubeConcrete)
-                      const { size } = circularSlabOrTubeConcrete
-                      if (typeof circularSlabOrTubeConcrete === 'object') {
-                        setResult1({
-                          sampleSize: size,
-                        })
-                      }
-                      if (success === true) {
-                        setAnswer(success)
-                      }
-                    } catch (err) {
-                      console.log('====>', err)
+                    if (success === true) {
+                      setAnswer(success)
                     }
-                  }}
-                >
-                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                    <form onSubmit={handleSubmit} className="form-container">
-
-                      <div className="form-row">
-                        <Label title={LABELS.confidenceLevel} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="confidence_level"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.confidence_level}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <div className="form-row">
-                        <Label title={LABELS.populationProportion} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="population_proportion"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.population_proportion}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <div className="form-row">
-                        <Label title={LABELS.marginOfError} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="margin_of_error"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.margin_of_error}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-                        <CustomBtn />
-                        <CustomResetBtn
-                          onHandleClick={() => resetForm()}
-                        />
-                      </div>
-                    </form>
-                  )}
-                </Formik>
-              </TabPanel>
-
-              <TabPanel
-                value={tabValue}
-                index={1}
+                  } catch (err) {
+                    console.log('====>', err)
+                  }
+                }}
               >
-                <Formik
-                  initialValues={marginOfErrorInitialValues}
-                  onSubmit={async ({
+                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                  <form onSubmit={handleSubmit} className="form-container">
+
+                    <div className="form-row">
+                      <Label title={LABELS.confidenceLevel} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="confidence_level"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.confidence_level}
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <div className="form-row">
+                      <Label title={LABELS.populationProportion} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="population_proportion"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.population_proportion}
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <div className="form-row">
+                      <Label title={LABELS.marginOfError} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="margin_of_error"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.margin_of_error}
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <div
+                      className="form-row"
+                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                    >
+                      <CustomBtn />
+                      <CustomResetBtn
+                        onHandleClick={() => resetForm()}
+                      />
+                    </div>
+                  </form>
+                )}
+              </Formik>
+            </TabPanel>
+
+            <TabPanel
+              value={tabValue}
+              index={1}
+            >
+              <Formik
+                initialValues={marginOfErrorInitialValues}
+                onSubmit={async ({
+                  confidence_level,
+                  sample_size,
+                  population_proportion
+                }, { setSubmitting }) => {
+                  const payload: MarginErrorI = {
                     confidence_level,
                     sample_size,
-                    population_proportion
-                  }, { setSubmitting }) => {
-                    const payload: MarginErrorI = {
-                      confidence_level,
-                      sample_size,
-                      population_proportion,
-                      method: 'FindOuttheMarginofError'
-                    }
-                    console.log(JSON.stringify(payload))
-                    try {
-                      const { success, payload: marginOfErrorCalculator } = await calculateStatistics(payload)
-                      console.log('=====>', marginOfErrorCalculator)
-                      const { margin_of_error } = marginOfErrorCalculator
-                      if (typeof marginOfErrorCalculator === 'object') {
-                        setResult2({
-                          marginOfError: margin_of_error,
-                        })
-                      }
-                      if (success === true) {
-                        setAnswer(success)
-                      }
-                    } catch (err) {
-                      console.log('====>', err)
-                    }
-                  }}
-                >
-                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                    <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
-                        <Label title={LABELS.confidenceLevel} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="confidence_level"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.confidence_level}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <div className="form-row">
-                        <Label title={LABELS.populationProportion} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="population_proportion"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.population_proportion}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <div className="form-row">
-                        <Label title={LABELS.sampleSize} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="sample_size"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.sample_size}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-                        <CustomBtn />
-                        <CustomResetBtn
-                          onHandleClick={() => resetForm()}
-                        />
-                      </div>
-                    </form>
-                  )}
-
-                </Formik>
-              </TabPanel>
-
-            </Box>
-          </animated.div>
-
-          <animated.div style={resultProps}>
-            <ResultTabsContainer
-              tabTitle={'Result'}
-            >
-              {answer === true &&
-                <Box className="text-wrap">
-                  {tabValue === 0 &&
-                    <Box sx={{ color: COLORS.text }}>
-                      <Latex displayMode={true}>{LATEX.sampleSizeCalc}</Latex>
-                      Sample size: {Result1.sampleSize}
-                    </Box>
+                    population_proportion,
+                    method: 'FindOuttheMarginofError'
                   }
-
-                  {tabValue === 1 &&
-                    <Box sx={{ color: COLORS.text }}>
-                      <Typography variant="subtitle1">
-                        <Latex displayMode={true}>{LATEX.marginOfError}</Latex>
-                        Margin of error: {Result2.marginOfError}
-                      </Typography>
-                    </Box>
+                  console.log(JSON.stringify(payload))
+                  try {
+                    const { success, payload: marginOfErrorCalculator } = await calculateStatistics(payload)
+                    console.log('=====>', marginOfErrorCalculator)
+                    const { margin_of_error } = marginOfErrorCalculator
+                    if (typeof marginOfErrorCalculator === 'object') {
+                      setResult2({
+                        marginOfError: margin_of_error,
+                      })
+                    }
+                    if (success === true) {
+                      setAnswer(success)
+                    }
+                  } catch (err) {
+                    console.log('====>', err)
                   }
+                }}
+              >
+                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                  <form onSubmit={handleSubmit} className="form-container">
+                    <div className="form-row">
+                      <Label title={LABELS.confidenceLevel} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="confidence_level"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.confidence_level}
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <div className="form-row">
+                      <Label title={LABELS.populationProportion} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="population_proportion"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.population_proportion}
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <div className="form-row">
+                      <Label title={LABELS.sampleSize} />
+                      <CustomTextInput
+                        type={INPUT_TYPE.number}
+                        id="sample_size"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.sample_size}
+                        onChange={handleChange}
+                      />
+                    </div>
+
+                    <div
+                      className="form-row"
+                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                    >
+                      <CustomBtn />
+                      <CustomResetBtn
+                        onHandleClick={() => resetForm()}
+                      />
+                    </div>
+                  </form>
+                )}
+
+              </Formik>
+            </TabPanel>
+
+          </Box>
+        </animated.div>
+
+        <animated.div
+          style={resultAnimation}
+        >{answer !== true &&
+          <ResultTabsContainer
+            tabTitle={'Result'}
+          >
+            <Box className="text-wrap">
+              {tabValue === 0 &&
+                <Box sx={{ color: COLORS.text }}>
+                  <Latex displayMode={true}>{LATEX.sampleSizeCalc}</Latex>
+                  Sample size: {Result1.sampleSize}
                 </Box>
               }
-            </ResultTabsContainer>
-          </animated.div>
-        </div>
+
+              {tabValue === 1 &&
+                <Box sx={{ color: COLORS.text }}>
+                  <Typography variant="subtitle1">
+                    <Latex displayMode={true}>{LATEX.marginOfError}</Latex>
+                    Margin of error: {Result2.marginOfError}
+                  </Typography>
+                </Box>
+              }
+            </Box>
+
+          </ResultTabsContainer>
+          }
+        </animated.div>
+
       </AddLayout>
     </>
   )

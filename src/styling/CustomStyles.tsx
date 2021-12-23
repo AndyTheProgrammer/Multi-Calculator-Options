@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   // Navigation bar
   root: {
     display: "flex",
+    flexGrow: 1,
   },
   container: {
     flex: 1,
@@ -87,13 +88,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     width: "100%",
     borderTopLeftRadius: 20,
     borderBottomRightRadius: 20,
-    justifyContent: 'space-between',
   },
   rightTabContainer: {
     height: 25,
     background: COLORS.gradient,
     color: COLORS.light_text_color,
-    justifyContent: "center",
     width: "100%",
     borderBottomLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -113,25 +112,26 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     borderRadius: '0 20px 3px',
   },
   formDisplay: {
-    width: 400,
+    // width: 400,
     height: '100%',
     borderRadius: '20px !important',
     backgroundColor: theme.palette.background.paper,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     paddingBottom: 2,
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
   },
   formResult: {
-    width: 400,
+    width: '90%',
     height: '100%',
     borderRadius: '20px !important',
     backgroundColor: theme.palette.background.paper,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     paddingBottom: 2,
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
   },
   formDisplay2: {
-    width: 500,
+    //opacity: 0.8,
+    //  width: 'calc(500px * 1vw)',
     height: '100%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
