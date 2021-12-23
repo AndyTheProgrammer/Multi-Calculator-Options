@@ -23,6 +23,7 @@ function SampleNextArrow(props) {
 class AddSlider extends React.Component {
     render() {
       const settings = {
+        arrows: false,
         dots: false,
         infinite: true,
         speed: 500,
@@ -31,22 +32,22 @@ class AddSlider extends React.Component {
         // nextArrow: <SampleNextArrow />,
       };
       return (
-            <Slider className="container" {...settings}>
+            <Slider className="container add-slider-height" {...settings}>
                 <div>
                     <Box sx={{
                         width: "100%",
-                        height: 200,
+                        height:"100%",
                         backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'contain',
+                        backgroundSize: 'fit',
                         justifyContent: 'start',
-                        backgroundImage: `url(${addimage})`,
+                        backgroundImage: `linear-gradient(to right, #3128af, #499fb8)`,
                         paddingTop: 3,
                     }}> 
                         <Typography>
                             <Box sx={{ 
                                     color: 'white',
                                     marginLeft: '25px',
-                                    fontSize: 32
+                                    fontSize: 24
                                  }}>
                                 Your Next Power Move
                             </Box>
@@ -58,38 +59,23 @@ class AddSlider extends React.Component {
                                 Here is your chance to win that move
                             </Box>
                         </Typography>
-                        <Box 
-                            sx={{ 
-                                color: 'white',
-                                marginTop: '1px',
-                                marginLeft: '25px',
-                            }}>
-                                <button
-                                    style={{
-                                        border:'none',
-                                        borderRadius: 5,
-                                        backgroundColor: 'white',
-                                        fontSize: 24
-                                    }} 
-                                    type="button"
-                                    >Subscribe Now</button>
-                            </Box>
+                        
                     </Box>
                 </div>
                 <Box sx={{
                         width: "100%",
-                        height: 200,
+                        height: "100%",
                         backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'contain',
+                        backgroundSize: 'fit',
                         justifyContent: 'start',
-                        backgroundImage: `url(${addimage})`,
+                        backgroundImage: `linear-gradient(to right, #3128af, #499fb8)`,
                         paddingTop: 3,
                     }}> 
                         <Typography>
                             <Box sx={{ 
                                     color: 'white',
                                     marginLeft: '25px',
-                                    fontSize: 32
+                                    fontSize: 24
                                  }}>
                                 Your Next Power Move
                             </Box>
@@ -101,38 +87,22 @@ class AddSlider extends React.Component {
                                 Here is your chance to win that move
                             </Box>
                         </Typography>
-                        <Box 
-                            sx={{ 
-                                color: 'white',
-                                marginTop: '1px',
-                                marginLeft: '25px',
-                            }}>
-                                <button
-                                    style={{
-                                        border:'none',
-                                        borderRadius: 5,
-                                        backgroundColor: 'white',
-                                        fontSize: 24
-                                    }} 
-                                    type="button"
-                                    >Subscribe Now</button>
-                            </Box>
                     </Box>
                 <div>
                 <Box sx={{
                         width: "100%",
-                        height: 200,
+                        height: "100%",
                         backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'contain',
+                        backgroundSize: 'fit',
                         justifyContent: 'start',
-                        backgroundImage: `url(${addimage})`,
+                        backgroundImage: `linear-gradient(to right, #3128af, #499fb8)`,
                         paddingTop: 3,
                     }}> 
                         <Typography>
                             <Box sx={{ 
                                     color: 'white',
                                     marginLeft: '25px',
-                                    fontSize: 32
+                                    fontSize: 24
                                  }}>
                                 Your Next Power Move
                             </Box>
@@ -144,22 +114,6 @@ class AddSlider extends React.Component {
                                 Here is your chance to win that move
                             </Box>
                         </Typography>
-                        <Box 
-                            sx={{ 
-                                color: 'white',
-                                marginTop: '1px',
-                                marginLeft: '25px',
-                            }}>
-                                <button
-                                    style={{
-                                        border:'none',
-                                        borderRadius: 5,
-                                        backgroundColor: 'white',
-                                        fontSize: 24
-                                    }} 
-                                    type="button"
-                                    >Subscribe Now</button>
-                            </Box>
                     </Box>
                 </div>
             </Slider>

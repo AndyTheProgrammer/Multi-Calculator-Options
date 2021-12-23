@@ -27,19 +27,21 @@ function MathCategories(){
           <Switch>
           <Route exact path={path}>
             <NavBar2 pageimage={math_icon} pagename="Math Calculators" mathHighLight={true}/>
+            
+            {/* Hide search bar when screen is small */}
             <Box
               sx={{
-              display: 'flex',
-              justifyContent: 'center',
+                display: {
+                  lg: 'flex',
+                  md: 'flex',
+                  sm: 'none',
+                  xs: 'none'
+                },
+                justifyContent: 'center',
               }}>
-                {
-                  showSearch ? <SearchForm />: null
-                }
+                <SearchForm />
             </Box>
             <MathOptions />
-            <Box sx={{ marginTop: 5 }}>
-              <Slide />
-            </Box>
           </Route>
      
         </Switch>

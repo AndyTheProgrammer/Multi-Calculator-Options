@@ -27,6 +27,7 @@ function FinancePage(){
           <Switch>
           <Route exact path={path}>
             <NavBar2 pageimage={fincance_icon} pagename="Financial Calculators" financialHighLight={true} />
+            
             {/* Hide search bar when screen is small */}
             <Box
               sx={{
@@ -43,9 +44,9 @@ function FinancePage(){
 
             
             <FinanceOptions />
-            <Box sx={{ marginTop: 5 }}>
+            {/* <Box sx={{ marginTop: 5 }}>
               <Slide />
-            </Box>
+            </Box> */}
           </Route>
 
         </Switch>

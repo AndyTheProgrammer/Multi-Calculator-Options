@@ -49,187 +49,175 @@ export default function ArithmeticSequenceCalculator(){
         <>
         <NavBar2 pagename="Arithmetic Sequence Calculator" />
         <AddLayout>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box sx={{ display: 'flex', justifyContent:'center'}}>
+            <Box className='animated-content-center'>
                 
-            <Anime
-                style={{
-                    position: 'absolute',
-                }}
-                ref={animatedSquaresRef1}
-                config={{
-                    translateX: -250,
-                    easing: 'easeInOutSine',
-                    autoplay: false,
-                    duration: 250
-                }}>
-                <Box sx={{ ...formDisplay }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:25, width: '100%' }}></Box>
-                        <Box sx={{ ...formCardStyle }}></Box>
-                    </Box>
-                    <Formik
-                        initialValues={{ 
-                            first_term:"",
-                            common_difference: "",
-                            number_of_observation: "",
-                            method: "ArithmeticSequenceCalculator"
-                        }}
-                        onSubmit = {(values, actions)=>{
-                            const data = {
-                                first_term: values.first_term,
-                                common_difference: values.common_difference,
-                                number_of_observation: values.number_of_observation,
-                                method: values.method
-                            }
-
-                            actions.resetForm({
-                                values: {
-                                  // the type of `values` inferred to be Blog
-                                  first_term: "Banana",
-                                  common_difference: "Moneky",
-                                  number_of_observation: "Apple",
-                                  method: values.method
-                                },
-                                // you can also set the other form states here
-                              });
-                            
-
-                            const postData = async () => {
-                                console.log(data)
-                                const responseData = await mathMainService(data)
-                                var msg:any = responseData.statusDescription;
-                                if(msg === "success"){
-                                    // setValue(responseData.message.answer)
+                <Anime
+                    className='animated-pos animated-margin'
+                    ref={animatedSquaresRef1}
+                    config={{
+                        translateX: -250,
+                        easing: 'easeInOutSine',
+                        autoplay: false,
+                        duration: 250
+                    }}>
+                    <Box className="animated-box" >
+                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                            <Box sx={{height:25, width: '100%' }}></Box>
+                            <Box sx={{ ...formCardStyle }}></Box>
+                        </Box>
+                        <Formik
+                            initialValues={{ 
+                                first_term:"",
+                                common_difference: "",
+                                number_of_observation: "",
+                                method: "ArithmeticSequenceCalculator"
+                            }}
+                            onSubmit = {(values, actions)=>{
+                                const data = {
+                                    first_term: values.first_term,
+                                    common_difference: values.common_difference,
+                                    number_of_observation: values.number_of_observation,
+                                    method: values.method
                                 }
-                            }
-                            postData()
-                            
-                        }}>
-                            
-                        {({
-                            values,
-                            handleChange,
-                            handleSubmit,
-                            isSubmitting
-                        }) => (
-                            <form onSubmit={handleSubmit}>
-                                <Box sx={{minHeight: 250, display:'flex', flexDirection:'column' }}>
-                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item={true} xs={7}>
-                                            <Box sx={{ ...labelStyle }}>First Term</Box>
-                                        </Grid>
-                                        <Grid item={true} xs={5} sx={{
-                                            display:'flex'}}>
+    
+                                const postData = async () => {
+                                    console.log(data)
+                                    const responseData = await mathMainService(data)
+                                    var msg:any = responseData.statusDescription;
+                                    if(msg === "success"){
+                                        setValue(responseData.message.answer)
+                                    }
+                                }
+                                postData()
+                                
+                            }}>
+                                
+                            {({
+                                values,
+                                handleChange,
+                                handleSubmit,
+                                isSubmitting
+                            }) => (
+                                <form onSubmit={handleSubmit}>
+                                    <Box sx={{minHeight: 250, display:'flex', flexDirection:'column' }}>
+                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                            <Grid item={true} xs={7}>
+                                                <Box sx={{ ...labelStyle }}>First Term</Box>
+                                            </Grid>
+                                            <Grid item={true} xs={5} sx={{
+                                                display:'flex'}}>
+                                                <CustomForm
+                                                    type="text"
+                                                    name="first_term"
+                                                    onChange={handleChange}
+                                                    value={values.first_term}
+                                                    placeholder=""
+                                                />
+                                            </Grid>
+                    
+                                            <Grid item xs={7}>
+                                                <Box sx={{ ...labelStyle }}>Common Difference</Box>
+                                            </Grid>
+                                            <Grid item xs={5}>
                                             <CustomForm
                                                 type="text"
-                                                name="first_term"
+                                                name="common_difference"
                                                 onChange={handleChange}
-                                                value={values.first_term}
+                                                value={values.common_difference}
                                                 placeholder=""
                                             />
+                                            </Grid>
+                                        
+                                            <Grid item xs={7}>
+                                                <Box sx={{ ...labelStyle }}>No# of Observations</Box>
+                                            </Grid>
+                                            <Grid item xs={5}>
+                                                <CustomForm
+                                                    type="text"
+                                                    name="number_of_observation"
+                                                    onChange={handleChange}
+                                                    value={values.number_of_observation}
+                                                    placeholder=""
+                                                />
+                                            </Grid>                    
                                         </Grid>
-                
-                                        <Grid item xs={7}>
-                                            <Box sx={{ ...labelStyle }}>Common Difference</Box>
-                                        </Grid>
-                                        <Grid item xs={5}>
-                                        <CustomForm
-                                            type="text"
-                                            name="common_difference"
-                                            onChange={handleChange}
-                                            value={values.common_difference}
-                                            placeholder=""
-                                        />
-                                        </Grid>
-                                    
-                                        <Grid item xs={7}>
-                                            <Box sx={{ ...labelStyle }}>No# of Observations</Box>
-                                        </Grid>
-                                        <Grid item xs={5}>
-                                            <CustomForm
-                                                type="text"
-                                                name="number_of_observation"
-                                                onChange={handleChange}
-                                                value={values.number_of_observation}
-                                                placeholder=""
-                                            />
-                                        </Grid>                    
-                                    </Grid>
-                                    
-                                    <Box sx={{flexGrow: 1}}>
-                                        {/* 
-                                            Flex box pushes submit button down
-                                        */}
+                                        
+                                        <Box sx={{flexGrow: 1}}>
+                                            {/* 
+                                                Flex box pushes submit button down
+                                            */}
+                                        </Box>
+                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                           <Grid item xs={4}>
+                                                <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                    <CustomFormBtn 
+                                                    type="button" 
+                                                    handleClick={()=>{ console.log("Clear button clicked") }} 
+                                                    name="Clear"/>
+                                                </Box>
+                                           </Grid>
+                                           <Grid item xs={4}></Grid>
+                                           <Grid item xs={4}>
+                                                <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                    <CustomFormImageBtn type="submit" name="Calculate"/>
+                                                </Box>
+                                           </Grid>
+                                       </Grid>
                                     </Box>
-                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                       <Grid item xs={4}>
-                                            <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                <CustomFormBtn 
-                                                type="button" 
-                                                handleClick={()=>{ console.log("Clear button clicked") }} 
-                                                name="Clear"/>
-                                            </Box>
-                                       </Grid>
-                                       <Grid item xs={4}></Grid>
-                                       <Grid item xs={4}>
-                                            <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                <CustomFormImageBtn type="submit" name="Calculate"/>
-                                            </Box>
-                                       </Grid>
-                                   </Grid>
-                                </Box>
-                            </form>
-                        )}
-                    </Formik>
-                </Box>
-            </Anime>
-
-
-            {/*
-                Component displays the results 
-            
-            */}
-
-            <Anime
-                style={{
-                    position: 'absolute',
-                    zIndex: -5
-                }}
-                ref={animatedSquaresRef2}
-                config={{
-                    translateX: 200,
-                    easing: 'easeInOutSine',
-                    autoplay: false,
-                    duration: 250
-                }}>
-                 <Box style={formDisplay} >
-                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:25, width: '100%' }}>
-                            <Typography>
-                                <Box
-                                    sx={{
-                                        color:'#4072B5',
-                                        fontWeight:'bold', 
-                                        textAlign:'center'
-                                    }}>Result</Box>
-                            </Typography>
-                        </Box>
-                        <Box sx={{ ...formCardStyle }}></Box>
+                                </form>
+                            )}
+                        </Formik>
                     </Box>
-
-                    <Box sx={{marginLeft: 5}}>
-                        <Box sx={{marginBottom: 2}}>
-                            <Latex displayMode={false}>{`$a_{n} = a+(n-1)d$`}</Latex>
+                </Anime>
+    
+    
+                {/*
+                    Component displays the results 
+                
+                */}
+    
+                <Anime
+                    className='animated-pos'
+                    style={{
+                        zIndex: -5
+                    }}
+                    ref={animatedSquaresRef2}
+                    config={{
+                        translateX: 200,
+                        easing: 'easeInOutSine',
+                        autoplay: false,
+                        duration: 250
+                    }}>
+                     <Box className="animated-box" >
+                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                            <Box sx={{height:25, width: '100%' }}>
+                                <Typography>
+                                    <Box
+                                        sx={{
+                                            color:'#4072B5',
+                                            fontWeight:'bold', 
+                                            textAlign:'center'
+                                        }}>Result</Box>
+                                </Typography>
+                            </Box>
+                            <Box sx={{ ...formCardStyle }}></Box>
                         </Box>
-                        <Box sx={{marginBottom: 2}}>
-                            <Latex displayMode={false}>{`$S_{n} = \\displaystyle \\sum_{i=1}^{10} t_i$`}</Latex>
-                        </Box>
-                        <Box sx={{marginBottom: 2}}>
-                            <Latex displayMode={false}>{`$answer = ${value}$`}</Latex>
+    
+                        <Box sx={{marginLeft: 5}}>
+                            <Box sx={{marginBottom: 2}}>
+                                <Latex displayMode={false}>{`$a_{n} = a+(n-1)d$`}</Latex>
+                            </Box>
+                            <Box sx={{marginBottom: 2}}>
+                                <Latex displayMode={false}>{`$S_{n} = \\displaystyle \\sum_{i=1}^{10} t_i$`}</Latex>
+                            </Box>
+                            <Box sx={{marginBottom: 2}}>
+                                <Latex displayMode={false}>{`$answer = ${value}$`}</Latex>
+                            </Box>
                         </Box>
                     </Box>
+                </Anime>
                 </Box>
-            </Anime>
             </Box>
         </AddLayout>
         </>

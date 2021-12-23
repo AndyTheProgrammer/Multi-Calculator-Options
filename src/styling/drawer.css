@@ -1,0 +1,86 @@
+.drawer-close{
+    display: none;
+}
+
+.drawer-open{
+    display: none;
+}
+
+.drawer-button{
+    color: #8591B0;
+    font-weight: 24px;
+    border-bottom: 1px solid rgb(187, 187, 187);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.drawer-button:hover{
+    color: #ffffff;
+    font-weight: 24px;
+    border-bottom: 1px solid rgb(187, 187, 187);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    padding-left: 10px;
+    background-image: linear-gradient(to right,#3128af, #499fb8);
+}
+
+@media screen and (max-width: 900px){
+    .drawer-close{
+        border: 0px solid red;
+        display: block;
+        top: 0;
+        position: fixed;
+        width: 350px;
+        height: 100vh;
+        left: -350px;
+        background: linear-gradient(146deg, rgba(251,251,251,1) 0%, rgba(243,243,243,1) 45%, rgba(209,209,209,1) 100%);
+        transition: left 0.25s;
+        z-index: 100;
+        /* background-color: rgb(212, 212, 212); */
+    }
+    
+    .drawer-open{
+        display: block;
+        border: 0px solid red;
+        top: 0;
+        position: fixed;
+        width: 350px;
+        height: 100vh;
+        left: 0px;
+        background: linear-gradient(146deg, rgba(251,251,251,1) 0%, rgba(243,243,243,1) 45%, rgba(209,209,209,1) 100%);
+        transition: left 0.25s;
+        z-index: 100;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .drawer-close{
+        border: 0px solid red;
+        display: block;
+        top: 0;
+        position: fixed;
+        width: 250px;
+        height: 100vh;
+        left: -250px;
+        background: linear-gradient(146deg, rgba(251,251,251,1) 0%, rgba(243,243,243,1) 45%, rgba(209,209,209,1) 100%);
+        transition: left 0.25s;
+        z-index: 100;
+        /* background-color: rgb(212, 212, 212); */
+    }
+    
+    .drawer-open{
+        display: block;
+        border: 0px solid red;
+        top: 0;
+        position: fixed;
+        width: 250px;
+        height: 100vh;
+        left: 0px;
+        background: linear-gradient(146deg, rgba(251,251,251,1) 0%, rgba(243,243,243,1) 45%, rgba(209,209,209,1) 100%);
+        transition: left 0.25s;
+        z-index: 100;
+    }
+}

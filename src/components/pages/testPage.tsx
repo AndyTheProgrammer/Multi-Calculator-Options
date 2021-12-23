@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom'
 
 // 
 import FindMyIPAddress from  '../TemperalComponentsFolder/other/FindMyIPAddress'
+import ArithmeticSequenceCalculator from  '../TemperalComponentsFolder/math/ArithmeticSequenceCalculator'
 
 
 
@@ -41,7 +42,7 @@ import ExponentForm from '../forms/math/ExponentForm'
 export default function TestPage(){
     return(
         <>
-          <FindMyIPAddress/>
+          <ArithmeticSequenceCalculator/>
         </>
     );
 }
