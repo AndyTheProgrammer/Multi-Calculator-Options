@@ -23,6 +23,9 @@ import {
 import { CustomNextArrow } from '../custom/sliderArrows/CustomNextArrow';
 import { CustomPrevArrow } from '../custom/sliderArrows/CustomPrevArrow';
 import { parse } from 'path/posix';
+
+import { mobileText } from '../../styling/textStyle'
+
 var classNames = require('classnames');
 
 const settings = {
@@ -400,9 +403,7 @@ function OptionsForSmallerScreens(){
                                                     <Box  
                                                     onClick={()=>{ history.push(r.path) }} 
                                                     sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
+                                                        ...mobileText 
                                                     }}> {r.name} </Box>);
                                                 })
                                                 :null
@@ -472,12 +473,12 @@ function OptionsForSmallerScreens(){
                                             {
                                                 (categoryIndex[1].id === 1)?
                                                 financialRoutes.subCategories[1].sub_calculator.map((r:any) => {
-                                                    return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                    return (
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }
@@ -545,12 +546,12 @@ function OptionsForSmallerScreens(){
                                             {
                                                 (categoryIndex[2].id === 2)?
                                                 financialRoutes.subCategories[2].sub_calculator.map((r:any) => {
-                                                    return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                    return (
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }
@@ -618,12 +619,12 @@ function OptionsForSmallerScreens(){
                                             {
                                                 (categoryIndex[3].id === 3)?
                                                 financialRoutes.subCategories[3].sub_calculator.map((r:any) => {
-                                                    return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                    return (
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }
@@ -691,12 +692,12 @@ function OptionsForSmallerScreens(){
                                             {
                                                 (categoryIndex[4].id === 4)?
                                                 financialRoutes.subCategories[4].sub_calculator.map((r:any) => {
-                                                    return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                    return (
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }

@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import fincance_icon from '../../common/assets/finance_icon.svg';
 import math_icon from '../../common/assets/math_icon.svg';
 import other_icon from '../../common/assets/other_icon.svg';
-
+import { mobileText } from '../../styling/textStyle'
 
 function CalcOptions(){
     const history = useHistory();

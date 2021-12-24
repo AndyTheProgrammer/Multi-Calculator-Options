@@ -22,6 +22,9 @@ import {
 
 import { CustomNextArrow } from '../custom/sliderArrows/CustomNextArrow';
 import { CustomPrevArrow } from '../custom/sliderArrows/CustomPrevArrow';
+
+import { mobileText } from '../../styling/textStyle'
+
 var classNames = require('classnames');
 
 var settings = {
@@ -454,13 +457,11 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[0].id === 0)?
                                                 mathRoutes.subCategories[0].sub_calculator.map((r:any) => {
                                                     return (
-                                                    <Box  
-                                                    onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }
@@ -529,12 +530,12 @@ function OptionsForSmallerScreens(){
                                             {
                                                 (categoryIndex[1].id === 1)?
                                                 mathRoutes.subCategories[0].sub_calculator.map((r:any) => {
-                                                    return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                    return (
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }
@@ -602,12 +603,12 @@ function OptionsForSmallerScreens(){
                                             {
                                                 (categoryIndex[2].id === 2)?
                                                 mathRoutes.subCategories[2].sub_calculator.map((r:any) => {
-                                                    return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                    return (
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }
@@ -675,12 +676,12 @@ function OptionsForSmallerScreens(){
                                             {
                                                 (categoryIndex[3].id === 3)?
                                                 mathRoutes.subCategories[3].sub_calculator.map((r:any) => {
-                                                    return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                    return (
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }
@@ -748,12 +749,12 @@ function OptionsForSmallerScreens(){
                                             {
                                                 (categoryIndex[4].id === 4)?
                                                 mathRoutes.subCategories[4].sub_calculator.map((r:any) => {
-                                                    return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                    return (
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }
@@ -821,12 +822,12 @@ function OptionsForSmallerScreens(){
                                             {
                                                 (categoryIndex[5].id === 5)?
                                                 mathRoutes.subCategories[5].sub_calculator.map((r:any) => {
-                                                    return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                    return (
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }

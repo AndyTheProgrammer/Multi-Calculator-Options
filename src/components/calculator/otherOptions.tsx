@@ -26,6 +26,9 @@ import {
 
 import { CustomNextArrow } from '../custom/sliderArrows/CustomNextArrow';
 import { CustomPrevArrow } from '../custom/sliderArrows/CustomPrevArrow';
+
+import { mobileText } from '../../styling/textStyle';
+
 var classNames = require('classnames');
 
 const settings = {
@@ -449,13 +452,11 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[5].id === 5)?
                                                 othersRoutes.subCategories[5].sub_calculator.map((r:any) => {
                                                     return (
-                                                    <Box  
-                                                    onClick={()=>{ history.push(r.path) }} 
-                                                    sx={{ 
-                                                        width: '100%', 
-                                                        paddingBottom: 0.5,  
-                                                        fontSize: 18,  
-                                                    }}> {r.name} </Box>);
+                                                        <Box  
+                                                        onClick={()=>{ history.push(r.path) }} 
+                                                        sx={{ 
+                                                            ...mobileText 
+                                                        }}> {r.name} </Box>);
                                                 })
                                                 :null
                                             }

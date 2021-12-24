@@ -12,7 +12,7 @@ import { useHistory } from 'react-router-dom'
 import FindMyIPAddress from  '../TemperalComponentsFolder/other/FindMyIPAddress'
 import ArithmeticSequenceCalculator from  '../TemperalComponentsFolder/math/ArithmeticSequenceCalculator'
 
-
+import MarginOfErrorCalculator from '../pages/calculators/statistics/MarginOfErrorCalculator'
 
 //
 import {
