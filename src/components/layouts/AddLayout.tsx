@@ -12,7 +12,7 @@ export default function AddLayout({ children }: any) {
         <>
             <Box className="container">
                 <Box sx={{ display: 'flex' }}>
-                    <Box sx={{ border:'3px solid red', width: '100%' }}>
+                    <Box sx={{ border:'0px solid red', width: '100%' }}>
                         <Box sx={{minHeight: 350}}>
                             {children}
                         </Box>
