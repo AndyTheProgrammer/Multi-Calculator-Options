@@ -80,15 +80,15 @@ function AreaCalculator() {
     <>
       <NavBar2 pagename="Area Calculator" />
       <AddLayout>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          {currentCalc.component}
-          <SimpleDialog
-            dropOptions={calculators}
-            selectedValue={selectedCalc}
-            open={open}
-            onClose={handleClose}
-          />
-        </Box>
+
+        {currentCalc.component}
+        <SimpleDialog
+          dropOptions={calculators}
+          selectedValue={selectedCalc}
+          open={open}
+          onClose={handleClose}
+        />
+
       </AddLayout>
     </>
   )

@@ -430,6 +430,14 @@ select.form-control-sm:not([size]):not([multiple]) {
   outline: none;
 }
 
+/* .layout-conatiner {
+}
+
+@media (max-width: 650px) {
+  .form-row {
+    flex-direction: column;
+  } */
+
 .show-border{
   border: 0px solid red;
   max-width: 1024px;

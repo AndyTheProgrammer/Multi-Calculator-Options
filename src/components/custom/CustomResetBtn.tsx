@@ -9,6 +9,7 @@ const ColorButton = withStyles((theme) => ({
   root: {
     color: COLORS.light_text_color,
     height: 25,
+    margin: theme.spacing(1),
     textTransform: 'none',
     borderRadius: 25,
     alignItems: 'center',

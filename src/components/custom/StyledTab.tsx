@@ -28,15 +28,11 @@ const StyledTab = withStyles((theme: Theme) =>
         '"Segoe UI Emoji"',
         '"Segoe UI Symbol"',
       ].join(','),
-      '&:nth-child(1)': {
+      '&:nth-child(odd)': {
         borderTopLeftRadius: 20,
         borderBottomRightRadius: 20,
       },
-      '&:nth-child(2)': {
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-      },
-      '&:nth-child(3)': {
+      '&:nth-child(even)': {
         borderBottomLeftRadius: 20,
         borderTopRightRadius: 20,
       },

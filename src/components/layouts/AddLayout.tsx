@@ -10,7 +10,7 @@ export default function AddLayout({ children }: any) {
     // const { container } = useStyles()
     return (
         <>
-            <Box className="container"> 
+            <Box className="container">
                 <Box sx={{ display: 'flex' }}>
                     <Box sx={{ border:'3px solid red', width: '100%' }}>
                         <Box sx={{minHeight: 350}}>
@@ -49,21 +49,21 @@ export default function AddLayout({ children }: any) {
                                 }}>
                                 <SingleSlider/>
                             </Box>
-                            <Box sx={{ 
-                                    display: {
-                                        lg: 'block',
-                                        md: 'none',
-                                        sm: 'none',
-                                        xs: 'none'
-                                    }
-                                }}>
-                                <SpecifiedSearchForm/>
+                            <Box sx={{
+                                display: {
+                                    lg: 'block',
+                                    md: 'none',
+                                    sm: 'none',
+                                    xs: 'none'
+                                }
+                            }}>
+                                <SpecifiedSearchForm />
                             </Box>
                         </Box>
                     </Box>
                 </Box>
             </Box>
-            <ResponsiveSlider/>
+            <ResponsiveSlider />
         </>
     )
 }
