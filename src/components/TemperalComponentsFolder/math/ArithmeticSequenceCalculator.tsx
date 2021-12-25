@@ -1,5 +1,4 @@
 /**
- * 
  * THIS MAKES THE Arithmetic Sequence Calculator FORM
  */
 
@@ -12,23 +11,20 @@ import AddLayout from '../../layouts/AddLayout'
 import { Box, Grid, Typography } from '@mui/material'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
-
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+import { errorText }  from '../../../styling/textStyle'
+const Latex = require('react-latex');
 
- const Latex = require('react-latex');
- const innerBoxStyle = {
-    border:'solid',
-    width: 400,
-    height: 300,
-    borderRadius: '20px',
-    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-    backgroundColor: 'white'
+ interface Errors{
+    first_term: string,
+    common_difference: string,
+    number_of_observation: string
  }
 
 export default function ArithmeticSequenceCalculator(){
     const [value, setValue] = useState("")
-    const [inputValue, setInputValue] = useState([""])
-
+    const [playAnimation, setPlayAnimation] = useState(false)
+    const [mediaQueryValue, setMediaQueryValue] = useState(false)
     const animatedSquaresRef1 = useRef(null)
     const animatedSquaresRef2= useRef(null)
   
@@ -36,13 +32,40 @@ export default function ArithmeticSequenceCalculator(){
     const play1 = () => animatedSquaresRef1.current.play();
     // @ts-ignore: Object is possibly 'null'.
     const play2 = () => animatedSquaresRef2.current.play();
+    // @ts-ignore: Object is possibly 'null'.
+    const reverse1 = () => animatedSquaresRef1.current.reverse();
+    // @ts-ignore: Object is possibly 'null'.
+    const reverse2 = () => animatedSquaresRef2.current.reverse();
+
+    
+    const controlAnimation = () => {
+        if(mediaQueryValue){
+            if(playAnimation){
+                // console.log("Monkey")
+                play1();
+                play2();
+                reverse1();
+                reverse2();
+                setValue("");
+                setPlayAnimation(false);
+            }
+        }
+        else{
+            setValue("");
+        }
+    } 
 
     useEffect(()=>{
-
-        if(value){
-            play1();
-            play2();
-        }
+        const mediaQuery = window.matchMedia('(min-width: 1000px)');
+        setMediaQueryValue(mediaQuery.matches);
+        console.log(mediaQuery);
+        if (mediaQuery.matches) {
+            if(value){
+                play1();
+                play2();
+                setPlayAnimation(true)
+            }
+          } 
     })
 
     return(
@@ -61,9 +84,17 @@ export default function ArithmeticSequenceCalculator(){
                         autoplay: false,
                         duration: 250
                     }}>
-                    <Box className="animated-box" >
+                    <Box 
+                    sx={{ maxWidth: 450,paddingBottom: 1 }}
+                    className="animated-box" >
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:25, width: '100%' }}></Box>
+                            <Box sx={{height:25, width: '100%' }}>
+                                <Typography>
+                                    <Box sx={{ fontSize: 12, paddingTop: 0.5, paddingLeft: 2, width: '100%', ...labelStyle }}>
+                                        <Latex displayMode={false}>{`$Formula = a+(n-1)d$`}</Latex>
+                                    </Box>
+                                </Typography>
+                            </Box>
                             <Box sx={{ ...formCardStyle }}></Box>
                         </Box>
                         <Formik
@@ -73,6 +104,33 @@ export default function ArithmeticSequenceCalculator(){
                                 number_of_observation: "",
                                 method: "ArithmeticSequenceCalculator"
                             }}
+                            validate={
+                                (values)=>{
+                                    const errors = {} as Errors
+                                    if(!values.first_term){
+                                        errors.first_term = 'Required'
+                                    }
+                                    else if(!parseInt(values.first_term)){
+                                        errors.first_term = 'Number is required'
+                                    }
+
+                                    if(!values.common_difference){
+                                        errors.common_difference = 'Required'
+                                    }
+                                    else if(!parseInt(values.common_difference)){
+                                        errors.common_difference = 'Number is required'
+                                    }
+
+                                    if(!values.number_of_observation){
+                                        errors.number_of_observation = 'Required'
+                                    }
+                                    else if(!parseInt(values.number_of_observation)){
+                                        errors.number_of_observation = 'Number is required'
+                                    }
+
+                                    return errors
+                                }
+                            }
                             onSubmit = {(values, actions)=>{
                                 const data = {
                                     first_term: values.first_term,
@@ -94,6 +152,7 @@ export default function ArithmeticSequenceCalculator(){
                             }}>
                                 
                             {({
+                                errors,
                                 values,
                                 handleChange,
                                 handleSubmit,
@@ -105,8 +164,7 @@ export default function ArithmeticSequenceCalculator(){
                                             <Grid item={true} xs={7}>
                                                 <Box sx={{ ...labelStyle }}>First Term</Box>
                                             </Grid>
-                                            <Grid item={true} xs={5} sx={{
-                                                display:'flex'}}>
+                                            <Grid item={true} xs={5} >
                                                 <CustomForm
                                                     type="text"
                                                     name="first_term"
@@ -114,19 +172,31 @@ export default function ArithmeticSequenceCalculator(){
                                                     value={values.first_term}
                                                     placeholder=""
                                                 />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{errors.first_term}</Box>
+                                                </Typography>
                                             </Grid>
                     
                                             <Grid item xs={7}>
                                                 <Box sx={{ ...labelStyle }}>Common Difference</Box>
                                             </Grid>
                                             <Grid item xs={5}>
-                                            <CustomForm
-                                                type="text"
-                                                name="common_difference"
-                                                onChange={handleChange}
-                                                value={values.common_difference}
-                                                placeholder=""
-                                            />
+                                                <CustomForm
+                                                    type="text"
+                                                    name="common_difference"
+                                                    onChange={handleChange}
+                                                    value={values.common_difference}
+                                                    placeholder=""
+                                                />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{errors.common_difference}</Box>
+                                                </Typography>
                                             </Grid>
                                         
                                             <Grid item xs={7}>
@@ -140,6 +210,12 @@ export default function ArithmeticSequenceCalculator(){
                                                     value={values.number_of_observation}
                                                     placeholder=""
                                                 />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{errors.number_of_observation}</Box>
+                                                </Typography>
                                             </Grid>                    
                                         </Grid>
                                         
@@ -148,22 +224,31 @@ export default function ArithmeticSequenceCalculator(){
                                                 Flex box pushes submit button down
                                             */}
                                         </Box>
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                           <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                    <CustomFormBtn 
-                                                    type="button" 
-                                                    handleClick={()=>{ console.log("Clear button clicked") }} 
-                                                    name="Clear"/>
-                                                </Box>
-                                           </Grid>
-                                           <Grid item xs={4}></Grid>
-                                           <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                    <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                </Box>
-                                           </Grid>
-                                       </Grid>
+
+                                        {/* button containers */}
+                                        <Box 
+                                            // className="toggle-box-primary"
+                                            sx={{ width: '100%' }}
+                                            >
+                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                            <Grid item xs={4}>
+                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                        <CustomFormBtn 
+                                                        type="button" 
+                                                        handleClick={()=>{ 
+                                                            controlAnimation();
+                                                         }} 
+                                                        name="Clear"/>
+                                                    </Box>
+                                            </Grid>
+                                            <Grid item xs={4}></Grid>
+                                            <Grid item xs={4}>
+                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
+                                                    </Box>
+                                            </Grid>
+                                            </Grid>
+                                        </Box>                   
                                     </Box>
                                 </form>
                             )}
@@ -189,33 +274,37 @@ export default function ArithmeticSequenceCalculator(){
                         autoplay: false,
                         duration: 250
                     }}>
-                     <Box className="animated-box" >
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:25, width: '100%' }}>
-                                <Typography>
-                                    <Box
-                                        sx={{
-                                            color:'#4072B5',
-                                            fontWeight:'bold', 
-                                            textAlign:'center'
-                                        }}>Result</Box>
-                                </Typography>
+                     {
+                         (value)?
+                         <Box className="animated-box" >
+                            <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                                <Box sx={{height:25, width: '100%' }}>
+                                    <Typography>
+                                        <Box
+                                            sx={{
+                                                color:'#4072B5',
+                                                fontWeight:'bold', 
+                                                textAlign:'center'
+                                            }}>Result</Box>
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ ...formCardStyle }}></Box>
                             </Box>
-                            <Box sx={{ ...formCardStyle }}></Box>
+        
+                            <Box sx={{marginLeft: 5}}>
+                                <Box sx={{marginBottom: 2}}>
+                                    <Latex displayMode={false}>{`$a_{n} = a+(n-1)d$`}</Latex>
+                                </Box>
+                                <Box sx={{marginBottom: 2}}>
+                                    <Latex displayMode={false}>{`$S_{n} = \\displaystyle \\sum_{i=1}^N t_i$`}</Latex>
+                                </Box>
+                                <Box sx={{marginBottom: 2}}>
+                                    <Latex displayMode={false}>{`$answer = ${value}$`}</Latex>
+                                </Box>
+                            </Box>
                         </Box>
-    
-                        <Box sx={{marginLeft: 5}}>
-                            <Box sx={{marginBottom: 2}}>
-                                <Latex displayMode={false}>{`$a_{n} = a+(n-1)d$`}</Latex>
-                            </Box>
-                            <Box sx={{marginBottom: 2}}>
-                                <Latex displayMode={false}>{`$S_{n} = \\displaystyle \\sum_{i=1}^{10} t_i$`}</Latex>
-                            </Box>
-                            <Box sx={{marginBottom: 2}}>
-                                <Latex displayMode={false}>{`$answer = ${value}$`}</Latex>
-                            </Box>
-                        </Box>
-                    </Box>
+                        :<Box></Box>
+                     }
                 </Anime>
                 </Box>
             </Box>
