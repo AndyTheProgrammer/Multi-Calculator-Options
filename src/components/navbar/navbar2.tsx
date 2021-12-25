@@ -58,18 +58,7 @@ function NavBar2(props:any){
                             position="static">
 
                             <Box sx={{ display: 'flex', m: 1 }}>
-                                {
-                                    (props.pageimage)?
-                                    <Box
-                                    sx={{
-                                        height: 40,
-                                        
-                                    }}>
-                                    <img style={{ width: '100%', height: '100%'}} alt="icon" src={props.pageimage} />
-
-                                    </Box>: null
-                                }
-                                <Button
+                            <Button
                                 onClick={
                                     ()=>{
                                         history.push(props.backroute)
@@ -86,6 +75,24 @@ function NavBar2(props:any){
                                 }}>
                                     <ArrowBackIcon/>
                                 </Button>
+                                {
+                                    (props.pageimage)?
+                                    <Box
+                                    sx={{
+                                        height: 40,
+                                        display:{
+                                            ld: 'block',
+                                            md: 'block',
+                                            sm: 'none',
+                                            xs: 'none'
+                                        } 
+                                        
+                                    }}>
+                                    <img style={{ width: '100%', height: '100%'}} alt="icon" src={props.pageimage} />
+
+                                    </Box>: null
+                                }
+                                
                                 <Box>
                                     <Link sx={{
                                             color: "white",
