@@ -1,5 +1,5 @@
 import React from 'react'
-import Anime from 'react-animejs-wrapper'
+import { useSpring, animated } from 'react-spring'
 
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
@@ -11,18 +11,21 @@ import useStyles from '../../styling/CustomStyles'
 
 interface FormProps {
   children?: React.ReactNode;
-  tabTitle: string;
+  tabTitle1?: String;
+  tabTitle2?: String;
+  dropDown?: Boolean;
+  openDrop?: String;
+  animation?: {};
 }
 
-function FormTabsContainer(props: any) {
+function FormTabsContainer(props: FormProps) {
   const {
     children,
     tabTitle1,
     tabTitle2,
-    sm,
-    type,
     dropDown,
     openDrop,
+    animation,
   } = props;
   const {
     tabRoot,
@@ -34,47 +37,55 @@ function FormTabsContainer(props: any) {
 
   if (dropDown === true) {
     return (
-      <Paper className={formDisplay}>
-        <div className={tabRoot}>
-          <StyledTabs>
-            <StaticTab
-              className={leftTabContainer}
-              label={tabTitle1}
-            />
-            <StaticTab
-              className={rightTabContainer}
-              label={tabTitle2}
-              dropDown={true}
-              openDrop={openDrop}
-            />
-          </StyledTabs>
+      <animated.div
+        style={animation}
+      >
+        <Paper className={formDisplay}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <StaticTab
+                className={leftTabContainer}
+                label={tabTitle1}
+              />
+              <StaticTab
+                className={rightTabContainer}
+                label={tabTitle2}
+                dropDown={true}
+                openDrop={openDrop}
+              />
+            </StyledTabs>
 
-          <NoIndexTabPanel>
-            {children}
-          </NoIndexTabPanel>
-        </div>
-      </Paper>
+            <NoIndexTabPanel>
+              {children}
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
+      </animated.div>
     )
   } else {
     return (
-      <Paper className={formDisplay}>
-        <div className={tabRoot}>
-          <StyledTabs>
-            <StaticTab
-              className={leftTabContainer}
-              label={tabTitle1}
-            />
-            <StaticTab
-              className={rightTabContainer}
-              label={tabTitle2}
-            />
-          </StyledTabs>
+      <animated.div
+        style={animation}
+      >
+        <Paper className={formDisplay}>
+          <div className={tabRoot}>
+            <StyledTabs>
+              <StaticTab
+                className={leftTabContainer}
+                label={tabTitle1}
+              />
+              <StaticTab
+                className={rightTabContainer}
+                label={tabTitle2}
+              />
+            </StyledTabs>
 
-          <NoIndexTabPanel>
-            {children}
-          </NoIndexTabPanel>
-        </div>
-      </Paper>
+            <NoIndexTabPanel>
+              {children}
+            </NoIndexTabPanel>
+          </div>
+        </Paper>
+      </animated.div>
     )
   }
 }

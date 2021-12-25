@@ -11,43 +11,45 @@ export default function AddLayout({ children }: any) {
     return (
         <>
             <Box className="container">
-                <Box sx={{ display: 'flex' }}>
-                    <Box sx={{ border:'0px solid red', width: '100%' }}>
-                        <Box sx={{minHeight: 350}}>
+                <Box
+                    sx={{ display: 'flex' }}
+                >
+                    <Box sx={{ border: '0px solid red', width: '100%' }}>
+                        <Box sx={{ minHeight: 350 }}>
                             {children}
                         </Box>
                     </Box>
-                    <Box sx={{ 
-                        border:'none', 
-                        width:{
-                                lg: 200,
-                                md: '100%',
-                                sm: '100%',
-                                xs: '100%'
-                            } ,
-                            display: {
-                                lg: 'flex',
-                                md: 'none',
-                                sm: 'none',
-                                xs: 'none'
-                            }
-                        }}>
+                    <Box sx={{
+                        border: 'none',
+                        width: {
+                            lg: 200,
+                            md: '100%',
+                            sm: '100%',
+                            xs: '100%'
+                        },
+                        display: {
+                            lg: 'flex',
+                            md: 'none',
+                            sm: 'none',
+                            xs: 'none'
+                        }
+                    }}>
                         <Box >
                             <Box sx={{
-                                    height: 250,
-                                    border: 'none',
-                                    borderWidth: 1,
-                                    borderColor: 'green',
-                                    width: {
-                                        lg: 250,
-                                        md: '100%',
-                                        sm: '100%',
-                                        xs: '100%' 
-                                    },
-                                    justifyContent: 'center' ,
-                                   
-                                }}>
-                                <SingleSlider/>
+                                height: 250,
+                                border: 'none',
+                                borderWidth: 1,
+                                borderColor: 'green',
+                                width: {
+                                    lg: 250,
+                                    md: '100%',
+                                    sm: '100%',
+                                    xs: '100%'
+                                },
+                                justifyContent: 'center',
+
+                            }}>
+                                <SingleSlider />
                             </Box>
                             <Box sx={{
                                 display: {

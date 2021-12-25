@@ -99,7 +99,7 @@ const ProbablityOfTwoEvents = (props: any) => {
       </Formik>
 
       {/* Results grid */}
-      {/* <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      {/* <ResultTabsContainer tabTitle={'Result'}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">Probability: {Result.probability}{Result.unit}</Typography>
         </div>

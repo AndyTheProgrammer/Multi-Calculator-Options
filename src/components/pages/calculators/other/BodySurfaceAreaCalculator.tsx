@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 
 import { NavBar2 } from '../../../navbar/navbar2'
 import AddLayout from '../../../layouts/AddLayout'
-import { USCustomarySystemBfcI } from '../../../../types'
+import { BodySurfaceAreaI } from '../../../../types'
 import { calculateOthers } from '../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
@@ -19,13 +19,13 @@ import {
   CustomTextInput,
   CustomSelect,
   CustomBtn,
-  Label,
   CustomResetBtn,
+  Label,
   FormTabsContainer,
   ResultTabsContainer
 } from '../../../custom'
 
-const USCustomarySystemBfc = () => {
+const BodyMassFormulaCalculator = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -44,26 +44,28 @@ const USCustomarySystemBfc = () => {
   const [initialFormValues] = React.useState({
     height: '',
     height_unit: '',
-    neck: '',
-    neck_unit: '',
-    hip: '',
-    hip_unit: '',
-    waist: '',
-    waist_unit: '',
-    abdomen: '',
-    gender: '',
+    weight: '',
+    weight_unit: ''
   })
   const [Result, setResult] = React.useState({
-    bfc: 0
+    duBoisFormulaBodySurfaceArea: 0,
+    mostellerFormulaBodySurfaceArea: 0,
+    haycockFormulaBodySurfaceArea: 0,
+    gehanAndGeorgeFormulaBodySurfaceArea: 0,
+    boydFormulaBodySurfaceArea: 0,
+    fujimotoFormulaBodySurfaceArea: 0,
+    takahiraFormulaBodySurfaceArea: 0,
+    schlichFormulaBodySurfaceArea: 0,
+    unit: ''
   })
 
   return (
     <>
-      <NavBar2 pagename="US Customary System BFC" />
+      <NavBar2 pagename="Body Surface Area Calculator" />
       <AddLayout>
         {/* Form grid */}
         <FormTabsContainer
-          tabTitle1={CALCULATORS.usCustomarySystemBfc}
+          tabTitle1={CALCULATORS.bodySurfaceArea}
           animation={formAnimation}
         >
           <Formik
@@ -71,36 +73,43 @@ const USCustomarySystemBfc = () => {
             onSubmit={async ({
               height,
               height_unit,
-              neck,
-              neck_unit,
-              hip,
-              hip_unit,
-              waist,
-              waist_unit,
-              abdomen,
-              gender,
+              weight,
+              weight_unit
             }, { setSubmitting }) => {
-              const payload: USCustomarySystemBfcI = {
+              const payload: BodySurfaceAreaI = {
                 height,
                 height_unit,
-                neck,
-                neck_unit,
-                hip,
-                hip_unit,
-                waist,
-                waist_unit,
-                abdomen,
-                gender,
-                method: 'USCustomarySystemBFP'
+                weight,
+                weight_unit,
+                method: 'allBodyMassFormulars'
               }
               console.log(JSON.stringify(payload))
               try {
-                const { success, payload: usCustomarySystemBFC } = await calculateOthers(payload)
-                console.log('=====>', usCustomarySystemBFC)
-                if (typeof usCustomarySystemBFC === 'object') {
-                  const { BFP } = usCustomarySystemBFC
+                const { success, payload: bodySurfaceArea } = await calculateOthers(payload)
+                console.log('=====>', bodySurfaceArea)
+                if (typeof bodySurfaceArea === 'object') {
+                  const {
+                    DuBoisFormulaBodySurfaceArea,
+                    MostellerFormulaBodySurfaceArea,
+                    HaycockFormulaBodySurfaceArea,
+                    GehanAndGeorgeFormulaBodySurfaceArea,
+                    $BoydFormulaBodySurfaceArea,
+                    FujimotoFormulaBodySurfaceArea,
+                    TakahiraFormulaBodySurfaceArea,
+                    SchlichFormulaBodySurfaceArea,
+                    unit,
+                    unitType,
+                  } = bodySurfaceArea
                   setResult({
-                    bfc: BFP,
+                    duBoisFormulaBodySurfaceArea: DuBoisFormulaBodySurfaceArea,
+                    mostellerFormulaBodySurfaceArea: MostellerFormulaBodySurfaceArea,
+                    haycockFormulaBodySurfaceArea: HaycockFormulaBodySurfaceArea,
+                    gehanAndGeorgeFormulaBodySurfaceArea: GehanAndGeorgeFormulaBodySurfaceArea,
+                    boydFormulaBodySurfaceArea: $BoydFormulaBodySurfaceArea,
+                    fujimotoFormulaBodySurfaceArea: FujimotoFormulaBodySurfaceArea,
+                    takahiraFormulaBodySurfaceArea: TakahiraFormulaBodySurfaceArea,
+                    schlichFormulaBodySurfaceArea: SchlichFormulaBodySurfaceArea,
+                    unit: unit
                   })
                 }
                 if (success === true) {
@@ -142,77 +151,20 @@ const USCustomarySystemBfc = () => {
                 </div>
 
                 <div className="form-row">
-                  <Label title={LABELS.neck} />
+                  <Label title={LABELS.weight} />
                   <CustomTextInput
                     type={INPUT_TYPE.number}
-                    id="neck"
+                    id="weight"
                     placeholder={PLACEHOLDERS.number}
-                    value={values.neck}
+                    value={values.weight}
                     onChange={handleChange}
                   />
 
                   <CustomSelect
-                    id="neck_unit"
-                    measurement="length"
-                    value={values.neck_unit}
-                    onChange={handleChange('neck_unit')}
-                  />
-                </div>
-
-                <div className="form-row">
-                  <Label title={LABELS.hip} />
-                  <CustomTextInput
-                    type={INPUT_TYPE.number}
-                    id="hip"
-                    placeholder={PLACEHOLDERS.number}
-                    value={values.hip}
-                    onChange={handleChange}
-                  />
-
-                  <CustomSelect
-                    id="hip_unit"
-                    measurement="length"
-                    value={values.hip_unit}
-                    onChange={handleChange('hip_unit')}
-                  />
-                </div>
-
-                <div className="form-row">
-                  <Label title={LABELS.waist} />
-                  <CustomTextInput
-                    type={INPUT_TYPE.number}
-                    id="waist"
-                    placeholder={PLACEHOLDERS.number}
-                    value={values.waist}
-                    onChange={handleChange}
-                  />
-
-                  <CustomSelect
-                    id="waist_unit"
-                    measurement="length"
-                    value={values.waist_unit}
-                    onChange={handleChange('waist_unit')}
-                  />
-                </div>
-
-                <div className="form-row">
-                  <Label title={LABELS.abdomen} />
-                  <CustomTextInput
-                    type={INPUT_TYPE.number}
-                    id="abdomen"
-                    placeholder={PLACEHOLDERS.number}
-                    value={values.abdomen}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-row">
-                  <Label title={LABELS.gender} />
-                  <CustomSelect
-                    id="gender"
-                    measurement="gender"
-                    value={values.gender}
-                    onChange={handleChange('gender')}
+                    id="weight_unit"
+                    measurement="weight"
+                    value={values.weight_unit}
+                    onChange={handleChange('weight_unit')}
                   />
                 </div>
 
@@ -235,15 +187,35 @@ const USCustomarySystemBfc = () => {
           {answer === true &&
             <div className="text-center mb-3">
               <Typography variant="subtitle1">
-                BFC: {Result.bfc}
+                Du Bois: {Result.duBoisFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                Mosteller: {Result.mostellerFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                Haycock: {Result.haycockFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                Gehan and George: {Result.gehanAndGeorgeFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                Boyd: {Result.boydFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                Fujimoto: {Result.fujimotoFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                Takahira: {Result.takahiraFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                Schlich: {Result.schlichFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
               </Typography>
             </div>
           }
         </ResultTabsContainer>
       </AddLayout>
-
     </>
   )
 }
 
-export default USCustomarySystemBfc
+export default BodyMassFormulaCalculator

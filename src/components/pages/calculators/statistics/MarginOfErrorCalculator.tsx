@@ -36,7 +36,6 @@ const MarginOfErrorCalculator = (props: any) => {
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.marginOfError}
-        sm={6}
       >
         <Formik
           initialValues={initialFormValues}
@@ -120,7 +119,7 @@ const MarginOfErrorCalculator = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.marginOfError}>
+      <ResultTabsContainer tabTitle={'Result'} latex={LATEX.marginOfError}>
         {answer === true &&
           <div className="text-center mb-3 text-wrap">
             <Typography variant="subtitle1">

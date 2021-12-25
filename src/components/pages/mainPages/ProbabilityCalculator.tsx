@@ -1,8 +1,9 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Typography, Box, Grid, Paper } from '@material-ui/core'
-import Anime, { anime } from 'react-animejs-wrapper'
+import { Typography, Box, Grid, Paper } from '@mui/material'
 import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import { NavBar2 } from '../../navbar/navbar2'
 import AddLayout from '../../layouts/AddLayout'
@@ -29,7 +30,6 @@ import {
   StyledTabs,
   TabPanel
 } from '../../custom'
-import { ProbabilityOfASeriesOfIndpendentEvents, ProbablityOfTwoEvents, ProbablitySolverForTwoEvents } from "../index";
 
 function a11yProps(index: any) {
   return {
@@ -41,6 +41,19 @@ function a11yProps(index: any) {
 const Latex = require('react-latex');
 
 function ProbabilityCalculator() {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const {
     tabRoot,
@@ -117,43 +130,29 @@ function ProbabilityCalculator() {
     setTabValue(newValue);
   };
 
-  // Animation
-  const [value, setValue] = React.useState<any>()
-  const formAnimationRef = React.useRef(null)
-  const resultAnimationRef = React.useRef(null)
-  // @ts-ignore: Object is possibly 'null'.
-  const playForm = () => formAnimationRef.current.play(null);
-  // @ts-ignore: Object is possibly 'null'.
-  const playResult = () => resultAnimationRef.current.play(null);
-
-  /* React.useEffect(() => {
-    playForm()
-    playResult()
-  }, []); */
-
-  const formProps = useSpring({
-    to: { opacity: 1 }, from: { opacity: 0 }
-  })
-  const resultProps = useSpring({
-    to: { opacity: 1 }, from: { opacity: 0 }
-  })
-
   return (
     <>
       <NavBar2 pagename="Probability Calculator" />
       <AddLayout>
         <Grid item xs={12} className='d-flex flex-row justify-content-center'>
           <button onClick={() => {
-            playForm();
-            playResult();
-            console.log("FORM: ", playForm, "RESULT: ", resultAnimationRef)
+            formApi.start({
+              transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+            });
+            resultApi.start({
+              transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+            })
           }}>
             Animate
           </button>
         </Grid>
 
 
-        <animated.div style={formProps}>
+        <animated.div style={formAnimation}>
           <Box className={formDisplay2} >
             <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
               <StyledTab
@@ -232,10 +231,17 @@ function ProbabilityCalculator() {
                       setAnswer(success)
                     }
                     if (success === true) {
-                      playForm()
-                      playResult()
+                      formApi.start({
+                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                      });
+                      resultApi.start({
+                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                      })
                     }
-                    console.log("VALUE: ", value)
                   } catch (err) {
                     console.log('====>', err)
                   }
@@ -345,6 +351,18 @@ function ProbabilityCalculator() {
                     if (success === true) {
                       setAnswer(success)
                     }
+                    if (success === true) {
+                      formApi.start({
+                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                      });
+                      resultApi.start({
+                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                      })
+                    }
                   } catch (err) {
                     console.log('====>', err)
                   }
@@ -445,6 +463,18 @@ function ProbabilityCalculator() {
                     }
                     if (success === true) {
                       setAnswer(success)
+                    }
+                    if (success === true) {
+                      formApi.start({
+                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                      });
+                      resultApi.start({
+                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                      })
                     }
                   } catch (err) {
                     console.log('====>', err)
@@ -559,114 +589,114 @@ function ProbabilityCalculator() {
           </Box>
         </animated.div>
 
-        <animated.div style={resultProps}>
-          <ResultTabsContainer
-            tabTitle={'Result'}
-          >
-            {answer === true &&
-              <Box className="text-wrap">
-                {tabValue === 0 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Typography variant="subtitle1">
-                      Probability of A occuring N times: {Result1.probabilityOfAOccuringNTimes}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A not occuring: {Result1.probabilityOfANotOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A occuring: {Result1.probabilityOfAOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B occuring N times: {Result1.probabilityOfBOccuringNTimes}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B not occuring: {Result1.probabilityOfBNotOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B occuring: {Result1.probabilityOfBOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A occuring N times and B occuring N times: {Result1.probabilityOfAOccuringNTimesAndBOccuringNTimes}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of neither A nor B occuring: {Result1.probabilityOfNeitherAnorBOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of both A and B occuring: {Result1.probabilityOfBothAandBOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A occuring N times but not B: {Result1.probabilityOfAOccuringNTimesButNotB}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B occuring N times but not A: {Result1.probabilityOfBOccuringNTimesButNotA}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A occuring but not B: {Result1.probabilityOfAOccuringButNotB}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B occuring but not A: {Result1.probabilityOfBOccuringButNotA}
-                    </Typography>
-                  </Box>
-                }
 
-                {tabValue === 1 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Typography variant="subtitle1">
-                      Probability of A not occurring: {Result2.prodabilityOfANotOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B not occurring: {Result2.prodabilityOfBNotOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of both A and B occurring: {Result2.probabilityOfBothAandBOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability that A or B or both occurs: {Result2.probabilityThatAorBorBothOccurs}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability that A or B but not both occurs: {Result2.probabilityThatAorBButNotBothOccurs}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of neither A nor B occurring: {Result2.probabilityOfNeitherAnorBOccuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A occurring but not B: {Result2.probabilityOfAOccuringButNotB}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B occurring but not A: {Result2.probabilityOfBOccuringButNotA}
-                    </Typography>
-                  </Box>
-                }
+        <ResultTabsContainer
+          tabTitle={'Result'}
+          animation={resultAnimation}
+        >
+          {answer === true &&
+            <Box className="text-wrap">
+              {tabValue === 0 &&
+                <Box sx={{ color: COLORS.text }}>
+                  <Typography variant="subtitle1">
+                    Probability of A occuring N times: {Result1.probabilityOfAOccuringNTimes}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of A not occuring: {Result1.probabilityOfANotOccuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of A occuring: {Result1.probabilityOfAOccuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of B occuring N times: {Result1.probabilityOfBOccuringNTimes}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of B not occuring: {Result1.probabilityOfBNotOccuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of B occuring: {Result1.probabilityOfBOccuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of A occuring N times and B occuring N times: {Result1.probabilityOfAOccuringNTimesAndBOccuringNTimes}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of neither A nor B occuring: {Result1.probabilityOfNeitherAnorBOccuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of both A and B occuring: {Result1.probabilityOfBothAandBOccuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of A occuring N times but not B: {Result1.probabilityOfAOccuringNTimesButNotB}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of B occuring N times but not A: {Result1.probabilityOfBOccuringNTimesButNotA}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of A occuring but not B: {Result1.probabilityOfAOccuringButNotB}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of B occuring but not A: {Result1.probabilityOfBOccuringButNotA}
+                  </Typography>
+                </Box>
+              }
 
-                {tabValue === 2 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Typography variant="subtitle1">
-                      Probability of A: {Result3.probability_of_a}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B: {Result3.probability_of_b}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability that A or B both occur: {Result3.probability_that_a_or_b_or_both_occur}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability that A or B occurs but not both: {Result3.probability_that_a_or_b_occurs_but_not_both}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of A not occurring: {Result3.probability_of_a_not_occuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of B not occurring: {Result3.probability_of_b_not_occuring}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Probability of neither A nor B occurring: {Result3.probability_of_neither_a_nor_b_occuring}
-                    </Typography>
-                  </Box>
-                }
-              </Box>
-            }
-          </ResultTabsContainer>
-        </animated.div>
+              {tabValue === 1 &&
+                <Box sx={{ color: COLORS.text }}>
+                  <Typography variant="subtitle1">
+                    Probability of A not occurring: {Result2.prodabilityOfANotOccuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of B not occurring: {Result2.prodabilityOfBNotOccuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of both A and B occurring: {Result2.probabilityOfBothAandBOccuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability that A or B or both occurs: {Result2.probabilityThatAorBorBothOccurs}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability that A or B but not both occurs: {Result2.probabilityThatAorBButNotBothOccurs}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of neither A nor B occurring: {Result2.probabilityOfNeitherAnorBOccuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of A occurring but not B: {Result2.probabilityOfAOccuringButNotB}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of B occurring but not A: {Result2.probabilityOfBOccuringButNotA}
+                  </Typography>
+                </Box>
+              }
+
+              {tabValue === 2 &&
+                <Box sx={{ color: COLORS.text }}>
+                  <Typography variant="subtitle1">
+                    Probability of A: {Result3.probability_of_a}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of B: {Result3.probability_of_b}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability that A or B both occur: {Result3.probability_that_a_or_b_or_both_occur}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability that A or B occurs but not both: {Result3.probability_that_a_or_b_occurs_but_not_both}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of A not occurring: {Result3.probability_of_a_not_occuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of B not occurring: {Result3.probability_of_b_not_occuring}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Probability of neither A nor B occurring: {Result3.probability_of_neither_a_nor_b_occuring}
+                  </Typography>
+                </Box>
+              }
+            </Box>
+          }
+        </ResultTabsContainer>
       </AddLayout>
     </>
   )

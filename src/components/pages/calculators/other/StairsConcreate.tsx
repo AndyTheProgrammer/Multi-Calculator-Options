@@ -1,6 +1,9 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
+import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import { StairsConcreateI } from '../../../../types'
 import { calculateOthers } from '../../../../services/AppCalculatorsApi'
@@ -22,6 +25,20 @@ import {
 
 const StairsConcreate = (props: any) => {
   const { openDrop } = props
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     run: '',
@@ -44,7 +61,7 @@ const StairsConcreate = (props: any) => {
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.stairsConcrete}
-        sm={6}
+        animation={formAnimation}
         dropDown={true}
         openDrop={openDrop}
       >
@@ -75,7 +92,7 @@ const StairsConcreate = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: stairsConcreteMethod } = await calculateOthers(payload)
+              const { success, payload: stairsConcreteMethod } = await calculateOthers(payload)
               console.log('=====>', stairsConcreteMethod)
               const { concreteNeeded, unit, run, rise, width, platform_depth, steps
               } = stairsConcreteMethod
@@ -83,6 +100,19 @@ const StairsConcreate = (props: any) => {
                 setResult({
                   concreteNeeded: concreteNeeded,
                   unit: unit
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
                 })
               }
             } catch (err) {
@@ -190,12 +220,14 @@ const StairsConcreate = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Amount of concrete needed: {Result.concreteNeeded}{Result.unit}
-          </Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">
+              Amount of concrete needed: {Result.concreteNeeded}{Result.unit}
+            </Typography>
+          </div>
+        }
       </ResultTabsContainer>
     </>
   )

@@ -1,15 +1,8 @@
 import React from 'react'
-import { Box, Grid } from '@material-ui/core'
 
 import { NavBar2 } from '../../navbar/navbar2'
 import AddLayout from '../../layouts/AddLayout'
 import { SimpleDialog } from "../../content";
-import {
-  CALCULATORS,
-  LABELS,
-  PLACEHOLDERS,
-  INPUT_TYPE,
-} from '../../../common/shared'
 import {
   CircleArea,
   EllipseArea,

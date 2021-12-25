@@ -21,13 +21,19 @@ import {
 } from '../../../custom'
 
 const BodyMassIndexMethodTwo = () => {
-  const [initialFormValues] = React.useState({
+  const [methodTwoInitialValues] = React.useState({
     height: '',
     height_unit: '',
     weight: '',
     weight_unit: ''
   })
-  const [Result, setResult] = React.useState({
+  const [methodTwoResult, setMethodTwoResult] = React.useState({
+    weightInlbs: 0,
+    heightToIn: 0,
+    bmi: 0,
+    unit: ''
+  })
+  const [methodTwoResult2, setMethodTwoResult2] = React.useState({
     weightInlbs: 0,
     heightToIn: 0,
     bmi: 0,
@@ -37,9 +43,9 @@ const BodyMassIndexMethodTwo = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.bodyMassIndexMethodTwo} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.bodyMassIndexMethodTwo}>
         <Formik
-          initialValues={initialFormValues}
+          initialValues={methodTwoInitialValues}
           onSubmit={async ({
             height,
             height_unit,
@@ -59,7 +65,7 @@ const BodyMassIndexMethodTwo = () => {
               console.log('=====>', bodyMassTwo)
               if (typeof bodyMassTwo === 'object') {
                 const { bmi, unit, heightToIn, weightInlbs } = bodyMassTwo
-                setResult({
+                setMethodTwoResult({
                   bmi: bmi,
                   heightToIn: heightToIn,
                   weightInlbs: weightInlbs,
@@ -124,11 +130,11 @@ const BodyMassIndexMethodTwo = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'} >
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">BMI:{Result.bmi}{Result.unit} </Typography>
-          <Typography variant="subtitle1">Height:{Result.heightToIn} </Typography>
-          <Typography variant="subtitle1">Weight:{Result.weightInlbs} </Typography>
+          <Typography variant="subtitle1">
+            BMI:{methodTwoResult.bmi}{methodTwoResult.unit}<sup>2</sup>
+          </Typography>
         </div>
       </ResultTabsContainer>
     </>

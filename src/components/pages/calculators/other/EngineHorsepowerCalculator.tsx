@@ -1,15 +1,15 @@
 import React from 'react'
-import { Formik } from 'formik'
 import { Typography, Box, Grid, Paper } from '@mui/material'
+import { Formik } from 'formik'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { NavBar2 } from '../../navbar/navbar2'
-import AddLayout from '../../layouts/AddLayout'
-import useStyles from '../../../styling/CustomStyles'
-import { calculateStatistics } from '../../../services/AppCalculatorsApi'
-import { MarginErrorI, SampleSizeI } from '../../../types'
+import { NavBar2 } from '../../../navbar/navbar2'
+import AddLayout from '../../../layouts/AddLayout'
+import { ElapsedTimeMethodI, TrapSpeedMethodI } from '../../../../types'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import useStyles from '../../../../styling/CustomStyles'
 import {
   CALCULATORS,
   LABELS,
@@ -17,17 +17,19 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
-} from '../../../common/shared'
+} from '../../../../common/shared'
 import {
   CustomTextInput,
   CustomBtn,
   CustomResetBtn,
   Label,
+  FormTabsContainer,
   ResultTabsContainer,
   StyledTab,
   StyledTabs,
-  TabPanel
-} from '../../custom'
+  TabPanel,
+  CustomSelect,
+} from '../../../custom'
 
 function a11yProps(index: any) {
   return {
@@ -38,7 +40,7 @@ function a11yProps(index: any) {
 
 const Latex = require('react-latex');
 
-function SampleSizeCalculator(props: any) {
+function EngineHorsepowerCalculator() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -52,79 +54,59 @@ function SampleSizeCalculator(props: any) {
     alignItems: 'center',
     justifyContent: 'center',
   }));
-  const [answer, setAnswer] = React.useState<boolean>(false);
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [tabValue, setTabValue] = React.useState(0);
+  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const {
     formDisplay,
-    formDisplay2
-  }: any = useStyles()
-  const [sampleSizeInitialValues] = React.useState({
-    confidence_level: '',
-    population_proportion: '',
-    margin_of_error: ''
-  })
-  const [Result1, setResult1] = React.useState({
-    sampleSize: 0,
-  })
+  }: any = useStyles();
 
-  // ProbablityOfTwoEvents
-  const [marginOfErrorInitialValues] = React.useState({
-    confidence_level: '',
-    sample_size: '',
-    population_proportion: ''
-  })
-  const [Result2, setResult2] = React.useState({
-    marginOfError: 0,
-  })
+  const [trapSpeedInitialValues] = React.useState({
+    weight: "",
+    weight_unit: "",
+    speed: "",
+    speed_unit: "",
+  });
 
-  // Tab value change
+  const [elapsedTimeInitialValues] = React.useState({
+    weight: "",
+    weight_unit: "",
+    time: "",
+    time_unit: "",
+  });
+
+  const [trapSpeedResult, setTrapSpeedResult] = React.useState({
+    horsePower: 0,
+    weight: 0,
+    speed: 0,
+    unit: '',
+  });
+
+  const [elapsedTimeResult, setElapsedTimeResult] = React.useState({
+    weight: 0,
+    time: 0,
+    horsePower: 0,
+  });
+
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setTabValue(newValue);
   };
 
-  React.useEffect(() => {
-
-    return () => {
-    };
-  }, [])
-
   return (
     <>
-      <NavBar2 pagename="Sample Size Calculator" />
+      <NavBar2 pagename="Engine Horsepower Calculator" />
       <AddLayout>
-        <Grid xs={12} sm={12}>
-          <button
-            style={{ alignItems: 'center', justifyContent: 'center' }}
-            onClick={() => {
-              formApi.start({
-                transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-              });
-              resultApi.start({
-                transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-              })
-            }}>
-            Animate
-          </button>
-          <Typography>{`theme.breakpoints.up('sm') matches: ${matches}`}</Typography>
-        </Grid>
-
-        <animated.div
-          style={formAnimation}
-        >
-          <Box className={formDisplay2} >
+        <animated.div style={formAnimation}>
+          <Box className={formDisplay} >
             <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
               <StyledTab
                 wrapped
-                label={CALCULATORS.sampleSize}
+                label={CALCULATORS.elapsedTimeMethod}
                 {...a11yProps(0)}
               />
               <StyledTab
                 wrapped
-                label={CALCULATORS.marginOfError}
+                label={CALCULATORS.trapSpeedMethod}
                 {...a11yProps(1)}
               />
             </StyledTabs>
@@ -134,26 +116,34 @@ function SampleSizeCalculator(props: any) {
               index={0}
             >
               <Formik
-                initialValues={sampleSizeInitialValues}
+                initialValues={elapsedTimeInitialValues}
                 onSubmit={async ({
-                  confidence_level,
-                  population_proportion,
-                  margin_of_error
+                  weight,
+                  weight_unit,
+                  time,
+                  time_unit,
                 }, { setSubmitting, resetForm }) => {
-                  const payload: SampleSizeI = {
-                    confidence_level,
-                    population_proportion,
-                    margin_of_error,
-                    method: 'FindOutTheSampleSize'
+                  const payload: ElapsedTimeMethodI = {
+                    weight,
+                    weight_unit,
+                    time,
+                    time_unit,
+                    method: 'TheElapsedTimeMethod'
                   }
                   console.log(JSON.stringify(payload))
                   try {
-                    const { success, payload: circularSlabOrTubeConcrete } = await calculateStatistics(payload)
-                    console.log('=====>', circularSlabOrTubeConcrete)
-                    const { size } = circularSlabOrTubeConcrete
-                    if (typeof circularSlabOrTubeConcrete === 'object') {
-                      setResult1({
-                        sampleSize: size,
+                    const { success, payload: elapsedTimeMethod } = await calculateOthers(payload)
+                    console.log('=====>', elapsedTimeMethod)
+                    const {
+                      weight,
+                      time,
+                      horsePower,
+                    } = elapsedTimeMethod
+                    if (typeof elapsedTimeMethod === 'object') {
+                      setElapsedTimeResult({
+                        weight: weight,
+                        time: time,
+                        horsePower: horsePower
                       })
                     }
                     if (success === true) {
@@ -176,37 +166,39 @@ function SampleSizeCalculator(props: any) {
               >
                 {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                   <form onSubmit={handleSubmit} className="form-container">
-
                     <div className="form-row">
-                      <Label title={LABELS.confidenceLevel} />
+                      <Label title={LABELS.weight} />
                       <CustomTextInput
                         type={INPUT_TYPE.number}
-                        id="confidence_level"
+                        id="weight"
                         placeholder={PLACEHOLDERS.number}
-                        value={values.confidence_level}
+                        value={values.weight}
                         onChange={handleChange}
+                      />
+
+                      <CustomSelect
+                        id="weight_unit"
+                        measurement="weight"
+                        value={values.weight_unit}
+                        onChange={handleChange('weight_unit')}
                       />
                     </div>
 
                     <div className="form-row">
-                      <Label title={LABELS.populationProportion} />
+                      <Label title={LABELS.time} />
                       <CustomTextInput
                         type={INPUT_TYPE.number}
-                        id="population_proportion"
+                        id="time"
                         placeholder={PLACEHOLDERS.number}
-                        value={values.population_proportion}
+                        value={values.time}
                         onChange={handleChange}
                       />
-                    </div>
 
-                    <div className="form-row">
-                      <Label title={LABELS.marginOfError} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="margin_of_error"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.margin_of_error}
-                        onChange={handleChange}
+                      <CustomSelect
+                        id="time_unit"
+                        measurement="time"
+                        value={values.time_unit}
+                        onChange={handleChange('time_unit')}
                       />
                     </div>
 
@@ -229,32 +221,40 @@ function SampleSizeCalculator(props: any) {
               index={1}
             >
               <Formik
-                initialValues={marginOfErrorInitialValues}
+                initialValues={trapSpeedInitialValues}
                 onSubmit={async ({
-                  confidence_level,
-                  sample_size,
-                  population_proportion
+                  weight,
+                  weight_unit,
+                  speed,
+                  speed_unit,
                 }, { setSubmitting }) => {
-                  const payload: MarginErrorI = {
-                    confidence_level,
-                    sample_size,
-                    population_proportion,
-                    method: 'FindOuttheMarginofError'
+                  const payload: TrapSpeedMethodI = {
+                    weight,
+                    weight_unit,
+                    speed,
+                    speed_unit,
+                    method: 'TheTrapSpeedMethod'
                   }
                   console.log(JSON.stringify(payload))
                   try {
-                    const { success, payload: marginOfErrorCalculator } = await calculateStatistics(payload)
-                    console.log('=====>', marginOfErrorCalculator)
-                    const { margin_of_error } = marginOfErrorCalculator
-                    if (typeof marginOfErrorCalculator === 'object') {
-                      setResult2({
-                        marginOfError: margin_of_error,
+                    const { success, payload: trapSpeedMethod } = await calculateOthers(payload)
+                    console.log('=====>', trapSpeedMethod)
+                    const {
+                      horsePower,
+                      unit,
+                      weight,
+                      speed,
+                    } = trapSpeedMethod
+                    if (typeof trapSpeedMethod === 'object') {
+                      setTrapSpeedResult({
+                        horsePower: horsePower,
+                        weight: weight,
+                        speed: speed,
+                        unit: unit
                       })
                     }
                     if (success === true) {
                       setAnswer(success)
-                    }
-                    if (success === true) {
                       formApi.start({
                         transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
                         alignItems: 'center',
@@ -274,35 +274,38 @@ function SampleSizeCalculator(props: any) {
                 {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                   <form onSubmit={handleSubmit} className="form-container">
                     <div className="form-row">
-                      <Label title={LABELS.confidenceLevel} />
+                      <Label title={LABELS.weight} />
                       <CustomTextInput
                         type={INPUT_TYPE.number}
-                        id="confidence_level"
+                        id="weight"
                         placeholder={PLACEHOLDERS.number}
-                        value={values.confidence_level}
+                        value={values.weight}
                         onChange={handleChange}
+                      />
+
+                      <CustomSelect
+                        id="weight_unit"
+                        measurement="weight"
+                        value={values.weight_unit}
+                        onChange={handleChange('weight_unit')}
                       />
                     </div>
 
                     <div className="form-row">
-                      <Label title={LABELS.populationProportion} />
+                      <Label title={LABELS.speed} />
                       <CustomTextInput
                         type={INPUT_TYPE.number}
-                        id="population_proportion"
+                        id="speed"
                         placeholder={PLACEHOLDERS.number}
-                        value={values.population_proportion}
+                        value={values.speed}
                         onChange={handleChange}
                       />
-                    </div>
 
-                    <div className="form-row">
-                      <Label title={LABELS.sampleSize} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="sample_size"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.sample_size}
-                        onChange={handleChange}
+                      <CustomSelect
+                        id="speed_unit"
+                        measurement="speed"
+                        value={values.speed_unit}
+                        onChange={handleChange('speed_unit')}
                       />
                     </div>
 
@@ -317,12 +320,12 @@ function SampleSizeCalculator(props: any) {
                     </div>
                   </form>
                 )}
-
               </Formik>
             </TabPanel>
 
           </Box>
         </animated.div>
+
 
         <ResultTabsContainer
           tabTitle={'Result'}
@@ -332,26 +335,27 @@ function SampleSizeCalculator(props: any) {
             <Box className="text-wrap">
               {tabValue === 0 &&
                 <Box sx={{ color: COLORS.text }}>
-                  <Latex displayMode={true}>{LATEX.sampleSizeCalc}</Latex>
-                  Sample size: {Result1.sampleSize}
+                  <Latex displayMode={true}>{LATEX.elapsedTimeMethod}</Latex>
+                  <Typography variant="subtitle1">
+                    Engine Horsepower: {elapsedTimeResult.horsePower}
+                  </Typography>
                 </Box>
               }
 
               {tabValue === 1 &&
                 <Box sx={{ color: COLORS.text }}>
+                  <Latex displayMode={true}>{LATEX.trapSpeed}</Latex>
                   <Typography variant="subtitle1">
-                    <Latex displayMode={true}>{LATEX.marginOfError}</Latex>
-                    Margin of error: {Result2.marginOfError}
+                    Engine Horsepower: {trapSpeedResult.horsePower}{trapSpeedResult.unit}
                   </Typography>
                 </Box>
               }
             </Box>
           }
-
         </ResultTabsContainer>
       </AddLayout>
     </>
   )
 }
 
-export default SampleSizeCalculator
+export default EngineHorsepowerCalculator

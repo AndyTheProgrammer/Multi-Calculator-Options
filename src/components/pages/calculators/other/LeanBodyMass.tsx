@@ -1,6 +1,9 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
+import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import { LeanBodyMassI } from '../../../../types'
 import { calculateOthers } from '../../../../services/AppCalculatorsApi'
@@ -21,6 +24,20 @@ import {
 } from '../../../custom'
 
 const LeanBodyMass = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
@@ -38,7 +55,7 @@ const LeanBodyMass = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.leanBodyMass} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.leanBodyMass} animation={formAnimation}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -142,7 +159,7 @@ const LeanBodyMass = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">
             Boer formular: {Result.BoerFormular}
