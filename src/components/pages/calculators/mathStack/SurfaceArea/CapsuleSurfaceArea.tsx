@@ -1,6 +1,9 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Typography } from '@material-ui/core'
+import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import { CapsuleSurfaceAreaI } from '../../../../../types'
 import { calculateMath } from '../../../../../services/AppCalculatorsApi'
@@ -23,6 +26,19 @@ import {
 
 const CapsuleSurfaceArea = (props: any) => {
   const { openDrop } = props;
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
   const [answer, setAnswer] = React.useState<boolean>(false);
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true);
   const [initialFormValues] = React.useState({
@@ -52,7 +68,7 @@ const CapsuleSurfaceArea = (props: any) => {
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.capsuleSurfArea}
-        sm={6}
+        animation={formAnimation}
         dropDown={true}
         openDrop={openDrop}
       >
@@ -109,6 +125,14 @@ const CapsuleSurfaceArea = (props: any) => {
               }
               if (success === true) {
                 setAnswer(success)
+              }
+              if (success === true) {
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)', alignItems: 'center', justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)', alignItems: 'center', justifyContent: 'flex-end',
+                })
               }
             } catch (err) {
               console.log('====>', err)
@@ -171,6 +195,7 @@ const CapsuleSurfaceArea = (props: any) => {
       <ResultTabsContainer
         tabTitle={'Result'}
         latex={LATEX.capsuleSurfArea}
+        animation={resultAnimation}
       >
         {answer === true &&
           <div>

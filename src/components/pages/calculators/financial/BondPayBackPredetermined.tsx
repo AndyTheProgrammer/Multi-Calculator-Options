@@ -23,13 +23,13 @@ import {
 
 const BondPayBackPredetermined = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [initialFormValues] = React.useState({
+  const [bondInitialValues] = React.useState({
     interest_rate: "",
     predetermined_amount: "",
     number_of_months: "",
     number_of_years: "",
   })
-  const [Result, setResult] = React.useState({
+  const [bondResult, setBondResult] = React.useState({
     monthlyRepayments: 0,
     totalAmountRepayable: 0,
     currency: ''
@@ -44,9 +44,9 @@ const BondPayBackPredetermined = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.bondPayBackPredetermined} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.bondPayBackPredetermined} >
         <Formik
-          initialValues={initialFormValues}
+          initialValues={bondInitialValues}
           onSubmit={async ({
             interest_rate,
             predetermined_amount,
@@ -66,7 +66,7 @@ const BondPayBackPredetermined = () => {
               console.log('=====>', bondPaybackWithPredeterminedAmount)
               const { monthlyRepayments, totalAmountRepayable, currency } = bondPaybackWithPredeterminedAmount
               if (typeof bondPaybackWithPredeterminedAmount === 'object') {
-                setResult({
+                setBondResult({
                   monthlyRepayments: monthlyRepayments,
                   totalAmountRepayable: totalAmountRepayable,
                   currency: currency
@@ -141,14 +141,14 @@ const BondPayBackPredetermined = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'}>
         {answer === true &&
           <div className="text-center mb-3">
             <Typography variant="subtitle1">
-              Your monthly repayments: {Result.currency}{Result.monthlyRepayments}
+              Your monthly repayments: {bondResult.currency}{bondResult.monthlyRepayments}
             </Typography>
             <Typography variant="subtitle1">
-              Total amount repayments: {Result.currency}{Result.totalAmountRepayable}
+              Total amount repayments: {bondResult.currency}{bondResult.totalAmountRepayable}
             </Typography>
           </div>
         }

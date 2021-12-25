@@ -1,6 +1,9 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
+import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import { RectangularTankVolumeI } from '../../../../../types'
 import { calculateMath } from '../../../../../services/AppCalculatorsApi'
@@ -23,6 +26,19 @@ import {
 
 const RectangularTankVolume = (props: any) => {
   const { openDrop } = props
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     length: "",
@@ -46,7 +62,7 @@ const RectangularTankVolume = (props: any) => {
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.rectangularTankVol}
-        sm={6}
+        animation={formAnimation}
         dropDown={true}
         openDrop={openDrop}
       >
@@ -96,6 +112,16 @@ const RectangularTankVolume = (props: any) => {
               }
               if (success === true) {
                 setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                })
               }
             } catch (err) {
               console.log('====>', err)
@@ -173,7 +199,11 @@ const RectangularTankVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.rectangularTankVolume}>
+      <ResultTabsContainer
+        tabTitle={'Result'}
+        animation={resultAnimation}
+        latex={LATEX.rectangularTankVolume}
+      >
         {answer === true &&
           <div>
             {selectedResult === true &&

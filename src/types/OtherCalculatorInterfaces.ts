@@ -246,7 +246,7 @@ export interface DuBoisBodySurfaceAreaI {
 }
 
 //note: endpoint spelt with all I assume it should be whole
-export interface WholeBodyMassFormulaI {
+export interface BodySurfaceAreaI {
   height: string;
   height_unit: string;
   weight: string;
@@ -372,7 +372,7 @@ export type AllOtherCalculators =
   | PeroidCalculatorI
   | DueDateMittendorfWilliamI
   | DuBoisBodySurfaceAreaI
-  | WholeBodyMassFormulaI
+  | BodySurfaceAreaI
   | MostellerBodySurfaceAreaI
   | HaycockBodySurfaceAreaI
   | GehanAndGeorgeSurfaceAreaI

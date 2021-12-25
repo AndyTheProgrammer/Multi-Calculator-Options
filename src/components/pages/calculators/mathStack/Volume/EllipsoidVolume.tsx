@@ -1,6 +1,9 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
+import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import { EllipsoidVolumeCalculatorI } from '../../../../../types'
 import { calculateMath } from '../../../../../services/AppCalculatorsApi'
@@ -23,6 +26,19 @@ import {
 
 const EllipsoidVolume = (props: any) => {
   const { openDrop } = props
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     axis1: "",
@@ -47,7 +63,7 @@ const EllipsoidVolume = (props: any) => {
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.ellipsoidVol}
-        sm={6}
+        animation={formAnimation}
         dropDown={true}
         openDrop={openDrop}
       >
@@ -98,6 +114,16 @@ const EllipsoidVolume = (props: any) => {
               }
               if (success === true) {
                 setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                })
               }
             } catch (err) {
               console.log('====>', err)
@@ -175,7 +201,11 @@ const EllipsoidVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} sm={6} latex={LATEX.ellipsoidVolume}>
+      <ResultTabsContainer
+        tabTitle={'Result'}
+        animation={resultAnimation}
+        latex={LATEX.ellipsoidVolume}
+      >
         {answer === true &&
           <div>
             {selectedResult === true &&

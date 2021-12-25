@@ -1,6 +1,9 @@
 import React from 'react'
 import { Formik } from 'formik'
 import { Typography } from '@material-ui/core'
+import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import { CylindricalTankAreaI } from '../../../../../types'
 import { calculateMath } from '../../../../../services/AppCalculatorsApi'
@@ -25,6 +28,19 @@ const Latex = require('react-latex');
 
 const CylindricalTankSurfArea = (props: any) => {
   const { openDrop } = props
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
@@ -54,7 +70,7 @@ const CylindricalTankSurfArea = (props: any) => {
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.cylindricalTankSurfArea}
-        sm={6}
+        animation={formAnimation}
         dropDown={true}
         openDrop={openDrop}
       >
@@ -113,6 +129,12 @@ const CylindricalTankSurfArea = (props: any) => {
               }
               if (success === true) {
                 setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)', alignItems: 'center', justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)', alignItems: 'center', justifyContent: 'flex-end',
+                })
               }
             } catch (err) {
               console.log('====>', err)
@@ -172,7 +194,7 @@ const CylindricalTankSurfArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
         {answer === true &&
           <div>
             {selectedResult ? (

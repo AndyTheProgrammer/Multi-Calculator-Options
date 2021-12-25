@@ -37,7 +37,6 @@ const SampleSizeCalculator = (props: any) => {
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.sampleSize}
-        sm={6}
         dropDown={true}
         openDrop={openDrop}
       >
@@ -121,11 +120,8 @@ const SampleSizeCalculator = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'} >
         <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            n = z^2 x p̂(1- p̂) / ε^2
-          </Typography>
           <Typography variant="subtitle1">
             Sample size: {Result.sampleSize}{Result.unit}
           </Typography>

@@ -272,7 +272,7 @@ const mathRoutes = {
         {
           name: "Slope (Gradent) Calculator",
           path: `${mathUrl}/slopecalculator`,
-          component: PC.SlopeCalculatorForTwoKnownPoints
+          component: PC.SlopeCalculator
         },
         {
           name: "Area Calculator",
@@ -287,7 +287,7 @@ const mathRoutes = {
         {
           name: "Circle Calculator",
           path: `${mathUrl}/circlecalculator`,
-          component: PC.CircleArea
+          component: PC.NoComponent
         },
         {
           name: "Surface Area Calculator",
@@ -631,7 +631,7 @@ const financialRoutes =
       sub_calculator: [
         {
           name: "Sales Calculator",
-          path: `${financialUrl}/calculator`,
+          path: `${financialUrl}/salescalculator`,
           component: PC.NoComponent
         },
         {
@@ -660,6 +660,31 @@ const financialRoutes =
           component: PC.NoComponent
         }
       ]
+    },
+    {
+      name: "Other Calculators",
+      sub_calculator: [
+        {
+          name: "Loan Calculator",
+          path: `${financialUrl}/loancalculator`,
+          component: PC.LoanCalculator
+        },
+        {
+          name: "Payment Calculator",
+          path: `${financialUrl}/paymentcalculator`,
+          component: PC.NoComponent
+        },
+        {
+          name: "Currency Calculator",
+          path: `${financialUrl}/currencycalculator`,
+          component: PC.NoComponent
+        },
+        {
+          name: "Inflation Calculator",
+          path: `${financialUrl}/inflationcalculator`,
+          component: PC.NoComponent
+        },
+      ]
     }
 
   ]
@@ -676,7 +701,7 @@ const othersRoutes = {
         {
           name: "Body Mass Index (BMI) Calculator",
           path: `${othersUrl}/bodymassindex`,
-          component: PC.BodyMassIndex
+          component: PC.BodyMassIndexCalculator
         },
         {
           name: "Calorie Calculator",
@@ -691,12 +716,12 @@ const othersRoutes = {
         {
           name: "Basal Metabolic Rate (BMR) Calculator",
           path: `${othersUrl}/calculator`,
-          component: PC.NoComponent
+          component: PC.BMRCalculator
         },
         {
           name: "Lean Body Mass Calculator",
           path: `${othersUrl}/leanbodymasscalculator`,
-          component: PC.LeanBodyMass
+          component: PC.LeanBodyMassCalculator
         },
         {
           name: "Ideal Body Weight Calculator",
@@ -711,7 +736,7 @@ const othersRoutes = {
         {
           name: "Pregnancy Due Date Calculator",
           path: `${othersUrl}/pregnancyduedatecalculator`,
-          component: PC.NoComponent
+          component: PC.DueDateCalculator
         },
         {
           name: "Pregnancy Weight Gain Calculator",
@@ -756,7 +781,7 @@ const othersRoutes = {
         {
           name: "Body Surface Area Calculator",
           path: `${othersUrl}/bodysurfaceareacalculator`,
-          component: PC.NoComponent
+          component: PC.BodySurfaceAreaCalculator
         },
         {
           name: "Blood Alcohol Content (BAC) Calculator",
@@ -817,7 +842,7 @@ const othersRoutes = {
         {
           name: "Bandwidth Calculator",
           path: `${othersUrl}/calculator`,
-          component: PC.NoComponent
+          component: PC.WebsiteBandwidth
         },
         {
           name: "Random Password Generator Calculator",
@@ -850,9 +875,14 @@ const othersRoutes = {
           component: PC.NoComponent
         },
         {
-          name: "Horsepower Calc + Engine Horsepower Calculator",
-          path: `${othersUrl}/enginehorsepowercalculator`,
+          name: "Horsepower Calculator",
+          path: `${othersUrl}/horsepowercalculator`,
           component: PC.HorsepowerCalculation
+        },
+        {
+          name: "Engine Horsepower Calculator",
+          path: `${othersUrl}/enginehorsepowercalculator`,
+          component: PC.EngineHorsepowerCalculator
         }
       ]
     },

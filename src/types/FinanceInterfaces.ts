@@ -29,7 +29,7 @@ export interface AmortizedLoanFixedAmountI {
   method: string;
 }
 
-export interface DefearedPaymentsLumpsumAtMaturityI {
+export interface DeferredPaymentsLumpsumAtMaturityI {
   interest_rate: string;
   loan_amount: string;
   number_of_years: string;
@@ -92,7 +92,7 @@ export type AllFinancialCalculators =
   | MortgagePayoffWithLoanTermI
   | MortgagePayOffWithoutLoanTermI
   | AmortizedLoanFixedAmountI
-  | DefearedPaymentsLumpsumAtMaturityI
+  | DeferredPaymentsLumpsumAtMaturityI
   | BondPayBackPredeterminedI
   | PresentValueI
   | PresentValueOfPeriodicalDepositI

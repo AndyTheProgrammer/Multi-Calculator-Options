@@ -1,6 +1,9 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
+import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import { TakahiraBodySurfaceAreaI } from '../../../../types'
 import { calculateOthers } from '../../../../services/AppCalculatorsApi'
@@ -21,6 +24,20 @@ import {
 } from '../../../custom'
 
 const TakahiraBodySurfaceArea = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     height: '',
@@ -36,7 +53,7 @@ const TakahiraBodySurfaceArea = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.takahiraBodySurfaceArea} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.takahiraBodySurfaceArea} animation={formAnimation}>
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -54,13 +71,26 @@ const TakahiraBodySurfaceArea = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: MifflinHarris } = await calculateOthers(payload)
+              const { success, payload: MifflinHarris } = await calculateOthers(payload)
               console.log('=====>', MifflinHarris)
               if (typeof MifflinHarris === 'object') {
                 const { bsa, unit } = MifflinHarris
                 setResult({
                   bodySurfaceArea: bsa,
                   unit: unit
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
                 })
               }
             } catch (err) {
@@ -121,12 +151,14 @@ const TakahiraBodySurfaceArea = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Body surface area: {Result.bodySurfaceArea}{Result.unit}
-          </Typography>
-        </div>
+      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+        {answer === true &&
+          <div className="text-center mb-3">
+            <Typography variant="subtitle1">
+              Body surface area: {Result.bodySurfaceArea}{Result.unit}
+            </Typography>
+          </div>
+        }
       </ResultTabsContainer>
     </>
   )

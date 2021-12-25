@@ -1,7 +1,9 @@
 import React from 'react'
-import { Typography, Grid } from '@material-ui/core'
+import { Typography, Grid } from '@mui/material'
 import { Formik } from 'formik'
-import Anime from 'react-animejs-wrapper'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import { useSpring, animated } from 'react-spring'
 
 import { CircleAreaI } from '../../../../../types'
 import { calculateMath } from '../../../../../services/AppCalculatorsApi'
@@ -26,6 +28,19 @@ const Latex = require('react-latex');
 
 const CircleArea = (props: any) => {
   const { openDrop } = props
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
@@ -44,9 +59,9 @@ const CircleArea = (props: any) => {
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.circleArea}
-        sm={6}
         dropDown={true}
         openDrop={openDrop}
+        animation={formAnimation}
       >
         <Formik
           initialValues={initialFormValues}
@@ -124,6 +139,7 @@ const CircleArea = (props: any) => {
       <ResultTabsContainer
         tabTitle={"Result"}
         latex={LATEX.cirleArea}
+        animation={resultAnimation}
       >
         {answer === true &&
           <div className="text-wrap">

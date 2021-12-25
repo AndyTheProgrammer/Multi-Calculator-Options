@@ -15,11 +15,13 @@ const Latex = require('react-latex');
 
 interface ResultsProps {
   children?: React.ReactNode;
-  tabTitle: string;
+  tabTitle: String;
+  latex?: String;
+  animation?: {};
 }
 
-const ResultTabsContainer = (props: any) => {
-  const { children, tabTitle, latex } = props;
+const ResultTabsContainer = (props: ResultsProps) => {
+  const { children, tabTitle, latex, animation } = props;
   const {
     tabRoot,
     rightTabContainer,
@@ -30,31 +32,33 @@ const ResultTabsContainer = (props: any) => {
   } = useStyles()
 
   return (
-    <div className={formDisplay}>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Box sx={{ height: 40, width: '100%' }}>
-          <Box
-            sx={{
-              color: '#4072B5',
-              fontWeight: 'bold',
-              textAlign: 'center',
-            }}><FontProvider fonts={[{ font: 'Varela Round' }]}>
-              <Typography>
-                <Font>{tabTitle}</Font>
-              </Typography>
-            </FontProvider>
+    <animated.div style={animation}>
+      <div className={formResult}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ height: 40, width: '100%' }}>
+            <Box
+              sx={{
+                color: '#4072B5',
+                fontWeight: 'bold',
+                textAlign: 'center',
+              }}><FontProvider fonts={[{ font: 'Varela Round' }]}>
+                <Typography>
+                  <Font>{tabTitle}</Font>
+                </Typography>
+              </FontProvider>
+            </Box>
           </Box>
+          <Box className={rightTabContainer}></Box>
         </Box>
-        <Box className={rightTabContainer}></Box>
-      </Box>
 
-      <div>
-        <div className='overflow-auto p-3'>
-          <Latex displayMode={true}>{latex}</Latex>
-          {children}
+        <div>
+          <div className='overflow-auto p-3'>
+            <Latex displayMode={true}>{latex}</Latex>
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </animated.div>
   )
 }
 

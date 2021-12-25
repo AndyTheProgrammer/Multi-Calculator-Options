@@ -1,8 +1,13 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import { Typography } from '@mui/material'
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import { Formik } from 'formik'
+import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
+import { NavBar2 } from '../../../navbar/navbar2'
+import AddLayout from '../../../layouts/AddLayout'
 import { AmortizedLoanFixedAmountI } from '../../../../types'
 import { calculateFinances } from '../../../../services/AppCalculatorsApi'
 import useStyles from '../../../../styling/CustomStyles'
@@ -24,15 +29,30 @@ import {
 
 
 const AmortizedLoanFixedAmount = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [initialFormValues] = React.useState({
+  const [amortizedLoanInitialValues] = React.useState({
     interest_rate: "",
     present_value: "",
     number_of_months: "",
     number_of_years: "",
   })
-  const [Result, setResult] = React.useState({
-    totalRepayment: 0,
+  const [amortizedLoanResult, setAmortizedLoanResult] = React.useState({
+    paymentEveryMonth: 0,
+    totalPayments: 0,
+    totalInterest: 0,
     currency: ''
   })
   const {
@@ -60,9 +80,9 @@ const AmortizedLoanFixedAmount = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.amortizedLoanFixedAmount} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.amortizedLoan} animation={formAnimation}>
         <Formik
-          initialValues={initialFormValues}
+          initialValues={amortizedLoanInitialValues}
           onSubmit={async ({
             interest_rate,
             present_value,
@@ -82,13 +102,25 @@ const AmortizedLoanFixedAmount = () => {
               console.log('=====>', amortizedLoanWithFixedAmount)
               const { totalRepayment, currency } = amortizedLoanWithFixedAmount
               if (typeof amortizedLoanWithFixedAmount === 'object') {
-                setResult({
-                  totalRepayment: totalRepayment,
+                setAmortizedLoanResult({
+                  paymentEveryMonth: 0,
+                  totalPayments: 0,
+                  totalInterest: 0,
                   currency: currency
                 })
               }
               if (success === true) {
                 setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                })
               }
             } catch (err) {
               console.log('====>', err)
@@ -156,11 +188,17 @@ const AmortizedLoanFixedAmount = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
         {answer === true &&
           <div className="text-center mb-3">
             <Typography variant="subtitle1">
-              Total Repayment: {Result.currency}{Result.totalRepayment}
+              Payment Every Month: {amortizedLoanResult.currency}{amortizedLoanResult.paymentEveryMonth}
+            </Typography>
+            <Typography variant="subtitle1">
+              Payments Total: {amortizedLoanResult.currency}{amortizedLoanResult.totalPayments}
+            </Typography>
+            <Typography variant="subtitle1">
+              Total Interest: {amortizedLoanResult.currency}{amortizedLoanResult.totalInterest}
             </Typography>
           </div>
         }

@@ -36,7 +36,7 @@ const MortgagePayOffWithoutLoanTerm = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.mortgagePayOffWithoutLoanTerm} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.mortgagePayOffWithoutLoanTerm} >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -120,7 +120,7 @@ const MortgagePayOffWithoutLoanTerm = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'} >
         {answer === true &&
           <div className="text-center mb-3">
             <Typography variant="subtitle1">

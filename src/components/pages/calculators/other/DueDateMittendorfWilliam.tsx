@@ -1,6 +1,9 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
+import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import { DueDateMittendorfWilliamI } from '../../../../types'
 import { calculateOthers } from '../../../../services/AppCalculatorsApi'
@@ -19,7 +22,22 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const DueDateMittendorfWilliam = () => {
+const DueDateMittendorfWilliam = (props: any) => {
+  const { openDrop } = props
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+  const [formAnimation, formApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [resultAnimation, resultApi] = useSpring(() => ({
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+  const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     first_date_of_last_period: '',
     type: ''
@@ -31,7 +49,12 @@ const DueDateMittendorfWilliam = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.dueDateMittendorfWilliam} sm={6}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.dueDateMittendorfWilliam}
+        animation={formAnimation}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -97,7 +120,7 @@ const DueDateMittendorfWilliam = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
         <div className="text-center mb-3">
           <Typography variant="subtitle1">Due Date: {Result.dueDate} </Typography>
         </div>

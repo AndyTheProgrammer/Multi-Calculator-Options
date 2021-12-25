@@ -2,7 +2,7 @@ import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 
-import { DefearedPaymentsLumpsumAtMaturityI } from '../../../../types'
+import { DeferredPaymentsLumpsumAtMaturityI } from '../../../../types'
 import { calculateFinances } from '../../../../services/AppCalculatorsApi'
 import useStyles from '../../../../styling/CustomStyles'
 import {
@@ -20,16 +20,16 @@ import {
   ResultTabsContainer
 } from '../../../custom'
 
-const DefearedPaymentsLumpsumAtMaturity = () => {
+const DeferredPaymentsLumpsumAtMaturity = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
-  const [initialFormValues] = React.useState({
+  const [deferredInitialValues] = React.useState({
     interest_rate: "",
     loan_amount: "",
     number_of_months: "",
     number_of_years: "",
   })
-  const [Result, setResult] = React.useState({
+  const [deferredResult, setDeferredResult] = React.useState({
     amountDueAtLoanMaturity: 0,
     totalInterest: 0,
     currency: ''
@@ -44,16 +44,16 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.defearedPaymentsLumpsumAtMaturity} sm={6}>
+      <FormTabsContainer tabTitle1={CALCULATORS.deferredPaymentsLoan}>
         <Formik
-          initialValues={initialFormValues}
+          initialValues={deferredInitialValues}
           onSubmit={async ({
             interest_rate,
             loan_amount,
             number_of_months,
             number_of_years,
           }, { setSubmitting }) => {
-            const payload: DefearedPaymentsLumpsumAtMaturityI = {
+            const payload: DeferredPaymentsLumpsumAtMaturityI = {
               interest_rate,
               loan_amount,
               number_of_months,
@@ -66,7 +66,7 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
               console.log('=====>', deferedPaymentLumpsumAtMaturity)
               const { amountDueAtLoanMaturity, totalInterest, currency } = deferedPaymentLumpsumAtMaturity
               if (typeof deferedPaymentLumpsumAtMaturity === 'object') {
-                setResult({
+                setDeferredResult({
                   amountDueAtLoanMaturity: amountDueAtLoanMaturity,
                   totalInterest: totalInterest,
                   currency: currency
@@ -74,6 +74,7 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
               }
               if (success === true) {
                 setAnswer(success)
+
               }
             } catch (err) {
               console.log('====>', err)
@@ -142,14 +143,14 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle1={'Result'} sm={6}>
+      <ResultTabsContainer tabTitle={'Result'}>
         {answer === true &&
           <div className="text-center mb-3">
             <Typography variant="subtitle1">
-              Amount due at loan maturity: {Result.currency}{Result.amountDueAtLoanMaturity}
+              Amount due at loan maturity: {deferredResult.currency}{deferredResult.amountDueAtLoanMaturity}
             </Typography>
             <Typography variant="subtitle1">
-              Total interest: {Result.currency}{Result.totalInterest}
+              Total interest: {deferredResult.currency}{deferredResult.totalInterest}
             </Typography>
           </div>
         }
@@ -159,4 +160,4 @@ const DefearedPaymentsLumpsumAtMaturity = () => {
   )
 }
 
-export default DefearedPaymentsLumpsumAtMaturity
+export default DeferredPaymentsLumpsumAtMaturity

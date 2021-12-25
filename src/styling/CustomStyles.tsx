@@ -114,6 +114,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   formDisplay: {
     // width: 400,
     height: '100%',
+    zIndex: 2,
     borderRadius: '20px !important',
     backgroundColor: theme.palette.background.paper,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
@@ -121,7 +122,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     margin: theme.spacing(2),
   },
   formResult: {
-    width: '90%',
+    maxWidth: 400,
+    //  zIndex: -1,
     height: '100%',
     borderRadius: '20px !important',
     backgroundColor: theme.palette.background.paper,
@@ -131,7 +133,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   formDisplay2: {
     //opacity: 0.8,
-    //  width: 'calc(500px * 1vw)',
+    zIndex: 2,
+    maxWidth: 500,
     height: '100%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
