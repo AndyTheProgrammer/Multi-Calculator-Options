@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import CloseIcon from '@mui/icons-material/Close';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const classNames = require('classnames');
 
@@ -68,6 +69,23 @@ function NavBar2(props:any){
 
                                     </Box>: null
                                 }
+                                <Button
+                                onClick={
+                                    ()=>{
+                                        history.push(props.backroute)
+                                    }
+                                } 
+                                sx={{
+                                    // color: '#353FB0',
+                                    display:{
+                                        lg: 'none',
+                                        md: 'none',
+                                        sm: 'block',
+                                        xs: 'block'
+                                    }
+                                }}>
+                                    <ArrowBackIcon/>
+                                </Button>
                                 <Box>
                                     <Link sx={{
                                             color: "white",
