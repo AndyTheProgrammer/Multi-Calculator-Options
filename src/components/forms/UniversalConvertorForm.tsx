@@ -19,19 +19,22 @@ const Latex = require('react-latex');
 
 function UniversalConverterForm(props:any){
     // using the useState ehook
-    const [optionsData, setData] = useState([]); //for getting units
+    const [optionsData, setData] = useState<any[]>([])//for getting units
 
     //using the useEffect hook
-    useEffect(() => {
-        const fetchData = async () => {
+    // useEffect(() => {
+    //     const fetchData = async () => {
 
-          //fetches defined units for converter
-          const result = await props.unitsFunnction()
-          // setData(prevRes => ([...prevRes, ...result]))
-          setData(result)
-        };
-        fetchData();
-    }, [])
+    //      if(optionsData){
+    //         console.log("If data options is empty")
+    //         //fetches defined units for converter
+    //         const result = await props.unitsFunnction()
+    //         // setData(prevRes => ([...prevRes, ...result]))
+    //         setData(result)
+    //      }
+    //     };
+    //     fetchData();
+    // }, [])
 
     const CustomFormikOptions = (props:any) => ( 
       <Box sx={{
@@ -49,8 +52,9 @@ function UniversalConverterForm(props:any){
           color:'black' 
         }}
         {...props} >
+          <option value=""></option>
           {optionsData.map((data, i) => (
-              <option key={data} >{
+              <option value={data} >{
                   data
               }</option>
           ))}
@@ -95,6 +99,17 @@ function UniversalConverterForm(props:any){
     useEffect(()=>{
         const mediaQuery = window.matchMedia('(min-width: 1000px)');
         setMediaQueryValue(mediaQuery.matches);
+
+        const fetchData = async () => {
+          if(!optionsData.length){
+            console.log("If data options is empty")
+            //fetches defined units for converter
+            const result = await props.unitsFunnction()
+            // setData(prevRes => ([...prevRes, ...result]))
+            setData(result)
+          }
+        };
+        fetchData();
         
         if (mediaQuery.matches) {
             if(value.length){
@@ -104,7 +119,8 @@ function UniversalConverterForm(props:any){
             }
           } 
           
-    },[value])
+          
+    })
 
 
 
@@ -131,7 +147,7 @@ function UniversalConverterForm(props:any){
                         <Box sx={{ ...formCardStyle }}></Box>
                     </Box>
                   <Formik
-                    initialValues={{ value: '1', fromUnit: "", toUnit: "" }}
+                    initialValues={{ value: '', fromUnit: "", toUnit: "" }}
                     onSubmit={(values, actions) => {
                         const data = {
                           value: values.value,
@@ -139,11 +155,13 @@ function UniversalConverterForm(props:any){
                           to_unit: values.toUnit,
                           method: props.convertMethod
                         }
-                       const postData = async () => {
+                        console.log(data)
+                        const postData = async () => {
                         
                         const dataReturned = await props.convertFunction(data);
                         var status:any = dataReturned.statusDescription;
                         if(status === "success"){
+                          console.log(dataReturned.message.convertionValue)
                           setValue([dataReturned.message.convertionValue])
                           
                         }
