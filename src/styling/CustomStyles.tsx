@@ -83,6 +83,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     wordBreak: 'break-word'
   },
   leftTabContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
     backgroundColor: theme.palette.background.paper,
     color: COLORS.text,
     width: "100%",
