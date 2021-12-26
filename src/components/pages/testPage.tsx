@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom'
 
 // 
 import FindMyIPAddress from  '../TemperalComponentsFolder/other/FindMyIPAddress'
-import ArithmeticSequenceCalculator from  '../TemperalComponentsFolder/math/ArithmeticSequenceCalculator'
+import AreaConverter from  '../TemperalComponentsFolder/other/AreaConverter'
 
 import MarginOfErrorCalculator from '../pages/calculators/statistics/MarginOfErrorCalculator'
 
@@ -42,7 +42,7 @@ import ExponentForm from '../forms/math/ExponentForm'
 export default function TestPage(){
     return(
         <>
-          <ArithmeticSequenceCalculator/>
+          <AreaConverter/>
         </>
     );
 }

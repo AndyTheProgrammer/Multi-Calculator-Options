@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import CloseIcon from '@mui/icons-material/Close';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const classNames = require('classnames');
 
@@ -57,17 +58,41 @@ function NavBar2(props:any){
                             position="static">
 
                             <Box sx={{ display: 'flex', m: 1 }}>
+                            <Button
+                                onClick={
+                                    ()=>{
+                                        history.push(props.backroute)
+                                    }
+                                } 
+                                sx={{
+                                    // color: '#353FB0',
+                                    display:{
+                                        lg: 'none',
+                                        md: 'none',
+                                        sm: 'block',
+                                        xs: 'block'
+                                    }
+                                }}>
+                                    <ArrowBackIcon/>
+                                </Button>
                                 {
                                     (props.pageimage)?
                                     <Box
                                     sx={{
                                         height: 40,
+                                        display:{
+                                            ld: 'block',
+                                            md: 'block',
+                                            sm: 'none',
+                                            xs: 'none'
+                                        } 
                                         
                                     }}>
                                     <img style={{ width: '100%', height: '100%'}} alt="icon" src={props.pageimage} />
 
                                     </Box>: null
                                 }
+                                
                                 <Box>
                                     <Link sx={{
                                             color: "white",

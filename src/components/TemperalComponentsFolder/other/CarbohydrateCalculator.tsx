@@ -10,13 +10,12 @@
  import Anime from 'react-animejs-wrapper'
  import AddLayout from '../../layouts/AddLayout'
  import { Box, Grid } from '@mui/material'
- import { CustomFormBtn } from '../../custom/CustomFormBtn'
  import { NavBar2 } from '../../navbar/navbar2'
  import { CustomFormikForm } from '../../forms/CustomForm'
  import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
- 
+ import TextCard from '../../utilityComponents/TextCard'
+ import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
  const Latex = require('react-latex');
- 
 
 
 const HeightUnit = (props:any) => ( 
@@ -83,6 +82,7 @@ const WeightUnit = (props:any) => (
          <>
          <NavBar2 pagename="Carbohydrate Calculator" />
          <AddLayout>
+             <Box>
              <Box sx={{ display: "flex", justifyContent: "center" }}>
              <Anime
                  style={{
@@ -299,6 +299,7 @@ const WeightUnit = (props:any) => (
                      </Box>
                  </Box>
              </Anime>
+             </Box>
              </Box>
          </AddLayout>
          </>

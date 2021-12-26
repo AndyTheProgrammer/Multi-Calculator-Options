@@ -9,3 +9,9 @@ export const mobileText = {
     borderWidth: '1px',
     borderColor: '#dbdbdb'
 }
+
+export const errorText = {
+    color: 'red',
+    paddingLeft: 2,
+    fontSize: 12
+}

@@ -65,7 +65,7 @@ export default function AddLayout({ children }: any) {
                     </Box>
                 </Box>
             </Box>
-            <ResponsiveSlider />
+            {/* <ResponsiveSlider /> */}
         </>
     )
 }

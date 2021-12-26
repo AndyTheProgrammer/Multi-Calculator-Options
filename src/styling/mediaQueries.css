@@ -1,3 +1,5 @@
+ /* styling for sliders */
+
 .animated-box{
     width: 400px;
     height: 100%;
@@ -13,6 +15,33 @@
 
 .test-display{
     display: block;
+}
+
+.toggle-box-primary{
+    display: none;
+}
+
+.toggle-box-secondary{
+    display: none;
+}
+
+.d1-before-animation{
+    position: absolute;
+}
+
+.d1-after-animation{
+    position: absolute;
+}
+
+.d2-before-animation{
+    position: absolute;
+}
+
+.d2-after-animation{
+    position: absolute;
+    position: absolute;
+    left: 250px;
+    transition: left 0.25s;
 }
 
 @media screen and (max-width: 1200px){
@@ -32,13 +61,37 @@
         justify-content: center;
     }
 
-    .animated-box{
+    .d1-before-animation{
+        border: 1px solid red;
+        position: absolute;
         width: 400px;
-        height: 100%;
+        max-height: 700px;
         border-radius: 20px;
         box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
         background-color: white;
         padding-bottom: 2;
+        z-index: 10;
+    }
+
+    .d2-before-animation{
+        border: 1px solid blue;
+        position: absolute;
+        max-height: 700px;
+        width: 400px;
+        height: 300px;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px 0px rgba(0, 0, 0, 0.2);
+        background-color: white;
+        padding-bottom: 2;
+    }
+
+    .toggle-box-primary{
+        display: block;
+        border: 5px solid red;
+    }
+
+    .toggle-box-secondary{
+        display: none;
     }
 }
 
@@ -55,6 +108,14 @@
 
     .animated-margin{
         margin-bottom: 25px;
+    }
+
+    .toggle-box-primary{
+        display: none;
+    }
+
+    .toggle-box-secondary{
+        display: block;
     }
 }
 

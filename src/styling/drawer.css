@@ -9,22 +9,29 @@
 .drawer-button{
     color: #8591B0;
     font-weight: 24px;
-    border-bottom: 1px solid rgb(187, 187, 187);
-    padding-top: 30px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 50px;
+    padding-top: 10px;
+    padding-left: 5px;
     padding-bottom: 10px;
     font-weight: 500;
     padding-left: 10px;
     font-size: 18px;
+    margin-bottom: 10px;
 }
 
 .drawer-button:hover{
     color: #ffffff;
     font-weight: 24px;
-    border-bottom: 1px solid rgb(187, 187, 187);
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 50px;
     padding-top: 10px;
+    padding-left: 5px;
     padding-bottom: 10px;
-    font-weight: bold;
+    font-weight: 500;
     padding-left: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
     background-image: linear-gradient(to right,#3128af, #499fb8);
 }
 
@@ -44,6 +51,8 @@
     }
     
     .drawer-open{
+        padding-left: 5px;
+        padding-right: 5px;
         display: block;
         border: 0px solid red;
         top: 0;
@@ -73,6 +82,8 @@
     }
     
     .drawer-open{
+        padding-left: 5px;
+        padding-right: 5px;
         display: block;
         border: 0px solid red;
         top: 0;
