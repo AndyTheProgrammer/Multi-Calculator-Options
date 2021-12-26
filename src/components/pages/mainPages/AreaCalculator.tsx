@@ -16,20 +16,20 @@ import {
 function AreaCalculator() {
   const [open, setOpen] = React.useState(false);
   // state that changes using the dropdown
-  const [selectedCalc, setSelectedCalc] = React.useState("marginOfError");
+  const [selectedCalc, setSelectedCalc] = React.useState("Circle Area");
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = (value: any) => {
-    setOpen(false);
+    setOpen(false)
     if (value) {
-      setSelectedCalc(value);
+      setSelectedCalc(value)
 
       // find calcName that matches the selected calc
-      const getCalc = calculators.find(({ calcName }) => calcName === value);
-      setCurrentCalc(getCalc!);
+      const getCalc = calculators.find(({ calcName }) => calcName === value)
+      setCurrentCalc(getCalc!)
     }
   };
 

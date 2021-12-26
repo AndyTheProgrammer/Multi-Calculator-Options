@@ -113,6 +113,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   formDisplay: {
     // width: 400,
+    maxWidth: 400,
     height: '100%',
     zIndex: 2,
     borderRadius: '20px !important',
