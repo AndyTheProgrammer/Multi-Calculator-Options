@@ -2,6 +2,8 @@ import React, { FC } from 'react'
 import Anime from 'react-animejs-wrapper'
 import { Grid, Paper, Box, Typography } from '@mui/material';
 import { useSpring, animated } from 'react-spring'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
@@ -21,6 +23,8 @@ interface ResultsProps {
 }
 
 const ResultTabsContainer = (props: ResultsProps) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const { children, tabTitle, latex, animation } = props;
   const {
     tabRoot,
@@ -33,7 +37,10 @@ const ResultTabsContainer = (props: ResultsProps) => {
 
   return (
     <animated.div style={animation}>
-      <div className={formResult}>
+      <div
+        className={formResult}
+        style={{ minWidth: matches ? 250 : 400 }} // width
+      >
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Box sx={{ height: 40, width: '100%' }}>
             <Box

@@ -127,6 +127,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   formResult: {
     maxWidth: 400,
+    // minWidth: 300,
+    // position: 'absolute',
     //  zIndex: -1,
     height: '100%',
     borderRadius: '20px !important',

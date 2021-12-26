@@ -13,7 +13,7 @@ function StaticTab(props: any) {
       <Box className={className} p={0.9}>
         <div>
           <FontProvider fonts={[{ font: 'Varela Round' }]}>
-            <Typography variant="subtitle2" style={{ fontSize: 12 }}>
+            <Typography variant="subtitle2">
               <Font>{label}</Font>
             </Typography>
           </FontProvider>
@@ -22,7 +22,7 @@ function StaticTab(props: any) {
 
         <div>
           {dropDown === true &&
-            <IconButton size='small' style={{ height: 20, width: 20 }} onClick={openDrop}>
+            <IconButton onClick={openDrop}>
               <ExpandMore />
             </IconButton>
           }

@@ -1,11 +1,14 @@
 import React from 'react'
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Dialog from "@mui/material/Dialog";
 
 import { Font, FontProvider } from "../../font";
+import { COLORS } from "../../../common/shared";
 
 function SimpleDialog(props: any) {
   const { onClose, selectedValue, open, dropOptions } = props;
@@ -25,6 +28,7 @@ function SimpleDialog(props: any) {
       open={open}
       fullWidth
       maxWidth='xs'
+
     >
       <FontProvider fonts={[{ font: "Raleway" }]}>
         <Font>
@@ -32,7 +36,7 @@ function SimpleDialog(props: any) {
             Select Calculator
           </DialogTitle>
         </Font>
-        <List>
+        <List sx={{ color: COLORS.text }} className='text-center'>
           {dropOptions.map((item: any) => (
             <ListItem
               button
