@@ -8,12 +8,13 @@ import { Box, Grid, Typography } from '@mui/material'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+import { errorText }  from '../../../styling/textStyle'
 
 const Latex = require('react-latex');
 
- interface Errors{
+interface Errors{
     first_value: string,
-    second_value: string,
+    second_value: string
  }
  
 
@@ -125,6 +126,20 @@ export default function BinaryCalculator(){
                                 operation:"Subtraction",
                                 method: "BinaryCalculator"
                             }}
+                            validate={
+                                (values)=>{
+                                    const errors = {} as Errors
+                                    if(!values.first_value){
+                                        errors.first_value = 'Required'
+                                    }
+                                   
+                                    if(!values.second_value){
+                                        errors.second_value = 'Required'
+                                    }
+                                   
+                                    return errors
+                                }
+                            }
                             onSubmit = {(values)=>{
                                
                                 const data = {
@@ -155,36 +170,48 @@ export default function BinaryCalculator(){
                                 
                             {(props: FormikProps<any>) => (
                                 <Form>
-                                    <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
+                                    <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                                            <Grid item={true} xs={5} >
+                                            <Grid item={true} xs={6} >
                                                 <Box sx={{ ...labelStyle }}>First number</Box>
                                             </Grid>
-                                            <Grid item={true} xs={7}>
-                                            <Field
-                                                    type="text"
-                                                    name="first_value"
-                                                    component={CustomFormikForm}
-                                                />
+                                            <Grid item={true} xs={6}>
+                                                <Field
+                                                        type="text"
+                                                        name="first_value"
+                                                        component={CustomFormikForm}
+                                                    />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{props.errors.first_value}</Box>
+                                                </Typography>
                                             </Grid>
 
-                                            <Grid item={true} xs={5} >
+                                            <Grid item={true} xs={6} >
                                                 <Box sx={{ ...labelStyle }}>Second number</Box>
                                             </Grid>
-                                            <Grid item={true} xs={7}>
-                                            <Field
-                                                    type="text"
-                                                    name="second_value"
-                                                    component={CustomFormikForm}
-                                                />
+                                            <Grid item={true} xs={6}>
+                                                <Field
+                                                        type="text"
+                                                        name="second_value"
+                                                        component={CustomFormikForm}
+                                                    />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{props.errors.second_value}</Box>
+                                                </Typography>
                                             </Grid>
 
-                                            <Grid item={true} xs={5} >
+                                            <Grid item={true} xs={6} >
                                                 <Box sx={{ ...labelStyle }}>Operation</Box>
                                             </Grid>
 
-                                            <Grid item={true} xs={7}>
+                                            <Grid item={true} xs={6}>
                                             <Field
                                                     as={BinaryOperators}
                                                     name="operation"
@@ -243,8 +270,9 @@ export default function BinaryCalculator(){
                     }}>
                     {
                         (value.length)?
-                        <Box 
-                            sx={{ maxWidth: 450, minHeight: 200, paddingBottom: 1 }}
+                        <Box sx={{ display:'flex', justifyContent: 'center' }}>
+                            <Box 
+                            sx={{ maxWidth: 400, minHeight: 200, paddingBottom: 1 }}
                             className="animated-box" >
                             <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                 <Box sx={{height:25, width: '100%' }}>
@@ -261,7 +289,7 @@ export default function BinaryCalculator(){
                             </Box>
                             <Box sx={{marginLeft: 5}}>
                                 <Grid container>
-                                    <Grid item xs={8}>
+                                    <Grid item xs={9}>
                                     <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Box
                                                 sx={{
@@ -282,7 +310,7 @@ export default function BinaryCalculator(){
                                             </Box>
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={4}>
+                                    <Grid item xs={3}>
                                         <Typography>
                                             <Box sx={{
                                                 paddingTop: 1,
@@ -293,7 +321,7 @@ export default function BinaryCalculator(){
                                             </Box>
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={8}>
+                                    <Grid item xs={9}>
                                         <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Box
                                                 sx={{
@@ -314,7 +342,7 @@ export default function BinaryCalculator(){
                                             </Box>
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={4}>
+                                    <Grid item xs={3}>
                                         <Typography>
                                             <Box sx={{
                                                 paddingTop: 1,
@@ -325,7 +353,7 @@ export default function BinaryCalculator(){
                                             </Box>
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={8}>
+                                    <Grid item xs={9}>
                                         <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Box
                                                 sx={{
@@ -346,7 +374,7 @@ export default function BinaryCalculator(){
                                             </Box>
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={4}>
+                                    <Grid item xs={3}>
                                         <Typography>
                                             <Box sx={{
                                                 paddingTop: 1,
@@ -357,7 +385,7 @@ export default function BinaryCalculator(){
                                             </Box>
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={8}>
+                                    <Grid item xs={9}>
                                         <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Box
                                                 sx={{
@@ -377,7 +405,7 @@ export default function BinaryCalculator(){
                                             </Box>
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={4}>
+                                    <Grid item xs={3}>
                                         <Typography>
                                             <Box sx={{
                                                 paddingTop: 1,
@@ -391,6 +419,8 @@ export default function BinaryCalculator(){
                                   
                                 </Grid>
                             </Box>
+                        </Box>
+
                         </Box>
                         :<Box></Box>
                     }

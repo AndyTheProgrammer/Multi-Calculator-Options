@@ -79,7 +79,7 @@ const mathRoutes = {
         //   component: TestPage
         // },
         {
-          name: "FractionsCalculator",
+          name: "Fractions Calculator",
           path: `${mathUrl}/fractifdgfdgonscalculator`,
           component: TPC.FractionCalculator
         },
@@ -88,11 +88,11 @@ const mathRoutes = {
           path: `${mathUrl}/simplifyfractionscalculator`,
           component: TPC.SimplifyFractionsCalculator
         },
-        {
-          name: "Mixed Numbers Calculator",
-          path: `${mathUrl}/mixednumberscalculator`,
-          component: PC.NoComponent
-        },
+        // {
+        //   name: "Mixed Numbers Calculator",
+        //   path: `${mathUrl}/mixednumberscalculator`,
+        //   component: PC.NoComponent
+        // },
         {
           name: "Decimal to Fraction Calculator",
           path: `${mathUrl}/decimaltofractioncalculator`,

@@ -14,6 +14,7 @@ import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
 import { errorText }  from '../../../styling/textStyle'
+
 const Latex = require('react-latex');
 
  interface Errors{
@@ -86,8 +87,8 @@ export default function ArithmeticSequenceCalculator(){
                         duration: 250
                     }}>
                     <Box 
-                    sx={{ maxWidth: 450,paddingBottom: 1 }}
-                    className="animated-box" >
+                        sx={{ maxWidth: 450,paddingBottom: 1 }}
+                        className="animated-box" >
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                             <Box sx={{height:25, width: '100%' }}>
                                 <Typography>
@@ -277,7 +278,9 @@ export default function ArithmeticSequenceCalculator(){
                     }}>
                      {
                          (value)?
-                         <Box className="animated-box" >
+                         <Box 
+                            sx={{ maxWidth:400,paddingBottom: 1 }}
+                            className="animated-box" >
                             <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                 <Box sx={{height:25, width: '100%' }}>
                                     <Typography>

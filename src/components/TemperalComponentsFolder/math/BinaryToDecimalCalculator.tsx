@@ -9,7 +9,13 @@ import { NavBar2 } from '../../navbar/navbar2'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
 import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
+import { errorText }  from '../../../styling/textStyle'
 const Latex = require('react-latex');
+
+interface Errors{
+    value: string
+}
+ 
 
 export default function BinaryToDecimalCalculator(){
     const [value, setValue] = useState<any[]>([])
@@ -92,6 +98,17 @@ export default function BinaryToDecimalCalculator(){
                                 value:"",
                                 method: "BinaryToDecimalCalculator"
                             }}
+
+                            validate={
+                                (values)=>{
+                                    const errors = {} as Errors
+                                    if(!values.value){
+                                        errors.value = 'Required'
+                                    }
+                                   
+                                    return errors
+                                }
+                            }
                             onSubmit = {(values)=>{
                                 const data = {
                                     value: values.value,
@@ -111,6 +128,7 @@ export default function BinaryToDecimalCalculator(){
                             }}>
                                 
                             {({
+                                errors,
                                 values,
                                 handleChange,
                                 handleSubmit,
@@ -119,7 +137,20 @@ export default function BinaryToDecimalCalculator(){
                                 <form onSubmit={handleSubmit}>
                                     <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-
+                                            <Grid xs={12}>
+                                                <Typography>    
+                                                    <Box
+                                                    sx={{
+                                                            fontWeight: 100,
+                                                            fontStyle: 'italic',
+                                                            fontSize: 14,
+                                                            color: '#b0b0b0'
+                                                        }}>
+                                                        {/* <Latex displayMode={false}>{`$decimal = d_{0}\\times{}2^0 + d_{1}\\times{}2^1 + d_{2}\\times{}2^2$`}</Latex> */}
+                                                    </Box>
+                                                    
+                                                </Typography>
+                                            </Grid>
                                             <Grid item={true} xs={5} >
                                                 <Box sx={{...labelStyle}}>Binary number</Box>
                                             </Grid>
@@ -131,6 +162,12 @@ export default function BinaryToDecimalCalculator(){
                                                     value={values.value}
                                                     placeholder=""
                                                 />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{errors.value}</Box>
+                                                </Typography>
                                             </Grid>
                                                             
                                         </Grid>
@@ -191,7 +228,7 @@ export default function BinaryToDecimalCalculator(){
                     {
                         (value.length)?
                         <Box 
-                            sx={{ maxWidth: 450,paddingBottom: 1 }}
+                            sx={{ maxWidth: 400,paddingBottom: 1 }}
                             className="animated-box" >
                             <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                 <Box sx={{height:25, width: '100%' }}>
@@ -206,12 +243,12 @@ export default function BinaryToDecimalCalculator(){
                                 </Box>
                                 <Box sx={{ ...formCardStyle }}></Box>
                             </Box>
-                            <Box sx={{marginLeft: 5}}>
-                                {/* <Typography>
-                                    <Box>
-                                        <Latex displayMode={false}>{`$decimal = d_{0}\\times{}2^0$`}</Latex>
+                            <Box sx={{marginTop: 2, marginLeft: 2}}>
+                                <Typography>
+                                    <Box sx={{ fontSize: 14, color: '#b0b0b0' }}>
+                                         <Latex displayMode={false}>{`$Formula = d_{0}\\times{}2^0 + d_{1}\\times{}2^1 + d_{2}\\times{}2^2$`}</Latex>
                                     </Box>
-                                </Typography> */}
+                                </Typography>
                                 <Box>
                                     <TextCard leadingtext="decimal number" trailingtext={value[0]}/>
                                 </Box>

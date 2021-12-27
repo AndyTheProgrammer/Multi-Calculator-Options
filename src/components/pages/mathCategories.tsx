@@ -26,7 +26,7 @@ function MathCategories(){
         <div>
           <Switch>
           <Route exact path={path}>
-            <NavBar2 pageimage={math_icon} pagename="Math Calculators" mathHighLight={true}/>
+            <NavBar2 pageimage={math_icon} categoryname="Math Calculators" mathHighLight={true}/>
             
             {/* Hide search bar when screen is small */}
             <Box

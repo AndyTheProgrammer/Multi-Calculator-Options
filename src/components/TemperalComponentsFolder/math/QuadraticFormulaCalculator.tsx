@@ -113,7 +113,7 @@ function QuadraticFormulaCalculator(){
                                 <Box sx={{  display:'flex', flexDirection:'column' }}>
                                     <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                                        <Grid item={true} xs={5} >
+                                        {/* <Grid item={true} xs={5} >
                                             <Box sx={{...labelStyle}}>a </Box></Grid>
                                         <Grid item={true} xs={7}>
                                             <Field
@@ -141,15 +141,13 @@ function QuadraticFormulaCalculator(){
                                                 name="c"
                                                 component={CustomFormikForm}
                                             />
-                                        </Grid>
+                                        </Grid> */}
                 
-                                        
+                                        <h1>Updating Component</h1>
                                                          
                                     </Grid>
                                     <Box sx={{ flexGrow: 1}}>
-                                        {/* 
-                                            Flex box pushes submit button down
-                                        */}
+                                      
                                     </Box>
 
                                     <Box 
@@ -203,7 +201,7 @@ function QuadraticFormulaCalculator(){
                 {
                     (value.length)?
                     <Box 
-                        sx={{ maxWidth: 450,paddingBottom: 1 }}
+                        sx={{ maxWidth: 400,paddingBottom: 1 }}
                         className="animated-box" >
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                 <Box sx={{height:25, width: '100%' }}>

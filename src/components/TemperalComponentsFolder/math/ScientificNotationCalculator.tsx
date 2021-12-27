@@ -181,7 +181,7 @@ export default function ScientificNotationCalculator(){
                     {
                         (value.length)?
                         <Box 
-                            sx={{ maxWidth: 450,paddingBottom: 1 }}
+                            sx={{ maxWidth: 400,paddingBottom: 1 }}
                             className="animated-box" >
                             <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                     <Box sx={{height:25, width: '100%' }}>

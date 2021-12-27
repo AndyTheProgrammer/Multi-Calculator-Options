@@ -9,7 +9,15 @@ import { Box, Grid, Typography } from '@mui/material'
 import TextCard from '../../utilityComponents/TextCard'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
+import { errorText }  from '../../../styling/textStyle'
 const Latex = require('react-latex');
+
+interface Errors{
+    sample_size: string,
+    sample_mean: string,
+    stardard_deviation: string,
+    confidence_level: string
+ }
 
 function ConfidenceIntervalCalculator(){
     const [value, setValue] = useState<any[]>([])
@@ -91,6 +99,40 @@ function ConfidenceIntervalCalculator(){
                                 confidence_level: "",
                                 method: "ConfidenceIntervalCalculator"
                             }}
+                            validate={
+                                (values)=>{
+                                    const errors = {} as Errors
+                                    if(!values.sample_size){
+                                        errors.sample_size = 'Required'
+                                    }
+                                    else if(!parseInt(values.sample_size)){
+                                        errors.sample_size = 'Number is required'
+                                    }
+
+                                    if(!values.sample_mean){
+                                        errors.sample_mean = 'Required'
+                                    }
+                                    else if(!parseInt(values.sample_mean)){
+                                        errors.sample_mean = 'Number is required'
+                                    }
+
+                                    if(!values.stardard_deviation){
+                                        errors.stardard_deviation = 'Required'
+                                    }
+                                    else if(!parseInt(values.stardard_deviation)){
+                                        errors.stardard_deviation = 'Number is required'
+                                    }
+
+                                    if(!values.confidence_level){
+                                        errors.confidence_level = 'Required'
+                                    }
+                                    else if(!parseInt(values.confidence_level)){
+                                        errors.confidence_level = 'Number is required'
+                                    }
+
+                                    return errors
+                                }
+                            }
                             onSubmit = {(values)=>{
                                 const data = {
                                     sample_size: values.sample_size,
@@ -120,6 +162,7 @@ function ConfidenceIntervalCalculator(){
                             }}>
                                 
                             {({
+                                errors,
                                 values,
                                 handleChange,
                                 handleSubmit,
@@ -128,7 +171,19 @@ function ConfidenceIntervalCalculator(){
                                 <form onSubmit={handleSubmit}>
                                     <Box sx={{ minHeight: 250, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-
+                                            <Grid xs={12}>
+                                                <Typography>    
+                                                    <Box
+                                                    sx={{
+                                                            fontWeight: 100,
+                                                            fontStyle: 'italic',
+                                                            fontSize: 14,
+                                                            color: '#b0b0b0'
+                                                        }}>
+                                                    </Box>
+                                                    
+                                                </Typography>
+                                            </Grid>
                                             <Grid item={true} xs={7} >
                                                 <Box sx={{ ...labelStyle }}>Sample Size</Box></Grid>
                                             <Grid item={true} xs={5}>
@@ -139,19 +194,31 @@ function ConfidenceIntervalCalculator(){
                                                     value={values.sample_size}
                                                     placeholder=""
                                                 />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{errors.sample_size}</Box>
+                                                </Typography>
                                             </Grid>
                     
                                             <Grid item xs={7}>
                                                 <Box sx={{ ...labelStyle }}>Sample Mean</Box>
                                             </Grid>
                                             <Grid item xs={5}>
-                                            <CustomForm
-                                                type="text"
-                                                name="sample_mean"
-                                                onChange={handleChange}
-                                                value={values.sample_mean}
-                                                placeholder=""
-                                            />
+                                                <CustomForm
+                                                    type="text"
+                                                    name="sample_mean"
+                                                    onChange={handleChange}
+                                                    value={values.sample_mean}
+                                                    placeholder=""
+                                                />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{errors.sample_mean}</Box>
+                                                </Typography>
                                             </Grid>
                                         
                                             <Grid item xs={7}>
@@ -167,6 +234,12 @@ function ConfidenceIntervalCalculator(){
                                                     value={values.stardard_deviation}
                                                     placeholder=""
                                                 />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{errors.stardard_deviation}</Box>
+                                                </Typography>
                                             
                                             </Grid>      
 
@@ -183,6 +256,12 @@ function ConfidenceIntervalCalculator(){
                                                     value={values.confidence_level}
                                                     placeholder=""
                                                 />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{errors.confidence_level}</Box>
+                                                </Typography>
                                             
                                             </Grid>                
                                         </Grid>
@@ -243,7 +322,7 @@ function ConfidenceIntervalCalculator(){
                     {
                         (value.length)?
                         <Box 
-                            sx={{ maxWidth: 450,paddingBottom: 1 }}
+                            sx={{ maxWidth: 400,paddingBottom: 1 }}
                             className="animated-box" >
                                 <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                     <Box sx={{height:25, width: '100%' }}>
@@ -258,19 +337,19 @@ function ConfidenceIntervalCalculator(){
                                     </Box>
                                     <Box sx={{ ...formCardStyle }}></Box>
                                 </Box>
-                            <Box sx={{marginLeft: 5}}>
-                                <Box>
-                                    <TextCard leadingtext="Standard Deviation" trailingtext={value[0]}/>
-                                </Box>
-                                <Box>
-                                    <TextCard leadingtext="Sum" trailingtext={value[1]}/>
-                                </Box>
-                                <Box>
-                                    <TextCard leadingtext="Mean" trailingtext={value[2]}/>
-                                </Box>
-                                <Box>
-                                    <TextCard leadingtext="Variance" trailingtext={value[3]}/>
-                                </Box>
+                                <Box sx={{marginLeft: 5}}>
+                                    <Box>
+                                        <TextCard leadingtext="Standard Deviation" trailingtext={value[0]}/>
+                                    </Box>
+                                    <Box>
+                                        <TextCard leadingtext="Sum" trailingtext={value[1]}/>
+                                    </Box>
+                                    <Box>
+                                        <TextCard leadingtext="Mean" trailingtext={value[2]}/>
+                                    </Box>
+                                    <Box>
+                                        <TextCard leadingtext="Variance" trailingtext={value[3]}/>
+                                    </Box>
                             </Box>
                         </Box>
                         :<Box></Box>

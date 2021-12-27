@@ -9,8 +9,13 @@ import { NavBar2 } from '../../navbar/navbar2'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
 import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
+import { errorText }  from '../../../styling/textStyle'
 const Latex = require('react-latex');
 
+interface Errors{
+    total_number: string,
+    amount_in_each_subset: string
+}
 function CombinationsCalculator(){
     const [value, setValue] = useState<any[]>([])
     const [playAnimation, setPlayAnimation] = useState(false)
@@ -61,7 +66,7 @@ function CombinationsCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Combinatins Calculator"/>
+        <NavBar2 pagename="Combinations Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
@@ -81,7 +86,7 @@ function CombinationsCalculator(){
                             <Box sx={{height:25, width: '100%' }}>
                                 <Typography>
                                     <Box sx={{fontSize: 12, paddingTop: 0.5, paddingLeft: 2, width: '100%', ...labelStyle }}>
-                                        (nCr) n choose r
+                                        Combinations Calculator
                                     </Box>
                                 </Typography>
                             </Box>
@@ -93,6 +98,26 @@ function CombinationsCalculator(){
                                 amount_in_each_subset: "",
                                 method: "CombinationsCalculator"
                             }}
+                            validate={
+                                (values)=>{
+                                    const errors = {} as Errors
+                                    if(!values.total_number){
+                                        errors.total_number = 'Required'
+                                    }
+                                    else if(!parseInt(values.total_number)){
+                                        errors.total_number = 'Number is required'
+                                    }
+
+                                    if(!values.amount_in_each_subset){
+                                        errors.amount_in_each_subset = 'Required'
+                                    }
+                                    else if(!parseInt(values.amount_in_each_subset)){
+                                        errors.amount_in_each_subset = 'Number is required'
+                                    }
+                                   
+                                    return errors
+                                }
+                            }
                             onSubmit = {(values)=>{
                                 const data = {
                                     total_number: values.total_number,
@@ -117,6 +142,7 @@ function CombinationsCalculator(){
                             }}>
                                 
                             {({
+                                errors,
                                 values,
                                 handleChange,
                                 handleSubmit,
@@ -125,7 +151,22 @@ function CombinationsCalculator(){
                                 <form onSubmit={handleSubmit}>
                                     <Box sx={{  minHeight: 200, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-
+                                            <Grid xs={12}>
+                                                <Typography>    
+                                                    <Box
+                                                    sx={{
+                                                            fontWeight: 100,
+                                                            fontStyle: 'italic',
+                                                            fontSize: 18,
+                                                            color: '#b0b0b0',
+                                                            display: 'flex',
+                                                            justifyContent: 'center'
+                                                        }}>
+                                                        <Latex displayMode={false}>{`$ {n+1\\choose r}= {n\\choose r} + {n \\choose r-1}$`}</Latex>
+                                                    </Box>
+                                                    
+                                                </Typography>
+                                            </Grid>
                                             <Grid item={true} xs={5} >
                                                 <Box sx={labelStyle}>n (objects)</Box>
                                             </Grid>
@@ -137,19 +178,32 @@ function CombinationsCalculator(){
                                                     value={values.total_number}
                                                     placeholder=""
                                                 />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{errors.total_number}</Box>
+                                                </Typography>
+                                                
                                             </Grid>
                     
                                             <Grid item xs={5}>
                                                 <Box sx={labelStyle}>r (samples)</Box>
                                             </Grid>
                                             <Grid item xs={7}>
-                                            <CustomForm
-                                                type="text"
-                                                name="amount_in_each_subset"
-                                                onChange={handleChange}
-                                                value={values.amount_in_each_subset}
-                                                placeholder=""
-                                            />
+                                                <CustomForm
+                                                    type="text"
+                                                    name="amount_in_each_subset"
+                                                    onChange={handleChange}
+                                                    value={values.amount_in_each_subset}
+                                                    placeholder=""
+                                                />
+                                                <Typography>
+                                                    <Box 
+                                                        sx={{
+                                                            ...errorText
+                                                        }}>{errors.amount_in_each_subset}</Box>
+                                                </Typography>
                                             </Grid>
                                         
                                                             
@@ -211,7 +265,7 @@ function CombinationsCalculator(){
                     {
                         (value.length)?
                         <Box 
-                            sx={{ maxWidth: 450,paddingBottom: 1 }}
+                            sx={{ maxWidth: 400,paddingBottom: 1 }}
                             className="animated-box" >
                                 <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                     <Box sx={{height:25, width: '100%' }}>
@@ -235,13 +289,16 @@ function CombinationsCalculator(){
                                             fontWeight: 'bold'
                                         }}
                                     >
-                                        <Latex displayMode={false}>{`$ {n+1\\choose r}= {n\\choose r} + {n \\choose r-1}$`}</Latex>
+                                        {/* <Latex displayMode={false}>{`$ {n+1\\choose r}= {n\\choose r} + {n \\choose r-1}$`}</Latex> */}
                                     </Box>
                                     <Box>
                                         <TextCard leadingtext="n factorial" trailingtext={value[1]}/>
                                     </Box>
                                     <Box>
                                         <TextCard leadingtext="Combinations" trailingtext={value[4]}/>
+                                    </Box>
+                                    <Box>
+                                        <TextCard leadingtext="Divider factorial" trailingtext={value[2]}/>
                                     </Box>
                                 </Typography>
                             </Box>

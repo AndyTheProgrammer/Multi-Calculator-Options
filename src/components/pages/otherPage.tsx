@@ -27,7 +27,7 @@ function OtherPage(){
          
           <Switch>  
           <Route exact path={path}>
-            <NavBar2 pageimage={other_icon} pagename="Other Calculators" otherHighLight={true}/>
+            <NavBar2 pageimage={other_icon} categoryname="Other Calculators" otherHighLight={true}/>
             
             {/* Hide search bar when screen is small */}
             <Box

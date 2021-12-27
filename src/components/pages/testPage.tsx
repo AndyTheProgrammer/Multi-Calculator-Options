@@ -11,38 +11,15 @@ import { useHistory } from 'react-router-dom'
 // 
 import FindMyIPAddress from  '../TemperalComponentsFolder/other/FindMyIPAddress'
 import AreaConverter from  '../TemperalComponentsFolder/other/AreaConverter'
-import ArithmeticSequenceCalculator from  '../TemperalComponentsFolder/math/ArithmeticSequenceCalculator'
+import PercentageCalculators from  '../TemperalComponentsFolder/pages/PercentageCalculators'
 import MarginOfErrorCalculator from '../pages/calculators/statistics/MarginOfErrorCalculator'
 
-//
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useParams,
-    useRouteMatch
-  } from "react-router-dom";
-import ExponentForm from '../forms/math/ExponentForm'
-
-    function Topic() {
-        // The <Route> that rendered this component has a
-        // path of `/topics/:topicId`. The `:topicId` portion
-        // of the URL indicates a placeholder that we can
-        // get from `useParams()`.
-        let { topicId }:any = useParams();
-      
-        return (
-          <div>
-            <h3>{topicId}</h3>
-          </div>
-        );
-      }
 
 
 export default function TestPage(){
     return(
         <>
-          <ArithmeticSequenceCalculator/>
+          <PercentageCalculators/>
         </>
     );
 }

@@ -7,7 +7,7 @@ import Anime from 'react-animejs-wrapper';
 import AddLayout from '../../layouts/AddLayout';
 import { Box, Grid, Typography } from '@mui/material';
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles';
-import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm';
+import { CustomFormikFormFraction, CustomFormikOptions } from '../../forms/CustomForm';
 import TextCard from '../../utilityComponents/TextCard';
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn';
 const Latex = require('react-latex');
@@ -63,7 +63,7 @@ function SimplifyFractionsCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Simplify Fractions Calculator"/>
+        <NavBar2 categoryname="Fraction Calculator" pagename="Simplify Fractions Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>
@@ -113,33 +113,63 @@ function SimplifyFractionsCalculator(){
                             <Form>
                                   <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
                                     <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>Value A</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <Field
-                                                type="text"
-                                                name="valueA"
-                                                component={CustomFormikForm}
-                                            />
+                                        <Grid item xs={12}>
+                                            <Box 
+                                                sx={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center'}}>
+                                                    <Box 
+                                                        sx={{ 
+                                                            width: 100,
+                                                            paddingLeft: '5px',
+                                                            paddingRight: '5px',
+                                                            marginTop: 2.5
+                                                        }}>
+                                                        <Field
+                                                            type="text"
+                                                            name="valueA"
+                                                            component={CustomFormikFormFraction}
+                                                        />
+                                                    </Box>
+                                                    <Box sx={{ 
+                                                            width: 100,
+                                                            paddingLeft: '5px',
+                                                            paddingRight: '5px'
+                                                        }}>
+                                                        <Box sx={{ width: '100%'}}>
+                                                            <Field
+                                                                    type="text"
+                                                                    name="valuea"
+                                                                    component={CustomFormikFormFraction}
+                                                                />
+                                                        </Box>
+                                                        <Box sx={{ 
+                                                                width: '100%',
+                                                                paddingLeft: '5px',
+                                                                paddingRight: '5px'
+                                                                }}>
+                                                            <Box 
+                                                                sx={{
+                                                                    backgroundColor: '#b5b5b5',
+                                                                    width: '100%',
+                                                                    borderRadius: 1,
+                                                                    height: 2,
+                                                                    marginTop: 0.5,
+                                                                    marginBottom: 0.5,
+                                                                    color: '#3023AE'
+                                                                }}></Box>
+                                                        </Box>
+                                                        <Box sx={{ width: '100%'}}>
+                                                            <Field
+                                                                    type="text"
+                                                                    name="valueb"
+                                                                    component={CustomFormikFormFraction}
+                                                                />
+                                                        </Box>
+                                                </Box>
+                                            </Box>
                                         </Grid>
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>Value a</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <Field
-                                                type="text"
-                                                name="valuea"
-                                                component={CustomFormikForm}
-                                            />
-                                        </Grid>
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>Value b</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <Field
-                                                type="text"
-                                                name="valueb"
-                                                component={CustomFormikForm}
-                                            />
-                                        </Grid>
+                                      
                                  
                                     </Grid>
                                     <Box sx={{ flexGrow: 1}}>
@@ -199,7 +229,7 @@ function SimplifyFractionsCalculator(){
                 {
                     (value.length)?
                     <Box 
-                        sx={{ maxWidth: 450,paddingBottom: 1 }}
+                        sx={{ maxWidth: 400,paddingBottom: 1 }}
                         className="animated-box" >
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                 <Box sx={{height:25, width: '100%' }}>
@@ -215,8 +245,14 @@ function SimplifyFractionsCalculator(){
                                 <Box sx={{ ...formCardStyle }}></Box>
                             </Box>
                         <Box sx={{marginLeft: 5}}>
-                            <p>Answer</p>
-                            <p>{value}</p>
+                            <Typography>
+                                <Box>
+                                    Answer
+                                </Box>
+                                <Box sx={{ fontSize: 24 }}>
+                                    {value}
+                                </Box>
+                            </Typography>
                         </Box>
                     </Box>
                     :<Box></Box>

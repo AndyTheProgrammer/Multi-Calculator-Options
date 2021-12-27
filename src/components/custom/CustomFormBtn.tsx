@@ -15,7 +15,9 @@ function HomeIcon(props: SvgIconProps) {
 export function CustomFormBtn(props:any){
     return(
         <Button
-        sx={{ paddingTop:1, textTransform: 'none', borderRadius: 15, width: 100, height: 25, fontSize:12, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} 
+        sx={{ paddingTop:1, 
+            textTransform: 'none', 
+            borderRadius: 15, width: 130, height: 25, fontSize:12, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} 
             type={props.type}
             onClick={props.handleClick}>
             { props.name }
@@ -32,10 +34,9 @@ export function CustomFormImageBtn(props:any){
                     display: 'flex',
                     justifyContent: 'center',
                     textTransform: 'none', 
-                    border:'none',
+                    border:'0px solid red',
                     borderRadius: 15, 
-                    
-                    width: 100, 
+                    width: 130, 
                     height: 25, 
                     color: 'white',
                     textAlign: 'center', 
@@ -44,7 +45,7 @@ export function CustomFormImageBtn(props:any){
                 type={props.type}
                 onClick={props.handleClick}>
                 <Typography>
-                    <Box sx={{ fontSize:12, paddingTop: 0.5 }}>Calculate</Box>
+                    <Box sx={{ width: '100%', fontSize:12, paddingTop: 0.5, paddingLeft: 0.5 }}>Calculate</Box>
                 </Typography>
                 <Box sx={{width: 20}}>
                     <img style={{width: '100%', height:'100%'}} alt="icon" src={form_btn}/>
