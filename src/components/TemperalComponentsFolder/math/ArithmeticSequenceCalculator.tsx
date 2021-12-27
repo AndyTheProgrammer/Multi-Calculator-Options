@@ -1,6 +1,7 @@
 /**
  * THIS MAKES THE Arithmetic Sequence Calculator FORM
  */
+import stats_icon from '../../../common/assets/stats_icon.svg';
 
 import React, { useRef, useState, useEffect } from 'react'
 import CustomForm from '../../forms/CustomForm'
@@ -70,7 +71,7 @@ export default function ArithmeticSequenceCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Arithmetic Sequence Calculator" />
+        <NavBar2 categoryname="Statistics Calculators"  pagename="Arithmetic Sequence Calculator" />
         <AddLayout>
             <Box sx={{ display: 'flex', justifyContent:'center'}}>
             <Box className='animated-content-center'>

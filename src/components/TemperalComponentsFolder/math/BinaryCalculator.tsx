@@ -89,7 +89,7 @@ export default function BinaryCalculator(){
     })
     return(
         <>
-        <NavBar2 pagename="Binary Arithmetic Calculator"/>
+        <NavBar2 categoryname="General Calculators" pagename="Binary Arithmetic Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
@@ -265,7 +265,7 @@ export default function BinaryCalculator(){
                                     <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Box
                                                 sx={{
-                                                    color:'#4072B5', 
+                                                    // color:'#4072B5', 
                                                     borderBottom: '0px solid #dbdbdb',
                                                     paddingTop: 1
                                                 }}>
@@ -273,7 +273,7 @@ export default function BinaryCalculator(){
                                             </Box>
                                             <Box
                                                 sx={{
-                                                    color:'#4072B5', 
+                                                    // color:'#4072B5', 
                                                     borderBottom: '0px solid #dbdbdb',
                                                     paddingTop: 1,
                                                     paddingRight: 5
@@ -297,7 +297,7 @@ export default function BinaryCalculator(){
                                         <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Box
                                                 sx={{
-                                                    color:'#4072B5', 
+                                                    // color:'#4072B5', 
                                                     borderBottom: '0px solid #dbdbdb',
                                                     paddingTop: 1
                                                 }}>
@@ -305,7 +305,7 @@ export default function BinaryCalculator(){
                                             </Box>
                                             <Box
                                                 sx={{
-                                                    color:'#4072B5', 
+                                                    // color:'#4072B5', 
                                                     borderBottom: '0px solid #dbdbdb',
                                                     paddingTop: 1,
                                                     paddingRight: 5
@@ -329,7 +329,7 @@ export default function BinaryCalculator(){
                                         <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Box
                                                 sx={{
-                                                    color:'#4072B5', 
+                                                    // color:'#4072B5', 
                                                     borderBottom: '0px solid #dbdbdb',
                                                     paddingTop: 1
                                                 }}>
@@ -337,7 +337,7 @@ export default function BinaryCalculator(){
                                             </Box>
                                             <Box
                                                 sx={{
-                                                    color:'#4072B5', 
+                                                    // color:'#4072B5', 
                                                     borderBottom: '0px solid #dbdbdb',
                                                     paddingTop: 1,
                                                     paddingRight: 5
@@ -361,7 +361,6 @@ export default function BinaryCalculator(){
                                         <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <Box
                                                 sx={{
-                                                    color:'#4072B5', 
                                                     borderBottom: '0px solid #dbdbdb',
                                                     paddingTop: 1
                                                 }}>

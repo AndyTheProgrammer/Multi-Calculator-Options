@@ -61,7 +61,7 @@ function ConfidenceIntervalCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Confidence interval Calculator"/>
+        <NavBar2 categoryname="Statistics Calculators" pagename="Confidence interval Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>

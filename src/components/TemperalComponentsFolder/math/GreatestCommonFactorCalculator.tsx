@@ -12,6 +12,7 @@ import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 const Latex = require('react-latex');
 
 function GreatestCommonFactorCalculator(){
+
     const [value, setValue] = useState<any[]>([])
     const [playAnimation, setPlayAnimation] = useState(false)
     const [mediaQueryValue, setMediaQueryValue] = useState(false)
@@ -62,7 +63,7 @@ function GreatestCommonFactorCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Greatest Common Factor Calculator"/>
+        <NavBar2 categoryname="General Calculators" pagename="Greatest Common Factor Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
@@ -101,7 +102,10 @@ function GreatestCommonFactorCalculator(){
                                     const responseData = await mathMainService(data)
                                     var msg:any = responseData.statusDescription;
                                     if(msg === "success"){
-                                        setValue([responseData.message.gcd])
+                                        setValue([
+                                            responseData.message.gcd,
+                                            responseData.message.primeFactors
+                                        ])
                                     
                                     }
                                 }
@@ -115,8 +119,30 @@ function GreatestCommonFactorCalculator(){
                                 isSubmitting
                             }) => (
                                 <form onSubmit={handleSubmit}>
-                                    <Box sx={{  maxHeight: 150, display:'flex', flexDirection:'column' }}>
+                                    <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                            <Grid xs={12}>
+                                                <Typography>    
+                                                    <Box
+                                                    sx={{
+                                                            fontWeight: 100,
+                                                            fontStyle: 'italic',
+                                                            fontSize: 14,
+                                                            color: '#b0b0b0'
+                                                        }}>
+                                                        Provide numbers seperated by a coma
+                                                    </Box>
+                                                    <Box
+                                                    sx={{
+                                                            fontWeight: 100,
+                                                            fontStyle: 'italic',
+                                                            fontSize: 14,
+                                                            color: '#b0b0b0'
+                                                        }}>
+                                                        e.g 12,4,5,64,87
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
                                             <Grid item={true} xs={5} >
                                                 <Box sx={{...labelStyle}}>Factors</Box></Grid>
                                             <Grid item={true} xs={7}>
@@ -204,8 +230,24 @@ function GreatestCommonFactorCalculator(){
                                     <Box sx={{ ...formCardStyle }}></Box>
                                 </Box>
                             <Box sx={{marginLeft: 5}}>
-                                <p>GCD</p>
-                                <p>{value}</p>
+                            <Typography>
+                                <Box>
+                                    Greatest common factor
+                                </Box>
+                                <Box>
+                                    {value[0]}
+                                </Box>
+                            </Typography>
+                            {/* <Typography>
+                                <Box>
+                                    Prime factors for index 1
+                                </Box>
+                                <Box>
+                                    {
+                                        value[0]
+                                    }
+                                </Box>
+                            </Typography> */}
                             </Box>
                         </Box>
                         :<Box></Box>

@@ -52,6 +52,36 @@ export const CustomFormikForm = ({
 );
 
 
+export const CustomFormikFormRatio = ({
+  field, // { name, value, onChange, onBlur }
+  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  ...props
+}:any) => (
+<Box sx={{
+          display: 'flex',
+          paddingLeft: '5px',
+          paddingRight: '5px'
+        }}>
+          
+          <input
+            style={{
+              width:'100%',
+              backgroundColor:'#F0F3F6',
+              border: 'solid',
+              borderWidth: 0,
+              borderColor: 'red',
+              borderRadius: 7,
+              outline: 'none',
+              
+            }}
+            type="text" {...field} {...props}
+          />
+        </Box>
+  // <div>
+  //   <input type="text" {...field} {...props} />
+  // </div>
+);
+
 const CustomForm = (props: any) => {
     return (
         <Box sx={{

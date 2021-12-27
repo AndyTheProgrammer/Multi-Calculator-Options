@@ -7,7 +7,7 @@ import AddLayout from '../../layouts/AddLayout'
 import { Box, Grid, Typography } from '@mui/material'
 import { NavBar2 } from '../../navbar/navbar2'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
-import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
+import { CustomFormikForm, CustomFormikFormRatio, CustomFormikOptions } from '../../forms/CustomForm'
 import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 const Latex = require('react-latex');
@@ -62,7 +62,7 @@ function RatioCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Ratio Calculator"/>
+        <NavBar2 categoryname="General Calculators" pagename="Ratio Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>
@@ -82,11 +82,7 @@ function RatioCalculator(){
 
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                         <Box sx={{height:30, width: '100%' }}></Box>
-                        <Box sx={{
-                                height:30, width: '100%', 
-                                backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                borderRadius: '0 10px 3px', 
-                            }}></Box>
+                        <Box sx={{...formCardStyle }}></Box>
                     </Box>
                     <Formik
                         initialValues={{ 
@@ -109,7 +105,12 @@ function RatioCalculator(){
                                 const responseData = await mathMainService(data)
                                 var msg:any = responseData.statusDescription;
                                 if(msg === "success"){
-                                    setValue([responseData.message.percentage])
+                                    setValue([
+                                        responseData.message.a,
+                                        responseData.message.b,
+                                        responseData.message.c,
+                                        responseData.message.d
+                                    ])
                                 }
                             }
                             postData()
@@ -119,51 +120,58 @@ function RatioCalculator(){
                             <Form >
                                 <Box sx={{  display:'flex', flexDirection:'column' }}>
                                     <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                    <Grid xs={12}>
+                                            <Typography>    
+                                                <Box
+                                                  sx={{
+                                                        fontWeight: 100,
+                                                        fontStyle: 'italic',
+                                                        fontSize: 14,
+                                                        color: '#b0b0b0'
+                                                    }}>
+                                                    provide any three values below to calculate the fourth in the ratio A:B = C:D.
+                                                </Box>
+                                               
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={3} >
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>A </Box></Grid>
+                                        <Grid item xs={3}>
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>B </Box></Grid>
+                                        <Grid item xs={3} >
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>C</Box></Grid>
+                                        <Grid item xs={3} >
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>D</Box></Grid>
 
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>a </Box></Grid>
-                                        <Grid item={true} xs={7}>
+                                        <Grid item={true} xs={3}>
                                             <Field
                                                 type="text"
                                                 name="a"
-                                                component={CustomFormikForm}
+                                                component={CustomFormikFormRatio}
                                             />
                                         </Grid>
                 
-                                        <Grid item xs={5}>
-                                            <Box sx={{...labelStyle}}>b</Box></Grid>
-                                        <Grid item xs={7}>
+                                        <Grid item xs={3}>
                                         <Field
                                             type="text"
                                             name="b"
-                                            component={CustomFormikForm}
+                                            component={CustomFormikFormRatio}
                                         />
                                         </Grid>
-
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>c</Box></Grid>
-                                        <Grid item={true} xs={7}>
+                                        <Grid item={true} xs={3}>
                                             <Field
                                                 type="text"
                                                 name="c"
-                                                component={CustomFormikForm}
+                                                component={CustomFormikFormRatio}
                                             />
-                                        </Grid>
-
-                                        
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>d</Box></Grid>
-                                        <Grid item={true} xs={7}>
+                                        </Grid>      
+                                        <Grid item={true} xs={3}>
                                             <Field
                                                 type="text"
                                                 name="d"
-                                                component={CustomFormikForm}
+                                                component={CustomFormikFormRatio}
                                             />
-                                        </Grid>
-                
-                
-                                        
-                                                         
+                                        </Grid>                
                                     </Grid>
                                     <Box sx={{ flexGrow: 1}}>
                                         {/* 
@@ -237,9 +245,30 @@ function RatioCalculator(){
                                 </Box>
                                 <Box sx={{ ...formCardStyle }}></Box>
                             </Box>
-                        <Box sx={{marginLeft: 5}}>
-                            <p>Answer</p>
-                            <p>{value}</p>
+                        <Box >
+                            <Typography sx={{ fontSize: 18}}>
+                                <Box >
+                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                        <Grid item xs={3} >
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>A </Box></Grid>
+                                        <Grid item xs={3}>
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>B </Box></Grid>
+                                        <Grid item xs={3} >
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>C</Box></Grid>
+                                        <Grid item xs={3} >
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>D</Box></Grid>
+
+                                        <Grid item xs={3} >
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>{value[0]} </Box></Grid>
+                                        <Grid item xs={3}>
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>{value[1]} </Box></Grid>
+                                        <Grid item xs={3} >
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>{value[2]} </Box></Grid>
+                                        <Grid item xs={3} >
+                                            <Box sx={{...labelStyle, textAlign:'center'}}>{value[3]} </Box></Grid>
+                                    </Grid>
+                                </Box>
+                            </Typography>
                         </Box>
                     </Box>
                     :<Box></Box>

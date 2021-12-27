@@ -62,7 +62,7 @@ function PercentageCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Percentage Calculator"/>
+        <NavBar2 categoryname="General Calculators" pagename="Percentage Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>  
             <Box className='animated-content-center'>
@@ -229,8 +229,14 @@ function PercentageCalculator(){
                                 <Box sx={{ ...formCardStyle }}></Box>
                             </Box>
                         <Box sx={{marginLeft: 5}}>
-                            <p>Answer</p>
-                            <p>{value}</p>
+                           <Typography>
+                               <Box>
+                                   Answer
+                               </Box>
+                               <Box sx={{ fontSize: 20, fontWeight: 'bold' }}>
+                                    {value} %
+                               </Box>
+                           </Typography>
                         </Box>
                     </Box>
                     :<Box></Box>

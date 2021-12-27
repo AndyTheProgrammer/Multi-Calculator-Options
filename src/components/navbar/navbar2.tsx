@@ -58,7 +58,7 @@ function NavBar2(props:any){
                             position="static">
 
                             <Box sx={{ display: 'flex', m: 1 }}>
-                            <Button
+                            {/* <Button
                                 onClick={
                                     ()=>{
                                         history.push(props.backroute)
@@ -69,12 +69,12 @@ function NavBar2(props:any){
                                     display:{
                                         lg: 'none',
                                         md: 'none',
-                                        sm: 'block',
-                                        xs: 'block'
+                                        sm: 'none',
+                                        xs: 'none'
                                     }
                                 }}>
                                     <ArrowBackIcon/>
-                                </Button>
+                                </Button> */}
                                 {
                                     (props.pageimage)?
                                     <Box
@@ -83,8 +83,8 @@ function NavBar2(props:any){
                                         display:{
                                             ld: 'block',
                                             md: 'block',
-                                            sm: 'none',
-                                            xs: 'none'
+                                            sm: 'block',
+                                            xs: 'block'
                                         } 
                                         
                                     }}>
@@ -99,25 +99,55 @@ function NavBar2(props:any){
                                             display:{
                                                 ld: 'block',
                                                 md: 'block',
-                                                sm: 'none',
-                                                xs: 'none'
+                                                sm: 'block',
+                                                xs: 'block'
                                             } 
                                         }} href="#" underline="none">
+                                            {/* page name */}
                                         <Typography variant="h6" component="div" >
                                             <Box 
                                                 sx={{
                                                     paddingTop: 1.5,
-                                                    fontSize: 16,
+                                                    fontSize: 20,
                                                     color: '#8591B0',
-                                                    fontWeight: 'bold'
+                                                    fontWeight: 300,
+                                                    display:{
+                                                        lg:'block',
+                                                        md:'block',
+                                                        sm:'none',
+                                                        xs:'none'
+                                                    }
                                                 }}>
                                                     {props.pagename}
                                                 </Box>
                                             
                                         </Typography>
+
+                                        {/* category name */}
+                                        <Typography
+                                            sx={{
+                                                paddingTop: 1,
+                                                fontSize: 18,
+                                                color: '#8591B0',
+                                                display:{
+                                                    lg:'none',
+                                                    md:'none',
+                                                    sm: 'block',
+                                                    xs: 'block'
+                                                }
+                                            }} 
+                                            variant="h6" component="div" >
+                                            <Box >
+                                                {props.categoryname}
+                                            </Box>
+                                        
+                                        </Typography>
                                     </Link>
                                 </Box>
-                            <Box sx={{ flexGrow: 1 }}></Box>
+                            <Box sx={{ flexGrow: 1 }}>
+
+                                
+                            </Box>
                             <Box sx={{ 
                                     paddingTop: 1.5,
                                     display: {
@@ -151,6 +181,25 @@ function NavBar2(props:any){
                                     </Button>
                             </Box>
                         </Box>
+                        <Typography
+                            sx={{
+                                paddingTop: 1.0,
+                                fontSize: 16,
+                                paddingLeft: 1,
+                                color: '#8591B0',
+                                display:{
+                                    lg:'none',
+                                    md:'none',
+                                    sm: 'block',
+                                    xs: 'block'
+                                }
+                            }} 
+                            variant="h6" component="div" >
+                            <Box >
+                                    {props.pagename}
+                                </Box>
+                            
+                        </Typography>
                         </AppBar>
                     </div>
                     <Box>

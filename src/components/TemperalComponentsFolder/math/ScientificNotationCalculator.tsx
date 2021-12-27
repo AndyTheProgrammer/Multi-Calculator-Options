@@ -61,7 +61,7 @@ export default function ScientificNotationCalculator(){
     })
     return(
         <>
-            <NavBar2 pagename="Scientific Notation Calculator"/>
+            <NavBar2 categoryname="General Calculators" pagename="Scientific Notation Calculator"/>
             <AddLayout>
                 <Box sx={{ display: "flex", justifyContent: "center" }}> 
                 <Box className='animated-content-center'>
@@ -112,7 +112,7 @@ export default function ScientificNotationCalculator(){
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Value</Box></Grid>
+                                                <Box sx={{...labelStyle}}>number</Box></Grid>
                                             <Grid item={true} xs={7}>
                                                 <CustomForm
                                                     type="text"
@@ -197,8 +197,22 @@ export default function ScientificNotationCalculator(){
                                     <Box sx={{ ...formCardStyle }}></Box>
                                 </Box>
                             <Box sx={{marginLeft: 5}}>
-                                <p>Answer</p>
-                                <p>{value}</p>
+                                <Typography sx={{ display:'flex'}}>
+                                    <Box sx={{ width: 120 }}>
+                                        Real number
+                                    </Box>
+                                    <Box>
+                                        : { value[0] }
+                                    </Box>
+                                </Typography>
+                                <Typography sx={{ display:'flex'}}>
+                                    <Box sx={{ width: 120 }}>
+                                        E-notation 
+                                    </Box>
+                                    <Box>
+                                        :
+                                    </Box>
+                                </Typography>
                             </Box>
                         </Box>
                         :<Box></Box>

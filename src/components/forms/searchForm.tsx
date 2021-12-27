@@ -153,6 +153,22 @@ function SearchForm(){
                         <SearchIcon 
                             sx={{ color: '#3128af' }}/>
                     </Box>
+                    <Box  ref={ref} className={appOverLayDisplay} 
+                    sx={{ border:'0px solid red', display: 'block' }}>
+                    {
+                        isSearchOption?
+                        (
+                            resultArray.map((data:any) => {
+                                return(
+                                    <Box id="" className="div-link link-search"
+                                    onClick={()=>{ 
+                                        history.push(data.path); 
+                                    }}>{ data.name }</Box>
+                                )
+                            })
+                        ): ""
+                    }
+                </Box>
                 </Box>
             </Box>
             <Box sx={{ 
@@ -174,21 +190,22 @@ function SearchForm(){
                     </Button>
                 </Box>
             
-            <Box  ref={ref} className={appOverLayDisplay} sx={{ display: 'block' }}>
-                {
-                    isSearchOption?
-                    (
-                        resultArray.map((data:any) => {
-                            return(
-                                <Box id="" className="div-link link-search"
-                                onClick={()=>{ 
-                                    history.push(data.path); 
-                                }}>{ data.name }</Box>
-                            )
-                        })
-                    ): ""
-                }
-            </Box>
+                {/* <Box  ref={ref} className={appOverLayDisplay} 
+                    sx={{ border:'1px solid red', display: 'block' }}>
+                    {
+                        isSearchOption?
+                        (
+                            resultArray.map((data:any) => {
+                                return(
+                                    <Box id="" className="div-link link-search"
+                                    onClick={()=>{ 
+                                        history.push(data.path); 
+                                    }}>{ data.name }</Box>
+                                )
+                            })
+                        ): ""
+                    }
+                </Box> */}
             <Box className={
                     classNames({
                         'drawer-close': !openDrawer,

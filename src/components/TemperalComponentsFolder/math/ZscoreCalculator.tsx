@@ -62,7 +62,7 @@ export default function ZscoreCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Zscore Calculator"/>
+        <NavBar2 categoryname="Statistics Calculators" pagename="Zscore Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>
@@ -104,7 +104,13 @@ export default function ZscoreCalculator(){
                                     var msg:any = responseData.statusDescription;
                                     if(msg === "success"){
                                         console.log("Hacking is beautiful")
-                                        setValue([responseData.message.answer])
+                                        setValue([
+                                            responseData.message.answer,
+                                            responseData.message.zsccore,
+                                            responseData.message.raw_score,
+                                            responseData.message.population_mean,
+                                            responseData.message.standard_deviation
+                                        ])
                                     }
                                 }
                                 postData()
@@ -216,8 +222,126 @@ export default function ZscoreCalculator(){
                                     <Box sx={{ ...formCardStyle }}></Box>
                                 </Box>
                                 <Box sx={{marginLeft: 5}}>
-                                    <p>Answer</p>
-                                    <p>{value}</p>
+                                    <Box 
+                                        sx={{ 
+                                            display:'flex', }}>
+                                        <Typography
+                                            sx={{ 
+                                                display:'flex',
+                                                justifyContent:  'space-between',
+                                                marginRight: 1 ,
+                                                fontSize: 14
+                                            }}>
+                                            <Box sx={{ width: 120 }}>
+                                                Answer   
+                                            </Box>
+                                            <Box>
+                                                :
+                                            </Box>
+
+                                        </Typography>
+                                        <Typography sx={{ fontSize: 14 }}>
+                                            <Box>
+                                                {value[0]}   
+                                            </Box>
+                                        </Typography>
+                                    </Box>
+                                    <Box 
+                                        sx={{ 
+                                        display:'flex', }}>
+                                        <Typography
+                                            sx={{ 
+                                                display:'flex',
+                                                justifyContent:  'space-between',
+                                                marginRight: 1 ,
+                                                fontSize: 14
+                                            }}>
+                                            <Box sx={{ width: 120 }}>
+                                                Z Score   
+                                            </Box>
+                                            <Box>
+                                                :
+                                            </Box>
+
+                                        </Typography>
+                                        <Typography sx={{ fontSize: 14 }}>
+                                            <Box>
+                                                {value[1]}   
+                                            </Box>
+                                        </Typography>
+                                    </Box>
+                                    <Box 
+                                        sx={{ 
+                                        display:'flex', }}>
+                                        <Typography
+                                            sx={{ 
+                                                display:'flex',
+                                                justifyContent:  'space-between',
+                                                marginRight: 1 ,
+                                                fontSize: 14
+                                            }}>
+                                            <Box sx={{ width: 120 }}>
+                                                Raw Score   
+                                            </Box>
+                                            <Box>
+                                                :
+                                            </Box>
+
+                                        </Typography>
+                                        <Typography sx={{ fontSize: 14 }}>
+                                            <Box>
+                                                {value[2]}   
+                                            </Box>
+                                        </Typography>
+                                    </Box>
+                                    <Box 
+                                        sx={{ 
+                                        display:'flex', }}>
+                                        <Typography
+                                            sx={{ 
+                                                display:'flex',
+                                                justifyContent:  'space-between',
+                                                marginRight: 1 ,
+                                                fontSize: 14
+                                            }}>
+                                            <Box sx={{ width: 120 }}>
+                                                Population mean   
+                                            </Box>
+                                            <Box>
+                                                :
+                                            </Box>
+
+                                        </Typography>
+                                        <Typography sx={{ fontSize: 14 }}>
+                                            <Box>
+                                                {value[3]}   
+                                            </Box>
+                                        </Typography>
+                                    </Box>
+                                    <Box 
+                                        sx={{ 
+                                        display:'flex', }}>
+                                        <Typography
+                                            sx={{ 
+                                                display:'flex',
+                                                justifyContent:  'space-between',
+                                                marginRight: 1 ,
+                                                fontSize: 14
+                                            }}>
+                                            <Box sx={{ width: 120 }}>
+                                                Standard deviation   
+                                            </Box>
+                                            <Box>
+                                                :
+                                            </Box>
+
+                                        </Typography>
+                                        <Typography sx={{ fontSize: 14 }}>
+                                            <Box>
+                                                {value[4]}   
+                                            </Box>
+                                        </Typography>
+                                    </Box>
                                 </Box>
                             </Box>
                             :<Box></Box>

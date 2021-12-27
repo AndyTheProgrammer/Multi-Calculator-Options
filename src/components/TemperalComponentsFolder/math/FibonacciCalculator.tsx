@@ -62,7 +62,7 @@ function FibonacciCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Fibonacci Calculator"/>
+        <NavBar2 categoryname="Statistics Calculators" pagename="Fibonacci Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
@@ -223,7 +223,7 @@ function FibonacciCalculator(){
                                                     ))
                                                 }
                                             </Box> 
-                                            <Typography>
+                                            <Typography sx={{ marginTop: 1}}>
                                                 <Box>
                                                     Nth term : { data.answer }
                                                 </Box>

@@ -85,7 +85,7 @@ export default function HexadecimalCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Hexadecimal Calculator"/>
+        <NavBar2 categoryname="General Calculators" pagename="Hexadecimal Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
@@ -128,7 +128,14 @@ export default function HexadecimalCalculator(){
                                         var msg:any = responseData.statusDescription;
                                         if(msg === "success"){
                                             console.log("Hacking is beautiful")
-                                            setValue([responseData.message.answerInHexadecimal])
+                                            setValue([
+                                                responseData.message.firstValueInDecimal,
+                                                responseData.message.secondValueInDecimal,
+                                                responseData.message.answerInDecimal,
+                                                responseData.message.answerInHexadecimal,
+                                                responseData.message.firstValueInBinary,
+                                                responseData.message.secondValueInBinary,
+                                            ])
                                         }
                                     }
                                     postData()
@@ -236,8 +243,137 @@ export default function HexadecimalCalculator(){
                                     <Box sx={{ ...formCardStyle }}></Box>
                                 </Box>
                                 <Box sx={{marginLeft: 5}}>
-                                    <p>Hexadecimal value</p>
-                                    <p>{value}</p>
+                                    <Grid container>
+                                        <Grid item xs={8}>
+                                        <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <Box
+                                                    sx={{
+                                                        // color:'#4072B5', 
+                                                        borderBottom: '0px solid #dbdbdb',
+                                                        paddingTop: 1
+                                                    }}>
+                                                    First number decimal 
+                                                </Box>
+                                                <Box
+                                                    sx={{
+                                                        // color:'#4072B5', 
+                                                        borderBottom: '0px solid #dbdbdb',
+                                                        paddingTop: 1,
+                                                        paddingRight: 5
+                                                    }}>
+                                                    :
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <Typography>
+                                                <Box sx={{
+                                                    paddingTop: 1,
+                                                    textAlign: 'end',
+                                                    paddingRight: 5
+                                                }}>
+                                                    {value[0]}
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={8}>
+                                            <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <Box
+                                                    sx={{
+                                                        // color:'#4072B5', 
+                                                        borderBottom: '0px solid #dbdbdb',
+                                                        paddingTop: 1
+                                                    }}>
+                                                    Second number decimal 
+                                                </Box>
+                                                <Box
+                                                    sx={{
+                                                        // color:'#4072B5', 
+                                                        borderBottom: '0px solid #dbdbdb',
+                                                        paddingTop: 1,
+                                                        paddingRight: 5
+                                                    }}>
+                                                    :
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <Typography>
+                                                <Box sx={{
+                                                    paddingTop: 1,
+                                                    textAlign: 'end',
+                                                    paddingRight: 5
+                                                }}>
+                                                    {value[1]}
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={8}>
+                                            <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <Box
+                                                    sx={{
+                                                        // color:'#4072B5', 
+                                                        borderBottom: '0px solid #dbdbdb',
+                                                        paddingTop: 1
+                                                    }}>
+                                                    Answer in decimal
+                                                </Box>
+                                                <Box
+                                                    sx={{
+                                                        // color:'#4072B5', 
+                                                        borderBottom: '0px solid #dbdbdb',
+                                                        paddingTop: 1,
+                                                        paddingRight: 5
+                                                    }}>
+                                                    :
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <Typography>
+                                                <Box sx={{
+                                                    paddingTop: 1,
+                                                    textAlign: 'end',
+                                                    paddingRight: 5
+                                                }}>
+                                                    {value[2]}
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={8}>
+                                            <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <Box
+                                                    sx={{
+                                                        border: 'none',
+                                                        borderBottom: '0px solid #dbdbdb',
+                                                        paddingTop: 1,
+                                                    }}>
+                                                    Answer in hexadecimal
+                                                </Box>
+                                                <Box
+                                                    sx={{
+                                                        color:'#4072B5', 
+                                                        borderBottom: '0px solid #dbdbdb',
+                                                        paddingTop: 1,
+                                                        paddingRight: 5
+                                                    }}>
+                                                    :
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                            <Typography>
+                                                <Box sx={{
+                                                    paddingTop: 1,
+                                                    textAlign: 'end',
+                                                    paddingRight: 5
+                                                }}>
+                                                    {value[3]}
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
+                                    
+                                    </Grid>
                                 </Box>
                             </Box>
                             :<Box></Box>

@@ -62,7 +62,7 @@ function LeastCommonMultipleCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Least Common Multiple Calculator"/>
+        <NavBar2 categoryname="General Calculators" pagename="Least Common Multiple Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>    
             <Box className='animated-content-center'>
@@ -117,6 +117,28 @@ function LeastCommonMultipleCalculator(){
                             <form onSubmit={handleSubmit}>
                                   <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
                                     <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                    <Grid xs={12}>
+                                            <Typography>    
+                                                <Box
+                                                  sx={{
+                                                        fontWeight: 100,
+                                                        fontStyle: 'italic',
+                                                        fontSize: 14,
+                                                        color: '#b0b0b0'
+                                                    }}>
+                                                    Provide numbers seperated by a coma
+                                                </Box>
+                                                <Box
+                                                  sx={{
+                                                        fontWeight: 100,
+                                                        fontStyle: 'italic',
+                                                        fontSize: 14,
+                                                        color: '#b0b0b0'
+                                                    }}>
+                                                    e.g 12,4,5,64,87
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
                                         <Grid item={true} xs={5} >
                                             <Box sx={{...labelStyle}}>Numbers</Box></Grid>
                                         <Grid item={true} xs={7}>
@@ -204,8 +226,14 @@ function LeastCommonMultipleCalculator(){
                                 <Box sx={{ ...formCardStyle }}></Box>
                             </Box>
                         <Box sx={{marginLeft: 5}}>
-                            <p>Least common multiple</p>
-                            <p>{value}</p>
+                            <Typography>
+                                <Box>
+                                    Least Common multiple
+                                </Box>
+                                <Box>
+                                    {value}
+                                </Box>
+                            </Typography>
                         </Box>
                     </Box>
                     :<Box></Box>

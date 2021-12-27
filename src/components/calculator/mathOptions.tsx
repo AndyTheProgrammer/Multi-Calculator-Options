@@ -529,7 +529,7 @@ function OptionsForSmallerScreens(){
                                         })} >
                                             {
                                                 (categoryIndex[1].id === 1)?
-                                                mathRoutes.subCategories[0].sub_calculator.map((r:any) => {
+                                                mathRoutes.subCategories[1].sub_calculator.map((r:any) => {
                                                     return (
                                                         <Box  
                                                         onClick={()=>{ history.push(r.path) }} 

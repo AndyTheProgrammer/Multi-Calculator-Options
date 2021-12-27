@@ -62,7 +62,7 @@ export default function SampleStandardDeviationCalculator(){
 
     return(
         <>
-            <NavBar2 pagename="Sample Standard Deviation Calculator"/>
+            <NavBar2 categoryname="Statistics Calculators" pagename="Sample Standard Deviation Calculator"/>
             <AddLayout>
                 <Box sx={{ display: "flex", justifyContent: "center" }}> 
                 <Box className='animated-content-center'>
@@ -96,7 +96,13 @@ export default function SampleStandardDeviationCalculator(){
                                     const responseData = await mathMainService(data)
                                     var msg:any = responseData.statusDescription;
                                     if(msg === "success"){
-                                        setValue([responseData.message.sampleStandardDeviation])
+                                        setValue([
+                                            responseData.message.sampleStandardDeviation,
+                                            responseData.message.count,
+                                            responseData.message.sum,
+                                            responseData.message.mean,
+                                            responseData.message.variance,
+                                        ])
                                     }
                                 }
                                 postData()
@@ -111,7 +117,28 @@ export default function SampleStandardDeviationCalculator(){
                                 <form onSubmit={handleSubmit}>
                                     <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-
+                                            <Grid xs={12}>
+                                            <Typography>    
+                                                <Box
+                                                  sx={{
+                                                        fontWeight: 100,
+                                                        fontStyle: 'italic',
+                                                        fontSize: 14,
+                                                        color: '#b0b0b0'
+                                                    }}>
+                                                    Provide numbers seperated by a coma
+                                                </Box>
+                                                <Box
+                                                  sx={{
+                                                        fontWeight: 100,
+                                                        fontStyle: 'italic',
+                                                        fontSize: 14,
+                                                        color: '#b0b0b0'
+                                                    }}>
+                                                    e.g 12,4,5,64,87
+                                                </Box>
+                                            </Typography>
+                                            </Grid>
                                             <Grid item={true} xs={5} >
                                                 <Box sx={{...labelStyle}}>Provided numbers</Box></Grid>
                                             <Grid item={true} xs={7}>
@@ -198,8 +225,128 @@ export default function SampleStandardDeviationCalculator(){
                                     <Box sx={{ ...formCardStyle }}></Box>
                                 </Box>
                             <Box sx={{marginLeft: 5}}>
-                                <p>Sample standard deviation</p>
-                                <p>{value}</p>
+                                <Box 
+                                    sx={{ 
+                                        display:'flex', }}>
+                                    <Typography
+                                        sx={{ 
+                                            display:'flex',
+                                            justifyContent:  'space-between',
+                                            marginRight: 1 ,
+                                            fontSize: 14
+                                        }}>
+                                        <Box sx={{ width: 150 }}>
+                                            Standard Deviation    
+                                        </Box>
+                                        <Box>
+                                            :
+                                        </Box>
+
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        <Box>
+                                            {value[0]}   
+                                        </Box>
+                                    </Typography>
+                                </Box>
+                                <Box 
+                                    sx={{ 
+                                        display:'flex', }}>
+                                    <Typography
+                                        sx={{ 
+                                            display:'flex',
+                                            justifyContent:  'space-between',
+                                            marginRight: 1 ,
+                                            fontSize: 14
+                                        }}>
+                                        <Box sx={{ width: 150 }}>
+                                            Count   
+                                        </Box>
+                                        <Box>
+                                            :
+                                        </Box>
+
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        <Box>
+                                            {value[1]}   
+                                        </Box>
+                                    </Typography>
+                                </Box>
+
+                                <Box 
+                                    sx={{ 
+                                        display:'flex', }}>
+                                    <Typography
+                                        sx={{ 
+                                            display:'flex',
+                                            justifyContent:  'space-between',
+                                            marginRight: 1 ,
+                                            fontSize: 14
+                                        }}>
+                                        <Box sx={{ width: 150 }}>
+                                            Sum   
+                                        </Box>
+                                        <Box>
+                                            :
+                                        </Box>
+
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        <Box>
+                                            {value[2]}   
+                                        </Box>
+                                    </Typography>
+                                </Box>
+                                <Box 
+                                    sx={{ 
+                                        display:'flex', }}>
+                                    <Typography
+                                        sx={{ 
+                                            display:'flex',
+                                            justifyContent:  'space-between',
+                                            marginRight: 1 ,
+                                            fontSize: 14,
+                                        }}>
+                                        <Box sx={{ width: 150 }}>
+                                            Mean 
+                                        </Box>
+                                        <Box>
+                                            :
+                                        </Box>
+
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        <Box>
+                                            {value[3]}   
+                                        </Box>
+                                    </Typography>
+                                </Box>
+                                <Box 
+                                    sx={{ 
+                                        display:'flex', }}>
+                                    <Typography
+                                        sx={{ 
+                                            display:'flex',
+                                            justifyContent:  'space-between',
+                                            marginRight: 1 ,
+                                            fontSize: 14
+                                        }}>
+                                        <Box sx={{ width: 150 }}>
+                                            Variance   
+                                        </Box>
+                                        <Box>
+                                            :
+                                        </Box>
+
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        <Box>
+                                            {value[4]}   
+                                        </Box>
+                                    </Typography>
+                                </Box>
+
                             </Box>
                         </Box>
                         :<Box></Box>

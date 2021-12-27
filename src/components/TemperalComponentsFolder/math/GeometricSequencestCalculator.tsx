@@ -62,7 +62,7 @@ function GeometricSequencestCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Geometric Sequencest Calculator"/>
+        <NavBar2 categoryname="Statistics Calculators" pagename="Geometric Sequencest Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
@@ -105,7 +105,13 @@ function GeometricSequencestCalculator(){
                                     const responseData = await mathMainService(data)
                                     var msg:any = responseData.statusDescription;
                                     if(msg === "success"){
-                                        setValue([responseData.message.answer])
+                                        setValue([
+                                            responseData.message.answer,
+                                            responseData.message.sumOfInfinite,
+                                            responseData.message.sum,
+                                            responseData.message.common_ratio,
+                                            responseData.message.nth_term
+                                        ])
                                     }
                                 }
                                 postData()
@@ -230,8 +236,126 @@ function GeometricSequencestCalculator(){
                                     <Box sx={{ ...formCardStyle }}></Box>
                                 </Box>
                             <Box sx={{marginLeft: 5}}>
-                                <p>Answer</p>
-                                <p>{value}</p>
+                                <Box 
+                                    sx={{ 
+                                        display:'flex', }}>
+                                    <Typography
+                                        sx={{ 
+                                            display:'flex',
+                                            justifyContent:  'space-between',
+                                            marginRight: 1 ,
+                                            fontSize: 14
+                                        }}>
+                                        <Box sx={{ width: 100 }}>
+                                            Answer   
+                                        </Box>
+                                        <Box>
+                                            :
+                                        </Box>
+
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        <Box>
+                                            {value[0]}   
+                                        </Box>
+                                    </Typography>
+                                </Box>
+                                <Box 
+                                    sx={{ 
+                                        display:'flex', }}>
+                                    <Typography
+                                        sx={{ 
+                                            display:'flex',
+                                            justifyContent:  'space-between',
+                                            marginRight: 1 ,
+                                            fontSize: 14
+                                        }}>
+                                        <Box sx={{ width: 100 }}>
+                                            Sum of infinite 
+                                        </Box>
+                                        <Box>
+                                            :
+                                        </Box>
+
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        <Box>
+                                            {value[1]}   
+                                        </Box>
+                                    </Typography>
+                                </Box>
+                                <Box 
+                                    sx={{ 
+                                        display:'flex', }}>
+                                    <Typography
+                                        sx={{ 
+                                            display:'flex',
+                                            justifyContent:  'space-between',
+                                            marginRight: 1 ,
+                                            fontSize: 14
+                                        }}>
+                                        <Box sx={{ width: 100 }}>
+                                            Sum   
+                                        </Box>
+                                        <Box>
+                                            :
+                                        </Box>
+
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        <Box>
+                                            {value[2]}   
+                                        </Box>
+                                    </Typography>
+                                </Box>
+                                <Box 
+                                    sx={{ 
+                                        display:'flex', }}>
+                                    <Typography
+                                        sx={{ 
+                                            display:'flex',
+                                            justifyContent:  'space-between',
+                                            marginRight: 1 ,
+                                            fontSize: 14
+                                        }}>
+                                        <Box sx={{ width: 100 }}>
+                                            Common ratio   
+                                        </Box>
+                                        <Box>
+                                            :
+                                        </Box>
+
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        <Box>
+                                            {value[3]}   
+                                        </Box>
+                                    </Typography>
+                                </Box>
+                                <Box 
+                                    sx={{ 
+                                        display:'flex', }}>
+                                    <Typography
+                                        sx={{ 
+                                            display:'flex',
+                                            justifyContent:  'space-between',
+                                            marginRight: 1 ,
+                                            fontSize: 14
+                                        }}>
+                                        <Box sx={{ width: 100 }}>
+                                            nth term  
+                                        </Box>
+                                        <Box>
+                                            :
+                                        </Box>
+
+                                    </Typography>
+                                    <Typography sx={{ fontSize: 14 }}>
+                                        <Box>
+                                            {value[4]}   
+                                        </Box>
+                                    </Typography>
+                                </Box>
                             </Box>
                         </Box>
                         :<Box></Box>

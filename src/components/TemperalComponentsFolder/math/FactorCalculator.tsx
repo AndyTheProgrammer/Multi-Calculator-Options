@@ -62,7 +62,7 @@ function FactorCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Factor Calculator"/>
+        <NavBar2 categoryname="General Calculators" pagename="Factor Calculator"/>
         <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
