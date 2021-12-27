@@ -83,6 +83,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     wordBreak: 'break-word'
   },
   leftTabContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
     backgroundColor: theme.palette.background.paper,
     color: COLORS.text,
     width: "100%",
@@ -113,6 +116,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   formDisplay: {
     // width: 400,
+    maxWidth: 400,
     height: '100%',
     zIndex: 2,
     borderRadius: '20px !important',
@@ -123,6 +127,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   formResult: {
     maxWidth: 400,
+    // minWidth: 300,
+    // position: 'absolute',
     //  zIndex: -1,
     height: '100%',
     borderRadius: '20px !important',

@@ -10,18 +10,23 @@ function StaticTab(props: any) {
 
   if (label) {
     return (
-      <Box className={className} p={0.9} style={{ display: 'block' }}>
-        <FontProvider fonts={[{ font: 'Varela Round' }]}>
-          <Typography className="text-center" variant="subtitle2" style={{ fontSize: 12 }}>
-            <Font>{label}</Font>
-          </Typography>
-        </FontProvider>
+      <Box className={className} p={0.9}>
+        <div>
+          <FontProvider fonts={[{ font: 'Varela Round' }]}>
+            <Typography variant="subtitle2">
+              <Font>{label}</Font>
+            </Typography>
+          </FontProvider>
+        </div>
 
-        {dropDown === true &&
-          <IconButton size='small' style={{ height: 18, width: 18 }} onClick={openDrop}>
-            <ExpandMore />
-          </IconButton>
-        }
+
+        <div>
+          {dropDown === true &&
+            <IconButton onClick={openDrop}>
+              <ExpandMore />
+            </IconButton>
+          }
+        </div>
       </Box>
     )
   } else {

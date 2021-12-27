@@ -46,12 +46,12 @@ function FormTabsContainer(props: FormProps) {
               <StaticTab
                 className={leftTabContainer}
                 label={tabTitle1}
+                dropDown={true}
+                openDrop={openDrop}
               />
               <StaticTab
                 className={rightTabContainer}
                 label={tabTitle2}
-                dropDown={true}
-                openDrop={openDrop}
               />
             </StyledTabs>
 
