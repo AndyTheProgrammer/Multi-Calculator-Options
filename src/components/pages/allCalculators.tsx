@@ -5,7 +5,6 @@ import IconButton from '@mui/material/IconButton';
 import { AppBar } from '@mui/material'
 import Link from '@mui/material/Link';
 import { SearchForm } from '../forms/searchForm'
-import { useHistory } from "react-router-dom";
 import { Box, Grid } from '@mui/material'
 import Slider from "react-slick";
 import LayoutWithoutSearchForm from '../layouts/LayoutWithoutSearchForm';
@@ -15,7 +14,12 @@ import other_icon from '../../common/assets/other.svg';
 import math_icon from '../../common/assets/math.svg';
 import { dataInit } from '../../services/dataInit';
 import { financialRoutes, othersRoutes, mathRoutes } from '../../routes/routes'
+import { useHistory } from 'react-router-dom'
+
+
 var classNames = require('classnames');
+
+
 
 const calculatorNamesStyles = {
     paddingLeft:4, 
@@ -110,6 +114,7 @@ function NavBar(){
 
 
 function AllCalculators(){
+    const history = useHistory()
 
     const financialCalculators = [
         ...financialRoutes.subCategories[0].sub_calculator,
@@ -186,8 +191,15 @@ function AllCalculators(){
                             {
                                 financialCalculators.map((data:any) => {
                                     return (
-                                        <Typography>
-                                            <Box sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                        <Typography >
+                                            <Box 
+                                            className="div-link"
+                                            onClick={
+                                                ()=>{
+                                                    history.push(data.path)
+                                                }
+                                            }
+                                            sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
                                         </Typography>
                                     );
                                 })
@@ -207,8 +219,15 @@ function AllCalculators(){
                             {
                                 financialCalculators.map((data:any) => {
                                     return (
-                                        <Typography>
-                                            <Box sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                        <Typography >
+                                            <Box 
+                                            className="div-link"
+                                            onClick={
+                                                ()=>{
+                                                    history.push(data.path)
+                                                }
+                                            }
+                                            sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
                                         </Typography>
                                     );
                                 })
@@ -244,9 +263,16 @@ function AllCalculators(){
                                 {
                                     mathCalculatorsData.map((data:any) => {
                                         return (
-                                            <Typography>
-                                                <Box sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
-                                            </Typography>
+                                            <Typography >
+                                            <Box 
+                                            className="div-link"
+                                            onClick={
+                                                ()=>{
+                                                    history.push(data.path)
+                                                }
+                                            }
+                                            sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                        </Typography>
                                         );
                                     })
                                 }
@@ -265,8 +291,15 @@ function AllCalculators(){
                                 {
                                     mathCalculatorsData.map((data:any) => {
                                         return (
-                                            <Typography>
-                                                <Box sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                            <Typography >
+                                                <Box 
+                                                className="div-link"
+                                                onClick={
+                                                    ()=>{
+                                                        history.push(data.path)
+                                                    }
+                                                }
+                                                sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
                                             </Typography>
                                         );
                                     })
@@ -304,8 +337,15 @@ function AllCalculators(){
                                 {
                                     otherCalculatorsData.map((data:any) => {
                                         return (
-                                            <Typography>
-                                                <Box sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                            <Typography >
+                                                <Box 
+                                                className="div-link"
+                                                onClick={
+                                                    ()=>{
+                                                        history.push(data.path)
+                                                    }
+                                                }
+                                                sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
                                             </Typography>
                                         );
                                     })
@@ -325,8 +365,15 @@ function AllCalculators(){
                                 {
                                     otherCalculatorsData.map((data:any) => {
                                         return (
-                                            <Typography>
-                                                <Box sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                            <Typography >
+                                                <Box 
+                                                className="div-link"
+                                                onClick={
+                                                    ()=>{
+                                                        history.push(data.path)
+                                                    }
+                                                }
+                                                sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
                                             </Typography>
                                         );
                                     })
