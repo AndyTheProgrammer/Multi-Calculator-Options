@@ -193,12 +193,13 @@ export default function GPACalculator(){
               play2();
               reverse1();
               reverse2();
-              setValue([]);
+              clearAll()
               setPlayAnimation(false);
           }
       }
       else{
-          setValue([]);
+        clearAll()
+         
       }
   } 
 
@@ -218,21 +219,27 @@ export default function GPACalculator(){
 
 
   const [courses, setCourses] = useState([
-    {id: 1, value: 'Math'},
-    {id: 2, value: 'English'},
-    {id: 3, value: 'History'}
+    {id: 1, value: ''},
+    {id: 2, value: ''},
+    {id: 3, value: ''}
   ]);
   const [credit, setCredit] = useState([
-    {id: 1, value: '3'},
-    {id: 2, value: '2'},
-    {id: 3, value: '3'}
+    {id: 1, value: ''},
+    {id: 2, value: ''},
+    {id: 3, value: ''}
   ]);
   const [grade, setGrade] = useState([
-    {id: 1, value: 'A'},
-    {id: 2, value: 'B'},
-    {id: 3, value: 'C+'}
+    {id: 1, value: ''},
+    {id: 2, value: ''},
+    {id: 3, value: ''}
   ]);
 
+  function clearAll(){
+    setCourses([{id: 1, value: ''}])
+    setCredit([{id: 1, value: ''}])
+    setGrade([{id: 1, value: ''}])
+    setValue([]);
+  }
   const handler = (h, id, name) =>{
 
     const copyCoursesArray = courses;
@@ -482,6 +489,7 @@ export default function GPACalculator(){
                                           type="button" 
                                           handleClick={()=>{ 
                                               controlAnimation();
+
                                               }} 
                                           name="Clear"/>
                                       </Box>

@@ -9,9 +9,9 @@ import { SearchForm } from '../forms/searchForm';
 import { useHistory } from 'react-router-dom'
 
 // 
-import RootsCalculators from  '../TemperalComponentsFolder/pages/RootsCalculators'
+import GradesCalculators from  '../TemperalComponentsFolder/pages/GradesCalculators'
 import AreaConverter from  '../TemperalComponentsFolder/other/AreaConverter'
-import GradeCalculator from  '../TemperalComponentsFolder/math/GradeCalculator'
+import GPACalculator from  '../TemperalComponentsFolder/math/GPACalculator'
 import MarginOfErrorCalculator from '../pages/calculators/statistics/MarginOfErrorCalculator'
 
 
@@ -19,7 +19,7 @@ import MarginOfErrorCalculator from '../pages/calculators/statistics/MarginOfErr
 export default function TestPage(){
     return(
         <>
-          <GradeCalculator/>
+          <GPACalculator/>
         </>
     );
 }
