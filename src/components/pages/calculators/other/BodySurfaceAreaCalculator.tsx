@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import { Typography, Grid } from '@mui/material'
 import { Formik } from 'formik'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -14,6 +14,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  LATEX,
 } from '../../../../common/shared'
 import {
   CustomTextInput,
@@ -24,6 +25,8 @@ import {
   FormTabsContainer,
   ResultTabsContainer
 } from '../../../custom'
+
+const Latex = require('react-latex');
 
 const BodyMassFormulaCalculator = () => {
   const theme = useTheme();
@@ -63,156 +66,183 @@ const BodyMassFormulaCalculator = () => {
     <>
       <NavBar2 pagename="Body Surface Area Calculator" />
       <AddLayout>
-        {/* Form grid */}
-        <FormTabsContainer
-          tabTitle1={CALCULATORS.bodySurfaceArea}
-          animation={formAnimation}
+        <Grid
+          container
+          justifyContent="center"
         >
-          <Formik
-            initialValues={initialFormValues}
-            onSubmit={async ({
-              height,
-              height_unit,
-              weight,
-              weight_unit
-            }, { setSubmitting }) => {
-              const payload: BodySurfaceAreaI = {
+          {/* Form grid */}
+          <FormTabsContainer
+            tabTitle1={CALCULATORS.bodySurfaceArea}
+            animation={formAnimation}
+          >
+            <Formik
+              initialValues={initialFormValues}
+              onSubmit={async ({
                 height,
                 height_unit,
                 weight,
-                weight_unit,
-                method: 'allBodyMassFormulars'
-              }
-              console.log(JSON.stringify(payload))
-              try {
-                const { success, payload: bodySurfaceArea } = await calculateOthers(payload)
-                console.log('=====>', bodySurfaceArea)
-                if (typeof bodySurfaceArea === 'object') {
-                  const {
-                    DuBoisFormulaBodySurfaceArea,
-                    MostellerFormulaBodySurfaceArea,
-                    HaycockFormulaBodySurfaceArea,
-                    GehanAndGeorgeFormulaBodySurfaceArea,
-                    $BoydFormulaBodySurfaceArea,
-                    FujimotoFormulaBodySurfaceArea,
-                    TakahiraFormulaBodySurfaceArea,
-                    SchlichFormulaBodySurfaceArea,
-                    unit,
-                    unitType,
-                  } = bodySurfaceArea
-                  setResult({
-                    duBoisFormulaBodySurfaceArea: DuBoisFormulaBodySurfaceArea,
-                    mostellerFormulaBodySurfaceArea: MostellerFormulaBodySurfaceArea,
-                    haycockFormulaBodySurfaceArea: HaycockFormulaBodySurfaceArea,
-                    gehanAndGeorgeFormulaBodySurfaceArea: GehanAndGeorgeFormulaBodySurfaceArea,
-                    boydFormulaBodySurfaceArea: $BoydFormulaBodySurfaceArea,
-                    fujimotoFormulaBodySurfaceArea: FujimotoFormulaBodySurfaceArea,
-                    takahiraFormulaBodySurfaceArea: TakahiraFormulaBodySurfaceArea,
-                    schlichFormulaBodySurfaceArea: SchlichFormulaBodySurfaceArea,
-                    unit: unit
-                  })
+                weight_unit
+              }, { setSubmitting }) => {
+                const payload: BodySurfaceAreaI = {
+                  height,
+                  height_unit,
+                  weight,
+                  weight_unit,
+                  method: 'allBodyMassFormulars'
                 }
-                if (success === true) {
-                  setAnswer(success)
-                  formApi.start({
-                    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-                  });
-                  resultApi.start({
-                    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                    alignItems: 'center',
-                    justifyContent: 'flex-end',
-                  })
+                console.log(JSON.stringify(payload))
+                try {
+                  const { success, payload: bodySurfaceArea } = await calculateOthers(payload)
+                  console.log('=====>', bodySurfaceArea)
+                  if (typeof bodySurfaceArea === 'object') {
+                    const {
+                      DuBoisFormulaBodySurfaceArea,
+                      MostellerFormulaBodySurfaceArea,
+                      HaycockFormulaBodySurfaceArea,
+                      GehanAndGeorgeFormulaBodySurfaceArea,
+                      $BoydFormulaBodySurfaceArea,
+                      FujimotoFormulaBodySurfaceArea,
+                      TakahiraFormulaBodySurfaceArea,
+                      SchlichFormulaBodySurfaceArea,
+                      unit,
+                      unitType,
+                    } = bodySurfaceArea
+                    setResult({
+                      duBoisFormulaBodySurfaceArea: DuBoisFormulaBodySurfaceArea,
+                      mostellerFormulaBodySurfaceArea: MostellerFormulaBodySurfaceArea,
+                      haycockFormulaBodySurfaceArea: HaycockFormulaBodySurfaceArea,
+                      gehanAndGeorgeFormulaBodySurfaceArea: GehanAndGeorgeFormulaBodySurfaceArea,
+                      boydFormulaBodySurfaceArea: $BoydFormulaBodySurfaceArea,
+                      fujimotoFormulaBodySurfaceArea: FujimotoFormulaBodySurfaceArea,
+                      takahiraFormulaBodySurfaceArea: TakahiraFormulaBodySurfaceArea,
+                      schlichFormulaBodySurfaceArea: SchlichFormulaBodySurfaceArea,
+                      unit: unit
+                    })
+                  }
+                  if (success === true) {
+                    setAnswer(success)
+                    formApi.start({
+                      transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                      alignItems: 'center',
+                      justifyContent: 'flex-start',
+                    });
+                    resultApi.start({
+                      transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                      alignItems: 'center',
+                      justifyContent: 'flex-end',
+                    })
+                  }
+                } catch (err) {
+                  console.log('====>', err)
                 }
-              } catch (err) {
-                console.log('====>', err)
-              }
-            }}
-          >
-            {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-              <form onSubmit={handleSubmit} className="form-container">
-                <div className="form-row">
-                  <Label title={LABELS.height} />
-                  <CustomTextInput
-                    type={INPUT_TYPE.number}
-                    id="height"
-                    placeholder={PLACEHOLDERS.number}
-                    value={values.height}
-                    onChange={handleChange}
-                  />
+              }}
+            >
+              {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                <form onSubmit={handleSubmit} className="form-container">
+                  <div className="form-row">
+                    <Label title={LABELS.height} />
+                    <CustomTextInput
+                      type={INPUT_TYPE.number}
+                      id="height"
+                      placeholder={PLACEHOLDERS.number}
+                      value={values.height}
+                      onChange={handleChange}
+                    />
 
-                  <CustomSelect
-                    id="height_unit"
-                    measurement="length"
-                    value={values.height_unit}
-                    onChange={handleChange('height_unit')}
-                  />
-                </div>
+                    <CustomSelect
+                      id="height_unit"
+                      measurement="length"
+                      value={values.height_unit}
+                      onChange={handleChange('height_unit')}
+                    />
+                  </div>
 
-                <div className="form-row">
-                  <Label title={LABELS.weight} />
-                  <CustomTextInput
-                    type={INPUT_TYPE.number}
-                    id="weight"
-                    placeholder={PLACEHOLDERS.number}
-                    value={values.weight}
-                    onChange={handleChange}
-                  />
+                  <div className="form-row">
+                    <Label title={LABELS.weight} />
+                    <CustomTextInput
+                      type={INPUT_TYPE.number}
+                      id="weight"
+                      placeholder={PLACEHOLDERS.number}
+                      value={values.weight}
+                      onChange={handleChange}
+                    />
 
-                  <CustomSelect
-                    id="weight_unit"
-                    measurement="weight"
-                    value={values.weight_unit}
-                    onChange={handleChange('weight_unit')}
-                  />
-                </div>
+                    <CustomSelect
+                      id="weight_unit"
+                      measurement="weight"
+                      value={values.weight_unit}
+                      onChange={handleChange('weight_unit')}
+                    />
+                  </div>
 
-                <div
-                  className="form-row"
-                  style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                >
-                  <CustomBtn />
-                  <CustomResetBtn
-                    onHandleClick={() => resetForm()}
-                  />
-                </div>
-              </form>
-            )}
-          </Formik>
-        </FormTabsContainer>
+                  <div
+                    className="form-row"
+                    style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                  >
+                    <CustomBtn />
+                    <CustomResetBtn
+                      onHandleClick={() => resetForm()}
+                    />
+                  </div>
+                </form>
+              )}
+            </Formik>
+          </FormTabsContainer>
 
-        {/* Results grid */}
-        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-          {answer === true &&
-            <div className="mb-3">
-              <Typography variant="subtitle1">
-                Du Bois: {Result.duBoisFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
-              </Typography>
-              <Typography variant="subtitle1">
-                Mosteller: {Result.mostellerFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
-              </Typography>
-              <Typography variant="subtitle1">
-                Haycock: {Result.haycockFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
-              </Typography>
-              <Typography variant="subtitle1">
-                Gehan and George: {Result.gehanAndGeorgeFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
-              </Typography>
-              <Typography variant="subtitle1">
-                Boyd: {Result.boydFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
-              </Typography>
-              <Typography variant="subtitle1">
-                Fujimoto: {Result.fujimotoFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
-              </Typography>
-              <Typography variant="subtitle1">
-                Takahira: {Result.takahiraFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
-              </Typography>
-              <Typography variant="subtitle1">
-                Schlich: {Result.schlichFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
-              </Typography>
-            </div>
+          {/* Results grid */}
+          {answer !== true &&
+            <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+
+              <div className="mb-3 text-center text-wrap">
+                <Typography variant="subtitle1">
+                  <Latex displayMode={true}>{LATEX.duBoisBodySurfArea}</Latex>
+                  Du Bois: {Result.duBoisFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+
+                <Typography variant="subtitle1">
+                  <Latex displayMode={true}>{LATEX.mostellerBodySurfArea}</Latex>
+                  Mosteller: {Result.mostellerFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+
+                <Typography variant="subtitle1">
+                  <Latex displayMode={true}>{LATEX.haycockBodySurfArea}</Latex>
+                  Haycock: {Result.haycockFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+
+                <Typography variant="subtitle1">
+                  <Latex displayMode={true}>{LATEX.gehanAndGeorgeBodySurfArea}</Latex>
+                  Gehan and George: {Result.gehanAndGeorgeFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+
+                <Typography variant="subtitle1">
+                  <Latex displayMode={true}>{LATEX.boydFormulaBodySurfArea}</Latex>
+                  Boyd: {Result.boydFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+
+                <Typography variant="subtitle1">
+                  <Latex displayMode={true}>{LATEX.fujimotoFormulaBodySurfArea}</Latex>
+                  Fujimoto: {Result.fujimotoFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+
+                <Typography variant="subtitle1">
+                  <Latex displayMode={true}>{LATEX.takahiraBodySurfArea}</Latex>
+                  Takahira: {Result.takahiraFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+
+                <Typography variant="subtitle1">
+                  Men : <Latex displayMode={true}>
+                    {LATEX.schlichBodySurfArea_men}
+                  </Latex>
+                  Women: <Latex displayMode={true}>
+                    {LATEX.schlichBodySurfArea_women}
+                  </Latex>
+
+                  Schlich: {Result.schlichFormulaBodySurfaceArea}{Result.unit}<sup>2</sup>
+                </Typography>
+              </div>
+            </ResultTabsContainer>
           }
-        </ResultTabsContainer>
+        </Grid>
       </AddLayout>
     </>
   )
