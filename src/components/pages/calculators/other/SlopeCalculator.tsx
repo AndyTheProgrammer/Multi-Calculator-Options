@@ -105,326 +105,330 @@ function SlopeCalculator() {
     <>
       <NavBar2 pagename="Slope Calculator" />
       <AddLayout>
-        <animated.div style={formAnimation}>
-          <Box className={formDisplay2} >
-            <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
-              <StyledTab
-                wrapped
-                label={CALCULATORS.slopeCalculatorWithASingleKnownPoint}
-                {...a11yProps(0)}
-              />
-              <StyledTab
-                wrapped
-                label={CALCULATORS.slopeCalculatorForTwoKnownPoints}
-                {...a11yProps(1)}
-              />
-            </StyledTabs>
+        <Grid
+          container
+          justifyContent="center"
+        >
+          <animated.div style={formAnimation}>
+            <Box className={formDisplay2} >
+              <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
+                <StyledTab
+                  wrapped
+                  label={CALCULATORS.slopeCalculatorWithASingleKnownPoint}
+                  {...a11yProps(0)}
+                />
+                <StyledTab
+                  wrapped
+                  label={CALCULATORS.slopeCalculatorForTwoKnownPoints}
+                  {...a11yProps(1)}
+                />
+              </StyledTabs>
 
-            <TabPanel
-              value={tabValue}
-              index={0}
-            >
-              <Formik
-                initialValues={singleKnownPointInitialValues}
-                onSubmit={async ({
-                  x_1,
-                  y_1,
-                  slope,
-                  distance
-                }, { setSubmitting }) => {
-                  const payload: SinglePointWithKnownSlopeI = {
+              <TabPanel
+                value={tabValue}
+                index={0}
+              >
+                <Formik
+                  initialValues={singleKnownPointInitialValues}
+                  onSubmit={async ({
                     x_1,
                     y_1,
                     slope,
-                    distance,
-                    method: 'If1PointAndTheSlopeAreKnown'
-                  }
-                  console.log(JSON.stringify(payload))
-                  try {
-                    const { success, payload: singlePointWithKnowPoint } = await calculateMath(payload)
-                    console.log('=====>', singlePointWithKnowPoint)
-                    if (typeof singlePointWithKnowPoint === 'object') {
-                      const {
-                        x_2,
-                        y_2,
-                        Δx,
-                        Δy,
-                        angel,
-                        left_x_2,
-                        left_y_2,
-                        left_Δx,
-                        left_Δy,
-                        angle_left,
-                      } = singlePointWithKnowPoint
-                      setSingleKnownPointResult({
-                        x_2: x_2,
-                        y_2: y_2,
-                        Δx: Δx,
-                        Δy: Δy,
-                        angle: angel,
-                        left_x_2: left_x_2,
-                        left_y_2: left_y_2,
-                        left_Δx: left_Δx,
-                        left_Δy: left_Δy,
-                        angle_left: angle_left,
-                        angle_unit: '°'
-                      })
+                    distance
+                  }, { setSubmitting }) => {
+                    const payload: SinglePointWithKnownSlopeI = {
+                      x_1,
+                      y_1,
+                      slope,
+                      distance,
+                      method: 'If1PointAndTheSlopeAreKnown'
                     }
-                    if (success === true) {
-                      setAnswer(success)
-                      formApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                      });
-                      resultApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                      })
+                    console.log(JSON.stringify(payload))
+                    try {
+                      const { success, payload: singlePointWithKnowPoint } = await calculateMath(payload)
+                      console.log('=====>', singlePointWithKnowPoint)
+                      if (typeof singlePointWithKnowPoint === 'object') {
+                        const {
+                          x_2,
+                          y_2,
+                          Δx,
+                          Δy,
+                          angel,
+                          left_x_2,
+                          left_y_2,
+                          left_Δx,
+                          left_Δy,
+                          angle_left,
+                        } = singlePointWithKnowPoint
+                        setSingleKnownPointResult({
+                          x_2: x_2,
+                          y_2: y_2,
+                          Δx: Δx,
+                          Δy: Δy,
+                          angle: angel,
+                          left_x_2: left_x_2,
+                          left_y_2: left_y_2,
+                          left_Δx: left_Δx,
+                          left_Δy: left_Δy,
+                          angle_left: angle_left,
+                          angle_unit: '°'
+                        })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
+                        formApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-start',
+                        });
+                        resultApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-end',
+                        })
+                      }
+                    } catch (err) {
+                      console.log('====>', err)
                     }
-                  } catch (err) {
-                    console.log('====>', err)
-                  }
-                }}
+                  }}
+                >
+                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                    <form onSubmit={handleSubmit} className="form-container">
+                      <div className="form-row">
+                        <Label title={LABELS.x1} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="x_1"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.x_1}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.y1} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="y_1"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.y_1}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.distance} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="distance"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.distance}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.slope} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="slope"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.slope}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div
+                        className="form-row"
+                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                      >
+                        <CustomBtn />
+                        <CustomResetBtn
+                          onHandleClick={() => resetForm()}
+                        />
+                      </div>
+                    </form>
+                  )}
+                </Formik>
+              </TabPanel>
+
+              <TabPanel
+                value={tabValue}
+                index={1}
               >
-                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                  <form onSubmit={handleSubmit} className="form-container">
-                    <div className="form-row">
-                      <Label title={LABELS.x1} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="x_1"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.x_1}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.y1} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="y_1"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.y_1}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.distance} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="distance"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.distance}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.slope} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="slope"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.slope}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div
-                      className="form-row"
-                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                    >
-                      <CustomBtn />
-                      <CustomResetBtn
-                        onHandleClick={() => resetForm()}
-                      />
-                    </div>
-                  </form>
-                )}
-              </Formik>
-            </TabPanel>
-
-            <TabPanel
-              value={tabValue}
-              index={1}
-            >
-              <Formik
-                initialValues={twoKnownPointsInitialValues}
-                onSubmit={async ({
-                  y_1,
-                  y_2,
-                  x_1,
-                  x_2,
-                }, { setSubmitting }) => {
-                  const payload: SlopeCalculatorForTwoKnownPointsI = {
+                <Formik
+                  initialValues={twoKnownPointsInitialValues}
+                  onSubmit={async ({
                     y_1,
                     y_2,
                     x_1,
                     x_2,
-                    method: 'IfThe2PointsAreKnownSlopeCalculator'
-                  }
-                  console.log(JSON.stringify(payload))
-                  try {
-                    const { success, payload: slopeWithTwoKnownPoints } = await calculateMath(payload)
-                    console.log('=====>', slopeWithTwoKnownPoints)
-                    const { d, m, angle, } = slopeWithTwoKnownPoints
-                    if (typeof slopeWithTwoKnownPoints === 'object') {
-                      settwoKnownPointsResult({
-                        slope: m,
-                        distance: d,
-                        angle: angle,
-                      })
+                  }, { setSubmitting }) => {
+                    const payload: SlopeCalculatorForTwoKnownPointsI = {
+                      y_1,
+                      y_2,
+                      x_1,
+                      x_2,
+                      method: 'IfThe2PointsAreKnownSlopeCalculator'
                     }
-                    if (success === true) {
-                      setAnswer(success)
-                      formApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                      });
-                      resultApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                      })
+                    console.log(JSON.stringify(payload))
+                    try {
+                      const { success, payload: slopeWithTwoKnownPoints } = await calculateMath(payload)
+                      console.log('=====>', slopeWithTwoKnownPoints)
+                      const { d, m, angle, } = slopeWithTwoKnownPoints
+                      if (typeof slopeWithTwoKnownPoints === 'object') {
+                        settwoKnownPointsResult({
+                          slope: m,
+                          distance: d,
+                          angle: angle,
+                        })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
+                        formApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-start',
+                        });
+                        resultApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-end',
+                        })
+                      }
+                    } catch (err) {
+                      console.log('====>', err)
                     }
-                  } catch (err) {
-                    console.log('====>', err)
-                  }
-                }}
-              >
-                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                  <form onSubmit={handleSubmit} className="form-container">
-                    <div className="form-row">
-                      <Label title={LABELS.x1} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="x_1"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.x_1}
-                        onChange={handleChange}
-                      />
-                    </div>
+                  }}
+                >
+                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                    <form onSubmit={handleSubmit} className="form-container">
+                      <div className="form-row">
+                        <Label title={LABELS.x1} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="x_1"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.x_1}
+                          onChange={handleChange}
+                        />
+                      </div>
 
-                    <div className="form-row">
-                      <Label title={LABELS.y1} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="y_1"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.y_1}
-                        onChange={handleChange}
-                      />
-                    </div>
+                      <div className="form-row">
+                        <Label title={LABELS.y1} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="y_1"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.y_1}
+                          onChange={handleChange}
+                        />
+                      </div>
 
-                    <div className="form-row">
-                      <Label title={LABELS.x2} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="x_2"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.x_2}
-                        onChange={handleChange}
-                      />
-                    </div>
+                      <div className="form-row">
+                        <Label title={LABELS.x2} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="x_2"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.x_2}
+                          onChange={handleChange}
+                        />
+                      </div>
 
-                    <div className="form-row">
-                      <Label title={LABELS.y2} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="y_2"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.y_2}
-                        onChange={handleChange}
-                      />
-                    </div>
+                      <div className="form-row">
+                        <Label title={LABELS.y2} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="y_2"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.y_2}
+                          onChange={handleChange}
+                        />
+                      </div>
 
-                    <div
-                      className="form-row"
-                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                    >
-                      <CustomBtn />
-                      <CustomResetBtn
-                        onHandleClick={() => resetForm()}
-                      />
-                    </div>
-                  </form>
-                )}
-              </Formik>
-            </TabPanel>
+                      <div
+                        className="form-row"
+                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                      >
+                        <CustomBtn />
+                        <CustomResetBtn
+                          onHandleClick={() => resetForm()}
+                        />
+                      </div>
+                    </form>
+                  )}
+                </Formik>
+              </TabPanel>
 
-          </Box>
-        </animated.div>
-
-
-        <ResultTabsContainer
-          tabTitle={'Result'}
-          animation={resultAnimation}
-        >
-          {answer === true &&
-            <Box className="text-wrap">
-              {tabValue === 0 &&
-                <Box sx={{ color: COLORS.text }}>
-                  <div className="mb-3">
-                    <Typography variant="subtitle1">
-                      X2: {singleKnownPointResult.x_2}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Y2: {singleKnownPointResult.y_2}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      ΔX: {singleKnownPointResult.Δx}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      ΔY: {singleKnownPointResult.Δy}
-                    </Typography>
-                    <Typography variant="subtitle1" gutterBottom>
-                      θ: {singleKnownPointResult.angle}{singleKnownPointResult.angle_unit}
-                    </Typography>
-
-                    <Typography variant="subtitle1" component='h6' gutterBottom>or</Typography>
-
-                    <Typography variant="subtitle1">
-                      X2: {singleKnownPointResult.left_x_2}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Y2: {singleKnownPointResult.left_y_2}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      ΔX: {singleKnownPointResult.left_Δx}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      ΔY: {singleKnownPointResult.left_Δy}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      θ: {singleKnownPointResult.angle_left}{singleKnownPointResult.angle_unit}
-                    </Typography>
-                  </div>
-                </Box>
-              }
-
-              {tabValue === 1 &&
-                <Box sx={{ color: COLORS.text }}>
-                  <Typography variant="subtitle1">
-                    Slope: {twoKnownPointsResult.slope}
-                  </Typography>
-
-                  <Typography variant="subtitle1">
-                    Distance: {twoKnownPointsResult.distance}
-                  </Typography>
-
-                  <Typography variant="subtitle1">
-                    Angle: {twoKnownPointsResult.angle}
-                  </Typography>
-                </Box>
-              }
             </Box>
+          </animated.div>
+
+          {answer === true &&
+            <ResultTabsContainer
+              tabTitle={'Result'}
+              animation={resultAnimation}
+            >
+              <Box className="text-wrap">
+                {tabValue === 0 &&
+                  <Box sx={{ color: COLORS.text }}>
+                    <div className="mb-3">
+                      <Typography variant="subtitle1">
+                        X2: {singleKnownPointResult.x_2}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Y2: {singleKnownPointResult.y_2}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        ΔX: {singleKnownPointResult.Δx}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        ΔY: {singleKnownPointResult.Δy}
+                      </Typography>
+                      <Typography variant="subtitle1" gutterBottom>
+                        θ: {singleKnownPointResult.angle}{singleKnownPointResult.angle_unit}
+                      </Typography>
+
+                      <Typography variant="subtitle1" component='h6' gutterBottom>or</Typography>
+
+                      <Typography variant="subtitle1">
+                        X2: {singleKnownPointResult.left_x_2}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Y2: {singleKnownPointResult.left_y_2}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        ΔX: {singleKnownPointResult.left_Δx}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        ΔY: {singleKnownPointResult.left_Δy}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        θ: {singleKnownPointResult.angle_left}{singleKnownPointResult.angle_unit}
+                      </Typography>
+                    </div>
+                  </Box>
+                }
+
+                {tabValue === 1 &&
+                  <Box sx={{ color: COLORS.text }}>
+                    <Typography variant="subtitle1">
+                      Slope: {twoKnownPointsResult.slope}
+                    </Typography>
+
+                    <Typography variant="subtitle1">
+                      Distance: {twoKnownPointsResult.distance}
+                    </Typography>
+
+                    <Typography variant="subtitle1">
+                      Angle: {twoKnownPointsResult.angle}
+                    </Typography>
+                  </Box>
+                }
+              </Box>
+            </ResultTabsContainer>
           }
-        </ResultTabsContainer>
+        </Grid>
       </AddLayout>
     </>
   )

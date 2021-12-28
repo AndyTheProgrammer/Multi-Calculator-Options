@@ -109,16 +109,15 @@ const ProfitMarginCalculator = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} >
-        {answer === true &&
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} >
           <div className="mb-3">
             <Typography variant="subtitle1"> Gross margin: {Result.grossMargin}%</Typography>
             <Typography variant="subtitle1"> Gross profit: {Result.currency}{Result.grossProfit}</Typography>
             <Typography variant="subtitle1"> Mark up: {Result.markUp}%</Typography>
           </div>
-        }
-
-      </ResultTabsContainer>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

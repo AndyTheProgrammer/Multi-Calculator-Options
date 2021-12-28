@@ -135,15 +135,14 @@ const PresentValue = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} >
-        {answer === true &&
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} >
           <div className="mb-3">
             <Typography variant="subtitle1"> Present value: {Result.currency}{Result.PV}</Typography>
             <Typography variant="subtitle1"> Total interest: {Result.currency}{Result.totalInterest}</Typography>
           </div>
-        }
-
-      </ResultTabsContainer>
+        </ResultTabsContainer>
+      }
     </>
   )
 }
