@@ -255,7 +255,7 @@ export const COLORS = {
   background: "linear-gradient(90deg, #fbfbfb 0%, #d1d1d1 100%)",
   gradientBackground: "linear-gradient(90deg, #fbfbfb 0%, #d1d1d1 100%)",
   paper_background: "#A8A79F",
-  text: "#4072B5",
+  text: "#3267ac",
   onGradient: "#ffffff",
   input: "#dde9ec"
 };
@@ -324,11 +324,11 @@ export const LATEX = {
   stockTradinfMargin: `$$`,
 
 
-  marginOfError: `$$`,
+  marginOfError: `$ε = z \\frac{S}{\\sqrt{n}}$`,
   probOfASeriesOfIndependentEvents: `$$`,
   probOfTwoEvents: `$$`,
   probSolverForTwoEvents: `$$`,
-  sampleSizeCalc: `$$`,
+  sampleSizeCalc: `$n = z^{2}  p̂  \\frac{(1 - p̂)}{ε^{2}}$`,
 
   bloodAlcoholContent: `$$`,
   bmrKatch: `$$`,

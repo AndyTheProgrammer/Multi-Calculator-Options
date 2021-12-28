@@ -101,13 +101,26 @@ const CurbAndGutterBarrier = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: trapSpeedMethod } = await calculateOthers(payload)
+              const { success, payload: trapSpeedMethod } = await calculateOthers(payload)
               console.log('=====>', trapSpeedMethod)
               const { concreteNeeded, unit, } = trapSpeedMethod
               if (typeof trapSpeedMethod === 'object') {
                 setResult({
                   concreteNeeded: concreteNeeded,
                   unit: unit
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
                 })
               }
             } catch (err) {
@@ -245,13 +258,13 @@ const CurbAndGutterBarrier = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Amount of concrete needed: {Result.concreteNeeded}{Result.unit}</Typography>
-        </div>
-      </ResultTabsContainer>
-
-
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3 text-center">
+            <Typography variant="subtitle1"> Amount of concrete needed: {Result.concreteNeeded}{Result.unit}</Typography>
+          </div>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

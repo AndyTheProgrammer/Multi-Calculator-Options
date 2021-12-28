@@ -29,15 +29,17 @@ const SphereVolume = (props: any) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    transform: matches === true ? 'translateX(0px)' : 'translateX(0px)',
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 'auto',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 'auto',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
@@ -136,20 +138,19 @@ const SphereVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer
-        tabTitle={'Result'}
-        animation={resultAnimation}
-        latex={LATEX.sphereVolume}
-      >
-        {answer === true &&
-          <div className="text-wrap">
+      {answer === true &&
+        <ResultTabsContainer
+          tabTitle={'Result'}
+          animation={resultAnimation}
+          latex={LATEX.sphereVolume}
+        >
+          <div className="text-wrap text-center">
             <Typography variant="subtitle1">
               Volume = {Result.volume}{Result.units}<sup>3</sup>
             </Typography>
           </div>
-        }
-
-      </ResultTabsContainer>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

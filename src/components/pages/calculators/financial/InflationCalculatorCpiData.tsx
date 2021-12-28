@@ -105,14 +105,13 @@ const InflationCalculatorCpiData = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} >
-        {answer === true &&
-          <div className="text-center mb-3">
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} >
+          <div className="mb-3 text-center">
             <Typography variant="subtitle1"> Inflation: {Result.currency}{Result.inflation}</Typography>
           </div>
-        }
-
-      </ResultTabsContainer>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

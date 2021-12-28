@@ -44,15 +44,17 @@ function LoanCalculator() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    transform: matches === true ? 'translateX(0px)' : 'translateX(0px)',
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 'auto',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 'auto',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [tabValue, setTabValue] = React.useState(0);
@@ -104,7 +106,7 @@ function LoanCalculator() {
   })
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setTabValue(newValue);
+    setTabValue(newValue)
     if (newValue === 0) {
       setCalcName("Amortized Loan: Paying Back a Fixed Amount Periodically")
     } else if (newValue === 1) {
@@ -121,406 +123,411 @@ function LoanCalculator() {
         pagename={`Loan Calculator - ${calcName}`}
       />
       <AddLayout>
-        <animated.div style={formAnimation}>
-          <Box className={formDisplay2} >
-            <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
-              <StyledTab
-                wrapped
-                label={CALCULATORS.amortizedLoan}
-                {...a11yProps(0)}
-              />
-              <StyledTab
-                wrapped
-                label={CALCULATORS.deferredPaymentsLoan}
-                {...a11yProps(1)}
-              />
-              <StyledTab
-                wrapped
-                label={CALCULATORS.bondPayBackPredetermined}
-                {...a11yProps(2)}
-              />
-            </StyledTabs>
+        <Grid
+          container
+          justifyContent="center"
+        >
+          <animated.div style={formAnimation}>
+            <Box className={formDisplay2} >
+              <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
+                <StyledTab
+                  wrapped
+                  label={CALCULATORS.amortizedLoan}
+                  {...a11yProps(0)}
+                />
+                <StyledTab
+                  wrapped
+                  label={CALCULATORS.deferredPaymentsLoan}
+                  {...a11yProps(1)}
+                />
+                <StyledTab
+                  wrapped
+                  label={CALCULATORS.bondPayBackPredetermined}
+                  {...a11yProps(2)}
+                />
+              </StyledTabs>
 
-            <TabPanel
-              value={tabValue}
-              index={0}
-            >
-              <Formik
-                initialValues={amortizedLoanInitialValues}
-                onSubmit={async ({
-                  interest_rate,
-                  present_value,
-                  number_of_months,
-                  number_of_years,
-                }, { setSubmitting }) => {
-                  const payload: AmortizedLoanFixedAmountI = {
+              <TabPanel
+                value={tabValue}
+                index={0}
+              >
+                <Formik
+                  initialValues={amortizedLoanInitialValues}
+                  onSubmit={async ({
                     interest_rate,
                     present_value,
                     number_of_months,
                     number_of_years,
-                    method: 'amortizedLoanFixeAmount'
-                  }
-                  console.log(JSON.stringify(payload))
-                  try {
-                    const { success, payload: amortizedLoanWithFixedAmount } = await calculateFinances(payload)
-                    console.log('=====>', amortizedLoanWithFixedAmount)
-                    const { totalRepayment, currency } = amortizedLoanWithFixedAmount
-                    if (typeof amortizedLoanWithFixedAmount === 'object') {
-                      setAmortizedLoanResult({
-                        paymentEveryMonth: 0,
-                        totalPayments: 0,
-                        totalInterest: 0,
-                        currency: currency
-                      })
+                  }, { setSubmitting }) => {
+                    const payload: AmortizedLoanFixedAmountI = {
+                      interest_rate,
+                      present_value,
+                      number_of_months,
+                      number_of_years,
+                      method: 'amortizedLoanFixeAmount'
                     }
-                    if (success === true) {
-                      setAnswer(success)
-                      formApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                      });
-                      resultApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                      })
+                    console.log(JSON.stringify(payload))
+                    try {
+                      const { success, payload: amortizedLoanWithFixedAmount } = await calculateFinances(payload)
+                      console.log('=====>', amortizedLoanWithFixedAmount)
+                      const { totalRepayment, currency } = amortizedLoanWithFixedAmount
+                      if (typeof amortizedLoanWithFixedAmount === 'object') {
+                        setAmortizedLoanResult({
+                          paymentEveryMonth: 0,
+                          totalPayments: 0,
+                          totalInterest: 0,
+                          currency: currency
+                        })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
+                        formApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-start',
+                        });
+                        resultApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-end',
+                        })
+                      }
+                    } catch (err) {
+                      console.log('====>', err)
                     }
-                  } catch (err) {
-                    console.log('====>', err)
-                  }
-                }}
+                  }}
+                >
+                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                    <form onSubmit={handleSubmit} className="form-container">
+                      <div className="form-row">
+                        <Label title={LABELS.interestRate} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="interest_rate"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.interest_rate}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.numberOfMonths} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="number_of_months"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.number_of_months}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.presentValue} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="present_value"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.present_value}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.numberOfYears} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="number_of_years"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.number_of_years}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div
+                        className="form-row"
+                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                      >
+                        <CustomBtn />
+                        <CustomResetBtn
+                          onHandleClick={() => resetForm()}
+                        />
+                      </div>
+                    </form>
+                  )}
+                </Formik>
+              </TabPanel>
+
+              <TabPanel
+                value={tabValue}
+                index={1}
               >
-                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                  <form onSubmit={handleSubmit} className="form-container">
-                    <div className="form-row">
-                      <Label title={LABELS.interestRate} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="interest_rate"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.interest_rate}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.numberOfMonths} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="number_of_months"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.number_of_months}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.presentValue} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="present_value"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.present_value}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.numberOfYears} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="number_of_years"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.number_of_years}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div
-                      className="form-row"
-                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                    >
-                      <CustomBtn />
-                      <CustomResetBtn
-                        onHandleClick={() => resetForm()}
-                      />
-                    </div>
-                  </form>
-                )}
-              </Formik>
-            </TabPanel>
-
-            <TabPanel
-              value={tabValue}
-              index={1}
-            >
-              <Formik
-                initialValues={bondInitialValues}
-                onSubmit={async ({
-                  interest_rate,
-                  predetermined_amount,
-                  number_of_months,
-                  number_of_years,
-                }, { setSubmitting }) => {
-                  const payload: BondPayBackPredeterminedI = {
+                <Formik
+                  initialValues={bondInitialValues}
+                  onSubmit={async ({
                     interest_rate,
                     predetermined_amount,
                     number_of_months,
                     number_of_years,
-                    method: 'bondPayBackPredeterminedAmountAtLoanMaturity'
-                  }
-                  console.log(JSON.stringify(payload))
-                  try {
-                    const { success, payload: bondPaybackWithPredeterminedAmount } = await calculateFinances(payload)
-                    console.log('=====>', bondPaybackWithPredeterminedAmount)
-                    const { monthlyRepayments, totalAmountRepayable, currency } = bondPaybackWithPredeterminedAmount
-                    if (typeof bondPaybackWithPredeterminedAmount === 'object') {
-                      setBondResult({
-                        monthlyRepayments: monthlyRepayments,
-                        totalAmountRepayable: totalAmountRepayable,
-                        currency: currency
-                      })
+                  }, { setSubmitting }) => {
+                    const payload: BondPayBackPredeterminedI = {
+                      interest_rate,
+                      predetermined_amount,
+                      number_of_months,
+                      number_of_years,
+                      method: 'bondPayBackPredeterminedAmountAtLoanMaturity'
                     }
-                    if (success === true) {
-                      setAnswer(success)
-                      formApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                      });
-                      resultApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                      })
+                    console.log(JSON.stringify(payload))
+                    try {
+                      const { success, payload: bondPaybackWithPredeterminedAmount } = await calculateFinances(payload)
+                      console.log('=====>', bondPaybackWithPredeterminedAmount)
+                      const { monthlyRepayments, totalAmountRepayable, currency } = bondPaybackWithPredeterminedAmount
+                      if (typeof bondPaybackWithPredeterminedAmount === 'object') {
+                        setBondResult({
+                          monthlyRepayments: monthlyRepayments,
+                          totalAmountRepayable: totalAmountRepayable,
+                          currency: currency
+                        })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
+                        formApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-start',
+                        });
+                        resultApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-end',
+                        })
+                      }
+                    } catch (err) {
+                      console.log('====>', err)
                     }
-                  } catch (err) {
-                    console.log('====>', err)
-                  }
-                }}
+                  }}
+                >
+                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                    <form onSubmit={handleSubmit} className="form-container">
+                      <div className="form-row">
+                        <Label title={LABELS.interestRate} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="interest_rate"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.interest_rate}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.predeterminedAmount} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="predetermined_amount"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.predetermined_amount}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.numberOfMonths} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="number_of_months"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.number_of_months}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.numberOfYears} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="number_of_years"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.number_of_years}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div
+                        className="form-row"
+                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                      >
+                        <CustomBtn />
+                        <CustomResetBtn
+                          onHandleClick={() => resetForm()}
+                        />
+                      </div>
+                    </form>
+                  )}
+                </Formik>
+              </TabPanel>
+
+              <TabPanel
+                value={tabValue}
+                index={2}
               >
-                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                  <form onSubmit={handleSubmit} className="form-container">
-                    <div className="form-row">
-                      <Label title={LABELS.interestRate} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="interest_rate"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.interest_rate}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.predeterminedAmount} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="predetermined_amount"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.predetermined_amount}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.numberOfMonths} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="number_of_months"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.number_of_months}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.numberOfYears} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="number_of_years"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.number_of_years}
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div
-                      className="form-row"
-                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                    >
-                      <CustomBtn />
-                      <CustomResetBtn
-                        onHandleClick={() => resetForm()}
-                      />
-                    </div>
-                  </form>
-                )}
-              </Formik>
-            </TabPanel>
-
-            <TabPanel
-              value={tabValue}
-              index={2}
-            >
-              <Formik
-                initialValues={deferredInitialValues}
-                onSubmit={async ({
-                  interest_rate,
-                  loan_amount,
-                  number_of_months,
-                  number_of_years,
-                }, { setSubmitting }) => {
-                  const payload: DeferredPaymentsLumpsumAtMaturityI = {
+                <Formik
+                  initialValues={deferredInitialValues}
+                  onSubmit={async ({
                     interest_rate,
                     loan_amount,
                     number_of_months,
                     number_of_years,
-                    method: 'DeferedPaymentLumpSumAtMaturity'
-                  }
-                  console.log(JSON.stringify(payload))
-                  try {
-                    const { success, payload: deferedPaymentLumpsumAtMaturity } = await calculateFinances(payload)
-                    console.log('=====>', deferedPaymentLumpsumAtMaturity)
-                    const { amountDueAtLoanMaturity, totalInterest, currency } = deferedPaymentLumpsumAtMaturity
-                    if (typeof deferedPaymentLumpsumAtMaturity === 'object') {
-                      setDeferredResult({
-                        amountDueAtLoanMaturity: amountDueAtLoanMaturity,
-                        totalInterest: totalInterest,
-                        currency: currency
-                      })
+                  }, { setSubmitting }) => {
+                    const payload: DeferredPaymentsLumpsumAtMaturityI = {
+                      interest_rate,
+                      loan_amount,
+                      number_of_months,
+                      number_of_years,
+                      method: 'DeferedPaymentLumpSumAtMaturity'
                     }
-                    if (success === true) {
-                      setAnswer(success)
-                      formApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                      });
-                      resultApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                      })
+                    console.log(JSON.stringify(payload))
+                    try {
+                      const { success, payload: deferedPaymentLumpsumAtMaturity } = await calculateFinances(payload)
+                      console.log('=====>', deferedPaymentLumpsumAtMaturity)
+                      const { amountDueAtLoanMaturity, totalInterest, currency } = deferedPaymentLumpsumAtMaturity
+                      if (typeof deferedPaymentLumpsumAtMaturity === 'object') {
+                        setDeferredResult({
+                          amountDueAtLoanMaturity: amountDueAtLoanMaturity,
+                          totalInterest: totalInterest,
+                          currency: currency
+                        })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
+                        formApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-start',
+                        });
+                        resultApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-end',
+                        })
+                      }
+                    } catch (err) {
+                      console.log('====>', err)
                     }
-                  } catch (err) {
-                    console.log('====>', err)
-                  }
-                }}
-              >
-                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                  <form onSubmit={handleSubmit} className="form-container">
-                    <div className="form-row">
-                      <Label title={LABELS.interestRate} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="interest_rate"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.interest_rate}
-                        onChange={handleChange}
-                      />
-                    </div>
+                  }}
+                >
+                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                    <form onSubmit={handleSubmit} className="form-container">
+                      <div className="form-row">
+                        <Label title={LABELS.interestRate} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="interest_rate"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.interest_rate}
+                          onChange={handleChange}
+                        />
+                      </div>
 
-                    <div className="form-row">
-                      <Label title={LABELS.creditCardBalance} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="loan_amount"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.loan_amount}
-                        onChange={handleChange}
-                      />
-                    </div>
+                      <div className="form-row">
+                        <Label title={LABELS.creditCardBalance} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="loan_amount"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.loan_amount}
+                          onChange={handleChange}
+                        />
+                      </div>
 
-                    <div className="form-row">
-                      <Label title={LABELS.numberOfMonths} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="number_of_months"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.number_of_months}
-                        onChange={handleChange}
-                      />
-                    </div>
+                      <div className="form-row">
+                        <Label title={LABELS.numberOfMonths} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="number_of_months"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.number_of_months}
+                          onChange={handleChange}
+                        />
+                      </div>
 
-                    <div className="form-row">
-                      <Label title={LABELS.numberOfYears} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="number_of_years"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.number_of_years}
-                        onChange={handleChange}
-                      />
-                    </div>
+                      <div className="form-row">
+                        <Label title={LABELS.numberOfYears} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="number_of_years"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.number_of_years}
+                          onChange={handleChange}
+                        />
+                      </div>
 
 
-                    <div
-                      className="form-row"
-                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                    >
-                      <CustomBtn />
-                      <CustomResetBtn
-                        onHandleClick={() => resetForm()}
-                      />
-                    </div>
-                  </form>
-                )}
-              </Formik>
-            </TabPanel>
+                      <div
+                        className="form-row"
+                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                      >
+                        <CustomBtn />
+                        <CustomResetBtn
+                          onHandleClick={() => resetForm()}
+                        />
+                      </div>
+                    </form>
+                  )}
+                </Formik>
+              </TabPanel>
 
-          </Box>
-        </animated.div>
-
-
-        <ResultTabsContainer
-          tabTitle={'Result'}
-          animation={resultAnimation}
-        >
-          {answer === true &&
-            <Box className="text-wrap">
-              {tabValue === 0 &&
-                <Box sx={{ color: COLORS.text }}>
-                  <Latex displayMode={true}>{LATEX.amortizedLoan}</Latex>
-                  <Typography variant="subtitle1">
-                    Payment Every Month: {amortizedLoanResult.currency}{amortizedLoanResult.paymentEveryMonth}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Payments Total: {amortizedLoanResult.currency}{amortizedLoanResult.totalPayments}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Total Interest: {amortizedLoanResult.currency}{amortizedLoanResult.totalInterest}
-                  </Typography>
-                </Box>
-              }
-
-              {tabValue === 1 &&
-                <Box sx={{ color: COLORS.text }}>
-                  <Latex displayMode={true}>{LATEX.bondPayback}</Latex>
-                  <Typography variant="subtitle1">
-                    Your monthly repayments: {bondResult.currency}{bondResult.monthlyRepayments}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Total amount repayments: {bondResult.currency}{bondResult.totalAmountRepayable}
-                  </Typography>
-                </Box>
-              }
-
-              {tabValue === 2 &&
-                <Box sx={{ color: COLORS.text }}>
-                  <Latex displayMode={true}>{LATEX.deferredPayment}</Latex>
-                  <Typography variant="subtitle1">
-                    Amount due at loan maturity: {deferredResult.currency}{deferredResult.amountDueAtLoanMaturity}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Total interest: {deferredResult.currency}{deferredResult.totalInterest}
-                  </Typography>
-                </Box>
-              }
             </Box>
+          </animated.div>
+
+          {answer === true &&
+            <ResultTabsContainer
+              tabTitle={'Result'}
+              animation={resultAnimation}
+            >
+
+              <Box className="text-wrap">
+                {tabValue === 0 &&
+                  <Box sx={{ color: COLORS.text }}>
+                    <Latex displayMode={true}>{LATEX.amortizedLoan}</Latex>
+                    <Typography variant="subtitle1">
+                      Payment Every Month: {amortizedLoanResult.currency}{amortizedLoanResult.paymentEveryMonth}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      Payments Total: {amortizedLoanResult.currency}{amortizedLoanResult.totalPayments}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      Total Interest: {amortizedLoanResult.currency}{amortizedLoanResult.totalInterest}
+                    </Typography>
+                  </Box>
+                }
+
+                {tabValue === 1 &&
+                  <Box sx={{ color: COLORS.text }}>
+                    <Latex displayMode={true}>{LATEX.bondPayback}</Latex>
+                    <Typography variant="subtitle1">
+                      Your monthly repayments: {bondResult.currency}{bondResult.monthlyRepayments}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      Total amount repayments: {bondResult.currency}{bondResult.totalAmountRepayable}
+                    </Typography>
+                  </Box>
+                }
+
+                {tabValue === 2 &&
+                  <Box sx={{ color: COLORS.text }}>
+                    <Latex displayMode={true}>{LATEX.deferredPayment}</Latex>
+                    <Typography variant="subtitle1">
+                      Amount due at loan maturity: {deferredResult.currency}{deferredResult.amountDueAtLoanMaturity}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      Total interest: {deferredResult.currency}{deferredResult.totalInterest}
+                    </Typography>
+                  </Box>
+                }
+              </Box>
+            </ResultTabsContainer>
           }
-        </ResultTabsContainer>
+        </Grid>
       </AddLayout>
     </>
   )

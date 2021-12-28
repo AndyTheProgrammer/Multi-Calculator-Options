@@ -22,12 +22,12 @@ import {
 const MortgagePayOffWithoutLoanTerm = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
-  const [initialFormValues] = React.useState({
+  const [unknownLoanTermInitialValues] = React.useState({
     interest_rate: "",
     principal_balance: "",
     monthly_payment: "",
   })
-  const [Result, setResult] = React.useState({
+  const [unknownResult, setUnknownResult] = React.useState({
     answer: 0,
     years: 0,
     months: 0,
@@ -38,7 +38,7 @@ const MortgagePayOffWithoutLoanTerm = () => {
       {/* Form grid */}
       <FormTabsContainer tabTitle1={CALCULATORS.mortgagePayOffWithoutLoanTerm} >
         <Formik
-          initialValues={initialFormValues}
+          initialValues={unknownLoanTermInitialValues}
           onSubmit={async ({
             interest_rate,
             principal_balance,
@@ -56,7 +56,7 @@ const MortgagePayOffWithoutLoanTerm = () => {
               console.log('=====>', mortgagePayoffCalculator)
               const { answer, years, months } = mortgagePayoffCalculator
               if (typeof mortgagePayoffCalculator === 'object') {
-                setResult({
+                setUnknownResult({
                   answer: answer,
                   years: years,
                   months: months
@@ -115,24 +115,25 @@ const MortgagePayOffWithoutLoanTerm = () => {
                 />
               </div>
             </form>
-          )}
-        </Formik>
-      </FormTabsContainer>
+          )
+          }
+        </Formik >
+      </FormTabsContainer >
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} >
+      < ResultTabsContainer tabTitle={'Result'} >
         {answer === true &&
-          <div className="text-center mb-3">
+          <div className="mb-3">
             <Typography variant="subtitle1">
-              Answer: {Result.answer}
+              Answer: {unknownResult.answer}
             </Typography>
             <Typography variant="subtitle1">
-              Payoff in: {Result.years} years and {Result.months} months
+              Payoff in: {unknownResult.years} years and {unknownResult.months} months
             </Typography>
           </div>
         }
 
-      </ResultTabsContainer>
+      </ResultTabsContainer >
     </>
   )
 }

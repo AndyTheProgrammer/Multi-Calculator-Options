@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid, Box } from '@mui/material';
 
 import { NavBar2 } from '../../navbar/navbar2'
 import AddLayout from '../../layouts/AddLayout'
@@ -58,13 +59,18 @@ function DueDateCalculator() {
     <>
       <NavBar2 pagename="Due Date Calculator" />
       <AddLayout>
-        {currentCalc.component}
-        <SimpleDialog
-          dropOptions={calculators}
-          selectedValue={selectedCalc}
-          open={open}
-          onClose={handleClose}
-        />
+        <Grid
+          container
+          justifyContent="center"
+        >
+          {currentCalc.component}
+          <SimpleDialog
+            dropOptions={calculators}
+            selectedValue={selectedCalc}
+            open={open}
+            onClose={handleClose}
+          />
+        </Grid>
       </AddLayout>
     </>
   )

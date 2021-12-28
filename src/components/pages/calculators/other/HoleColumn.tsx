@@ -80,7 +80,7 @@ const HoleColumn = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: trapSpeedMethod } = await calculateOthers(payload)
+              const { success, payload: trapSpeedMethod } = await calculateOthers(payload)
               console.log('=====>', trapSpeedMethod)
               const {
                 volumeInDiameterUnit,
@@ -90,6 +90,19 @@ const HoleColumn = (props: any) => {
                 setResult({
                   volumeInDiameterUnit: volumeInDiameterUnit,
                   volumeInHeightUnit: volumeInHeightUnit,
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
                 })
               }
             } catch (err) {
@@ -162,17 +175,20 @@ const HoleColumn = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Volume in diameter unit: {Result.volumeInDiameterUnit}
-          </Typography>
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3 text-center">
+            <Typography variant="subtitle1">
+              Volume in diameter unit: {Result.volumeInDiameterUnit}
+            </Typography>
 
-          <Typography variant="subtitle1">
-            Volume in height unit: {Result.volumeInHeightUnit}
-          </Typography>
-        </div>
-      </ResultTabsContainer>
+            <Typography variant="subtitle1">
+              Volume in height unit: {Result.volumeInHeightUnit}
+            </Typography>
+          </div>
+        </ResultTabsContainer>
+      }
+
     </>
   )
 }

@@ -23,7 +23,6 @@ const CustomTextInput = (props: any) => {
       <Box sx={{
         display: 'flex',
       }}>
-        <Box sx={{ marginRight: 1, color: '#4072B5' }}>:</Box>
         <Field
           className="form-control form-control-sm"
           type={type}
@@ -32,7 +31,7 @@ const CustomTextInput = (props: any) => {
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          style={{ backgroundColor: COLORS.input }}
+          style={{ backgroundColor: COLORS.input, color: '#4072B5' }}
         />
       </Box>
     </div>

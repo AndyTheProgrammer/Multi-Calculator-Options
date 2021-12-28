@@ -145,7 +145,7 @@ const DeferredPaymentsLumpsumAtMaturity = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'}>
         {answer === true &&
-          <div className="text-center mb-3">
+          <div className="mb-3">
             <Typography variant="subtitle1">
               Amount due at loan maturity: {deferredResult.currency}{deferredResult.amountDueAtLoanMaturity}
             </Typography>

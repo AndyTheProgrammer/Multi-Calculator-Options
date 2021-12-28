@@ -29,15 +29,12 @@ const CapsuleVolume = (props: any) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    transform: matches === true ? 'translateX(0px)' : 'translateX(0px)',
     zIndex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-    alignItems: 'center',
-    justifyContent: 'center',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
+    margin: 'auto',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
@@ -111,13 +108,9 @@ const CapsuleVolume = (props: any) => {
                 setAnswer(success)
                 formApi.start({
                   transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
                 });
                 resultApi.start({
                   transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                  alignItems: 'center',
-                  justifyContent: 'flex-end',
                 })
               }
             } catch (err) {
@@ -129,7 +122,7 @@ const CapsuleVolume = (props: any) => {
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
 
-                <Label title={LABELS.radius} />
+                <Label title={LABELS.baseRadius} />
 
                 <CustomTextInput
                   type={INPUT_TYPE.number}
@@ -181,13 +174,13 @@ const CapsuleVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer
-        tabTitle={'Result'}
-        animation={resultAnimation}
-        latex={LATEX.capsuleVolume}
-      >
-        {answer === true &&
-          <div>
+      {answer === true &&
+        <ResultTabsContainer
+          tabTitle={'Result'}
+          animation={resultAnimation}
+          latex={LATEX.capsuleVolume}
+        >
+          <div className="text-center">
             {selectedResult ? (
               <div className="text-wrap">
                 <Typography variant="subtitle1">
@@ -208,8 +201,8 @@ const CapsuleVolume = (props: any) => {
               </div>
             )}
           </div>
-        }
-      </ResultTabsContainer>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

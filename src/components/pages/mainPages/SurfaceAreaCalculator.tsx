@@ -91,7 +91,10 @@ function SurfaceAreaCalculator() {
     <>
       <NavBar2 pagename="Surface Area Calculator" />
       <AddLayout>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid
+          container
+          justifyContent="center"
+        >
           {currentCalc.component}
           <SimpleDialog
             dropOptions={calculators}
@@ -99,7 +102,7 @@ function SurfaceAreaCalculator() {
             open={open}
             onClose={handleClose}
           />
-        </Box>
+        </Grid>
       </AddLayout>
     </>
   )

@@ -1,15 +1,16 @@
 import React from 'react'
-import { Typography, Box, Grid, Paper } from '@mui/material'
 import { Formik } from 'formik'
+import { Typography, Box, Grid, Paper } from '@mui/material'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
 import { NavBar2 } from '../../../navbar/navbar2'
 import AddLayout from '../../../layouts/AddLayout'
-import { SlopeCalculatorForTwoKnownPointsI, SinglePointWithKnownSlopeI } from '../../../../types'
-import { calculateMath } from '../../../../services/AppCalculatorsApi'
+import { SimpleDialog } from "../../../content";
 import useStyles from '../../../../styling/CustomStyles'
+import { calculateFinances } from '../../../../services/AppCalculatorsApi'
+import { MortgagePayOffWithoutLoanTermI, MortgagePayoffWithLoanTermI } from '../../../../types'
 import {
   CALCULATORS,
   LABELS,
@@ -39,23 +40,26 @@ function a11yProps(index: any) {
 
 const Latex = require('react-latex');
 
-function SlopeCalculator() {
+function MortgagePayoffCalculator() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    transform: matches === true ? 'translateX(0px)' : 'translateX(0px)',
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 'auto',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 'auto',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [tabValue, setTabValue] = React.useState(0);
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+  const [calcName, setCalcName] = React.useState('If You Know the Remaining Loan Term');
   const {
     tabRoot,
     rightTabContainer,
@@ -64,46 +68,43 @@ function SlopeCalculator() {
     formDisplay2
   }: any = useStyles()
 
-  const [twoKnownPointsInitialValues] = React.useState({
-    y_1: '',
-    y_2: '',
-    x_1: '',
-    x_2: '',
+  const [knownLoanTermInitialValues] = React.useState({
+    interest_rate: "",
+    total_payments_years: "",
+    payments_made_years: "",
+    loan_amount: "",
+  })
+  const [knownResult, setKnownResult] = React.useState({
+    balance: 0,
+    currency: ''
   })
 
-  const [singleKnownPointInitialValues] = React.useState({
-    x_1: '',
-    y_1: '',
-    slope: '',
-    distance: ''
+  const [unknownLoanTermInitialValues] = React.useState({
+    interest_rate: "",
+    principal_balance: "",
+    monthly_payment: "",
+  })
+  const [unknownResult, setUnknownResult] = React.useState({
+    answer: 0,
+    years: 0,
+    months: 0,
   })
 
-  const [twoKnownPointsResult, settwoKnownPointsResult] = React.useState({
-    slope: 0,
-    distance: 0,
-    angle: 0,
-  })
-
-  const [singleKnownPointResult, setSingleKnownPointResult] = React.useState({
-    x_2: 0,
-    y_2: 0,
-    Δx: 0,
-    Δy: 0,
-    angle: 0,
-    left_x_2: 0,
-    left_y_2: 0,
-    left_Δx: 0,
-    left_Δy: 0,
-    angle_left: 0,
-    angle_unit: '',
-  })
-
+  // Tab value change
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setTabValue(newValue);
+    if (newValue === 0) {
+      setCalcName("If You Know the Remaining Loan Term")
+    } else if (newValue === 1) {
+      setCalcName("If You Don't Know the Remaining Loan Term")
+    }
   };
+
   return (
     <>
-      <NavBar2 pagename="Slope Calculator" />
+      <NavBar2
+        pagename={`Mortgage Payoff Calculator - ${calcName}`}
+      />
       <AddLayout>
         <Grid
           container
@@ -114,12 +115,12 @@ function SlopeCalculator() {
               <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
                 <StyledTab
                   wrapped
-                  label={CALCULATORS.slopeCalculatorWithASingleKnownPoint}
+                  label={CALCULATORS.mortgagePayoffWithLoanTerm}
                   {...a11yProps(0)}
                 />
                 <StyledTab
                   wrapped
-                  label={CALCULATORS.slopeCalculatorForTwoKnownPoints}
+                  label={CALCULATORS.mortgagePayOffWithoutLoanTerm}
                   {...a11yProps(1)}
                 />
               </StyledTabs>
@@ -129,49 +130,29 @@ function SlopeCalculator() {
                 index={0}
               >
                 <Formik
-                  initialValues={singleKnownPointInitialValues}
+                  initialValues={knownLoanTermInitialValues}
                   onSubmit={async ({
-                    x_1,
-                    y_1,
-                    slope,
-                    distance
+                    interest_rate,
+                    total_payments_years,
+                    payments_made_years,
+                    loan_amount,
                   }, { setSubmitting }) => {
-                    const payload: SinglePointWithKnownSlopeI = {
-                      x_1,
-                      y_1,
-                      slope,
-                      distance,
-                      method: 'If1PointAndTheSlopeAreKnown'
+                    const payload: MortgagePayoffWithLoanTermI = {
+                      interest_rate,
+                      total_payments_years,
+                      payments_made_years,
+                      loan_amount,
+                      method: 'mortagePayOffCalculatorWithLoanTerm'
                     }
                     console.log(JSON.stringify(payload))
                     try {
-                      const { success, payload: singlePointWithKnowPoint } = await calculateMath(payload)
-                      console.log('=====>', singlePointWithKnowPoint)
-                      if (typeof singlePointWithKnowPoint === 'object') {
-                        const {
-                          x_2,
-                          y_2,
-                          Δx,
-                          Δy,
-                          angel,
-                          left_x_2,
-                          left_y_2,
-                          left_Δx,
-                          left_Δy,
-                          angle_left,
-                        } = singlePointWithKnowPoint
-                        setSingleKnownPointResult({
-                          x_2: x_2,
-                          y_2: y_2,
-                          Δx: Δx,
-                          Δy: Δy,
-                          angle: angel,
-                          left_x_2: left_x_2,
-                          left_y_2: left_y_2,
-                          left_Δx: left_Δx,
-                          left_Δy: left_Δy,
-                          angle_left: angle_left,
-                          angle_unit: '°'
+                      const { success, payload: mortgagePayoffWithLoanTerm } = await calculateFinances(payload)
+                      console.log('=====>', mortgagePayoffWithLoanTerm)
+                      const { balance, currency } = mortgagePayoffWithLoanTerm
+                      if (typeof mortgagePayoffWithLoanTerm === 'object') {
+                        setKnownResult({
+                          balance: balance,
+                          currency: currency
                         })
                       }
                       if (success === true) {
@@ -195,45 +176,45 @@ function SlopeCalculator() {
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
                       <div className="form-row">
-                        <Label title={LABELS.x1} />
+                        <Label title={LABELS.interestRate} />
                         <CustomTextInput
                           type={INPUT_TYPE.number}
-                          id="x_1"
+                          id="interest_rate"
                           placeholder={PLACEHOLDERS.number}
-                          value={values.x_1}
+                          value={values.interest_rate}
                           onChange={handleChange}
                         />
                       </div>
 
                       <div className="form-row">
-                        <Label title={LABELS.y1} />
+                        <Label title={LABELS.paymentsMade} />
                         <CustomTextInput
                           type={INPUT_TYPE.number}
-                          id="y_1"
+                          id="payments_made_years"
                           placeholder={PLACEHOLDERS.number}
-                          value={values.y_1}
+                          value={values.payments_made_years}
                           onChange={handleChange}
                         />
                       </div>
 
                       <div className="form-row">
-                        <Label title={LABELS.distance} />
+                        <Label title={LABELS.totalPaymentsperYear} />
                         <CustomTextInput
                           type={INPUT_TYPE.number}
-                          id="distance"
+                          id="total_payments_years"
                           placeholder={PLACEHOLDERS.number}
-                          value={values.distance}
+                          value={values.total_payments_years}
                           onChange={handleChange}
                         />
                       </div>
 
                       <div className="form-row">
-                        <Label title={LABELS.slope} />
+                        <Label title={LABELS.loanAmount} />
                         <CustomTextInput
                           type={INPUT_TYPE.number}
-                          id="slope"
+                          id="loan_amount"
                           placeholder={PLACEHOLDERS.number}
-                          value={values.slope}
+                          value={values.loan_amount}
                           onChange={handleChange}
                         />
                       </div>
@@ -257,30 +238,28 @@ function SlopeCalculator() {
                 index={1}
               >
                 <Formik
-                  initialValues={twoKnownPointsInitialValues}
+                  initialValues={unknownLoanTermInitialValues}
                   onSubmit={async ({
-                    y_1,
-                    y_2,
-                    x_1,
-                    x_2,
+                    interest_rate,
+                    principal_balance,
+                    monthly_payment
                   }, { setSubmitting }) => {
-                    const payload: SlopeCalculatorForTwoKnownPointsI = {
-                      y_1,
-                      y_2,
-                      x_1,
-                      x_2,
-                      method: 'IfThe2PointsAreKnownSlopeCalculator'
+                    const payload: MortgagePayOffWithoutLoanTermI = {
+                      interest_rate,
+                      principal_balance,
+                      monthly_payment,
+                      method: 'mortagePayOffCalculatorWithoutLoanTerm'
                     }
                     console.log(JSON.stringify(payload))
                     try {
-                      const { success, payload: slopeWithTwoKnownPoints } = await calculateMath(payload)
-                      console.log('=====>', slopeWithTwoKnownPoints)
-                      const { d, m, angle, } = slopeWithTwoKnownPoints
-                      if (typeof slopeWithTwoKnownPoints === 'object') {
-                        settwoKnownPointsResult({
-                          slope: m,
-                          distance: d,
-                          angle: angle,
+                      const { success, payload: mortgagePayoffCalculator } = await calculateFinances(payload)
+                      console.log('=====>', mortgagePayoffCalculator)
+                      const { answer, years, months } = mortgagePayoffCalculator
+                      if (typeof mortgagePayoffCalculator === 'object') {
+                        setUnknownResult({
+                          answer: answer,
+                          years: years,
+                          months: months
                         })
                       }
                       if (success === true) {
@@ -304,45 +283,34 @@ function SlopeCalculator() {
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
                       <div className="form-row">
-                        <Label title={LABELS.x1} />
+                        <Label title={LABELS.interestRate} />
                         <CustomTextInput
                           type={INPUT_TYPE.number}
-                          id="x_1"
+                          id="interest_rate"
                           placeholder={PLACEHOLDERS.number}
-                          value={values.x_1}
+                          value={values.interest_rate}
                           onChange={handleChange}
                         />
                       </div>
 
                       <div className="form-row">
-                        <Label title={LABELS.y1} />
+                        <Label title={LABELS.principalBalance} />
                         <CustomTextInput
                           type={INPUT_TYPE.number}
-                          id="y_1"
+                          id="principal_balance"
                           placeholder={PLACEHOLDERS.number}
-                          value={values.y_1}
+                          value={values.principal_balance}
                           onChange={handleChange}
                         />
                       </div>
 
                       <div className="form-row">
-                        <Label title={LABELS.x2} />
+                        <Label title={LABELS.monthlyPayment} />
                         <CustomTextInput
                           type={INPUT_TYPE.number}
-                          id="x_2"
+                          id="monthly_payment"
                           placeholder={PLACEHOLDERS.number}
-                          value={values.x_2}
-                          onChange={handleChange}
-                        />
-                      </div>
-
-                      <div className="form-row">
-                        <Label title={LABELS.y2} />
-                        <CustomTextInput
-                          type={INPUT_TYPE.number}
-                          id="y_2"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.y_2}
+                          value={values.monthly_payment}
                           onChange={handleChange}
                         />
                       </div>
@@ -357,8 +325,9 @@ function SlopeCalculator() {
                         />
                       </div>
                     </form>
-                  )}
-                </Formik>
+                  )
+                  }
+                </Formik >
               </TabPanel>
 
             </Box>
@@ -369,69 +338,35 @@ function SlopeCalculator() {
               tabTitle={'Result'}
               animation={resultAnimation}
             >
+
               <Box className="text-wrap">
                 {tabValue === 0 &&
                   <Box sx={{ color: COLORS.text }}>
-                    <div className="mb-3">
-                      <Typography variant="subtitle1">
-                        X2: {singleKnownPointResult.x_2}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        Y2: {singleKnownPointResult.y_2}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        ΔX: {singleKnownPointResult.Δx}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        ΔY: {singleKnownPointResult.Δy}
-                      </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
-                        θ: {singleKnownPointResult.angle}{singleKnownPointResult.angle_unit}
-                      </Typography>
-
-                      <Typography variant="subtitle1" component='h6' gutterBottom>or</Typography>
-
-                      <Typography variant="subtitle1">
-                        X2: {singleKnownPointResult.left_x_2}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        Y2: {singleKnownPointResult.left_y_2}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        ΔX: {singleKnownPointResult.left_Δx}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        ΔY: {singleKnownPointResult.left_Δy}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        θ: {singleKnownPointResult.angle_left}{singleKnownPointResult.angle_unit}
-                      </Typography>
-                    </div>
+                    <Typography variant="subtitle1">
+                      Balance: {knownResult.currency}{knownResult.balance}
+                    </Typography>
                   </Box>
                 }
 
                 {tabValue === 1 &&
                   <Box sx={{ color: COLORS.text }}>
                     <Typography variant="subtitle1">
-                      Slope: {twoKnownPointsResult.slope}
+                      Answer: {unknownResult.answer}
                     </Typography>
-
                     <Typography variant="subtitle1">
-                      Distance: {twoKnownPointsResult.distance}
-                    </Typography>
-
-                    <Typography variant="subtitle1">
-                      Angle: {twoKnownPointsResult.angle}
+                      Payoff in: {unknownResult.years} years and {unknownResult.months} months
                     </Typography>
                   </Box>
                 }
               </Box>
             </ResultTabsContainer>
           }
+
         </Grid>
       </AddLayout>
+
     </>
   )
 }
 
-export default SlopeCalculator
+export default MortgagePayoffCalculator

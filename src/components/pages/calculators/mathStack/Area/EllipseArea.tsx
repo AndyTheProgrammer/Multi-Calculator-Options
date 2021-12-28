@@ -195,35 +195,32 @@ const EllipseArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer
-        tabTitle={"Result"}
-        latex={LATEX.ellipseArea}
-        animation={resultAnimation}
-      >
-        {answer === true &&
-          <div>
-            {selectedResult === true &&
-              <div className="text-wrap">
-                <Typography variant="subtitle1">
-                  = {Result.area}{Result.unit}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-            {selectedResult === false &&
-              <div>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInsemi_major_axes_aUnit}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInsemi_major_axes_bUnit}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-          </div>
-        }
+      {answer === true &&
+        <ResultTabsContainer
+          tabTitle={"Result"}
+          latex={LATEX.ellipseArea}
+          animation={resultAnimation}
+        >
 
-      </ResultTabsContainer>
-
+          {selectedResult === true &&
+            <div className="text-wrap text-center">
+              <Typography variant="subtitle1">
+                = {Result.area}{Result.unit}<sup>2</sup>
+              </Typography>
+            </div>
+          }
+          {selectedResult === false &&
+            <div className="text-wrap text-center">
+              <Typography variant="subtitle1">
+                = {resultTwo.areaInsemi_major_axes_aUnit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                = {resultTwo.areaInsemi_major_axes_bUnit}<sup>2</sup>
+              </Typography>
+            </div>
+          }
+        </ResultTabsContainer>
+      }
     </>
   )
 }

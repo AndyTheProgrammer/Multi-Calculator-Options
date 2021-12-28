@@ -187,21 +187,19 @@ const SectorArea = (props: any) => {
 
 
       {/* Results grid */}
-      <ResultTabsContainer
-        tabTitle={"Result"}
-        latex={LATEX.sectorArea}
-        animation={resultAnimation}
-      >
-        {answer === true &&
-          <div className="text-wrap">
+      {answer === true &&
+        <ResultTabsContainer
+          tabTitle={"Result"}
+          latex={LATEX.sectorArea}
+          animation={resultAnimation}
+        >
+          <div className="text-wrap text-center">
             <Typography variant="subtitle1">
               = {Result.area}{Result.unit}<sup>2</sup>
             </Typography>
           </div>
-        }
-
-      </ResultTabsContainer>
-
+        </ResultTabsContainer>
+      }
 
     </>
   )

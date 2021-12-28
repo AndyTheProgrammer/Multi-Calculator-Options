@@ -91,7 +91,7 @@ const ConcreteSquareFooting = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: slabsSquareFootingsOrWallsConcreteCalculator } = await calculateOthers(payload)
+              const { success, payload: slabsSquareFootingsOrWallsConcreteCalculator } = await calculateOthers(payload)
               console.log('=====>', slabsSquareFootingsOrWallsConcreteCalculator)
               const {
                 volumeInm,
@@ -110,6 +110,19 @@ const ConcreteSquareFooting = (props: any) => {
                   width,
                   breadth,
                   units,
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
                 })
               }
             } catch (err) {
@@ -199,36 +212,36 @@ const ConcreteSquareFooting = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1">
-            Volume: {Result.volume1}{Result.units}<sup>3</sup>,
-          </Typography>
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3 text-center">
+            <Typography variant="subtitle1">
+              Volume: {Result.volume1}{Result.units}<sup>3</sup>,
+            </Typography>
 
-          <Typography variant="subtitle1">
-            or
-          </Typography>
+            <Typography variant="subtitle1">
+              or
+            </Typography>
 
-          <Typography variant="subtitle1">
-            Volume: {Result.volume2}{Result.units}<sup>3</sup>
-          </Typography>
+            <Typography variant="subtitle1">
+              Volume: {Result.volume2}{Result.units}<sup>3</sup>
+            </Typography>
 
-          <Typography variant="subtitle1">
-            or
-          </Typography>
+            <Typography variant="subtitle1">
+              or
+            </Typography>
 
-          <Typography variant="subtitle1">
-            Volume: {Result.volume2}{Result.units}<sup>3</sup>
-          </Typography>
+            <Typography variant="subtitle1">
+              Volume: {Result.volume2}{Result.units}<sup>3</sup>
+            </Typography>
 
-          <Typography variant="subtitle1">  Breath: {Result.breadth}</Typography>
-          <Typography variant="subtitle1"> length: {Result.length}</Typography>
-          <Typography variant="subtitle1"> Width: {Result.width}</Typography>
-          <Typography variant="subtitle1"> Units: {Result.units}</Typography>
-        </div>
-      </ResultTabsContainer>
-
-
+            <Typography variant="subtitle1">  Breath: {Result.breadth}</Typography>
+            <Typography variant="subtitle1"> length: {Result.length}</Typography>
+            <Typography variant="subtitle1"> Width: {Result.width}</Typography>
+            <Typography variant="subtitle1"> Units: {Result.units}</Typography>
+          </div>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

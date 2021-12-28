@@ -30,13 +30,13 @@ const EllipsoidSurfaceArea = (props: any) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    transform: matches === true ? 'translateX(0px)' : 'translateX(0px)',
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
   }));
@@ -208,13 +208,14 @@ const EllipsoidSurfaceArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer
-        tabTitle={'Result'}
-        animation={resultAnimation}
-        latex={LATEX.ellipsoidSurfArea}
-      >
-        {answer === true &&
-          <div>
+      {answer === true &&
+        <ResultTabsContainer
+          tabTitle={'Result'}
+          animation={resultAnimation}
+          latex={LATEX.ellipsoidSurfArea}
+        >
+
+          <div className="text-center">
             {selectedResult === true &&
               < div className="text-wrap">3
                 <Typography variant="subtitle1">
@@ -230,12 +231,8 @@ const EllipsoidSurfaceArea = (props: any) => {
               </div>
             }
           </div>
-        }
-
-      </ResultTabsContainer >
-
-
-
+        </ResultTabsContainer >
+      }
     </>
   )
 }

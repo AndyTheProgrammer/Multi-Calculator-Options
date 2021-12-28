@@ -121,7 +121,7 @@ const MarginOfErrorCalculator = (props: any) => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} latex={LATEX.marginOfError}>
         {answer === true &&
-          <div className="text-center mb-3 text-wrap">
+          <div className="mb-3 text-wrap">
             <Typography variant="subtitle1">
               Margin of error: {Result.marginOfError}
             </Typography>
