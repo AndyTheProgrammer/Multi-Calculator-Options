@@ -131,7 +131,7 @@ const BodyMassIndexMethodTwo = () => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} >
-        <div className="text-center mb-3">
+        <div className="mb-3">
           <Typography variant="subtitle1">
             BMI:{methodTwoResult.bmi}{methodTwoResult.unit}<sup>2</sup>
           </Typography>

@@ -196,7 +196,7 @@ const WebsiteBandwidth = () => {
           latex={LATEX.websiteBandwidth}
         >
           {answer === true &&
-            <div className="text-center mb-3">
+            <div className="mb-3">
               <Typography variant="subtitle1">
                 Website bandwidth: {Result.website_bandwidth}
               </Typography>

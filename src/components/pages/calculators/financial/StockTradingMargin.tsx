@@ -127,7 +127,7 @@ const StockTradingMargin = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} >
         {answer === true &&
-          <div className="text-center mb-3">
+          <div className="mb-3">
             <Typography variant="subtitle1">
               Amount required: {Result.currency}{Result.amountRequired}
             </Typography>

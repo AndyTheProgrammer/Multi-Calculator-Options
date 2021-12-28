@@ -29,15 +29,17 @@ const SquarePyramidVolume = (props: any) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    transform: matches === true ? 'translateX(0px)' : 'translateX(0px)',
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 'auto',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 'auto',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
@@ -177,12 +179,13 @@ const SquarePyramidVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer
-        tabTitle={'Result'}
-        animation={resultAnimation}
-        latex={LATEX.squarePyramidVolume}
-      >
-        {answer === true &&
+      {answer === true &&
+        <ResultTabsContainer
+          tabTitle={'Result'}
+          animation={resultAnimation}
+          latex={LATEX.squarePyramidVolume}
+        >
+
           <div>
             {selectedResult === true &&
               <div className="text-center mb-3">
@@ -199,9 +202,8 @@ const SquarePyramidVolume = (props: any) => {
               </div>
             }
           </div>
-        }
-
-      </ResultTabsContainer>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

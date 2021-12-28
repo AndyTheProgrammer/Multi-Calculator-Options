@@ -234,35 +234,31 @@ const TrapezoidArea = (props: any) => {
 
 
       {/* Results grid */}
-      <ResultTabsContainer
-        tabTitle={"Result"}
-        latex={LATEX.trapezoidArea}
-        animation={resultAnimation}
-      >
-        {answer === true &&
-          <div>
-            {selectedResult === true &&
-              <div className="text-wrap">
-                <Typography variant="subtitle1">
-                  = {Result.area}{Result.unit}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-            {selectedResult === false &&
-              <div>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInm}{Result.unit}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaIncm}{Result.unit}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-          </div>
-        }
-      </ResultTabsContainer>
-
-
+      {answer === true &&
+        <ResultTabsContainer
+          tabTitle={"Result"}
+          latex={LATEX.trapezoidArea}
+          animation={resultAnimation}
+        >
+          {selectedResult === true &&
+            <div className="text-wrap text-center">
+              <Typography variant="subtitle1">
+                = {Result.area}{Result.unit}<sup>2</sup>
+              </Typography>
+            </div>
+          }
+          {selectedResult === false &&
+            <div className="text-wrap text-center">
+              <Typography variant="subtitle1">
+                = {resultTwo.areaInm}{Result.unit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                = {resultTwo.areaIncm}{Result.unit}<sup>2</sup>
+              </Typography>
+            </div>
+          }
+        </ResultTabsContainer>
+      }
     </>
   )
 }

@@ -29,15 +29,17 @@ const CylinderVolume = (props: any) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    transform: matches === true ? 'translateX(0px)' : 'translateX(0px)',
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 'auto',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 'auto',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
@@ -181,13 +183,13 @@ const CylinderVolume = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer
-        tabTitle={'Result'}
-        animation={resultAnimation}
-        latex={LATEX.cylinderVolume}
-      >
-        {answer === true &&
-          <div>
+      {answer === true &&
+        <ResultTabsContainer
+          tabTitle={'Result'}
+          animation={resultAnimation}
+          latex={LATEX.cylinderVolume}
+        >
+          <div className="text-center">
             {selectedResult === true &&
               <div className="text-wrap">
                 <Typography variant="subtitle1">
@@ -207,9 +209,8 @@ const CylinderVolume = (props: any) => {
               </div>
             }
           </div>
-        }
-
-      </ResultTabsContainer>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

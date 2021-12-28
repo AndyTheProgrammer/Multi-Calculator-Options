@@ -190,7 +190,7 @@ const AmortizedLoanFixedAmount = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
         {answer === true &&
-          <div className="text-center mb-3">
+          <div className="mb-3">
             <Typography variant="subtitle1">
               Payment Every Month: {amortizedLoanResult.currency}{amortizedLoanResult.paymentEveryMonth}
             </Typography>

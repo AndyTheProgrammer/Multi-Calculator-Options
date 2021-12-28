@@ -74,7 +74,10 @@ function AreaCalculator() {
     <>
       <NavBar2 pagename="Area Calculator" />
       <AddLayout>
-        <Grid container>
+        <Grid
+          container
+          justifyContent="center"
+        >
           {currentCalc.component}
           <SimpleDialog
             dropOptions={calculators}

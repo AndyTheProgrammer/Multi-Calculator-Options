@@ -27,7 +27,7 @@ function ConcreteCalculator() {
     setSearchText(event.target.value);
   };
   // state that changes using the dropdown
-  const [selectedCalc, setSelectedCalc] = React.useState("marginOfError");
+  const [selectedCalc, setSelectedCalc] = React.useState("Circular Slab or Tube");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -76,7 +76,10 @@ function ConcreteCalculator() {
     <>
       <NavBar2 pagename="Concrete Calculator" />
       <AddLayout>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid
+          container
+          justifyContent="center"
+        >
           {currentCalc.component}
           <SimpleDialog
             dropOptions={calculators}
@@ -84,7 +87,7 @@ function ConcreteCalculator() {
             open={open}
             onClose={handleClose}
           />
-        </Box>
+        </Grid>
       </AddLayout>
     </>
   )

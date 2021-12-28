@@ -34,7 +34,7 @@ const StairsConcreate = (props: any) => {
     justifyContent: 'center',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
   }));
@@ -220,15 +220,15 @@ const StairsConcreate = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        {answer === true &&
-          <div className="text-center mb-3">
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3 text-center">
             <Typography variant="subtitle1">
               Amount of concrete needed: {Result.concreteNeeded}{Result.unit}
             </Typography>
           </div>
-        }
-      </ResultTabsContainer>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

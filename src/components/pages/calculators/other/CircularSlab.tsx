@@ -34,7 +34,7 @@ const CircularSlab = (props: any) => {
     justifyContent: 'center',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
   }));
@@ -220,13 +220,16 @@ const CircularSlab = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="text-center mb-3">
-          <Typography variant="subtitle1"> Volume: {Result.volume1}{Result.unit1}</Typography>
-          <Typography variant="subtitle1"> or {Result.volume2}{Result.unit2}</Typography>
-          <Typography variant="subtitle1"> or {Result.volume3}{Result.unit3}</Typography>
-        </div>
-      </ResultTabsContainer>
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3 text-center">
+            <Typography variant="subtitle1"> Volume: {Result.volume1}{Result.unit1}</Typography>
+            <Typography variant="subtitle1"> or {Result.volume2}{Result.unit2}</Typography>
+            <Typography variant="subtitle1"> or {Result.volume3}{Result.unit3}</Typography>
+          </div>
+        </ResultTabsContainer>
+      }
+
     </>
   )
 }

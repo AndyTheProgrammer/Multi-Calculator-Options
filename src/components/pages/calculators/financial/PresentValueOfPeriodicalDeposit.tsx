@@ -140,7 +140,7 @@ const PresentValueOfPeriodicalDeposit = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} >
         {answer === true &&
-          <div className="text-center mb-3">
+          <div className="mb-3">
             <Typography variant="subtitle1"> Present value: {Result.currency}{Result.presentValue}</Typography>
             <Typography variant="subtitle1"> Future value: {Result.currency}{Result.futureValue}</Typography>
             <Typography variant="subtitle1"> Total principal: {Result.currency}{Result.totalPrincipal}</Typography>

@@ -10,7 +10,7 @@ function StaticTab(props: any) {
 
   if (label) {
     return (
-      <Box className={className} p={0.9}>
+      <Box className={className}>
         <div>
           <FontProvider fonts={[{ font: 'Varela Round' }]}>
             <Typography variant="subtitle2">

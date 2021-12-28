@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import { COLORS } from "../../common/shared";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -26,7 +27,7 @@ const NoIndexTabPanel = (props: TabPanelProps) => {
     >
       <Box
         p={5}
-      // className={classes.container}
+        sx={{ color: COLORS.text }}
       >
         <Grid>{children}</Grid>
       </Box>

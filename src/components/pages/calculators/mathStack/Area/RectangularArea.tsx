@@ -196,34 +196,31 @@ const RectangularArea = (props: any) => {
 
 
       {/* Results grid */}
-      <ResultTabsContainer
-        tabTitle={"Result"}
-        latex={LATEX.rectangleArea}
-        animation={resultAnimation}
-      >
-        {answer === true &&
-          <div>
-            {selectedResult === true &&
-              <div className="text-wrap">
-                <Typography variant="subtitle1">
-                  = {Result.area}{Result.units}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-            {selectedResult === false &&
-              <div>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInLengthUnit}{Result.units}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInWidthUnit}{Result.units}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-          </div>
-        }
-      </ResultTabsContainer>
-
+      {answer === true &&
+        <ResultTabsContainer
+          tabTitle={"Result"}
+          latex={LATEX.rectangleArea}
+          animation={resultAnimation}
+        >
+          {selectedResult === true &&
+            <div className="text-wrap text-center">
+              <Typography variant="subtitle1">
+                = {Result.area}{Result.units}<sup>2</sup>
+              </Typography>
+            </div>
+          }
+          {selectedResult === false &&
+            <div className="text-wrap text-center">
+              <Typography variant="subtitle1">
+                = {resultTwo.areaInLengthUnit}{Result.units}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                = {resultTwo.areaInWidthUnit}{Result.units}<sup>2</sup>
+              </Typography>
+            </div>
+          }
+        </ResultTabsContainer>
+      }
     </>
   )
 }

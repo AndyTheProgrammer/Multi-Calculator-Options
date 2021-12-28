@@ -28,11 +28,14 @@ function SimpleDialog(props: any) {
       open={open}
       fullWidth
       maxWidth='xs'
-
     >
       <FontProvider fonts={[{ font: "Raleway" }]}>
         <Font>
-          <DialogTitle id="simple-dialog-title">
+          <DialogTitle
+            className="text-center"
+            sx={{ color: COLORS.text }}
+            id="simple-dialog-title"
+          >
             Select Calculator
           </DialogTitle>
         </Font>

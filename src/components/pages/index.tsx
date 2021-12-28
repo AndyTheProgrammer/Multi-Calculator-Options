@@ -70,8 +70,7 @@ export { default as WebsiteBandwidth } from "./calculators/other/WebsiteBandwidt
 // Financial
 export { default as LoanCalculator } from "./calculators/financial/LoanCalculator";
 export { default as InflationCalculatorCpiData } from "./calculators/financial/InflationCalculatorCpiData";
-export { default as MortgagePayOffWithoutLoanTerm } from "./calculators/financial/MortgagePayOffWithoutLoanTerm";
-export { default as MortgagePayoffWithLoanTerm } from "./calculators/financial/MortgagePayoffWithLoanTerm";
+export { default as MortgagePayoffCalculator } from "./calculators/financial/MortgagePayoffCalculator";
 export { default as PaybackACertainAmount } from "./calculators/financial/PayBackACertainAmount";
 export { default as PaybackWithinTimeframe } from "./calculators/financial/PaybackWithinTimeframe";
 export { default as PresentValue } from "./calculators/financial/PresentValue";

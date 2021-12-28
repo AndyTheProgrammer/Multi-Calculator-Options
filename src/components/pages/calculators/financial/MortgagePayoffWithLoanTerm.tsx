@@ -23,13 +23,13 @@ import {
 const MortgagePayoffWithLoanTerm = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [value, setValue] = React.useState(0);
-  const [initialFormValues] = React.useState({
+  const [knownLoanTermInitialValues] = React.useState({
     interest_rate: "",
     total_payments_years: "",
     payments_made_years: "",
     loan_amount: "",
   })
-  const [Result, setResult] = React.useState({
+  const [knownResult, setKnownResult] = React.useState({
     balance: 0,
     currency: ''
   })
@@ -39,7 +39,7 @@ const MortgagePayoffWithLoanTerm = () => {
       {/* Form grid */}
       <FormTabsContainer tabTitle1={CALCULATORS.mortgagePayoffWithLoanTerm} >
         <Formik
-          initialValues={initialFormValues}
+          initialValues={knownLoanTermInitialValues}
           onSubmit={async ({
             interest_rate,
             total_payments_years,
@@ -59,13 +59,14 @@ const MortgagePayoffWithLoanTerm = () => {
               console.log('=====>', mortgagePayoffWithLoanTerm)
               const { balance, currency } = mortgagePayoffWithLoanTerm
               if (typeof mortgagePayoffWithLoanTerm === 'object') {
-                setResult({
+                setKnownResult({
                   balance: balance,
                   currency: currency
                 })
               }
               if (success === true) {
                 setAnswer(success)
+
               }
             } catch (err) {
               console.log('====>', err)
@@ -135,8 +136,10 @@ const MortgagePayoffWithLoanTerm = () => {
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} >
         {answer === true &&
-          <div className="text-center mb-3">
-            <Typography variant="subtitle1"> Balance: {Result.currency}{Result.balance}</Typography>
+          <div className="mb-3">
+            <Typography variant="subtitle1">
+              Balance: {knownResult.currency}{knownResult.balance}
+            </Typography>
           </div>
         }
 

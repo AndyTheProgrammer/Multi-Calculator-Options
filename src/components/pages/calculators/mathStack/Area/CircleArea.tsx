@@ -37,7 +37,7 @@ const CircleArea = (props: any) => {
     justifyContent: 'center',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
   }));
@@ -56,8 +56,6 @@ const CircleArea = (props: any) => {
 
   return (
     <>
-
-
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.circleArea}
@@ -92,9 +90,12 @@ const CircleArea = (props: any) => {
               }
               if (success === true) {
                 setAnswer(success)
-              }
-              if (success === true) {
-
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                })
               }
               console.log("VALUE: ", success)
             } catch (err) {
@@ -136,23 +137,19 @@ const CircleArea = (props: any) => {
         </Formik>
       </FormTabsContainer>
 
-
-      {/* Result grid */}
-      <ResultTabsContainer
-        tabTitle={"Result"}
-        latex={LATEX.cirleArea}
-        animation={resultAnimation}
-      >
-        {answer === true &&
-          <div className="text-wrap">
+      {answer === true &&
+        < ResultTabsContainer
+          tabTitle={"Result"}
+          latex={LATEX.cirleArea}
+          animation={resultAnimation}
+        >
+          <div className="text-wrap text-center">
             <Typography variant="subtitle1">
               = {Result.area}{Result.units}<sup>2</sup>
             </Typography>
           </div>
-        }
-
-      </ResultTabsContainer>
-
+        </ResultTabsContainer>
+      }
     </>
   )
 }

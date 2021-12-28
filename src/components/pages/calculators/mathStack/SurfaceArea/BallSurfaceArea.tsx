@@ -30,13 +30,13 @@ const BallSurfaceArea = (props: any) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(100px)' : 'translateX(0px)',
+    transform: matches === true ? 'translateX(0px)' : 'translateX(0px)',
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
   }));
@@ -135,20 +135,21 @@ const BallSurfaceArea = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer
-        tabTitle={'Result'}
-        latex={LATEX.ballSurfArea}
-        animation={resultAnimation}
-      >
-        {answer === true &&
-          <div className="text-wrap">
+      {answer === true &&
+        <ResultTabsContainer
+          tabTitle={'Result'}
+          latex={LATEX.ballSurfArea}
+          animation={resultAnimation}
+        >
+
+          <div className="text-wrap text-center">
             <Typography variant="subtitle1">
               = {Result.surfaceArea}{Result.unit}<sup>2</sup>
             </Typography>
           </div>
-        }
 
-      </ResultTabsContainer>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

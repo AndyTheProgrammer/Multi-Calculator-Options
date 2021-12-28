@@ -28,6 +28,7 @@ const ResultTabsContainer = (props: ResultsProps) => {
   const { children, tabTitle, latex, animation } = props;
   const {
     tabRoot,
+    leftTabContainer,
     rightTabContainer,
     formCardStyle,
     paperBackground,
@@ -39,30 +40,23 @@ const ResultTabsContainer = (props: ResultsProps) => {
     <animated.div style={animation}>
       <div
         className={formResult}
-        style={{ minWidth: matches ? 250 : 400 }} // width
+        style={{ minWidth: matches ? 250 : 350 }} // width
       >
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Box sx={{ height: 40, width: '100%' }}>
-            <Box
-              sx={{
-                color: '#4072B5',
-                fontWeight: 'bold',
-                textAlign: 'center',
-              }}><FontProvider fonts={[{ font: 'Varela Round' }]}>
-                <Typography>
-                  <Font>{tabTitle}</Font>
-                </Typography>
-              </FontProvider>
-            </Box>
-          </Box>
-          <Box className={rightTabContainer}></Box>
-        </Box>
+        <div className={tabRoot}>
+          <StyledTabs>
+            <StaticTab
+              className={leftTabContainer}
+              label={tabTitle}
+            />
+            <StaticTab
+              className={rightTabContainer}
+            />
+          </StyledTabs>
 
-        <div>
-          <div className='overflow-auto p-3'>
+          <NoIndexTabPanel>
             <Latex displayMode={true}>{latex}</Latex>
             {children}
-          </div>
+          </NoIndexTabPanel>
         </div>
       </div>
     </animated.div>

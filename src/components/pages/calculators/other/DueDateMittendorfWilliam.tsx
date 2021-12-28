@@ -121,7 +121,7 @@ const DueDateMittendorfWilliam = (props: any) => {
 
       {/* Results grid */}
       <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="text-center mb-3">
+        <div className="mb-3">
           <Typography variant="subtitle1">Due Date: {Result.dueDate} </Typography>
         </div>
       </ResultTabsContainer>

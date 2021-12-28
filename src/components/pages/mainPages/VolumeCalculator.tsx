@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Grid } from '@material-ui/core'
+import { Grid, Box } from '@mui/material';
 
 import { NavBar2 } from '../../navbar/navbar2'
 import AddLayout from '../../layouts/AddLayout'
@@ -93,7 +93,10 @@ function VolumeCalculator() {
     <>
       <NavBar2 pagename="Volume Calculator" />
       <AddLayout>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid
+          container
+          justifyContent="center"
+        >
           {currentCalc.component}
           <SimpleDialog
             dropOptions={calculators}
@@ -101,7 +104,7 @@ function VolumeCalculator() {
             open={open}
             onClose={handleClose}
           />
-        </Box>
+        </Grid>
       </AddLayout>
     </>
   )
