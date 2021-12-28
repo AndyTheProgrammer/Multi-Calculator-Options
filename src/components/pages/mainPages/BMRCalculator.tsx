@@ -47,13 +47,11 @@ function BMRCalculator() {
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 'auto',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
     transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 'auto',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false);
   const [tabValue, setTabValue] = React.useState(0);
@@ -486,7 +484,7 @@ function BMRCalculator() {
               animation={resultAnimation}
             >
 
-              <Box className="text-wrap">
+              <Box className="text-wrap text-center">
                 {tabValue === 0 &&
                   <Box sx={{ color: COLORS.text }}>
                     <Typography variant="subtitle1">

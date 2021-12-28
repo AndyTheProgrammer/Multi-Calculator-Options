@@ -115,6 +115,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     borderRadius: '0 20px 3px',
   },
   formDisplay: {
+    //  position: 'absolute',
     maxWidth: 400,
     // height: '100%',
     borderRadius: '20px !important',
@@ -124,6 +125,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     margin: theme.spacing(2),
   },
   formResult: {
+    //  position: 'absolute',
     maxHeight: 300,
     minHeight: 300,
     borderRadius: '20px !important',
@@ -133,6 +135,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     margin: theme.spacing(2),
   },
   formDisplay2: {
+    // position: 'absolute',
     maxWidth: 500,
     // height: '100%',
     backgroundColor: theme.palette.background.paper,

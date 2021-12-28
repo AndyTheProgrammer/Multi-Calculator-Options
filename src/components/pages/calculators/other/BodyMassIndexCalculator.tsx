@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Box } from '@mui/material'
+import { Typography, Box, Grid } from '@mui/material'
 import { Formik } from 'formik'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -106,256 +106,263 @@ const BodyMassIndexCalculator = () => {
     <>
       <NavBar2 pagename="BMI Calculator" />
       <AddLayout>
-        <animated.div
-          style={formAnimation}
+        <Grid
+          container
+          justifyContent="center"
         >
-          <Box className={formDisplay} >
-            <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
-              <StyledTab
-                wrapped
-                label={CALCULATORS.bodyMassIndex}
-                {...a11yProps(0)}
-              />
-              <StyledTab
-                wrapped
-                label={CALCULATORS.bodyMassIndexMethodTwo}
-                {...a11yProps(1)}
-              />
-            </StyledTabs>
+          <animated.div
+            style={formAnimation}
+          >
+            <Box className={formDisplay} >
+              <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
+                <StyledTab
+                  wrapped
+                  label={CALCULATORS.bodyMassIndex}
+                  {...a11yProps(0)}
+                />
+                <StyledTab
+                  wrapped
+                  label={CALCULATORS.bodyMassIndexMethodTwo}
+                  {...a11yProps(1)}
+                />
+              </StyledTabs>
 
-            <TabPanel
-              value={tabValue}
-              index={0}
-            >
-              <Formik
-                initialValues={methodOneInitialValues}
-                onSubmit={async ({
-                  height,
-                  height_unit,
-                  weight,
-                  weight_unit
-                }, { setSubmitting, resetForm }) => {
-                  const payload: BodyMassIndexI = {
+              <TabPanel
+                value={tabValue}
+                index={0}
+              >
+                <Formik
+                  initialValues={methodOneInitialValues}
+                  onSubmit={async ({
                     height,
                     height_unit,
                     weight,
-                    weight_unit,
-                    method: 'bodyMassIndex'
-                  }
-                  console.log(JSON.stringify(payload))
-                  try {
-                    const { success, payload: bodyMass } = await calculateOthers(payload)
-                    console.log('=====>', bodyMass)
-                    if (typeof bodyMass === 'object') {
-                      const { weight, height, bmi, unit } = bodyMass
-                      setMethodOneResult({
-                        weight: weight,
-                        height: height,
-                        bmi: bmi,
-                        unit: unit
-                      })
+                    weight_unit
+                  }, { setSubmitting, resetForm }) => {
+                    const payload: BodyMassIndexI = {
+                      height,
+                      height_unit,
+                      weight,
+                      weight_unit,
+                      method: 'bodyMassIndex'
                     }
-                    if (success === true) {
-                      setAnswer(success)
-                      formApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                      });
-                      resultApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                      })
+                    console.log(JSON.stringify(payload))
+                    try {
+                      const { success, payload: bodyMass } = await calculateOthers(payload)
+                      console.log('=====>', bodyMass)
+                      if (typeof bodyMass === 'object') {
+                        const { weight, height, bmi, unit } = bodyMass
+                        setMethodOneResult({
+                          weight: weight,
+                          height: height,
+                          bmi: bmi,
+                          unit: unit
+                        })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
+                        formApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-start',
+                        });
+                        resultApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-end',
+                        })
+                      }
+                    } catch (err) {
+                      console.log('====>', err)
                     }
-                  } catch (err) {
-                    console.log('====>', err)
-                  }
-                }}
+                  }}
+                >
+                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                    <form onSubmit={handleSubmit} className="form-container">
+                      <div className="form-row">
+                        <Label title={LABELS.height} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="height"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.height}
+                          onChange={handleChange}
+                        />
+
+                        <CustomSelect
+                          id="height_unit"
+                          measurement="length"
+                          value={values.height_unit}
+                          onChange={handleChange('height_unit')}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.weight} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="weight"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.weight}
+                          onChange={handleChange}
+                        />
+
+                        <CustomSelect
+                          id="weight_unit"
+                          measurement="weight"
+                          value={values.weight_unit}
+                          onChange={handleChange('weight_unit')}
+                        />
+                      </div>
+
+                      <div
+                        className="form-row"
+                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                      >
+                        <CustomBtn />
+                        <CustomResetBtn
+                          onHandleClick={() => resetForm()}
+                        />
+                      </div>
+                    </form>
+                  )}
+                </Formik>
+              </TabPanel>
+
+              <TabPanel
+                value={tabValue}
+                index={1}
               >
-                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                  <form onSubmit={handleSubmit} className="form-container">
-                    <div className="form-row">
-                      <Label title={LABELS.height} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="height"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.height}
-                        onChange={handleChange}
-                      />
-
-                      <CustomSelect
-                        id="height_unit"
-                        measurement="length"
-                        value={values.height_unit}
-                        onChange={handleChange('height_unit')}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.weight} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="weight"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.weight}
-                        onChange={handleChange}
-                      />
-
-                      <CustomSelect
-                        id="weight_unit"
-                        measurement="weight"
-                        value={values.weight_unit}
-                        onChange={handleChange('weight_unit')}
-                      />
-                    </div>
-
-                    <div
-                      className="form-row"
-                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                    >
-                      <CustomBtn />
-                      <CustomResetBtn
-                        onHandleClick={() => resetForm()}
-                      />
-                    </div>
-                  </form>
-                )}
-              </Formik>
-            </TabPanel>
-
-            <TabPanel
-              value={tabValue}
-              index={1}
-            >
-              <Formik
-                initialValues={methodTwoInitialValues}
-                onSubmit={async ({
-                  height,
-                  height_unit,
-                  weight,
-                  weight_unit
-                }, { setSubmitting }) => {
-                  const payload: BodyMassIndexMethodTwoI = {
+                <Formik
+                  initialValues={methodTwoInitialValues}
+                  onSubmit={async ({
                     height,
                     height_unit,
                     weight,
-                    weight_unit,
-                    method: 'bodyMassIndexTwo'
-                  }
-                  console.log(JSON.stringify(payload))
-                  try {
-                    const { success, payload: bodyMassTwo } = await calculateOthers(payload)
-                    console.log('=====>', bodyMassTwo)
-                    if (typeof bodyMassTwo === 'object') {
-                      const { bmi, unit, heightToIn, weightInlbs } = bodyMassTwo
-                      setMethodTwoResult({
-                        bmi: bmi,
-                        heightToIn: heightToIn,
-                        weightInlbs: weightInlbs,
-                        unit: unit
-                      })
+                    weight_unit
+                  }, { setSubmitting }) => {
+                    const payload: BodyMassIndexMethodTwoI = {
+                      height,
+                      height_unit,
+                      weight,
+                      weight_unit,
+                      method: 'bodyMassIndexTwo'
                     }
-                    if (success === true) {
-                      setAnswer(success)
-                      formApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                      });
-                      resultApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                      })
+                    console.log(JSON.stringify(payload))
+                    try {
+                      const { success, payload: bodyMassTwo } = await calculateOthers(payload)
+                      console.log('=====>', bodyMassTwo)
+                      if (typeof bodyMassTwo === 'object') {
+                        const { bmi, unit, heightToIn, weightInlbs } = bodyMassTwo
+                        setMethodTwoResult({
+                          bmi: bmi,
+                          heightToIn: heightToIn,
+                          weightInlbs: weightInlbs,
+                          unit: unit
+                        })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
+                        formApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-start',
+                        });
+                        resultApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-end',
+                        })
+                      }
+                    } catch (err) {
+                      console.log('====>', err)
                     }
-                  } catch (err) {
-                    console.log('====>', err)
-                  }
-                }}
-              >
-                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                  <form onSubmit={handleSubmit} className="form-container">
-                    <div className="form-row">
-                      <Label title={LABELS.height} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="height"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.height}
-                        onChange={handleChange}
-                      />
+                  }}
+                >
+                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                    <form onSubmit={handleSubmit} className="form-container">
+                      <div className="form-row">
+                        <Label title={LABELS.height} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="height"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.height}
+                          onChange={handleChange}
+                        />
 
-                      <CustomSelect
-                        id="height_unit"
-                        measurement="length"
-                        value={values.height_unit}
-                        onChange={handleChange('height_unit')}
-                      />
-                    </div>
+                        <CustomSelect
+                          id="height_unit"
+                          measurement="length"
+                          value={values.height_unit}
+                          onChange={handleChange('height_unit')}
+                        />
+                      </div>
 
-                    <div className="form-row">
-                      <Label title={LABELS.weight} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="weight"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.weight}
-                        onChange={handleChange}
-                      />
+                      <div className="form-row">
+                        <Label title={LABELS.weight} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="weight"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.weight}
+                          onChange={handleChange}
+                        />
 
-                      <CustomSelect
-                        id="weight_unit"
-                        measurement="weight"
-                        value={values.weight_unit}
-                        onChange={handleChange('weight_unit')}
-                      />
-                    </div>
+                        <CustomSelect
+                          id="weight_unit"
+                          measurement="weight"
+                          value={values.weight_unit}
+                          onChange={handleChange('weight_unit')}
+                        />
+                      </div>
 
-                    <div
-                      className="form-row"
-                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                    >
-                      <CustomBtn />
-                      <CustomResetBtn
-                        onHandleClick={() => resetForm()}
-                      />
-                    </div>
-                  </form>
-                )}
-              </Formik>
-            </TabPanel>
+                      <div
+                        className="form-row"
+                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                      >
+                        <CustomBtn />
+                        <CustomResetBtn
+                          onHandleClick={() => resetForm()}
+                        />
+                      </div>
+                    </form>
+                  )}
+                </Formik>
+              </TabPanel>
 
-          </Box>
-        </animated.div>
-
-        <ResultTabsContainer
-          tabTitle={'Result'}
-          animation={resultAnimation}
-        >
-          {answer === true &&
-            <Box className="text-wrap">
-              {tabValue === 0 &&
-                <Box sx={{ color: COLORS.text }}>
-                  <Latex displayMode={true}>{ }</Latex>
-                  <Typography variant="subtitle1">
-                    BMI: {methodOneResult.bmi}{methodOneResult.unit}<sup>2</sup>
-                  </Typography>
-                </Box>
-              }
-
-              {tabValue === 1 &&
-                <Box sx={{ color: COLORS.text }}>
-                  <Latex displayMode={true}>{ }</Latex>
-                  <Typography variant="subtitle1">
-                    BMI:{methodTwoResult.bmi}{methodTwoResult.unit}<sup>2</sup>
-                  </Typography>
-                </Box>
-              }
             </Box>
+          </animated.div>
+
+          {answer === true &&
+            <ResultTabsContainer
+              tabTitle={'Result'}
+              animation={resultAnimation}
+            >
+
+              <Box className="text-wrap">
+                {tabValue === 0 &&
+                  <Box sx={{ color: COLORS.text }}>
+                    <Latex displayMode={true}>{ }</Latex>
+                    <Typography variant="subtitle1">
+                      BMI: {methodOneResult.bmi}{methodOneResult.unit}<sup>2</sup>
+                    </Typography>
+                  </Box>
+                }
+
+                {tabValue === 1 &&
+                  <Box sx={{ color: COLORS.text }}>
+                    <Latex displayMode={true}>{ }</Latex>
+                    <Typography variant="subtitle1">
+                      BMI:{methodTwoResult.bmi}{methodTwoResult.unit}<sup>2</sup>
+                    </Typography>
+                  </Box>
+                }
+              </Box>
+
+            </ResultTabsContainer>
           }
-        </ResultTabsContainer>
+        </Grid>
       </AddLayout>
     </>
   )

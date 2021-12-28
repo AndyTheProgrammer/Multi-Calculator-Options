@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import { Typography, Grid } from '@mui/material'
 import { Formik } from 'formik'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -62,151 +62,158 @@ const HorsepowerCalculation = () => {
     <>
       <NavBar2 pagename="Body Surface Area Calculator" />
       <AddLayout>
-        {/* Form grid */}
-        <FormTabsContainer
-          tabTitle1={CALCULATORS.horsepowerCalculation}
-          animation={formAnimation}
+        <Grid
+          container
+          justifyContent="center"
         >
-          <Formik
-            initialValues={initialFormValues}
-            onSubmit={async ({
-              force,
-              force_unit,
-              distance,
-              distance_unit,
-              time,
-              time_unit,
-            }, { setSubmitting }) => {
-              const payload: HorsepowerCalculationI = {
+          {/* Form grid */}
+          <FormTabsContainer
+            tabTitle1={CALCULATORS.horsepowerCalculation}
+            animation={formAnimation}
+          >
+            <Formik
+              initialValues={initialFormValues}
+              onSubmit={async ({
                 force,
                 force_unit,
                 distance,
                 distance_unit,
                 time,
                 time_unit,
-                method: 'HorsepowerCalculationBasedOnDefinition'
-              }
-              console.log(JSON.stringify(payload))
-              try {
-                const { success, payload: horsepowerCalculation } = await calculateOthers(payload)
-                console.log('=====>', horsepowerCalculation)
-                const {
-                  answer,
+              }, { setSubmitting }) => {
+                const payload: HorsepowerCalculationI = {
                   force,
+                  force_unit,
                   distance,
+                  distance_unit,
                   time,
-                  unit,
-                  unitType,
-                } = horsepowerCalculation
-                if (typeof horsepowerCalculation === 'object' && unitType === true) {
-                  setResult({
-                    horsepower: answer,
-                    force: force,
-                    distance: distance,
-                    time: time,
-                    unit: unit
-                  })
+                  time_unit,
+                  method: 'HorsepowerCalculationBasedOnDefinition'
                 }
-                if (success === true) {
-                  setAnswer(success)
-                  formApi.start({
-                    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-                  });
-                  resultApi.start({
-                    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                    alignItems: 'center',
-                    justifyContent: 'flex-end',
-                  })
+                console.log(JSON.stringify(payload))
+                try {
+                  const { success, payload: horsepowerCalculation } = await calculateOthers(payload)
+                  console.log('=====>', horsepowerCalculation)
+                  const {
+                    answer,
+                    force,
+                    distance,
+                    time,
+                    unit,
+                    unitType,
+                  } = horsepowerCalculation
+                  if (typeof horsepowerCalculation === 'object' && unitType === true) {
+                    setResult({
+                      horsepower: answer,
+                      force: force,
+                      distance: distance,
+                      time: time,
+                      unit: unit
+                    })
+                  }
+                  if (success === true) {
+                    setAnswer(success)
+                    formApi.start({
+                      transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                      alignItems: 'center',
+                      justifyContent: 'flex-start',
+                    });
+                    resultApi.start({
+                      transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                      alignItems: 'center',
+                      justifyContent: 'flex-end',
+                    })
+                  }
+                } catch (err) {
+                  console.log('====>', err)
                 }
-              } catch (err) {
-                console.log('====>', err)
-              }
-            }}
-          >
-            {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-              <form onSubmit={handleSubmit} className="form-container">
-                <div className="form-row">
-                  <Label title={LABELS.force} />
-                  <CustomTextInput
-                    type={INPUT_TYPE.number}
-                    id="force"
-                    placeholder={PLACEHOLDERS.number}
-                    value={values.force}
-                    onChange={handleChange}
-                  />
+              }}
+            >
+              {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                <form onSubmit={handleSubmit} className="form-container">
+                  <div className="form-row">
+                    <Label title={LABELS.force} />
+                    <CustomTextInput
+                      type={INPUT_TYPE.number}
+                      id="force"
+                      placeholder={PLACEHOLDERS.number}
+                      value={values.force}
+                      onChange={handleChange}
+                    />
 
-                  <CustomSelect
-                    id="force_unit"
-                    measurement="force"
-                    value={values.force_unit}
-                    onChange={handleChange('force_unit')}
-                  />
-                </div>
+                    <CustomSelect
+                      id="force_unit"
+                      measurement="force"
+                      value={values.force_unit}
+                      onChange={handleChange('force_unit')}
+                    />
+                  </div>
 
-                <div className="form-row">
-                  <Label title={LABELS.distance} />
-                  <CustomTextInput
-                    type={INPUT_TYPE.number}
-                    id="distance"
-                    placeholder={PLACEHOLDERS.number}
-                    value={values.distance}
-                    onChange={handleChange}
-                  />
+                  <div className="form-row">
+                    <Label title={LABELS.distance} />
+                    <CustomTextInput
+                      type={INPUT_TYPE.number}
+                      id="distance"
+                      placeholder={PLACEHOLDERS.number}
+                      value={values.distance}
+                      onChange={handleChange}
+                    />
 
-                  <CustomSelect
-                    id="distance_unit"
-                    measurement="length"
-                    value={values.distance_unit}
-                    onChange={handleChange('distance_unit')}
-                  />
-                </div>
+                    <CustomSelect
+                      id="distance_unit"
+                      measurement="length"
+                      value={values.distance_unit}
+                      onChange={handleChange('distance_unit')}
+                    />
+                  </div>
 
-                <div className="form-row">
-                  <Label title={LABELS.time} />
-                  <CustomTextInput
-                    type={INPUT_TYPE.number}
-                    id="time"
-                    placeholder={PLACEHOLDERS.number}
-                    value={values.time}
-                    onChange={handleChange}
-                  />
+                  <div className="form-row">
+                    <Label title={LABELS.time} />
+                    <CustomTextInput
+                      type={INPUT_TYPE.number}
+                      id="time"
+                      placeholder={PLACEHOLDERS.number}
+                      value={values.time}
+                      onChange={handleChange}
+                    />
 
-                  <CustomSelect
-                    id="time_unit"
-                    measurement="time"
-                    value={values.time_unit}
-                    onChange={handleChange('time_unit')}
-                  />
-                </div>
+                    <CustomSelect
+                      id="time_unit"
+                      measurement="time"
+                      value={values.time_unit}
+                      onChange={handleChange('time_unit')}
+                    />
+                  </div>
 
-                <div
-                  className="form-row"
-                  style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                >
-                  <CustomBtn />
-                  <CustomResetBtn
-                    onHandleClick={() => resetForm()}
-                  />
-                </div>
-              </form>
-            )}
-          </Formik>
-        </FormTabsContainer>
+                  <div
+                    className="form-row"
+                    style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                  >
+                    <CustomBtn />
+                    <CustomResetBtn
+                      onHandleClick={() => resetForm()}
+                    />
+                  </div>
+                </form>
+              )}
+            </Formik>
+          </FormTabsContainer>
 
-        {/* Results grid */}
-        <ResultTabsContainer
-          tabTitle={'Result'}
-          animation={resultAnimation}
-          latex={LATEX.horsepowerCalc}
-        >
-          <div className="mb-3">
-            <Typography variant="subtitle1">
-              Horsepower: {Result.horsepower}{Result.unit}
-            </Typography>
-          </div>
-        </ResultTabsContainer>
+          {/* Results grid */}
+          {answer === true &&
+            <ResultTabsContainer
+              tabTitle={'Result'}
+              animation={resultAnimation}
+              latex={LATEX.horsepowerCalc}
+            >
+              <div className="mb-3">
+                <Typography variant="subtitle1">
+                  Horsepower: {Result.horsepower}{Result.unit}
+                </Typography>
+              </div>
+            </ResultTabsContainer>
+          }
+        </Grid>
       </AddLayout>
 
     </>
