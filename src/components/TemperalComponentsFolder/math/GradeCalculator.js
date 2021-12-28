@@ -223,14 +223,14 @@ export default function GPACalculator(){
     {id: 3, value: 'History'}
   ]);
   const [credit, setCredit] = useState([
-    {id: 1, value: '3'},
-    {id: 2, value: '2'},
-    {id: 3, value: '3'}
+    {id: 1, value: '30'},
+    {id: 2, value: '20'},
+    {id: 3, value: '10'}
   ]);
   const [grade, setGrade] = useState([
-    {id: 1, value: 'A'},
-    {id: 2, value: 'B'},
-    {id: 3, value: 'C+'}
+    {id: 1, value: '80'},
+    {id: 2, value: '79'},
+    {id: 3, value: '90'}
   ]);
 
   const handler = (h, id, name) =>{
@@ -377,15 +377,15 @@ export default function GPACalculator(){
     console.log(resultCreditArray.toString())
     console.log(resultGradeArray.toString())
 
-    submitData(resultCoursesArray.toString(), resultCreditArray.toString(), resultGradeArray.toString())
+    // submitData(resultCoursesArray.toString(), resultCreditArray.toString(), resultGradeArray.toString())
   }
 
   async function submitData(courses, credit, grade){
     const data = {
-      course: courses,
-      credit: credit,
+      entry: courses,
+      weight: credit,
       grade: grade,
-      method:"GPACalculator"
+      method:"GradeCalculator"
     }
     const response = await mathMainService(data);
     setValue([response.message])
@@ -401,7 +401,7 @@ export default function GPACalculator(){
 
   return(
     <>
-    <NavBar2 pagename="GPA Calculator" />
+    <NavBar2 pagename="Grades Calculator" />
     <AddLayout>
             <Box sx={{ display: "flex", justifyContent: "center" }}
             > 
@@ -425,10 +425,10 @@ export default function GPACalculator(){
                       <Box sx={{minHeight: 150, display:'flex', flexDirection:'column' }}>
                           <Grid container={true}columnSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
                               <Grid item={true} xs={4}>
-                                  <Box sx={{ ...labelStyle }}>Course</Box>
+                                  <Box sx={{ ...labelStyle }}>Entry</Box>
                               </Grid>
                               <Grid item={true} xs={4}>
-                                  <Box sx={{ ...labelStyle }}>Credit</Box>
+                                  <Box sx={{ ...labelStyle }}>Weight</Box>
                               </Grid>
                               <Grid item={true} xs={4}>
                                   <Box sx={{ ...labelStyle }}>Grade</Box>
@@ -455,7 +455,7 @@ export default function GPACalculator(){
                               {
                                 grade.map((data) => (
                                   <Box sx={{ marginBottom: 1 }}>
-                                    <GradeInputFieldOptions inputvalue={data.value} id={data.id} getValue={handler} />
+                                    <GradeInputField inputvalue={data.value} id={data.id} getValue={handler} />
                                   </Box>
                                 ))
                               }

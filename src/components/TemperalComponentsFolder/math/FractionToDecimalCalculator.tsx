@@ -9,6 +9,9 @@ import { Box, Grid, Typography } from '@mui/material'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
 import TextCard from '../../utilityComponents/TextCard';
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn';
+import fractions from '../../../common/assets/fractions_icon.svg';
+import math_icon from '../../../common/assets/math_icon.svg';
+
 const Latex = require('react-latex');
 
 function FractionToDecimalCalculator(){
@@ -62,8 +65,8 @@ function FractionToDecimalCalculator(){
 
     return(
         <>
-        <NavBar2 categoryname="Fraction Calculator" pagename="Fraction To Decimal Calculator"/>
-        <AddLayout>
+        <NavBar2 pageimage={math_icon} categoryname="Fraction Calculator" pagename="Fraction To Decimal Calculator"/>
+        <AddLayout categorykey='fractions' searchname='Fractions Calculators' searchimage={fractions}>
            
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>

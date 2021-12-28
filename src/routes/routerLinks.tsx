@@ -69,15 +69,6 @@ export default function RouterLinks() {
               );
             })
           }
-           {
-            mathRoutes.subCategories[5].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
 
             {/*Financial routes */}
             {
@@ -98,9 +89,66 @@ export default function RouterLinks() {
               );
             })
           }
+          {
+            financialRoutes.subCategories[2].sub_calculator.map((r:any) => {
+              return (
+                <Route key={r} path={r.path}>
+                  <r.component />
+                </Route>
+              );
+            })
+          }
+          {
+            financialRoutes.subCategories[3].sub_calculator.map((r:any) => {
+              return (
+                <Route key={r} path={r.path}>
+                  <r.component />
+                </Route>
+              );
+            })
+          }
+          {
+            financialRoutes.subCategories[4].sub_calculator.map((r:any) => {
+              return (
+                <Route key={r} path={r.path}>
+                  <r.component />
+                </Route>
+              );
+            })
+          }
 
             {/* Other routes */}
+            { othersRoutes.subCategories[0].sub_calculator.map((route, i) => (
+                <Route key={route.name} path={route.path} >{
+                      <route.component />
+                }</Route>
+            ))}
+            { othersRoutes.subCategories[1].sub_calculator.map((route, i) => (
+                <Route key={route.name} path={route.path} >{
+                      <route.component />
+                }</Route>
+            ))}
+            { othersRoutes.subCategories[2].sub_calculator.map((route, i) => (
+                <Route key={route.name} path={route.path} >{
+                      <route.component />
+                }</Route>
+            ))}
+            { othersRoutes.subCategories[3].sub_calculator.map((route, i) => (
+                <Route key={route.name} path={route.path} >{
+                      <route.component />
+                }</Route>
+            ))}
+            { othersRoutes.subCategories[4].sub_calculator.map((route, i) => (
+                <Route key={route.name} path={route.path} >{
+                      <route.component />
+                }</Route>
+            ))}
             { othersRoutes.subCategories[5].sub_calculator.map((route, i) => (
+                <Route key={route.name} path={route.path} >{
+                      <route.component />
+                }</Route>
+            ))}
+            { othersRoutes.subCategories[6].sub_calculator.map((route, i) => (
                 <Route key={route.name} path={route.path} >{
                       <route.component />
                 }</Route>

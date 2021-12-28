@@ -9,6 +9,8 @@ import { Box, Grid, Typography } from '@mui/material'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
 import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
+import math_icon from '../../../common/assets/math_icon.svg';
+import stats from '../../../common/assets/stats_icon.svg';
 const Latex = require('react-latex');
 
 function FibonacciCalculator(){
@@ -62,8 +64,8 @@ function FibonacciCalculator(){
 
     return(
         <>
-        <NavBar2 categoryname="Statistics Calculators" pagename="Fibonacci Calculator"/>
-        <AddLayout>
+        <NavBar2 pageimage={math_icon} categoryname="Statistics Calculators" pagename="Fibonacci Calculator"/>
+        <AddLayout categorykey='statistics' searchname='Statistics Calculators' searchimage={stats}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
                 <Anime

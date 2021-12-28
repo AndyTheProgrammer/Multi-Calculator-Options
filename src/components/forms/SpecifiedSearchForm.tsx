@@ -1,28 +1,40 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useHistory } from 'react-router-dom'
 import { Button } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
-import { othersRoutes } from '../../routes/routes'
+import { othersRoutes, mathRoutes } from '../../routes/routes'
 import List from '@mui/material/List';
-
-
-
 var classNames = require('classnames');
 
-function SpecifiedSearchForm(){
+function SpecifiedSearchForm(props:any){
 
     const history = useHistory();
 
-    const converters = othersRoutes.subCategories[5].sub_calculator
-    
+    //Math list
+    const fractionsLists = mathRoutes.subCategories[0].sub_calculator
+    const generalList = mathRoutes.subCategories[1].sub_calculator
+    const algebraList = mathRoutes.subCategories[2].sub_calculator
+    const statisticsList = mathRoutes.subCategories[3].sub_calculator
+    const geometryList = mathRoutes.subCategories[4].sub_calculator
+
+    // other list
+    const converterList = othersRoutes.subCategories[6].sub_calculator
+
+
     const ref:any = useRef();
     const [isSearchOption, setSearchOption] = useState(false)
 
     const [value, setValue] = useState("");
     const [resultArray, setResultArray] = useState([])
 
-    var dataArray = [...othersRoutes.subCategories[5].sub_calculator]
+    var dataArray = [
+        ...fractionsLists,
+        ...generalList,
+        ...algebraList,
+        ...statisticsList,
+        ...geometryList
+    ]
 
     useEffect(() => {
         const dataToArray:any = [];
@@ -88,12 +100,42 @@ function SpecifiedSearchForm(){
             </div>
             
         </Box>
-        <Box  sx={{ 
+        <Box 
+            sx={{ 
+                width:'100%',
+                display: 'flex',
+                height: 30,
+                justifyContent: 'start',
+                backgroundColor: 'white',
+                borderRadius: 5,
+                boxShadow: '0px 5px 20px 1px rgba(0, 0, 0, 0.1)',
+            }}>
+            <Box sx={{ height: 30, }}>
+                <img style={{ height: '100%', }} alt="icon" src={props.searchimage} />
+            </Box>
+            <Typography sx={{width: '100%'}}>
+                <Box
+                    sx={{
+                        width: '100%',
+                        paddingRight: 3,
+                        paddingLeft: 0.5,
+                        paddingTop: 0.5,
+                    }}>
+                        {props.searchname}
+                </Box>
+            </Typography>
+            
+        </Box>
+        <Box
+            className="general-text-box app-scroller"  
+            sx={{ 
                 border: 0, 
                 display: 'block',
-                marginLeft: 2
+                height: 170,
+                overflowY: 'scroll'
             }}>
             {
+                (value)?
                 resultArray.map((data:any) => {
                     return(
                         <Box sx={[
@@ -104,7 +146,7 @@ function SpecifiedSearchForm(){
                                 }
                             },
                             {
-                                fontSize: 15,
+                                fontSize: 16,
                             }
                         ]}
                             onClick={()=>{ 
@@ -112,6 +154,142 @@ function SpecifiedSearchForm(){
                             }}>{ data.name }</Box>
                     )
                 })
+                :<Box>
+                    {
+                        (props.searchkey === 'fractions')?
+                        <Box>
+                            {
+                                fractionsLists.map((data:any) => {
+                                    return(
+                                        <Box sx={[
+                                            {
+                                                '&:hover':{
+                                                    cursor: 'pointer',
+                                                    backgroundColor: '#F0F3F6'
+                                                }
+                                            },
+                                            {
+                                                fontSize: 16,
+                                            }
+                                        ]}
+                                            onClick={()=>{ 
+                                                history.push(data.path); 
+                                            }}>{ data.name }</Box>
+                                    )
+                                })
+                            }
+                        </Box>
+                        :<Box></Box>
+                    }
+                    {
+                        (props.searchkey === 'general')?
+                        <Box>
+                            {
+                                generalList.map((data:any) => {
+                                    return(
+                                        <Box sx={[
+                                            {
+                                                '&:hover':{
+                                                    cursor: 'pointer',
+                                                    backgroundColor: '#F0F3F6'
+                                                }
+                                            },
+                                            {
+                                                fontSize: 16,
+                                            }
+                                        ]}
+                                            onClick={()=>{ 
+                                                history.push(data.path); 
+                                            }}>{ data.name }</Box>
+                                    )
+                                })
+                            }
+                            
+                        </Box>
+                        :<Box></Box>
+                    }
+                    {
+                        (props.searchkey === 'algebra')?
+                        <Box>
+                            {
+                                algebraList.map((data:any) => {
+                                    return(
+                                        <Box sx={[
+                                            {
+                                                '&:hover':{
+                                                    cursor: 'pointer',
+                                                    backgroundColor: '#F0F3F6'
+                                                }
+                                            },
+                                            {
+                                                fontSize: 16,
+                                            }
+                                        ]}
+                                            onClick={()=>{ 
+                                                history.push(data.path); 
+                                            }}>{ data.name }</Box>
+                                    )
+                                })
+                            }
+                            
+                        </Box>
+                        :<Box></Box>
+                    }
+                    {
+                        (props.searchkey === 'statistics')?
+                        <Box>
+                            {
+                                statisticsList.map((data:any) => {
+                                    return(
+                                        <Box sx={[
+                                            {
+                                                '&:hover':{
+                                                    cursor: 'pointer',
+                                                    backgroundColor: '#F0F3F6'
+                                                }
+                                            },
+                                            {
+                                                fontSize: 16,
+                                            }
+                                        ]}
+                                            onClick={()=>{ 
+                                                history.push(data.path); 
+                                            }}>{ data.name }</Box>
+                                    )
+                                })
+                            }
+                            
+                        </Box>
+                        :<Box></Box>
+                    }
+                    {
+                        (props.searchkey === 'converter')?
+                        <Box>
+                            {
+                                converterList.map((data:any) => {
+                                    return(
+                                        <Box sx={[
+                                            {
+                                                '&:hover':{
+                                                    cursor: 'pointer',
+                                                    backgroundColor: '#F0F3F6'
+                                                }
+                                            },
+                                            {
+                                                fontSize: 16,
+                                            }
+                                        ]}
+                                            onClick={()=>{ 
+                                                history.push(data.path); 
+                                            }}>{ data.name }</Box>
+                                    )
+                                })
+                            }
+                            
+                        </Box>
+                        :<Box></Box>
+                    }
+                </Box>
             }
         </Box>
         </Box>

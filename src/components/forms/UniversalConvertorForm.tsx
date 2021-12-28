@@ -14,27 +14,14 @@ import { CustomFormikForm, CustomFormikOptions } from './CustomForm'
 import { labelStyle, formCardStyle, formDisplay } from '../../styling/CustomStyles'
 import TextCard from '../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../custom/CustomFormBtn'
+import other_icon from '../../common/assets/other_icon.svg';
+import convertion_calc_icon from '../../common/assets/others_icons/convertion_calc_icon.svg';
 const Latex = require('react-latex');
 
 
 function UniversalConverterForm(props:any){
     // using the useState ehook
     const [optionsData, setData] = useState<any[]>([])//for getting units
-
-    //using the useEffect hook
-    // useEffect(() => {
-    //     const fetchData = async () => {
-
-    //      if(optionsData){
-    //         console.log("If data options is empty")
-    //         //fetches defined units for converter
-    //         const result = await props.unitsFunnction()
-    //         // setData(prevRes => ([...prevRes, ...result]))
-    //         setData(result)
-    //      }
-    //     };
-    //     fetchData();
-    // }, [])
 
     const CustomFormikOptions = (props:any) => ( 
       <Box sx={{
@@ -126,8 +113,8 @@ function UniversalConverterForm(props:any){
 
     return(
       <>
-      <NavBar2 pagename={props.pagename} />
-      <AddLayout>
+      <NavBar2 pageimage={other_icon} categoryname="Converter Calculators"  pagename={props.pagename} />
+      <AddLayout categorykey='converter' searchname='Converter Calculators' searchimage={convertion_calc_icon}>
           <Box sx={{ display: "flex", justifyContent: "center" }}> 
           <Box className='animated-content-center'>
           <Anime

@@ -1,16 +1,66 @@
-import React, { useRef, useState, useEffect }  from 'react'
-import CustomForm from '../../forms/CustomForm'
-import { Field, Form, Formik, FormikProps } from 'formik'
-import { mathMainService } from '../../../services/mathService/mathMainService'
-import Anime from 'react-animejs-wrapper'
-import AddLayout from '../../layouts/AddLayout'
-import { Box, Grid, Typography } from '@mui/material'
-import { NavBar2 } from '../../navbar/navbar2'
-import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
-import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
-import TextCard from '../../utilityComponents/TextCard'
-import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
+import React, { useRef, useState, useEffect }  from 'react';
+import CustomForm from '../../forms/CustomForm';
+import { Field, Form, Formik, FormikProps } from 'formik';
+import { mathMainService } from '../../../services/mathService/mathMainService';
+import Anime from 'react-animejs-wrapper';
+import AddLayout from '../../layouts/AddLayout';
+import { Box, Grid, Typography } from '@mui/material';
+import { NavBar2 } from '../../navbar/navbar2';
+import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles';
+import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm';
+import TextCard from '../../utilityComponents/TextCard';
+import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn';
+import math_icon from '../../../common/assets/math_icon.svg';
+import stats from '../../../common/assets/stats_icon.svg';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+
 const Latex = require('react-latex');
+
+function checkArray(arr:any, num:any){
+    for(var i = 0; i < arr.length; i++){
+      if(arr[i].id === num){
+        return true;
+      }
+    }
+    return false
+  }
+
+function InputField(props:any){
+    const [value, setValue] = useState(props.inputvalue)
+  
+    const handleChange = (e:any) => {
+      setValue(e.target.value)
+      console.log(props.id)
+      props.getValue(e.target.value, props.id)     
+    }
+  
+    return (
+        <Box sx={{
+          display: 'flex',
+        }}>
+          <input
+            style={{
+              textAlign: 'center',
+              width:'100%',
+              backgroundColor:'#F0F3F6',
+              border: 'solid',
+              borderWidth: 0,
+              borderColor: 'red',
+              borderRadius: 7,
+              outline: 'none'
+            }}
+            type="text" 
+            name="value" 
+            value={value} 
+            onChange={handleChange}
+          />
+        </Box>
+    );
+  }
 
 export default function SampleStandardDeviationCalculator(){
     const [value, setValue] = useState<any[]>([])
@@ -60,10 +110,67 @@ export default function SampleStandardDeviationCalculator(){
           
     })
 
+    const [sdValue, setSDValue] = useState([
+        {id: 0, value: '7'},
+        {id: 1, value: '4'},
+        {id: 2, value: '2'}
+      ]);
+
+      const handler = (h:any, id:any) =>{
+
+        const copysdValue = sdValue;
+        
+          if(copysdValue.length !== 0){
+            for(var i = 0; i < copysdValue.length; i++){
+                // if(!checkArray(copysdValue, id)){
+                //     const data = {
+                //         id: id,
+                //         value: h
+                //     }
+                //     setSDValue([...copysdValue, data]);
+                // }
+                if(copysdValue[i].id === id ){      
+                    copysdValue[i].value = h
+                    console.log("Monkey")
+                    setSDValue(copysdValue)
+                }
+            }
+            // setSDValue([...copysdValue])
+        }
+    }
+    
+    function addField(){
+        setSDValue([...sdValue, {id: sdValue.length, value: ''}]);
+    }
+
+    function checkEmpty(arr:any){
+        for(var i = 0; i < arr.length; i++){
+            if(parseInt(arr[i++].value) && arr[i].value === ''  ){
+                return false
+            }
+            if(!parseInt(arr[i].value)){
+                return false
+            }
+        }
+        return true
+    }
+
+    async function submitHandler(){
+        var postData:any = [];
+        
+        for(var i = 0; i < sdValue.length; i++){
+            if( sdValue[i].value !== '' && parseInt(sdValue[i].value)){
+                postData.push(parseInt(sdValue[i].value))
+            }
+        }
+
+        console.log(postData.toString())
+    }
+
     return(
         <>
-            <NavBar2 categoryname="Statistics Calculators" pagename="Sample Standard Deviation Calculator"/>
-            <AddLayout>
+            <NavBar2 pageimage={math_icon} categoryname="Statistics Calculators" pagename="Sample Standard Deviation Calculator"/>
+            <AddLayout  categorykey='statistics' searchname='Statistics Calculators' searchimage={stats} >
                 <Box sx={{ display: "flex", justifyContent: "center" }}> 
                 <Box className='animated-content-center'>
                 <Anime
@@ -82,109 +189,85 @@ export default function SampleStandardDeviationCalculator(){
                             <Box sx={{height:25, width: '100%' }}></Box>
                             <Box sx={{...formCardStyle}}></Box>
                         </Box>
-                        <Formik
-                            initialValues={{ 
-                                provided_numbers:"",
-                                method: "SampleStandardDeviationCalculator"
-                            }}
-                            onSubmit = {(values)=>{
-                                const data = {
-                                    provided_numbers: values.provided_numbers,
-                                    method: values.method
-                                }
-                                const postData = async () => {
-                                    const responseData = await mathMainService(data)
-                                    var msg:any = responseData.statusDescription;
-                                    if(msg === "success"){
-                                        setValue([
-                                            responseData.message.sampleStandardDeviation,
-                                            responseData.message.count,
-                                            responseData.message.sum,
-                                            responseData.message.mean,
-                                            responseData.message.variance,
-                                        ])
-                                    }
-                                }
-                                postData()
-                            }}>
-                                
-                            {({
-                                values,
-                                handleChange,
-                                handleSubmit,
-                                isSubmitting
-                            }) => (
-                                <form onSubmit={handleSubmit}>
-                                    <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid xs={12}>
-                                            <Typography>    
-                                                <Box
-                                                  sx={{
-                                                        fontWeight: 100,
-                                                        fontStyle: 'italic',
-                                                        fontSize: 14,
-                                                        color: '#b0b0b0'
-                                                    }}>
-                                                    Provide numbers seperated by a coma
-                                                </Box>
-                                                <Box
-                                                  sx={{
-                                                        fontWeight: 100,
-                                                        fontStyle: 'italic',
-                                                        fontSize: 14,
-                                                        color: '#b0b0b0'
-                                                    }}>
-                                                    e.g 12,4,5,64,87
-                                                </Box>
-                                            </Typography>
-                                            </Grid>
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Provided numbers</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                                <CustomForm
-                                                    type="text"
-                                                    name="provided_numbers"
-                                                    onChange={handleChange}
-                                                    value={values.provided_numbers}
-                                                    placeholder=""
+                        <Grid columnSpacing={1} container sx={{ paddingTop:5, paddingBottom:5, paddingLeft:5, paddingRight:5}}>
+                            <Grid item xs={12}>
+                                <Box sx={{ display: 'flex' }}>
+                                        <Typography sx={{
+                                                width: {
+                                                    lg: '50%',
+                                                    md: '50%',
+                                                    sm: '170px',
+                                                    xs: '170px'
+                                                },
+                                                fontWeight: 'bold',
+                                                marginTop: 1.1
+                                            }}>
+                                            <Box>This is data :</Box>
+                                        </Typography>
+                                    <FormControl component="fieldset" sx={{ width: '100%'}}>
+                                        
+                                        <RadioGroup row aria-label="position" name="position" defaultValue={0}>
+                                            <FormControlLabel
+                                                value={0}
+                                                control={<Radio />}
+                                                label="Population"
+                                                labelPlacement="start"
                                                 />
-                                            </Grid>
-                                                            
-                                        </Grid>
-                                        <Box sx={{ flexGrow: 1}}>
-                                            {/* 
-                                                Flex box pushes submit button down
-                                            */}
+                                            <FormControlLabel
+                                                value={1}
+                                                control={<Radio />}
+                                                label="Sample"
+                                                labelPlacement="start"
+                                                />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </Box>
+                            </Grid>
+                        {
+                            sdValue.map((data) => (
+                                <Grid item xs={4} sm={3} md={2} sx={{ marginBottom: 1 }}>
+                                    <Box sx={{ display: 'flex' }}>
+                                        <Box sx={{ width: '100%' }}>
+                                            <InputField inputvalue={data.value} id={data.id} getValue={handler} />
                                         </Box>
-
-                                        <Box 
-                                            // className="toggle-box-primary"
-                                            sx={{ width: '100%' }}
-                                                >
-                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                        <CustomFormBtn 
-                                                        type="button" 
-                                                        handleClick={()=>{ 
-                                                            controlAnimation();
-                                                            }} 
-                                                        name="Clear"/>
-                                                    </Box>
-                                            </Grid>
-                                            <Grid item xs={4}></Grid>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                    </Box>
-                                            </Grid>
-                                            </Grid>
-                                        </Box>
+                                        <Typography>
+                                            <Box>,</Box>
+                                        </Typography>
                                     </Box>
-                                </form>
-                            )}
-                        </Formik>
+                                </Grid>
+                            ))
+                        }
+                        </Grid>
+                        <Box 
+                              // className="toggle-box-primary"
+                              sx={{
+                                paddingLeft: 2, paddingRight: 2, 
+                                minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                      <Box sx={{display:"flex", justifyContent:"start"}}>
+                                          <CustomFormBtn 
+                                          type="button" 
+                                          handleClick={()=>{ 
+                                              controlAnimation();
+                                              }} 
+                                          name="Clear"/>
+                                      </Box>
+                                  <Box sx={{display:"flex", justifyContent:"start"}}>
+                                      <CustomFormBtn 
+                                      type="button" 
+                                      handleClick={()=>{ addField() }} 
+                                      name="Add Courses"/>
+                                  </Box>
+                                  <Box sx={{display:"flex", justifyContent:"end"}}>
+                                      <CustomFormImageBtn
+                                        type="button"
+                                        handleClick={
+                                          () =>{
+                                            submitHandler()
+                                          }
+                                        }  
+                                        name="Calculate"/>
+                                  </Box>
+                          </Box>
                     </Box>
                 </Anime>
 

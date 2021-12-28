@@ -4,6 +4,8 @@ import * as FINANCE_INTERFACES from '../types/financeTypes'
 
 export async function mathMainService(
     dataObject:
+    INTERFACES.SalesCalculator|
+    INTERFACES.PopulationStandardDeviationCalculator|
     INTERFACES.FibonacciCalculator|
     INTERFACES.ArithmeticSequenceCalculator|
     INTERFACES.AverageCalculator|
@@ -22,6 +24,9 @@ export async function mathMainService(
     INTERFACES.GeneralRootCalculator|
     INTERFACES.GeometricSequencestCalculator|
     INTERFACES.GreatestCommonFactorCalculator|
+    INTERFACES.GPACalculator|
+    INTERFACES.GradeCalculator|
+    INTERFACES.FinalGradeCalculator|
     INTERFACES.HexadecimalCalculator|
     INTERFACES.HexadecimalToDecimalCalculator|
     INTERFACES.LeastCommonMultipleCalculator|

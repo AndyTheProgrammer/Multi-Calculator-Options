@@ -128,6 +128,10 @@ export default function BinaryCalculator(){
                             }}
                             validate={
                                 (values)=>{
+                                    interface Errors{
+                                        first_value: string,
+                                        second_value: string
+                                     }
                                     const errors = {} as Errors
                                     if(!values.first_value){
                                         errors.first_value = 'Required'

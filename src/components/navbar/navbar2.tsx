@@ -2,12 +2,11 @@ import React, { useState } from "react"
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import { AppBar } from '@mui/material'
 import Link from '@mui/material/Link';
 import { SearchForm } from '../forms/searchForm';
 import { useHistory } from 'react-router-dom'
-
+import IconButton from '@mui/material/IconButton';
 //icons
 import SearchIcon from '@mui/icons-material/Search';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
@@ -119,6 +118,7 @@ function NavBar2(props:any){
                                                     }
                                                 }}>
                                                     {props.pagename}
+                                                    {props.pagecategoryname}
                                                 </Box>
                                             
                                         </Typography>
@@ -169,23 +169,25 @@ function NavBar2(props:any){
                                         xs: 'flex'
                                     } 
                                 }}>
-                                    <Button type="button">
+                                    <IconButton color="primary" type="button" size="small">
                                         <SearchIcon/>
-                                    </Button>
-                                    <Button
+                                    </IconButton>
+                                    <IconButton
+                                        color="primary"
+                                        size="small"
                                         onClick={()=>{
                                             toggleDrawer();
                                         }} 
                                         type="button">
-                                        <DensityMediumIcon/>
-                                    </Button>
+                                        <DensityMediumIcon />
+                                    </IconButton>
                             </Box>
                         </Box>
                         <Typography
                             sx={{
                                 paddingTop: 1.0,
                                 fontSize: 16,
-                                paddingLeft: 1,
+                                paddingLeft: 1.7,
                                 color: '#8591B0',
                                 display:{
                                     lg:'none',

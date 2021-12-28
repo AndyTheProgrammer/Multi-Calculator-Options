@@ -1,3 +1,250 @@
+// import React, { useEffect, useRef, useState } from 'react'
+// import { Box } from '@mui/material'
+// import { useHistory } from 'react-router-dom'
+// import { Button } from '@mui/material'
+// //icons
+// import SearchIcon from '@mui/icons-material/Search';
+// import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+// import CloseIcon from '@mui/icons-material/Close';
+
+// import { othersRoutes , mathRoutes, financialRoutes } from '../../routes/routes'
+// import List from '@mui/material/List';
+// var classNames = require('classnames');
+
+
+// function SearchForm(){
+//     const [openDrawer, setOpenDrawer] = useState(false);
+//     const toggleDrawer = () =>{
+//         setOpenDrawer(!openDrawer)
+//     }
+//     const history = useHistory();
+    
+//     const ref:any = useRef();
+//     const [isSearchOption, setSearchOption] = useState(false)
+
+//     const [value, setValue] = useState("");
+//     const [resultArray, setResultArray] = useState([])
+
+//     var dataArray = [
+//         ...othersRoutes.subCategories[0].sub_calculator,
+//         ...othersRoutes.subCategories[1].sub_calculator,
+//         ...othersRoutes.subCategories[2].sub_calculator,
+//         ...othersRoutes.subCategories[3].sub_calculator,
+//         ...othersRoutes.subCategories[4].sub_calculator,
+//         ...othersRoutes.subCategories[5].sub_calculator,
+//         ...othersRoutes.subCategories[6].sub_calculator,
+//         ...mathRoutes.subCategories[0].sub_calculator,
+//         ...mathRoutes.subCategories[1].sub_calculator,
+//         ...mathRoutes.subCategories[2].sub_calculator,
+//         ...mathRoutes.subCategories[3].sub_calculator,
+//         ...mathRoutes.subCategories[4].sub_calculator,
+//         ...financialRoutes.subCategories[0].sub_calculator,
+//         ...financialRoutes.subCategories[1].sub_calculator,
+//         ...financialRoutes.subCategories[2].sub_calculator,
+//         ...financialRoutes.subCategories[3].sub_calculator,
+//         ...financialRoutes.subCategories[4].sub_calculator
+//     ]
+
+//     useEffect(() => {
+//         const dataToArray:any = [];
+//         for(let i = 0; i < dataArray.length; i++){
+//             var a = dataArray[i].name;
+//             if(a.toLocaleLowerCase().indexOf(value) > -1 && value !== ""){
+//                 dataToArray[i] = dataArray[i];
+//             }
+//             else{
+                
+//             }
+//             setResultArray(dataToArray)
+//         }
+//     }, [value])
+
+
+
+//     useEffect(() => {
+//         const checkIfClickedOutside = (e: { target: any; }) => {
+//           // If the menu is open and the clicked target is not within the menu,
+//           // then close the menu
+//           if (isSearchOption && ref.current && !ref.current.contains(e.target)) {
+//             setSearchOption(false)
+//           }
+//         }
+
+//         document.addEventListener("mousedown", checkIfClickedOutside)
+
+//         return () => {
+//           // Cleanup the event listener
+//           document.removeEventListener("mousedown", checkIfClickedOutside)
+//         }
+//     }, [isSearchOption])
+
+//     const overLayStyleClasses = classNames({
+//         'app-over-lay': isSearchOption
+//     })
+
+//     const appOverLayDisplay = classNames({
+//         'app-over-lay-display': isSearchOption
+//     })
+
+//     const commonStyles = {
+//         marginTop: 0.5,
+//         width: 300,
+//         height: 30,
+//         marginRight: 4,
+//         backgroundColor: '#FFFFFF',
+//         borderRadius: 25,
+//         borderColor: '#707070', 
+//         color: '#707070',
+//         display: {
+//             lg: 'flex',
+//             md: 'flex',
+//             sm: 'none',
+//             xs: 'none'
+//         },
+        
+//       };
+
+//     return(
+//         <>
+//             <div className={overLayStyleClasses} ></div>
+//             <Box sx={{ ...commonStyles, }}>
+//                 <Box sx={{
+//                     width: '100%',
+//                     paddingRight: 2,
+//                     display: {
+//                         lg: 'flex',
+//                         md: 'flex',
+//                         sm: 'none',
+//                         xs: 'none'
+//                     },
+//                     flexDirection:'row' ,
+//                     justifyContent: 'center'
+//                     }}>
+
+//                     <input
+//                         autoComplete="off"
+//                         onFocus = { ()=> { setSearchOption(true) }}
+//                         id="calc-search"
+//                         list="data"
+//                         type="text"
+//                         placeholder="Search for Calculator"
+//                         className="search-input"
+//                         value = {value}
+//                         onChange = {(e) => {
+//                             console.log("button is pressed ", e.target.value)
+//                             setValue(e.target.value)
+//                         }}
+//                     />
+//                     <Box sx={{ flexGrow: 1}}></Box>
+
+//                     <Box sx={{ border: 'none',}}>
+//                         <SearchIcon 
+//                             sx={{ color: '#3128af' }}/>
+//                     </Box>
+//                     <Box  ref={ref} className={appOverLayDisplay} 
+//                     sx={{ border:'0px solid red', display: 'block' }}>
+//                     {
+//                         isSearchOption?
+//                         (
+//                             resultArray.map((data:any) => {
+//                                 return(
+//                                     <Box id="" className="div-link link-search"
+//                                     onClick={()=>{ 
+//                                         history.push(data.path); 
+//                                     }}>{ data.name }</Box>
+//                                 )
+//                             })
+//                         ): ""
+//                     }
+//                 </Box>
+//                 </Box>
+//             </Box>
+//             <Box sx={{ 
+//                 display: {
+//                     lg: 'none',
+//                     md: 'none',
+//                     sm: 'flex',
+//                     xs: 'flex'
+//                 },}}>
+//                     <Button type="button">
+//                         <SearchIcon/>
+//                     </Button>
+//                     <Button
+//                         onClick={()=>{
+//                             toggleDrawer();
+//                         }} 
+//                         type="button">
+//                         <DensityMediumIcon/>
+//                     </Button>
+//                 </Box>
+            
+//                 {/* <Box  ref={ref} className={appOverLayDisplay} 
+//                     sx={{ border:'1px solid red', display: 'block' }}>
+//                     {
+//                         isSearchOption?
+//                         (
+//                             resultArray.map((data:any) => {
+//                                 return(
+//                                     <Box id="" className="div-link link-search"
+//                                     onClick={()=>{ 
+//                                         history.push(data.path); 
+//                                     }}>{ data.name }</Box>
+//                                 )
+//                             })
+//                         ): ""
+//                     }
+//                 </Box> */}
+//             <Box className={
+//                     classNames({
+//                         'drawer-close': !openDrawer,
+//                         'drawer-open' : openDrawer
+//                     })} 
+//                     // sx={{ display: 'none' }}
+//                     >
+//                         <Box
+//                             sx={{
+//                                 marginTop: 1,
+//                                 width: '100%',
+//                                 display: 'flex',
+//                                 justifyContent: 'end'
+//                             }}>
+//                             <Button
+//                                 onClick={()=>{
+//                                     toggleDrawer();
+//                                 }} 
+//                                 type="button">
+//                                 <CloseIcon/>
+//                             </Button>
+//                         </Box>
+
+//                         <Box
+//                             className="drawer-button" 
+//                             onClick={()=>{ history.push('/home') }} 
+//                             >Home</Box>
+
+//                         <Box 
+//                             className="drawer-button"
+//                             onClick={()=>{ history.push("/financepage") }} 
+//                             >Financial</Box>
+//                         <Box 
+//                             className="drawer-button"
+//                             onClick={()=>{ history.push("/mathcategories") }}
+//                             >Mathematics</Box>
+//                         <Box 
+//                             className="drawer-button"
+//                             onClick={()=>{ history.push("/otherpage") }} 
+//                             >Other</Box>
+                        
+//                         <Box 
+//                             className="drawer-button" 
+//                             onClick={()=>{ history.push("/allcalculators") }}
+//                             >All Calculators</Box>
+//                 </Box>
+//         </>
+//         );
+// }
+
+// export { SearchForm }
 import React, { useEffect, useRef, useState } from 'react'
 import { Box } from '@mui/material'
 import { useHistory } from 'react-router-dom'
@@ -7,55 +254,43 @@ import SearchIcon from '@mui/icons-material/Search';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { othersRoutes } from '../../routes/routes'
+import IconButton from '@mui/material/IconButton';
+import { othersRoutes , mathRoutes, financialRoutes } from '../../routes/routes'
 import List from '@mui/material/List';
 var classNames = require('classnames');
 
-/**
- * Hides corresponding componenets when screen size reduced 
- */
-
- const generalHideStyle = {
-    display: {
-        lg: 'block',
-        md: 'block',
-        sm: 'none',
-        xs: 'none'
-    }
-}
-
-/**
- * Hides corresponding componenets when screen size reduced 
- */
-
- const generalRevealStyle = {
-    display: {
-        lg: 'none',
-        md: 'none',
-        sm: 'block',
-        xs: 'block'
-    }
-}
-
-// **********************************************************************
 
 function SearchForm(){
     const [openDrawer, setOpenDrawer] = useState(false);
     const toggleDrawer = () =>{
         setOpenDrawer(!openDrawer)
     }
-
     const history = useHistory();
 
-    const converters = othersRoutes.subCategories[5].sub_calculator
-    
-    const ref:any = useRef();
     const [isSearchOption, setSearchOption] = useState(false)
 
     const [value, setValue] = useState("");
     const [resultArray, setResultArray] = useState([])
 
-    var dataArray = [...othersRoutes.subCategories[5].sub_calculator]
+    var dataArray = [
+        ...othersRoutes.subCategories[0].sub_calculator,
+        ...othersRoutes.subCategories[1].sub_calculator,
+        ...othersRoutes.subCategories[2].sub_calculator,
+        ...othersRoutes.subCategories[3].sub_calculator,
+        ...othersRoutes.subCategories[4].sub_calculator,
+        ...othersRoutes.subCategories[5].sub_calculator,
+        ...othersRoutes.subCategories[6].sub_calculator,
+        ...mathRoutes.subCategories[0].sub_calculator,
+        ...mathRoutes.subCategories[1].sub_calculator,
+        ...mathRoutes.subCategories[2].sub_calculator,
+        ...mathRoutes.subCategories[3].sub_calculator,
+        ...mathRoutes.subCategories[4].sub_calculator,
+        ...financialRoutes.subCategories[0].sub_calculator,
+        ...financialRoutes.subCategories[1].sub_calculator,
+        ...financialRoutes.subCategories[2].sub_calculator,
+        ...financialRoutes.subCategories[3].sub_calculator,
+        ...financialRoutes.subCategories[4].sub_calculator
+    ]
 
     useEffect(() => {
         const dataToArray:any = [];
@@ -65,30 +300,10 @@ function SearchForm(){
                 dataToArray[i] = dataArray[i];
             }
             else{
-                
             }
             setResultArray(dataToArray)
         }
     }, [value])
-
-
-
-    useEffect(() => {
-        const checkIfClickedOutside = (e: { target: any; }) => {
-          // If the menu is open and the clicked target is not within the menu,
-          // then close the menu
-          if (isSearchOption && ref.current && !ref.current.contains(e.target)) {
-            setSearchOption(false)
-          }
-        }
-
-        document.addEventListener("mousedown", checkIfClickedOutside)
-
-        return () => {
-          // Cleanup the event listener
-          document.removeEventListener("mousedown", checkIfClickedOutside)
-        }
-    }, [isSearchOption])
 
     const overLayStyleClasses = classNames({
         'app-over-lay': isSearchOption
@@ -153,22 +368,59 @@ function SearchForm(){
                         <SearchIcon 
                             sx={{ color: '#3128af' }}/>
                     </Box>
-                    <Box  ref={ref} className={appOverLayDisplay} 
-                    sx={{ border:'0px solid red', display: 'block' }}>
                     {
-                        isSearchOption?
-                        (
-                            resultArray.map((data:any) => {
-                                return(
-                                    <Box id="" className="div-link link-search"
-                                    onClick={()=>{ 
-                                        history.push(data.path); 
-                                    }}>{ data.name }</Box>
-                                )
-                            })
-                        ): ""
+                        (isSearchOption)?
+                        <Box className={appOverLayDisplay} 
+                            sx={{ border:'0px solid red', display: 'block' }}>
+                                <Box 
+                                    sx={{
+                                            width: '100%', 
+                                            display:'flex', 
+                                            justifyContent:'end',
+                                        }}>
+                                    <Box
+                                        sx={{
+                                            marginTop: 1,
+                                            display: 'flex',
+                                            justifyContent: 'end',
+                                        }}>
+                                        <Button
+                                            sx={{
+                                                border: '0px solid red',
+                                                borderRadius: 20
+                                            }}
+                                            onClick={()=>{
+                                                setSearchOption(false)
+                                            }} 
+                                            type="button">
+                                            close 
+                                            {/* <CloseIcon/> */}
+                                        </Button>
+                                    </Box>
+                                </Box>
+                                <Box
+                                className=' app-scroller' 
+                                sx={{
+                                    height: '150px',
+                                    overflowY: 'auto'
+                                }}>
+                                    {
+                                        isSearchOption?
+                                        (
+                                            resultArray.map((data:any) => {
+                                                return(
+                                                    <Box id="" className="div-link link-search"
+                                                    onClick={()=>{ 
+                                                        history.push(data.path); 
+                                                    }}>{ data.name }</Box>
+                                                )
+                                            })
+                                        ): ""
+                                    }
+                                </Box>
+                        </Box>
+                        :<Box></Box>
                     }
-                </Box>
                 </Box>
             </Box>
             <Box sx={{ 
@@ -190,22 +442,7 @@ function SearchForm(){
                     </Button>
                 </Box>
             
-                {/* <Box  ref={ref} className={appOverLayDisplay} 
-                    sx={{ border:'1px solid red', display: 'block' }}>
-                    {
-                        isSearchOption?
-                        (
-                            resultArray.map((data:any) => {
-                                return(
-                                    <Box id="" className="div-link link-search"
-                                    onClick={()=>{ 
-                                        history.push(data.path); 
-                                    }}>{ data.name }</Box>
-                                )
-                            })
-                        ): ""
-                    }
-                </Box> */}
+        
             <Box className={
                     classNames({
                         'drawer-close': !openDrawer,

@@ -9,9 +9,9 @@ import { SearchForm } from '../forms/searchForm';
 import { useHistory } from 'react-router-dom'
 
 // 
-import FindMyIPAddress from  '../TemperalComponentsFolder/other/FindMyIPAddress'
+import RootsCalculators from  '../TemperalComponentsFolder/pages/RootsCalculators'
 import AreaConverter from  '../TemperalComponentsFolder/other/AreaConverter'
-import PercentageCalculators from  '../TemperalComponentsFolder/pages/PercentageCalculators'
+import GradeCalculator from  '../TemperalComponentsFolder/math/GradeCalculator'
 import MarginOfErrorCalculator from '../pages/calculators/statistics/MarginOfErrorCalculator'
 
 
@@ -19,7 +19,7 @@ import MarginOfErrorCalculator from '../pages/calculators/statistics/MarginOfErr
 export default function TestPage(){
     return(
         <>
-          <PercentageCalculators/>
+          <GradeCalculator/>
         </>
     );
 }

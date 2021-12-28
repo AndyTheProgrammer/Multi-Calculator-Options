@@ -73,11 +73,7 @@ const mathRoutes = {
     {
       name: "Fractions Calculators",
       sub_calculator: [
-        // {
-        //   name:"TestPage",
-        //   path: "/testpage",
-        //   component: TestPage
-        // },
+       
         {
           name: "Fractions Calculator",
           path: `${mathUrl}/fractifdgfdgonscalculator`,
@@ -96,7 +92,7 @@ const mathRoutes = {
         {
           name: "Decimal to Fraction Calculator",
           path: `${mathUrl}/decimaltofractioncalculator`,
-          component: TPC.DecimalToBinaryCalculator
+          component: TPC.DecimalToFractionCalculator
         },
         {
           name: "Fraction to Decimal Calculator",
@@ -297,51 +293,6 @@ const mathRoutes = {
         {
           name: "Pythagoras Theorem Calculator",
           path: `${mathUrl}/pythagorascalculator`,
-          component: PC.NoComponent
-        }
-      ]
-    },
-    {
-      name: "Measurements Calculators",
-      sub_calculator: [
-        {
-          name: "Density Calculator",
-          path: `${mathUrl}/densitycalculator`,
-          component: PC.NoComponent
-        },
-        {
-          name: "Mass Calculator",
-          path: `${mathUrl}/mathcalculator`,
-          component: PC.NoComponent
-        },
-        {
-          name: "Weight Calculator",
-          path: `${mathUrl}/weightcalculator`,
-          component: PC.NoComponent
-        },
-        {
-          name: "Volume Calculator",
-          path: `${mathUrl}/volumecalculator`,
-          component: PC.VolumeCalculator
-        },
-        {
-          name: "Height Calculator",
-          path: `${mathUrl}/heightcalculator`,
-          component: PC.NoComponent
-        },
-        {
-          name: "Bra Size Calculator",
-          path: `${mathUrl}/brasizecalculator`,
-          component: PC.NoComponent
-        },
-        {
-          name: "Heat Index Calculator",
-          path: `${mathUrl}/heatindexcalculator`,
-          component: PC.NoComponent
-        },
-        {
-          name: "Dew Point Calculator",
-          path: `${mathUrl}/dewpointcalculator`,
           component: PC.NoComponent
         }
       ]
@@ -727,6 +678,11 @@ const othersRoutes = {
           name: "Ideal Body Weight Calculator",
           path: `${othersUrl}/idealbodyweightcalculator`,
           component: PC.NoComponent
+        },
+        {
+          name: "Body Shape (Type) Calculator",
+          path: `${othersUrl}/bodyshape`,
+          component: PC.NoComponent
         }
       ]
     },
@@ -883,6 +839,51 @@ const othersRoutes = {
           name: "Engine Horsepower Calculator",
           path: `${othersUrl}/enginehorsepowercalculator`,
           component: PC.EngineHorsepowerCalculator
+        }
+      ]
+    },
+    {
+      name: "Measurements Calculators",
+      sub_calculator: [
+        {
+          name: "Density Calculator",
+          path: `${mathUrl}/densitycalculator`,
+          component: PC.NoComponent
+        },
+        {
+          name: "Mass Calculator",
+          path: `${mathUrl}/mathcalculator`,
+          component: PC.NoComponent
+        },
+        {
+          name: "Weight Calculator",
+          path: `${mathUrl}/weightcalculator`,
+          component: PC.NoComponent
+        },
+        {
+          name: "Volume Calculator",
+          path: `${mathUrl}/volumecalculator`,
+          component: PC.VolumeCalculator
+        },
+        {
+          name: "Height Calculator",
+          path: `${mathUrl}/heightcalculator`,
+          component: PC.NoComponent
+        },
+        {
+          name: "Bra Size Calculator",
+          path: `${mathUrl}/brasizecalculator`,
+          component: PC.NoComponent
+        },
+        {
+          name: "Heat Index Calculator",
+          path: `${mathUrl}/heatindexcalculator`,
+          component: PC.NoComponent
+        },
+        {
+          name: "Dew Point Calculator",
+          path: `${mathUrl}/dewpointcalculator`,
+          component: PC.NoComponent
         }
       ]
     },

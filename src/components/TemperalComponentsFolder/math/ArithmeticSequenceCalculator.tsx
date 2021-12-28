@@ -14,7 +14,8 @@ import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
 import { errorText }  from '../../../styling/textStyle'
-
+import math_icon from '../../../common/assets/math_icon.svg';
+import stats from '../../../common/assets/stats_icon.svg';
 const Latex = require('react-latex');
 
  interface Errors{
@@ -72,8 +73,8 @@ export default function ArithmeticSequenceCalculator(){
 
     return(
         <>
-        <NavBar2 categoryname="Statistics Calculators"  pagename="Arithmetic Sequence Calculator" />
-        <AddLayout>
+        <NavBar2 pageimage={math_icon} categoryname="Statistics Calculators"  pagename="Arithmetic Sequence Calculator" />
+        <AddLayout categorykey='statistics' searchname='Statistics Calculators' searchimage={stats}>
             <Box sx={{ display: 'flex', justifyContent:'center'}}>
             <Box className='animated-content-center'>
                 

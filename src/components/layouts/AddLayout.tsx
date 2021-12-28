@@ -6,14 +6,14 @@ import { NavBar2 } from '../navbar/navbar2'
 import { AddSlider } from '../slider/AddSlider'
 import ResponsiveSlider from '../slider/ResponsiveSlider'
 
-export default function AddLayout({ children }: any) {
+export default function AddLayout(props : any) {
     // const { container } = useStyles()
+    const { children } = props;
     return (
         <>
             <Box className="container">
                 <Box
-                    sx={{ display: 'flex' }}
-                >
+                    sx={{ display: 'flex' }}>
                     <Box sx={{ border: '0px solid red', width: '100%' }}>
                         <Box sx={{ minHeight: 350 }}>
                             {children}
@@ -59,7 +59,11 @@ export default function AddLayout({ children }: any) {
                                     xs: 'none'
                                 }
                             }}>
-                                <SpecifiedSearchForm />
+                                <SpecifiedSearchForm 
+                                    searchkey={props.categorykey}
+                                    searchname={props.searchname} 
+                                    searchimage={props.searchimage}
+                                    />
                             </Box>
                         </Box>
                     </Box>

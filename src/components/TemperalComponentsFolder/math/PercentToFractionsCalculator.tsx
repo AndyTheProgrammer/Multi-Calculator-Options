@@ -15,6 +15,9 @@
  import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
  import TextCard from '../../utilityComponents/TextCard'
  import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
+ import fractions from '../../../common/assets/fractions_icon.svg';
+ import math_icon from '../../../common/assets/math_icon.svg';
+
  const Latex = require('react-latex');
 
  function PercentToFractionsCalculator(){
@@ -68,8 +71,8 @@
  
      return(
          <>
-         <NavBar2 pagename="Percent To Fractions Calculator"/>
-         <AddLayout>
+         <NavBar2 pageimage={math_icon} pagename="Percent To Fractions Calculator"/>
+         <AddLayout categorykey='fractions' searchname='Fractions Calculators' searchimage={fractions}>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>
              <Anime

@@ -17,7 +17,14 @@ export function CustomFormBtn(props:any){
         <Button
         sx={{ paddingTop:1, 
             textTransform: 'none', 
-            borderRadius: 15, width: 130, height: 25, fontSize:12, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} 
+            borderRadius: 15, 
+            width: {
+                lg: 130,
+                md: 130,
+                sm: 130,
+                xs: 100
+            },
+            height: 25, fontSize:12, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} 
             type={props.type}
             onClick={props.handleClick}>
             { props.name }
@@ -27,8 +34,8 @@ export function CustomFormBtn(props:any){
 
 export function CustomFormImageBtn(props:any){
     return(
-        <button 
-            style={{ 
+        <Button 
+            sx={{ 
                     paddingLeft: 3,
                     paddingRight: 3,
                     display: 'flex',
@@ -36,8 +43,13 @@ export function CustomFormImageBtn(props:any){
                     textTransform: 'none', 
                     border:'0px solid red',
                     borderRadius: 15, 
-                    width: 130, 
-                    height: 25, 
+                    width: {
+                        lg: 130,
+                        md: 130,
+                        sm: 130,
+                        xs: 100
+                    },
+                    height: 25,
                     color: 'white',
                     textAlign: 'center', 
                     backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' 
@@ -45,11 +57,11 @@ export function CustomFormImageBtn(props:any){
                 type={props.type}
                 onClick={props.handleClick}>
                 <Typography>
-                    <Box sx={{ width: '100%', fontSize:12, paddingTop: 0.5, paddingLeft: 0.5 }}>Calculate</Box>
+                    <Box sx={{ width: '100%', fontSize:12,  paddingLeft: 0.5 }}>Calculate</Box>
                 </Typography>
                 <Box sx={{width: 20}}>
                     <img style={{width: '100%', height:'100%'}} alt="icon" src={form_btn}/>
                 </Box>
-        </button>
+        </Button>
     );
 }

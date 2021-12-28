@@ -35,6 +35,7 @@ function HexadecimalOperations(props:any){
   </Box>
     );
 }
+
 export default function HexadecimalCalculator(){
     const [value, setValue] = useState<any[]>([])
     const [playAnimation, setPlayAnimation] = useState(false)

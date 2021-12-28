@@ -124,7 +124,8 @@ export const CustomFormikFormRatio = ({
               borderColor: 'red',
               borderRadius: 7,
               outline: 'none',
-              
+              fontSize: 20,
+              textAlign: 'center'
             }}
             type="text" {...field} {...props}
           />
@@ -148,7 +149,8 @@ const CustomForm = (props: any) => {
               borderWidth: 0,
               borderColor: 'red',
               borderRadius: 7,
-              outline: 'none'
+              outline: 'none',
+              fontSize: 20
             }}
             name={props.name}
             id={props.id}

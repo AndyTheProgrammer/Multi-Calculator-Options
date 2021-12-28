@@ -10,6 +10,8 @@ import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomS
 import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
 import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
+import algebra_icon from '../../../common/assets/algebra_icon.svg';
+import math_icon from '../../../common/assets/math_icon.svg';
 const Latex = require('react-latex');
 
 function QuadraticFormulaCalculator(){
@@ -63,8 +65,8 @@ function QuadraticFormulaCalculator(){
 
     return(
         <>
-        <NavBar2 pagename="Quadratic Formula Calculator"/>
-        <AddLayout>
+        <NavBar2 pageimage={math_icon} categoryname="Algebra Calculators" pagename="Quadratic Formula Calculator"/>
+        <AddLayout categorykey='algebra' searchname='Algebra Calculators' searchimage={algebra_icon}>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>
             <Anime
@@ -113,7 +115,7 @@ function QuadraticFormulaCalculator(){
                                 <Box sx={{  display:'flex', flexDirection:'column' }}>
                                     <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                                        {/* <Grid item={true} xs={5} >
+                                        <Grid item={true} xs={5} >
                                             <Box sx={{...labelStyle}}>a </Box></Grid>
                                         <Grid item={true} xs={7}>
                                             <Field
@@ -141,13 +143,15 @@ function QuadraticFormulaCalculator(){
                                                 name="c"
                                                 component={CustomFormikForm}
                                             />
-                                        </Grid> */}
+                                        </Grid>
                 
-                                        <h1>Updating Component</h1>
+                                        
                                                          
                                     </Grid>
                                     <Box sx={{ flexGrow: 1}}>
-                                      
+                                        {/* 
+                                            Flex box pushes submit button down
+                                        */}
                                     </Box>
 
                                     <Box 

@@ -1,3 +1,5 @@
+
+
 import React, {useState} from 'react'
 import { Grid, Typography, Box, Container } from '@mui/material'
 import { useHistory } from "react-router-dom";
@@ -7,13 +9,10 @@ import { mathRoutes } from '../../routes/routes'
 
 import { Slide } from '../slider/slider'
 import { ResponsiveSliderSmall } from '../slider/ResponsiveSlider';
-
-import fractions from '../../common/assets/fractions_icon.svg';
 import general_math from '../../common/assets/general_math.svg';
 import algebra_icon from '../../common/assets/algebra_icon.svg';
 import stats from '../../common/assets/stats_icon.svg';
 import geometry_icon from '../../common/assets/geometry_icon.svg';
-
 import {
     slider_box_content_wrapper_style,
     boxStyle,
@@ -22,8 +21,9 @@ import {
 
 import { CustomNextArrow } from '../custom/sliderArrows/CustomNextArrow';
 import { CustomPrevArrow } from '../custom/sliderArrows/CustomPrevArrow';
-
 import { mobileText } from '../../styling/textStyle'
+
+import fractions from '../../common/assets/fractions_icon.svg';
 
 var classNames = require('classnames');
 
@@ -33,10 +33,11 @@ var settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
     initialSlide: 0,
     nextArrow: <CustomNextArrow />,
     prevArrow: <CustomPrevArrow />,
+    variableWidth: true,
     responsive:[
         {
             breakpoint: 700,
@@ -73,11 +74,12 @@ function MathOptions(){
                     sm: 'none',
                     xs: 'none'
                 },
-                justifyContent: 'center'
+                justifyContent: 'center',
+                width: '100%'
             }} className="container mt-4">
                 <Box sx={{ width:'100%' }}>
                     <Slider  {...settings}>
-                        <div>
+                        <div style={{ width: '300px' }}>
                             <Box sx={{
                                 ...slider_box_content_wrapper_style
                             }}>
@@ -89,35 +91,34 @@ function MathOptions(){
                                         <Box sx={{ height: 30, }}>
                                             <img style={{ height: '100%', }} alt="icon" src={fractions} />
                                         </Box>
-                                        <Typography>
+                                        <Typography sx={{width: '100%'}}>
                                             <Box
                                                 sx={{
-                                                    width: 240,
+                                                    width: '100%',
                                                     paddingRight: 3,
                                                     paddingLeft: 0.5,
                                                     paddingTop: 0.5,
-                                                    fontSize: 16,
-                                                    color: '#8591B0',
-                                                    whiteSpace: 'nowrap',
-                                                    overflow: 'hidden', 
+                                                    fontSize: 16, 
                                                 }}>
                                                     Fraction Calculators
                                             </Box>
                                         </Typography>
                                         
                                     </Box>
-                                    <Box className="general-text-box app-scroller" sx={{ paddingLeft: 2 }}>
+                                    <Box className="general-text-box app-scroller" >
                                         {
                                             mathRoutes.subCategories[0].sub_calculator.map((r:any) => {
                                                 
-                                                return (<Box key={r.name} className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                                                return (<Box key={r.name} 
+                                                    className="div-link" onClick={()=>{ history.push(r.path) }} 
+                                                    sx={{ width: '100%', paddingBottom: 0.5,  fontSize: 16 }}> {r.name} </Box>);
                                             })
                                         }
                                     </Box>
                                 </Box>
                             </Box>
                         </div>
-                        <div>
+                        <div style={{ width: '360px' }}>
                             <Box sx={{
                                 ...slider_box_content_wrapper_style
                             }}>
@@ -129,34 +130,33 @@ function MathOptions(){
                                         <Box sx={{ height: 30, }}>
                                             <img style={{ height: '100%', }} alt="icon" src={general_math} />
                                         </Box>
-                                        <Typography>
+                                        <Typography sx={{width: '100%'}}>
                                             <Box
                                                 sx={{
-                                                    width: 240,
+                                                    width: '100%',
                                                     paddingRight: 3,
                                                     paddingLeft: 0.5,
                                                     paddingTop: 0.5,
                                                     fontSize: 16,
-                                                    color: '#8591B0',
-                                                    whiteSpace: 'nowrap',
-                                                    overflow: 'hidden', 
                                                 }}>
                                                     General Calculators
                                             </Box>
                                         </Typography>
                                         
                                     </Box>
-                                    <Box className="general-text-box app-scroller" sx={{ paddingLeft: 2 }}>
+                                    <Box className="general-text-box app-scroller" >
                                         {
                                             mathRoutes.subCategories[1].sub_calculator.map((r:any) => {
-                                                return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                                                return (<Box className="div-link" 
+                                                onClick={()=>{ history.push(r.path) }} 
+                                                sx={{ width: '100%', paddingBottom: 0.5,  fontSize: 16, paddingRight: 1 }}> {r.name} </Box>);
                                             })
                                         }
                                     </Box>
                                 </Box>
                             </Box>
                         </div>
-                        <div>
+                        <div style={{ width: '350px' }}>
                             <Box sx={{
                                 ...slider_box_content_wrapper_style
                             }}>
@@ -168,34 +168,31 @@ function MathOptions(){
                                         <Box sx={{ height: 30, }}>
                                             <img style={{ height: '100%', }} alt="icon" src={algebra_icon} />
                                         </Box>
-                                        <Typography>
+                                        <Typography sx={{width: '100%'}}>
                                             <Box
                                                 sx={{
-                                                    width: 240,
+                                                    width: '100%',
                                                     paddingRight: 3,
                                                     paddingLeft: 0.5,
                                                     paddingTop: 0.5,
                                                     fontSize: 16,
-                                                    color: '#8591B0',
-                                                    whiteSpace: 'nowrap',
-                                                    overflow: 'hidden', 
                                                 }}>
                                                     Algebra Calculators
                                             </Box>
                                         </Typography>
                                         
                                     </Box>
-                                    <Box className="general-text-box app-scroller" sx={{ paddingLeft: 2 }}>
+                                    <Box className="general-text-box app-scroller" >
                                         {
                                             mathRoutes.subCategories[2].sub_calculator.map((r:any) => {
-                                                return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                                                return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: '100%', paddingBottom: 0.5,  fontSize: 16 }}> {r.name} </Box>);
                                             })
                                         }
                                     </Box>
                                 </Box>
                             </Box>
                         </div>
-                        <div>
+                        <div style={{ width: '380px' }}>
                             <Box sx={{
                                 ...slider_box_content_wrapper_style
                             }}>
@@ -207,34 +204,32 @@ function MathOptions(){
                                         <Box sx={{ height: 30, }}>
                                             <img style={{ height: '100%', }} alt="icon" src={stats} />
                                         </Box>
-                                        <Typography>
+                                        <Typography sx={{width: '100%'}}>
                                             <Box
                                                 sx={{
-                                                    width: 240,
+                                                    width: '100%',
                                                     paddingRight: 3,
                                                     paddingLeft: 0.5,
                                                     paddingTop: 0.5,
                                                     fontSize: 16,
                                                     color: '#8591B0',
-                                                    whiteSpace: 'nowrap',
-                                                    overflow: 'hidden', 
                                                 }}>
                                                     Statistics Calculators
                                             </Box>
                                         </Typography>
                                         
                                     </Box>
-                                    <Box className="general-text-box app-scroller" sx={{ paddingLeft: 2 }}>
+                                    <Box className="general-text-box app-scroller" >
                                         {
                                             mathRoutes.subCategories[3].sub_calculator.map((r:any) => {
-                                                return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                                                return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: '100%', paddingBottom: 0.5,  fontSize: 16 }}> {r.name} </Box>);
                                             })
                                         }
                                     </Box>
                                 </Box>
                             </Box>
                         </div>
-                        <div>
+                        <div style={{ width: '300px' }}>
                             <Box sx={{
                                 ...slider_box_content_wrapper_style
                             }}>
@@ -246,72 +241,32 @@ function MathOptions(){
                                         <Box sx={{ height: 30, }}>
                                             <img style={{ height: '100%', }} alt="icon" src={geometry_icon} />
                                         </Box>
-                                        <Typography>
+                                        <Typography sx={{width: '100%'}}>
                                             <Box
                                                 sx={{
-                                                    width: 240,
+                                                    width: '100%',
                                                     paddingRight: 3,
                                                     paddingLeft: 0.5,
                                                     paddingTop: 0.5,
                                                     fontSize: 16,
-                                                    color: '#8591B0',
-                                                    whiteSpace: 'nowrap',
-                                                    overflow: 'hidden', 
+                                                    color: '#8591B0', 
                                                 }}>
                                                     Geometry Calculators
                                             </Box>
                                         </Typography>
                                         
                                     </Box>
-                                    <Box className="general-text-box app-scroller" sx={{ paddingLeft: 2 }}>
+                                    <Box className="general-text-box app-scroller" >
                                         {
                                             mathRoutes.subCategories[4].sub_calculator.map((r:any) => {
-                                                return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
+                                                return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: '100%', paddingBottom: 0.5,  fontSize: 16 }}> {r.name} </Box>);
                                             })
                                         }
                                     </Box>
                                 </Box>
                             </Box>
                         </div>
-                        <div>
-                            <Box sx={{
-                                ...slider_box_content_wrapper_style
-                            }}>
-                                <Box sx={{...boxStyle }}>
-                                    <Box 
-                                        sx={{ 
-                                            ...categoryHeaderShadow
-                                        }}>
-                                        <Box sx={{ height: 30, }}>
-                                            <img style={{ height: '100%', }} alt="icon" src={geometry_icon} />
-                                        </Box>
-                                        <Typography>
-                                            <Box
-                                                sx={{
-                                                    width: 240,
-                                                    paddingRight: 3,
-                                                    paddingLeft: 0.5,
-                                                    paddingTop: 0.5,
-                                                    fontSize: 16,
-                                                    color: '#8591B0',
-                                                    whiteSpace: 'nowrap',
-                                                    overflow: 'hidden', 
-                                                }}>
-                                                    Measurement Calculators
-                                            </Box>
-                                        </Typography>
-                                        
-                                    </Box>
-                                    <Box className="general-text-box app-scroller" sx={{ paddingLeft: 2 }}>
-                                        {
-                                            mathRoutes.subCategories[5].sub_calculator.map((r:any) => {
-                                                return (<Box className="div-link" onClick={()=>{ history.push(r.path) }} sx={{ width: 230, paddingBottom: 0.5,  fontSize: 16, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}> {r.name} </Box>);
-                                            })
-                                        }
-                                    </Box>
-                                </Box>
-                            </Box>
-                        </div>
+                        
                     </Slider> 
                     <Box>
                         <Box >
@@ -763,81 +718,6 @@ function OptionsForSmallerScreens(){
                                 </Box>
                             </div>
                         }
-                        {
-                            <div>
-                                <Box sx={{ 
-                                    display: 'flex',
-                                    width: "100%",
-                                    border: 'none',
-                                    justifyContent: 'center',
-                                    borderColor: 'green'
-                                }}
-                                    onClick={() => { handleCategoryChange(categoryIndex[5].id) }}
-                                >
-                                    
-                                    <Box sx={{
-                                            border:'none',
-                                            marginBottom: 2,
-                                            backgroundColor: 'transparent',
-                                            width: "100%",
-                                            borderRadius: 3,
-                                            paddingTop: 1,
-                                            paddingBottom: 0.5, }}>
-                                        <Box 
-                                            sx={{ 
-                                                width:'100%',
-                                                height: 40, 
-                                                fontSize: 22,
-                                                display: 'flex',
-                                                justifyContent: 'start',
-                                                backgroundColor: 'white',
-                                                borderRadius: 5,
-                                                boxShadow: '0px 5px 20px 1px rgba(0, 0, 0, 0.1)',
-                                            }}>
-                                            <Box sx={{ height: 40, }}>
-                                                <img style={{ height: '100%', }} alt="icon" src={geometry_icon} />
-                                            </Box>
-                                            <Typography>
-                                                <Box
-                                                    sx={{
-                                                        width: "100%",
-                                                        paddingRight: 3,
-                                                        paddingLeft: 0.5,
-                                                        paddingTop: 0.5,
-                                                        fontSize: 18,
-                                                        color: '#8591B0',
-                                                        whiteSpace: 'nowrap',
-                                                        overflow: 'hidden', 
-                                                    }}>
-                                                        Measurement Calculators
-                                                </Box>
-                                            </Typography>
-                                            
-                                        </Box>
-                                        <Box 
-                                        className={classNames({
-                                            'hidden-text': !categoryIndex[5].show,
-                                            'reveal-text': categoryIndex[5].show
-                                        })} >
-                                            {
-                                                (categoryIndex[5].id === 5)?
-                                                mathRoutes.subCategories[5].sub_calculator.map((r:any) => {
-                                                    return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
-                                                })
-                                                :null
-                                            }
-                                        </Box>
-                                    </Box>
-                                </Box>
-                            </div>
-                        }
-                        
-                        
                     </Box>
                 </Box>
             </Box>

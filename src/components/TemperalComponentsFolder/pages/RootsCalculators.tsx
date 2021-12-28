@@ -1,3 +1,12 @@
+// import React from 'react'
+
+// export default function RootsCalculators(){
+//     return(
+//         <>
+//         </>
+//     );
+
+// }
 
 import React, { useRef, useState, useEffect } from 'react'
 import { NavBar2 } from '../../navbar/navbar2'
@@ -18,7 +27,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 const Latex = require('react-latex');
 var classNames = require('classnames');
 
-export default function HexadecimalCalculators(){
+export default function RootsCalculators(){
     const [index, setIndex] = useState([true,false,false])
     const [calcName, setCalcName] = useState("Percentage Change")
     const [showMenu, setShowMenu] = useState(false)
@@ -118,7 +127,7 @@ export default function HexadecimalCalculators(){
                                             onClick={
                                                 ()=>{
                                                     setIndex([true, false, false])
-                                                    setCalcName("Permutations Calculator")
+                                                    setCalcName("General root calculator")
                                                     setShowMenu(false)
                                                 }
                                             }
@@ -134,14 +143,14 @@ export default function HexadecimalCalculators(){
                                                     marginBottom:0.5
                                                 }}>
                                             <Box>
-                                                Permutations Calculator
+                                                General root calculator
                                             </Box>
                                         </Typography >
                                         <Typography
                                             onClick={
                                                 ()=>{
                                                     setIndex([false, true, false])
-                                                    setCalcName("Combinations Calculato")
+                                                    setCalcName("Square root")
                                                     setShowMenu(false)
                                                 }
                                             }
@@ -158,10 +167,32 @@ export default function HexadecimalCalculators(){
                                                     paddingTop: 0.1, 
                                                     marginBottom:0.5
                                                 }}>
-                                                Combinations Calculator
+                                                Square root
                                             </Box>
                                         </Typography>
-                                       
+                                        <Typography
+                                            onClick={
+                                                ()=>{
+                                                    setIndex([false, false, true])
+                                                    setCalcName("Cube root")
+                                                    setShowMenu(false)
+                                                }
+                                            }
+                                            className={classNames({
+                                                'form-card-3': index[2],
+                                                'form-card-none': !index[2],
+                                                'div-link': true
+                                            })}
+                                            sx={{ width:'100%' }}>
+                                            <Box
+                                                sx={{ 
+                                                    width:'100%',
+                                                    fontSize: 16,
+                                                    paddingTop: 0.1, 
+                                                    marginBottom:0.5
+                                                }}
+                                            >Cube root</Box>
+                                        </Typography>
                                     </Box>
                                     :<Box></Box>
                                 }
@@ -171,148 +202,26 @@ export default function HexadecimalCalculators(){
                         {
                             (index[0])?
                             <Formik
-                        initialValues={{ 
-                            total_number:"",
-                            amount_in_each_subset: "",
-                            method: "PermutationCalculator"
-                        }}
-                        onSubmit = {(values)=>{
-                            const data = {
-                                total_number: values.total_number,
-                                amount_in_each_subset: values.amount_in_each_subset,
-                                method: values.method
-                            }
-                            console.log(data)
-                            const postData = async () => {
-                                const responseData = await mathMainService(data)
-                                var msg:any = responseData.statusDescription;
-                                if(msg === "success"){
-                                    setValue([responseData.message.nfactorial])
-                                }
-                            }
-                            postData()
-                        }}>
-                            
-                        {({
-                            values,
-                            handleChange,
-                            handleSubmit,
-                            isSubmitting
-                        }) => (
-                            <form onSubmit={handleSubmit}>
-                                <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
-                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>Total Number</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <CustomForm
-                                                type="text"
-                                                name="total_number"
-                                                onChange={handleChange}
-                                                value={values.total_number}
-                                                placeholder=""
-                                            />
-                                        </Grid>
-                
-                                        <Grid item xs={5}>
-                                            <Box sx={{...labelStyle}}>Amount</Box></Grid>
-                                        <Grid item xs={7}>
-                                        <CustomForm
-                                            type="text"
-                                            name="amount_in_each_subset"
-                                            onChange={handleChange}
-                                            value={values.amount_in_each_subset}
-                                            placeholder=""
-                                        />
-                                        </Grid>
-                                    
-                                                         
-                                    </Grid>
-                                    <Box sx={{ flexGrow: 1}}>
-                                        {/* 
-                                            Flex box pushes submit button down
-                                        */}
-                                    </Box>
-
-                                    <Box 
-                                        // className="toggle-box-primary"
-                                        sx={{ width: '100%' }}
-                                        >
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                    <CustomFormBtn 
-                                                    type="button" 
-                                                    handleClick={()=>{ 
-                                                        controlAnimation();
-                                                        }} 
-                                                    name="Clear"/>
-                                                </Box>
-                                        </Grid>
-                                        <Grid item xs={4}></Grid>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                    <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                </Box>
-                                        </Grid>
-                                        </Grid>
-                                    </Box>
-                                </Box>
-                            </form>
-                        )}
-                    </Formik>
-                            :<Box></Box>
-                        }
-                        {
-                            (index[1])?
-                            <Formik
                             initialValues={{ 
-                                total_number:"",
-                                amount_in_each_subset: "",
-                                method: "CombinationsCalculator"
+                                
+                                number: "",
+                                root_number: "",
+                                method: "GeneralRootCalculator"
                             }}
-                            validate={
-                                (values)=>{
-                                    interface Errors{
-                                        total_number: string,
-                                        amount_in_each_subset: string
-                                    }
-                                    const errors = {} as Errors
-                                    if(!values.total_number){
-                                        errors.total_number = 'Required'
-                                    }
-                                    else if(!parseInt(values.total_number)){
-                                        errors.total_number = 'Number is required'
-                                    }
-
-                                    if(!values.amount_in_each_subset){
-                                        errors.amount_in_each_subset = 'Required'
-                                    }
-                                    else if(!parseInt(values.amount_in_each_subset)){
-                                        errors.amount_in_each_subset = 'Number is required'
-                                    }
-                                   
-                                    return errors
-                                }
-                            }
                             onSubmit = {(values)=>{
                                 const data = {
-                                    total_number: values.total_number,
-                                    amount_in_each_subset: values.amount_in_each_subset,
+                                    number: values.number,
+                                    root_number: values.root_number,
                                     method: values.method
                                 }
+
                                 console.log(data)
                                 const postData = async () => {
                                     const responseData = await mathMainService(data)
                                     var msg:any = responseData.statusDescription;
                                     if(msg === "success"){
                                         setValue([
-                                            responseData.message.unitType,
-                                            responseData.message.nfactorial,
-                                            responseData.message.dividerfactorial,
-                                            responseData.message.rFactorial,
-                                            responseData.message.Combinations
+                                            responseData.message.answer
                                         ])
                                     }
                                 }
@@ -320,71 +229,38 @@ export default function HexadecimalCalculators(){
                             }}>
                                 
                             {({
-                                errors,
                                 values,
                                 handleChange,
                                 handleSubmit,
                                 isSubmitting
                             }) => (
                                 <form onSubmit={handleSubmit}>
-                                    <Box sx={{  minHeight: 200, display:'flex', flexDirection:'column' }}>
+                                    <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid xs={12}>
-                                                <Typography>    
-                                                    <Box
-                                                    sx={{
-                                                            fontWeight: 100,
-                                                            fontStyle: 'italic',
-                                                            fontSize: 18,
-                                                            color: '#b0b0b0',
-                                                            display: 'flex',
-                                                            justifyContent: 'center'
-                                                        }}>
-                                                        <Latex displayMode={false}>{`$ {n+1\\choose r}= {n\\choose r} + {n \\choose r-1}$`}</Latex>
-                                                    </Box>
-                                                    
-                                                </Typography>
-                                            </Grid>
                                             <Grid item={true} xs={5} >
-                                                <Box sx={labelStyle}>n (objects)</Box>
-                                            </Grid>
+                                                <Box sx={{...labelStyle}}>Number</Box></Grid>
                                             <Grid item={true} xs={7}>
                                                 <CustomForm
                                                     type="text"
-                                                    name="total_number"
+                                                    name="number"
                                                     onChange={handleChange}
-                                                    value={values.total_number}
+                                                    value={values.number}
                                                     placeholder=""
                                                 />
-                                                <Typography>
-                                                    <Box 
-                                                        sx={{
-                                                            ...errorText
-                                                        }}>{errors.total_number}</Box>
-                                                </Typography>
-                                                
                                             </Grid>
-                    
-                                            <Grid item xs={5}>
-                                                <Box sx={labelStyle}>r (samples)</Box>
-                                            </Grid>
-                                            <Grid item xs={7}>
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Root Number</Box></Grid>
+                                            <Grid item={true} xs={7}>
                                                 <CustomForm
                                                     type="text"
-                                                    name="amount_in_each_subset"
+                                                    name="root_number"
                                                     onChange={handleChange}
-                                                    value={values.amount_in_each_subset}
+                                                    value={values.root_number}
                                                     placeholder=""
                                                 />
-                                                <Typography>
-                                                    <Box 
-                                                        sx={{
-                                                            ...errorText
-                                                        }}>{errors.amount_in_each_subset}</Box>
-                                                </Typography>
                                             </Grid>
-                                        
-                                                            
+                                            
+                                                                
                                         </Grid>
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
@@ -414,6 +290,168 @@ export default function HexadecimalCalculators(){
                                                     </Box>
                                             </Grid>
                                             </Grid>
+                                        </Box>
+                                    </Box>
+                                </form>
+                            )}
+                        </Formik>
+                            :<Box></Box>
+                        }
+                        {
+                            (index[1])?
+                            <Formik
+                        initialValues={{ 
+                            number:"",
+                            method: "SquareRootCalculator"
+                        }}
+                        onSubmit = {(values)=>{
+                            const data = {
+                                number: values.number,
+                                method: values.method
+                            }
+                            console.log(data)
+                            const postData = async () => {
+                                const responseData = await mathMainService(data)
+                                var msg:any = responseData.statusDescription;
+                                if(msg === "success"){
+                                    setValue([responseData.message.answer])
+                                }
+                            }
+                            postData()
+                        }}>
+                            
+                        {({
+                            values,
+                            handleChange,
+                            handleSubmit,
+                            isSubmitting
+                        }) => (
+                            <form onSubmit={handleSubmit}>
+                               <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
+                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+
+                                        <Grid item={true} xs={5} >
+                                            <Box sx={{...labelStyle}}>Number</Box></Grid>
+                                        <Grid item={true} xs={7}>
+                                            <CustomForm
+                                                type="text"
+                                                name="number"
+                                                onChange={handleChange}
+                                                value={values.number}
+                                                placeholder=""
+                                            />
+                                        </Grid>
+                                  
+                                    </Grid>
+                                    <Box sx={{ flexGrow: 1}}>
+                                        {/* 
+                                            Flex box pushes submit button down
+                                        */}
+                                    </Box>
+
+                                    <Box 
+                                        // className="toggle-box-primary"
+                                        sx={{ width: '100%' }}
+                                            >
+                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                        <Grid item xs={4}>
+                                                <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                    <CustomFormBtn 
+                                                    type="button" 
+                                                    handleClick={()=>{ 
+                                                        controlAnimation();
+                                                        }} 
+                                                    name="Clear"/>
+                                                </Box>
+                                        </Grid>
+                                        <Grid item xs={4}></Grid>
+                                        <Grid item xs={4}>
+                                                <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                    <CustomFormImageBtn type="submit" name="Calculate"/>
+                                                </Box>
+                                        </Grid>
+                                        </Grid>
+                                    </Box>
+                                </Box>
+                            </form>
+                        )}
+                    </Formik>
+                            :<Box></Box>
+                        }
+                        {
+                            (index[2])?
+                            <Formik
+                            initialValues={{ 
+                                number:"",
+                                method: "CubeRootCalculator"
+                            }}
+                            onSubmit = {(values)=>{
+                                const data = {
+                                    number: values.number,
+                                    method: values.method
+                                }
+                                console.log(data)
+                                const postData = async () => {
+                                    const responseData = await mathMainService(data)
+                                    var msg:any = responseData.statusDescription;
+                                    if(msg === "success"){
+                                        setValue([responseData.message.answer])
+                                    }
+                                }
+                                postData()
+                            }}>
+                                
+                            {({
+                                values,
+                                handleChange,
+                                handleSubmit,
+                                isSubmitting
+                            }) => (
+                                <form onSubmit={handleSubmit}>
+                                   <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
+                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+    
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle }}>Number</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                                <CustomForm
+                                                    type="text"
+                                                    name="number"
+                                                    onChange={handleChange}
+                                                    value={values.number}
+                                                    placeholder=""
+                                                />
+                                            </Grid>
+                                      
+                                        </Grid>
+                                        <Box sx={{ flexGrow: 1}}>
+                                            {/* 
+                                                Flex box pushes submit button down
+                                            */}
+                                        </Box>
+    
+                                        <Box 
+                                            // className="toggle-box-primary"
+                                            sx={{ width: '100%' }}
+                                            >
+                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                            <Grid item xs={4}>
+                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                        <CustomFormBtn 
+                                                        type="button" 
+                                                        handleClick={()=>{ 
+                                                            controlAnimation();
+                                                            }} 
+                                                        name="Clear"/>
+                                                    </Box>
+                                            </Grid>
+                                            <Grid item xs={4}></Grid>
+                                            <Grid item xs={4}>
+                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
+                                                    </Box>
+                                            </Grid>
+                                            </Grid>
                                         </Box> 
                                     </Box>
                                 </form>
@@ -421,7 +459,6 @@ export default function HexadecimalCalculators(){
                         </Formik>
                             :<Box></Box>
                         }
-                     
                       
                     </Box>
                 </Anime>
@@ -452,9 +489,9 @@ export default function HexadecimalCalculators(){
                         {
                                 (index[0])?
                                 <Box 
-                                // sx={{ maxWidth: 400,paddingBottom: 1 }}
-                                // className="animated-box"
-                                >
+                                    // sx={{ maxWidth: 400,paddingBottom: 1 }}
+                                    // className="animated-box" 
+                                    >
                                 <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                         <Box sx={{height:25, width: '100%' }}>
                                             <Typography>
@@ -478,9 +515,9 @@ export default function HexadecimalCalculators(){
                             {
                                 (index[1])?
                                 <Box 
-                                    // sx={{ maxWidth: 400,paddingBottom: 1 }}
-                                    // className="animated-box" 
-                                >
+                                        // sx={{ maxWidth: 400,paddingBottom: 1 }}
+                                        // className="animated-box" 
+                                    >
                                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                         <Box sx={{height:25, width: '100%' }}>
                                             <Typography>
@@ -494,32 +531,39 @@ export default function HexadecimalCalculators(){
                                         </Box>
                                         <Box sx={{ ...formCardStyle }}></Box>
                                     </Box>
-                                <Box sx={{marginLeft: 5}}>
-                                    <Typography>
-                                        <Box
-                                            sx={{
-                                                // ...labelStyle,
-                                                fontSize: 18,
-                                                fontWeight: 'bold'
-                                            }}
-                                        >
-                                            {/* <Latex displayMode={false}>{`$ {n+1\\choose r}= {n\\choose r} + {n \\choose r-1}$`}</Latex> */}
-                                        </Box>
-                                        <Box>
-                                            <TextCard leadingtext="n factorial" trailingtext={value[1]}/>
-                                        </Box>
-                                        <Box>
-                                            <TextCard leadingtext="Combinations" trailingtext={value[4]}/>
-                                        </Box>
-                                        <Box>
-                                            <TextCard leadingtext="Divider factorial" trailingtext={value[2]}/>
-                                        </Box>
-                                    </Typography>
+                                    <Box sx={{marginLeft: 5}}>
+                                        <p>Square root</p>
+                                        <p>{value}</p>
+                                    </Box>
                                 </Box>
-                            </Box>
                                 :<Box></Box>
                             }
-                         
+                            {
+                                (index[2])?
+                                <Box 
+                                    // sx={{ maxWidth: 400,paddingBottom: 1 }}
+                                    // className="animated-box" 
+                                    >
+                                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                                        <Box sx={{height:25, width: '100%' }}>
+                                            <Typography>
+                                                <Box
+                                                    sx={{
+                                                        color:'#4072B5',
+                                                        fontWeight:'bold', 
+                                                        textAlign:'center'
+                                                    }}>Result</Box>
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ ...formCardStyle }}></Box>
+                                    </Box>
+                                    <Box sx={{marginLeft: 5}}>
+                                        <p>Answer</p>
+                                        <p>{value}</p>
+                                    </Box>
+                                </Box>
+                                :<Box></Box>
+                            }
                         </Box>
                         :<Box></Box>
                     }

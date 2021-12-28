@@ -26,7 +26,7 @@ function FinancePage(){
 
           <Switch>
           <Route exact path={path}>
-            <NavBar2 pageimage={fincance_icon} categoryname="Financial Calculators" financialHighLight={true} />
+            <NavBar2 pageimage={fincance_icon} pagecategoryname="Financial Calculators" categoryname="Financial Calculators" financialHighLight={true} />
             
             {/* Hide search bar when screen is small */}
             <Box

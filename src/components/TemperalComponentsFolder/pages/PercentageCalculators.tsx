@@ -1,3 +1,5 @@
+
+
 import React, { useRef, useState, useEffect } from 'react'
 import { NavBar2 } from '../../navbar/navbar2'
 import CustomForm from '../../forms/CustomForm'
@@ -11,6 +13,10 @@ import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomS
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import { errorText }  from '../../../styling/textStyle'
 import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
+import geometry_icon from '../../../common/assets/geometry_icon.svg';
+import math_icon from '../../../common/assets/math_icon.svg';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 var classNames = require('classnames');
 
 export default function PercentageCalculators(){
@@ -67,8 +73,8 @@ export default function PercentageCalculators(){
 
     return(
         <>
-        <NavBar2 categoryname="General Math" pagename="Percentage Calculators"/>
-            <AddLayout>
+        <NavBar2 pageimage={math_icon} categoryname="General Math" pagename="Percentage Calculators"/>
+        <AddLayout categorykey='general' searchname='General Calculators' searchimage={geometry_icon}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
                 <Anime
@@ -81,30 +87,28 @@ export default function PercentageCalculators(){
                         autoplay: false,
                     }}>
                     <Box 
-                        sx={{ maxWidth: 450, minHeight: 200, paddingBottom: 1 }}
+                        sx={{ maxWidth: 500, minHeight: 200, paddingBottom: 1 }}
                         className="animated-box" >
-                        {/* <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:25, width: '100%' }}></Box>
-                            <Box sx={{...formCardStyle}}></Box>
-                        </Box> */}
-                        <Box sx={{ display: 'flex', }}>
+                        
+                        <Box sx={{ width:'100%', display: 'flex', }}>
                             <Box sx={{ width:'100%'}}>
                                 <Box sx={{ width:'100%'}}
                                     onClick={
                                         ()=>{
-                                            setShowMenu(true)
+                                            setShowMenu(!showMenu)
                                         }
                                     }
                                 >
-                                    <Typography sx={{ paddingLeft: 1 }}>
-                                        <Box className="form-card-none"> {calcName} </Box>
+                                    <Typography sx={{ display: 'flex', paddingLeft: 1 }}>
+                                        <Box className="form-card-none div-link"> {calcName} </Box>
+                                        <KeyboardArrowDownIcon sx={{ color: 'blue' }} />
                                     </Typography>
                                 </Box>
                                 {
                                     (showMenu)?
                                     <Box sx={{ 
                                         position:'absolute',    
-                                        width:'200px',
+                                        width:'230px',
                                         height: '100px',
                                         backgroundColor: 'white',
                                         boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
@@ -120,15 +124,17 @@ export default function PercentageCalculators(){
                                             }
                                             className={classNames({
                                                 'form-card-1': index[0],
-                                                'form-card-none': !index[0]
+                                                'form-card-none': !index[0],
+                                                'div-link': true
                                             })}
                                             sx={{ 
                                                     width:'100%',
-                                                    fontSize: 12,
-                                                    paddingTop: 0.5, 
+                                                    fontSize: 16,
+                                                    paddingTop: 0.1, 
+                                                    marginBottom:0.5
                                                 }}>
                                             <Box>
-                                                Percentage Change
+                                                Percentage Change 
                                             </Box>
                                         </Typography >
                                         <Typography
@@ -141,14 +147,16 @@ export default function PercentageCalculators(){
                                             }
                                             className={classNames({
                                                 'form-card-2': index[1],
-                                                'form-card-none': !index[1]
+                                                'form-card-none': !index[1],
+                                                'div-link': true
                                             })}
                                             sx={{ width:'100%' }}>
                                             <Box
                                                 sx={{ 
                                                     width:'100%',
-                                                    fontSize: 12,
-                                                    paddingTop: 0.5, 
+                                                    fontSize: 16,
+                                                    paddingTop: 0.1, 
+                                                    marginBottom:0.5
                                                 }}>
                                                 Percentage difference
                                             </Box>
@@ -163,14 +171,16 @@ export default function PercentageCalculators(){
                                             }
                                             className={classNames({
                                                 'form-card-3': index[2],
-                                                'form-card-none': !index[2]
+                                                'form-card-none': !index[2],
+                                                'div-link': true
                                             })}
                                             sx={{ width:'100%' }}>
                                             <Box
                                                 sx={{ 
                                                     width:'100%',
-                                                    fontSize: 12,
-                                                    paddingTop: 0.5, 
+                                                    fontSize: 16,
+                                                    paddingTop: 0.1, 
+                                                    marginBottom:0.5
                                                 }}
                                             > Percentage error</Box>
                                         </Typography>
@@ -210,7 +220,7 @@ export default function PercentageCalculators(){
                                     
                                 {(props: FormikProps<any>) => (
                                     <Form >
-                                        <Box sx={{  minHeight: 250, display:'flex', flexDirection:'column' }}>
+                                        <Box sx={{ width:'100%', minHeight: 250, display:'flex', flexDirection:'column' }}>
                                             <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
                                                 <Grid item={true} xs={5} >

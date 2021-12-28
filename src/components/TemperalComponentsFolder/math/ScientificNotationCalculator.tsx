@@ -10,6 +10,9 @@ import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomS
 import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
 import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
+import geometry_icon from '../../../common/assets/geometry_icon.svg';
+import math_icon from '../../../common/assets/math_icon.svg';
+
 const Latex = require('react-latex');
 
 export default function ScientificNotationCalculator(){
@@ -61,8 +64,8 @@ export default function ScientificNotationCalculator(){
     })
     return(
         <>
-            <NavBar2 categoryname="General Calculators" pagename="Scientific Notation Calculator"/>
-            <AddLayout>
+            <NavBar2 pageimage={math_icon} categoryname="General Calculators" pagename="Scientific Notation Calculator"/>
+            <AddLayout categorykey='general' searchname='General Calculators' searchimage={geometry_icon}>
                 <Box sx={{ display: "flex", justifyContent: "center" }}> 
                 <Box className='animated-content-center'>
                 <Anime
