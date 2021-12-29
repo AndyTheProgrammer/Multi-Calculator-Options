@@ -202,7 +202,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="interest_rate"
                           placeholder={PLACEHOLDERS.number}
                           value={values.interest_rate}
@@ -213,7 +213,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfMonths} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="number_of_months"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_months}
@@ -224,7 +224,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.presentValue} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="present_value"
                           placeholder={PLACEHOLDERS.number}
                           value={values.present_value}
@@ -235,7 +235,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfYears} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="number_of_years"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_years}
@@ -247,10 +247,12 @@ function LoanCalculator() {
                         className="form-row"
                         style={{ alignItems: 'center', justifyContent: 'space-between' }}
                       >
-                        <CustomBtn />
+
                         <CustomResetBtn
                           onHandleClick={() => resetForm()}
                         />
+
+                        <CustomBtn />
                       </div>
                     </form>
                   )}
@@ -311,7 +313,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="interest_rate"
                           placeholder={PLACEHOLDERS.number}
                           value={values.interest_rate}
@@ -322,7 +324,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.predeterminedAmount} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="predetermined_amount"
                           placeholder={PLACEHOLDERS.number}
                           value={values.predetermined_amount}
@@ -333,7 +335,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfMonths} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="number_of_months"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_months}
@@ -344,7 +346,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfYears} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="number_of_years"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_years}
@@ -421,7 +423,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="interest_rate"
                           placeholder={PLACEHOLDERS.number}
                           value={values.interest_rate}
@@ -432,7 +434,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.creditCardBalance} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="loan_amount"
                           placeholder={PLACEHOLDERS.number}
                           value={values.loan_amount}
@@ -443,7 +445,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfMonths} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="number_of_months"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_months}
@@ -454,7 +456,7 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfYears} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={null}
                           id="number_of_years"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_years}
@@ -467,10 +469,11 @@ function LoanCalculator() {
                         className="form-row"
                         style={{ alignItems: 'center', justifyContent: 'space-between' }}
                       >
-                        <CustomBtn />
+
                         <CustomResetBtn
                           onHandleClick={() => resetForm()}
                         />
+                        <CustomBtn />
                       </div>
                     </form>
                   )}

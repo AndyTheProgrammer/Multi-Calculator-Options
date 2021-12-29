@@ -82,7 +82,7 @@ const BodyMassIndexMethodTwo = () => {
               <div className="form-row">
                 <Label title={LABELS.height} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="height"
                   placeholder={PLACEHOLDERS.number}
                   value={values.height}
@@ -100,7 +100,7 @@ const BodyMassIndexMethodTwo = () => {
               <div className="form-row">
                 <Label title={LABELS.weight} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="weight"
                   placeholder={PLACEHOLDERS.number}
                   value={values.weight}

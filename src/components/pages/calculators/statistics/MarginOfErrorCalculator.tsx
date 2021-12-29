@@ -73,7 +73,7 @@ const MarginOfErrorCalculator = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.confidenceLevel} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="confidence_level"
                   placeholder={PLACEHOLDERS.number}
                   value={values.confidence_level}
@@ -84,7 +84,7 @@ const MarginOfErrorCalculator = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.populationProportion} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="population_proportion"
                   placeholder={PLACEHOLDERS.number}
                   value={values.population_proportion}
@@ -95,7 +95,7 @@ const MarginOfErrorCalculator = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.sampleSize} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="sample_size"
                   placeholder={PLACEHOLDERS.number}
                   value={values.sample_size}
@@ -107,7 +107,7 @@ const MarginOfErrorCalculator = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />

@@ -71,7 +71,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = (props: any) => {
             <div className="form-row">
               <Label title={LABELS.eventA} />
               <CustomTextInput
-                type={INPUT_TYPE.number}
+                type={null}
                 id="event_a"
                 placeholder={PLACEHOLDERS.number}
                 value={values.event_a}
@@ -82,7 +82,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = (props: any) => {
             <div className="form-row">
               <Label title={LABELS.aRepeatTimes} />
               <CustomTextInput
-                type={INPUT_TYPE.number}
+                type={null}
                 id="a_repeat_times"
                 placeholder={PLACEHOLDERS.number}
                 value={values.a_repeat_times}
@@ -93,7 +93,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = (props: any) => {
             <div className="form-row">
               <Label title={LABELS.eventB} />
               <CustomTextInput
-                type={INPUT_TYPE.number}
+                type={null}
                 id="event_b"
                 placeholder={PLACEHOLDERS.number}
                 value={values.event_b}
@@ -104,7 +104,7 @@ const ProbabilityOfASeriesOfIndpendentEvents = (props: any) => {
             <div className="form-row">
               <Label title={LABELS.bRepeatTimes} />
               <CustomTextInput
-                type={INPUT_TYPE.number}
+                type={null}
                 id="b_repeat_times"
                 placeholder={PLACEHOLDERS.number}
                 value={values.b_repeat_times}

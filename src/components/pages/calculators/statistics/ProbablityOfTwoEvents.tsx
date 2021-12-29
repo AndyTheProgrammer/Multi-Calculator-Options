@@ -66,7 +66,7 @@ const ProbablityOfTwoEvents = (props: any) => {
             <div className="form-row">
               <Label title={LABELS.eventA} />
               <CustomTextInput
-                type={INPUT_TYPE.number}
+                type={null}
                 id="event_a"
                 placeholder={PLACEHOLDERS.number}
                 value={values.event_a}
@@ -77,7 +77,7 @@ const ProbablityOfTwoEvents = (props: any) => {
             <div className="form-row">
               <Label title={LABELS.eventB} />
               <CustomTextInput
-                type={INPUT_TYPE.number}
+                type={null}
                 id="event_b"
                 placeholder={PLACEHOLDERS.number}
                 value={values.event_b}
