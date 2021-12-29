@@ -155,7 +155,7 @@ const SectorArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.angle} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="angle"
                   placeholder={PLACEHOLDERS.number}
                   value={values.angle}
@@ -174,10 +174,11 @@ const SectorArea = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <CustomBtn />
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />
+                <CustomBtn />
               </div>
             </form>
           )}

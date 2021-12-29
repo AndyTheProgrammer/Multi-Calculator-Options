@@ -90,7 +90,7 @@ export default function ArithmeticSequenceCalculator(){
                     <Box 
                         sx={{ maxWidth: 450,paddingBottom: 1 }}
                         className="animated-box" >
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{  width: '100%', display: 'flex', justifyContent: 'center'}}>
                             <Box sx={{height:25, width: '100%' }}>
                                 <Typography>
                                     <Box sx={{ fontSize: 12, paddingTop: 0.5, paddingLeft: 2, width: '100%', ...labelStyle }}>

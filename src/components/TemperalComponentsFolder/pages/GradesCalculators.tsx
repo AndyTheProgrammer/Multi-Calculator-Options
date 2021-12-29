@@ -11,10 +11,12 @@ import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import  GradeCalculator from '../math/GradeCalculator'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import math_icon from '../../../common/assets/math_icon.svg';
+import stats from '../../../common/assets/stats_icon.svg'
 const Latex = require('react-latex');
 var classNames = require('classnames');
 
-function FinalGradeCalculator(){
+function GradesCalculators(){
     const [index, setIndex] = useState([true,false,false])
     const [calcName, setCalcName] = useState("Grade Calculator")
     const [showMenu, setShowMenu] = useState(false)
@@ -66,12 +68,10 @@ function FinalGradeCalculator(){
           
     })
 
-
-
     return(
         <>
-        <NavBar2 pagename="Grades Calculator"/>
-        <AddLayout>
+        <NavBar2 pageimage={math_icon} categoryname="Statistics Calculators"  pagename="Grades Calculator"/>
+        <AddLayout categorykey='statistics' searchname='Statistics Calculators' searchimage={stats}>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
                 <Anime
@@ -87,83 +87,61 @@ function FinalGradeCalculator(){
                         sx={{ maxWidth: 500, minHeight: 200, paddingBottom: 1 }}
                         className="animated-box" >
                         
-                        <Box sx={{ width:'100%', display: 'flex', }}>
-                            <Box sx={{ width:'100%'}}>
-                                <Box sx={{ width:'100%'}}
+                        <Box sx={{ width:'100%',}}>
+                            <Box sx={{ width:'100%', display: 'flex',}}>
+                                <Typography
                                     onClick={
                                         ()=>{
-                                            setShowMenu(!showMenu)
+                                            setIndex([true, false, false])
+                                            setCalcName("Grade Calculator")
+                                            setShowMenu(false)
                                         }
                                     }
-                                >
-                                    <Typography sx={{ display: 'flex', paddingLeft: 1 }}>
-                                        <Box className="form-card-none div-link"> {calcName} </Box>
-                                        <KeyboardArrowDownIcon sx={{ color: 'blue' }} />
-                                    </Typography>
-                                </Box>
-                                {
-                                    (showMenu)?
-                                    <Box sx={{ 
-                                        position:'absolute',    
-                                        width:'230px',
-                                        height: '100px',
-                                        backgroundColor: 'white',
-                                        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
-                                        borderRadius: 5,
-                                    }}>
-                                        <Typography
-                                            onClick={
-                                                ()=>{
-                                                    setIndex([true, false, false])
-                                                    setCalcName("Grade Calculator")
-                                                    setShowMenu(false)
-                                                }
-                                            }
-                                            className={classNames({
-                                                'form-card-1': index[0],
-                                                'form-card-none': !index[0],
-                                                'div-link': true
-                                            })}
-                                            sx={{ 
-                                                    width:'100%',
-                                                    fontSize: 16,
-                                                    paddingTop: 0.1, 
-                                                    marginBottom:0.5
-                                                }}>
-                                            <Box>
-                                                Grade Calculator
-                                            </Box>
-                                        </Typography >
-                                        <Typography
-                                            onClick={
-                                                ()=>{
-                                                    setIndex([false, true, false])
-                                                    setCalcName("Grade Planning")
-                                                    setShowMenu(false)
-                                                }
-                                            }
-                                            className={classNames({
-                                                'form-card-2': index[1],
-                                                'form-card-none': !index[1],
-                                                'div-link': true
-                                            })}
-                                            sx={{ width:'100%' }}>
-                                            <Box
-                                                sx={{ 
-                                                    width:'100%',
-                                                    fontSize: 16,
-                                                    paddingTop: 0.1, 
-                                                    marginBottom:0.5
-                                                }}>
-                                                Grade Planning
-                                            </Box>
-                                        </Typography>
-                                        
+                                    className={classNames({
+                                        'form-card-1-b': index[0],
+                                        'form-card-none': !index[0],
+                                        'div-link': true
+                                    })}
+                                    sx={{ 
+                                            width:'100%',
+                                            fontSize: 14,
+                                            paddingTop: 0.1, 
+                                            marginBottom:0.5,
+                                            fontWeight: 'bold',
+                                            textAlign: 'center'
+                                        }}>
+                                    <Box>
+                                        Grade Calculator
                                     </Box>
-                                    :<Box></Box>
-                                }
+                                </Typography >
+                                <Typography
+                                    onClick={
+                                        ()=>{
+                                            setIndex([false, true, false])
+                                            setCalcName("Grade Planning")
+                                            setShowMenu(false)
+                                        }
+                                    }
+                                    className={classNames({
+                                        'form-card-3-b': index[1],
+                                        'form-card-none': !index[1],
+                                        'div-link': true
+                                    })}
+                                    sx={{ width:'100%' }}>
+                                    <Box
+                                        sx={{ 
+                                            width:'100%',
+                                            fontSize: 14,
+                                            paddingTop: 0.1, 
+                                            marginBottom:0.5,
+                                            fontWeight: 'bold',
+                                            textAlign: 'center'
+                                        }}>
+                                        Grade Planning
+                                    </Box>
+                                </Typography>
+                            
                             </Box>
-                            <Box sx={{...formCardStyle}}></Box>
                         </Box>
                         {
                             (index[0])?
@@ -392,4 +370,4 @@ function FinalGradeCalculator(){
     );
 }
 
-export default FinalGradeCalculator
+export default GradesCalculators

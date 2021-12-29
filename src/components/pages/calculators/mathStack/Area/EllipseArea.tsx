@@ -147,7 +147,7 @@ const EllipseArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.semiMajorAxesA} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="semi_major_axes_a"
                   placeholder={PLACEHOLDERS.number}
                   value={values.semi_major_axes_a}
@@ -165,7 +165,7 @@ const EllipseArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.semiMajorAxesB} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="semi_major_axes_b"
                   placeholder={PLACEHOLDERS.number}
                   value={values.semi_major_axes_b}
@@ -184,10 +184,11 @@ const EllipseArea = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <CustomBtn />
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />
+                <CustomBtn />
               </div>
             </form>
           )}

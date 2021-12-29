@@ -170,6 +170,7 @@ const CustomForm = (props: any) => {
         }}>
           <input
             style={{
+              textAlign:'center',
               width:'100%',
               backgroundColor:'#F0F3F6',
               border: 'solid',

@@ -105,7 +105,7 @@ const CubeVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.edgeLength} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="edge_length"
                   placeholder={PLACEHOLDERS.number}
                   value={values.edge_length}
@@ -124,10 +124,11 @@ const CubeVolume = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <CustomBtn />
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />
+                <CustomBtn />
               </div>
             </form>
           )}

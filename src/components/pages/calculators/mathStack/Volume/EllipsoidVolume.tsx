@@ -137,7 +137,7 @@ const EllipsoidVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.axis1} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="axis1"
                   placeholder={PLACEHOLDERS.number}
                   value={values.axis1}
@@ -155,7 +155,7 @@ const EllipsoidVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.axis2} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="axis2"
                   placeholder={PLACEHOLDERS.number}
                   value={values.axis2}
@@ -173,7 +173,7 @@ const EllipsoidVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.axis3} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="axis3"
                   placeholder={PLACEHOLDERS.number}
                   value={values.axis3}
@@ -192,10 +192,11 @@ const EllipsoidVolume = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <CustomBtn />
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />
+                <CustomBtn />
               </div>
             </form>
           )}

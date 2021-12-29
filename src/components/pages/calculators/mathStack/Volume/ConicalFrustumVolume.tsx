@@ -130,7 +130,7 @@ const ConicalFrustumVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.topRadius} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="top_radius"
                   placeholder={PLACEHOLDERS.number}
                   value={values.top_radius}
@@ -148,7 +148,7 @@ const ConicalFrustumVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.bottomRadius} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="bottom_radius"
                   placeholder={PLACEHOLDERS.number}
                   value={values.bottom_radius}
@@ -166,7 +166,7 @@ const ConicalFrustumVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.height} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="height"
                   placeholder={PLACEHOLDERS.number}
                   value={values.height}
@@ -185,10 +185,11 @@ const ConicalFrustumVolume = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <CustomBtn />
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />
+                <CustomBtn />
               </div>
             </form>
           )}

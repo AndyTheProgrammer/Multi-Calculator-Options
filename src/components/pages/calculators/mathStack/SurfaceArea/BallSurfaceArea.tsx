@@ -105,7 +105,7 @@ const BallSurfaceArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.radius} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="radius"
                   placeholder={PLACEHOLDERS.number}
                   value={values.radius}
@@ -124,10 +124,11 @@ const BallSurfaceArea = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <CustomBtn />
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />
+                <CustomBtn />
               </div>
             </form>
           )}

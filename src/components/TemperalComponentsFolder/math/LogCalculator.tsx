@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect }from 'react'
 import { NavBar2 } from '../../navbar/navbar2'
-import CustomForm from '../../forms/CustomForm'
+import CustomForm, {CustomFormFraction} from '../../forms/CustomForm'
 import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
@@ -118,7 +118,33 @@ function LogCalculator(){
                             }) => (
                                 <form onSubmit={handleSubmit}>
                                     <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                        <Box sx={{ marginTop: 3, display:'flex', justifyContent:'center' }}>
+                                            <Typography>
+                                                <Box sx={{...labelStyle}}>
+                                                    Log
+                                                </Box>
+                                            </Typography>
+                                            <Box sx={{ width: 70, marginTop: 4}}>
+                                                <CustomFormFraction
+                                                    type="text"
+                                                    name="base"
+                                                    onChange={handleChange}
+                                                    value={values.base}
+                                                    
+                                                    placeholder="b"
+                                                />
+                                            </Box>
+                                            <Box sx={{ width: 70}}>
+                                            <CustomFormFraction
+                                                    type="text"
+                                                    name="number"
+                                                    onChange={handleChange}
+                                                    value={values.number}
+                                                    placeholder="X"
+                                                />
+                                            </Box>
+                                        </Box>
+                                        {/* <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
                                             <Grid item={true} xs={5} >
                                                 <Box sx={{...labelStyle}}>Base</Box></Grid>
                                             <Grid item={true} xs={7}>
@@ -143,7 +169,7 @@ function LogCalculator(){
                                                 />
                                             </Grid>
                                                                 
-                                        </Grid>
+                                        </Grid> */}
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
                                                 Flex box pushes submit button down

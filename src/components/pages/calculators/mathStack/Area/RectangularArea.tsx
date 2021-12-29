@@ -164,7 +164,7 @@ const RectangularArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.width} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="width"
                   placeholder={PLACEHOLDERS.number}
                   value={values.width}
@@ -183,10 +183,11 @@ const RectangularArea = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <CustomBtn />
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />
+                <CustomBtn />
               </div>
             </form>
           )}

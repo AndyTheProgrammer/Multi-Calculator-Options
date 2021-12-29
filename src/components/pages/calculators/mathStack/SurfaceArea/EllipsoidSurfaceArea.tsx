@@ -178,7 +178,7 @@ const EllipsoidSurfaceArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.axis3} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="axis3"
                   placeholder={PLACEHOLDERS.number}
                   value={values.axis3}
@@ -197,10 +197,11 @@ const EllipsoidSurfaceArea = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <CustomBtn />
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />
+                <CustomBtn />
               </div>
             </form>
           )}

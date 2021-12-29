@@ -57,23 +57,6 @@ function NavBar2(props:any){
                             position="static">
 
                             <Box sx={{ display: 'flex', m: 1 }}>
-                            {/* <Button
-                                onClick={
-                                    ()=>{
-                                        history.push(props.backroute)
-                                    }
-                                } 
-                                sx={{
-                                    // color: '#353FB0',
-                                    display:{
-                                        lg: 'none',
-                                        md: 'none',
-                                        sm: 'none',
-                                        xs: 'none'
-                                    }
-                                }}>
-                                    <ArrowBackIcon/>
-                                </Button> */}
                                 {
                                     (props.pageimage)?
                                     <Box

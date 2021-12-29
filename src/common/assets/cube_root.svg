@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="204.917" height="131.957" viewBox="0 0 204.917 131.957">
+  <defs>
+    <filter id="Path_58" x="0" y="26.228" width="204.917" height="105.729" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Component_165_1" data-name="Component 165 – 1" transform="translate(4.545 1)">
+    <g transform="matrix(1, 0, 0, 1, -4.54, -1)" filter="url(#Path_58)">
+      <path id="Path_58-2" data-name="Path 58" d="M8881,5057.463c14.678.266,15.288,0,15.288,0l8.54,51.32,26.637-93.544h145.407" transform="translate(-8876.46 -4984.01)" fill="none" stroke="#5782be" stroke-width="5"/>
+    </g>
+    <text id="Hello_Welcome_to_Br" data-name="Hello! Welcome to Br" transform="translate(9.649 49)" fill="#5681bd" stroke="#5681bd" stroke-width="1" font-size="45" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">3</tspan></text>
+  </g>
+</svg>
