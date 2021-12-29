@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'// requires a loader
 import Slider from "react-slick"
 import addimage from '../../common/assets/add.svg'
-
+import add_1 from '../../common/assets/add_1.svg';
+import add_2 from '../../common/assets/add_2.svg';
+import add_3 from '../../common/assets/add_3.svg';
 
 import { Button, Paper, Box } from '@mui/material'
 
 const boxstyle = {
-    height: 100,
+    height: 150,
     width: '100%',
     border:'0px solid black',
     display: 'flex',
@@ -21,7 +23,7 @@ class SingleSlider extends React.Component {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: false
+        arrows: false,
       };
       return (
             <Box sx={{ 
@@ -32,18 +34,18 @@ class SingleSlider extends React.Component {
                     <div style={{ border:'0px solid yellow', width: '100%', height: '100%', }} >
                         <Box sx={{
                             ...boxstyle
-                        }}> <img style={{ height: '100%' }} src={addimage} alt="add"  /></Box>
+                        }}> <img style={{ height: '100%' }} src={add_1} alt="add"  /></Box>
                     </div>
                     <Box >
                         <Box sx={{
                             ...boxstyle
-                        }}> <img style={{ height: '100%' }} src={addimage} alt="add"  /> </Box>
+                        }}> <img style={{ height: '100%' }} src={add_2} alt="add"  /> </Box>
                     </Box>
                     <div>
                     <Box >
                         <Box sx={{
                             ...boxstyle
-                        }}> <img style={{ height: '100%' }} src={addimage} alt="add"  /> </Box>
+                        }}> <img style={{ height: '100%' }} src={add_3} alt="add"  /> </Box>
                     </Box>
                     </div>
                 </Slider>
