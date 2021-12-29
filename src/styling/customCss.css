@@ -355,6 +355,10 @@ p.resultDisplay {
   display: block;
   width: 8px;
 }
+.other-scroller::-webkit-scrollbar {
+  display: none;
+  width: 8px;
+}
 
 .app-scroller::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;

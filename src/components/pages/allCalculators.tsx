@@ -186,8 +186,13 @@ function AllCalculators(){
                                 md: 'block',
                                 sm: 'none',
                                 xs: 'none'
-                            }
-                        }}>
+                            },
+                            height: '70vh',
+                            border: '0px solid red',
+                            overflowY: 'auto'
+                        }}
+                            className="other-scroller"
+                        >
                             {
                                 financialCalculators.map((data:any) => {
                                     return (
@@ -211,7 +216,8 @@ function AllCalculators(){
                                 md: 'none',
                                 sm: 'block',
                                 xs: 'block'
-                            }}}
+                            },
+                        }}
                             className={classNames({
                                 'hidden-text': !categoryIndex[0].show,
                                 'reveal-text': categoryIndex[0].show
@@ -258,8 +264,14 @@ function AllCalculators(){
                                         md: 'block',
                                         sm: 'none',
                                         xs: 'none'
-                                    }
-                                }}>
+                                    },
+                                    height: '70vh',
+                                    border: '0px solid red',
+                                    overflowY: 'auto'
+                                }}
+                                className="other-scroller"
+                                >
+                                
                                 {
                                     mathCalculatorsData.map((data:any) => {
                                         return (
@@ -332,8 +344,13 @@ function AllCalculators(){
                                         md: 'block',
                                         sm: 'none',
                                         xs: 'none'
-                                    }
-                                }}>
+                                    },
+                                    height: '70vh',
+                                    border: '0px solid red',
+                                    overflowY: 'auto'
+                                }}
+                                className="other-scroller"
+                                >
                                 {
                                     otherCalculatorsData.map((data:any) => {
                                         return (

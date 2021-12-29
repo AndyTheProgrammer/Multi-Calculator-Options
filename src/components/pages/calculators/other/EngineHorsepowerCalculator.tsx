@@ -96,264 +96,269 @@ function EngineHorsepowerCalculator() {
     <>
       <NavBar2 pagename="Engine Horsepower Calculator" />
       <AddLayout>
-        <animated.div style={formAnimation}>
-          <Box className={formDisplay} >
-            <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
-              <StyledTab
-                wrapped
-                label={CALCULATORS.elapsedTimeMethod}
-                {...a11yProps(0)}
-              />
-              <StyledTab
-                wrapped
-                label={CALCULATORS.trapSpeedMethod}
-                {...a11yProps(1)}
-              />
-            </StyledTabs>
+        <Grid
+          container
+          justifyContent="center"
+        >
+          <animated.div style={formAnimation}>
+            <Box className={formDisplay} >
+              <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
+                <StyledTab
+                  wrapped
+                  label={CALCULATORS.elapsedTimeMethod}
+                  {...a11yProps(0)}
+                />
+                <StyledTab
+                  wrapped
+                  label={CALCULATORS.trapSpeedMethod}
+                  {...a11yProps(1)}
+                />
+              </StyledTabs>
 
-            <TabPanel
-              value={tabValue}
-              index={0}
-            >
-              <Formik
-                initialValues={elapsedTimeInitialValues}
-                onSubmit={async ({
-                  weight,
-                  weight_unit,
-                  time,
-                  time_unit,
-                }, { setSubmitting, resetForm }) => {
-                  const payload: ElapsedTimeMethodI = {
+              <TabPanel
+                value={tabValue}
+                index={0}
+              >
+                <Formik
+                  initialValues={elapsedTimeInitialValues}
+                  onSubmit={async ({
                     weight,
                     weight_unit,
                     time,
                     time_unit,
-                    method: 'TheElapsedTimeMethod'
-                  }
-                  console.log(JSON.stringify(payload))
-                  try {
-                    const { success, payload: elapsedTimeMethod } = await calculateOthers(payload)
-                    console.log('=====>', elapsedTimeMethod)
-                    const {
+                  }, { setSubmitting, resetForm }) => {
+                    const payload: ElapsedTimeMethodI = {
                       weight,
+                      weight_unit,
                       time,
-                      horsePower,
-                    } = elapsedTimeMethod
-                    if (typeof elapsedTimeMethod === 'object') {
-                      setElapsedTimeResult({
-                        weight: weight,
-                        time: time,
-                        horsePower: horsePower
-                      })
+                      time_unit,
+                      method: 'TheElapsedTimeMethod'
                     }
-                    if (success === true) {
-                      setAnswer(success)
-                      formApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                      });
-                      resultApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                      })
+                    console.log(JSON.stringify(payload))
+                    try {
+                      const { success, payload: elapsedTimeMethod } = await calculateOthers(payload)
+                      console.log('=====>', elapsedTimeMethod)
+                      const {
+                        weight,
+                        time,
+                        horsePower,
+                      } = elapsedTimeMethod
+                      if (typeof elapsedTimeMethod === 'object') {
+                        setElapsedTimeResult({
+                          weight: weight,
+                          time: time,
+                          horsePower: horsePower
+                        })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
+                        formApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-start',
+                        });
+                        resultApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-end',
+                        })
+                      }
+                    } catch (err) {
+                      console.log('====>', err)
                     }
-                  } catch (err) {
-                    console.log('====>', err)
-                  }
-                }}
+                  }}
+                >
+                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                    <form onSubmit={handleSubmit} className="form-container">
+                      <div className="form-row">
+                        <Label title={LABELS.weight} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="weight"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.weight}
+                          onChange={handleChange}
+                        />
+
+                        <CustomSelect
+                          id="weight_unit"
+                          measurement="weight"
+                          value={values.weight_unit}
+                          onChange={handleChange('weight_unit')}
+                        />
+                      </div>
+
+                      <div className="form-row">
+                        <Label title={LABELS.time} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="time"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.time}
+                          onChange={handleChange}
+                        />
+
+                        <CustomSelect
+                          id="time_unit"
+                          measurement="time"
+                          value={values.time_unit}
+                          onChange={handleChange('time_unit')}
+                        />
+                      </div>
+
+                      <div
+                        className="form-row"
+                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                      >
+                        <CustomBtn />
+                        <CustomResetBtn
+                          onHandleClick={() => resetForm()}
+                        />
+                      </div>
+                    </form>
+                  )}
+                </Formik>
+              </TabPanel>
+
+              <TabPanel
+                value={tabValue}
+                index={1}
               >
-                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                  <form onSubmit={handleSubmit} className="form-container">
-                    <div className="form-row">
-                      <Label title={LABELS.weight} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="weight"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.weight}
-                        onChange={handleChange}
-                      />
-
-                      <CustomSelect
-                        id="weight_unit"
-                        measurement="weight"
-                        value={values.weight_unit}
-                        onChange={handleChange('weight_unit')}
-                      />
-                    </div>
-
-                    <div className="form-row">
-                      <Label title={LABELS.time} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="time"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.time}
-                        onChange={handleChange}
-                      />
-
-                      <CustomSelect
-                        id="time_unit"
-                        measurement="time"
-                        value={values.time_unit}
-                        onChange={handleChange('time_unit')}
-                      />
-                    </div>
-
-                    <div
-                      className="form-row"
-                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                    >
-
-                      <CustomResetBtn
-                        onHandleClick={() => resetForm()}
-                      />
-                      <CustomBtn />
-                    </div>
-                  </form>
-                )}
-              </Formik>
-            </TabPanel>
-
-            <TabPanel
-              value={tabValue}
-              index={1}
-            >
-              <Formik
-                initialValues={trapSpeedInitialValues}
-                onSubmit={async ({
-                  weight,
-                  weight_unit,
-                  speed,
-                  speed_unit,
-                }, { setSubmitting }) => {
-                  const payload: TrapSpeedMethodI = {
+                <Formik
+                  initialValues={trapSpeedInitialValues}
+                  onSubmit={async ({
                     weight,
                     weight_unit,
                     speed,
                     speed_unit,
-                    method: 'TheTrapSpeedMethod'
-                  }
-                  console.log(JSON.stringify(payload))
-                  try {
-                    const { success, payload: trapSpeedMethod } = await calculateOthers(payload)
-                    console.log('=====>', trapSpeedMethod)
-                    const {
-                      horsePower,
-                      unit,
+                  }, { setSubmitting }) => {
+                    const payload: TrapSpeedMethodI = {
                       weight,
+                      weight_unit,
                       speed,
-                    } = trapSpeedMethod
-                    if (typeof trapSpeedMethod === 'object') {
-                      setTrapSpeedResult({
-                        horsePower: horsePower,
-                        weight: weight,
-                        speed: speed,
-                        unit: unit
-                      })
+                      speed_unit,
+                      method: 'TheTrapSpeedMethod'
                     }
-                    if (success === true) {
-                      setAnswer(success)
-                      formApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                      });
-                      resultApi.start({
-                        transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                      })
+                    console.log(JSON.stringify(payload))
+                    try {
+                      const { success, payload: trapSpeedMethod } = await calculateOthers(payload)
+                      console.log('=====>', trapSpeedMethod)
+                      const {
+                        horsePower,
+                        unit,
+                        weight,
+                        speed,
+                      } = trapSpeedMethod
+                      if (typeof trapSpeedMethod === 'object') {
+                        setTrapSpeedResult({
+                          horsePower: horsePower,
+                          weight: weight,
+                          speed: speed,
+                          unit: unit
+                        })
+                      }
+                      if (success === true) {
+                        setAnswer(success)
+                        formApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-start',
+                        });
+                        resultApi.start({
+                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                          alignItems: 'center',
+                          justifyContent: 'flex-end',
+                        })
+                      }
+                    } catch (err) {
+                      console.log('====>', err)
                     }
-                  } catch (err) {
-                    console.log('====>', err)
-                  }
-                }}
-              >
-                {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
-                  <form onSubmit={handleSubmit} className="form-container">
-                    <div className="form-row">
-                      <Label title={LABELS.weight} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="weight"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.weight}
-                        onChange={handleChange}
-                      />
+                  }}
+                >
+                  {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
+                    <form onSubmit={handleSubmit} className="form-container">
+                      <div className="form-row">
+                        <Label title={LABELS.weight} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="weight"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.weight}
+                          onChange={handleChange}
+                        />
 
-                      <CustomSelect
-                        id="weight_unit"
-                        measurement="weight"
-                        value={values.weight_unit}
-                        onChange={handleChange('weight_unit')}
-                      />
-                    </div>
+                        <CustomSelect
+                          id="weight_unit"
+                          measurement="weight"
+                          value={values.weight_unit}
+                          onChange={handleChange('weight_unit')}
+                        />
+                      </div>
 
-                    <div className="form-row">
-                      <Label title={LABELS.speed} />
-                      <CustomTextInput
-                        type={INPUT_TYPE.number}
-                        id="speed"
-                        placeholder={PLACEHOLDERS.number}
-                        value={values.speed}
-                        onChange={handleChange}
-                      />
+                      <div className="form-row">
+                        <Label title={LABELS.speed} />
+                        <CustomTextInput
+                          type={INPUT_TYPE.number}
+                          id="speed"
+                          placeholder={PLACEHOLDERS.number}
+                          value={values.speed}
+                          onChange={handleChange}
+                        />
 
-                      <CustomSelect
-                        id="speed_unit"
-                        measurement="speed"
-                        value={values.speed_unit}
-                        onChange={handleChange('speed_unit')}
-                      />
-                    </div>
+                        <CustomSelect
+                          id="speed_unit"
+                          measurement="speed"
+                          value={values.speed_unit}
+                          onChange={handleChange('speed_unit')}
+                        />
+                      </div>
 
-                    <div
-                      className="form-row"
-                      style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                    >
-                      <CustomBtn />
-                      <CustomResetBtn
-                        onHandleClick={() => resetForm()}
-                      />
-                    </div>
-                  </form>
-                )}
-              </Formik>
-            </TabPanel>
+                      <div
+                        className="form-row"
+                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
+                      >
+                        <CustomBtn />
+                        <CustomResetBtn
+                          onHandleClick={() => resetForm()}
+                        />
+                      </div>
+                    </form>
+                  )}
+                </Formik>
+              </TabPanel>
 
-          </Box>
-        </animated.div>
-
-
-        <ResultTabsContainer
-          tabTitle={'Result'}
-          animation={resultAnimation}
-        >
-          {answer === true &&
-            <Box className="text-wrap">
-              {tabValue === 0 &&
-                <Box sx={{ color: COLORS.text }}>
-                  <Latex displayMode={true}>{LATEX.elapsedTimeMethod}</Latex>
-                  <Typography variant="subtitle1">
-                    Engine Horsepower: {elapsedTimeResult.horsePower}
-                  </Typography>
-                </Box>
-              }
-
-              {tabValue === 1 &&
-                <Box sx={{ color: COLORS.text }}>
-                  <Latex displayMode={true}>{LATEX.trapSpeed}</Latex>
-                  <Typography variant="subtitle1">
-                    Engine Horsepower: {trapSpeedResult.horsePower}{trapSpeedResult.unit}
-                  </Typography>
-                </Box>
-              }
             </Box>
+          </animated.div>
+
+          {answer === true &&
+            <ResultTabsContainer
+              tabTitle={'Result'}
+              animation={resultAnimation}
+            >
+
+              <Box className="text-wrap text-center">
+                {tabValue === 0 &&
+                  <Box sx={{ color: COLORS.text }}>
+                    <Latex displayMode={true}>{LATEX.elapsedTimeMethod}</Latex>
+                    <Typography variant="subtitle1">
+                      Engine Horsepower: {elapsedTimeResult.horsePower}
+                    </Typography>
+                  </Box>
+                }
+
+                {tabValue === 1 &&
+                  <Box sx={{ color: COLORS.text }}>
+                    <Latex displayMode={true}>{LATEX.trapSpeed}</Latex>
+                    <Typography variant="subtitle1">
+                      Engine Horsepower: {trapSpeedResult.horsePower}{trapSpeedResult.unit}
+                    </Typography>
+                  </Box>
+                }
+              </Box>
+
+            </ResultTabsContainer>
           }
-        </ResultTabsContainer>
+        </Grid>
       </AddLayout>
     </>
   )

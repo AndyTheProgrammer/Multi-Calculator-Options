@@ -1,36 +1,30 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+import Box from '@mui/material/Box';
+import Container from "@mui/material/Container";
+
 import { COLORS } from "../../common/shared";
+import { Font, FontProvider } from '../font'
 
 interface TabPanelProps {
   children?: React.ReactNode;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    padding: theme.spacing(2),
-  }
-}))
-
 const NoIndexTabPanel = (props: TabPanelProps) => {
   const { children, ...other } = props;
-  const classes = useStyles()
 
   return (
     <div
       role="tabpanel"
       {...other}
     >
-      <Box
-        p={5}
-        sx={{ color: COLORS.text }}
-      >
-        <Grid>{children}</Grid>
-      </Box>
+      <FontProvider fonts={[{ font: 'Varela Round' }]}>
+        <Box
+          p={5}
+          sx={{ color: COLORS.text }}
+        >
+          <Font>{children}</Font>
+        </Box>
+      </FontProvider>
     </div>
   );
 }

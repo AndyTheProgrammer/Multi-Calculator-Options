@@ -269,28 +269,7 @@ function MathOptions(){
                         
                     </Slider> 
                     <Box>
-                        <Box >
-                            <Box sx={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                p: 1,
-                                width: '100%',
-                                borderRadius: 3,
-                                textAlign: 'center',
-                                fontSize: 24,
-                                color: '#8591B0',
-                                // boxShadow: ' 0 8px 8px 0 rgba(0, 0, 0, 0.2)'
-                            }}>
-                                <Box>
-                                    <img style={{ width: '100%' }}  alt="lineIcon" src={iconLine} />
-                                </Box>
-                                <p style={{ marginLeft: 30, marginRight: 30 }}>Advertisement</p>
-                                <Box>
-                                    <img style={{ width: '100%' }}  alt="lineIcon" src={iconLine} />
-                                </Box>
-                            </Box>
-                        </Box>
-                        <Box sx={{ }}>
+                        <Box>
                             <Slide />
                         </Box>
                     </Box>

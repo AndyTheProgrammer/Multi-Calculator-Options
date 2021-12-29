@@ -73,7 +73,7 @@ const mathRoutes = {
     {
       name: "Fractions Calculators",
       sub_calculator: [
-       
+
         {
           name: "Fractions Calculator",
           path: `${mathUrl}/fractifdgfdgonscalculator`,
@@ -662,7 +662,7 @@ const othersRoutes = {
         {
           name: "Body Fat Calc + Army Body Fat",
           path: `${othersUrl}/bodyfatarmycalculator`,
-          component: PC.NoComponent
+          component: PC.BodyFatPercentageCalculator
         },
         {
           name: "Basal Metabolic Rate (BMR) Calculator",
@@ -702,12 +702,12 @@ const othersRoutes = {
         {
           name: "Ovulation Calculator",
           path: `${othersUrl}/ovulationcalculator`,
-          component: PC.NoComponent
+          component: PC.RegularCycleOvulation
         },
         {
           name: "Period Calculator",
           path: `${othersUrl}/periodcalculator`,
-          component: PC.NoComponent
+          component: PC.PeroidCalculator
         },
         {
           name: "Macro Calculator",
@@ -742,7 +742,7 @@ const othersRoutes = {
         {
           name: "Blood Alcohol Content (BAC) Calculator",
           path: `${othersUrl}/baccalculator`,
-          component: PC.NoComponent
+          component: PC.BloodAlcoholContent
         },
         {
           name: "HIV Window Period Calculator",
@@ -797,7 +797,7 @@ const othersRoutes = {
         },
         {
           name: "Bandwidth Calculator",
-          path: `${othersUrl}/calculator`,
+          path: `${othersUrl}/bandwidthcalculator`,
           component: PC.WebsiteBandwidth
         },
         {

@@ -145,7 +145,7 @@ export function ResponsiveSliderHome(){
                             <img style={{ width: '100%' }}  alt="lineIcon" src={iconLine} />
                         </Box>
                         <Typography>
-                            <Box sx={{ fontSize: 20, marginLeft: 3, marginRight: 3, marginTop: 1 }}>
+                            <Box sx={{ fontSize: 16, marginLeft: 1, marginRight: 1, marginTop: 1 }}>
                                 Advertisement
                             </Box>
                         </Typography>
