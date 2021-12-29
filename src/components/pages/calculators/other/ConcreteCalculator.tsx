@@ -3,21 +3,21 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 
-import { NavBar2 } from '../../navbar/navbar2'
-import AddLayout from '../../layouts/AddLayout'
-import { SimpleDialog } from "../../content";
-import useStyles from "../../../styling/CustomStyles";
+import { NavBar2 } from '../../../navbar/navbar2'
+import AddLayout from '../../../layouts/AddLayout'
+import { SimpleDialog } from "../../../content";
+import useStyles from "../../../../styling/CustomStyles";
 import {
   PLACEHOLDERS,
   INPUT_TYPE,
-} from '../../../common/shared'
+} from '../../../../common/shared'
 import {
   CircularSlab,
   ConcreteSquareFooting,
   CurbAndGutterBarrier,
   HoleColumn,
   StairsConcreate
-} from "../index";
+} from "../../index";
 
 function ConcreteCalculator() {
   const { sideBarPaperBackground } = useStyles();

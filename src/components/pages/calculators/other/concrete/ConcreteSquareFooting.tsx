@@ -5,14 +5,14 @@ import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { CircularSlabI } from '../../../../types'
-import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import { ConcreteSquareFootingI } from '../../../../../types'
+import { calculateOthers } from '../../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
-} from '../../../../common/shared'
+} from '../../../../../common/shared'
 import {
   CustomTextInput,
   CustomSelect,
@@ -21,9 +21,9 @@ import {
   Label,
   FormTabsContainer,
   ResultTabsContainer
-} from '../../../custom'
+} from '../../../../custom'
 
-const CircularSlab = (props: any) => {
+const ConcreteSquareFooting = (props: any) => {
   const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -34,7 +34,7 @@ const CircularSlab = (props: any) => {
     justifyContent: 'center',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
     alignItems: 'center',
     justifyContent: 'center',
   }));
@@ -43,26 +43,27 @@ const CircularSlab = (props: any) => {
   const [initialFormValues] = React.useState({
     length: "",
     length_unit: "",
-    outer_diameter: "",
-    outer_diameter_unit: "",
-    inner_diameter: "",
-    inner_diameter_unit: "",
+    width: "",
+    width_unit: "",
+    breadth: "",
+    breadth_unit: "",
     quantity: ""
   })
   const [Result, setResult] = React.useState({
     volume1: 0,
     volume2: 0,
     volume3: 0,
-    unit1: '',
-    unit2: '',
-    unit3: '',
+    length: 0,
+    width: 0,
+    breadth: 0,
+    units: ''
   })
 
   return (
     <>
       {/* Form grid */}
       <FormTabsContainer
-        tabTitle1={CALCULATORS.circularSlab}
+        tabTitle1={CALCULATORS.concreteSquareFooting}
         animation={formAnimation}
         dropDown={true}
         openDrop={openDrop}
@@ -72,54 +73,45 @@ const CircularSlab = (props: any) => {
           onSubmit={async ({
             length,
             length_unit,
-            outer_diameter,
-            outer_diameter_unit,
-            inner_diameter,
-            inner_diameter_unit,
+            width,
+            width_unit,
+            breadth,
+            breadth_unit,
             quantity,
           }, { setSubmitting }) => {
-            const payload: CircularSlabI = {
+            const payload: ConcreteSquareFootingI = {
               length,
               length_unit,
-              outer_diameter,
-              outer_diameter_unit,
-              inner_diameter,
-              inner_diameter_unit,
+              width,
+              width_unit,
+              breadth,
+              breadth_unit,
               quantity,
-              method: 'CircularSlabOrTubeConcreteCalculator'
+              method: 'SlabsSquareFootingsOrWallsConcreteCalculator'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { success, payload: circularSlabOrTubeConcrete } = await calculateOthers(payload)
-              console.log('=====>', circularSlabOrTubeConcrete)
+              const { success, payload: slabsSquareFootingsOrWallsConcreteCalculator } = await calculateOthers(payload)
+              console.log('=====>', slabsSquareFootingsOrWallsConcreteCalculator)
               const {
-                volumeInOuterDiameterUnit,
-                volumeInInnerDiameterUnit,
-                volumeInLengthUnit,
-                outerDiameterUnit,
-                innerDiameterUnit,
-                lengthUnit
-              } = circularSlabOrTubeConcrete
-              if (typeof circularSlabOrTubeConcrete === 'object') {
+                volumeInm,
+                units,
+                volumeInin,
+                length,
+                width,
+                breadth
+              } = slabsSquareFootingsOrWallsConcreteCalculator
+              if (typeof slabsSquareFootingsOrWallsConcreteCalculator === 'object') {
                 setResult({
-                  volume1: volumeInOuterDiameterUnit,
-                  volume2: volumeInInnerDiameterUnit,
-                  volume3: volumeInLengthUnit,
-                  unit1: outerDiameterUnit,
-                  unit2: innerDiameterUnit,
-                  unit3: lengthUnit,
+                  volume1: volumeInm,
+                  volume2: volumeInin,
+                  volume3: volumeInin,
+                  length,
+                  width,
+                  breadth,
+                  units,
                 })
               }
-              /*  if (typeof circularSlabOrTubeConcrete === 'object') {
-                 setResult({
-                   volume1: volume1,
-                   volume2: volume2,
-                   volume3: volume3,
-                   unit1: unit1,
-                   unit2: unit2,
-                   unit3: unit3,
-                 })
-               } */
               if (success === true) {
                 setAnswer(success)
                 formApi.start({
@@ -159,38 +151,38 @@ const CircularSlab = (props: any) => {
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.outerDiameter} />
+                <Label title={LABELS.width} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="outer_diameter"
+                  id="width"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.outer_diameter}
+                  value={values.width}
                   onChange={handleChange}
                 />
 
                 <CustomSelect
-                  id="outer_diameter_unit"
+                  id="width_unit"
                   measurement="length"
-                  value={values.outer_diameter_unit}
-                  onChange={handleChange('outer_diameter_unit')}
+                  value={values.width_unit}
+                  onChange={handleChange('width_unit')}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.innerDiameter} />
+                <Label title={LABELS.breadth} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="inner_diameter"
+                  id="breadth"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.inner_diameter}
+                  value={values.breadth}
                   onChange={handleChange}
                 />
 
                 <CustomSelect
-                  id="inner_diameter_unit"
+                  id="breadth_unit"
                   measurement="length"
-                  value={values.inner_diameter_unit}
-                  onChange={handleChange('inner_diameter_unit')}
+                  value={values.breadth_unit}
+                  onChange={handleChange('breadth_unit')}
                 />
               </div>
 
@@ -223,15 +215,35 @@ const CircularSlab = (props: any) => {
       {answer === true &&
         <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
           <div className="mb-3 text-center">
-            <Typography variant="subtitle1"> Volume: {Result.volume1}{Result.unit1}</Typography>
-            <Typography variant="subtitle1"> or {Result.volume2}{Result.unit2}</Typography>
-            <Typography variant="subtitle1"> or {Result.volume3}{Result.unit3}</Typography>
+            <Typography variant="subtitle1">
+              Volume: {Result.volume1}{Result.units}<sup>3</sup>,
+            </Typography>
+
+            <Typography variant="subtitle1">
+              or
+            </Typography>
+
+            <Typography variant="subtitle1">
+              Volume: {Result.volume2}{Result.units}<sup>3</sup>
+            </Typography>
+
+            <Typography variant="subtitle1">
+              or
+            </Typography>
+
+            <Typography variant="subtitle1">
+              Volume: {Result.volume2}{Result.units}<sup>3</sup>
+            </Typography>
+
+            <Typography variant="subtitle1">  Breath: {Result.breadth}</Typography>
+            <Typography variant="subtitle1"> length: {Result.length}</Typography>
+            <Typography variant="subtitle1"> Width: {Result.width}</Typography>
+            <Typography variant="subtitle1"> Units: {Result.units}</Typography>
           </div>
         </ResultTabsContainer>
       }
-
     </>
   )
 }
 
-export default CircularSlab
+export default ConcreteSquareFooting

@@ -5,14 +5,14 @@ import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { StairsConcreateI } from '../../../../types'
-import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import { CurbAndGutterBarrierI } from '../../../../../types'
+import { calculateOthers } from '../../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
-} from '../../../../common/shared'
+} from '../../../../../common/shared'
 import {
   CustomTextInput,
   CustomSelect,
@@ -21,9 +21,9 @@ import {
   Label,
   FormTabsContainer,
   ResultTabsContainer
-} from '../../../custom'
+} from '../../../../custom'
 
-const StairsConcreate = (props: any) => {
+const CurbAndGutterBarrier = (props: any) => {
   const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -34,22 +34,25 @@ const StairsConcreate = (props: any) => {
     justifyContent: 'center',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
+    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
     alignItems: 'center',
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
-    run: '',
-    run_unit: '',
+    curb_depth: '',
+    curb_depth_unit: '',
+    curb_height: '',
+    curb_height_unit: '',
+    flag_thickness: '',
+    flag_thickness_unit: '',
+    gutter_width: '',
+    gutter_width_unit: '',
+    length: '',
+    length_unit: '',
     rise: '',
-    rise_unit: '',
-    width: '',
-    width_unit: '',
-    platform_depth: '',
-    platform_depth_unit: '',
-    steps: '',
+    quantity: '',
   })
   const [Result, setResult] = React.useState({
     concreteNeeded: 0,
@@ -60,7 +63,7 @@ const StairsConcreate = (props: any) => {
     <>
       {/* Form grid */}
       <FormTabsContainer
-        tabTitle1={CALCULATORS.stairsConcrete}
+        tabTitle1={CALCULATORS.curbAndGutterBarrier}
         animation={formAnimation}
         dropDown={true}
         openDrop={openDrop}
@@ -68,35 +71,40 @@ const StairsConcreate = (props: any) => {
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            run,
-            run_unit,
+            curb_depth,
+            curb_depth_unit,
+            curb_height,
+            curb_height_unit,
+            flag_thickness,
+            flag_thickness_unit,
+            gutter_width,
+            gutter_width_unit,
+            length,
+            length_unit,
             rise,
-            rise_unit,
-            width,
-            width_unit,
-            platform_depth,
-            platform_depth_unit,
-            steps,
+            quantity,
           }, { setSubmitting }) => {
-            const payload: StairsConcreateI = {
-              run,
-              run_unit,
+            const payload: CurbAndGutterBarrierI = {
+              curb_depth,
+              curb_depth_unit,
+              curb_height,
+              curb_height_unit,
+              flag_thickness,
+              flag_thickness_unit,
+              gutter_width,
+              gutter_width_unit,
+              length,
+              length_unit,
               rise,
-              rise_unit,
-              width,
-              width_unit,
-              platform_depth,
-              platform_depth_unit,
-              steps,
-              method: 'StairsConcreteCalculator'
+              quantity,
+              method: 'CurbAndGutterBarrierConcreteCalculator'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { success, payload: stairsConcreteMethod } = await calculateOthers(payload)
-              console.log('=====>', stairsConcreteMethod)
-              const { concreteNeeded, unit, run, rise, width, platform_depth, steps
-              } = stairsConcreteMethod
-              if (typeof stairsConcreteMethod === 'object') {
+              const { success, payload: trapSpeedMethod } = await calculateOthers(payload)
+              console.log('=====>', trapSpeedMethod)
+              const { concreteNeeded, unit, } = trapSpeedMethod
+              if (typeof trapSpeedMethod === 'object') {
                 setResult({
                   concreteNeeded: concreteNeeded,
                   unit: unit
@@ -122,21 +130,94 @@ const StairsConcreate = (props: any) => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
+
               <div className="form-row">
-                <Label title={LABELS.run} />
+                <Label title={LABELS.curbDepth} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="run"
+                  id="curb_depth"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.run}
+                  value={values.curb_depth}
                   onChange={handleChange}
                 />
 
                 <CustomSelect
-                  id="run_unit"
+                  id="curb_depth_unit"
                   measurement="length"
-                  value={values.run_unit}
-                  onChange={handleChange('run_unit')}
+                  value={values.curb_depth_unit}
+                  onChange={handleChange('curb_depth_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.curbHeight} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="curb_height"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.curb_height}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="curb_height_unit"
+                  measurement="length"
+                  value={values.curb_height_unit}
+                  onChange={handleChange('curb_height_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.flagThickness} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="flag_thickness"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.flag_thickness}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="flag_thickness_unit"
+                  measurement="length"
+                  value={values.flag_thickness_unit}
+                  onChange={handleChange('flag_thickness_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.gutterWidth} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="gutter_width"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.gutter_width}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="gutter_width_unit"
+                  measurement="length"
+                  value={values.gutter_width_unit}
+                  onChange={handleChange('gutter_width_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.length} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="length"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.length}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="length_unit"
+                  measurement="length"
+                  value={values.length_unit}
+                  onChange={handleChange('length_unit')}
                 />
               </div>
 
@@ -149,58 +230,15 @@ const StairsConcreate = (props: any) => {
                   value={values.rise}
                   onChange={handleChange}
                 />
-
-                <CustomSelect
-                  id="rise_unit"
-                  measurement="length"
-                  value={values.rise_unit}
-                  onChange={handleChange('rise_unit')}
-                />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.width} />
+                <Label title={LABELS.quantity} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="width"
+                  id="quantity"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.width}
-                  onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="width_unit"
-                  measurement="length"
-                  value={values.width_unit}
-                  onChange={handleChange('width_unit')}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.platformDepth} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="platform_depth"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.platform_depth}
-                  onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="platform_depth_unit"
-                  measurement="length"
-                  value={values.platform_depth_unit}
-                  onChange={handleChange('platform_depth_unit')}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.steps} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="steps"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.steps}
+                  value={values.quantity}
                   onChange={handleChange}
                 />
               </div>
@@ -223,9 +261,7 @@ const StairsConcreate = (props: any) => {
       {answer === true &&
         <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
           <div className="mb-3 text-center">
-            <Typography variant="subtitle1">
-              Amount of concrete needed: {Result.concreteNeeded}{Result.unit}
-            </Typography>
+            <Typography variant="subtitle1"> Amount of concrete needed: {Result.concreteNeeded}{Result.unit}</Typography>
           </div>
         </ResultTabsContainer>
       }
@@ -233,4 +269,4 @@ const StairsConcreate = (props: any) => {
   )
 }
 
-export default StairsConcreate
+export default CurbAndGutterBarrier

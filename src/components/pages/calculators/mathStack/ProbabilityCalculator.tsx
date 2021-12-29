@@ -5,12 +5,12 @@ import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { NavBar2 } from '../../navbar/navbar2'
-import AddLayout from '../../layouts/AddLayout'
-import { SimpleDialog } from "../../content";
-import useStyles from '../../../styling/CustomStyles'
-import { calculateStatistics } from '../../../services/AppCalculatorsApi'
-import { ProbabilityOfASeriesOfIndpendentEventsI, ProbablityOfTwoEventsI, ProbablitySolverForTwoEventsI } from '../../../types'
+import { NavBar2 } from '../../../navbar/navbar2'
+import AddLayout from '../../../layouts/AddLayout'
+import { SimpleDialog } from "../../../content";
+import useStyles from '../../../../styling/CustomStyles'
+import { calculateStatistics } from '../../../../services/AppCalculatorsApi'
+import { ProbabilityOfASeriesOfIndpendentEventsI, ProbablityOfTwoEventsI, ProbablitySolverForTwoEventsI } from '../../../../types'
 import {
   CALCULATORS,
   LABELS,
@@ -18,7 +18,7 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
-} from '../../../common/shared'
+} from '../../../../common/shared'
 import {
   CustomTextInput,
   CustomBtn,
@@ -29,7 +29,7 @@ import {
   StyledTab,
   StyledTabs,
   TabPanel
-} from '../../custom'
+} from '../../../custom'
 
 function a11yProps(index: any) {
   return {

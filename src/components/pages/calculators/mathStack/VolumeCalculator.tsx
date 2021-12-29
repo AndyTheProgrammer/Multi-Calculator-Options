@@ -1,15 +1,9 @@
 import React from 'react'
-import { Grid, Box } from '@mui/material';
+import { Grid } from '@mui/material';
 
-import { NavBar2 } from '../../navbar/navbar2'
-import AddLayout from '../../layouts/AddLayout'
-import { SimpleDialog } from "../../content";
-import {
-  CALCULATORS,
-  LABELS,
-  PLACEHOLDERS,
-  INPUT_TYPE,
-} from '../../../common/shared'
+import { NavBar2 } from '../../../navbar/navbar2'
+import AddLayout from '../../../layouts/AddLayout'
+import { SimpleDialog } from "../../../content";
 import {
   CapsuleVolume,
   ConeVolume,
@@ -22,7 +16,7 @@ import {
   SphericalCapVolume,
   SquarePyramidVolume,
   TubeVolume,
-} from '../index'
+} from '../../index'
 
 function VolumeCalculator() {
   const [open, setOpen] = React.useState(false);
@@ -62,6 +56,14 @@ function VolumeCalculator() {
     {
       calcName: "Conical Frustrum Volume",
       component: <ConicalFrustumVolume openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Cube Volume",
+      component: <CubeVolume openDrop={handleClickOpen} />,
+    },
+    {
+      calcName: "Cylinder Volume",
+      component: <CylinderVolume openDrop={handleClickOpen} />,
     },
     {
       calcName: "Ellipsoid Volume",

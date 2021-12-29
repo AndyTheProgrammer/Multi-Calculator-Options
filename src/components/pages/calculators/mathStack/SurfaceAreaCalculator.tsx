@@ -1,15 +1,15 @@
 import React from 'react'
 import { Box, Grid } from '@material-ui/core'
 
-import { NavBar2 } from '../../navbar/navbar2'
-import AddLayout from '../../layouts/AddLayout'
-import { SimpleDialog } from "../../content";
+import { NavBar2 } from '../../../navbar/navbar2'
+import AddLayout from '../../../layouts/AddLayout'
+import { SimpleDialog } from "../../../content";
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
-} from '../../../common/shared'
+} from '../../../../common/shared'
 import {
   BallSurfaceArea,
   CapsuleSurfaceArea,
@@ -20,7 +20,7 @@ import {
   EllipsoidSurfaceArea,
   SphericalCapSurfaceArea,
   SquarePyramidSurfaceArea,
-} from '../index'
+} from '../../index'
 
 function SurfaceAreaCalculator() {
   const [open, setOpen] = React.useState(false);

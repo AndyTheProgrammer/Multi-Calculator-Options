@@ -5,14 +5,14 @@ import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { HoleColumnI } from '../../../../types'
-import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import { StairsConcreateI } from '../../../../../types'
+import { calculateOthers } from '../../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
-} from '../../../../common/shared'
+} from '../../../../../common/shared'
 import {
   CustomTextInput,
   CustomSelect,
@@ -21,9 +21,9 @@ import {
   Label,
   FormTabsContainer,
   ResultTabsContainer
-} from '../../../custom'
+} from '../../../../custom'
 
-const HoleColumn = (props: any) => {
+const StairsConcreate = (props: any) => {
   const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -34,29 +34,33 @@ const HoleColumn = (props: any) => {
     justifyContent: 'center',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
-    diameter: "",
-    diameter_unit: "",
-    height: "",
-    height_unit: "",
-    quantity: ""
+    run: '',
+    run_unit: '',
+    rise: '',
+    rise_unit: '',
+    width: '',
+    width_unit: '',
+    platform_depth: '',
+    platform_depth_unit: '',
+    steps: '',
   })
   const [Result, setResult] = React.useState({
-    volumeInDiameterUnit: 0,
-    volumeInHeightUnit: 0,
+    concreteNeeded: 0,
+    unit: ''
   })
 
   return (
     <>
       {/* Form grid */}
       <FormTabsContainer
-        tabTitle1={CALCULATORS.holeColumn}
+        tabTitle1={CALCULATORS.stairsConcrete}
         animation={formAnimation}
         dropDown={true}
         openDrop={openDrop}
@@ -64,32 +68,38 @@ const HoleColumn = (props: any) => {
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            diameter,
-            diameter_unit,
-            height,
-            height_unit,
-            quantity,
+            run,
+            run_unit,
+            rise,
+            rise_unit,
+            width,
+            width_unit,
+            platform_depth,
+            platform_depth_unit,
+            steps,
           }, { setSubmitting }) => {
-            const payload: HoleColumnI = {
-              diameter,
-              diameter_unit,
-              height,
-              height_unit,
-              quantity,
-              method: 'holeColumnOrRoundFootings'
+            const payload: StairsConcreateI = {
+              run,
+              run_unit,
+              rise,
+              rise_unit,
+              width,
+              width_unit,
+              platform_depth,
+              platform_depth_unit,
+              steps,
+              method: 'StairsConcreteCalculator'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { success, payload: trapSpeedMethod } = await calculateOthers(payload)
-              console.log('=====>', trapSpeedMethod)
-              const {
-                volumeInDiameterUnit,
-                volumeInHeightUnit,
-              } = trapSpeedMethod
-              if (typeof trapSpeedMethod === 'object') {
+              const { success, payload: stairsConcreteMethod } = await calculateOthers(payload)
+              console.log('=====>', stairsConcreteMethod)
+              const { concreteNeeded, unit, run, rise, width, platform_depth, steps
+              } = stairsConcreteMethod
+              if (typeof stairsConcreteMethod === 'object') {
                 setResult({
-                  volumeInDiameterUnit: volumeInDiameterUnit,
-                  volumeInHeightUnit: volumeInHeightUnit,
+                  concreteNeeded: concreteNeeded,
+                  unit: unit
                 })
               }
               if (success === true) {
@@ -113,49 +123,84 @@ const HoleColumn = (props: any) => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.diameter} />
+                <Label title={LABELS.run} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="diameter"
+                  id="run"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.diameter}
+                  value={values.run}
                   onChange={handleChange}
                 />
 
                 <CustomSelect
-                  id="diameter_unit"
+                  id="run_unit"
                   measurement="length"
-                  value={values.diameter_unit}
-                  onChange={handleChange('diameter_unit')}
+                  value={values.run_unit}
+                  onChange={handleChange('run_unit')}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.height} />
+                <Label title={LABELS.rise} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="height"
+                  id="rise"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.height}
+                  value={values.rise}
                   onChange={handleChange}
                 />
 
                 <CustomSelect
-                  id="height_unit"
+                  id="rise_unit"
                   measurement="length"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
+                  value={values.rise_unit}
+                  onChange={handleChange('rise_unit')}
                 />
               </div>
 
-
               <div className="form-row">
-                <Label title={LABELS.quantity} />
+                <Label title={LABELS.width} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="quantity"
+                  id="width"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.quantity}
+                  value={values.width}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="width_unit"
+                  measurement="length"
+                  value={values.width_unit}
+                  onChange={handleChange('width_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.platformDepth} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="platform_depth"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.platform_depth}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="platform_depth_unit"
+                  measurement="length"
+                  value={values.platform_depth_unit}
+                  onChange={handleChange('platform_depth_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.steps} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="steps"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.steps}
                   onChange={handleChange}
                 />
               </div>
@@ -179,18 +224,13 @@ const HoleColumn = (props: any) => {
         <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
           <div className="mb-3 text-center">
             <Typography variant="subtitle1">
-              Volume in diameter unit: {Result.volumeInDiameterUnit}
-            </Typography>
-
-            <Typography variant="subtitle1">
-              Volume in height unit: {Result.volumeInHeightUnit}
+              Amount of concrete needed: {Result.concreteNeeded}{Result.unit}
             </Typography>
           </div>
         </ResultTabsContainer>
       }
-
     </>
   )
 }
 
-export default HoleColumn
+export default StairsConcreate

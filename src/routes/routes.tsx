@@ -462,7 +462,7 @@ const financialRoutes =
         {
           name: "Mortgage Payoff Calculator",
           path: `${financialUrl}/mortgagepayoffcalculator`,
-          component: PC.NoComponent
+          component: PC.MortgagePayoffCalculator
         },
         {
           name: "Mortgage Annual Percentage Rate Calculator",
@@ -588,7 +588,7 @@ const financialRoutes =
         {
           name: "Margin Calculator",
           path: `${financialUrl}/margincalculator`,
-          component: PC.NoComponent
+          component: PC.MarginCalculator
         },
         {
           name: "Markup Calculator",
@@ -612,32 +612,6 @@ const financialRoutes =
         }
       ]
     },
-    {
-      name: "Other Calculators",
-      sub_calculator: [
-        {
-          name: "Loan Calculator",
-          path: `${financialUrl}/loancalculator`,
-          component: PC.LoanCalculator
-        },
-        {
-          name: "Payment Calculator",
-          path: `${financialUrl}/paymentcalculator`,
-          component: PC.NoComponent
-        },
-        {
-          name: "Currency Calculator",
-          path: `${financialUrl}/currencycalculator`,
-          component: PC.NoComponent
-        },
-        {
-          name: "Inflation Calculator",
-          path: `${financialUrl}/inflationcalculator`,
-          component: PC.NoComponent
-        },
-      ]
-    }
-
   ]
 }
 
@@ -798,7 +772,7 @@ const othersRoutes = {
         {
           name: "Bandwidth Calculator",
           path: `${othersUrl}/bandwidthcalculator`,
-          component: PC.WebsiteBandwidth
+          component: PC.BandwidthCalculator
         },
         {
           name: "Random Password Generator Calculator",

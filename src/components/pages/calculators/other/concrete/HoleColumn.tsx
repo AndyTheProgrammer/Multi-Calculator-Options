@@ -5,14 +5,14 @@ import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { BoydFormulaSurfaceAreaI } from '../../../../types'
-import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import { HoleColumnI } from '../../../../../types'
+import { calculateOthers } from '../../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
-} from '../../../../common/shared'
+} from '../../../../../common/shared'
 import {
   CustomTextInput,
   CustomSelect,
@@ -21,9 +21,10 @@ import {
   Label,
   FormTabsContainer,
   ResultTabsContainer
-} from '../../../custom'
+} from '../../../../custom'
 
-const BoydFormulaSurfaceArea = () => {
+const HoleColumn = (props: any) => {
+  const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -40,48 +41,68 @@ const BoydFormulaSurfaceArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
-    weight: '',
-    weight_unit: ''
+    diameter: "",
+    diameter_unit: "",
+    height: "",
+    height_unit: "",
+    quantity: ""
   })
   const [Result, setResult] = React.useState({
-    weightInKg: 0,
-    heightToMeter: 0,
-    bsa: 0,
-    unit: 0,
+    volumeInDiameterUnit: 0,
+    volumeInHeightUnit: 0,
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.boydFormulaSurfaceArea} animation={formAnimation}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.holeColumn}
+        animation={formAnimation}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
+            diameter,
+            diameter_unit,
             height,
             height_unit,
-            weight,
-            weight_unit
-          }, { setSubmitting, resetForm }) => {
-            const payload: BoydFormulaSurfaceAreaI = {
+            quantity,
+          }, { setSubmitting }) => {
+            const payload: HoleColumnI = {
+              diameter,
+              diameter_unit,
               height,
               height_unit,
-              weight,
-              weight_unit,
-              method: 'BoydFormulaBodySurfaceArea'
+              quantity,
+              method: 'holeColumnOrRoundFootings'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: boydFormula } = await calculateOthers(payload)
-              console.log('=====>', boydFormula)
-              if (typeof boydFormula === 'object') {
-                const { weightInKg, heightToMeter, bsa, unit } = boydFormula
+              const { success, payload: trapSpeedMethod } = await calculateOthers(payload)
+              console.log('=====>', trapSpeedMethod)
+              const {
+                volumeInDiameterUnit,
+                volumeInHeightUnit,
+              } = trapSpeedMethod
+              if (typeof trapSpeedMethod === 'object') {
                 setResult({
-                  bsa: bsa,
-                  heightToMeter: heightToMeter,
-                  weightInKg: weightInKg,
-                  unit: unit
+                  volumeInDiameterUnit: volumeInDiameterUnit,
+                  volumeInHeightUnit: volumeInHeightUnit,
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
                 })
               }
             } catch (err) {
@@ -91,6 +112,24 @@ const BoydFormulaSurfaceArea = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
+              <div className="form-row">
+                <Label title={LABELS.diameter} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="diameter"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.diameter}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="diameter_unit"
+                  measurement="length"
+                  value={values.diameter_unit}
+                  onChange={handleChange('diameter_unit')}
+                />
+              </div>
+
               <div className="form-row">
                 <Label title={LABELS.height} />
                 <CustomTextInput
@@ -109,21 +148,15 @@ const BoydFormulaSurfaceArea = () => {
                 />
               </div>
 
+
               <div className="form-row">
-                <Label title={LABELS.weight} />
+                <Label title={LABELS.quantity} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="weight"
+                  id="quantity"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.weight}
+                  value={values.quantity}
                   onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="weight_unit"
-                  measurement="weight"
-                  value={values.weight_unit}
-                  onChange={handleChange('weight_unit')}
                 />
               </div>
 
@@ -142,15 +175,22 @@ const BoydFormulaSurfaceArea = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="mb-3">
-          <Typography variant="subtitle1">Boyd formula surface area: {Result.bsa}{Result.unit}</Typography>
-          <Typography variant="subtitle1">Weight: {Result.weightInKg}</Typography>
-          <Typography variant="subtitle1">Height: {Result.heightToMeter}</Typography>
-        </div>
-      </ResultTabsContainer>
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3 text-center">
+            <Typography variant="subtitle1">
+              Volume in diameter unit: {Result.volumeInDiameterUnit}
+            </Typography>
+
+            <Typography variant="subtitle1">
+              Volume in height unit: {Result.volumeInHeightUnit}
+            </Typography>
+          </div>
+        </ResultTabsContainer>
+      }
+
     </>
   )
 }
 
-export default BoydFormulaSurfaceArea
+export default HoleColumn

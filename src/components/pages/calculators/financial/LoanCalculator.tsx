@@ -7,7 +7,6 @@ import { useTheme } from '@mui/material/styles';
 
 import { NavBar2 } from '../../../navbar/navbar2'
 import AddLayout from '../../../layouts/AddLayout'
-import { SimpleDialog } from "../../../content";
 import useStyles from '../../../../styling/CustomStyles'
 import { calculateFinances } from '../../../../services/AppCalculatorsApi'
 import { AmortizedLoanFixedAmountI, BondPayBackPredeterminedI, DeferredPaymentsLumpsumAtMaturityI } from '../../../../types'

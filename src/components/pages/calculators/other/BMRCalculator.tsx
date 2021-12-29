@@ -5,11 +5,11 @@ import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { NavBar2 } from '../../navbar/navbar2'
-import AddLayout from '../../layouts/AddLayout'
-import useStyles from '../../../styling/CustomStyles'
-import { calculateOthers } from '../../../services/AppCalculatorsApi'
-import { BMRKatchMcArdleI, BmrMifflinHarrisBenedictI, BmrMifflinJeorEquationI } from '../../../types'
+import { NavBar2 } from '../../../navbar/navbar2'
+import AddLayout from '../../../layouts/AddLayout'
+import useStyles from '../../../../styling/CustomStyles'
+import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import { BMRKatchMcArdleI, BmrMifflinHarrisBenedictI, BmrMifflinJeorEquationI } from '../../../../types'
 import {
   CALCULATORS,
   LABELS,
@@ -17,7 +17,7 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
-} from '../../../common/shared'
+} from '../../../../common/shared'
 import {
   CustomTextInput,
   CustomBtn,
@@ -28,7 +28,7 @@ import {
   StyledTabs,
   TabPanel,
   CustomSelect,
-} from '../../custom'
+} from '../../../custom'
 
 function a11yProps(index: any) {
   return {

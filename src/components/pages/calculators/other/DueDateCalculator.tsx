@@ -1,15 +1,15 @@
 import React from 'react'
 import { Grid, Box } from '@mui/material';
 
-import { NavBar2 } from '../../navbar/navbar2'
-import AddLayout from '../../layouts/AddLayout'
-import { SimpleDialog } from "../../content";
+import { NavBar2 } from '../../../navbar/navbar2'
+import AddLayout from '../../../layouts/AddLayout'
+import { SimpleDialog } from "../../../content";
 import {
   DueDateMittendorfWilliam,
   DueDateNaegeleRule,
   DueDateParikhsRule,
   DueDateWoodsRule,
-} from '../index'
+} from '../../index'
 
 function DueDateCalculator() {
   const [open, setOpen] = React.useState(false);

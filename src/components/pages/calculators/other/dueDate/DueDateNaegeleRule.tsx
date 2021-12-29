@@ -5,14 +5,14 @@ import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { DueDateWoodsRuleI } from '../../../../types'
-import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import { DueDateNaegeleRuleI } from '../../../../../types'
+import { calculateOthers } from '../../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
-} from '../../../../common/shared'
+} from '../../../../../common/shared'
 import {
   CustomTextInput,
   CustomBtn,
@@ -20,9 +20,9 @@ import {
   Label,
   FormTabsContainer,
   ResultTabsContainer
-} from '../../../custom'
+} from '../../../../custom'
 
-const DueDateWoodsRule = (props: any) => {
+const DueDateNaegeleRule = (props: any) => {
   const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -38,21 +38,20 @@ const DueDateWoodsRule = (props: any) => {
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
     first_date_of_last_period: '',
     days: '',
-    type: '',
+    method: '',
   })
   const [Result, setResult] = React.useState({
-    expectedDueDate: 0
+    dueDate: 0
   })
 
   return (
     <>
       {/* Form grid */}
       <FormTabsContainer
-        tabTitle1={CALCULATORS.dueDateWoodsRule}
+        tabTitle1={CALCULATORS.dueDateNaegeleRule}
         animation={formAnimation}
         dropDown={true}
         openDrop={openDrop}
@@ -62,22 +61,21 @@ const DueDateWoodsRule = (props: any) => {
           onSubmit={async ({
             first_date_of_last_period,
             days,
-            type,
+            method,
           }, { setSubmitting }) => {
-            const payload: DueDateWoodsRuleI = {
+            const payload: DueDateNaegeleRuleI = {
               first_date_of_last_period,
               days,
-              type,
-              method: 'DueDateWoodsRule'
+              method: 'DueDateNaegeleRule'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { success, payload: dueDateWoodsRule } = await calculateOthers(payload)
-              console.log('=====>', dueDateWoodsRule)
-              if (typeof dueDateWoodsRule === 'object') {
-                const { expectedDueDate } = dueDateWoodsRule
+              const { success, payload: dueDateNaegeleRule } = await calculateOthers(payload)
+              console.log('=====>', dueDateNaegeleRule)
+              if (typeof dueDateNaegeleRule === 'object') {
+                const { dueDate } = dueDateNaegeleRule
                 setResult({
-                  expectedDueDate: expectedDueDate,
+                  dueDate: dueDate
                 })
               }
               if (success === true) {
@@ -123,12 +121,12 @@ const DueDateWoodsRule = (props: any) => {
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.type} />
+                <Label title={LABELS.method} />
                 <CustomTextInput
                   type={INPUT_TYPE.text}
-                  id="type"
-                  placeholder={PLACEHOLDERS.type}
-                  value={values.type}
+                  id="method"
+                  placeholder={PLACEHOLDERS.method}
+                  value={values.method}
                   onChange={handleChange}
                 />
               </div>
@@ -150,15 +148,15 @@ const DueDateWoodsRule = (props: any) => {
       {/* Results grid */}
       {answer === true &&
         <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+
           <div className="mb-3">
-            <Typography variant="subtitle1">
-              Expected due date: {Result.expectedDueDate}
-            </Typography>
+            <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
           </div>
+
         </ResultTabsContainer>
       }
     </>
   )
 }
 
-export default DueDateWoodsRule
+export default DueDateNaegeleRule

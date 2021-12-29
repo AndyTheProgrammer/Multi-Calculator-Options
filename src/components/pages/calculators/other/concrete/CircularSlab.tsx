@@ -5,14 +5,14 @@ import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { CurbAndGutterBarrierI } from '../../../../types'
-import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import { CircularSlabI } from '../../../../../types'
+import { calculateOthers } from '../../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
-} from '../../../../common/shared'
+} from '../../../../../common/shared'
 import {
   CustomTextInput,
   CustomSelect,
@@ -21,9 +21,9 @@ import {
   Label,
   FormTabsContainer,
   ResultTabsContainer
-} from '../../../custom'
+} from '../../../../custom'
 
-const CurbAndGutterBarrier = (props: any) => {
+const CircularSlab = (props: any) => {
   const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -34,36 +34,35 @@ const CurbAndGutterBarrier = (props: any) => {
     justifyContent: 'center',
   }));
   const [resultAnimation, resultApi] = useSpring(() => ({
-    transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+    transform: matches === true ? 'translateY(-200px)' : 'translateX(-210px)',
     alignItems: 'center',
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
-    curb_depth: '',
-    curb_depth_unit: '',
-    curb_height: '',
-    curb_height_unit: '',
-    flag_thickness: '',
-    flag_thickness_unit: '',
-    gutter_width: '',
-    gutter_width_unit: '',
-    length: '',
-    length_unit: '',
-    rise: '',
-    quantity: '',
+    length: "",
+    length_unit: "",
+    outer_diameter: "",
+    outer_diameter_unit: "",
+    inner_diameter: "",
+    inner_diameter_unit: "",
+    quantity: ""
   })
   const [Result, setResult] = React.useState({
-    concreteNeeded: 0,
-    unit: ''
+    volume1: 0,
+    volume2: 0,
+    volume3: 0,
+    unit1: '',
+    unit2: '',
+    unit3: '',
   })
 
   return (
     <>
       {/* Form grid */}
       <FormTabsContainer
-        tabTitle1={CALCULATORS.curbAndGutterBarrier}
+        tabTitle1={CALCULATORS.circularSlab}
         animation={formAnimation}
         dropDown={true}
         openDrop={openDrop}
@@ -71,45 +70,56 @@ const CurbAndGutterBarrier = (props: any) => {
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            curb_depth,
-            curb_depth_unit,
-            curb_height,
-            curb_height_unit,
-            flag_thickness,
-            flag_thickness_unit,
-            gutter_width,
-            gutter_width_unit,
             length,
             length_unit,
-            rise,
+            outer_diameter,
+            outer_diameter_unit,
+            inner_diameter,
+            inner_diameter_unit,
             quantity,
           }, { setSubmitting }) => {
-            const payload: CurbAndGutterBarrierI = {
-              curb_depth,
-              curb_depth_unit,
-              curb_height,
-              curb_height_unit,
-              flag_thickness,
-              flag_thickness_unit,
-              gutter_width,
-              gutter_width_unit,
+            const payload: CircularSlabI = {
               length,
               length_unit,
-              rise,
+              outer_diameter,
+              outer_diameter_unit,
+              inner_diameter,
+              inner_diameter_unit,
               quantity,
-              method: 'CurbAndGutterBarrierConcreteCalculator'
+              method: 'CircularSlabOrTubeConcreteCalculator'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { success, payload: trapSpeedMethod } = await calculateOthers(payload)
-              console.log('=====>', trapSpeedMethod)
-              const { concreteNeeded, unit, } = trapSpeedMethod
-              if (typeof trapSpeedMethod === 'object') {
+              const { success, payload: circularSlabOrTubeConcrete } = await calculateOthers(payload)
+              console.log('=====>', circularSlabOrTubeConcrete)
+              const {
+                volumeInOuterDiameterUnit,
+                volumeInInnerDiameterUnit,
+                volumeInLengthUnit,
+                outerDiameterUnit,
+                innerDiameterUnit,
+                lengthUnit
+              } = circularSlabOrTubeConcrete
+              if (typeof circularSlabOrTubeConcrete === 'object') {
                 setResult({
-                  concreteNeeded: concreteNeeded,
-                  unit: unit
+                  volume1: volumeInOuterDiameterUnit,
+                  volume2: volumeInInnerDiameterUnit,
+                  volume3: volumeInLengthUnit,
+                  unit1: outerDiameterUnit,
+                  unit2: innerDiameterUnit,
+                  unit3: lengthUnit,
                 })
               }
+              /*  if (typeof circularSlabOrTubeConcrete === 'object') {
+                 setResult({
+                   volume1: volume1,
+                   volume2: volume2,
+                   volume3: volume3,
+                   unit1: unit1,
+                   unit2: unit2,
+                   unit3: unit3,
+                 })
+               } */
               if (success === true) {
                 setAnswer(success)
                 formApi.start({
@@ -130,79 +140,6 @@ const CurbAndGutterBarrier = (props: any) => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-
-              <div className="form-row">
-                <Label title={LABELS.curbDepth} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="curb_depth"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.curb_depth}
-                  onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="curb_depth_unit"
-                  measurement="length"
-                  value={values.curb_depth_unit}
-                  onChange={handleChange('curb_depth_unit')}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.curbHeight} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="curb_height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.curb_height}
-                  onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="curb_height_unit"
-                  measurement="length"
-                  value={values.curb_height_unit}
-                  onChange={handleChange('curb_height_unit')}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.flagThickness} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="flag_thickness"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.flag_thickness}
-                  onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="flag_thickness_unit"
-                  measurement="length"
-                  value={values.flag_thickness_unit}
-                  onChange={handleChange('flag_thickness_unit')}
-                />
-              </div>
-
-              <div className="form-row">
-                <Label title={LABELS.gutterWidth} />
-                <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="gutter_width"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.gutter_width}
-                  onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="gutter_width_unit"
-                  measurement="length"
-                  value={values.gutter_width_unit}
-                  onChange={handleChange('gutter_width_unit')}
-                />
-              </div>
-
               <div className="form-row">
                 <Label title={LABELS.length} />
                 <CustomTextInput
@@ -222,13 +159,38 @@ const CurbAndGutterBarrier = (props: any) => {
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.rise} />
+                <Label title={LABELS.outerDiameter} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="rise"
+                  id="outer_diameter"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.rise}
+                  value={values.outer_diameter}
                   onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="outer_diameter_unit"
+                  measurement="length"
+                  value={values.outer_diameter_unit}
+                  onChange={handleChange('outer_diameter_unit')}
+                />
+              </div>
+
+              <div className="form-row">
+                <Label title={LABELS.innerDiameter} />
+                <CustomTextInput
+                  type={INPUT_TYPE.number}
+                  id="inner_diameter"
+                  placeholder={PLACEHOLDERS.number}
+                  value={values.inner_diameter}
+                  onChange={handleChange}
+                />
+
+                <CustomSelect
+                  id="inner_diameter_unit"
+                  measurement="length"
+                  value={values.inner_diameter_unit}
+                  onChange={handleChange('inner_diameter_unit')}
                 />
               </div>
 
@@ -261,12 +223,15 @@ const CurbAndGutterBarrier = (props: any) => {
       {answer === true &&
         <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
           <div className="mb-3 text-center">
-            <Typography variant="subtitle1"> Amount of concrete needed: {Result.concreteNeeded}{Result.unit}</Typography>
+            <Typography variant="subtitle1"> Volume: {Result.volume1}{Result.unit1}</Typography>
+            <Typography variant="subtitle1"> or {Result.volume2}{Result.unit2}</Typography>
+            <Typography variant="subtitle1"> or {Result.volume3}{Result.unit3}</Typography>
           </div>
         </ResultTabsContainer>
       }
+
     </>
   )
 }
 
-export default CurbAndGutterBarrier
+export default CircularSlab

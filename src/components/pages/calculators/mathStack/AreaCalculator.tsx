@@ -1,9 +1,9 @@
 import React from 'react'
 import { Grid, Box } from '@mui/material';
 
-import { NavBar2 } from '../../navbar/navbar2'
-import AddLayout from '../../layouts/AddLayout'
-import { SimpleDialog } from "../../content";
+import { NavBar2 } from '../../../navbar/navbar2'
+import AddLayout from '../../../layouts/AddLayout'
+import { SimpleDialog } from "../../../content";
 import {
   CircleArea,
   EllipseArea,
@@ -12,7 +12,7 @@ import {
   SectorArea,
   TrapezoidArea,
   TriangleArea,
-} from '../index'
+} from '../../index'
 
 function AreaCalculator() {
   const [open, setOpen] = React.useState(false);

@@ -5,25 +5,25 @@ import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { MostellerBodySurfaceAreaI } from '../../../../types'
-import { calculateOthers } from '../../../../services/AppCalculatorsApi'
+import { DueDateParikhsRuleI } from '../../../../../types'
+import { calculateOthers } from '../../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
-} from '../../../../common/shared'
+} from '../../../../../common/shared'
 import {
   CustomTextInput,
-  CustomSelect,
   CustomBtn,
   CustomResetBtn,
   Label,
   FormTabsContainer,
   ResultTabsContainer
-} from '../../../custom'
+} from '../../../../custom'
 
-const MostellerBodySurfaceArea = () => {
+const DueDateParikhsRule = (props: any) => {
+  const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -38,46 +38,55 @@ const MostellerBodySurfaceArea = () => {
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const [initialFormValues] = React.useState({
-    height: '',
-    height_unit: '',
-    weight: '',
-    weight_unit: ''
+    first_date_of_last_period: '',
+    days: ''
   })
   const [Result, setResult] = React.useState({
-    bodySurfaceArea: 0,
-    unit: ''
+    dueDate: 0
   })
 
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.mostellerBodySurfaceArea} animation={formAnimation}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.dueDateParikhsRule}
+        animation={formAnimation}
+        dropDown={true}
+        openDrop={openDrop}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            height,
-            height_unit,
-            weight,
-            weight_unit
+            first_date_of_last_period,
+            days,
           }, { setSubmitting }) => {
-            const payload: MostellerBodySurfaceAreaI = {
-              height,
-              height_unit,
-              weight,
-              weight_unit,
-              method: 'MostellerFormulaBodySurfaceArea'
+            const payload: DueDateParikhsRuleI = {
+              first_date_of_last_period,
+              days,
+              method: 'DueDateParikhsRule'
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: mostellerBodySurfaceArea } = await calculateOthers(payload)
-              console.log('=====>', mostellerBodySurfaceArea)
-              if (typeof mostellerBodySurfaceArea === 'object') {
-                const { bsa, unit } = mostellerBodySurfaceArea
+              const { success, payload: dueDateParikhsRule } = await calculateOthers(payload)
+              console.log('=====>', dueDateParikhsRule)
+              if (typeof dueDateParikhsRule === 'object') {
+                const { dueDate } = dueDateParikhsRule
                 setResult({
-                  bodySurfaceArea: bsa,
-                  unit: unit
+                  dueDate: dueDate,
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
                 })
               }
             } catch (err) {
@@ -88,38 +97,24 @@ const MostellerBodySurfaceArea = () => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="form-row">
-                <Label title={LABELS.height} />
+                <Label title={LABELS.firstDateofLastPeriod} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
-                  id="height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.height}
+                  type={INPUT_TYPE.date}
+                  id="first_date_of_last_period"
+                  placeholder={PLACEHOLDERS.date}
+                  value={values.first_date_of_last_period}
                   onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="height_unit"
-                  measurement="length"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
                 />
               </div>
 
               <div className="form-row">
-                <Label title={LABELS.weight} />
+                <Label title={LABELS.days} />
                 <CustomTextInput
                   type={INPUT_TYPE.number}
-                  id="weight"
+                  id="days"
                   placeholder={PLACEHOLDERS.number}
-                  value={values.weight}
+                  value={values.days}
                   onChange={handleChange}
-                />
-
-                <CustomSelect
-                  id="weight_unit"
-                  measurement="weight"
-                  value={values.weight_unit}
-                  onChange={handleChange('weight_unit')}
                 />
               </div>
 
@@ -138,15 +133,17 @@ const MostellerBodySurfaceArea = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="mb-3">
-          <Typography variant="subtitle1">
-            Body surface area: {Result.bodySurfaceArea}{Result.unit}
-          </Typography>
-        </div>
-      </ResultTabsContainer>
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3">
+            <Typography variant="subtitle1">
+              Due date: {Result.dueDate}
+            </Typography>
+          </div>
+        </ResultTabsContainer>
+      }
     </>
   )
 }
 
-export default MostellerBodySurfaceArea
+export default DueDateParikhsRule

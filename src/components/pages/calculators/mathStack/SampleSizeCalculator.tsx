@@ -5,11 +5,11 @@ import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { NavBar2 } from '../../navbar/navbar2'
-import AddLayout from '../../layouts/AddLayout'
-import useStyles from '../../../styling/CustomStyles'
-import { calculateStatistics } from '../../../services/AppCalculatorsApi'
-import { MarginErrorI, SampleSizeI } from '../../../types'
+import { NavBar2 } from '../../../navbar/navbar2'
+import AddLayout from '../../../layouts/AddLayout'
+import useStyles from '../../../../styling/CustomStyles'
+import { calculateStatistics } from '../../../../services/AppCalculatorsApi'
+import { MarginErrorI, SampleSizeI } from '../../../../types'
 import {
   CALCULATORS,
   LABELS,
@@ -17,7 +17,7 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
-} from '../../../common/shared'
+} from '../../../../common/shared'
 import {
   CustomTextInput,
   CustomBtn,
@@ -27,7 +27,7 @@ import {
   StyledTab,
   StyledTabs,
   TabPanel
-} from '../../custom'
+} from '../../../custom'
 
 function a11yProps(index: any) {
   return {
@@ -146,31 +146,21 @@ function SampleSizeCalculator(props: any) {
                             sampleSize: size,
                           })
                         }
-                        formApi.start({
-                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                          alignItems: 'center',
-                          justifyContent: 'flex-start',
-                          margin: 'auto',
-                        });
-                        resultApi.start({
-                          transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                          alignItems: 'center',
-                          justifyContent: 'flex-end',
-                          margin: 'auto',
-                        })
-                        /* if (success === true) {
+                        if (success === true) {
                           setAnswer(success)
                           formApi.start({
                             transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
                             alignItems: 'center',
                             justifyContent: 'flex-start',
+                            margin: 'auto',
                           });
                           resultApi.start({
                             transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
                             alignItems: 'center',
                             justifyContent: 'flex-end',
+                            margin: 'auto',
                           })
-                        } */
+                        }
                       } catch (err) {
                         console.log('====>', err)
                       }
