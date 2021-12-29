@@ -71,7 +71,7 @@
  
      return(
          <>
-         <NavBar2 pageimage={math_icon} pagename="Percent To Fractions Calculator"/>
+         <NavBar2 pageimage={math_icon} categoryname="Fraction Calculator" pagename="Percent To Fractions Calculator"/>
          <AddLayout categorykey='fractions' searchname='Fractions Calculators' searchimage={fractions}>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>

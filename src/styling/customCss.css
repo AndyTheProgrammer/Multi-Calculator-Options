@@ -459,6 +459,19 @@ select.form-control-sm:not([size]):not([multiple]) {
   border-radius: 20px;
   color: #4173B5;
   padding-left: 10px;
+  font-weight: 'bold';
+}
+
+.form-card{
+  border: 0px solid red;
+  height: 25px; 
+  width: 100%;
+  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  border-radius: 20px;
+  color: white;
+  font-weight: 'bold';
+  padding-left: 10px;
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
 .form-card-1{
@@ -466,33 +479,94 @@ select.form-control-sm:not([size]):not([multiple]) {
   height: 25px; 
   width: 100%;
   background-image: linear-gradient(to left, #499FB8, #3128AF);
-  /* border-radius: 20px 3px 3px; */
-  border-radius: 20px;
+  border-radius: 20px 1px 1px;
   color: white;
   font-weight: 'bold';
   padding-left: 10px;
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
+
+.form-card-1-b{
+  border: 0px solid red;
+  height: 25px; 
+  width: 100%;
+  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  border-radius: 20px 1px 20px;
+  color: white;
+  font-weight: 'bold';
+  padding-left: 10px;
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+.form-card-1-c{
+  border: 0px solid red;
+  height: 25px; 
+  width: 100%;
+  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  border-radius: 20px 1px 1px 1px;
+  color: white;
+  font-weight: 'bold';
+  padding-left: 10px;
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+
 
 .form-card-2{
   border: 0px solid red;
   height: 25px; 
   width: 100%;
   background-image: linear-gradient(to left, #499FB8, #3128AF);
-  /* border-radius: 20px 3px 3px; */
-  border-radius: 20px;
+  border-radius: 1px 1px 1px 20px;
   color: white;
   font-weight: 'bold';
   padding-left: 10px;
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
+.form-card-2-b{
+  border: 0px solid red;
+  height: 25px; 
+  width: 100%;
+  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  border-radius: 1px 1px 20px;
+  color: white;
+  font-weight: 'bold';
+  padding-left: 10px;
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
+}
+.form-card-2-c{
+  border: 0px solid red;
+  height: 25px; 
+  width: 100%;
+  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  border-radius: 1px 1px 20px 1px;
+  color: white;
+  font-weight: 'bold';
+  padding-left: 10px;
+    box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
+}
+
 
 .form-card-3{
   border: 0px solid red;
   height: 25px; 
   width: 100%;
   background-image: linear-gradient(to left, #499FB8, #3128AF);
-  /* border-radius: 20px 3px 3px; */
-  border-radius: 20px;
+  border-radius: 1px 20px 1px 1px;
   color: white;
   font-weight: 'bold';
   padding-left: 10px;
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+.form-card-3-b{
+  border: 0px solid red;
+  height: 25px; 
+  width: 100%;
+  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  border-radius: 1px 20px 1px 20px;
+  color: white;
+  font-weight: 'bold';
+  padding-left: 10px;
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }

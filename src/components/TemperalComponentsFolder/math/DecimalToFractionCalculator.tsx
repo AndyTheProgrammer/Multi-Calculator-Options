@@ -67,7 +67,7 @@ export default function DecimalToFractionCalculator(){
 
     return(
         <>
-        <NavBar2 pageimage={math_icon} pagename="Decimal To Fraction Calculator"/>
+        <NavBar2 pageimage={math_icon} categoryname="Fraction Calculator" pagename="Decimal To Fraction Calculator"/>
         <AddLayout categorykey='fractions' searchname='Fractions Calculators' searchimage={fractions}>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box className='animated-content-center'>

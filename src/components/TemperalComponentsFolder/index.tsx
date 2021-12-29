@@ -58,6 +58,8 @@ export { default as StatisticsCalculator } from './math/StatisticsCalculator'
 export { default as TDEECalculator } from './math/TDEECalculator'
 export { default as TwoDDistanceCalculator } from './math/TwoDDistanceCalculator'
 export { default as ZscoreCalculator } from './math/ZscoreCalculator'
+export { default as GPACalculator } from './math/GPACalculator'
+
 
 //Othes Category Components
 export { default as AreaConverter } from './other/AreaConverter'
@@ -68,3 +70,11 @@ export { default as TemperatureConverter } from './other/TemperatureConverter'
 export { default as TimeConverter } from './other/TimeConverter'
 export { default as VolumeConverter } from './other/VolumeConverter'
 export { default as WeightConverter } from './other/WeightConverter'
+
+//pages
+export { default as BinaryCalculators } from './pages/BinaryCalculators'
+export { default as GradesCalculators } from './pages/GradesCalculators'
+export { default as HexadecimalCalculators } from './pages/HexadecimalCalculators'
+export { default as PermutationsAndCombination } from './pages/PermutationsAndCombination'
+export { default as RootsCalculators } from './pages/RootsCalculators'
+export { default as StandardDeviationCalculators } from './pages/StandardDeviationCalculators'
