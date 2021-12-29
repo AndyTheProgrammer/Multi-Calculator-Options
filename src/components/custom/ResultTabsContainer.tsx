@@ -54,7 +54,9 @@ const ResultTabsContainer = (props: ResultsProps) => {
           </StyledTabs>
 
           <NoIndexTabPanel>
-            <Latex displayMode={true}>{latex}</Latex>
+            <p style={{ fontSize: 14 }}>
+              <Latex displayMode={true}>{latex}</Latex>
+            </p>
             {children}
           </NoIndexTabPanel>
         </div>

@@ -36,6 +36,7 @@ export { default as TubeVolume } from "./calculators/mathStack/Volume/TubeVolume
 // Other > Fitness & Health
 export { default as BloodAlcoholContent } from "./calculators/other/BloodAlcoholContent";
 export { default as BMRCalculator } from "./mainPages/BMRCalculator";
+export { default as BodyFatPercentageCalculator } from "./calculators/other/BodyFatPercentageBmi";
 export { default as BodyMassIndexCalculator } from "./calculators/other/BodyMassIndexCalculator";
 export { default as DueDateMittendorfWilliam } from "./calculators/other/DueDateMittendorfWilliam";
 export { default as DueDateNaegeleRule } from "./calculators/other/DueDateNaegeleRule";

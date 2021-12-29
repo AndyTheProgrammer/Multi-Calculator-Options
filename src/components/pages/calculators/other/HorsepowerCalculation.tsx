@@ -60,7 +60,7 @@ const HorsepowerCalculation = () => {
 
   return (
     <>
-      <NavBar2 pagename="Body Surface Area Calculator" />
+      <NavBar2 pagename="Horsepower Calculator" />
       <AddLayout>
         <Grid
           container
@@ -189,10 +189,11 @@ const HorsepowerCalculation = () => {
                     className="form-row"
                     style={{ alignItems: 'center', justifyContent: 'space-between' }}
                   >
-                    <CustomBtn />
+
                     <CustomResetBtn
                       onHandleClick={() => resetForm()}
                     />
+                    <CustomBtn />
                   </div>
                 </form>
               )}

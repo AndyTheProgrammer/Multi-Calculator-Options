@@ -68,12 +68,25 @@ const DueDateMittendorfWilliam = (props: any) => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: dueDateMittendorf } = await calculateOthers(payload)
+              const { success, payload: dueDateMittendorf } = await calculateOthers(payload)
               console.log('=====>', dueDateMittendorf)
               if (typeof dueDateMittendorf === 'object') {
                 const { dueDate } = dueDateMittendorf
                 setResult({
                   dueDate: dueDate
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
                 })
               }
             } catch (err) {
@@ -109,10 +122,11 @@ const DueDateMittendorfWilliam = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <CustomBtn />
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />
+                <CustomBtn />
               </div>
             </form>
           )}
@@ -120,11 +134,14 @@ const DueDateMittendorfWilliam = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="mb-3">
-          <Typography variant="subtitle1">Due Date: {Result.dueDate} </Typography>
-        </div>
-      </ResultTabsContainer>
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3">
+            <Typography variant="subtitle1">Due Date: {Result.dueDate} </Typography>
+          </div>
+        </ResultTabsContainer>
+      }
+
     </>
   )
 }

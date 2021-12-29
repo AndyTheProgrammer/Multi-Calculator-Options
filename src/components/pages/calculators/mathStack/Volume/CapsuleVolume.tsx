@@ -144,7 +144,7 @@ const CapsuleVolume = (props: any) => {
                 <Label title={LABELS.height} />
 
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={null}
                   id="height"
                   placeholder={PLACEHOLDERS.number}
                   value={values.height}
@@ -163,10 +163,11 @@ const CapsuleVolume = (props: any) => {
                 className="form-row"
                 style={{ alignItems: 'center', justifyContent: 'space-between' }}
               >
-                <CustomBtn />
+
                 <CustomResetBtn
                   onHandleClick={() => resetForm()}
                 />
+                <CustomBtn />
               </div>
             </form>
           )}
