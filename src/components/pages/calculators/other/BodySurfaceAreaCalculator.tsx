@@ -72,7 +72,6 @@ const BodyMassFormulaCalculator = () => {
         >
           {/* Form grid */}
           <FormTabsContainer
-            tabTitle1={CALCULATORS.bodySurfaceArea}
             animation={formAnimation}
           >
             <Formik
@@ -191,7 +190,7 @@ const BodyMassFormulaCalculator = () => {
           </FormTabsContainer>
 
           {/* Results grid */}
-          {answer !== true &&
+          {answer === true &&
             <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
 
               <div className="mb-3 text-center text-wrap">
