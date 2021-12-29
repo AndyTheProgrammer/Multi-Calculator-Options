@@ -343,7 +343,7 @@ const BodyMassIndexCalculator = () => {
               <Box className="text-wrap">
                 {tabValue === 0 &&
                   <Box sx={{ color: COLORS.text }}>
-                    <Latex displayMode={true}>{ }</Latex>
+                    <Latex displayMode={true}>{LATEX.bmi}</Latex>
                     <Typography variant="subtitle1">
                       BMI: {methodOneResult.bmi}{methodOneResult.unit}<sup>2</sup>
                     </Typography>
@@ -352,9 +352,9 @@ const BodyMassIndexCalculator = () => {
 
                 {tabValue === 1 &&
                   <Box sx={{ color: COLORS.text }}>
-                    <Latex displayMode={true}>{ }</Latex>
+                    <Latex displayMode={true}>{LATEX.bmiMethodTwo}</Latex>
                     <Typography variant="subtitle1">
-                      BMI:{methodTwoResult.bmi}{methodTwoResult.unit}<sup>2</sup>
+                      BMI:{methodTwoResult.bmi}{methodTwoResult.unit}<sup>3</sup>
                     </Typography>
                   </Box>
                 }

@@ -1,5 +1,5 @@
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, Typography } from '@material-ui/core'
+import { Box, Typography } from '@mui/material'
 
 import iconLine from '../../common/assets/line.svg';
 
@@ -33,17 +33,17 @@ function CustomDivider(props: any) {
             <img className={image} alt="lineIcon" src={iconLine} />
           </Box>
 
-          <p className={label} >
+          <Typography className={label} noWrap>
             {label1}
-          </p>
+          </Typography>
 
           <Box>
             <img className={image} alt="lineIcon" src={iconLine} />
           </Box>
 
-          <p className={label} >
+          <Typography className={label} noWrap>
             {label2}
-          </p>
+          </Typography>
 
           <Box>
             <img className={image} alt="lineIcon" src={iconLine} />

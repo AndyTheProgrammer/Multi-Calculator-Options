@@ -101,27 +101,6 @@ function SampleSizeCalculator(props: any) {
           container
           justifyContent="center"
         >
-          <Grid xs={12} >
-            <Button onClick={() => {
-              setAnswer(!answer)
-              formApi.start({
-                transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-                margin: 'auto',
-              });
-              resultApi.start({
-                transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                margin: 'auto',
-              })
-            }}>
-              Animate
-            </Button>
-            <span>{`theme.breakpoints.down('sm') matches: ${matches}`}</span>;
-          </Grid>
-
           <animated.div
             style={formAnimation}
           >

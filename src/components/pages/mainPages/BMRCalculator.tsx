@@ -117,17 +117,17 @@ function BMRCalculator() {
               <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
                 <StyledTab
                   wrapped
-                  label={CALCULATORS.bMRKatchMcArdle}
+                  label={CALCULATORS.bmrKatchMcArdle}
                   {...a11yProps(0)}
                 />
                 <StyledTab
                   wrapped
-                  label={CALCULATORS.bmrMifflinHarrisBenedict}
+                  label={CALCULATORS.bmrHarrisBenedict}
                   {...a11yProps(1)}
                 />
                 <StyledTab
                   wrapped
-                  label={CALCULATORS.bmrMifflinJeorEquation}
+                  label={CALCULATORS.bmrMifflinStJeorEquation}
                   {...a11yProps(2)}
                 />
               </StyledTabs>

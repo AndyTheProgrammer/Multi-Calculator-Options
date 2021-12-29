@@ -133,13 +133,15 @@ const DueDateParikhsRule = (props: any) => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        {answer === true &&
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
           <div className="mb-3">
-            <Typography variant="subtitle1">Due date: {Result.dueDate}</Typography>
+            <Typography variant="subtitle1">
+              Due date: {Result.dueDate}
+            </Typography>
           </div>
-        }
-      </ResultTabsContainer>
+        </ResultTabsContainer>
+      }
     </>
   )
 }
