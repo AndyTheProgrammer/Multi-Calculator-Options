@@ -87,12 +87,24 @@ export default function StandardDeviationCalculator(){
                 play2();
                 reverse1();
                 reverse2();
+                setSDValue([
+                    {id:1,value:''},
+                    {id:1,value:''},
+                    {id:1,value:''}
+                ])
                 setValue([]);
+                setInputType('population')
                 setPlayAnimation(false);
             }
         }
         else{
             setValue([]);
+            setInputType('population')
+            setSDValue([
+                {id:1,value:''},
+                {id:1,value:''},
+                {id:1,value:''}
+            ])
         }
     } 
 
@@ -165,12 +177,25 @@ export default function StandardDeviationCalculator(){
         }
         if(inputType === 'population'){
             console.log("Submit population data here")
+            const data = {
+                provided_numbers: postData.toString(),
+                method: "PopulationStandardDeviationCalculator"
+            }
+            const response = await mathMainService(data);
+            setValue([response.message])
+            console.log(response.message)
         }
 
         if(inputType === 'sample'){
             console.log("Submit sample data here")
+            const data = {
+                provided_numbers: postData.toString(),
+                method: "SampleStandardDeviationCalculator"
+            }
+            const response = await mathMainService(data);
+            setValue([response.message])
         }
-        console.log(postData.toString())
+        console.log(value)
     }
 
     function toggleType(data:string){
@@ -216,7 +241,7 @@ export default function StandardDeviationCalculator(){
                                         </Typography>
                                     <FormControl component="fieldset" sx={{ width: '100%'}}>
                                         
-                                        <RadioGroup row aria-label="position" name="position" defaultValue='population'>
+                                        <RadioGroup row aria-label="position" name="position" defaultValue={inputType}>
                                             <FormControlLabel
                                                 value='population'
                                                 control={<Radio />}
@@ -311,9 +336,13 @@ export default function StandardDeviationCalculator(){
                     }}>
                     {
                         (value.length)?
-                        <Box 
+                        value.map((data:any)=>(
+                            <Box 
                             sx={{ maxWidth: 400,paddingBottom: 1 }}
                             className="animated-box" >
+                                {
+                                    console.log(data)
+                                }
                             <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                     <Box sx={{height:25, width: '100%' }}>
                                         <Typography>
@@ -348,7 +377,8 @@ export default function StandardDeviationCalculator(){
                                     </Typography>
                                     <Typography sx={{ fontSize: 14 }}>
                                         <Box>
-                                            {value[0]}   
+                                            {data.standardDeviation}   
+                                            {data.sampleStandardDeviation} 
                                         </Box>
                                     </Typography>
                                 </Box>
@@ -372,7 +402,7 @@ export default function StandardDeviationCalculator(){
                                     </Typography>
                                     <Typography sx={{ fontSize: 14 }}>
                                         <Box>
-                                            {value[1]}   
+                                            {data.count}   
                                         </Box>
                                     </Typography>
                                 </Box>
@@ -397,7 +427,7 @@ export default function StandardDeviationCalculator(){
                                     </Typography>
                                     <Typography sx={{ fontSize: 14 }}>
                                         <Box>
-                                            {value[2]}   
+                                        {data.sum}    
                                         </Box>
                                     </Typography>
                                 </Box>
@@ -421,7 +451,7 @@ export default function StandardDeviationCalculator(){
                                     </Typography>
                                     <Typography sx={{ fontSize: 14 }}>
                                         <Box>
-                                            {value[3]}   
+                                        {data.mean}   
                                         </Box>
                                     </Typography>
                                 </Box>
@@ -445,13 +475,14 @@ export default function StandardDeviationCalculator(){
                                     </Typography>
                                     <Typography sx={{ fontSize: 14 }}>
                                         <Box>
-                                            {value[4]}   
+                                        {data.variance}     
                                         </Box>
                                     </Typography>
                                 </Box>
 
                             </Box>
                         </Box>
+                        ))
                         :<Box></Box>
                     }
                 </Anime>

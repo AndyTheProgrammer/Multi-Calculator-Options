@@ -8,6 +8,8 @@ import { Box, Grid, Typography } from '@mui/material'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+import math_icon from '../../../common/assets/math_icon.svg';
+import stats from '../../../common/assets/stats_icon.svg';
 
 const Latex = require('react-latex');
 
@@ -140,7 +142,7 @@ function GradeInputFieldOptions(props){
             borderColor: 'red',
             borderRadius: 7,
             outline: 'none',
-            fontSize: 20
+            fontSize: 18
     }}
       value={value} 
       onChange={handleChange}>
@@ -408,8 +410,8 @@ export default function GPACalculator(){
 
   return(
     <>
-    <NavBar2 pagename="GPA Calculator" />
-    <AddLayout>
+    <NavBar2 pageimage={math_icon} categoryname="Statistics Calculators"  pagename="GPA Calculator" />
+    <AddLayout categorykey='statistics' searchname='Statistics Calculators' searchimage={stats}>
             <Box sx={{ display: "flex", justifyContent: "center" }}
             > 
             <Box className='animated-content-center'>
@@ -431,16 +433,16 @@ export default function GPACalculator(){
                     </Box>
                       <Box sx={{minHeight: 150, display:'flex', flexDirection:'column' }}>
                           <Grid container={true}columnSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                              <Grid item={true} xs={4}>
-                                  <Box sx={{ ...labelStyle }}>Course</Box>
+                              <Grid item={true} xs={6}>
+                                  <Box sx={{ ...labelStyle }}>Course (Optional)</Box>
                               </Grid>
-                              <Grid item={true} xs={4}>
+                              <Grid item={true} xs={3}>
                                   <Box sx={{ ...labelStyle }}>Credit</Box>
                               </Grid>
-                              <Grid item={true} xs={4}>
+                              <Grid item={true} xs={3}>
                                   <Box sx={{ ...labelStyle }}>Grade</Box>
                               </Grid>
-                              <Grid item={true} xs={4} >
+                              <Grid item={true} xs={6} >
                               {
                                 courses.map((data) => (
                                   <Box sx={{ marginBottom: 1 }}>
@@ -449,7 +451,7 @@ export default function GPACalculator(){
                                 ))
                               }
                               </Grid>
-                              <Grid item={true} xs={4} >
+                              <Grid item={true} xs={3} >
                               {
                                 credit.map((data) => (
                                   <Box sx={{ marginBottom: 1 }}>
@@ -458,7 +460,7 @@ export default function GPACalculator(){
                                 ))
                               }
                               </Grid>
-                              <Grid item={true} xs={4} >
+                              <Grid item={true} xs={3} >
                               {
                                 grade.map((data) => (
                                   <Box sx={{ marginBottom: 1 }}>

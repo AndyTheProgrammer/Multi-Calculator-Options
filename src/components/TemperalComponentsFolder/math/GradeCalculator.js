@@ -107,7 +107,7 @@ function GradeInputField(props){
             borderColor: 'red',
             borderRadius: 7,
             outline: 'none',
-            fontSize: 18
+            fontSize: 16
           }}
           type="text" 
           name="grade" 
@@ -140,7 +140,7 @@ function GradeInputFieldOptions(props){
             borderColor: 'red',
             borderRadius: 7,
             outline: 'none',
-            fontSize: 20
+            fontSize: 18
     }}
       value={value} 
       onChange={handleChange}>

@@ -48,7 +48,7 @@ export { default as RatioCalculator } from './math/RatioCalculator'
 export { default as RightAngleTriangle } from './math/RightAngleTriangle'
 
 
-export { default as SampleStandardDeviationCalculator } from './math/SampleStandardDeviationCalculator'
+// export { default as SampleStandardDeviationCalculator } from './math/SampleStandardDeviationCalculator'
 export { default as ScientificNotationCalculator } from './math/ScientificNotationCalculator'
 export { default as SimplifyFractionsCalculator } from './math/SimplifyFractionsCalculator'
 
