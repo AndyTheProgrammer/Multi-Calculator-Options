@@ -172,7 +172,8 @@ function SampleSizeCalculator(props: any) {
                         <div className="form-row">
                           <Label title={LABELS.confidenceLevel} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            col
+                            type={INPUT_TYPE.text}
                             id="confidence_level"
                             placeholder={PLACEHOLDERS.number}
                             value={values.confidence_level}
@@ -183,7 +184,8 @@ function SampleSizeCalculator(props: any) {
                         <div className="form-row">
                           <Label title={LABELS.populationProportion} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            col
+                            type={INPUT_TYPE.text}
                             id="population_proportion"
                             placeholder={PLACEHOLDERS.number}
                             value={values.population_proportion}
@@ -194,7 +196,8 @@ function SampleSizeCalculator(props: any) {
                         <div className="form-row">
                           <Label title={LABELS.marginOfError} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            col
+                            type={INPUT_TYPE.text}
                             id="margin_of_error"
                             placeholder={PLACEHOLDERS.number}
                             value={values.margin_of_error}
@@ -270,7 +273,8 @@ function SampleSizeCalculator(props: any) {
                         <div className="form-row">
                           <Label title={LABELS.confidenceLevel} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            col
+                            type={INPUT_TYPE.text}
                             id="confidence_level"
                             placeholder={PLACEHOLDERS.number}
                             value={values.confidence_level}
@@ -281,7 +285,8 @@ function SampleSizeCalculator(props: any) {
                         <div className="form-row">
                           <Label title={LABELS.populationProportion} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            col
+                            type={INPUT_TYPE.text}
                             id="population_proportion"
                             placeholder={PLACEHOLDERS.number}
                             value={values.population_proportion}
@@ -292,7 +297,8 @@ function SampleSizeCalculator(props: any) {
                         <div className="form-row">
                           <Label title={LABELS.sampleSize} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            col
+                            type={INPUT_TYPE.text}
                             id="sample_size"
                             placeholder={PLACEHOLDERS.number}
                             value={values.sample_size}

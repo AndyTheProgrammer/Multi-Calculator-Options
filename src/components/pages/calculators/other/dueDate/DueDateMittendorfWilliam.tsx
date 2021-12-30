@@ -99,6 +99,7 @@ const DueDateMittendorfWilliam = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.firstDateofLastPeriod} />
                 <CustomTextInput
+                  col
                   type={INPUT_TYPE.date}
                   id="first_date_of_last_period"
                   placeholder={PLACEHOLDERS.date}
@@ -110,6 +111,7 @@ const DueDateMittendorfWilliam = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.type} />
                 <CustomTextInput
+                  col
                   type={INPUT_TYPE.text}
                   id="type"
                   placeholder={PLACEHOLDERS.type}

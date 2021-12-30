@@ -112,7 +112,8 @@ const PaybackWithinTimeframe = () => {
                   <div className="form-row">
                     <Label title={LABELS.interestRate} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="interest_rate"
                       placeholder={PLACEHOLDERS.number}
                       value={values.interest_rate}
@@ -123,7 +124,8 @@ const PaybackWithinTimeframe = () => {
                   <div className="form-row">
                     <Label title={LABELS.months} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="months"
                       placeholder={PLACEHOLDERS.number}
                       value={values.months}
@@ -134,7 +136,8 @@ const PaybackWithinTimeframe = () => {
                   <div className="form-row">
                     <Label title={LABELS.creditCardBalance} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="credit_card_balance"
                       placeholder={PLACEHOLDERS.number}
                       value={values.credit_card_balance}
@@ -145,7 +148,8 @@ const PaybackWithinTimeframe = () => {
                   <div className="form-row">
                     <Label title={LABELS.year} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="year"
                       placeholder={PLACEHOLDERS.number}
                       value={values.year}

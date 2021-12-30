@@ -178,7 +178,8 @@ function MortgagePayoffCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="interest_rate"
                           placeholder={PLACEHOLDERS.number}
                           value={values.interest_rate}
@@ -189,7 +190,8 @@ function MortgagePayoffCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.paymentsMade} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="payments_made_years"
                           placeholder={PLACEHOLDERS.number}
                           value={values.payments_made_years}
@@ -200,7 +202,8 @@ function MortgagePayoffCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.totalPaymentsperYear} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="total_payments_years"
                           placeholder={PLACEHOLDERS.number}
                           value={values.total_payments_years}
@@ -211,7 +214,8 @@ function MortgagePayoffCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.loanAmount} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="loan_amount"
                           placeholder={PLACEHOLDERS.number}
                           value={values.loan_amount}
@@ -286,7 +290,8 @@ function MortgagePayoffCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="interest_rate"
                           placeholder={PLACEHOLDERS.number}
                           value={values.interest_rate}
@@ -297,7 +302,8 @@ function MortgagePayoffCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.principalBalance} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="principal_balance"
                           placeholder={PLACEHOLDERS.number}
                           value={values.principal_balance}
@@ -308,7 +314,8 @@ function MortgagePayoffCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.monthlyPayment} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="monthly_payment"
                           placeholder={PLACEHOLDERS.number}
                           value={values.monthly_payment}

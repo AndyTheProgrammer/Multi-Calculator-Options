@@ -59,11 +59,10 @@ const USCustomarySystemBfc = () => {
 
   return (
     <>
-      <NavBar2 pagename="US Customary System BFC" />
+      <NavBar2 pagename={CALCULATORS.usCustomarySystemBfc} />
       <AddLayout>
         {/* Form grid */}
         <FormTabsContainer
-          tabTitle1={CALCULATORS.usCustomarySystemBfc}
           animation={formAnimation}
         >
           <Formik
@@ -126,7 +125,7 @@ const USCustomarySystemBfc = () => {
                 <div className="form-row">
                   <Label title={LABELS.height} />
                   <CustomTextInput
-                    type={INPUT_TYPE.number}
+                    type={INPUT_TYPE.text}
                     id="height"
                     placeholder={PLACEHOLDERS.number}
                     value={values.height}
@@ -144,7 +143,7 @@ const USCustomarySystemBfc = () => {
                 <div className="form-row">
                   <Label title={LABELS.neck} />
                   <CustomTextInput
-                    type={INPUT_TYPE.number}
+                    type={INPUT_TYPE.text}
                     id="neck"
                     placeholder={PLACEHOLDERS.number}
                     value={values.neck}
@@ -162,7 +161,7 @@ const USCustomarySystemBfc = () => {
                 <div className="form-row">
                   <Label title={LABELS.hip} />
                   <CustomTextInput
-                    type={INPUT_TYPE.number}
+                    type={INPUT_TYPE.text}
                     id="hip"
                     placeholder={PLACEHOLDERS.number}
                     value={values.hip}
@@ -180,7 +179,7 @@ const USCustomarySystemBfc = () => {
                 <div className="form-row">
                   <Label title={LABELS.waist} />
                   <CustomTextInput
-                    type={INPUT_TYPE.number}
+                    type={INPUT_TYPE.text}
                     id="waist"
                     placeholder={PLACEHOLDERS.number}
                     value={values.waist}
@@ -198,7 +197,8 @@ const USCustomarySystemBfc = () => {
                 <div className="form-row">
                   <Label title={LABELS.abdomen} />
                   <CustomTextInput
-                    type={INPUT_TYPE.number}
+                    col
+                    type={INPUT_TYPE.text}
                     id="abdomen"
                     placeholder={PLACEHOLDERS.number}
                     value={values.abdomen}

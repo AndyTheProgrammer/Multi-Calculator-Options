@@ -129,7 +129,7 @@ const TubeVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.outerDiameter} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="outer_diameter"
                   placeholder={PLACEHOLDERS.number}
                   value={values.outer_diameter}
@@ -147,7 +147,7 @@ const TubeVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.innerDiameter} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="inner_diameter"
                   placeholder={PLACEHOLDERS.number}
                   value={values.inner_diameter}
@@ -165,7 +165,7 @@ const TubeVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.length} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="length"
                   placeholder={PLACEHOLDERS.number}
                   value={values.length}

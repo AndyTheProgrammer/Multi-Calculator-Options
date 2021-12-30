@@ -115,7 +115,7 @@ const HoleColumn = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.diameter} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="diameter"
                   placeholder={PLACEHOLDERS.number}
                   value={values.diameter}
@@ -133,7 +133,7 @@ const HoleColumn = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.height} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="height"
                   placeholder={PLACEHOLDERS.number}
                   value={values.height}
@@ -152,7 +152,8 @@ const HoleColumn = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.quantity} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  col
+                  type={INPUT_TYPE.text}
                   id="quantity"
                   placeholder={PLACEHOLDERS.number}
                   value={values.quantity}

@@ -640,7 +640,7 @@ const othersRoutes = {
         },
         {
           name: "Basal Metabolic Rate (BMR) Calculator",
-          path: `${othersUrl}/calculator`,
+          path: `${othersUrl}/bmrcalculator`,
           component: PC.BMRCalculator
         },
         {

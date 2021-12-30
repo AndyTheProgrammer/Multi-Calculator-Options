@@ -108,6 +108,7 @@ const PeroidCalculator = () => {
                   <div className="form-row">
                     <Label title={LABELS.previousCycleStartDate} />
                     <CustomTextInput
+                      col
                       type={INPUT_TYPE.date}
                       id="start_date_of_last_cycle"
                       placeholder={PLACEHOLDERS.number}
@@ -119,7 +120,8 @@ const PeroidCalculator = () => {
                   <div className="form-row">
                     <Label title={LABELS.cycleLength} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="cycle_length"
                       placeholder={PLACEHOLDERS.number}
                       value={values.cycle_length}
@@ -130,7 +132,8 @@ const PeroidCalculator = () => {
                   <div className="form-row">
                     <Label title={LABELS.lastPeriodDays} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="last_period_days"
                       placeholder={PLACEHOLDERS.number}
                       value={values.last_period_days}

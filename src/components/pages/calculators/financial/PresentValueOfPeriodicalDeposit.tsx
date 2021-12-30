@@ -120,7 +120,8 @@ const PresentValueOfPeriodicalDeposit = () => {
                   <div className="form-row">
                     <Label title={LABELS.interestRate} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="interest_rate"
                       placeholder={PLACEHOLDERS.number}
                       value={values.interest_rate}
@@ -131,7 +132,8 @@ const PresentValueOfPeriodicalDeposit = () => {
                   <div className="form-row">
                     <Label title={LABELS.periodDeposit} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="period_deposit"
                       placeholder={PLACEHOLDERS.number}
                       value={values.period_deposit}
@@ -142,7 +144,8 @@ const PresentValueOfPeriodicalDeposit = () => {
                   <div className="form-row">
                     <Label title={LABELS.numberOfMonths} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="number_of_months"
                       placeholder={PLACEHOLDERS.number}
                       value={values.number_of_months}
@@ -153,7 +156,8 @@ const PresentValueOfPeriodicalDeposit = () => {
                   <div className="form-row">
                     <Label title={LABELS.numberOfYears} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="number_of_years"
                       placeholder={PLACEHOLDERS.number}
                       value={values.number_of_years}

@@ -167,7 +167,8 @@ function MarginCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.salesRevenue} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="sales_revenue"
                           placeholder={PLACEHOLDERS.number}
                           value={values.sales_revenue}
@@ -178,7 +179,8 @@ function MarginCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.cost} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="cost"
                           placeholder={PLACEHOLDERS.number}
                           value={values.cost}
@@ -252,7 +254,8 @@ function MarginCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.marginRequirement} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="margin_requirement"
                           placeholder={PLACEHOLDERS.number}
                           value={values.margin_requirement}
@@ -263,7 +266,8 @@ function MarginCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.stockPrice} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="stock_price"
                           placeholder={PLACEHOLDERS.number}
                           value={values.stock_price}
@@ -274,7 +278,8 @@ function MarginCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.shares} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="shares"
                           placeholder={PLACEHOLDERS.number}
                           value={values.shares}

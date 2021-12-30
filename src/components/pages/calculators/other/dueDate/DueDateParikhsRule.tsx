@@ -99,6 +99,7 @@ const DueDateParikhsRule = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.firstDateofLastPeriod} />
                 <CustomTextInput
+                  col
                   type={INPUT_TYPE.date}
                   id="first_date_of_last_period"
                   placeholder={PLACEHOLDERS.date}
@@ -110,7 +111,8 @@ const DueDateParikhsRule = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.days} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  col
+                  type={INPUT_TYPE.text}
                   id="days"
                   placeholder={PLACEHOLDERS.number}
                   value={values.days}

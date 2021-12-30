@@ -13,9 +13,19 @@ import Weight from '../../lib/Weight.json'
 
 import { COLORS } from "../../common/shared";
 
+interface SelectProps {
+  id?: String;
+  value?: any;
+  measurement?: any;
+  col?: Boolean;
+  onChange?: {
+    (e: React.ChangeEvent<any>): void;
+    <T_1 = string | React.ChangeEvent<any>>(field: T_1): T_1 extends React.ChangeEvent<any> ? void : (e: string | React.ChangeEvent<any>) => void;
+  };
+}
 
-const CustomSelect = (props: any) => {
-  const { id, value, measurement } = props
+const CustomSelect = (props: SelectProps) => {
+  const { id, value, measurement, onChange } = props
 
   const genders = [
     {
@@ -41,11 +51,8 @@ const CustomSelect = (props: any) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text }}
+          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
         >
-          <option selected style={{ fontWeight: 'bold', fontStyle: 'italic', color: COLORS.text }}>
-            Select unit
-          </option>
           {Angle.map(({ type, units }) => (
             units.map(({ name, unit }) => (
               <option
@@ -69,9 +76,8 @@ const CustomSelect = (props: any) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text }}
+          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
         >
-          <option selected style={{ fontWeight: 'bold', fontStyle: 'italic', color: COLORS.text }}>Select unit</option>
           {Capacity.map(({ type, units }) => (
             units.map(({ name, unit }) => (
               <option
@@ -95,9 +101,8 @@ const CustomSelect = (props: any) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text }}
+          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
         >
-          <option selected style={{ fontWeight: 'bold', fontStyle: 'italic', color: COLORS.text }}>Select unit</option>
           {Length.map(({ type, units }) => (
             units.map(({ name, unit }) => (
               <option
@@ -121,9 +126,8 @@ const CustomSelect = (props: any) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text }}
+          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
         >
-          <option selected style={{ fontWeight: 'bold', fontStyle: 'italic', color: COLORS.text }}>Select unit</option>
           {Speed.map(({ type, units }) => (
             units.map(({ name, unit }) => (
               <option
@@ -147,9 +151,8 @@ const CustomSelect = (props: any) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text }}
+          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
         >
-          <option selected style={{ fontWeight: 'bold', fontStyle: 'italic', color: COLORS.text }}>Select unit</option>
           {Data.map(({ type, units }) => (
             units.map(({ name, unit }) => (
               <option
@@ -173,9 +176,8 @@ const CustomSelect = (props: any) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text }}
+          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
         >
-          <option selected style={{ fontWeight: 'bold', fontStyle: 'italic', color: COLORS.text }}>Select unit</option>
           {Time.map(({ type, units }) => (
             units.map(({ name, unit }) => (
               <option
@@ -198,9 +200,8 @@ const CustomSelect = (props: any) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text }}
+          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
         >
-          <option selected style={{ fontWeight: 'bold', fontStyle: 'italic', color: COLORS.text }}>Select unit</option>
           {Weight.map(({ type, units }) => (
             units.map(({ name, unit }) => (
               <option
@@ -217,15 +218,14 @@ const CustomSelect = (props: any) => {
     )
   } if (measurement === "gender") {
     return (
-      <div className="form-group col">
+      <div className="form-group col-8">
         <Field
           as="select"
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text }}
+          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
         >
-          <option selected style={{ fontWeight: 'bold', fontStyle: 'italic', color: COLORS.text }}>Select gender</option>
           {genders.map(({ type, label }) => (
             <option
               key={type}
@@ -246,9 +246,8 @@ const CustomSelect = (props: any) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text }}
+          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
         >
-          <option selected style={{ fontWeight: 'bold', fontStyle: 'italic', color: COLORS.text }}>Select unit</option>
           {Units.map(({ type, units }) => (
             units.map(({ name, unit }) => (
               <option

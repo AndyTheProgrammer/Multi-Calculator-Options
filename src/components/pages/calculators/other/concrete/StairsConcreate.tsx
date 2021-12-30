@@ -125,7 +125,7 @@ const StairsConcreate = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.run} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="run"
                   placeholder={PLACEHOLDERS.number}
                   value={values.run}
@@ -143,7 +143,7 @@ const StairsConcreate = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.rise} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="rise"
                   placeholder={PLACEHOLDERS.number}
                   value={values.rise}
@@ -161,7 +161,7 @@ const StairsConcreate = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.width} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="width"
                   placeholder={PLACEHOLDERS.number}
                   value={values.width}
@@ -179,7 +179,7 @@ const StairsConcreate = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.platformDepth} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="platform_depth"
                   placeholder={PLACEHOLDERS.number}
                   value={values.platform_depth}
@@ -197,7 +197,8 @@ const StairsConcreate = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.steps} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  col
+                  type={INPUT_TYPE.text}
                   id="steps"
                   placeholder={PLACEHOLDERS.number}
                   value={values.steps}
