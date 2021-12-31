@@ -135,7 +135,7 @@ const ConcreteSquareFooting = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.length} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="length"
                   placeholder={PLACEHOLDERS.number}
                   value={values.length}
@@ -153,7 +153,7 @@ const ConcreteSquareFooting = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.width} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="width"
                   placeholder={PLACEHOLDERS.number}
                   value={values.width}
@@ -171,7 +171,7 @@ const ConcreteSquareFooting = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.breadth} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="breadth"
                   placeholder={PLACEHOLDERS.number}
                   value={values.breadth}
@@ -189,7 +189,8 @@ const ConcreteSquareFooting = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.quantity} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  col
+                  type={INPUT_TYPE.text}
                   id="quantity"
                   placeholder={PLACEHOLDERS.number}
                   value={values.quantity}

@@ -134,7 +134,7 @@ const CurbAndGutterBarrier = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.curbDepth} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="curb_depth"
                   placeholder={PLACEHOLDERS.number}
                   value={values.curb_depth}
@@ -152,7 +152,7 @@ const CurbAndGutterBarrier = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.curbHeight} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="curb_height"
                   placeholder={PLACEHOLDERS.number}
                   value={values.curb_height}
@@ -170,7 +170,7 @@ const CurbAndGutterBarrier = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.flagThickness} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="flag_thickness"
                   placeholder={PLACEHOLDERS.number}
                   value={values.flag_thickness}
@@ -188,7 +188,7 @@ const CurbAndGutterBarrier = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.gutterWidth} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="gutter_width"
                   placeholder={PLACEHOLDERS.number}
                   value={values.gutter_width}
@@ -206,7 +206,7 @@ const CurbAndGutterBarrier = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.length} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="length"
                   placeholder={PLACEHOLDERS.number}
                   value={values.length}
@@ -224,7 +224,8 @@ const CurbAndGutterBarrier = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.rise} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  col
+                  type={INPUT_TYPE.text}
                   id="rise"
                   placeholder={PLACEHOLDERS.number}
                   value={values.rise}
@@ -235,7 +236,8 @@ const CurbAndGutterBarrier = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.quantity} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  col
+                  type={INPUT_TYPE.text}
                   id="quantity"
                   placeholder={PLACEHOLDERS.number}
                   value={values.quantity}

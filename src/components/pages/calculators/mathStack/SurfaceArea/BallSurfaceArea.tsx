@@ -105,7 +105,7 @@ const BallSurfaceArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.radius} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="radius"
                   placeholder={PLACEHOLDERS.number}
                   value={values.radius}

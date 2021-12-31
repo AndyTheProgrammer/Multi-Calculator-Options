@@ -182,7 +182,7 @@ const BandwidthCalculator = () => {
                       <div className="form-row">
                         <Label title={LABELS.pageViews} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={INPUT_TYPE.text}
                           id="page_views"
                           placeholder={PLACEHOLDERS.number}
                           value={values.page_views}
@@ -200,7 +200,7 @@ const BandwidthCalculator = () => {
                       <div className="form-row">
                         <Label title={LABELS.pageSize} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={INPUT_TYPE.text}
                           id="page_size"
                           placeholder={PLACEHOLDERS.number}
                           value={values.page_size}
@@ -219,7 +219,8 @@ const BandwidthCalculator = () => {
                       <div className="form-row">
                         <Label title={LABELS.redundancyFactor} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="redundancy_factor"
                           placeholder={PLACEHOLDERS.number}
                           value={values.redundancy_factor}
@@ -294,7 +295,7 @@ const BandwidthCalculator = () => {
                       <div className="form-row">
                         <Label title={LABELS.monthlyUsage} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={INPUT_TYPE.text}
                           id="monthly_usage"
                           placeholder={PLACEHOLDERS.number}
                           value={values.monthly_usage}

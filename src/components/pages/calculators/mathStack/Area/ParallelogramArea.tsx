@@ -148,7 +148,7 @@ const ParallelogramArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.breadth} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="breadth"
                   placeholder={PLACEHOLDERS.number}
                   value={values.breadth}
@@ -166,7 +166,7 @@ const ParallelogramArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.height} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="height"
                   placeholder={PLACEHOLDERS.number}
                   value={values.height}

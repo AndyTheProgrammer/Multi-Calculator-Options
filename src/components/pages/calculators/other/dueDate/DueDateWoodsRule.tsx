@@ -103,6 +103,7 @@ const DueDateWoodsRule = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.firstDateofLastPeriod} />
                 <CustomTextInput
+                  col
                   type={INPUT_TYPE.date}
                   id="first_date_of_last_period"
                   placeholder={PLACEHOLDERS.number}
@@ -114,7 +115,8 @@ const DueDateWoodsRule = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.days} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  col
+                  type={INPUT_TYPE.text}
                   id="days"
                   placeholder={PLACEHOLDERS.number}
                   value={values.days}
@@ -125,6 +127,7 @@ const DueDateWoodsRule = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.type} />
                 <CustomTextInput
+                  col
                   type={INPUT_TYPE.text}
                   id="type"
                   placeholder={PLACEHOLDERS.type}

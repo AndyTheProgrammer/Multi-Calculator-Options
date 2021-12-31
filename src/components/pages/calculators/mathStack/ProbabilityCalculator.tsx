@@ -239,18 +239,22 @@ function ProbabilityCalculator() {
                     {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                       <form onSubmit={handleSubmit} className="form-container">
                         <div className="form-row">
+                          <Label title={" "} />
+                          <Label title={"Probability"} />
+                          <Label title={"Repeat Times"} />
+                        </div>
+                        <div className="form-row">
                           <Label title={LABELS.eventA} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="event_a"
                             placeholder={PLACEHOLDERS.number}
                             value={values.event_a}
                             onChange={handleChange}
                           />
 
-                          <Label title={LABELS.aRepeatTimes} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="a_repeat_times"
                             placeholder={PLACEHOLDERS.number}
                             value={values.a_repeat_times}
@@ -261,16 +265,15 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.eventB} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="event_b"
                             placeholder={PLACEHOLDERS.number}
                             value={values.event_b}
                             onChange={handleChange}
                           />
 
-                          <Label title={LABELS.bRepeatTimes} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="b_repeat_times"
                             placeholder={PLACEHOLDERS.number}
                             value={values.b_repeat_times}
@@ -282,10 +285,10 @@ function ProbabilityCalculator() {
                           className="form-row"
                           style={{ alignItems: 'center', justifyContent: 'space-between' }}
                         >
-                          <CustomBtn />
                           <CustomResetBtn
                             onHandleClick={() => resetForm()}
                           />
+                          <CustomBtn />
                         </div>
                       </form>
                     )}
@@ -359,7 +362,8 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.eventA} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            col
+                            type={INPUT_TYPE.text}
                             id="event_a"
                             placeholder={PLACEHOLDERS.number}
                             value={values.event_a}
@@ -370,7 +374,8 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.eventB} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            col
+                            type={INPUT_TYPE.text}
                             id="event_b"
                             placeholder={PLACEHOLDERS.number}
                             value={values.event_b}
@@ -382,10 +387,10 @@ function ProbabilityCalculator() {
                           className="form-row"
                           style={{ alignItems: 'center', justifyContent: 'space-between' }}
                         >
-                          <CustomBtn />
                           <CustomResetBtn
                             onHandleClick={() => resetForm()}
                           />
+                          <CustomBtn />
                         </div>
                       </form>
                     )}
@@ -472,7 +477,7 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.probabilityOfA} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="probability_of_a"
                             placeholder={PLACEHOLDERS.number}
                             value={values.probability_of_a}
@@ -483,7 +488,7 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.probabilityOfB} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="probability_of_b"
                             placeholder={PLACEHOLDERS.number}
                             value={values.probability_of_b}
@@ -494,7 +499,7 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.probabilityOfANotOccuring} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="probability_of_a_not_occuring"
                             placeholder={PLACEHOLDERS.number}
                             value={values.probability_of_a_not_occuring}
@@ -505,7 +510,7 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.probabilityOfBNotOccuring} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="probability_of_b_not_occuring"
                             placeholder={PLACEHOLDERS.number}
                             value={values.probability_of_b_not_occuring}
@@ -516,7 +521,7 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.probabilityOfAAndBBothOccuring} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="probability_of_a_and_b_both_occuring"
                             placeholder={PLACEHOLDERS.number}
                             value={values.probability_of_a_and_b_both_occuring}
@@ -527,7 +532,7 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.probabilityThatAOrBOrBothOccur} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="probability_that_a_or_b_or_both_occur"
                             placeholder={PLACEHOLDERS.number}
                             value={values.probability_that_a_or_b_or_both_occur}
@@ -538,7 +543,7 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.probabilityThatAOrBOccursButNotBoth} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="probability_that_a_or_b_occurs_but_not_both"
                             placeholder={PLACEHOLDERS.number}
                             value={values.probability_that_a_or_b_occurs_but_not_both}
@@ -549,7 +554,7 @@ function ProbabilityCalculator() {
                         <div className="form-row">
                           <Label title={LABELS.probabilityOfNeitherANorBOccuring} />
                           <CustomTextInput
-                            type={INPUT_TYPE.number}
+                            type={INPUT_TYPE.text}
                             id="probability_of_neither_a_nor_b_occuring"
                             placeholder={PLACEHOLDERS.number}
                             value={values.probability_of_neither_a_nor_b_occuring}
@@ -561,10 +566,11 @@ function ProbabilityCalculator() {
                           className="form-row"
                           style={{ alignItems: 'center', justifyContent: 'space-between' }}
                         >
-                          <CustomBtn />
                           <CustomResetBtn
                             onHandleClick={() => resetForm()}
                           />
+                          <CustomBtn />
+
                         </div>
                       </form>
                     )}

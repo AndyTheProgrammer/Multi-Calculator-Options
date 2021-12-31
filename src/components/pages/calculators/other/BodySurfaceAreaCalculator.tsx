@@ -141,7 +141,7 @@ const BodyMassFormulaCalculator = () => {
                   <div className="form-row">
                     <Label title={LABELS.height} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      type={INPUT_TYPE.text}
                       id="height"
                       placeholder={PLACEHOLDERS.number}
                       value={values.height}
@@ -159,7 +159,7 @@ const BodyMassFormulaCalculator = () => {
                   <div className="form-row">
                     <Label title={LABELS.weight} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      type={INPUT_TYPE.text}
                       id="weight"
                       placeholder={PLACEHOLDERS.number}
                       value={values.weight}

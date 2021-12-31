@@ -142,7 +142,7 @@ const EllipsoidSurfaceArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.axis1} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="axis1"
                   placeholder={PLACEHOLDERS.number}
                   value={values.axis1}
@@ -160,7 +160,7 @@ const EllipsoidSurfaceArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.axis2} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="axis2"
                   placeholder={PLACEHOLDERS.number}
                   value={values.axis2}
@@ -178,7 +178,7 @@ const EllipsoidSurfaceArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.axis3} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="axis3"
                   placeholder={PLACEHOLDERS.number}
                   value={values.axis3}

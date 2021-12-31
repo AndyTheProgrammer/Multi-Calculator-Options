@@ -134,7 +134,7 @@ const SquarePyramidSurfaceArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.baseEdge} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="base_edge"
                   placeholder={PLACEHOLDERS.number}
                   value={values.base_edge}
@@ -152,7 +152,7 @@ const SquarePyramidSurfaceArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.height} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="height"
                   placeholder={PLACEHOLDERS.number}
                   value={values.height}

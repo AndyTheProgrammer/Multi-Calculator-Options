@@ -166,7 +166,7 @@ const TrapezoidArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.base1} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="base1"
                   placeholder={PLACEHOLDERS.number}
                   value={values.base1}
@@ -184,7 +184,7 @@ const TrapezoidArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.base2} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="base2"
                   placeholder={PLACEHOLDERS.number}
                   value={values.base2}
@@ -202,7 +202,7 @@ const TrapezoidArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.height} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="height"
                   placeholder={PLACEHOLDERS.number}
                   value={values.height}

@@ -109,7 +109,8 @@ const InflationCalculatorCpiData = () => {
                   <div className="form-row">
                     <Label title={LABELS.currentPrice} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="current_price"
                       placeholder={PLACEHOLDERS.number}
                       value={values.current_price}
@@ -120,7 +121,8 @@ const InflationCalculatorCpiData = () => {
                   <div className="form-row">
                     <Label title={LABELS.priceInBase} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="price_in_base"
                       placeholder={PLACEHOLDERS.number}
                       value={values.price_in_base}

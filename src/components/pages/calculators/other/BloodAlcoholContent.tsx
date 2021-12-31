@@ -69,7 +69,6 @@ const BloodAlcoholContent = () => {
         >
           {/* Form grid */}
           <FormTabsContainer
-            tabTitle1={CALCULATORS.bloodAlcoholContent}
             animation={formAnimation}
           >
             <Formik
@@ -130,7 +129,7 @@ const BloodAlcoholContent = () => {
                   <div className="form-row">
                     <Label title={LABELS.weight} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      type={INPUT_TYPE.text}
                       id="weight"
                       placeholder={PLACEHOLDERS.number}
                       value={values.weight}
@@ -159,7 +158,8 @@ const BloodAlcoholContent = () => {
                   <div className="form-row">
                     <Label title={LABELS.hoursOfDrinking} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="hours_of_drinking"
                       placeholder={PLACEHOLDERS.number}
                       value={values.hours_of_drinking}
@@ -170,7 +170,8 @@ const BloodAlcoholContent = () => {
                   <div className="form-row">
                     <Label title={LABELS.minutesOfDrinking} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="minutes_of_drinking"
                       placeholder={PLACEHOLDERS.number}
                       value={values.minutes_of_drinking}
@@ -181,7 +182,8 @@ const BloodAlcoholContent = () => {
                   <div className="form-row">
                     <Label title={LABELS.numberOfStandardDrinks} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="number_of_standard_drinks"
                       placeholder={PLACEHOLDERS.number}
                       value={values.number_of_standard_drinks}
