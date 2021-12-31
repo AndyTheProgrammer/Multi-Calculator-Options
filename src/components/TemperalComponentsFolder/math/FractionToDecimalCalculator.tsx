@@ -120,7 +120,7 @@ function FractionToDecimalCalculator(){
                         }) => (
                             <form onSubmit={handleSubmit}>
                                   <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
-                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                    <Grid container={true} rowSpacing={1} sx={{ minWidth:'350px', paddingTop:5, paddingLeft:2, paddingRight:2}}>
                                         
                                         <Grid item xs={12}>
                                             <Box sx={{
@@ -179,27 +179,25 @@ function FractionToDecimalCalculator(){
                                     </Box>
 
                                     <Box 
-                                        // className="toggle-box-primary"
-                                        sx={{ width: '100%' }}
-                                            >
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                    <CustomFormBtn 
-                                                    type="button" 
-                                                    handleClick={()=>{ 
-                                                        controlAnimation();
-                                                        }} 
-                                                    name="Clear"/>
-                                                </Box>
-                                        </Grid>
-                                        <Grid item xs={4}></Grid>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                    <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                </Box>
-                                        </Grid>
-                                        </Grid>
+                                    // className="toggle-box-primary"
+                                    sx={{
+                                        paddingLeft: 2, paddingRight: 2, 
+                                        minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{ 
+                                                    controlAnimation();
+
+                                                    }} 
+                                                name="Clear"/>
+                                            </Box>
+                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                        
+                                        </Box>
+                                        <Box sx={{display:"flex", justifyContent:"end"}}>
+                                            <CustomFormImageBtn type="submit" name="Calculate"/>   
+                                        </Box>
                                     </Box>
                                 </Box>
                             </form>

@@ -84,6 +84,17 @@ export default function PercentageCalculators(){
         <>
         <NavBar2 pageimage={math_icon} categoryname="General Math" pagename="Percentage Calculators"/>
         <AddLayout categorykey='general' searchname='General Calculators' searchimage={geometry_icon}>
+            <Typography 
+                sx={{
+                    paddingLeft: 1, 
+                    marginBottom: 2,
+                    fontFamily: 'Roboto, Helvetica',
+                    fontSize: 16
+                }}>
+                <Box>
+                    In mathematics, a percentage is a number or ratio that represents a fraction of 100. 
+                </Box>
+            </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
                 <Anime
@@ -108,12 +119,18 @@ export default function PercentageCalculators(){
                                     }>
                                     <Typography 
                                         sx={{ 
-                                            textAlign:'center',
+                                            // textAlign:'center',
+                                            justifyContent: 'space-between',
                                             display: 'flex', 
                                             paddingLeft: 2, 
                                             paddingRight: 1,}}>
                                         <Box className="form-card-none div-link"> 
                                             {calcName} 
+                                            {/* {
+                                                (showMenu)?
+                                                    <KeyboardArrowDownIcon sx={{ color: 'blue' }} />
+                                                :   <KeyboardArrowUpIcon sx={{ color: 'blue' }} />
+                                            } */}
                                         </Box>
                                         {
                                             (showMenu)?
@@ -212,7 +229,6 @@ export default function PercentageCalculators(){
                                     :<Box></Box>
                                 }
                             </Box>
-                            <Box sx={{...formCardStyle}}></Box>
                         </Box>
 
                         {/* CALCULATOR COMPONENT  1 START */}

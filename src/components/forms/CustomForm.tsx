@@ -84,15 +84,17 @@ export const CustomFormikFormFraction = ({
 <Box sx={{
           display: 'flex',
           paddingLeft: '5px',
-          paddingRight: '5px'
+          paddingRight: '5px',
+          width:'100%'
         }}>
           <input
             style={{
               width:'100%',
-              backgroundColor:'#F0F3F6',
+              // backgroundColor:'#F0F3F6',
+              backgroundColor:'white',
               border: 'solid',
-              borderWidth: 0,
-              borderColor: 'red',
+              borderWidth: 1,
+              borderColor: 'gray',
               borderRadius: 7,
               outline: 'none'
             }}
@@ -172,10 +174,11 @@ const CustomForm = (props: any) => {
             style={{
               textAlign:'center',
               width:'100%',
-              backgroundColor:'#F0F3F6',
+              // backgroundColor:'#F0F3F6',
+              backgroundColor:'white',
               border: 'solid',
-              borderWidth: 0,
-              borderColor: 'red',
+              borderWidth: 1,
+              borderColor: 'gray',
               borderRadius: 7,
               outline: 'none'
             }}

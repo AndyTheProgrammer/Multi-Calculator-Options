@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 
 // import '../node_modules/jquery/dist/jquery.js'
+
 import '../node_modules/slick-carousel/slick/slick.css';
 import '../node_modules/slick-carousel/slick/slick-theme.css'
 import '../node_modules/react-datepicker/dist/react-datepicker.css'
@@ -15,6 +16,7 @@ import './styling/customCss.css';
 import './styling/mobile.css';
 import './styling/drawer.css';
 import './styling/mediaQueries.css';
+import './styling/index.css';
 
 import { BrowserRouter as Router } from 'react-router-dom'
 import RouterLinks from './routes/routerLinks'

@@ -22,7 +22,7 @@ export function CustomFormBtn(props:any){
                 lg: 130,
                 md: 130,
                 sm: 130,
-                xs: 100
+                xs: 110
             },
             height: 25, fontSize:12, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} 
             type={props.type}
@@ -47,7 +47,7 @@ export function CustomFormImageBtn(props:any){
                         lg: 130,
                         md: 130,
                         sm: 130,
-                        xs: 100
+                        xs: 110
                     },
                     height: 25,
                     color: 'white',
