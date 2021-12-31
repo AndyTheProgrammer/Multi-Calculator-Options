@@ -77,7 +77,7 @@ export default function DecimalToFractionCalculator(){
                     fontSize: 16
                 }}>
                 <Box>
-                This calculator converts a decimal number to a fraction or a decimal number to a mixed number.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
                 </Box>
             </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}>

@@ -77,7 +77,7 @@ function FractionToPercentageCalculator(){
                     fontSize: 16
                 }}>
                 <Box>
-                Convert a fraction to a percent. Convert proper and improper fractions to percentages. This calculator shows the steps and work to convert a fraction to a percentage number.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
                 </Box>
             </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}>

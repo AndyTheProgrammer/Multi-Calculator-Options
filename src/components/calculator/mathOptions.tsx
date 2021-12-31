@@ -1,7 +1,7 @@
 
 
 import React, {useState} from 'react'
-import { Grid, Typography, Box, Container } from '@mui/material'
+import { Grid, Typography, Box, Container, Link } from '@mui/material'
 import { useHistory } from "react-router-dom";
 import iconLine from '../../common/assets/line.svg';
 import Slider from "react-slick";
@@ -391,11 +391,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[0].id === 0)?
                                                 mathRoutes.subCategories[0].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }
@@ -465,11 +467,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[1].id === 1)?
                                                 mathRoutes.subCategories[1].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }
@@ -538,11 +542,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[2].id === 2)?
                                                 mathRoutes.subCategories[2].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }
@@ -611,11 +617,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[3].id === 3)?
                                                 mathRoutes.subCategories[3].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }
@@ -684,11 +692,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[4].id === 4)?
                                                 mathRoutes.subCategories[4].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }

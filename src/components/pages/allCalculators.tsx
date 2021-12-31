@@ -15,7 +15,7 @@ import math_icon from '../../common/assets/math.svg';
 import { dataInit } from '../../services/dataInit';
 import { financialRoutes, othersRoutes, mathRoutes } from '../../routes/routes'
 import { useHistory } from 'react-router-dom'
-
+import { mobileText } from '../../styling/textStyle'
 
 var classNames = require('classnames');
 
@@ -354,16 +354,12 @@ function AllCalculators(){
                                 {
                                     otherCalculatorsData.map((data:any) => {
                                         return (
-                                            <Typography >
-                                                <Box 
-                                                className="div-link"
-                                                onClick={
-                                                    ()=>{
-                                                        history.push(data.path)
-                                                    }
-                                                }
-                                                sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
-                                            </Typography>
+                                        <Typography>
+                                            <Link  
+                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                            component="button"
+                                            onClick={()=>{ history.push(data.path) }}> {data.name} </Link>
+                                        </Typography>
                                         );
                                     })
                                 }

@@ -76,7 +76,7 @@ function SimplifyFractionsCalculator(){
                     fontSize: 16
                 }}>
                 <Box>
-                A combined form of a whole number and a fraction is called a mixed number. Use this calculator to simplify mixed fractions
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
                 </Box>
             </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 

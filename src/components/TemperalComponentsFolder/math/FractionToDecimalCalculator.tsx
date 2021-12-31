@@ -75,7 +75,7 @@ function FractionToDecimalCalculator(){
                         fontSize: 16
                     }}>
                     <Box>
-                    To convert a fraction to a decimal, divide the numerator by the denominator.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
                     </Box>
                 </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 

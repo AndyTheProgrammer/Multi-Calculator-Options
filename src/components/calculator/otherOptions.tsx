@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Typography, Box, Container } from '@mui/material'
+import { Grid, Typography, Box, Container, Link } from '@mui/material'
 import { useHistory } from "react-router-dom";
 import iconLine from '../../common/assets/line.svg';
 import Slider from "react-slick";
@@ -416,78 +416,7 @@ function OptionsForSmallerScreens(){
                 }}>
                 <Box sx={{ minWidth: 120 }} className="container">
                     <Box>
-                        {/* {
-                            <div>
-                                <Box sx={{ 
-                                    display: 'flex',
-                                    width: "100%",
-                                    border: 'none',
-                                    justifyContent: 'center',
-                                    borderColor: 'green'
-                                }}
-                                    onClick={() => { handleCategoryChange(categoryIndex[0].id) }}>
-                                    
-                                    <Box sx={{
-                                            border:'none',
-                                            marginBottom: 2,
-                                            backgroundColor: 'transparent',
-                                            width: "100%",
-                                            borderRadius: 3,
-                                            paddingTop: 1,
-                                            paddingBottom: 0.5, }}>
-                                        <Box 
-                                            sx={{ 
-                                                width:'100%',
-                                                height: 40, 
-                                                fontSize: 22,
-                                                display: 'flex',
-                                                justifyContent: 'start',
-                                                backgroundColor: 'white',
-                                                borderRadius: 5,
-                                                boxShadow: '0px 5px 20px 1px rgba(0, 0, 0, 0.1)',
-                                            }}>
-                                            <Box sx={{ height: 40, }}>
-                                                <img style={{ height: '100%', }} alt="icon" src={convertion_calc_icon} />
-                                            </Box>
-                                            <Typography>
-                                                <Box
-                                                    sx={{
-                                                        width: "100%",
-                                                        paddingRight: 3,
-                                                        paddingLeft: 0.5,
-                                                        paddingTop: 0.5,
-                                                        fontSize: 18,
-                                                        color: '#8591B0',
-                                                        whiteSpace: 'nowrap',
-                                                        overflow: 'hidden', 
-                                                    }}>
-                                                        Fitness Calculators
-                                                </Box>
-                                            </Typography>
-                                            
-                                        </Box>
-                                        <Box  
-                                            className={classNames({
-                                                'hidden-text': !categoryIndex[0].show,
-                                                'reveal-text': categoryIndex[0].show
-                                            })} >
-                                            {
-                                                (categoryIndex[0].id === 0)?
-                                                othersRoutes.subCategories[0].sub_calculator.map((r:any) => {
-                                                    return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
-                                                })
-                                                :null
-                                            }
-                                        </Box>
-                                    </Box>
-                                </Box>
-                            </div>
-                        } */}
+                        
 
                         {
                             <div>
@@ -549,11 +478,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[0].id === 0)?
                                                 othersRoutes.subCategories[0].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }
@@ -622,11 +553,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[1].id === 1)?
                                                 othersRoutes.subCategories[1].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }
@@ -695,11 +628,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[2].id === 2)?
                                                 othersRoutes.subCategories[2].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }
@@ -768,11 +703,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[3].id === 3)?
                                                 othersRoutes.subCategories[3].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }
@@ -841,11 +778,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[4].id === 4)?
                                                 othersRoutes.subCategories[4].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }
@@ -914,11 +853,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[5].id === 5)?
                                                 othersRoutes.subCategories[5].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);
                                                 })
                                                 :null
                                             }
@@ -987,11 +928,13 @@ function OptionsForSmallerScreens(){
                                                 (categoryIndex[6].id === 6)?
                                                 othersRoutes.subCategories[6].sub_calculator.map((r:any) => {
                                                     return (
-                                                        <Box  
-                                                        onClick={()=>{ history.push(r.path) }} 
-                                                        sx={{ 
-                                                            ...mobileText 
-                                                        }}> {r.name} </Box>);
+                                                        <Typography>
+                                                            <Link  
+                                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                            component="button"
+                                                            onClick={()=>{ history.push(r.path) }} 
+                                                            > {r.name} </Link>
+                                                        </Typography>);;
                                                 })
                                                 :null
                                             }

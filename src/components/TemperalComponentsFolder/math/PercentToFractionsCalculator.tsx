@@ -81,7 +81,7 @@
                     fontSize: 16
                 }}>
                 <Box>
-                Percent to fraction conversion is needed to make use of the value of percentage in a calculation. In any calculation, the percent value has to be changed in a number in fractional form by removing the percent symbol and dividing it by 100. So, x percent to fraction is x/100. For example, 50% is equivalent to 50/100 which can be reduced to 1/2.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
                 </Box>
             </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 

@@ -73,7 +73,7 @@ function FractionCalculator() {
                         fontSize: 16
                     }}>
                     <Box>
-                        Use this fraction calculator for adding, subtracting, multiplying and dividing fractions. Answers are fractions in lowest terms or mixed numbers in reduced form.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
                     </Box>
                 </Typography>
                 <Box sx={{ display: 'flex', justifyContent:'center'}}>
