@@ -1,7 +1,7 @@
 export const mobileText = {
     width: '100%', 
     paddingTop: 1,
-    paddingBottom: 1,
+    paddingBottom: 0,
     paddingLeft:4,
     fontWeight: 500,
     fontSize: 16,  
