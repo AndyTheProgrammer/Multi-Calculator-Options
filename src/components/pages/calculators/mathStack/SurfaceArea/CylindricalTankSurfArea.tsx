@@ -146,7 +146,7 @@ const CylindricalTankSurfArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.radius} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="radius"
                   placeholder={PLACEHOLDERS.number}
                   value={values.radius}
@@ -164,7 +164,7 @@ const CylindricalTankSurfArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.height} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="height"
                   placeholder={PLACEHOLDERS.number}
                   value={values.height}

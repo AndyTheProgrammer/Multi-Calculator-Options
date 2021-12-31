@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect }from 'react'
 import { NavBar2 } from '../../navbar/navbar2'
-import CustomForm from '../../forms/CustomForm'
+import CustomForm, {CustomFormFraction} from '../../forms/CustomForm'
 import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
@@ -11,6 +11,7 @@ import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import algebra_icon from '../../../common/assets/algebra_icon.svg';
 import math_icon from '../../../common/assets/math_icon.svg';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 const Latex = require('react-latex');
 
 
@@ -114,8 +115,31 @@ function ExponentCalculator(){
                             isSubmitting
                         }) => (
                             <form onSubmit={handleSubmit}>
-                                  <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
-                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                  <Box sx={{  maxHeight: 150, display:'flex', flexDirection:'column' }}>
+                                    <Box sx={{ marginTop: 3, display:'flex', justifyContent:'center' }}>
+                                        <Box sx={{ width: 70, marginTop: 4}}>
+                                            <CustomFormFraction
+                                                  type="text"
+                                                  name="base"
+                                                  onChange={handleChange}
+                                                  value={values.base}
+                                                  placeholder="x"
+                                            />
+                                        </Box>
+                                        <Box sx={{  marginTop: 2}}>
+                                            <KeyboardArrowUpIcon sx={{ color: 'blue'  }}/>
+                                        </Box>
+                                        <Box sx={{ width: 70}}>
+                                            <CustomFormFraction
+                                                type="text"
+                                                name="number"
+                                                onChange={handleChange}
+                                                value={values.number}
+                                                placeholder="n"
+                                            />
+                                        </Box>
+                                    </Box>
+                                    {/* <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
                                         <Grid item={true} xs={5} >
                                             <Box sx={{...labelStyle}}>x (base)</Box></Grid>
                                         <Grid item={true} xs={7}>
@@ -140,7 +164,7 @@ function ExponentCalculator(){
                                             />
                                         </Grid>
                                                             
-                                    </Grid>
+                                    </Grid> */}
                                     <Box sx={{ flexGrow: 1}}>
                                         {/* 
                                             Flex box pushes submit button down

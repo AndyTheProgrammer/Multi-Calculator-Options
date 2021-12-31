@@ -35,14 +35,14 @@ export { default as TubeVolume } from "./calculators/mathStack/Volume/TubeVolume
 
 // Other > Fitness & Health
 export { default as BloodAlcoholContent } from "./calculators/other/BloodAlcoholContent";
-export { default as BMRCalculator } from "./mainPages/BMRCalculator";
+export { default as BMRCalculator } from "./calculators/other/BMRCalculator";
 export { default as BodyFatPercentageCalculator } from "./calculators/other/BodyFatPercentageBmi";
 export { default as BodyMassIndexCalculator } from "./calculators/other/BodyMassIndexCalculator";
-export { default as DueDateMittendorfWilliam } from "./calculators/other/DueDateMittendorfWilliam";
-export { default as DueDateNaegeleRule } from "./calculators/other/DueDateNaegeleRule";
-export { default as DueDateParikhsRule } from "./calculators/other/DueDateParikhsRule";
-export { default as DueDateWoodsRule } from "./calculators/other/DueDateWoodsRule";
-export { default as DueDateCalculator } from "./mainPages/DueDateCalculator";
+export { default as DueDateMittendorfWilliam } from "./calculators/other/dueDate/DueDateMittendorfWilliam";
+export { default as DueDateNaegeleRule } from "./calculators/other/dueDate/DueDateNaegeleRule";
+export { default as DueDateParikhsRule } from "./calculators/other/dueDate/DueDateParikhsRule";
+export { default as DueDateWoodsRule } from "./calculators/other/dueDate/DueDateWoodsRule";
+export { default as DueDateCalculator } from "./calculators/other/DueDateCalculator";
 export { default as InternationalSystemBfc } from "./calculators/other/InternationalSystemBfc";
 export { default as LeanBodyMassCalculator } from "./calculators/other/LeanBodyMass";
 export { default as PeroidCalculator } from "./calculators/other/PeroidCalculator";
@@ -50,23 +50,19 @@ export { default as RegularCycleOvulation } from "./calculators/other/RegularCyc
 export { default as USCustomarySystemBfc } from "./calculators/other/USCustomarySystemBfc";
 export { default as BodySurfaceAreaCalculator } from "./calculators/other/BodySurfaceAreaCalculator";
 
-// Statistics
-
-
 // Other
-export { default as CircularSlab } from "./calculators/other/CircularSlab";
-export { default as ConcreteSquareFooting } from "./calculators/other/ConcreteSquareFooting";
+export { default as CircularSlab } from "./calculators/other/concrete/CircularSlab";
+export { default as ConcreteSquareFooting } from "./calculators/other/concrete/ConcreteSquareFooting";
 export { default as ConductorResitor } from "./calculators/other/ConductorResitor";
-export { default as CurbAndGutterBarrier } from "./calculators/other/CurbAndGutterBarrier";
+export { default as CurbAndGutterBarrier } from "./calculators/other/concrete/CurbAndGutterBarrier";
 export { default as EngineHorsepowerCalculator } from "./calculators/other/EngineHorsepowerCalculator";
-export { default as HoleColumn } from "./calculators/other/HoleColumn";
+export { default as HoleColumn } from "./calculators/other/concrete/HoleColumn";
 export { default as HorsepowerCalculation } from "./calculators/other/HorsepowerCalculation";
-export { default as HostingBandwidth } from "./calculators/other/HostingBandwidth";
 export { default as ParrallelResitor } from "./calculators/other/ParrallelResitor";
 export { default as SeriesResistor } from "./calculators/other/SeriesResistor";
 export { default as SlopeCalculator } from "./calculators/other/SlopeCalculator";
-export { default as StairsConcreate } from "./calculators/other/StairsConcreate";
-export { default as WebsiteBandwidth } from "./calculators/other/WebsiteBandwidth";
+export { default as StairsConcreate } from "./calculators/other/concrete/StairsConcreate";
+export { default as BandwidthCalculator } from "./calculators/other/BandwidthCalculator";
 
 // Financial
 export { default as LoanCalculator } from "./calculators/financial/LoanCalculator";
@@ -76,18 +72,15 @@ export { default as PaybackACertainAmount } from "./calculators/financial/PayBac
 export { default as PaybackWithinTimeframe } from "./calculators/financial/PaybackWithinTimeframe";
 export { default as PresentValue } from "./calculators/financial/PresentValue";
 export { default as PresentValueOfPeriodicalDeposit } from "./calculators/financial/PresentValueOfPeriodicalDeposit";
-export { default as ProfitMarginCalculator } from "./calculators/financial/ProfitMarginCalculator";
-export { default as StockTradingMargin } from "./calculators/financial/StockTradingMargin";
+export { default as MarginCalculator } from "./calculators/financial/MarginCalculator";
 
+export { default as ConcreteCalculator } from './calculators/other/ConcreteCalculator';
+export { default as ProbabilityCalculator } from './calculators/mathStack/ProbabilityCalculator';
+export { default as AreaCalculator } from './calculators/mathStack/AreaCalculator';
+export { default as SurfaceAreaCalculator } from './calculators/mathStack/SurfaceAreaCalculator';
+export { default as VolumeCalculator } from './calculators/mathStack/VolumeCalculator';
+export { default as SampleSizeCalculator } from "./calculators/mathStack/SampleSizeCalculator";
 
-//Calculator Pages
 //export { default as } from '';
-export { default as ConcreteCalculator } from './mainPages/ConcreteCalculator';
-export { default as ProbabilityCalculator } from './mainPages/ProbabilityCalculator';
-export { default as AreaCalculator } from './mainPages/AreaCalculator';
-export { default as SurfaceAreaCalculator } from './mainPages/SurfaceAreaCalculator';
-export { default as VolumeCalculator } from './mainPages/VolumeCalculator';
-export { default as SampleSizeCalculator } from "./mainPages/SampleSizeCalculator";
-
 
 

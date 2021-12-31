@@ -173,7 +173,7 @@ function EngineHorsepowerCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.weight} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={INPUT_TYPE.text}
                           id="weight"
                           placeholder={PLACEHOLDERS.number}
                           value={values.weight}
@@ -191,7 +191,7 @@ function EngineHorsepowerCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.time} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={INPUT_TYPE.text}
                           id="time"
                           placeholder={PLACEHOLDERS.number}
                           value={values.time}
@@ -280,7 +280,7 @@ function EngineHorsepowerCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.weight} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={INPUT_TYPE.text}
                           id="weight"
                           placeholder={PLACEHOLDERS.number}
                           value={values.weight}
@@ -298,7 +298,7 @@ function EngineHorsepowerCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.speed} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          type={INPUT_TYPE.text}
                           id="speed"
                           placeholder={PLACEHOLDERS.number}
                           value={values.speed}

@@ -107,7 +107,7 @@ function GradeInputField(props){
             borderColor: 'red',
             borderRadius: 7,
             outline: 'none',
-            fontSize: 18
+            fontSize: 16
           }}
           type="text" 
           name="grade" 
@@ -140,7 +140,7 @@ function GradeInputFieldOptions(props){
             borderColor: 'red',
             borderRadius: 7,
             outline: 'none',
-            fontSize: 20
+            fontSize: 18
     }}
       value={value} 
       onChange={handleChange}>
@@ -362,16 +362,16 @@ export default function GPACalculator(props){
     <Box>
       <Box sx={{minHeight: 150, display:'flex', flexDirection:'column' }}>
           <Grid container={true}columnSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-              <Grid item={true} xs={4}>
-                  <Box sx={{ ...labelStyle }}>Entry</Box>
+              <Grid item={true} xs={6}>
+                  <Box sx={{ ...labelStyle }}>Entry (optional) </Box>
               </Grid>
-              <Grid item={true} xs={4}>
+              <Grid item={true} xs={3}>
                   <Box sx={{ ...labelStyle }}>Weight</Box>
               </Grid>
-              <Grid item={true} xs={4}>
+              <Grid item={true} xs={3}>
                   <Box sx={{ ...labelStyle }}>Grade</Box>
               </Grid>
-              <Grid item={true} xs={4} >
+              <Grid item={true} xs={6} >
               {
                 courses.map((data) => (
                   <Box sx={{ marginBottom: 1 }}>
@@ -380,7 +380,7 @@ export default function GPACalculator(props){
                 ))
               }
               </Grid>
-              <Grid item={true} xs={4} >
+              <Grid item={true} xs={3} >
               {
                 credit.map((data) => (
                   <Box sx={{ marginBottom: 1 }}>
@@ -389,7 +389,7 @@ export default function GPACalculator(props){
                 ))
               }
               </Grid>
-              <Grid item={true} xs={4} >
+              <Grid item={true} xs={3} >
               {
                 grade.map((data) => (
                   <Box sx={{ marginBottom: 1 }}>

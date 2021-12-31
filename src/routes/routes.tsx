@@ -123,12 +123,12 @@ const mathRoutes = {
         {
           name: "Binary Calculator",
           path: `${mathUrl}/binarycalculator`,
-          component: TPC.BinaryCalculator
+          component: TPC.BinaryCalculators
         },
         {
           name: "Hexadecimal Calculator",
           path: `${mathUrl}/hexadecimalcalculator`,
-          component: TPC.HexadecimalCalculator
+          component: TPC.HexadecimalCalculators
         },
         {
           name: "Ratio Calculator",
@@ -150,11 +150,11 @@ const mathRoutes = {
           path: `${mathUrl}/factorcalculator`,
           component: TPC.FactorCalculator
         },
-        {
-          name: "Matrix Calculator",
-          path: `${mathUrl}/matrixcalculator`,
-          component: PC.NoComponent
-        },
+        // {
+        //   name: "Matrix Calculator",
+        //   path: `${mathUrl}/matrixcalculator`,
+        //   component: PC.NoComponent
+        // },
         {
           name: "Scientific Notation Calculator",
           path: `${mathUrl}/sncalculator`,
@@ -165,11 +165,11 @@ const mathRoutes = {
     {
       name: "Algebra Calculators",
       sub_calculator: [
-        {
-          name: "Difference of Two Squares Calculator",
-          path: `${mathUrl}/dotscalculator`,
-          component: PC.NoComponent
-        },
+        // {
+        //   name: "Difference of Two Squares Calculator",
+        //   path: `${mathUrl}/dotscalculator`,
+        //   component: PC.NoComponent
+        // },
         {
           name: "Quadratic Formula Calculator",
           path: `${mathUrl}/quadformulacalculator`,
@@ -178,7 +178,7 @@ const mathRoutes = {
         {
           name: "Roots Calculator",
           path: `${mathUrl}/calculator`,
-          component: PC.NoComponent
+          component: TPC.RootsCalculators
         },
         {
           name: "Exponent Calculator",
@@ -198,7 +198,7 @@ const mathRoutes = {
         {
           name: "Standard Diviation Calculator",
           path: `${mathUrl}/stdcalcaultor`,
-          component: TPC.SampleStandardDeviationCalculator
+          component: TPC.StandardDeviationCalculators
         },
         {
           name: "Fibonacci Sequency Calculator",
@@ -233,7 +233,7 @@ const mathRoutes = {
         {
           name: "Permutations and Combinantion Calculator",
           path: `${mathUrl}/permutationsandcombinationscalculator`,
-          component: PC.NoComponent
+          component: TPC.PermutationsAndCombination
         },
         {
           name: "Z-Score Calculator",
@@ -248,12 +248,12 @@ const mathRoutes = {
         {
           name: "GPA  Calculator",
           path: `${mathUrl}/gpacalculator`,
-          component: PC.NoComponent
+          component: TPC.GPACalculator
         },
         {
           name: "Grade Calculator",
           path: `${mathUrl}/gradecalculator`,
-          component: PC.NoComponent
+          component: TPC.GradesCalculators
         }
       ]
     },
@@ -462,7 +462,7 @@ const financialRoutes =
         {
           name: "Mortgage Payoff Calculator",
           path: `${financialUrl}/mortgagepayoffcalculator`,
-          component: PC.NoComponent
+          component: PC.MortgagePayoffCalculator
         },
         {
           name: "Mortgage Annual Percentage Rate Calculator",
@@ -593,7 +593,7 @@ const financialRoutes =
         {
           name: "Margin Calculator",
           path: `${financialUrl}/margincalculator`,
-          component: PC.NoComponent
+          component: PC.MarginCalculator
         },
         {
           name: "Markup Calculator",
@@ -617,32 +617,6 @@ const financialRoutes =
         }
       ]
     },
-    {
-      name: "Other Calculators",
-      sub_calculator: [
-        {
-          name: "Loan Calculator",
-          path: `${financialUrl}/loancalculator`,
-          component: PC.LoanCalculator
-        },
-        {
-          name: "Payment Calculator",
-          path: `${financialUrl}/paymentcalculator`,
-          component: PC.NoComponent
-        },
-        {
-          name: "Currency Calculator",
-          path: `${financialUrl}/currencycalculator`,
-          component: PC.NoComponent
-        },
-        {
-          name: "Inflation Calculator",
-          path: `${financialUrl}/inflationcalculator`,
-          component: PC.NoComponent
-        },
-      ]
-    }
-
   ]
 }
 
@@ -671,7 +645,7 @@ const othersRoutes = {
         },
         {
           name: "Basal Metabolic Rate (BMR) Calculator",
-          path: `${othersUrl}/calculator`,
+          path: `${othersUrl}/bmrcalculator`,
           component: PC.BMRCalculator
         },
         {
@@ -803,7 +777,7 @@ const othersRoutes = {
         {
           name: "Bandwidth Calculator",
           path: `${othersUrl}/bandwidthcalculator`,
-          component: PC.WebsiteBandwidth
+          component: PC.BandwidthCalculator
         },
         {
           name: "Random Password Generator Calculator",

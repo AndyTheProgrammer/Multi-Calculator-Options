@@ -114,7 +114,8 @@ const PayBackACertainAmount = () => {
                   <div className="form-row">
                     <Label title={LABELS.interestRate} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="interest_rate"
                       placeholder={PLACEHOLDERS.number}
                       value={values.interest_rate}
@@ -125,7 +126,8 @@ const PayBackACertainAmount = () => {
                   <div className="form-row">
                     <Label title={LABELS.creditCardBalance} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="credit_card_balance"
                       placeholder={PLACEHOLDERS.number}
                       value={values.credit_card_balance}
@@ -136,7 +138,8 @@ const PayBackACertainAmount = () => {
                   <div className="form-row">
                     <Label title={LABELS.monthlyPayment} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="monthly_payment"
                       placeholder={PLACEHOLDERS.number}
                       value={values.monthly_payment}

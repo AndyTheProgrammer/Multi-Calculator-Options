@@ -15,7 +15,7 @@ import { errorText }  from '../../../styling/textStyle'
 import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
 import geometry_icon from '../../../common/assets/geometry_icon.svg';
 import math_icon from '../../../common/assets/math_icon.svg';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 
 const Latex = require('react-latex');
 var classNames = require('classnames');
@@ -96,7 +96,31 @@ export default function BinaryCalculators(){
           } 
           
     })
+    const [tab_1, setTab_1] = useState([false,false,true, false])
+    const [tab_2, setTab_2] = useState([true, false, false])
+    const [tab_3, setTab_3] = useState([true, false, false])
 
+    const tabstyles_1 = classNames({
+        'form-card-1': tab_1[0],
+        'form-card-1-b': tab_1[1],
+        'form-card-none': tab_1[2],
+        'form-card-1-c': tab_1[3],
+        'div-link': true
+    })
+
+    const tabstyles_2 = classNames({
+        'form-card-2': tab_2[0],
+        'form-card-2-b': tab_2[1],
+        'form-card-none': tab_2[2],
+        'div-link': true
+    })
+
+    const tabstyles_3 = classNames({
+        'form-card-3': tab_3[0],
+        'form-card-3-b': tab_3[1],
+        'form-card-none': tab_3[2],
+        'div-link': true
+    })
     return(
         <>
         <NavBar2 pageimage={math_icon} categoryname="General Math" pagename="Binary Calculators"/>
@@ -116,105 +140,82 @@ export default function BinaryCalculators(){
                         sx={{ maxWidth: 500, minHeight: 200, paddingBottom: 1 }}
                         className="animated-box" >
                         
-                        <Box sx={{ width:'100%', display: 'flex', }}>
-                            <Box sx={{ width:'100%'}}>
-                                <Box sx={{ width:'100%'}}
+                        <Box sx={{ width:'100%',  }}>
+                            <Box sx={{ width:'100%',display: 'flex',}}>
+                                <Typography
                                     onClick={
                                         ()=>{
-                                            setShowMenu(!showMenu)
+                                            setTab_1([false,false,true, false])
+                                            setTab_2([true, false, false])
+                                            setTab_3([true, false, false])
+                                            setIndex([true, false, false])
+                                            setCalcName("Binary Calculator")
+                                            
                                         }
                                     }
-                                >
-                                    <Typography sx={{ display: 'flex', paddingLeft: 1 }}>
-                                        <Box className="form-card-none div-link"> {calcName} </Box>
-                                        <KeyboardArrowDownIcon sx={{ color: 'blue' }} />
-                                    </Typography>
-                                </Box>
-                                {
-                                    (showMenu)?
-                                    <Box sx={{ 
-                                        position:'absolute',    
-                                        width:'230px',
-                                        height: '100px',
-                                        backgroundColor: 'white',
-                                        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
-                                        borderRadius: 5,
-                                    }}>
-                                        <Typography
-                                            onClick={
-                                                ()=>{
-                                                    setIndex([true, false, false])
-                                                    setCalcName("Binary Calculator")
-                                                    setShowMenu(false)
-                                                }
-                                            }
-                                            className={classNames({
-                                                'form-card-1': index[0],
-                                                'form-card-none': !index[0],
-                                                'div-link': true
-                                            })}
-                                            sx={{ 
-                                                    width:'100%',
-                                                    fontSize: 16,
-                                                    paddingTop: 0.1, 
-                                                    marginBottom:0.5
-                                                }}>
-                                            <Box>
-                                                Binary Calculator
-                                            </Box>
-                                        </Typography >
-                                        <Typography
-                                            onClick={
-                                                ()=>{
-                                                    setIndex([false, true, false])
-                                                    setCalcName("Binary to decimal")
-                                                    setShowMenu(false)
-                                                }
-                                            }
-                                            className={classNames({
-                                                'form-card-2': index[1],
-                                                'form-card-none': !index[1],
-                                                'div-link': true
-                                            })}
-                                            sx={{ width:'100%' }}>
-                                            <Box
-                                                sx={{ 
-                                                    width:'100%',
-                                                    fontSize: 16,
-                                                    paddingTop: 0.1, 
-                                                    marginBottom:0.5
-                                                }}>
-                                                Binary to decimal
-                                            </Box>
-                                        </Typography>
-                                        <Typography
-                                            onClick={
-                                                ()=>{
-                                                    setIndex([false, false, true])
-                                                    setCalcName("Decimal to binary<")
-                                                    setShowMenu(false)
-                                                }
-                                            }
-                                            className={classNames({
-                                                'form-card-3': index[2],
-                                                'form-card-none': !index[2],
-                                                'div-link': true
-                                            })}
-                                            sx={{ width:'100%' }}>
-                                            <Box
-                                                sx={{ 
-                                                    width:'100%',
-                                                    fontSize: 16,
-                                                    paddingTop: 0.1, 
-                                                    marginBottom:0.5
-                                                }}
-                                            >Decimal to binary</Box>
-                                        </Typography>
+                                    className={tabstyles_1 }
+                                    sx={{ 
+                                            width:'100%',
+                                            fontSize: 14,
+                                            paddingTop: 0.1, 
+                                            marginBottom:0.5,
+                                            fontWeight: 'bold',
+                                            textAlign: 'center'
+                                        }}>
+                                    <Box>
+                                        Binary Calculator
                                     </Box>
-                                    :<Box></Box>
-                                }
+                                </Typography >
+                                <Typography
+                                    onClick={
+                                        ()=>{
+                                            setTab_1([false, true, false])
+                                            setTab_2([false, false, true])
+                                            setTab_3([false, true, false])
+                                            setIndex([false, true, false])
+                                            setCalcName("Binary to decimal")
+                                            
+                                        }
+                                    }
+                                    className={tabstyles_2}
+                                    sx={{ width:'100%' }}>
+                                    <Box
+                                        sx={{ 
+                                            width:'100%',
+                                            fontSize: 14,
+                                            paddingTop: 0.1, 
+                                            marginBottom:0.5,
+                                            fontWeight: 'bold',
+                                            textAlign: 'center'
+                                        }}>
+                                        Binary to decimal
+                                    </Box>
+                                </Typography>
+                                <Typography
+                                    onClick={
+                                        ()=>{
+                                            setTab_1([false, false, false, true])
+                                            setTab_2([false, true, false])
+                                            setTab_3([false, false, true])
+                                            setIndex([false, false, true])
+                                            setCalcName("Decimal to binary")
+                                            
+                                        }
+                                    }
+                                    className={tabstyles_3}
+                                    sx={{ width:'100%' }}>
+                                    <Box
+                                        sx={{ 
+                                            width:'100%',
+                                            fontSize: 14,
+                                            paddingTop: 0.1, 
+                                            marginBottom:0.5,
+                                            fontWeight: 'bold',
+                                            textAlign: 'center'
+                                        }}
+                                    >Decimal to binary</Box>
+                                </Typography>   
                             </Box>
-                            <Box sx={{...formCardStyle}}></Box>
                         </Box>
                         {
                             (index[0])?

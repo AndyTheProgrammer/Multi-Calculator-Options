@@ -137,7 +137,7 @@ const SectorArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.radius} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="radius"
                   placeholder={PLACEHOLDERS.number}
                   value={values.radius}
@@ -155,7 +155,7 @@ const SectorArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.angle} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="angle"
                   placeholder={PLACEHOLDERS.number}
                   value={values.angle}

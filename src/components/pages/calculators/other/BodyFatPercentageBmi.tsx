@@ -65,7 +65,6 @@ const BodyFatPercentageBmi = () => {
         >
           {/* Form grid */}
           <FormTabsContainer
-            tabTitle1={CALCULATORS.bodyFatPercentageBmi}
             animation={formAnimation}
           >
             <Formik
@@ -126,7 +125,7 @@ const BodyFatPercentageBmi = () => {
                   <div className="form-row">
                     <Label title={LABELS.height} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      type={INPUT_TYPE.text}
                       id="height"
                       placeholder={PLACEHOLDERS.number}
                       value={values.height}
@@ -144,7 +143,7 @@ const BodyFatPercentageBmi = () => {
                   <div className="form-row">
                     <Label title={LABELS.waist} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      type={INPUT_TYPE.text}
                       id="waist"
                       placeholder={PLACEHOLDERS.number}
                       value={values.waist}
@@ -162,7 +161,7 @@ const BodyFatPercentageBmi = () => {
                   <div className="form-row">
                     <Label title={LABELS.neck} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      type={INPUT_TYPE.text}
                       id="neck"
                       placeholder={PLACEHOLDERS.number}
                       value={values.neck}
@@ -180,7 +179,7 @@ const BodyFatPercentageBmi = () => {
                   <div className="form-row">
                     <Label title={LABELS.hip} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      type={INPUT_TYPE.text}
                       id="hip"
                       placeholder={PLACEHOLDERS.number}
                       value={values.hip}

@@ -110,7 +110,7 @@ const CubeSurfArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.edgeLength} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="edge_length"
                   placeholder={PLACEHOLDERS.number}
                   value={values.edge_length}

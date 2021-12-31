@@ -93,7 +93,31 @@ export default function HexadecimalCalculators(){
           
     })
 
+    const [tab_1, setTab_1] = useState([false,false,true, false])
+    const [tab_2, setTab_2] = useState([true, false, false])
+    const [tab_3, setTab_3] = useState([true, false, false])
 
+    const tabstyles_1 = classNames({
+        'form-card-1': tab_1[0],
+        'form-card-1-b': tab_1[1],
+        'form-card-none': tab_1[2],
+        'form-card-1-c': tab_1[3],
+        'div-link': true
+    })
+
+    const tabstyles_2 = classNames({
+        'form-card-2': tab_2[0],
+        'form-card-2-b': tab_2[1],
+        'form-card-none': tab_2[2],
+        'div-link': true
+    })
+
+    const tabstyles_3 = classNames({
+        'form-card-3': tab_3[0],
+        'form-card-3-b': tab_3[1],
+        'form-card-none': tab_3[2],
+        'div-link': true
+    })
     return(
         <>
         <NavBar2 pageimage={math_icon} categoryname="General Math" pagename="Hexadecimal Calculators"/>
@@ -110,108 +134,91 @@ export default function HexadecimalCalculators(){
                         autoplay: false,
                     }}>
                     <Box 
-                        sx={{ maxWidth: 500, minHeight: 200, paddingBottom: 1 }}
-                        className="animated-box" >
+                        className="animated-box"
+                        sx={{ 
+                            width: {
+                                lg:550,
+                                md:550,
+                                sm:'100%',
+                                xs:'100%'
+                            }, 
+                            minHeight: 200, paddingBottom: 1 }}
+                        >
                         
-                        <Box sx={{ width:'100%', display: 'flex', }}>
-                            <Box sx={{ width:'100%'}}>
-                                <Box sx={{ width:'100%'}}
+                        <Box sx={{ width:'100%' }}>
+                            <Box sx={{ width:'100%', display: 'flex',}}>
+                                <Typography
                                     onClick={
                                         ()=>{
-                                            setShowMenu(!showMenu)
+                                            setTab_1([false,false,true, false])
+                                            setTab_2([true, false, false])
+                                            setTab_3([true, false, false])
+                                            setIndex([true, false, false])
+                                            setCalcName("Hexadecimal Calculator")
                                         }
                                     }
-                                >
-                                    <Typography sx={{ display: 'flex', paddingLeft: 1 }}>
-                                        <Box className="form-card-none div-link"> {calcName} </Box>
-                                        <KeyboardArrowDownIcon sx={{ color: 'blue' }} />
-                                    </Typography>
-                                </Box>
-                                {
-                                    (showMenu)?
-                                    <Box sx={{ 
-                                        position:'absolute',    
-                                        width:'230px',
-                                        height: '100px',
-                                        backgroundColor: 'white',
-                                        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
-                                        borderRadius: 5,
-                                    }}>
-                                        <Typography
-                                            onClick={
-                                                ()=>{
-                                                    setIndex([true, false, false])
-                                                    setCalcName("Hexadecimal Calculator")
-                                                    setShowMenu(false)
-                                                }
-                                            }
-                                            className={classNames({
-                                                'form-card-1': index[0],
-                                                'form-card-none': !index[0],
-                                                'div-link': true
-                                            })}
-                                            sx={{ 
-                                                    width:'100%',
-                                                    fontSize: 16,
-                                                    paddingTop: 0.1, 
-                                                    marginBottom:0.5
-                                                }}>
-                                            <Box>
-                                                Hexadecimal Calculator
-                                            </Box>
-                                        </Typography >
-                                        <Typography
-                                            onClick={
-                                                ()=>{
-                                                    setIndex([false, true, false])
-                                                    setCalcName("Hexadecimal to decimal")
-                                                    setShowMenu(false)
-                                                }
-                                            }
-                                            className={classNames({
-                                                'form-card-2': index[1],
-                                                'form-card-none': !index[1],
-                                                'div-link': true
-                                            })}
-                                            sx={{ width:'100%' }}>
-                                            <Box
-                                                sx={{ 
-                                                    width:'100%',
-                                                    fontSize: 16,
-                                                    paddingTop: 0.1, 
-                                                    marginBottom:0.5
-                                                }}>
-                                                Hexadecimal to decimal
-                                            </Box>
-                                        </Typography>
-                                        <Typography
-                                            onClick={
-                                                ()=>{
-                                                    setIndex([false, false, true])
-                                                    setCalcName("Decimal to hexadecimal")
-                                                    setShowMenu(false)
-                                                }
-                                            }
-                                            className={classNames({
-                                                'form-card-3': index[2],
-                                                'form-card-none': !index[2],
-                                                'div-link': true
-                                            })}
-                                            sx={{ width:'100%' }}>
-                                            <Box
-                                                sx={{ 
-                                                    width:'100%',
-                                                    fontSize: 16,
-                                                    paddingTop: 0.1, 
-                                                    marginBottom:0.5
-                                                }}
-                                            >Decimal to hexadecimal</Box>
-                                        </Typography>
+                                    className={tabstyles_1}
+                                    sx={{ 
+                                            width:'100%',
+                                            fontSize: 14,
+                                            paddingTop: 0.1, 
+                                            marginBottom:0.5,
+                                            fontWeight: 'bold',
+                                            textAlign: 'center'
+                                        }}>
+                                    <Box>
+                                        Hexadecimal Calculator
                                     </Box>
-                                    :<Box></Box>
-                                }
+                                </Typography >
+                                <Typography
+                                    onClick={
+                                        ()=>{
+                                            setTab_1([false, true, false])
+                                            setTab_2([false, false, true])
+                                            setTab_3([false, true, false])
+                                            setIndex([false, true, false])
+                                            setCalcName("Hexadecimal to decimal")
+                                        }
+                                    }
+                                    className={tabstyles_2}
+                                    sx={{ width:'100%' }}>
+                                    <Box
+                                        sx={{ 
+                                            width:'100%',
+                                            fontSize: 14,
+                                            paddingTop: 0.1, 
+                                            marginBottom:0.5,
+                                            fontWeight: 'bold',
+                                            textAlign: 'center'
+                                        }}>
+                                        Hexadecimal to decimal
+                                    </Box>
+                                </Typography>
+                                <Typography
+                                    onClick={
+                                        ()=>{
+                                            setTab_1([false, false, false, true])
+                                            setTab_2([false, true, false])
+                                            setTab_3([false, false, true])
+                                            setIndex([false, false, true])
+                                            setCalcName("Decimal to hexadecimal")
+                                        }
+                                    }
+                                    className={tabstyles_3}
+                                    sx={{ width:'100%' }}>
+                                    <Box
+                                        sx={{ 
+                                            width:'100%',
+                                            fontSize: 14,
+                                            paddingTop: 0.1, 
+                                            marginBottom:0.5,
+                                            fontWeight: 'bold',
+                                            textAlign: 'center'
+                                        }}
+                                    >Decimal to hexadecimal</Box>
+                                </Typography>
+                        
                             </Box>
-                            <Box sx={{...formCardStyle}}></Box>
                         </Box>
                         {
                             (index[0])?
@@ -252,7 +259,13 @@ export default function HexadecimalCalculators(){
                                 
                             {(props: FormikProps<any>) => (
                                 <Form>
-                                    <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
+                                    <Box sx={{ 
+                                        width: {
+                                            lg:550,
+                                            md:550,
+                                            sm:'100%',
+                                            xs:'100%'
+                                        }, height: 250, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
                                             <Grid item={true} xs={5} >
@@ -291,7 +304,6 @@ export default function HexadecimalCalculators(){
                                         </Box>
 
                                         <Box 
-                                            // className="toggle-box-primary"
                                             sx={{ width: '100%' }}
                                             >
                                             <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
@@ -348,9 +360,15 @@ export default function HexadecimalCalculators(){
                                 handleSubmit,
                                 isSubmitting
                             }) => (
-                                <form onSubmit={handleSubmit}>
-                                    <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                <form style={{width:'100%',}} onSubmit={handleSubmit}>
+                                    <Box sx={{
+                                        width: {
+                                            lg:550,
+                                            md:550,
+                                            sm:'100%',
+                                            xs:'100%'
+                                        }, height: 250, display:'flex', flexDirection:'column' }}>
+                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, width:'100%', paddingRight:5}}>
 
                                             <Grid item={true} xs={5} >
                                                 <Box sx={{...labelStyle}}>Hexadecimal value</Box></Grid>
@@ -403,11 +421,12 @@ export default function HexadecimalCalculators(){
                         {
                             (index[2])?
                             <Formik
-                        initialValues={{ 
-                            value:"",
-                            method: "DecimalToHexadecimalCalculator"
-                        }}
-                        onSubmit = {(values)=>{
+                            initialValues={{ 
+                                value:"",
+                                method: "DecimalToHexadecimalCalculator"
+                            }}
+
+                            onSubmit = {(values)=>{
                             const data = {
                                 value: values.value,
                                 method: values.method
@@ -429,12 +448,12 @@ export default function HexadecimalCalculators(){
                             handleSubmit,
                             isSubmitting
                         }) => (
-                            <form onSubmit={handleSubmit}>
-                               <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
+                            <form style={{ width: '100%'}} onSubmit={handleSubmit}>
+                               <Box sx={{ width: '100%', minHeight: 150, display:'flex', flexDirection:'column' }}>
                                     <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
                                         <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>Deciaml value</Box></Grid>
+                                            <Box sx={{...labelStyle}}>Deciaml number</Box></Grid>
                                         <Grid item={true} xs={7}>
                                             <CustomForm
                                                 type="text"

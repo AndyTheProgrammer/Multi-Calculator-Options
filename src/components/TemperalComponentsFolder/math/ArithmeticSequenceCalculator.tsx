@@ -90,7 +90,7 @@ export default function ArithmeticSequenceCalculator(){
                     <Box 
                         sx={{ maxWidth: 450,paddingBottom: 1 }}
                         className="animated-box" >
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{  width: '100%', display: 'flex', justifyContent: 'center'}}>
                             <Box sx={{height:25, width: '100%' }}>
                                 <Typography>
                                     <Box sx={{ fontSize: 12, paddingTop: 0.5, paddingLeft: 2, width: '100%', ...labelStyle }}>
@@ -227,31 +227,27 @@ export default function ArithmeticSequenceCalculator(){
                                                 Flex box pushes submit button down
                                             */}
                                         </Box>
-
-                                        {/* button containers */}
                                         <Box 
-                                            // className="toggle-box-primary"
-                                            sx={{ width: '100%' }}
-                                            >
-                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                        <CustomFormBtn 
-                                                        type="button" 
-                                                        handleClick={()=>{ 
-                                                            controlAnimation();
-                                                         }} 
-                                                        name="Clear"/>
-                                                    </Box>
-                                            </Grid>
-                                            <Grid item xs={4}></Grid>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                    </Box>
-                                            </Grid>
-                                            </Grid>
-                                        </Box>                   
+                                        // className="toggle-box-primary"
+                                        sx={{
+                                            paddingLeft: 2, paddingRight: 2, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                                <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                    <CustomFormBtn 
+                                                    type="button" 
+                                                    handleClick={()=>{ 
+                                                        controlAnimation();
+
+                                                        }} 
+                                                    name="Clear"/>
+                                                </Box>
+                                            <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                               
+                                            </Box>
+                                            <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                <CustomFormImageBtn type="submit" name="Calculate"/>   
+                                            </Box>
+                                        </Box>
                                     </Box>
                                 </form>
                             )}

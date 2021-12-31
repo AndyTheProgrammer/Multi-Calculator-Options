@@ -9,17 +9,16 @@ import { SearchForm } from '../forms/searchForm';
 import { useHistory } from 'react-router-dom'
 
 // 
-import GradesCalculators from  '../TemperalComponentsFolder/pages/GradesCalculators'
-import AreaConverter from  '../TemperalComponentsFolder/other/AreaConverter'
-import GPACalculator from  '../TemperalComponentsFolder/math/GPACalculator'
-import MarginOfErrorCalculator from '../pages/calculators/statistics/MarginOfErrorCalculator'
+import RootsCalculators from '../TemperalComponentsFolder/pages/RootsCalculators'
+import AreaConverter from '../TemperalComponentsFolder/other/AreaConverter'
+import GPACalculator from '../TemperalComponentsFolder/math/GPACalculator'
 
 
 
-export default function TestPage(){
-    return(
-        <>
-          <GPACalculator/>
-        </>
-    );
+export default function TestPage() {
+  return (
+    <>
+      <RootsCalculators />
+    </>
+  );
 }

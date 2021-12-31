@@ -145,7 +145,7 @@ const RectangularArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.length} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="length"
                   placeholder={PLACEHOLDERS.number}
                   value={values.length}
@@ -164,7 +164,7 @@ const RectangularArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.width} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="width"
                   placeholder={PLACEHOLDERS.number}
                   value={values.width}

@@ -7,7 +7,6 @@ import { useTheme } from '@mui/material/styles';
 
 import { NavBar2 } from '../../../navbar/navbar2'
 import AddLayout from '../../../layouts/AddLayout'
-import { SimpleDialog } from "../../../content";
 import useStyles from '../../../../styling/CustomStyles'
 import { calculateFinances } from '../../../../services/AppCalculatorsApi'
 import { AmortizedLoanFixedAmountI, BondPayBackPredeterminedI, DeferredPaymentsLumpsumAtMaturityI } from '../../../../types'
@@ -202,7 +201,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="interest_rate"
                           placeholder={PLACEHOLDERS.number}
                           value={values.interest_rate}
@@ -213,7 +213,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfMonths} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="number_of_months"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_months}
@@ -224,7 +225,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.presentValue} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="present_value"
                           placeholder={PLACEHOLDERS.number}
                           value={values.present_value}
@@ -235,7 +237,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfYears} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="number_of_years"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_years}
@@ -313,7 +316,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="interest_rate"
                           placeholder={PLACEHOLDERS.number}
                           value={values.interest_rate}
@@ -324,7 +328,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.predeterminedAmount} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="predetermined_amount"
                           placeholder={PLACEHOLDERS.number}
                           value={values.predetermined_amount}
@@ -335,7 +340,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfMonths} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="number_of_months"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_months}
@@ -346,7 +352,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfYears} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="number_of_years"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_years}
@@ -423,7 +430,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="interest_rate"
                           placeholder={PLACEHOLDERS.number}
                           value={values.interest_rate}
@@ -434,7 +442,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.creditCardBalance} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="loan_amount"
                           placeholder={PLACEHOLDERS.number}
                           value={values.loan_amount}
@@ -445,7 +454,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfMonths} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="number_of_months"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_months}
@@ -456,7 +466,8 @@ function LoanCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.numberOfYears} />
                         <CustomTextInput
-                          type={null}
+                          col
+                          type={INPUT_TYPE.text}
                           id="number_of_years"
                           placeholder={PLACEHOLDERS.number}
                           value={values.number_of_years}

@@ -144,7 +144,7 @@ const TriangleArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.sideA} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="sideA"
                   placeholder={PLACEHOLDERS.number}
                   value={values.sideA}
@@ -162,7 +162,7 @@ const TriangleArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.sideB} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="sideB"
                   placeholder={PLACEHOLDERS.number}
                   value={values.sideB}
@@ -180,7 +180,7 @@ const TriangleArea = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.sideC} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="sideC"
                   placeholder={PLACEHOLDERS.number}
                   value={values.sideC}

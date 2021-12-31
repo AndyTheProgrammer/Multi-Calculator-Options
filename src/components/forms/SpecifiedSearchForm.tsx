@@ -127,12 +127,13 @@ function SpecifiedSearchForm(props:any){
             
         </Box>
         <Box
-            className="general-text-box app-scroller"  
+            // className="general-text-box app-scroller"  
+            className="general-text-box"  
             sx={{ 
                 border: 0, 
                 display: 'block',
                 height: 170,
-                overflowY: 'scroll'
+                overflowY: 'hidden'
             }}>
             {
                 (value)?

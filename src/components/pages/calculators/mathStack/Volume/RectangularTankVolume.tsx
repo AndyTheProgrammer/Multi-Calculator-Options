@@ -135,7 +135,7 @@ const RectangularTankVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.length} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="length"
                   placeholder={PLACEHOLDERS.number}
                   value={values.length}
@@ -153,7 +153,7 @@ const RectangularTankVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.width} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="width"
                   placeholder={PLACEHOLDERS.number}
                   value={values.width}
@@ -171,7 +171,7 @@ const RectangularTankVolume = (props: any) => {
               <div className="form-row">
                 <Label title={LABELS.height} />
                 <CustomTextInput
-                  type={null}
+                  type={INPUT_TYPE.text}
                   id="height"
                   placeholder={PLACEHOLDERS.number}
                   value={values.height}

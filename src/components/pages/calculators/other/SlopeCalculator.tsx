@@ -197,7 +197,8 @@ function SlopeCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.x1} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="x_1"
                           placeholder={PLACEHOLDERS.number}
                           value={values.x_1}
@@ -208,7 +209,8 @@ function SlopeCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.y1} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="y_1"
                           placeholder={PLACEHOLDERS.number}
                           value={values.y_1}
@@ -219,7 +221,8 @@ function SlopeCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.distance} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="distance"
                           placeholder={PLACEHOLDERS.number}
                           value={values.distance}
@@ -230,7 +233,8 @@ function SlopeCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.slope} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="slope"
                           placeholder={PLACEHOLDERS.number}
                           value={values.slope}
@@ -307,7 +311,8 @@ function SlopeCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.x1} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="x_1"
                           placeholder={PLACEHOLDERS.number}
                           value={values.x_1}
@@ -318,7 +323,8 @@ function SlopeCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.y1} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="y_1"
                           placeholder={PLACEHOLDERS.number}
                           value={values.y_1}
@@ -329,7 +335,8 @@ function SlopeCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.x2} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="x_2"
                           placeholder={PLACEHOLDERS.number}
                           value={values.x_2}
@@ -340,7 +347,8 @@ function SlopeCalculator() {
                       <div className="form-row">
                         <Label title={LABELS.y2} />
                         <CustomTextInput
-                          type={INPUT_TYPE.number}
+                          col
+                          type={INPUT_TYPE.text}
                           id="y_2"
                           placeholder={PLACEHOLDERS.number}
                           value={values.y_2}

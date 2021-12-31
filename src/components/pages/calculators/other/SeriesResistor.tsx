@@ -79,7 +79,8 @@ const SeriesResistor = () => {
               <div className="form-row">
                 <Label title={LABELS.resistanceValues} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  col
+                  type={INPUT_TYPE.text}
                   id="resistance_values"
                   placeholder={PLACEHOLDERS.number}
                   value={values.resistance_values}

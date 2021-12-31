@@ -134,7 +134,7 @@ const HorsepowerCalculation = () => {
                   <div className="form-row">
                     <Label title={LABELS.force} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      type={INPUT_TYPE.text}
                       id="force"
                       placeholder={PLACEHOLDERS.number}
                       value={values.force}
@@ -152,7 +152,7 @@ const HorsepowerCalculation = () => {
                   <div className="form-row">
                     <Label title={LABELS.distance} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      type={INPUT_TYPE.text}
                       id="distance"
                       placeholder={PLACEHOLDERS.number}
                       value={values.distance}
@@ -170,7 +170,7 @@ const HorsepowerCalculation = () => {
                   <div className="form-row">
                     <Label title={LABELS.time} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      type={INPUT_TYPE.text}
                       id="time"
                       placeholder={PLACEHOLDERS.number}
                       value={values.time}

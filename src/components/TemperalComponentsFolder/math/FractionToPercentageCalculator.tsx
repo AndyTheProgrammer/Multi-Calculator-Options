@@ -69,6 +69,17 @@ function FractionToPercentageCalculator(){
         <>
         <NavBar2 pageimage={math_icon} categoryname="Fraction Calculator" pagename="Fraction to Percentage Calculator"/>
         <AddLayout categorykey='fractions' searchname='Fractions Calculators' searchimage={fractions}>
+            <Typography 
+                sx={{
+                    paddingLeft: 1.5, 
+                    marginBottom: 2,
+                    fontFamily: 'Roboto, Helvetica',
+                    fontSize: 16
+                }}>
+                <Box>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
+                </Box>
+            </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box className='animated-content-center'>
             <Anime
@@ -84,8 +95,17 @@ function FractionToPercentageCalculator(){
                     sx={{ maxWidth: 450,paddingBottom: 1 }}
                     className="animated-box" >
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{minHeight:25, width: '100%' }}></Box>
-                        <Box sx={{...formCardStyle}}></Box>
+                        <Box sx={{height:25, width: '100%' }}>
+                            <Typography>
+                                <Box
+                                    sx={{
+                                        color:'#4072B5',
+                                        fontWeight:'bold', 
+                                        paddingLeft:2
+                                    }}>Calculator</Box>
+                            </Typography>
+                        </Box>
+                        {/* <Box sx={{...formCardStyle}}></Box> */}
                     </Box>
                     <Formik
                         initialValues={{ 
@@ -123,52 +143,59 @@ function FractionToPercentageCalculator(){
                         }) => (
                             <form onSubmit={handleSubmit}>
                                   <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
-                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:2, paddingLeft:5, paddingRight:5}}>
                                         <Grid item xs={12}>
-                                            <Box sx={{
-                                                width: '100%',
-                                                display:'flex', 
-                                                justifyContent: 'center' 
-                                            }}>
-                                                <Box sx={{ width: '50px' }}>
-                                                    <CustomFormFraction
-                                                        type="text"
-                                                        name="top"
-                                                        onChange={handleChange}
-                                                        value={values.top}
-                                                        placeholder=""
-                                                    />
+                                            <Box sx={{display: 'flex', justifyContent:'center'}}>
+                                                <Box>
+                                                    <Box sx={{
+                                                        width: '100%',
+                                                        display:'flex', 
+                                                        justifyContent: 'center' 
+                                                    }}>
+                                                    <Box sx={{ width: '50px' }}>
+                                                        <CustomFormFraction
+                                                            type="text"
+                                                            name="top"
+                                                            onChange={handleChange}
+                                                            value={values.top}
+                                                            placeholder=""
+                                                        />
+                                                    </Box>
                                                 </Box>
-                                            </Box>
-                                            <Box
-                                                sx={{
+                                                <Box
+                                                    sx={{
+                                                        display:'flex', 
+                                                        justifyContent: 'center' 
+                                                    }}>
+                                                    <Box 
+                                                        sx={{
+                                                            backgroundColor: '#b5b5b5',
+                                                            width: '60px',
+                                                            borderRadius: 1,
+                                                            height: 2,
+                                                            marginTop: 0.5,
+                                                            marginBottom: 0.5,
+                                                            color: '#3023AE'
+                                                        }}></Box>
+                                                </Box>
+                                                <Box sx={{
                                                     display:'flex', 
                                                     justifyContent: 'center' 
-                                                }}>
-                                                <Box 
-                                                    sx={{
-                                                        backgroundColor: '#b5b5b5',
-                                                        width: '60px',
-                                                        borderRadius: 1,
-                                                        height: 2,
-                                                        marginTop: 0.5,
-                                                        marginBottom: 0.5,
-                                                        color: '#3023AE'
-                                                    }}></Box>
-                                            </Box>
-                                            <Box sx={{
-                                                display:'flex', 
-                                                justifyContent: 'center' 
-                                                }}>
-                                                <Box sx={{ width: '50px' }}>
-                                                    <CustomFormFraction
-                                                        type="text"
-                                                        name="bottom"
-                                                        onChange={handleChange}
-                                                        value={values.bottom}
-                                                        placeholder=""
-                                                    />
+                                                    }}>
+                                                    <Box sx={{ width: '50px' }}>
+                                                        <CustomFormFraction
+                                                            type="text"
+                                                            name="bottom"
+                                                            onChange={handleChange}
+                                                            value={values.bottom}
+                                                            placeholder=""
+                                                        />
+                                                    </Box>
                                                 </Box>
+                                                </Box>
+                                                <Typography>
+                                                    <Latex displayMode={true}>{`$\\hspace{.1cm}=\\hspace{.1cm}\\frac{?}{?}$`}</Latex>
+                                                </Typography>
                                             </Box>
                                             
                                         </Grid>
@@ -182,27 +209,25 @@ function FractionToPercentageCalculator(){
 
                                     <Box 
                                         // className="toggle-box-primary"
-                                        sx={{ width: '100%' }}
-                                        >
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                    <CustomFormBtn 
-                                                    type="button" 
-                                                    handleClick={()=>{ 
-                                                        controlAnimation();
-                                                        }} 
-                                                    name="Clear"/>
-                                                </Box>
-                                        </Grid>
-                                        <Grid item xs={4}></Grid>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                    <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                </Box>
-                                        </Grid>
-                                        </Grid>
-                                    </Box> 
+                                        sx={{
+                                            paddingLeft: 2, paddingRight: 2, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{ 
+                                                    controlAnimation();
+
+                                                    }} 
+                                                name="Clear"/>
+                                            </Box>
+                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                        
+                                        </Box>
+                                        <Box sx={{display:"flex", justifyContent:"end"}}>
+                                            <CustomFormImageBtn type="submit" name="Calculate"/>   
+                                        </Box>
+                                    </Box>
                                 </Box>
                             </form>
                         )}
@@ -240,11 +265,11 @@ function FractionToPercentageCalculator(){
                                         sx={{
                                             color:'#4072B5',
                                             fontWeight:'bold', 
-                                            textAlign:'center'
+                                            paddingLeft:2
                                         }}>Result</Box>
                                 </Typography>
                             </Box>
-                            <Box sx={{ ...formCardStyle }}></Box>
+                            {/* <Box sx={{ ...formCardStyle }}></Box> */}
                         </Box>
                         <Box >
                             <Box sx={{marginLeft: 5}}>

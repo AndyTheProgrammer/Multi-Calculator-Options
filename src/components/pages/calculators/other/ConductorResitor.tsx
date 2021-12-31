@@ -56,7 +56,10 @@ const ConductorResitor = () => {
   return (
     <>
       {/* Form grid */}
-      <FormTabsContainer tabTitle1={CALCULATORS.conductorResitor} animation={formAnimation}>
+      <FormTabsContainer
+        tabTitle1={CALCULATORS.conductorResitor}
+        animation={formAnimation}
+      >
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -102,7 +105,7 @@ const ConductorResitor = () => {
               <div className="form-row">
                 <Label title={LABELS.length} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="length"
                   placeholder={PLACEHOLDERS.number}
                   value={values.length}
@@ -120,7 +123,7 @@ const ConductorResitor = () => {
               <div className="form-row">
                 <Label title={LABELS.diameter} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  type={INPUT_TYPE.text}
                   id="diameter"
                   placeholder={PLACEHOLDERS.number}
                   value={values.diameter}
@@ -139,7 +142,8 @@ const ConductorResitor = () => {
               <div className="form-row">
                 <Label title={LABELS.conductivity} />
                 <CustomTextInput
-                  type={INPUT_TYPE.number}
+                  col
+                  type={INPUT_TYPE.text}
                   id="conductivity"
                   placeholder={PLACEHOLDERS.number}
                   value={values.conductivity}

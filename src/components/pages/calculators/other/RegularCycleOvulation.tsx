@@ -118,6 +118,7 @@ const RegularCycleOvulation = () => {
                   <div className="form-row">
                     <Label title={LABELS.previousCycleStartDate} />
                     <CustomTextInput
+                      col
                       type={INPUT_TYPE.date}
                       id="previous_cycle_start_date"
                       placeholder={PLACEHOLDERS.number}
@@ -129,7 +130,8 @@ const RegularCycleOvulation = () => {
                   <div className="form-row">
                     <Label title={LABELS.cycleDays} />
                     <CustomTextInput
-                      type={INPUT_TYPE.number}
+                      col
+                      type={INPUT_TYPE.text}
                       id="cycle_days"
                       placeholder={PLACEHOLDERS.number}
                       value={values.cycle_days}
