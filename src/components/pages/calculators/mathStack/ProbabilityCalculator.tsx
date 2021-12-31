@@ -570,7 +570,6 @@ function ProbabilityCalculator() {
                             onHandleClick={() => resetForm()}
                           />
                           <CustomBtn />
-
                         </div>
                       </form>
                     )}

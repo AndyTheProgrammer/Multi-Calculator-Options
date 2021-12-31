@@ -528,7 +528,12 @@ const financialRoutes =
           name: "Debt Payoff Calculator",
           path: `${financialUrl}/debtpayoffcalculator`,
           component: PC.NoComponent
-        }
+        },
+        {
+          name: "Loan Calculator",
+          path: `${financialUrl}/loancalculator`,
+          component: PC.LoanCalculator
+        },
       ]
     },
     {
