@@ -67,7 +67,17 @@ function FractionToDecimalCalculator(){
         <>
         <NavBar2 pageimage={math_icon} categoryname="Fraction Calculator" pagename="Fraction To Decimal Calculator"/>
         <AddLayout categorykey='fractions' searchname='Fractions Calculators' searchimage={fractions}>
-           
+            <Typography 
+                    sx={{
+                        paddingLeft: 1.5, 
+                        marginBottom: 2,
+                        fontFamily: 'Roboto, Helvetica',
+                        fontSize: 16
+                    }}>
+                    <Box>
+                    To convert a fraction to a decimal, divide the numerator by the denominator.
+                    </Box>
+                </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>
             <Anime
@@ -84,8 +94,17 @@ function FractionToDecimalCalculator(){
                     className="animated-box" >
                 
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:25, width: '100%' }}></Box>
-                        <Box sx={{...formCardStyle}}></Box>
+                        <Box sx={{height:25, width: '100%' }}>
+                            <Typography>
+                                <Box
+                                    sx={{
+                                        color:'#4072B5',
+                                        fontWeight:'bold', 
+                                        paddingLeft:2
+                                    }}>Calculator</Box>
+                            </Typography>
+                        </Box>
+                        {/* <Box sx={{...formCardStyle}}></Box> */}
                     </Box>
                     <Formik
                         initialValues={{ 
@@ -120,53 +139,60 @@ function FractionToDecimalCalculator(){
                         }) => (
                             <form onSubmit={handleSubmit}>
                                   <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
-                                    <Grid container={true} rowSpacing={1} sx={{ minWidth:'350px', paddingTop:5, paddingLeft:2, paddingRight:2}}>
+                                    <Grid container={true} rowSpacing={1} sx={{ minWidth:'350px', paddingTop:2, paddingLeft:2, paddingRight:2}}>
                                         
                                         <Grid item xs={12}>
-                                            <Box sx={{
-                                                width: '100%',
-                                                display:'flex', 
-                                                justifyContent: 'center' 
-                                            }}>
-                                                <Box sx={{ width: '50px' }}>
-                                                    <CustomFormFraction
-                                                        type="text"
-                                                        name="top"
-                                                        onChange={handleChange}
-                                                        value={values.top}
-                                                        placeholder=""
-                                                    />
+                                            <Box sx={{display:'flex', justifyContent: 'center'}}>
+                                                <Box sx={{marginRight: 1}}>
+                                                    <Box sx={{
+                                                        width: '100%',
+                                                        display:'flex', 
+                                                        justifyContent: 'center' 
+                                                        }}>
+                                                        <Box sx={{ width: '50px' }}>
+                                                            <CustomFormFraction
+                                                                type="text"
+                                                                name="top"
+                                                                onChange={handleChange}
+                                                                value={values.top}
+                                                                placeholder=""
+                                                            />
+                                                        </Box>
+                                                    </Box>
+                                                    <Box
+                                                        sx={{
+                                                            display:'flex', 
+                                                            justifyContent: 'center' 
+                                                        }}>
+                                                        <Box 
+                                                            sx={{
+                                                                backgroundColor: '#b5b5b5',
+                                                                width: '60px',
+                                                                borderRadius: 1,
+                                                                height: 2,
+                                                                marginTop: 0.5,
+                                                                marginBottom: 0.5,
+                                                                color: '#3023AE'
+                                                            }}></Box>
+                                                    </Box>
+                                                    <Box sx={{
+                                                        display:'flex', 
+                                                        justifyContent: 'center' 
+                                                        }}>
+                                                        <Box sx={{ width: '50px' }}>
+                                                            <CustomFormFraction
+                                                                type="text"
+                                                                name="bottom"
+                                                                onChange={handleChange}
+                                                                value={values.bottom}
+                                                                placeholder=""
+                                                            />
+                                                        </Box>
+                                                    </Box>
                                                 </Box>
-                                            </Box>
-                                            <Box
-                                                sx={{
-                                                    display:'flex', 
-                                                    justifyContent: 'center' 
-                                                }}>
-                                                <Box 
-                                                    sx={{
-                                                        backgroundColor: '#b5b5b5',
-                                                        width: '60px',
-                                                        borderRadius: 1,
-                                                        height: 2,
-                                                        marginTop: 0.5,
-                                                        marginBottom: 0.5,
-                                                        color: '#3023AE'
-                                                    }}></Box>
-                                            </Box>
-                                            <Box sx={{
-                                                display:'flex', 
-                                                justifyContent: 'center' 
-                                                }}>
-                                                <Box sx={{ width: '50px' }}>
-                                                    <CustomFormFraction
-                                                        type="text"
-                                                        name="bottom"
-                                                        onChange={handleChange}
-                                                        value={values.bottom}
-                                                        placeholder=""
-                                                    />
-                                                </Box>
+                                                <Typography>
+                                                    <Latex displayMode={true}>{`$\\hspace{.1cm}=\\hspace{.1cm}\\frac{?}{?}$`}</Latex>
+                                                </Typography>
                                             </Box>
                                             
                                         </Grid>
@@ -236,11 +262,11 @@ function FractionToDecimalCalculator(){
                                             sx={{
                                                 color:'#4072B5',
                                                 fontWeight:'bold', 
-                                                textAlign:'center'
+                                                paddingLeft:2
                                             }}>Result</Box>
                                     </Typography>
                                 </Box>
-                                <Box sx={{ ...formCardStyle }}></Box>
+                                {/* <Box sx={{ ...formCardStyle }}></Box> */}
                             </Box>
                             <Box sx={{marginLeft: 5}}>
                                 <Typography>

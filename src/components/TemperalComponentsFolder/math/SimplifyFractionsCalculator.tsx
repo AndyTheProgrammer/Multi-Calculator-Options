@@ -68,6 +68,17 @@ function SimplifyFractionsCalculator(){
         <>
         <NavBar2 pageimage={math_icon} categoryname="Fraction Calculator" pagename="Simplify Fractions Calculator"/>
         <AddLayout categorykey='fractions' searchname='Fractions Calculators' searchimage={fractions}>
+            <Typography 
+                sx={{
+                    paddingLeft: 1.5, 
+                    marginBottom: 2,
+                    fontFamily: 'Roboto, Helvetica',
+                    fontSize: 16
+                }}>
+                <Box>
+                A combined form of a whole number and a fraction is called a mixed number. Use this calculator to simplify mixed fractions
+                </Box>
+            </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>
             <Anime
@@ -83,8 +94,17 @@ function SimplifyFractionsCalculator(){
                     sx={{ maxWidth: 450,paddingBottom: 1 }}
                     className="animated-box" >
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:25, width: '100%' }}></Box>
-                        <Box sx={{...formCardStyle}}></Box>
+                    <Box sx={{height:25, width: '100%' }}>
+                                    <Typography>
+                                        <Box
+                                            sx={{
+                                                color:'#4072B5',
+                                                fontWeight:'bold', 
+                                                paddingLeft:2
+                                            }}>Calculator</Box>
+                                    </Typography>
+                                </Box>
+                        {/* <Box sx={{...formCardStyle}}></Box> */}
                     </Box>
                     <Formik
                         initialValues={{ 
@@ -115,7 +135,7 @@ function SimplifyFractionsCalculator(){
                         {(props: FormikProps<any>) => (
                             <Form>
                                   <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
-                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
+                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:2, paddingLeft:5, paddingRight:5}}>
                                         <Grid item xs={12}>
                                             <Box 
                                                 sx={{
@@ -170,6 +190,9 @@ function SimplifyFractionsCalculator(){
                                                                 />
                                                         </Box>
                                                 </Box>
+                                                <Typography sx={{fontSize: 18}}>
+                                                    <Latex displayMode={true}>{`$\\hspace{.1cm}=\\hspace{.1cm}?$`}</Latex>
+                                                </Typography>
                                             </Box>
                                         </Grid>
                                       
@@ -183,27 +206,25 @@ function SimplifyFractionsCalculator(){
 
                                     <Box 
                                         // className="toggle-box-primary"
-                                        sx={{ width: '100%' }}
-                                            >
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item xs={4}>
+                                            sx={{
+                                                paddingLeft: 2, paddingRight: 2, 
+                                                minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
                                                 <Box sx={{display:"flex", justifyContent:"start"}}>
                                                     <CustomFormBtn 
                                                     type="button" 
                                                     handleClick={()=>{ 
                                                         controlAnimation();
+
                                                         }} 
                                                     name="Clear"/>
                                                 </Box>
-                                        </Grid>
-                                        <Grid item xs={4}></Grid>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                    <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                </Box>
-                                        </Grid>
-                                        </Grid>
-                                    </Box>
+                                            <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                            
+                                            </Box>
+                                            <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                <CustomFormImageBtn type="submit" name="Calculate"/>   
+                                            </Box>
+                                        </Box>
                                 </Box>
                             </Form>
                         )}
@@ -241,11 +262,11 @@ function SimplifyFractionsCalculator(){
                                             sx={{
                                                 color:'#4072B5',
                                                 fontWeight:'bold', 
-                                                textAlign:'center'
+                                                paddingLeft:2
                                             }}>Result</Box>
                                     </Typography>
                                 </Box>
-                                <Box sx={{ ...formCardStyle }}></Box>
+                                {/* <Box sx={{ ...formCardStyle }}></Box> */}
                             </Box>
                         <Box sx={{marginLeft: 5}}>
                             <Typography>

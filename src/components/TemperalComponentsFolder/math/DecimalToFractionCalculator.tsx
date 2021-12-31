@@ -69,7 +69,18 @@ export default function DecimalToFractionCalculator(){
         <>
         <NavBar2 pageimage={math_icon} categoryname="Fraction Calculator" pagename="Decimal To Fraction Calculator"/>
         <AddLayout categorykey='fractions' searchname='Fractions Calculators' searchimage={fractions}>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography 
+                sx={{
+                    paddingLeft: 1.5, 
+                    marginBottom: 2,
+                    fontFamily: 'Roboto, Helvetica',
+                    fontSize: 16
+                }}>
+                <Box>
+                This calculator converts a decimal number to a fraction or a decimal number to a mixed number.
+                </Box>
+            </Typography>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box className='animated-content-center'>
                 <Anime
                     className='animated-pos animated-margin'
@@ -84,8 +95,17 @@ export default function DecimalToFractionCalculator(){
                     sx={{ maxWidth: 450,paddingBottom: 1 }}
                     className="animated-box" >
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:25, width: '100%' }}></Box>
-                            <Box sx={{...formCardStyle}}></Box>
+                                <Box sx={{height:25, width: '100%' }}>
+                                    <Typography>
+                                        <Box
+                                            sx={{
+                                                color:'#4072B5',
+                                                fontWeight:'bold', 
+                                                paddingLeft:2
+                                            }}>Calculator</Box>
+                                    </Typography>
+                                </Box>
+                            {/* <Box sx={{...formCardStyle}}></Box> */}
                         </Box>
                         <Formik
                             initialValues={{ 
@@ -120,7 +140,7 @@ export default function DecimalToFractionCalculator(){
 
                                             <Grid item={true} xs={5} >
                                                 <Box sx={{...labelStyle }}>Decimal number</Box></Grid>
-                                            <Grid item={true} xs={7}>
+                                            <Grid item={true} xs={5}>
                                                 <CustomForm
                                                     type="text"
                                                     name="value"
@@ -129,36 +149,37 @@ export default function DecimalToFractionCalculator(){
                                                     placeholder=""
                                                 />
                                             </Grid>
-                                    
+                                            <Grid item xs={2}>
+                                                <Typography sx={{ marginTop: 0.5}}>
+                                                    <Latex displayMode={false}>{`$=\\hspace{.1cm}?$`}</Latex>
+                                                </Typography>
+                                            </Grid>
                                         </Grid>
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
                                                 Flex box pushes submit button down
                                             */}
                                         </Box>
-
                                         <Box 
                                         // className="toggle-box-primary"
-                                            sx={{ width: '100%' }}
-                                            >
-                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                        <CustomFormBtn 
-                                                        type="button" 
-                                                        handleClick={()=>{ 
-                                                            controlAnimation();
-                                                            }} 
-                                                        name="Clear"/>
-                                                    </Box>
-                                            </Grid>
-                                            <Grid item xs={4}></Grid>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                    </Box>
-                                            </Grid>
-                                            </Grid>
+                                            sx={{
+                                                paddingLeft: 2, paddingRight: 2, 
+                                                minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                                <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                    <CustomFormBtn 
+                                                    type="button" 
+                                                    handleClick={()=>{ 
+                                                        controlAnimation();
+
+                                                        }} 
+                                                    name="Clear"/>
+                                                </Box>
+                                            <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                            
+                                            </Box>
+                                            <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                <CustomFormImageBtn type="submit" name="Calculate"/>   
+                                            </Box>
                                         </Box>
                                     </Box>
                                 </form>
@@ -197,7 +218,7 @@ export default function DecimalToFractionCalculator(){
                                                 sx={{
                                                     color:'#4072B5',
                                                     fontWeight:'bold', 
-                                                    textAlign:'center'
+                                                    paddingLeft:2
                                                 }}>Result</Box>
                                         </Typography>
                                     </Box>

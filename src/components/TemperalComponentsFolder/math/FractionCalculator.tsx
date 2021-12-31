@@ -65,6 +65,17 @@ function FractionCalculator() {
         <>
             <NavBar2 pageimage={math_icon} categoryname="Fraction Calculator" Calculator pagename="Fraction Calculator" />
             <AddLayout categorykey='fractions' searchname='Fractions Calculators' searchimage={fractions}>
+                <Typography 
+                    sx={{
+                        paddingLeft: 1.5, 
+                        marginBottom: 2,
+                        fontFamily: 'Roboto, Helvetica',
+                        fontSize: 16
+                    }}>
+                    <Box>
+                        Use this fraction calculator for adding, subtracting, multiplying and dividing fractions. Answers are fractions in lowest terms or mixed numbers in reduced form.
+                    </Box>
+                </Typography>
                 <Box sx={{ display: 'flex', justifyContent:'center'}}>
                 <Box className='animated-content-center'>
                     <Anime
@@ -80,8 +91,17 @@ function FractionCalculator() {
                         sx={{ maxWidth: 450,paddingBottom: 1 }}
                         className="animated-box" >
                             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <Box sx={{ height: 25, width: '100%' }}></Box>
-                                <Box sx={{ ...formCardStyle }}></Box>
+                            <Box sx={{height:25, width: '100%' }}>
+                                <Typography>
+                                    <Box
+                                        sx={{
+                                            color:'#4072B5',
+                                            fontWeight:'bold', 
+                                            paddingLeft:2
+                                        }}>Calculator</Box>
+                                </Typography>
+                            </Box>
+                                {/* <Box sx={{ ...formCardStyle }}></Box> */}
                             </Box>
                             <Formik
                                 initialValues={{
@@ -118,21 +138,21 @@ function FractionCalculator() {
 
                                 {(props: FormikProps<any>) => (
                                     <Form>
-                                        <Box sx={{ minHeight: 150, display: 'flex', flexDirection: 'column' }}>
-                                            <Grid container={true} rowSpacing={1} sx={{ minWidth:'350px', border:'0px solid red', paddingTop: 5, paddingLeft: 2, paddingRight: 2 }}>
+                                        <Box sx={{ minHeight: 100, border:'0px solid red',}}>
+                                            <Grid container={true} rowSpacing={1} sx={{ minWidth:'350px',  paddingTop: 2, paddingLeft: 2, paddingRight: 2 }}>
                                                 <Grid xs={12}>
                                                     <Box sx={{
                                                         display: 'flex',
                                                         justifyContent: 'center',
                                                         width: '100%',
                                                         
-                                                    }}>
+                                                        }}>
                                                         <Box sx={{ 
                                                             width: 100,
                                                             paddingLeft: '5px',
                                                             paddingRight: '5px'
                                                         }}>
-                                                            <Box sx={{ width: '100%'}}>
+                                                            <Box sx={{ width: 100,}}>
                                                                 <Field
                                                                         type="text"
                                                                         name="valuea"
@@ -140,7 +160,7 @@ function FractionCalculator() {
                                                                     />
                                                             </Box>
                                                             <Box sx={{ 
-                                                                    width: '100%',
+                                                                    width: 100,
                                                                     paddingLeft: '5px',
                                                                     paddingRight: '5px'
                                                                  }}>
@@ -155,7 +175,7 @@ function FractionCalculator() {
                                                                         color: '#3023AE'
                                                                     }}></Box>
                                                             </Box>
-                                                            <Box sx={{ width: '100%'}}>
+                                                            <Box sx={{ width: 100,}}>
                                                                 <Field
                                                                         type="text"
                                                                         name="valueb"
@@ -163,7 +183,7 @@ function FractionCalculator() {
                                                                     />
                                                             </Box>
                                                         </Box>
-                                                        <Box sx={{ width: 50, marginTop: 2.5}}>
+                                                        <Box sx={{ width: 50, marginTop: 2.5,marginLeft:1, marginRight:1 }}>
                                                             <Field as={CustomFormikOptionsFractions} name="operation" />
                                                         </Box>
                                                         <Box sx={{ width: 100}}>
@@ -199,36 +219,38 @@ function FractionCalculator() {
                                                                 />
                                                             </Box>
                                                         </Box>
+                                                        <Latex displayMode={true}>{`$\\hspace{.1cm}=\\hspace{.1cm} \\frac{?} {?}$`}</Latex>
                                                     </Box>
                                                 </Grid>
                                             
                                             </Grid>
-                                            <Box sx={{ flexGrow: 1 }}>
+                                                
+                                            <Box sx={{ border:'0px solid red',flexGrow: 1 }}>
                                                 {/* 
-                                            Flex box pushes submit button down
-                                        */}
+                                                    Flex box pushes submit button down
+                                                */}
+                                                
                                             </Box>
-
-                                            <Box 
-                                            // className="toggle-box-primary"
+                                        </Box>
+                                        <Box 
+                                        // className="toggle-box-primary"
                                             sx={{
                                                 paddingLeft: 2, paddingRight: 2, 
                                                 minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
-                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                        <CustomFormBtn 
-                                                        type="button" 
-                                                        handleClick={()=>{ 
-                                                            controlAnimation();
+                                                <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                    <CustomFormBtn 
+                                                    type="button" 
+                                                    handleClick={()=>{ 
+                                                        controlAnimation();
 
-                                                            }} 
-                                                        name="Clear"/>
-                                                    </Box>
-                                                <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
-                                                
+                                                        }} 
+                                                    name="Clear"/>
                                                 </Box>
-                                                <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                    <CustomFormImageBtn type="submit" name="Calculate"/>   
-                                                </Box>
+                                            <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                            
+                                            </Box>
+                                            <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                <CustomFormImageBtn type="submit" name="Calculate"/>   
                                             </Box>
                                         </Box>
                                     </Form>
@@ -267,11 +289,11 @@ function FractionCalculator() {
                                                 sx={{
                                                     color: '#4072B5',
                                                     fontWeight: 'bold',
-                                                    textAlign: 'center'
+                                                    paddingLeft:2
                                                 }}>Result</Box>
                                         </Typography>
                                     </Box>
-                                    <Box sx={{ ...formCardStyle }}></Box>
+                                    {/* <Box sx={{ ...formCardStyle }}></Box> */}
                                 </Box>
                                 <Box sx={{ marginLeft: 5 }}>
                                    <Typography >

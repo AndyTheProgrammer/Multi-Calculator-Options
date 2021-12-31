@@ -86,7 +86,7 @@ export default function PercentageCalculators(){
         <AddLayout categorykey='general' searchname='General Calculators' searchimage={geometry_icon}>
             <Typography 
                 sx={{
-                    paddingLeft: 1, 
+                    paddingLeft: 1.5, 
                     marginBottom: 2,
                     fontFamily: 'Roboto, Helvetica',
                     fontSize: 16
