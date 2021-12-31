@@ -220,6 +220,7 @@ function FractionCalculator() {
                                                             </Box>
                                                         </Box>
                                                         <Latex displayMode={true}>{`$\\hspace{.1cm}=\\hspace{.1cm} \\frac{?} {?}$`}</Latex>
+                                                        
                                                     </Box>
                                                 </Grid>
                                             
