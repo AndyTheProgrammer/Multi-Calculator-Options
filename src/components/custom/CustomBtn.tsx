@@ -15,7 +15,7 @@ const ColorButton = withStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundImage: COLORS.gradient,
-    width: 130,
+    maxWidth: 130,
     '&:hover': {
       backgroundColor: green[400],
     },

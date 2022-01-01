@@ -11,7 +11,7 @@ const ColorButton = withStyles((theme) => ({
     height: 25,
     margin: theme.spacing(1),
     textTransform: 'none',
-    width: 130,
+    maxWidth: 130,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
