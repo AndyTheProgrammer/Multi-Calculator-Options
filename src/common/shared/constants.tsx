@@ -109,7 +109,7 @@ export const PLACEHOLDERS = {
 };
 
 export const LABELS = {
-  radius: "Radius",
+  radius: "Radius (r)",
   baseRadius: "Base Radius",
   topRadius: "Top Radius",
   bottomRadius: "Bottom Radius",
@@ -256,7 +256,8 @@ export const COLORS = {
   paper_background: "#A8A79F",
   text: "#3267ac",
   onGradient: "#ffffff",
-  input: "#dde9ec"
+  input: "#dde9ec",
+  newInput: '#EEEEEE'
 };
 
 export const CALC_LABELS = {

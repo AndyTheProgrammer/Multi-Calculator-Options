@@ -12,8 +12,8 @@ function StaticTab(props: any) {
     return (
       <Box className={className}>
         <div>
-          <FontProvider fonts={[{ font: 'Varela Round' }]}>
-            <Typography variant="subtitle2">
+          <FontProvider fonts={[{ font: 'Roboto, Helvetica' }]}>
+            <Typography variant="subtitle2" style={{fontWeight: 'bold'}}>
               <Font>{label}</Font>
             </Typography>
           </FontProvider>

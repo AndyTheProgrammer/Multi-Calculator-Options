@@ -25,6 +25,7 @@ const CustomTextInput = (props: TextInputProps) => {
       <div className="form-group col-8">
         <Box sx={{
           display: 'flex',
+          
         }}>
           <Field
             className="form-control form-control-sm"
@@ -34,7 +35,15 @@ const CustomTextInput = (props: TextInputProps) => {
             placeholder={placeholder}
             value={value}
             onChange={onChange}
-            style={{ backgroundColor: COLORS.input, color: '#4072B5', fontWeight: 500 }}
+            style={{
+              backgroundColor: COLORS.newInput,
+              // fontWeight: 500,
+              border: 'solid',
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 3,
+              
+            }}
           />
         </Box>
       </div>
@@ -53,7 +62,14 @@ const CustomTextInput = (props: TextInputProps) => {
             placeholder={placeholder}
             value={value}
             onChange={onChange}
-            style={{ backgroundColor: COLORS.input, color: '#4072B5', fontWeight: 500 }}
+            style={{
+              backgroundColor: COLORS.newInput,
+              // fontWeight: 500,
+              border: 'solid',
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 3,
+            }}
           />
         </Box>
       </div>

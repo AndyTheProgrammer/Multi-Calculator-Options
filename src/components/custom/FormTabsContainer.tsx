@@ -46,7 +46,7 @@ function FormTabsContainer(props: FormProps) {
               <StaticTab
                 className={leftTabContainer}
                 label={tabTitle1}
-                dropDown={true}
+                // dropDown={true}
                 openDrop={openDrop}
               />
               <StaticTab

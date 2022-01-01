@@ -84,8 +84,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   leftTabContainer: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
+    padding: 10,
+    // alignItems: 'left' ,
+    // justifyContent: 'space-evenly',
     backgroundColor: theme.palette.background.paper,
     color: COLORS.text,
     width: "100%",
@@ -94,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   rightTabContainer: {
     height: 25,
-    background: COLORS.gradient,
+    // background: COLORS.gradient,
     color: COLORS.light_text_color,
     width: "100%",
     borderBottomLeftRadius: 20,
@@ -116,7 +117,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   formDisplay: {
     //  position: 'absolute',
-    maxWidth: 400,
+    maxWidth: 450,
     // height: '100%',
     borderRadius: '20px !important',
     backgroundColor: theme.palette.background.paper,
@@ -144,6 +145,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     paddingBottom: 2,
     margin: theme.spacing(2),
   },
+  fieldDisplay: {
+    display: 'flex',
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // padding: 5
+
+  }
+
 }));
 
 export default useStyles;

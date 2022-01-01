@@ -23,6 +23,8 @@ import {
   ResultTabsContainer,
   FormTabsContainer
 } from '../../../../custom'
+import PlaceHolder from '../../../../custom/PlaceHolder';
+import useStyles from '../../../../../styling/CustomStyles';
 
 const Latex = require('react-latex');
 
@@ -43,7 +45,7 @@ const CircleArea = (props: any) => {
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
-    radius: "",
+    radius: "25",
     radius_unit: "",
   })
   const [Result, setResult] = React.useState({
@@ -53,10 +55,15 @@ const CircleArea = (props: any) => {
     Submitted_unit: ''
   })
 
+  const {
+    fieldDisplay
+  }: any = useStyles()
 
   return (
     <>
-      {/* Form grid */}
+      <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.     '
+      />
       <FormTabsContainer
         tabTitle1={CALCULATORS.circleArea}
         dropDown={true}
@@ -105,12 +112,12 @@ const CircleArea = (props: any) => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <div className="form-row">
+              <div className='form-row'>
                 <Label title={LABELS.radius} />
                 <CustomTextInput
                   type={INPUT_TYPE.text}
                   id="radius"
-                  placeholder={PLACEHOLDERS.number}
+                  placeholder=''
                   value={values.radius}
                   onChange={handleChange}
                 />
