@@ -42,7 +42,7 @@ function FormTabsContainer(props: FormProps) {
       >
         <Paper className={formDisplay}>
           <div className={tabRoot}>
-            <StyledTabs>
+            {/* <StyledTabs>
               <StaticTab
                 className={leftTabContainer}
                 label={tabTitle1}
@@ -53,7 +53,7 @@ function FormTabsContainer(props: FormProps) {
                 className={rightTabContainer}
                 label={tabTitle2}
               />
-            </StyledTabs>
+            </StyledTabs> */}
 
             <NoIndexTabPanel>
               {children}
