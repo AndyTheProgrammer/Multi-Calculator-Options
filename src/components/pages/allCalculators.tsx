@@ -196,15 +196,11 @@ function AllCalculators(){
                             {
                                 financialCalculators.map((data:any) => {
                                     return (
-                                        <Typography >
-                                            <Box 
-                                            className="div-link"
-                                            onClick={
-                                                ()=>{
-                                                    history.push(data.path)
-                                                }
-                                            }
-                                            sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                        <Typography>
+                                            <Link  
+                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                            component="button"
+                                            onClick={()=>{ history.push(data.path) }}> {data.name} </Link>
                                         </Typography>
                                     );
                                 })
@@ -225,15 +221,11 @@ function AllCalculators(){
                             {
                                 financialCalculators.map((data:any) => {
                                     return (
-                                        <Typography >
-                                            <Box 
-                                            className="div-link"
-                                            onClick={
-                                                ()=>{
-                                                    history.push(data.path)
-                                                }
-                                            }
-                                            sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                        <Typography>
+                                            <Link  
+                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                            component="button"
+                                            onClick={()=>{ history.push(data.path) }}> {data.name} </Link>
                                         </Typography>
                                     );
                                 })
@@ -275,15 +267,11 @@ function AllCalculators(){
                                 {
                                     mathCalculatorsData.map((data:any) => {
                                         return (
-                                            <Typography >
-                                            <Box 
-                                            className="div-link"
-                                            onClick={
-                                                ()=>{
-                                                    history.push(data.path)
-                                                }
-                                            }
-                                            sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                            <Typography>
+                                            <Link  
+                                            sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                            component="button"
+                                            onClick={()=>{ history.push(data.path) }}> {data.name} </Link>
                                         </Typography>
                                         );
                                     })
@@ -303,15 +291,11 @@ function AllCalculators(){
                                 {
                                     mathCalculatorsData.map((data:any) => {
                                         return (
-                                            <Typography >
-                                                <Box 
-                                                className="div-link"
-                                                onClick={
-                                                    ()=>{
-                                                        history.push(data.path)
-                                                    }
-                                                }
-                                                sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                            <Typography>
+                                                <Link  
+                                                sx={{...mobileText, textAlign:'start' ,color: 'black',}}
+                                                component="button"
+                                                onClick={()=>{ history.push(data.path) }}> {data.name} </Link>
                                             </Typography>
                                         );
                                     })
@@ -378,15 +362,11 @@ function AllCalculators(){
                                 {
                                     otherCalculatorsData.map((data:any) => {
                                         return (
-                                            <Typography >
-                                                <Box 
-                                                className="div-link"
-                                                onClick={
-                                                    ()=>{
-                                                        history.push(data.path)
-                                                    }
-                                                }
-                                                sx={{ ...calculatorNamesStyles }}> { data.name } </Box>
+                                            <Typography>
+                                                <Link  
+                                                sx={{...mobileText, textAlign:'start' ,color: '#8591B0',}}
+                                                component="button"
+                                                onClick={()=>{ history.push(data.path) }}> {data.name} </Link>
                                             </Typography>
                                         );
                                     })
