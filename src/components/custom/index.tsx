@@ -1,3 +1,4 @@
+export { default as CalculatorDropdown } from "./CalculatorDropdown";
 export { default as CategoryBar } from "./CategoryBar";
 export { default as CustomBtn } from "./CustomBtn";
 export { default as CustomDivider } from "./CustomDivider";
@@ -12,5 +13,6 @@ export { default as NoIndexTabPanel } from "./NoIndexTabPanel";
 export { default as ResultTabsContainer } from "./ResultTabsContainer";
 export { default as StaticTab } from "./StaticTab";
 export { default as StyledTab } from "./StyledTab";
+export { default as StyledTabForThree } from "./StyledTabForThree";
 export { default as StyledTabs } from "./StyledTabs";
 export { default as TabPanel } from "./TabPanel";

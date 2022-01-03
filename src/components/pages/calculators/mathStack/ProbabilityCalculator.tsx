@@ -23,9 +23,8 @@ import {
   CustomBtn,
   CustomResetBtn,
   Label,
-  FormTabsContainer,
   ResultTabsContainer,
-  StyledTab,
+  StyledTabForThree,
   StyledTabs,
   TabPanel
 } from '../../../custom'
@@ -143,17 +142,17 @@ function ProbabilityCalculator() {
             <Box className={formDisplay2} >
               <div className={tabRoot}>
                 <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
-                  <StyledTab
+                  <StyledTabForThree
                     wrapped
                     label={CALCULATORS.probabilityOfASeriesOfIndpendentEvents}
                     {...a11yProps(0)}
                   />
-                  <StyledTab
+                  <StyledTabForThree
                     wrapped
                     label={CALCULATORS.probablityOfTwoEvents}
                     {...a11yProps(1)}
                   />
-                  <StyledTab
+                  <StyledTabForThree
                     wrapped
                     label={CALCULATORS.probablitySolverForTwoEvents}
                     {...a11yProps(2)}

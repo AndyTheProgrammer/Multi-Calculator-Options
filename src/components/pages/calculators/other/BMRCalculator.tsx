@@ -24,7 +24,7 @@ import {
   CustomResetBtn,
   Label,
   ResultTabsContainer,
-  StyledTab,
+  StyledTabForThree,
   StyledTabs,
   TabPanel,
   CustomSelect,
@@ -115,17 +115,17 @@ function BMRCalculator() {
           <animated.div style={formAnimation}>
             <Box className={formDisplay2} >
               <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>
-                <StyledTab
+                <StyledTabForThree
                   wrapped
                   label={CALCULATORS.bmrKatchMcArdle}
                   {...a11yProps(0)}
                 />
-                <StyledTab
+                <StyledTabForThree
                   wrapped
                   label={CALCULATORS.bmrHarrisBenedict}
                   {...a11yProps(1)}
                 />
-                <StyledTab
+                <StyledTabForThree
                   wrapped
                   label={CALCULATORS.bmrMifflinStJeorEquation}
                   {...a11yProps(2)}

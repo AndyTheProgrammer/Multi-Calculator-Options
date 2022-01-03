@@ -49,7 +49,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control "
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -81,7 +81,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control "
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -113,7 +113,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control "
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -145,7 +145,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control "
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -177,7 +177,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control "
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -209,7 +209,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control "
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -240,7 +240,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control "
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -271,7 +271,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control "
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -300,7 +300,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control "
           value={value}
           style={{
             backgroundColor: COLORS.newInput,

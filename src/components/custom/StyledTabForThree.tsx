@@ -2,14 +2,14 @@ import React from 'react';
 import { makeStyles, withStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Tab from '@mui/material/Tab';
 
-import { COLORS } from './../../common/shared'
+import { COLORS } from '../../common/shared'
 import { fontSize } from '@mui/system';
 
 interface StyledTabProps {
   label: string;
 }
 
-const StyledTab = withStyles((theme: Theme) =>
+const StyledTabForThree = withStyles((theme: Theme) =>
   createStyles({
     root: {
       color: COLORS.light_text_color,
@@ -34,6 +34,10 @@ const StyledTab = withStyles((theme: Theme) =>
       },
       '&:nth-child(2)': {
         borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+      },
+      '&:nth-child(3)': {
+        borderBottomLeftRadius: 20,
         borderTopRightRadius: 20,
       },
     },
@@ -45,4 +49,4 @@ const StyledTab = withStyles((theme: Theme) =>
   }),
 )((props: any) => <Tab disableRipple  {...props} />);
 
-export default StyledTab
+export default StyledTabForThree

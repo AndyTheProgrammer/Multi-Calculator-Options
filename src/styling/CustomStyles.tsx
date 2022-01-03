@@ -145,14 +145,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     paddingBottom: 2,
     margin: theme.spacing(2),
   },
-  fieldDisplay: {
-    display: 'flex',
-    flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // padding: 5
-
-  }
-
+  list: {
+    width: 250,
+  },
+  listItem: { color: COLORS.light_text_color },
+  fullList: {
+    width: "auto",
+    backgroundColor: "blue",
+  },
 }));
 
 export default useStyles;
