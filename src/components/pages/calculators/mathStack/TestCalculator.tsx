@@ -1266,6 +1266,7 @@ function TestCalculator() {
             onHandleOpen={handleClickOpen}
             animation={formAnimation}
           >
+            {/* Dropdown */}
             {open &&
               <Box sx={{
                 zIndex: 1,
@@ -1285,7 +1286,6 @@ function TestCalculator() {
                 >
                   {calculators.map((item: any) => (
                     <ListItem
-
                       button
                       onClick={() => handleClose(item.calcName)}
                       key={item.calcName}
