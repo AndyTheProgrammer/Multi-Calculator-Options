@@ -4,6 +4,7 @@ import { Box, Grid } from '@material-ui/core'
 import { NavBar2 } from '../../../navbar/navbar2'
 import AddLayout from '../../../layouts/AddLayout'
 import { SimpleDialog } from "../../../content";
+import geometry_icon from '../../../../common/assets/geometry_icon.svg';
 import {
   CALCULATORS,
   LABELS,
@@ -90,7 +91,11 @@ function SurfaceAreaCalculator() {
   return (
     <>
       <NavBar2 pagename="Surface Area Calculator" />
-      <AddLayout>
+      <AddLayout
+        categorykey='geometry'
+        searchname='Geometry Calculators'
+        searchimage={geometry_icon}
+      >
         <Grid
           container
           justifyContent="center"

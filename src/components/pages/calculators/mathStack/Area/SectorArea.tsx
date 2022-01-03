@@ -42,13 +42,13 @@ const SectorArea = (props: any) => {
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [initialFormValues] = React.useState({
+  const [sectorInitialValues] = React.useState({
     radius: "",
     radius_unit: "",
     angle: "",
     angle_unit: "",
   })
-  const [Result, setResult] = React.useState({
+  const [sectorResult, setSectorResult] = React.useState({
     area: 0,
     radiusUnits: 0,
     angleUnit: 0,
@@ -57,7 +57,7 @@ const SectorArea = (props: any) => {
     unit: ''
   })
 
-  const [resultTwo, setResultTwo] = React.useState({
+  const [sectorResultTwo, setSectorResultTwo] = React.useState({
 
   })
   const {
@@ -83,7 +83,7 @@ const SectorArea = (props: any) => {
         animation={formAnimation}
       >
         <Formik
-          initialValues={initialFormValues}
+          initialValues={sectorInitialValues}
           onSubmit={async ({
             radius,
             radius_unit,
@@ -112,7 +112,7 @@ const SectorArea = (props: any) => {
               } = sectorArea
               if (typeof sectorArea === 'object' && unitType === true) {
                 setSelectedResult(unitType)
-                setResult({
+                setSectorResult({
                   area: area,
                   radiusUnits: radiusUnits,
                   angleUnit: angleUnit,
@@ -196,7 +196,7 @@ const SectorArea = (props: any) => {
         >
           <div className="text-wrap text-center">
             <Typography variant="subtitle1">
-              = {Result.area}{Result.unit}<sup>2</sup>
+              = {sectorResult.area}{sectorResult.unit}<sup>2</sup>
             </Typography>
           </div>
         </ResultTabsContainer>

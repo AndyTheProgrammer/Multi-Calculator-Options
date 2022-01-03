@@ -15,6 +15,7 @@ interface FormProps {
   tabTitle2?: String;
   dropDown?: Boolean;
   openDrop?: String;
+  onHandleOpen?: (value: any) => any;
   animation?: {};
 }
 
@@ -25,6 +26,7 @@ function FormTabsContainer(props: FormProps) {
     tabTitle2,
     dropDown,
     openDrop,
+    onHandleOpen,
     animation,
   } = props;
   const {
@@ -42,18 +44,18 @@ function FormTabsContainer(props: FormProps) {
       >
         <Paper className={formDisplay}>
           <div className={tabRoot}>
-            {/* <StyledTabs>
+            <StyledTabs>
               <StaticTab
                 className={leftTabContainer}
                 label={tabTitle1}
-                // dropDown={true}
-                openDrop={openDrop}
+                dropDown={true}
+                openDrop={openDrop || onHandleOpen}
               />
               <StaticTab
                 className={rightTabContainer}
                 label={tabTitle2}
               />
-            </StyledTabs> */}
+            </StyledTabs>
 
             <NoIndexTabPanel>
               {children}

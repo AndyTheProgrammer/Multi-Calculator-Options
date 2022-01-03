@@ -41,19 +41,19 @@ const EllipseArea = (props: any) => {
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [initialFormValues] = React.useState({
+  const [ellipseInitialValues] = React.useState({
     semi_major_axes_a: "",
     semi_major_axes_a_unit: "",
     semi_major_axes_b: "",
     semi_major_axes_b_unit: "",
   })
-  const [Result, setResult] = React.useState({
+  const [ellipseResult, setEllipseResult] = React.useState({
     semi_major_axes_a: 0,
     semi_major_axes_b: 0,
     area: 0,
     unit: ''
   })
-  const [resultTwo, setResultTwo] = React.useState({
+  const [ellipseResultTwo, setEllipseResultTwo] = React.useState({
     areaInsemi_major_axes_aUnit: 0,
     areaInsemi_major_axes_bUnit: 0,
     semi_major_axes_aInsemi_major_axes_bUnit: 0,
@@ -83,7 +83,7 @@ const EllipseArea = (props: any) => {
         animation={formAnimation}
       >
         <Formik
-          initialValues={initialFormValues}
+          initialValues={ellipseInitialValues}
           onSubmit={async ({
             semi_major_axes_a,
             semi_major_axes_a_unit,
@@ -116,7 +116,7 @@ const EllipseArea = (props: any) => {
               } = ellipseArea
               if (typeof ellipseArea === 'object' && unitType === true) {
                 setSelectedResult(unitType)
-                setResult({
+                setEllipseResult({
                   area: area,
                   semi_major_axes_a: semi_major_axes_a,
                   semi_major_axes_b: semi_major_axes_b,
@@ -125,7 +125,7 @@ const EllipseArea = (props: any) => {
               }
               if (typeof ellipseArea === 'object' && unitType === false) {
                 setSelectedResult(unitType)
-                setResultTwo({
+                setEllipseResultTwo({
                   areaInsemi_major_axes_aUnit: areaInsemi_major_axes_aUnit,
                   areaInsemi_major_axes_bUnit: areaInsemi_major_axes_bUnit,
                   semi_major_axes_aInsemi_major_axes_bUnit: semi_major_axes_aInsemi_major_axes_bUnit,
@@ -206,17 +206,17 @@ const EllipseArea = (props: any) => {
           {selectedResult === true &&
             <div className="text-wrap text-center">
               <Typography variant="subtitle1">
-                = {Result.area}{Result.unit}<sup>2</sup>
+                = {ellipseResult.area}{ellipseResult.unit}<sup>2</sup>
               </Typography>
             </div>
           }
           {selectedResult === false &&
             <div className="text-wrap text-center">
               <Typography variant="subtitle1">
-                = {resultTwo.areaInsemi_major_axes_aUnit}<sup>2</sup>
+                = {ellipseResultTwo.areaInsemi_major_axes_aUnit}<sup>2</sup>
               </Typography>
               <Typography variant="subtitle1">
-                = {resultTwo.areaInsemi_major_axes_bUnit}<sup>2</sup>
+                = {ellipseResultTwo.areaInsemi_major_axes_bUnit}<sup>2</sup>
               </Typography>
             </div>
           }

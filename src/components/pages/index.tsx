@@ -84,3 +84,4 @@ export { default as SampleSizeCalculator } from "./calculators/mathStack/SampleS
 //export { default as } from '';
 
 
+export { default as TestCalculator } from './calculators/mathStack/TestCalculator';

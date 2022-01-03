@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     display: 'flex',
     padding: 10,
     // alignItems: 'left' ,
-    // justifyContent: 'space-evenly',
+    justifyContent: 'space-evenly',
     backgroundColor: theme.palette.background.paper,
     color: COLORS.text,
     width: "100%",
@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   rightTabContainer: {
     height: 25,
-    // background: COLORS.gradient,
+    backgroundColor: theme.palette.background.paper,
     color: COLORS.light_text_color,
     width: "100%",
     borderBottomLeftRadius: 20,

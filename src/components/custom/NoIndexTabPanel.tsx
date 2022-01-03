@@ -19,7 +19,7 @@ const NoIndexTabPanel = (props: TabPanelProps) => {
     >
       <FontProvider fonts={[{ font: 'Varela Round' }]}>
         <Box
-          p={5}
+          p={3}
           sx={{ color: COLORS.text }}
         >
           <Font>{children}</Font>

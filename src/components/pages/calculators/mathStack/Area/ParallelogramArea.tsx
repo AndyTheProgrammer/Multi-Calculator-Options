@@ -41,26 +41,27 @@ const ParallelogramArea = (props: any) => {
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [initialFormValues] = React.useState({
+  const [parallelogramInitialValues] = React.useState({
     breadth: '',
     breadth_unit: '',
     height: '',
     height_unit: ''
   })
-  const [Result, setResult] = React.useState({
+  const [parallelogramResult, setParallelogramResult] = React.useState({
     area: 0,
     breadth: 0,
     height: 0,
     unit: ''
   })
 
-  const [resultTwo, setResultTwo] = React.useState({
+  const [parallelogramResultTwo, setParallelogramResultTwo] = React.useState({
     areaInbreadthUnit: 0,
     areaInheightUnit: 0,
     breadthInheightUnit: 0,
     $heightInbreadthUnit: 0,
     submittedbreadth: 0,
-    submitted_height: 0
+    submitted_height: 0,
+    unit: ''
   })
   const {
     formDisplay
@@ -84,7 +85,7 @@ const ParallelogramArea = (props: any) => {
         animation={formAnimation}
       >
         <Formik
-          initialValues={initialFormValues}
+          initialValues={parallelogramInitialValues}
           onSubmit={async ({
             breadth,
             breadth_unit,
@@ -116,7 +117,7 @@ const ParallelogramArea = (props: any) => {
               } = parallelogramArea
               if (typeof parallelogramArea === 'object' && unitType === true) {
                 setSelectedResult(unitType)
-                setResult({
+                setParallelogramResult({
                   area: area,
                   breadth: submittedbreadth,
                   height: submitted_height,
@@ -126,13 +127,14 @@ const ParallelogramArea = (props: any) => {
 
               if (typeof parallelogramArea === 'object' && unitType === false) {
                 setSelectedResult(unitType)
-                setResultTwo({
+                setParallelogramResultTwo({
                   areaInbreadthUnit: areaInbreadthUnit,
                   areaInheightUnit: areaInheightUnit,
                   breadthInheightUnit: breadthInheightUnit,
                   $heightInbreadthUnit: $heightInbreadthUnit,
                   submitted_height: submitted_height,
-                  submittedbreadth: submittedbreadth
+                  submittedbreadth: submittedbreadth,
+                  unit: unit
                 })
               }
               if (success === true) {
@@ -207,17 +209,17 @@ const ParallelogramArea = (props: any) => {
           {selectedResult === true &&
             <div className="text-wrap text-center">
               <Typography variant="subtitle1">
-                = {Result.area}{Result.unit}<sup>2</sup>
+                = {parallelogramResult.area}{parallelogramResult.unit}<sup>2</sup>
               </Typography>
             </div>
           }
           {selectedResult === false &&
             <div className="text-wrap text-center">
               <Typography variant="subtitle1">
-                = {resultTwo.areaInbreadthUnit}{Result.unit}<sup>2</sup>
+                = {parallelogramResultTwo.areaInbreadthUnit}{parallelogramResultTwo.unit}<sup>2</sup>
               </Typography>
               <Typography variant="subtitle1">
-                = {resultTwo.areaInheightUnit}{Result.unit}<sup>2</sup>
+                = {parallelogramResultTwo.areaInheightUnit}{parallelogramResultTwo.unit}<sup>2</sup>
               </Typography>
             </div>
           }

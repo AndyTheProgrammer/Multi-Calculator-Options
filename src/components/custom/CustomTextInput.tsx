@@ -23,55 +23,46 @@ const CustomTextInput = (props: TextInputProps) => {
   if (col) {
     return (
       <div className="form-group col-8">
-        <Box sx={{
-          display: 'flex',
-          
-        }}>
-          <Field
-            className="form-control form-control-sm"
-            type={type}
-            name={name}
-            id={id}
-            placeholder={placeholder}
-            value={value}
-            onChange={onChange}
-            style={{
-              backgroundColor: COLORS.newInput,
-              // fontWeight: 500,
-              border: 'solid',
-              borderWidth: 1,
-              borderColor: 'gray',
-              borderRadius: 3,
-              
-            }}
-          />
-        </Box>
+        <Field
+          className="form-control form-control-sm"
+          type={type}
+          name={name}
+          id={id}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          style={{
+            backgroundColor: COLORS.newInput,
+            // fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            borderRadius: 3,
+
+          }}
+        />
       </div>
     )
   } else {
     return (
       <div className="form-group col">
-        <Box sx={{
-          display: 'flex',
-        }}>
-          <Field
-            className="form-control form-control-sm"
-            type={type}
-            name={name}
-            id={id}
-            placeholder={placeholder}
-            value={value}
-            onChange={onChange}
-            style={{
-              backgroundColor: COLORS.newInput,
-              // fontWeight: 500,
-              border: 'solid',
-              borderWidth: 1,
-              borderColor: 'gray',
-              borderRadius: 3,
-            }}
-          />
-        </Box>
+        <Field
+          className="form-control form-control-sm"
+          type={type}
+          name={name}
+          id={id}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          style={{
+            backgroundColor: COLORS.newInput,
+            // fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            borderRadius: 3,
+          }}
+        />
       </div>
     )
   }

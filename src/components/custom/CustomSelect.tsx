@@ -51,7 +51,14 @@ const CustomSelect = (props: SelectProps) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
+          style={{
+            backgroundColor: COLORS.newInput,
+            fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            width: '100%'
+          }}
         >
           {Angle.map(({ type, units }) => (
             units.map(({ name, unit }) => (
@@ -76,8 +83,15 @@ const CustomSelect = (props: SelectProps) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.newInput, fontWeight: 500, border: 'solid', borderWidth: 1, borderColor: 'gray', width: '100%' }}
-          >
+          style={{
+            backgroundColor: COLORS.newInput,
+            fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            width: '100%'
+          }}
+        >
           {Capacity.map(({ type, units }) => (
             units.map(({ name, unit }) => (
               <option
@@ -101,8 +115,15 @@ const CustomSelect = (props: SelectProps) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.newInput, fontWeight: 500, border: 'solid', borderWidth: 1, borderColor: 'gray', width: '100%' }}
-          >
+          style={{
+            backgroundColor: COLORS.newInput,
+            fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            width: '100%'
+          }}
+        >
           {Length.map(({ type, units }) => (
             units.map(({ name, unit }) => (
               <option
@@ -126,7 +147,14 @@ const CustomSelect = (props: SelectProps) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
+          style={{
+            backgroundColor: COLORS.newInput,
+            fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            width: '100%'
+          }}
         >
           {Speed.map(({ type, units }) => (
             units.map(({ name, unit }) => (
@@ -151,7 +179,14 @@ const CustomSelect = (props: SelectProps) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
+          style={{
+            backgroundColor: COLORS.newInput,
+            fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            width: '100%'
+          }}
         >
           {Data.map(({ type, units }) => (
             units.map(({ name, unit }) => (
@@ -176,7 +211,14 @@ const CustomSelect = (props: SelectProps) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
+          style={{
+            backgroundColor: COLORS.newInput,
+            fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            width: '100%'
+          }}
         >
           {Time.map(({ type, units }) => (
             units.map(({ name, unit }) => (
@@ -200,7 +242,14 @@ const CustomSelect = (props: SelectProps) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
+          style={{
+            backgroundColor: COLORS.newInput,
+            fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            width: '100%'
+          }}
         >
           {Weight.map(({ type, units }) => (
             units.map(({ name, unit }) => (
@@ -224,7 +273,14 @@ const CustomSelect = (props: SelectProps) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
+          style={{
+            backgroundColor: COLORS.newInput,
+            fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            width: '100%'
+          }}
         >
           {genders.map(({ type, label }) => (
             <option
@@ -246,7 +302,14 @@ const CustomSelect = (props: SelectProps) => {
           id={id}
           className="form-control form-control-sm"
           value={value}
-          style={{ backgroundColor: COLORS.input, color: COLORS.text, fontWeight: 500 }}
+          style={{
+            backgroundColor: COLORS.newInput,
+            fontWeight: 500,
+            border: 'solid',
+            borderWidth: 1,
+            borderColor: 'gray',
+            width: '100%'
+          }}
         >
           {Units.map(({ type, units }) => (
             units.map(({ name, unit }) => (

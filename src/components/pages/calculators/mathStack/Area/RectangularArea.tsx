@@ -40,20 +40,20 @@ const RectangularArea = (props: any) => {
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [initialFormValues] = React.useState({
+  const [rectInitialValues] = React.useState({
     length: '',
     length_unit: '',
     width: '',
     width_unit: '',
   })
-  const [Result, setResult] = React.useState({
+  const [rectResult, setRectResult] = React.useState({
     area: 0,
     submittedLength: 0,
     submitted_width: 0,
     units: ''
   })
 
-  const [resultTwo, setResultTwo] = React.useState({
+  const [rectResultTwo, setRectResultTwo] = React.useState({
     areaInLengthUnit: 0,
     areaInWidthUnit: 0,
     lengthInWidthUnit: 0,
@@ -81,7 +81,7 @@ const RectangularArea = (props: any) => {
         animation={formAnimation}
       >
         <Formik
-          initialValues={initialFormValues}
+          initialValues={rectInitialValues}
           onSubmit={async ({
             length,
             length_unit,
@@ -112,7 +112,7 @@ const RectangularArea = (props: any) => {
               } = rectangleArea
               if (typeof rectangleArea === 'object' && unitType === true) {
                 setSelectedResult(unitType)
-                setResult({
+                setRectResult({
                   area: area,
                   submittedLength: submittedLength,
                   submitted_width: submitted_width,
@@ -122,7 +122,7 @@ const RectangularArea = (props: any) => {
 
               if (typeof rectangleArea === 'object' && unitType === false) {
                 setSelectedResult(unitType)
-                setResultTwo({
+                setRectResultTwo({
                   areaInLengthUnit: areaInLengthUnit,
                   areaInWidthUnit: areaInWidthUnit,
                   lengthInWidthUnit: lengthInWidthUnit,
@@ -206,17 +206,17 @@ const RectangularArea = (props: any) => {
           {selectedResult === true &&
             <div className="text-wrap text-center">
               <Typography variant="subtitle1">
-                = {Result.area}{Result.units}<sup>2</sup>
+                = {rectResult.area}{rectResult.units}<sup>2</sup>
               </Typography>
             </div>
           }
           {selectedResult === false &&
             <div className="text-wrap text-center">
               <Typography variant="subtitle1">
-                = {resultTwo.areaInLengthUnit}{Result.units}<sup>2</sup>
+                = {rectResultTwo.areaInLengthUnit}{rectResult.units}<sup>2</sup>
               </Typography>
               <Typography variant="subtitle1">
-                = {resultTwo.areaInWidthUnit}{Result.units}<sup>2</sup>
+                = {rectResultTwo.areaInWidthUnit}{rectResult.units}<sup>2</sup>
               </Typography>
             </div>
           }

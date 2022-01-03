@@ -42,7 +42,7 @@ const TrapezoidArea = (props: any) => {
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [initialFormValues] = React.useState({
+  const [trapezoidInitialValues] = React.useState({
     base1: "",
     base1_unit: "",
     base2: "",
@@ -50,15 +50,14 @@ const TrapezoidArea = (props: any) => {
     height: "",
     height_unit: "",
   })
-  const [Result, setResult] = React.useState({
+  const [trapezoidResult, setTrapezoidResult] = React.useState({
     area: 0,
     base1: 0,
     base2: 0,
     height: 0,
     unit: ''
   })
-
-  const [resultTwo, setResultTwo] = React.useState({
+  const [trapezoidResultTwo, setTrapezoidResultTwo] = React.useState({
     areaInm: 0,
     base1tom: 0,
     base2tom: 0,
@@ -90,7 +89,7 @@ const TrapezoidArea = (props: any) => {
         animation={formAnimation}
       >
         <Formik
-          initialValues={initialFormValues}
+          initialValues={trapezoidInitialValues}
           onSubmit={async ({
             base1,
             base1_unit,
@@ -131,7 +130,7 @@ const TrapezoidArea = (props: any) => {
               } = TrapezoidArea
               if (typeof TrapezoidArea === 'object' && unitType === true) {
                 setSelectedResult(unitType)
-                setResult({
+                setTrapezoidResult({
                   area: area,
                   base1: submittedbase1,
                   base2: submitted_base2,
@@ -141,7 +140,7 @@ const TrapezoidArea = (props: any) => {
               }
               if (typeof TrapezoidArea === 'object' && unitType === false) {
                 setSelectedResult(unitType)
-                setResultTwo({
+                setTrapezoidResultTwo({
                   areaIncm: areaIncm,
                   base1tocm: base1tocm,
                   base2tocm: base2tocm,
@@ -244,17 +243,17 @@ const TrapezoidArea = (props: any) => {
           {selectedResult === true &&
             <div className="text-wrap text-center">
               <Typography variant="subtitle1">
-                = {Result.area}{Result.unit}<sup>2</sup>
+                = {trapezoidResult.area}{trapezoidResult.unit}<sup>2</sup>
               </Typography>
             </div>
           }
           {selectedResult === false &&
             <div className="text-wrap text-center">
               <Typography variant="subtitle1">
-                = {resultTwo.areaInm}{Result.unit}<sup>2</sup>
+                = {trapezoidResultTwo.areaInm}{trapezoidResult.unit}<sup>2</sup>
               </Typography>
               <Typography variant="subtitle1">
-                = {resultTwo.areaIncm}{Result.unit}<sup>2</sup>
+                = {trapezoidResultTwo.areaIncm}{trapezoidResult.unit}<sup>2</sup>
               </Typography>
             </div>
           }

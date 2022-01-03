@@ -44,11 +44,11 @@ const CircleArea = (props: any) => {
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [initialFormValues] = React.useState({
+  const [circleInitialValues] = React.useState({
     radius: "25",
     radius_unit: "",
   })
-  const [Result, setResult] = React.useState({
+  const [circleResult, setCircleResult] = React.useState({
     area: 0,
     units: '',
     Submitted_radius: '',
@@ -71,7 +71,7 @@ const CircleArea = (props: any) => {
         animation={formAnimation}
       >
         <Formik
-          initialValues={initialFormValues}
+          initialValues={circleInitialValues}
           onSubmit={async ({
             radius,
             radius_unit
@@ -88,7 +88,7 @@ const CircleArea = (props: any) => {
 
               if (typeof circleArea === 'object') {
                 const { area, units, submittedradius, submittedunit } = circleArea
-                setResult({
+                setCircleResult({
                   area: area,
                   units: units,
                   Submitted_radius: submittedradius,
@@ -153,7 +153,7 @@ const CircleArea = (props: any) => {
         >
           <div className="text-wrap text-center">
             <Typography variant="subtitle1">
-              = {Result.area}{Result.units}<sup>2</sup>
+              = {circleResult.area}{circleResult.units}<sup>2</sup>
             </Typography>
           </div>
         </ResultTabsContainer>

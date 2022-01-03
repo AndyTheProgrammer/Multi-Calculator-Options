@@ -43,7 +43,7 @@ const TriangleArea = (props: any) => {
     justifyContent: 'center',
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
-  const [initialFormValues] = React.useState({
+  const [triangleInitialValues] = React.useState({
     sideA: "",
     sideA_unit: "",
     sideB: "",
@@ -51,14 +51,14 @@ const TriangleArea = (props: any) => {
     sideC: "",
     sideC_unit: "",
   })
-  const [Result, setResult] = React.useState({
+  const [triangleResult, setTriangleResult] = React.useState({
     area: 0,
     sideA: 0,
     sideB: 0,
     sideC: 0,
     unit: ''
   })
-  const [Result2, setResult2] = React.useState({
+  const [triangleResult2, setTriangleResult2] = React.useState({
     areaInLenghtUnit: 0,
     areaInWidthUnit: 0,
     unit: ''
@@ -81,7 +81,7 @@ const TriangleArea = (props: any) => {
         animation={formAnimation}
       >
         <Formik
-          initialValues={initialFormValues}
+          initialValues={triangleInitialValues}
           onSubmit={async ({
             sideA,
             sideA_unit,
@@ -115,7 +115,7 @@ const TriangleArea = (props: any) => {
               } = triangleArea
               if (typeof triangleArea === 'object' && unitType === true) {
                 setSelectedResult(unitType)
-                setResult({
+                setTriangleResult({
                   area: area,
                   sideA: sideA,
                   sideB: sideB,
@@ -125,7 +125,7 @@ const TriangleArea = (props: any) => {
               }
               if (typeof triangleArea === 'object' && unitType === false) {
                 setSelectedResult(unitType)
-                setResult2({
+                setTriangleResult2({
                   areaInLenghtUnit: areaInLengthUnit,
                   areaInWidthUnit: areaInWidthUnit,
                   unit: units
@@ -221,17 +221,17 @@ const TriangleArea = (props: any) => {
           {selectedResult === true &&
             <div className="text-wrap text-center">
               <Typography variant="subtitle1">
-                = {Result.area}{Result.unit}<sup>2</sup>
+                = {triangleResult.area}{triangleResult.unit}<sup>2</sup>
               </Typography>
             </div>
           }
           {selectedResult === false &&
             <div className="text-wrap text-center">
               <Typography variant="subtitle1">
-                = {Result2.areaInLenghtUnit}{Result.unit}<sup>2</sup>
+                = {triangleResult2.areaInLenghtUnit}{triangleResult.unit}<sup>2</sup>
               </Typography>
               <Typography variant="subtitle1">
-                = {Result2.areaInWidthUnit}{Result.unit}<sup>2</sup>
+                = {triangleResult2.areaInWidthUnit}{triangleResult.unit}<sup>2</sup>
               </Typography>
             </div>
           }
