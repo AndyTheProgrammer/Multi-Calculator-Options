@@ -4,6 +4,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import IconButton from '@mui/material/IconButton';
 
 import { Font, FontProvider } from '../font'
+import { COLORS } from '../../common/shared';
 
 function StaticTab(props: any) {
   const { className, label, dropDown, dOptions, openDrop } = props
@@ -22,7 +23,7 @@ function StaticTab(props: any) {
 
         <div>
           {dropDown === true &&
-            <IconButton onClick={openDrop}>
+            <IconButton sx={{ height: 18, width: 18, color: COLORS.text }} onClick={openDrop}>
               <ExpandMore />
             </IconButton>
           }

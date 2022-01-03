@@ -85,7 +85,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   leftTabContainer: {
     display: 'flex',
     padding: 10,
-    // alignItems: 'left' ,
     justifyContent: 'space-evenly',
     backgroundColor: theme.palette.background.paper,
     color: COLORS.text,

@@ -1,13 +1,12 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Typography, Box, Grid, Paper, List, ListItem, ListItemText } from '@mui/material'
+import { Typography, Box, Grid, Paper, List, ListItem, ListItemText, ListItemButton } from '@mui/material'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
 import { NavBar2 } from '../../../navbar/navbar2'
 import AddLayout from '../../../layouts/AddLayout'
-import { SimpleDialog } from "../../../content";
 import useStyles from '../../../../styling/CustomStyles'
 import { calculateMath } from '../../../../services/AppCalculatorsApi'
 import { Font, FontProvider } from "../../../font";
@@ -1278,29 +1277,35 @@ function TestCalculator() {
                 boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
                 borderRadius: 2.5,
                 marginLeft: 1,
-              }}>
+              }}
+                className='text-center'
+              >
                 <List
+                  className='text-center'
                   sx={{
                     color: COLORS.light_text_color,
                   }}
                 >
                   {calculators.map((item: any) => (
                     <ListItem
-                      button
                       onClick={() => handleClose(item.calcName)}
                       key={item.calcName}
                     >
-                      <Font>
-                        <ListItemText
-                          primary={item.calcName}
-                          sx={{
-                            fontSize: 10,
-                            background: COLORS.gradient,
-                            padding: theme.spacing(0.5),
-                            borderRadius: '20px !important',
-                          }}
-                        />
-                      </Font>
+                      <ListItemButton
+                        sx={{
+                          fontSize: 10,
+                          background: COLORS.gradient,
+                          padding: theme.spacing(0.5),
+                          borderRadius: '20px !important',
+                        }}
+                      >
+                        <Font>
+                          <ListItemText
+                            primary={item.calcName}
+
+                          />
+                        </Font>
+                      </ListItemButton>
                     </ListItem>
                   ))}
                 </List>
