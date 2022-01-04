@@ -45,7 +45,7 @@ const CustomTextInput = (props: TextInputProps) => {
     )
   } else {
     return (
-      <div className="form-group col">
+      <div className="form-group col" >
         <Field
           className="form-control form-control-sm"
           type={type}

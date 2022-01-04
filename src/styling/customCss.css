@@ -403,7 +403,6 @@ select.form-control-sm:not([size]):not([multiple]) {
 .form-control-sm {
   min-height: calc(1.5em + 0.5rem + 2px);
   padding: 0.25rem 0.5rem;
-  font-size: 0.8rem !important;
   border-radius: 0.2rem;
 }
 
@@ -444,130 +443,127 @@ select.form-control-sm:not([size]):not([multiple]) {
     flex-direction: column;
   } */
 
-.show-border{
+.show-border {
   border: 0px solid red;
   max-width: 1024px;
   display: flex;
   justify-content: center;
 }
 
-.form-card-none{
+.form-card-none {
   border: 0px solid red;
-  height: 25px; 
+  height: 25px;
   width: 100%;
   /* background-image: linear-gradient(to left, #499FB8, #3128AF); */
   /* border-radius: 20px 3px 3px; */
   border-radius: 20px;
-  color: #4173B5;
+  color: #4173b5;
   padding-left: 10px;
-  font-weight: 'bold';
+  font-weight: "bold";
 }
 
-.form-card{
+.form-card {
   border: 0px solid red;
-  height: 25px; 
+  height: 25px;
   width: 100%;
-  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  background-image: linear-gradient(to left, #499fb8, #3128af);
   border-radius: 20px;
   color: white;
-  font-weight: 'bold';
+  font-weight: "bold";
   padding-left: 10px;
   box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
-.form-card-1{
+.form-card-1 {
   border: 0px solid red;
-  height: 25px; 
+  height: 25px;
   width: 100%;
-  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  background-image: linear-gradient(to left, #499fb8, #3128af);
   border-radius: 20px 1px 1px;
   color: white;
-  font-weight: 'bold';
+  font-weight: "bold";
   padding-left: 10px;
   box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
-.form-card-1-b{
+.form-card-1-b {
   border: 0px solid red;
-  height: 25px; 
+  height: 25px;
   width: 100%;
-  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  background-image: linear-gradient(to left, #499fb8, #3128af);
   border-radius: 20px 1px 20px;
   color: white;
-  font-weight: 'bold';
+  font-weight: "bold";
   padding-left: 10px;
   box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
-.form-card-1-c{
+.form-card-1-c {
   border: 0px solid red;
-  height: 25px; 
+  height: 25px;
   width: 100%;
-  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  background-image: linear-gradient(to left, #499fb8, #3128af);
   border-radius: 20px 1px 1px 1px;
   color: white;
-  font-weight: 'bold';
+  font-weight: "bold";
   padding-left: 10px;
   box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
-
-
-.form-card-2{
+.form-card-2 {
   border: 0px solid red;
-  height: 25px; 
+  height: 25px;
   width: 100%;
-  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  background-image: linear-gradient(to left, #499fb8, #3128af);
   border-radius: 1px 1px 1px 20px;
   color: white;
-  font-weight: 'bold';
+  font-weight: "bold";
   padding-left: 10px;
   box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
-.form-card-2-b{
+.form-card-2-b {
   border: 0px solid red;
-  height: 25px; 
+  height: 25px;
   width: 100%;
-  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  background-image: linear-gradient(to left, #499fb8, #3128af);
   border-radius: 1px 1px 20px;
   color: white;
-  font-weight: 'bold';
+  font-weight: "bold";
   padding-left: 10px;
   box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
-.form-card-2-c{
+.form-card-2-c {
   border: 0px solid red;
-  height: 25px; 
+  height: 25px;
   width: 100%;
-  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  background-image: linear-gradient(to left, #499fb8, #3128af);
   border-radius: 1px 1px 20px 1px;
   color: white;
-  font-weight: 'bold';
-  padding-left: 10px;
-    box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
-}
-
-
-.form-card-3{
-  border: 0px solid red;
-  height: 25px; 
-  width: 100%;
-  background-image: linear-gradient(to left, #499FB8, #3128AF);
-  border-radius: 1px 20px 1px 1px;
-  color: white;
-  font-weight: 'bold';
+  font-weight: "bold";
   padding-left: 10px;
   box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }
 
-.form-card-3-b{
+.form-card-3 {
   border: 0px solid red;
-  height: 25px; 
+  height: 25px;
   width: 100%;
-  background-image: linear-gradient(to left, #499FB8, #3128AF);
+  background-image: linear-gradient(to left, #499fb8, #3128af);
+  border-radius: 1px 20px 1px 1px;
+  color: white;
+  font-weight: "bold";
+  padding-left: 10px;
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+.form-card-3-b {
+  border: 0px solid red;
+  height: 25px;
+  width: 100%;
+  background-image: linear-gradient(to left, #499fb8, #3128af);
   border-radius: 1px 20px 1px 20px;
   color: white;
-  font-weight: 'bold';
+  font-weight: "bold";
   padding-left: 10px;
   box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.2);
 }

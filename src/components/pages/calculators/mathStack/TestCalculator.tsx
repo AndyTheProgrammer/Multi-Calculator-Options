@@ -20,7 +20,6 @@ import {
   TrapezoidAreaI,
   TriangleAreaI,
 } from '../../../../types'
-import PlaceHolder from '../../../custom/PlaceHolder';
 import {
   CALCULATORS,
   LABELS,
@@ -35,9 +34,21 @@ import {
   CustomBtn,
   CustomResetBtn,
   Label,
+  FormRow,
   FormTabsContainer,
+  Image,
+  PlaceHolder,
   ResultTabsContainer,
 } from '../../../custom'
+import {
+  circle,
+  ellipse,
+  parallelogram,
+  rectangle,
+  sector,
+  trapezoid,
+  triangle,
+} from "../../../../common/assets/images"
 
 const Latex = require('react-latex');
 
@@ -235,6 +246,10 @@ function TestCalculator() {
   // main state
   const [currentCalc, setCurrentCalc] = React.useState({
     calcName: "Circle Area",
+    placeholder: <PlaceHolder
+      placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.     '
+    />,
+    image: <Image path={circle} />,
     form: <Formik
       initialValues={circleInitialValues}
       onSubmit={async ({
@@ -277,7 +292,7 @@ function TestCalculator() {
     >
       {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
         <form onSubmit={handleSubmit} className="form-container">
-          <div className='form-row'>
+          <FormRow>
             <Label title={LABELS.radius} />
             <CustomTextInput
               type={INPUT_TYPE.text}
@@ -293,7 +308,7 @@ function TestCalculator() {
               value={values.radius_unit}
               onChange={handleChange('radius_unit')}
             />
-          </div>
+          </FormRow>
 
           <div
             className="form-row"
@@ -322,6 +337,10 @@ function TestCalculator() {
   const calculators = [
     {
       calcName: "Circle Area",
+      placeholder: <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.     '
+      />,
+      image: <Image path={circle} />,
       form: <Formik
         initialValues={circleInitialValues}
         onSubmit={async ({
@@ -364,7 +383,7 @@ function TestCalculator() {
       >
         {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className='form-row'>
+            <FormRow>
               <Label title={LABELS.radius} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -380,7 +399,7 @@ function TestCalculator() {
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
               />
-            </div>
+            </FormRow>
 
             <div
               className="form-row"
@@ -406,6 +425,10 @@ function TestCalculator() {
     },
     {
       calcName: "Ellipse Area",
+      placeholder: <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.     '
+      />,
+      image: <Image path={ellipse} />,
       form: <Formik
         initialValues={ellipseInitialValues}
         onSubmit={async ({
@@ -468,7 +491,7 @@ function TestCalculator() {
       >
         {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.semiMajorAxesA} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -484,9 +507,9 @@ function TestCalculator() {
                 value={values.semi_major_axes_a_unit}
                 onChange={handleChange('semi_major_axes_a_unit')}
               />
-            </div>
+            </FormRow>
 
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.semiMajorAxesB} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -502,7 +525,7 @@ function TestCalculator() {
                 value={values.semi_major_axes_b_unit}
                 onChange={handleChange('semi_major_axes_b_unit')}
               />
-            </div>
+            </FormRow>
 
             <div
               className="form-row"
@@ -515,8 +538,9 @@ function TestCalculator() {
               <CustomBtn />
             </div>
           </form>
-        )}
-      </Formik>,
+        )
+        }
+      </Formik >,
       result: <div className="text-wrap text-center">
         <p style={{ fontSize: 14 }}>
           <Latex displayMode={true}>{LATEX.ellipseArea}</Latex>
@@ -542,6 +566,10 @@ function TestCalculator() {
     },
     {
       calcName: "Parallelogram Area",
+      placeholder: <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.     '
+      />,
+      image: <Image path={parallelogram} />,
       form: <Formik
         initialValues={parallelogramInitialValues}
         onSubmit={async ({
@@ -605,7 +633,7 @@ function TestCalculator() {
       >
         {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.breadth} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -621,9 +649,9 @@ function TestCalculator() {
                 value={values.breadth_unit}
                 onChange={handleChange('breadth_unit')}
               />
-            </div>
+            </FormRow>
 
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.height} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -639,7 +667,7 @@ function TestCalculator() {
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
               />
-            </div>
+            </FormRow>
 
             <div
               className="form-row"
@@ -679,6 +707,10 @@ function TestCalculator() {
     },
     {
       calcName: "Rectangle Area",
+      placeholder: <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.     '
+      />,
+      image: <Image path={rectangle} />,
       form: <Formik
         initialValues={rectInitialValues}
         onSubmit={async ({
@@ -741,7 +773,7 @@ function TestCalculator() {
       >
         {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.length} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -757,10 +789,10 @@ function TestCalculator() {
                 value={values.length_unit}
                 onChange={handleChange('length_unit')}
               />
-            </div>
+            </FormRow>
 
 
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.width} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -776,7 +808,7 @@ function TestCalculator() {
                 value={values.width_unit}
                 onChange={handleChange('width_unit')}
               />
-            </div>
+            </FormRow>
 
             <div
               className="form-row"
@@ -816,6 +848,10 @@ function TestCalculator() {
     },
     {
       calcName: "Sector Area",
+      placeholder: <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.     '
+      />,
+      image: <Image path={sector} />,
       form: <Formik
         initialValues={sectorInitialValues}
         onSubmit={async ({
@@ -868,7 +904,7 @@ function TestCalculator() {
       >
         {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.radius} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -884,9 +920,9 @@ function TestCalculator() {
                 value={values.radius_unit}
                 onChange={handleChange('radius_unit')}
               />
-            </div>
+            </FormRow>
 
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.angle} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -902,7 +938,7 @@ function TestCalculator() {
                 value={values.angle_unit}
                 onChange={handleChange('angle_unit')}
               />
-            </div>
+            </FormRow>
 
             <div
               className="form-row"
@@ -928,6 +964,10 @@ function TestCalculator() {
     },
     {
       calcName: "Trapezoid Area",
+      placeholder: <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.     '
+      />,
+      image: <Image path={trapezoid} />,
       form: <Formik
         initialValues={trapezoidInitialValues}
         onSubmit={async ({
@@ -1002,7 +1042,7 @@ function TestCalculator() {
       >
         {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.base1} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -1018,9 +1058,9 @@ function TestCalculator() {
                 value={values.base1_unit}
                 onChange={handleChange('base1_unit')}
               />
-            </div>
+            </FormRow>
 
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.base2} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -1036,9 +1076,9 @@ function TestCalculator() {
                 value={values.base2_unit}
                 onChange={handleChange('base2_unit')}
               />
-            </div>
+            </FormRow>
 
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.height} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -1054,7 +1094,7 @@ function TestCalculator() {
                 value={values.height_unit}
                 onChange={handleChange('height_unit')}
               />
-            </div>
+            </FormRow>
 
             <div
               className="form-row"
@@ -1094,6 +1134,10 @@ function TestCalculator() {
     },
     {
       calcName: "Triangle Area",
+      placeholder: <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.     '
+      />,
+      image: <Image path={triangle} />,
       form: <Formik
         initialValues={triangleInitialValues}
         onSubmit={async ({
@@ -1155,7 +1199,7 @@ function TestCalculator() {
       >
         {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.sideA} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -1171,9 +1215,9 @@ function TestCalculator() {
                 value={values.sideA_unit}
                 onChange={handleChange('sideA_unit')}
               />
-            </div>
+            </FormRow>
 
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.sideB} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -1189,9 +1233,9 @@ function TestCalculator() {
                 value={values.sideB_unit}
                 onChange={handleChange('sideB_unit')}
               />
-            </div>
+            </FormRow>
 
-            <div className="form-row">
+            <FormRow>
               <Label title={LABELS.sideC} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
@@ -1207,7 +1251,7 @@ function TestCalculator() {
                 value={values.sideC_unit}
                 onChange={handleChange('sideC_unit')}
               />
-            </div>
+            </FormRow>
 
             <div
               className="form-row"
@@ -1259,13 +1303,14 @@ function TestCalculator() {
           container
           justifyContent="center"
         >
+          {currentCalc.placeholder}
           <FormTabsContainer
             tabTitle1={currentCalc.calcName}
             dropDown={true}
             onHandleOpen={handleClickOpen}
             animation={formAnimation}
           >
-            {/* Dropdown */}
+            {/* DROPDOWN */}
             {open &&
               <Box sx={{
                 zIndex: 1,
@@ -1311,6 +1356,19 @@ function TestCalculator() {
                 </List>
               </Box>
             }
+
+            {/* IMAGE */}
+            <Box mt={0} mb={2}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {currentCalc.image}
+            </Box>
+
+            {/* FORM */}
             {currentCalc.form}
           </FormTabsContainer>
 
