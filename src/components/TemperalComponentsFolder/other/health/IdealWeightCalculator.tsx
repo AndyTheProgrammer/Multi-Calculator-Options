@@ -6,39 +6,20 @@
  import React, { useRef, useState, useEffect } from 'react'
  import CustomForm from '../../../forms/CustomForm'
  import { Field, Form, Formik, FormikProps } from 'formik'
- import { otherMainService } from '../../../../services/mathService/mathMainService'
+ import { otherMainService, mathMainService } from '../../../../services/mathService/mathMainService'
  import Anime from 'react-animejs-wrapper'
  import AddLayout from '../../../layouts/AddLayout'
  import { Box, Grid } from '@mui/material'
  import { NavBar2 } from '../../../navbar/navbar2'
  import { CustomFormikForm } from '../../../forms/CustomForm'
- import { labelStyle, formCardStyle, formDisplay } from '../../../../styling/CustomStyles';
+ import { labelStyle, formCardStyle, formDisplay } from '../../../../styling/CustomStyles'
  import { CustomFormBtn, CustomFormImageBtn } from '../../../custom/CustomFormBtn'
  import other_icon from '../../../../common/assets/other_icon.svg';
  import health_calc_icon from '../../../../common/assets/others_icons/health_calc_icon.svg';
  
  const Latex = require('react-latex');
  
- const WeightUnit = (props:any) => ( 
-    <Box sx={{
-      display: 'flex',
-    }}>
-      <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
-      <select 
-      style={{
-        width:'100%',
-        backgroundColor:'#F0F3F6',
-        border: 'none',
-        borderColor: 'red',
-        borderRadius: 7,
-        outline: 'none',
-        color:'black' 
-      }}
-      {...props} >
-        <option value="kg">kg</option>
-      </select>
-    </Box>
-);
+
 
 const HeightUnit = (props:any) => ( 
     <Box sx={{
@@ -61,7 +42,7 @@ const HeightUnit = (props:any) => (
     </Box>
 );
 
-const TwinsUnit = (props:any) => ( 
+const WeightUnit = (props:any) => ( 
     <Box sx={{
       display: 'flex',
     }}>
@@ -77,14 +58,13 @@ const TwinsUnit = (props:any) => (
         color:'black' 
       }}
       {...props} >
-        <option value="yes">yes</option>
-        <option value="yes">no</option>
+        <option value="kg">kg</option>
       </select>
     </Box>
 );
 
  
- export default function PregnancyWeightGainCalculator(){
+ export default function IdealWeightCalculator(){
     const [value, setValue] = useState<any[]>([])
     const [playAnimation, setPlayAnimation] = useState(false)
     const [mediaQueryValue, setMediaQueryValue] = useState(false)
@@ -133,7 +113,7 @@ const TwinsUnit = (props:any) => (
  
      return(
          <>
-         <NavBar2 pageimage={other_icon} categoryname="Health Calculators" pagename="Pregnancy Weight Gain Calculator" />
+         <NavBar2 pageimage={other_icon} categoryname="Health Calculators" pagename="Ideal Weight Calculator" />
          <AddLayout categorykey='health' searchname='Health Calculators' searchimage={health_calc_icon}>
             <Box sx={{ display: 'flex', justifyContent:'center'}}>
             <Box className='animated-content-center'>
@@ -149,38 +129,33 @@ const TwinsUnit = (props:any) => (
                     <Box 
                         sx={{ maxWidth: 450,paddingBottom: 1 }}
                         className="animated-box" >
-                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                         <Box sx={{height:25, width: '100%' }}></Box>
-                     </Box>
+                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                            <Box sx={{height:25, width: '100%' }}></Box>
+                        </Box>
                      <Formik
                          initialValues={{ 
                             height:"",
                             height_unit: "cm",
-                            weight: "",
-                            weight_unit:"kg",
-                            twins: "yes",
-                            weeks: "",
-                            method: "PregnancyWeightGainCalculator"
+                            gender: "",
+                            method: "IdealWeightCalculator"
                          }}
                          onSubmit = {(values)=>{
-                             var week = parseInt(values.weeks)
+
                              const data = {
                                 height: values.height,
                                 height_unit: values.height_unit,
-                                weight: values.weight,
-                                weight_unit: values.weight_unit,
-                                twins: values.twins,
-                                weeks: week,
+                                gender: values.gender,
                                 method: values.method
                              }
-                             
+
+                             console.log(data)
                              const postData = async () => {
                                  console.log("**** DATA UNIT ****")
                                  const responseData = await otherMainService(data)
                                  console.log(responseData)
                                  var msg:any = responseData.statusDescription;
                                  if(msg === "success"){
-                                     setValue([responseData.message.answer])
+                                     setValue([responseData.message])
                                      console.log(responseData)
                                  }
                              }
@@ -215,47 +190,17 @@ const TwinsUnit = (props:any) => (
                                          />
                                          </Grid>
                                      
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Weight</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="weight"
-                                                 component={CustomFormikForm}
-                                             />
-                                         </Grid>  
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Weight unit</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="weight_unit"
-                                                 as={WeightUnit}
-                                             />
-                                         </Grid>  
-                                         <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Twins</Box>
-                                         </Grid>
-                                         <Grid item xs={5}>
-                                             <Field
-                                                 type="text"
-                                                 name="twins"
-                                                 as={TwinsUnit}
-                                             />
-                                         </Grid>     
 
                                          <Grid item xs={7}>
-                                             <Box sx={{ ...labelStyle }}>Weeks</Box>
+                                             <Box sx={{ ...labelStyle }}>Gender</Box>
                                          </Grid>
                                          <Grid item xs={5}>
                                              <Field
                                                  type="text"
-                                                 name="weeks"
+                                                 name="gender"
                                                  component={CustomFormikForm}
                                              />
-                                         </Grid>                
+                                         </Grid>                                                             
                                      </Grid>
                                      
                                      <Box sx={{flexGrow: 1}}>
@@ -283,7 +228,7 @@ const TwinsUnit = (props:any) => (
                                             <Box sx={{display:"flex", justifyContent:"end"}}>
                                                 <CustomFormImageBtn type="submit" name="Calculate"/>   
                                             </Box>
-                                    </Box>
+                                        </Box>
                                  </Box>
                              </Form>
                          )}
@@ -297,7 +242,7 @@ const TwinsUnit = (props:any) => (
              
              */}
  
-                <Anime
+                    <Anime
                         className='animated-pos animated-margin'
                         style={{
                             zIndex: -5
@@ -330,9 +275,9 @@ const TwinsUnit = (props:any) => (
                             </Box>
                             :<Box></Box>
                         }
-                </Anime>
+                    </Anime>
+                </Box>
              </Box>
-            </Box>
          </AddLayout>
          </>
      );

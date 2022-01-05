@@ -25,29 +25,6 @@ export const CustomFormikOptions = (props:any) => (
 );
 
 
-// export const CustomFormikOptionsFractions = (props:any) => (
- 
-//   <Box sx={{
-//     display: 'flex',
-//   }}>
-//     <select 
-//     style={{
-//       width:'100%',
-//       backgroundColor:'#F0F3F6',
-//       border: 'none',
-//       borderColor: 'red',
-//       borderRadius: 7,
-//       outline: 'none',
-//       color:'black' 
-//     }}
-//     {...props} >
-//       <option value=""> </option>
-//       <option value="subtraction">-</option>
-//       <option value="multiply">x</option>
-//     </select>
-//   </Box>
-// );
-
 export const CustomFormikOptionsFractions = (props:any) => (
  
   <Box sx={{
@@ -72,32 +49,33 @@ export const CustomFormikOptionsFractions = (props:any) => (
   </Box>
 );
 
-// export const CustomFormikForm = ({
-//   field, // { name, value, onChange, onBlur }
-//   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-//   ...props
-// }:any) => (
-// <Box sx={{
-//           display: 'flex',
-//         }}>
-//           <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
-//           <input
-//             style={{
-//               width:'100%',
-//               backgroundColor:'#F0F3F6',
-//               border: 'solid',
-//               borderWidth: 0,
-//               borderColor: 'red',
-//               borderRadius: 7,
-//               outline: 'none'
-//             }}
-//             type="text" {...field} {...props}
-//           />
-//         </Box>
-//   // <div>
-//   //   <input type="text" {...field} {...props} />
-//   // </div>
-// );
+export const PercentageOptions = (props:any) => (
+ 
+  <Box sx={{
+    display: 'flex',
+  }}>
+    <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
+    <select 
+    style={{
+      width:'100%',
+      // backgroundColor:'#F0F3F6',
+      backgroundColor:'#EEEEEE',
+      border: 'solid',
+      borderWidth: 1,
+      borderColor: 'gray',
+      borderRadius: 3,
+      height: 30
+      // outline: 'none'
+    }}
+    {...props} >
+      <option value=""> </option>
+      <option value="increase">increase</option>
+      <option value="decrease">decrease</option>
+    </select>
+  </Box>
+);
+
+
 
 export const CustomFormikForm = ({
   field, // { name, value, onChange, onBlur }
@@ -122,9 +100,6 @@ export const CustomFormikForm = ({
             type="text" {...field} {...props}
           />
         </Box>
-  // <div>
-  //   <input type="text" {...field} {...props} />
-  // </div>
 );
 
 
@@ -189,33 +164,6 @@ export const CustomFormikFormRatio = ({
   // </div>
 );
 
-// const CustomForm = (props: any) => {
-//     return (
-//         <Box sx={{
-//           display: 'flex',
-//         }}>
-//           <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
-//           <input
-//             style={{
-//               width:'100%',
-//               backgroundColor:'#F0F3F6',
-//               border: 'solid',
-//               borderWidth: 0,
-//               borderColor: 'red',
-//               borderRadius: 7,
-//               outline: 'none',
-//               fontSize: 20
-//             }}
-//             name={props.name}
-//             id={props.id}
-//             type={props.type}
-//             placeholder={props.placeholder}
-//             value={props.value}
-//             onChange={props.onChange}
-//           />
-//         </Box>
-//     );
-//   }
 
 const CustomForm = (props: any) => {
   return (

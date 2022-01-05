@@ -5,23 +5,17 @@ import { financeService } from '../../../../services/mathService/mathMainService
 import Anime from 'react-animejs-wrapper'
 import AddLayout from '../../../layouts/AddLayout'
 import { Box, Grid, Typography } from '@mui/material'
-import { CustomFormBtn } from '../../../custom/CustomFormBtn'
 import { NavBar2 } from '../../../navbar/navbar2'
 import { labelStyle, formCardStyle, formDisplay } from '../../../../styling/CustomStyles'
 import { CustomFormikForm } from '../../../forms/CustomForm'
-
-
-const innerBoxStyle = {
-    width: 400,
-    height: 300,
-    borderRadius: 10,
-    boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
-    backgroundColor: 'white'
- }
-
+import { CustomFormBtn, CustomFormImageBtn } from '../../../custom/CustomFormBtn';
+import finance_icon from '../../../../common/assets/finance_icon.svg';
+import money_tax_icon from '../../../../common/assets/money_tax_icon.svg';
 
 export default function DebtToIncomeCalculator(){
-    const [value, setValue] = useState("")
+    const [value, setValue] = useState<any[]>([])
+    const [playAnimation, setPlayAnimation] = useState(false)
+    const [mediaQueryValue, setMediaQueryValue] = useState(false)
     const animatedSquaresRef1 = useRef(null)
     const animatedSquaresRef2= useRef(null)
   
@@ -29,21 +23,60 @@ export default function DebtToIncomeCalculator(){
     const play1 = () => animatedSquaresRef1.current.play();
     // @ts-ignore: Object is possibly 'null'.
     const play2 = () => animatedSquaresRef2.current.play();
-    useEffect(()=>{
-        if(value){
-            play1();
-            play2();
+    // @ts-ignore: Object is possibly 'null'.
+    const reverse1 = () => animatedSquaresRef1.current.reverse();
+    // @ts-ignore: Object is possibly 'null'.
+    const reverse2 = () => animatedSquaresRef2.current.reverse();
+
+    
+    const controlAnimation = () => {
+        if(mediaQueryValue){
+            if(playAnimation){
+                // console.log("Monkey")
+                play1();
+                play2();
+                reverse1();
+                reverse2();
+                setValue([]);
+                setPlayAnimation(false);
+            }
         }
+        else{
+            setValue([]);
+        }
+    } 
+
+    useEffect(()=>{
+        const mediaQuery = window.matchMedia('(min-width: 1000px)');
+        setMediaQueryValue(mediaQuery.matches);
+        
+        if (mediaQuery.matches) {
+            if(value.length){
+                play1();
+                play2();
+                setPlayAnimation(true)
+            }
+        }  
     })
     return(
         <>
-        <NavBar2 pagename="Debt To Income Calculator"/>
-        <AddLayout>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <NavBar2 pageimage={finance_icon} categoryname="Money Calculators" pagename="Debt To Income Calculator"/>
+        <AddLayout categorykey='money' searchname='Money Calculators' searchimage={money_tax_icon}>
+            <Typography 
+                sx={{
+                    paddingLeft: 1.5, 
+                    marginBottom: 2,
+                    fontFamily: 'Roboto, Helvetica',
+                    fontSize: 16
+                }}>
+                <Box>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
+                </Box>
+            </Typography>
+            <Box sx={{ display: 'flex', justifyContent:'center'}}>
+            <Box className='animated-content-center'>
                 <Anime
-                    style={{
-                        position: 'absolute',
-                    }}
+                    className='animated-pos animated-margin'
                     ref={animatedSquaresRef1}
                     config={{
                         translateX: -250,
@@ -51,42 +84,45 @@ export default function DebtToIncomeCalculator(){
                         easing: 'easeInOutSine',
                         autoplay: false,
                     }}>
-                    <Box sx={{...formDisplay}}>
+                    <Box 
+                        sx={{ maxWidth: 450,paddingBottom: 1 }}
+                        className="animated-box" >
                         
-
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                             <Box sx={{height:25, width: '100%' }}></Box>
-                            <Box sx={{...formCardStyle}}></Box>
+                            {/* <Box sx={{...formCardStyle}}></Box> */}
                         </Box>
                         <Formik
                             initialValues={{ 
-                                salary_and_earned_income:"",
-                                pension_and_social_security:"",
-                                investment_and_savings:"",
-                                other_income:"",
-                                rental_cost:"",
-                                mortgage:"",
-                                property_tax:"",
-                                other_expenses:"",
-                                auto_loan:"",
-                                credit_cards:"",
-                                homeowner_insurance:"",
-                                hoa_fees:"",
-                                method: "DebtToIncomeCalculator"
+                                salary_and_earned_income: "",
+                                pension_and_social_security: "",
+                                investment_and_savings: "",
+                                other_income: "",
+                                rental_cost: "",
+                                mortgage: "",
+                                property_tax: "",
+                                other_expenses: "",
+                                auto_loan: "",
+                                credit_cards: "",
+                                homeowner_insurance: "",
+                                hoa_fees: "",
+                                method: "DebtToIncomeCalculator",
+
                             }}
                             onSubmit = {(values)=>{
-                                const salary_and_earned_income = parseInt(values.salary_and_earned_income);
-                                const pension_and_social_security = parseInt(values.pension_and_social_security);
-                                const investment_and_savings = parseInt(values.investment_and_savings);
-                                const other_income = parseInt(values.other_income);
-                                const rental_cost = parseInt(values.rental_cost);
-                                const mortgage = parseInt(values.mortgage);
-                                const property_tax = parseInt(values.property_tax);
-                                const other_expenses = parseInt(values.other_expenses);
-                                const auto_loan = parseInt(values.auto_loan);
-                                const credit_cards = parseInt(values.credit_cards);
-                                const homeowner_insurance = parseInt(values.homeowner_insurance);
-                                const hoa_fees = parseInt(values.hoa_fees);
+                                const salary_and_earned_income = parseInt(values.salary_and_earned_income)
+                                const pension_and_social_security = parseInt(values.pension_and_social_security)
+                                const investment_and_savings = parseInt(values.investment_and_savings)
+                                const other_income = parseInt(values.other_income)
+                                const rental_cost = parseInt(values.rental_cost)
+                                const mortgage = parseInt(values.mortgage)
+                                const property_tax = parseInt(values.property_tax)
+                                const other_expenses = parseInt(values.other_expenses)
+                                const auto_loan = parseInt(values.auto_loan)
+                                const credit_cards = parseInt(values.credit_cards)
+                                const homeowner_insurance = parseInt(values.homeowner_insurance)
+                                const hoa_fees = parseInt(values.hoa_fees)
+
                                 const data = {
                                     salary_and_earned_income: salary_and_earned_income,
                                     pension_and_social_security: pension_and_social_security,
@@ -100,17 +136,16 @@ export default function DebtToIncomeCalculator(){
                                     credit_cards: credit_cards,
                                     homeowner_insurance: homeowner_insurance,
                                     hoa_fees: hoa_fees,
-                                    method: values.method
+                                    method: "DebtToIncomeCalculator",
                                 }
                                 console.log(data)
+                                setValue(['NO DATA FROM END POINT'])
                                 const postData = async () => {
                                     const responseData = await financeService(data)
                                     
                                     var msg:any = responseData.statusDescription;
                                     if(msg === "success"){
-                                        console.log("Hacking is beautiful")
-                                        setValue(responseData.message.distance)
-                                        console.log(responseData)
+                                        // setValue([responseData.message])
                                     }
                                 }
                                 postData()
@@ -118,11 +153,11 @@ export default function DebtToIncomeCalculator(){
                                 
                             {(props: FormikProps<any>) => (
                                 <Form>
-                                    <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
+                                    <Box sx={{  minHeight: 250, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>salary and earned income</Box></Grid>
+                                                <Box sx={{...labelStyle}}>salary_and_earned_income</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
@@ -132,45 +167,41 @@ export default function DebtToIncomeCalculator(){
                                             </Grid>
 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Pension and social security</Box></Grid>
+                                                <Box sx={{...labelStyle}}>pension_and_social_security</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="pension_and_social_security"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-
-                                            
+                                            </Grid>   
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>investment and savings</Box></Grid>
+                                                <Box sx={{...labelStyle}}>investment_and_savings</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="investment_and_savings"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-
+                                            </Grid>   
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>other income</Box></Grid>
+                                                <Box sx={{...labelStyle}}>other_income</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="other_income"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
+                                            </Grid>    
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>rental cost</Box></Grid>
+                                                <Box sx={{...labelStyle}}>rental_cost</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="rental_cost"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-
+                                            </Grid>   
                                             <Grid item={true} xs={5} >
                                                 <Box sx={{...labelStyle}}>mortgage</Box></Grid>
                                             <Grid item={true} xs={7}>
@@ -179,20 +210,19 @@ export default function DebtToIncomeCalculator(){
                                                     name="mortgage"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-
+                                            </Grid>  
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>property tax</Box></Grid>
+                                                <Box sx={{...labelStyle}}>property_tax</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="property_tax"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
+                                            </Grid>  
 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>other expenses</Box></Grid>
+                                                <Box sx={{...labelStyle}}>other_expenses</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
@@ -200,47 +230,43 @@ export default function DebtToIncomeCalculator(){
                                                     component={CustomFormikForm}
                                                 />
                                             </Grid>
-
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>auto loan</Box></Grid>
+                                                <Box sx={{...labelStyle}}>auto_loan</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="auto_loan"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-
+                                            </Grid>   
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>credit cards</Box></Grid>
+                                                <Box sx={{...labelStyle}}>credit_cards</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="credit_cards"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-
+                                            </Grid> 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>homeowner insurance</Box></Grid>
+                                                <Box sx={{...labelStyle}}>homeowner_insurance</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="homeowner_insurance"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-
+                                            </Grid> 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>hoa fees</Box></Grid>
+                                                <Box sx={{...labelStyle}}>hoa_fees</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
                                                     name="hoa_fees"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-                                                            
+                                            </Grid> 
+                                                       
                                         </Grid>
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
@@ -248,25 +274,27 @@ export default function DebtToIncomeCalculator(){
                                             */}
                                         </Box>
 
-                                    <Grid container rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item xs={4}>
+                                        <Box 
+                                        // className="toggle-box-primary"
+                                        sx={{
+                                            paddingLeft: 2, paddingRight: 2, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
                                                 <Box sx={{display:"flex", justifyContent:"start"}}>
                                                     <CustomFormBtn 
                                                     type="button" 
                                                     handleClick={()=>{ 
-                                                        play1();
-                                                        play2();
-                                                    }} 
+                                                        controlAnimation();
+
+                                                        }} 
                                                     name="Clear"/>
                                                 </Box>
-                                        </Grid>
-                                        <Grid item xs={4}></Grid>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                    <CustomFormBtn type="submit" name="Calculate"/>
-                                                </Box>
-                                        </Grid>
-                                    </Grid>
+                                            <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                            
+                                            </Box>
+                                            <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                <CustomFormImageBtn type="submit" name="Calculate"/>   
+                                            </Box>
+                                        </Box>
                                     </Box>
                                 </Form>
                             )}
@@ -275,8 +303,8 @@ export default function DebtToIncomeCalculator(){
                 </Anime>
 
                 <Anime
+                    className='animated-pos animated-margin'
                     style={{
-                        position: 'absolute',
                         zIndex: -5
                     }}
                     ref={animatedSquaresRef2}
@@ -285,27 +313,28 @@ export default function DebtToIncomeCalculator(){
                         duration: 250,
                         easing: 'easeInOutSine',
                         autoplay: false,
-                    }}>
-                    <Box sx={formDisplay}>
-                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:25, width: '100%' }}>
-                                <Typography>
-                                    <Box
-                                        sx={{
-                                            color:'#4072B5',
-                                            fontWeight:'bold', 
-                                            textAlign:'center'
-                                        }}>Result</Box>
-                                </Typography>
+                    }}> 
+                  {
+                      (value.length)?
+                       <Box 
+                            sx={{ maxWidth: 400,paddingBottom: 1 }}
+                            className="animated-box" >
+                            <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                                <Box sx={{height:30, width: '100%' }}></Box>
+                                <Box sx={{
+                                        height:30, width: '100%', 
+                                        // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+                                        borderRadius: '0 10px 3px', 
+                                    }}></Box>
                             </Box>
-                            <Box sx={{ ...formCardStyle }}></Box>
-                        </Box>
-                    <Box sx={{marginLeft: 5}}>
-                        <p>Answer</p>
-                        <p>{value}</p>
-                    </Box>
-                </Box>
+                            <Box sx={{marginLeft: 5}}>
+                               We may have data
+                            </Box>
+                      </Box>
+                      :<Box></Box>
+                  }
                 </Anime>
+            </Box>
             </Box>
         </AddLayout>
         </>
