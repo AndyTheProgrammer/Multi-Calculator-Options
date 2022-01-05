@@ -10,9 +10,9 @@ import { labelStyle, formCardStyle, formDisplay } from '../../../../styling/Cust
 import { CustomFormikForm } from '../../../forms/CustomForm'
 import { CustomFormBtn, CustomFormImageBtn } from '../../../custom/CustomFormBtn';
 import finance_icon from '../../../../common/assets/finance_icon.svg';
-import invest_and_savings_icon from '../../../../common/assets/invest_and_savings_icon.svg';
+import money_tax_icon from '../../../../common/assets/money_tax_icon.svg';
 
-export default function ReturnOnInvestmentCalculator(){
+export default function VATCalculator(){
     const [value, setValue] = useState<any[]>([])
     const [playAnimation, setPlayAnimation] = useState(false)
     const [mediaQueryValue, setMediaQueryValue] = useState(false)
@@ -60,8 +60,8 @@ export default function ReturnOnInvestmentCalculator(){
     })
     return(
         <>
-        <NavBar2 pageimage={finance_icon} categoryname="Investment And Savings Calculators" pagename="Return On Investment Calculator"/>
-        <AddLayout categorykey='investment' searchname='Investment And Savings Calculators' searchimage={invest_and_savings_icon}>
+        <NavBar2 pageimage={finance_icon} categoryname="Money Calculators" pagename="VAT Calculator"/>
+        <AddLayout categorykey='money' searchname='Money Calculators' searchimage={money_tax_icon}>
             <Typography 
                 sx={{
                     paddingLeft: 1.5, 
@@ -88,36 +88,34 @@ export default function ReturnOnInvestmentCalculator(){
                         sx={{ maxWidth: 450,paddingBottom: 1 }}
                         className="animated-box" >
                         
-
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                             <Box sx={{height:25, width: '100%' }}></Box>
                             {/* <Box sx={{...formCardStyle}}></Box> */}
                         </Box>
                         <Formik
                             initialValues={{ 
-                                final_value:"",
-                                initial_investment:"",
-                                total_expenses:"",
-                                total_income:"",
-                                method: "ReturnOnInvestmentCalculator"
+                                net_before_vat_price:"",
+                                vat_rate:"",
+                                final_vat_inclusive_price:"",
+                                method: "VATCalculator"
                             }}
                             onSubmit = {(values)=>{
-                               
+                                const net_before_vat_price = parseInt(values.net_before_vat_price)
                                 const data = {
-                                    final_value: values.final_value,
-                                    initial_investment: values.initial_investment,
-                                    total_expenses: values.total_expenses,
-                                    total_income: values.total_income,
+                                    net_before_vat_price: net_before_vat_price,
+                                    vat_rate: values.vat_rate,
+                                    final_vat_inclusive_price: values.final_vat_inclusive_price,
                                     method: values.method
                                 }
+                                console.log(data)
                                 setValue(['NO DATA FROM END POINT'])
                                 const postData = async () => {
-                                    const responseData = await financeService(data)
+                                    // const responseData = await financeService(data)
                                     
-                                    var msg:any = responseData.statusDescription;
-                                    if(msg === "success"){
-                                        
-                                    }
+                                    // var msg:any = responseData.statusDescription;
+                                    // if(msg === "success"){
+                                    //     setValue([responseData.message])
+                                    // }
                                 }
                                 postData()
                             }}>
@@ -128,47 +126,34 @@ export default function ReturnOnInvestmentCalculator(){
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Final value</Box></Grid>
+                                                <Box sx={{...labelStyle}}>Net before vat price</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
-                                                    name="final_value"
+                                                    name="net_before_vat_price"
                                                     component={CustomFormikForm}
                                                 />
                                             </Grid>
 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Initial investment</Box></Grid>
+                                                <Box sx={{...labelStyle}}>Vat Rate</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
-                                                    name="initial_investment"
+                                                    name="vat_rate"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-                                            
+                                            </Grid>   
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Total expenses</Box></Grid>
+                                                <Box sx={{...labelStyle}}>Final Vat Inclusive Price</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
-                                                    name="total_expenses"
+                                                    name="final_vat_inclusive_price"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Total income</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                            <Field
-                                                    type="text"
-                                                    name="total_income"
-                                                    component={CustomFormikForm}
-                                                />
-                                            </Grid>
-
-                                            
-                                                            
+                                            </Grid>   
+                                                     
                                         </Grid>
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
@@ -230,9 +215,7 @@ export default function ReturnOnInvestmentCalculator(){
                                     }}></Box>
                             </Box>
                             <Box sx={{marginLeft: 5}}>
-                               {
-                                   value[0]
-                               }
+                               We may have data
                             </Box>
                       </Box>
                       :<Box></Box>

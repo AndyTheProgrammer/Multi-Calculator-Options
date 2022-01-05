@@ -11,14 +11,16 @@ import { useHistory } from 'react-router-dom'
 // 
 import RootsCalculators from '../TemperalComponentsFolder/pages/RootsCalculators'
 import AreaConverter from '../TemperalComponentsFolder/other/AreaConverter'
-import GPACalculator from '../TemperalComponentsFolder/math/GPACalculator'
-
-
+import ReturnOnInvestmentCalculator from '../TemperalComponentsFolder/finance/investmentAndSavingsCalc/ReturnOnInvestmentCalculator'
+import SalesCalculator from '../TemperalComponentsFolder/finance/MoneyTaxCalc/SalesCalculator'
+import ArmyBodyFatCalculator from '../TemperalComponentsFolder/other/fitness/ArmyBodyFatCalculator'
+import PregnancyWeightGainCalculator from '../TemperalComponentsFolder/other/health/PregnancyWeightGainCalculator'
+import RandomPasswordGenerator from '../TemperalComponentsFolder/other/technology/RandomPasswordGenerator'
 
 export default function TestPage() {
   return (
     <>
-      <RootsCalculators />
+      <RandomPasswordGenerator/>
     </>
   );
 }

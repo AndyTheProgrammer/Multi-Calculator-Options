@@ -10,9 +10,9 @@ import { labelStyle, formCardStyle, formDisplay } from '../../../../styling/Cust
 import { CustomFormikForm } from '../../../forms/CustomForm'
 import { CustomFormBtn, CustomFormImageBtn } from '../../../custom/CustomFormBtn';
 import finance_icon from '../../../../common/assets/finance_icon.svg';
-import invest_and_savings_icon from '../../../../common/assets/invest_and_savings_icon.svg';
+import money_tax_icon from '../../../../common/assets/money_tax_icon.svg';
 
-export default function ReturnOnInvestmentCalculator(){
+export default function SalesCalculator(){
     const [value, setValue] = useState<any[]>([])
     const [playAnimation, setPlayAnimation] = useState(false)
     const [mediaQueryValue, setMediaQueryValue] = useState(false)
@@ -60,8 +60,8 @@ export default function ReturnOnInvestmentCalculator(){
     })
     return(
         <>
-        <NavBar2 pageimage={finance_icon} categoryname="Investment And Savings Calculators" pagename="Return On Investment Calculator"/>
-        <AddLayout categorykey='investment' searchname='Investment And Savings Calculators' searchimage={invest_and_savings_icon}>
+        <NavBar2 pageimage={finance_icon} categoryname="Money Calculators" pagename="Sales Calculator"/>
+        <AddLayout categorykey='money' searchname='Money Calculators' searchimage={money_tax_icon}>
             <Typography 
                 sx={{
                     paddingLeft: 1.5, 
@@ -88,35 +88,48 @@ export default function ReturnOnInvestmentCalculator(){
                         sx={{ maxWidth: 450,paddingBottom: 1 }}
                         className="animated-box" >
                         
-
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                             <Box sx={{height:25, width: '100%' }}></Box>
                             {/* <Box sx={{...formCardStyle}}></Box> */}
                         </Box>
                         <Formik
-                            initialValues={{ 
-                                final_value:"",
-                                initial_investment:"",
-                                total_expenses:"",
-                                total_income:"",
-                                method: "ReturnOnInvestmentCalculator"
-                            }}
+                            initialValues={{
+                                price: "",
+                                products_solds: "",
+                                products_solds_unit: "",
+                                allowances: "",
+                                allowances_unit: "",
+                                discounts_solds: "",
+                                discounts_unit: "",
+                                sales_returns: "",
+                                sales_returns_unit: "",
+                                answer_unit: "",
+                                method: "SalesCalculator",
+                            }
+                        }
                             onSubmit = {(values)=>{
                                
                                 const data = {
-                                    final_value: values.final_value,
-                                    initial_investment: values.initial_investment,
-                                    total_expenses: values.total_expenses,
-                                    total_income: values.total_income,
+                                    price: values.price,
+                                    products_solds: values.products_solds,
+                                    products_solds_unit: values.products_solds_unit,
+                                    allowances: values.allowances,
+                                    allowances_unit: values.allowances_unit,
+                                    discounts_solds: values.discounts_solds,
+                                    discounts_unit: values.discounts_unit,
+                                    sales_returns: values.sales_returns,
+                                    sales_returns_unit: values.sales_returns_unit,
+                                    answer_unit: values.answer_unit,
                                     method: values.method
                                 }
+                                console.log(data)
                                 setValue(['NO DATA FROM END POINT'])
                                 const postData = async () => {
                                     const responseData = await financeService(data)
                                     
                                     var msg:any = responseData.statusDescription;
                                     if(msg === "success"){
-                                        
+                                        setValue([responseData.message])
                                     }
                                 }
                                 postData()
@@ -124,51 +137,101 @@ export default function ReturnOnInvestmentCalculator(){
                                 
                             {(props: FormikProps<any>) => (
                                 <Form>
-                                    <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
+                                    <Box sx={{  minHeight: 250, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Final value</Box></Grid>
+                                                <Box sx={{...labelStyle}}>Price</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
-                                                    name="final_value"
+                                                    name="price"
                                                     component={CustomFormikForm}
                                                 />
                                             </Grid>
 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Initial investment</Box></Grid>
+                                                <Box sx={{...labelStyle}}>Products solds</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
-                                                    name="initial_investment"
+                                                    name="products_solds"
+                                                    component={CustomFormikForm}
+                                                />
+                                            </Grid>   
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>products Solds Unit</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                            <Field
+                                                    type="text"
+                                                    name="products_solds_unit"
+                                                    component={CustomFormikForm}
+                                                />
+                                            </Grid>   
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>allowancest</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                            <Field
+                                                    type="text"
+                                                    name="allowances"
                                                     component={CustomFormikForm}
                                                 />
                                             </Grid>
-                                            
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Total expenses</Box></Grid>
+                                                <Box sx={{...labelStyle}}>Allowances Unit</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
-                                                    name="total_expenses"
+                                                    name="allowances_unit"
                                                     component={CustomFormikForm}
                                                 />
                                             </Grid>
 
                                             <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Total income</Box></Grid>
+                                                <Box sx={{...labelStyle}}>Discounts Solds</Box></Grid>
                                             <Grid item={true} xs={7}>
                                             <Field
                                                     type="text"
-                                                    name="total_income"
+                                                    name="discounts_solds"
                                                     component={CustomFormikForm}
                                                 />
-                                            </Grid>
-
-                                            
-                                                            
+                                            </Grid>   
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Discounts Unit</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                            <Field
+                                                    type="text"
+                                                    name="discounts_unit"
+                                                    component={CustomFormikForm}
+                                                />
+                                            </Grid>   
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Sales Returns</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                            <Field
+                                                    type="text"
+                                                    name="sales_returns"
+                                                    component={CustomFormikForm}
+                                                />
+                                            </Grid>      
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Sales Returns Unit</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                            <Field
+                                                    type="text"
+                                                    name="sales_returns_unit"
+                                                    component={CustomFormikForm}
+                                                />
+                                            </Grid>   
+                                            <Grid item={true} xs={5} >
+                                                <Box sx={{...labelStyle}}>Answer Unit</Box></Grid>
+                                            <Grid item={true} xs={7}>
+                                            <Field
+                                                    type="text"
+                                                    name="answer_unit"
+                                                    component={CustomFormikForm}
+                                                />
+                                            </Grid>             
                                         </Grid>
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
@@ -230,9 +293,7 @@ export default function ReturnOnInvestmentCalculator(){
                                     }}></Box>
                             </Box>
                             <Box sx={{marginLeft: 5}}>
-                               {
-                                   value[0]
-                               }
+                               We may have data
                             </Box>
                       </Box>
                       :<Box></Box>

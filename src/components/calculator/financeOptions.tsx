@@ -11,7 +11,7 @@ import { ResponsiveSliderSmall }  from '../slider/ResponsiveSlider';
 
 import invest_and_saving_icon from '../../common/assets/invest_and_savings_icon.svg';
 import money_tax_icon from '../../common/assets/money_tax_icon.svg';
-import mortage_icon from '../../common/assets/mortage_icon.svg';
+import mortage_icon from '../../common/assets/mortgage_icon.svg';
 import retirement_calc_icon from '../../common/assets/retirement_calc_icon.svg';
 import sales from '../../common/assets/sales.svg';
 import Slider from "react-slick";

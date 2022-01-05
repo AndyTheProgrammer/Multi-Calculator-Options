@@ -177,7 +177,7 @@
                         className="animated-box" >
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                             <Box sx={{height:25, width: '100%' }}></Box>
-                            <Box sx={{ ...formCardStyle }}></Box>
+                            {/* <Box sx={{ ...formCardStyle }}></Box> */}
                         </Box>
                       <Formik
                           initialValues={{ 

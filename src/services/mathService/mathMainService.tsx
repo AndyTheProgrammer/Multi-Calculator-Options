@@ -150,10 +150,14 @@ export async function financeService(
         FINANCE_INTERFACES.ReturnOnInvestmentCalculator|
         FINANCE_INTERFACES.IncomeTaxCalculator|
         FINANCE_INTERFACES.SalesTaxCalculator|
-        FINANCE_INTERFACES.DebtToIncomeCalculator
+        FINANCE_INTERFACES.DebtToIncomeCalculator|
+        FINANCE_INTERFACES.VATCalculator|
+        FINANCE_INTERFACES.SharedBillTipCalculator|
+        FINANCE_INTERFACES.SalesCalculator|
+        FINANCE_INTERFACES.USMortgageCalculator
     ){
     try{
-        const { data } = await axiosInstance.post('/finance', dataObject);
+        const { data } = await axiosInstance.post('/finacial', dataObject);
         console.log(data)
         var msg:any = data.statusDescription;
         if(msg === "success"){

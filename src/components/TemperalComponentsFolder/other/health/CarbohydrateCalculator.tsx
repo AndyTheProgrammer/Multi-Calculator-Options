@@ -4,17 +4,20 @@
  */
 
  import React, { useRef, useState, useEffect } from 'react'
- import CustomForm from '../../forms/CustomForm'
+ import CustomForm from '../../../forms/CustomForm'
  import { Field, Form, Formik, FormikProps } from 'formik'
- import { otherMainService, mathMainService } from '../../../services/mathService/mathMainService'
+ import { otherMainService, mathMainService } from '../../../../services/mathService/mathMainService'
  import Anime from 'react-animejs-wrapper'
- import AddLayout from '../../layouts/AddLayout'
+ import AddLayout from '../../../layouts/AddLayout'
  import { Box, Grid } from '@mui/material'
- import { NavBar2 } from '../../navbar/navbar2'
- import { CustomFormikForm } from '../../forms/CustomForm'
- import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
- import TextCard from '../../utilityComponents/TextCard'
- import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
+ import { NavBar2 } from '../../../navbar/navbar2'
+ import { CustomFormikForm } from '../../../forms/CustomForm'
+ import { labelStyle, formCardStyle, formDisplay } from '../../../../styling/CustomStyles'
+ import TextCard from '../../../utilityComponents/TextCard'
+ import { CustomFormBtn, CustomFormImageBtn } from '../../../custom/CustomFormBtn'
+ import other_icon from '../../../../common/assets/other_icon.svg';
+ import health_calc_icon from '../../../../common/assets/others_icons/health_calc_icon.svg';
+ 
  const Latex = require('react-latex');
 
 
@@ -62,43 +65,71 @@ const WeightUnit = (props:any) => (
 
  
  export default function CarbohydrateCalculator(){
-     const [value, setValue] = useState("")
-     const animatedSquaresRef1 = useRef(null)
-     const animatedSquaresRef2= useRef(null)
-   
-     // @ts-ignore: Object is possibly 'null'.
-     const play1 = () => animatedSquaresRef1.current.play();
-     // @ts-ignore: Object is possibly 'null'.
-     const play2 = () => animatedSquaresRef2.current.play();
- 
-     useEffect(()=>{
-         if(value){
-             play1();
-             play2();
-         }
-     })
+    const [value, setValue] = useState<any[]>([])
+    const [playAnimation, setPlayAnimation] = useState(false)
+    const [mediaQueryValue, setMediaQueryValue] = useState(false)
+    const animatedSquaresRef1 = useRef(null)
+    const animatedSquaresRef2= useRef(null)
+  
+    // @ts-ignore: Object is possibly 'null'.
+    const play1 = () => animatedSquaresRef1.current.play();
+    // @ts-ignore: Object is possibly 'null'.
+    const play2 = () => animatedSquaresRef2.current.play();
+    // @ts-ignore: Object is possibly 'null'.
+    const reverse1 = () => animatedSquaresRef1.current.reverse();
+    // @ts-ignore: Object is possibly 'null'.
+    const reverse2 = () => animatedSquaresRef2.current.reverse();
+
+    
+    const controlAnimation = () => {
+        if(mediaQueryValue){
+            if(playAnimation){
+                // console.log("Monkey")
+                play1();
+                play2();
+                reverse1();
+                reverse2();
+                setValue([]);
+                setPlayAnimation(false);
+            }
+        }
+        else{
+            setValue([]);
+        }
+    } 
+
+    useEffect(()=>{
+        const mediaQuery = window.matchMedia('(min-width: 1000px)');
+        setMediaQueryValue(mediaQuery.matches);
+        
+        if (mediaQuery.matches) {
+            if(value.length){
+                play1();
+                play2();
+                setPlayAnimation(true)
+            }
+        }  
+    })
  
      return(
          <>
-         <NavBar2 pagename="Carbohydrate Calculator" />
-         <AddLayout>
-             <Box>
-             <Box sx={{ display: "flex", justifyContent: "center" }}>
-             <Anime
-                 style={{
-                     position: 'absolute',
-                 }}
-                 ref={animatedSquaresRef1}
-                 config={{
-                     translateX: -250,
-                     easing: 'easeInOutSine',
-                     autoplay: false,
-                 }}>
-                 <Box sx={{ ...formDisplay }}>
-                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                         <Box sx={{height:25, width: '100%' }}></Box>
-                         <Box sx={{ ...formCardStyle }}></Box>
-                     </Box>
+         <NavBar2 pageimage={other_icon} categoryname="Health Calculators" pagename="Carbohydrate Calculator" />
+         <AddLayout categorykey='health' searchname='Health Calculators' searchimage={health_calc_icon}>
+            <Box sx={{ display: 'flex', justifyContent:'center'}}>
+            <Box className='animated-content-center'>
+                <Anime
+                    className='animated-pos animated-margin'
+                    ref={animatedSquaresRef1}
+                    config={{
+                        translateX: -250,
+                        duration: 250,
+                        easing: 'easeInOutSine',
+                        autoplay: false,
+                    }}>
+                    <Box 
+                        sx={{ maxWidth: 450,paddingBottom: 1 }}
+                        className="animated-box" >
+                     <Box sx={{ display: 'flex', justifyContent: 'center'}}></Box>
                      <Formik
                          initialValues={{ 
                             height:"",
@@ -131,7 +162,7 @@ const WeightUnit = (props:any) => (
                                  console.log(responseData)
                                  var msg:any = responseData.statusDescription;
                                  if(msg === "success"){
-                                     //setValue(responseData.message.answer)
+                                     setValue([responseData.message.answer])
                                      console.log(responseData)
                                  }
                              }
@@ -236,22 +267,27 @@ const WeightUnit = (props:any) => (
                                              Flex box pushes submit button down
                                          */}
                                      </Box>
-                                     <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item xs={4}>
-                                             <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                 <CustomFormBtn 
-                                                 type="button" 
-                                                 handleClick={()=>{ console.log("Clear button clicked") }} 
-                                                 name="Clear"/>
-                                             </Box>
-                                        </Grid>
-                                        <Grid item xs={4}></Grid>
-                                        <Grid item xs={4}>
-                                             <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                 <CustomFormBtn type="submit" name="Calculate"/>
-                                             </Box>
-                                        </Grid>
-                                    </Grid>
+                                     <Box 
+                                        // className="toggle-box-primary"
+                                        sx={{
+                                            paddingLeft: 2, paddingRight: 2, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                                <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                    <CustomFormBtn 
+                                                    type="button" 
+                                                    handleClick={()=>{ 
+                                                        controlAnimation();
+
+                                                        }} 
+                                                    name="Clear"/>
+                                                </Box>
+                                            <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                            
+                                            </Box>
+                                            <Box sx={{display:"flex", justifyContent:"end"}}>
+                                                <CustomFormImageBtn type="submit" name="Calculate"/>   
+                                            </Box>
+                                        </Box>
                                  </Box>
                              </Form>
                          )}
@@ -265,40 +301,40 @@ const WeightUnit = (props:any) => (
              
              */}
  
-             <Anime
-                 style={{
-                     position: 'absolute',
-                     zIndex: -5
-                 }}
-                 ref={animatedSquaresRef2}
-                 config={{
-                     translateX: 200,
-                 //   direction: 'alternate',
-                     easing: 'easeInOutSine',
-                     autoplay: false,
-                 }}>
-                  <Box style={formDisplay} >
-                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                         <Box sx={{height:30, width: '100%' }}></Box>
-                         <Box sx={{
-                                 height:30, width: '100%', 
-                                 // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
-                                 borderRadius: '0 10px 3px', 
-                             }}></Box>
-                     </Box>
-                     <Box sx={{marginLeft: 5}}>
-                         <Box sx={{marginBottom: 2}}>
-                             <Latex displayMode={false}>{`$a_{n} = a+(n-1)d$`}</Latex>
-                         </Box>
-                         <Box sx={{marginBottom: 2}}>
-                             <Latex displayMode={false}>{`$S_{n} = \\displaystyle \\sum_{i=1}^{10} t_i$`}</Latex>
-                         </Box>
-                         <Box sx={{marginBottom: 2}}>
-                             <Latex displayMode={false}>{`$answer = ${value}$`}</Latex>
-                         </Box>
-                     </Box>
-                 </Box>
-             </Anime>
+                <Anime
+                    className='animated-pos animated-margin'
+                    style={{
+                        zIndex: -5
+                    }}
+                    ref={animatedSquaresRef2}
+                    config={{
+                        translateX: 200,
+                        duration: 250,
+                        easing: 'easeInOutSine',
+                        autoplay: false,
+                    }}> 
+                    {
+                        (value.length)?
+                        <Box 
+                            sx={{ maxWidth: 450,paddingBottom: 1 }}
+                            className="animated-box" >
+                            <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                                <Box sx={{height:30, width: '100%' }}></Box>
+                                <Box sx={{
+                                        height:30, width: '100%', 
+                                        // backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)',
+                                        borderRadius: '0 10px 3px', 
+                                    }}></Box>
+                            </Box>
+                            <Box sx={{marginLeft: 5}}>
+                                <Box sx={{marginBottom: 2}}>
+                                    <Latex displayMode={false}>{`$answer = ${value}$`}</Latex>
+                                </Box>
+                            </Box>
+                        </Box>
+                        :<Box></Box>
+                    }
+                </Anime>
              </Box>
              </Box>
          </AddLayout>

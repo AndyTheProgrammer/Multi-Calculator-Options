@@ -12,7 +12,32 @@ import { CustomFormBtn, CustomFormImageBtn } from '../../../custom/CustomFormBtn
 import finance_icon from '../../../../common/assets/finance_icon.svg';
 import money_tax_icon from '../../../../common/assets/money_tax_icon.svg';
 
-export default function SalesTaxCalculator(){
+
+const BudgetOptions = (props:any) => (
+ 
+    <Box sx={{
+      display: 'flex',
+    }}>
+      <select 
+      style={{
+        width:'100%',
+        // backgroundColor:'#F0F3F6',
+        backgroundColor:'#EEEEEE',
+        border: 'solid',
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 3,
+        fontSize: 18,
+        marginLeft: 1
+      }}
+      {...props} >
+        <option value="">Year</option>
+        <option value="">Month</option>
+      </select>
+    </Box>
+  );
+
+export default function BudgetCalculator(){
     const [value, setValue] = useState<any[]>([])
     const [playAnimation, setPlayAnimation] = useState(false)
     const [mediaQueryValue, setMediaQueryValue] = useState(false)
@@ -60,8 +85,8 @@ export default function SalesTaxCalculator(){
     })
     return(
         <>
-        <NavBar2 pageimage={finance_icon} categoryname="Money Calculators" pagename="Sales Tax Calculator"/>
-        <AddLayout categorykey='money' searchname='Money Calculators' searchimage={money_tax_icon}>
+        <NavBar2 pageimage={finance_icon} categoryname="Laon Calculators" pagename="Budget Calculator"/>
+        <AddLayout categorykey='money' searchname='Loan Calculators' searchimage={money_tax_icon}>
             <Typography 
                 sx={{
                     paddingLeft: 1.5, 
@@ -85,7 +110,7 @@ export default function SalesTaxCalculator(){
                         autoplay: false,
                     }}>
                     <Box 
-                        sx={{ maxWidth: 450,paddingBottom: 1 }}
+                        sx={{ maxWidth: 750,paddingBottom: 1 }}
                         className="animated-box" >
                         
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
@@ -93,78 +118,143 @@ export default function SalesTaxCalculator(){
                             {/* <Box sx={{...formCardStyle}}></Box> */}
                         </Box>
                         <Formik
-                            initialValues={{ 
-                                sales_tax_percentage:"",
-                                net_price:"",
-                                gross_price:"",
-                                tax_amount:"",
-                                method: "SalesTaxCalculator"
+                            initialValues={ {
+                                income_tax_rate: "",
+                                income_one: "",
+                                income_one_unit: "",
+                                income_two: "",
+                                income_two_unit: "",
+                                income_three: "",
+                                income_three_unit: "",
+                                income_four: "",
+                                income_four_unit: "",
+                                income_five: "",
+                                income_five_unit: "",
+                                income_six: "",
+                                income_six_unit: "",
+                                housing_and_tilities_one: "",
+                                housing_and_tilities_one_unit: "",
+                                housing_and_tilities_two: "",
+                                housing_and_tilities_two_unit: "",
+                                housing_and_tilities_three: "",
+                                housing_and_tilities_three_unit: "",
+                                housing_and_tilities_four: "",
+                                housing_and_tilities_four_unit: "",
+                                housing_and_tilities_five: "",
+                                housing_and_tilities_five_unit: "",
+                                housing_and_tilities_six: "",
+                                housing_and_tilities_six_unit: "",
+                                housing_and_tilities_seven: "",
+                                housing_and_tilities_seven_unit: "",
+                                transportation_one: "",
+                                transportation_one_unit: "",
+                                transportation_two: "",
+                                transportation_two_unit: "",
+                                transportation_three: "",
+                                transportation_three_unit: "",
+                                transportation_four: "",
+                                transportation_four_unit: "",
+                                transportation_five: "",
+                                transportation_five_unit: "",
+                                transportation_six: "",
+                                transportation_six_unit: "",
+                                transportation_seven: "",
+                                transportation_seven_unit: "",
+                                other_debt_and_loan_payments_one: "",
+                                other_debt_and_loan_payments_one_unit: "",
+                                other_debt_and_loan_payments_two: "",
+                                other_debt_and_loan_payments_two_unit: "",
+                                other_debt_and_loan_payments_three: "",
+                                other_debt_and_loan_payments_three_unit: "",
+                                healthcare_one: "",
+                                healthcare_one_unit: "",
+                                healthcare_two: "",
+                                healthcare_two_unit: "",
+                                healthcare_three: "",
+                                healthcare_three_unit: "",
+                                living_expenses_one: "",
+                                living_expenses_one_unit: "",
+                                living_expenses_two: "",
+                                living_expenses_two_unit: "",
+                                living_expenses_three: "",
+                                living_expenses_three_unit: "",
+                                living_expenses_four: "",
+                                living_expenses_four_unit: "",
+                                living_expenses_five: "",
+                                living_expenses_five_unit: "",
+                                living_expenses_six: "",
+                                living_expenses_six_unit: "",
+                                children_and_education_one: "",
+                                children_and_education_one_unit: "",
+                                children_and_education_two: "",
+                                children_and_education_two_unit: "",
+                                children_and_education_three: "",
+                                children_and_education_three_unit: "",
+                                children_and_education_four: "",
+                                children_and_education_four_unit: "",
+                                children_and_education_five: "",
+                                children_and_education_five_unit: "",
+                                savings_and_investments_one: "",
+                                savings_and_investments_one_unit: "",
+                                savings_and_investments_two: "",
+                                savings_and_investments_two_unit: "",
+                                savings_and_investments_three: "",
+                                savings_and_investments_three_unit: "",
+                                savings_and_investments_four: "",
+                                savings_and_investments_four_unit: "",
+                                savings_and_investments_five: "",
+                                savings_and_investments_five_unit: "",
+                                miscellaneous_expenses_one: "",
+                                miscellaneous_expenses_one_unit: "",
+                                miscellaneous_expenses_two: "",
+                                miscellaneous_expenses_two_unit: "",
+                                miscellaneous_expenses_three: "",
+                                miscellaneous_expenses_three_unit: "",
+                                miscellaneous_expenses_four: "",
+                                miscellaneous_expenses_four_unit: "",
+                                miscellaneous_expenses_five: "",
+                                miscellaneous_expenses_five_unit: "",
+                                miscellaneous_expenses_six: "",
+                                miscellaneous_expenses_six_unit: "",
+                                method: "",
                             }}
                             onSubmit = {(values)=>{
-                                const sales_int = parseInt(values.sales_tax_percentage)
-                                const gross_int = parseInt(values.gross_price)
-                                const data = {
-                                    sales_tax_percentage: sales_int,
-                                    net_price: values.net_price,
-                                    gross_price: gross_int,
-                                    tax_amount: values.net_price,
-                                    method: values.method
-                                }
-                                console.log(data)
+                                const data = {}
+
                                 setValue(['NO DATA FROM END POINT'])
                                 const postData = async () => {
-                                    const responseData = await financeService(data)
+                                    // const responseData = await financeService(data)
                                     
-                                    var msg:any = responseData.statusDescription;
-                                    if(msg === "success"){
-                                        setValue([responseData.message])
-                                    }
+                                    // var msg:any = responseData.statusDescription;
+                                    // if(msg === "success"){
+                                    //     setValue([responseData.message])
+                                    // }
                                 }
                                 postData()
                             }}>
                                 
                             {(props: FormikProps<any>) => (
                                 <Form>
-                                    <Box sx={{  height: 250, display:'flex', flexDirection:'column' }}>
+                                    <Box sx={{  minHeight: 250, display:'flex', flexDirection:'column' }}>
                                         <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
 
-                                            <Grid item={true} xs={5} >
+                                            <Grid item={true} xs={6} >
                                                 <Box sx={{...labelStyle}}>Sales Tax Percentage</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                            <Field
+                                            <Grid item={true} xs={3}>
+                                                <Field
                                                     type="text"
                                                     name="sales_tax_percentage"
                                                     component={CustomFormikForm}
                                                 />
                                             </Grid>
-
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Net Price</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                            <Field
+                                            <Grid item={true} xs={3} >
+                                                <Field
                                                     type="text"
-                                                    name="net_price"
-                                                    component={CustomFormikForm}
+                                                    name="sales_tax_percentage"
+                                                    component={BudgetOptions}
                                                 />
-                                            </Grid>   
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Gross Price</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                            <Field
-                                                    type="text"
-                                                    name="gross_price"
-                                                    component={CustomFormikForm}
-                                                />
-                                            </Grid>   
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Tax Amount</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                            <Field
-                                                    type="text"
-                                                    name="tax_amount"
-                                                    component={CustomFormikForm}
-                                                />
-                                            </Grid>               
+                                            </Grid>
+             
                                         </Grid>
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
