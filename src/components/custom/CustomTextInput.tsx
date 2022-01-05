@@ -34,6 +34,7 @@ const CustomTextInput = (props: TextInputProps) => {
           style={{
             backgroundColor: COLORS.newInput,
             // fontWeight: 500,
+            fontSize: 16,
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',
@@ -57,6 +58,7 @@ const CustomTextInput = (props: TextInputProps) => {
           style={{
             backgroundColor: COLORS.newInput,
             // fontWeight: 500,
+            fontSize: 16,
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',

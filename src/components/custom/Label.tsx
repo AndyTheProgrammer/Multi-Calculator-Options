@@ -5,11 +5,17 @@ import { Font, FontProvider } from '../font'
 const Label = (props: any) => {
   const { title } = props
   return (
-    <div className="form-group col" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', }}>
+    <div
+      className="form-group col"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
       <FontProvider fonts={[{ font: 'Roboto, Helvetica' }]}>
         <Typography
           variant='subtitle2'
-          style={{ color: COLORS.text, fontWeight: 'bold', }}
+          style={{ color: 'black', fontSize: 16 }}
         >
           <Font>{title}</Font>
         </Typography>

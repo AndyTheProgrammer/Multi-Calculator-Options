@@ -23,6 +23,7 @@ import {
   CustomBtn,
   CustomResetBtn,
   Label,
+  FormRow,
   FormTabsContainer,
   ResultTabsContainer,
   StyledTabForThree,
@@ -198,7 +199,7 @@ function LoanCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
                           col
@@ -208,9 +209,9 @@ function LoanCalculator() {
                           value={values.interest_rate}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.numberOfMonths} />
                         <CustomTextInput
                           col
@@ -220,9 +221,9 @@ function LoanCalculator() {
                           value={values.number_of_months}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.presentValue} />
                         <CustomTextInput
                           col
@@ -232,9 +233,9 @@ function LoanCalculator() {
                           value={values.present_value}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.numberOfYears} />
                         <CustomTextInput
                           col
@@ -244,19 +245,14 @@ function LoanCalculator() {
                           value={values.number_of_years}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-
+                      <FormRow buttons>
                         <CustomResetBtn
                           onHandleClick={() => resetForm()}
                         />
-
                         <CustomBtn />
-                      </div>
+                      </FormRow>
                     </form>
                   )}
                 </Formik>
@@ -313,7 +309,7 @@ function LoanCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
                           col
@@ -323,9 +319,9 @@ function LoanCalculator() {
                           value={values.interest_rate}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.predeterminedAmount} />
                         <CustomTextInput
                           col
@@ -335,9 +331,9 @@ function LoanCalculator() {
                           value={values.predetermined_amount}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.numberOfMonths} />
                         <CustomTextInput
                           col
@@ -347,9 +343,9 @@ function LoanCalculator() {
                           value={values.number_of_months}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.numberOfYears} />
                         <CustomTextInput
                           col
@@ -359,18 +355,14 @@ function LoanCalculator() {
                           value={values.number_of_years}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-
+                      <FormRow buttons>
                         <CustomResetBtn
                           onHandleClick={() => resetForm()}
                         />
                         <CustomBtn />
-                      </div>
+                      </FormRow>
                     </form>
                   )}
                 </Formik>
@@ -427,7 +419,7 @@ function LoanCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.interestRate} />
                         <CustomTextInput
                           col
@@ -437,9 +429,9 @@ function LoanCalculator() {
                           value={values.interest_rate}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.creditCardBalance} />
                         <CustomTextInput
                           col
@@ -449,9 +441,9 @@ function LoanCalculator() {
                           value={values.loan_amount}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.numberOfMonths} />
                         <CustomTextInput
                           col
@@ -461,9 +453,9 @@ function LoanCalculator() {
                           value={values.number_of_months}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.numberOfYears} />
                         <CustomTextInput
                           col
@@ -473,19 +465,15 @@ function LoanCalculator() {
                           value={values.number_of_years}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-
+                      <FormRow buttons>
                         <CustomResetBtn
                           onHandleClick={() => resetForm()}
                         />
                         <CustomBtn />
-                      </div>
+                      </FormRow>
                     </form>
                   )}
                 </Formik>

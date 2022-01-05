@@ -21,6 +21,7 @@ import {
   CustomBtn,
   CustomResetBtn,
   Label,
+  FormRow,
   FormTabsContainer,
   ResultTabsContainer
 } from '../../../custom'
@@ -106,7 +107,7 @@ const InflationCalculatorCpiData = () => {
             >
               {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                 <form onSubmit={handleSubmit} className="form-container">
-                  <div className="form-row">
+                  <FormRow>
                     <Label title={LABELS.currentPrice} />
                     <CustomTextInput
                       col
@@ -116,9 +117,9 @@ const InflationCalculatorCpiData = () => {
                       value={values.current_price}
                       onChange={handleChange}
                     />
-                  </div>
+                  </FormRow>
 
-                  <div className="form-row">
+                  <FormRow>
                     <Label title={LABELS.priceInBase} />
                     <CustomTextInput
                       col
@@ -128,18 +129,14 @@ const InflationCalculatorCpiData = () => {
                       value={values.price_in_base}
                       onChange={handleChange}
                     />
-                  </div>
+                  </FormRow>
 
-                  <div
-                    className="form-row"
-                    style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                  >
-
+                  <FormRow buttons>
                     <CustomResetBtn
                       onHandleClick={() => resetForm()}
                     />
                     <CustomBtn />
-                  </div>
+                  </FormRow>
                 </form>
               )}
             </Formik>

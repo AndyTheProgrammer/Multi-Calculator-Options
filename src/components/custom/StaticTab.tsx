@@ -1,13 +1,14 @@
 import React from 'react'
 import { Typography, Box } from '@mui/material'
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import IconButton from '@mui/material/IconButton';
 
 import { Font, FontProvider } from '../font'
 import { COLORS } from '../../common/shared';
 
 function StaticTab(props: any) {
-  const { className, label, dropDown, dOptions, openDrop } = props
+  const { className, label, dropDown, opened, openDrop } = props
 
   if (label) {
     return (
@@ -24,7 +25,7 @@ function StaticTab(props: any) {
         <div>
           {dropDown === true &&
             <IconButton sx={{ height: 18, width: 18, color: COLORS.text }} onClick={openDrop}>
-              <ExpandMore />
+              {opened ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </IconButton>
           }
         </div>

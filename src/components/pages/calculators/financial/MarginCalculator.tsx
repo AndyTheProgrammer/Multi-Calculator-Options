@@ -23,6 +23,7 @@ import {
   CustomBtn,
   CustomResetBtn,
   Label,
+  FormRow,
   FormTabsContainer,
   ResultTabsContainer,
   StyledTab,
@@ -164,7 +165,7 @@ function MarginCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.salesRevenue} />
                         <CustomTextInput
                           col
@@ -174,9 +175,9 @@ function MarginCalculator() {
                           value={values.sales_revenue}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.cost} />
                         <CustomTextInput
                           col
@@ -186,18 +187,15 @@ function MarginCalculator() {
                           value={values.cost}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-                        <CustomBtn />
+                      <FormRow buttons>
                         <CustomResetBtn
                           onHandleClick={() => resetForm()}
                         />
-                      </div>
+                        <CustomBtn />
+                      </FormRow>
                     </form>
                   )}
                 </Formik>
@@ -251,7 +249,7 @@ function MarginCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.marginRequirement} />
                         <CustomTextInput
                           col
@@ -261,9 +259,9 @@ function MarginCalculator() {
                           value={values.margin_requirement}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.stockPrice} />
                         <CustomTextInput
                           col
@@ -273,9 +271,9 @@ function MarginCalculator() {
                           value={values.stock_price}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div className="form-row">
+                      <FormRow>
                         <Label title={LABELS.shares} />
                         <CustomTextInput
                           col
@@ -285,17 +283,14 @@ function MarginCalculator() {
                           value={values.shares}
                           onChange={handleChange}
                         />
-                      </div>
+                      </FormRow>
 
-                      <div
-                        className="form-row"
-                        style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                      >
-                        <CustomBtn />
+                      <FormRow buttons>
                         <CustomResetBtn
                           onHandleClick={() => resetForm()}
                         />
-                      </div>
+                        <CustomBtn />
+                      </FormRow>
                     </form>
                   )}
                 </Formik>

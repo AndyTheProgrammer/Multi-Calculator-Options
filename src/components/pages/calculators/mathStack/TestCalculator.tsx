@@ -310,16 +310,12 @@ function TestCalculator() {
             />
           </FormRow>
 
-          <div
-            className="form-row"
-            style={{ alignItems: 'center', justifyContent: 'space-between' }}
-          >
-
+          <FormRow buttons>
             <CustomResetBtn
               onHandleClick={() => resetForm()}
             />
             <CustomBtn />
-          </div>
+          </FormRow>
         </form>
       )}
     </Formik>,
@@ -401,16 +397,12 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <div
-              className="form-row"
-              style={{ alignItems: 'center', justifyContent: 'space-between' }}
-            >
-
+            <FormRow buttons>
               <CustomResetBtn
                 onHandleClick={() => resetForm()}
               />
               <CustomBtn />
-            </div>
+            </FormRow>
           </form>
         )}
       </Formik>,
@@ -527,16 +519,12 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <div
-              className="form-row"
-              style={{ alignItems: 'center', justifyContent: 'space-between' }}
-            >
-
+            <FormRow buttons>
               <CustomResetBtn
                 onHandleClick={() => resetForm()}
               />
               <CustomBtn />
-            </div>
+            </FormRow>
           </form>
         )
         }
@@ -669,16 +657,12 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <div
-              className="form-row"
-              style={{ alignItems: 'center', justifyContent: 'space-between' }}
-            >
-
+            <FormRow buttons>
               <CustomResetBtn
                 onHandleClick={() => resetForm()}
               />
               <CustomBtn />
-            </div>
+            </FormRow>
           </form>
         )}
       </Formik>,
@@ -810,16 +794,12 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <div
-              className="form-row"
-              style={{ alignItems: 'center', justifyContent: 'space-between' }}
-            >
-
+            <FormRow buttons>
               <CustomResetBtn
                 onHandleClick={() => resetForm()}
               />
               <CustomBtn />
-            </div>
+            </FormRow>
           </form>
         )}
       </Formik>,
@@ -940,16 +920,12 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <div
-              className="form-row"
-              style={{ alignItems: 'center', justifyContent: 'space-between' }}
-            >
-
+            <FormRow buttons>
               <CustomResetBtn
                 onHandleClick={() => resetForm()}
               />
               <CustomBtn />
-            </div>
+            </FormRow>
           </form>
         )}
       </Formik>,
@@ -1096,16 +1072,12 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <div
-              className="form-row"
-              style={{ alignItems: 'center', justifyContent: 'space-between' }}
-            >
-
+            <FormRow buttons>
               <CustomResetBtn
                 onHandleClick={() => resetForm()}
               />
               <CustomBtn />
-            </div>
+            </FormRow>
           </form>
         )}
       </Formik>,
@@ -1253,16 +1225,12 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <div
-              className="form-row"
-              style={{ alignItems: 'center', justifyContent: 'space-between' }}
-            >
-
+            <FormRow buttons>
               <CustomResetBtn
                 onHandleClick={() => resetForm()}
               />
               <CustomBtn />
-            </div>
+            </FormRow>
           </form>
         )}
       </Formik>,
@@ -1307,6 +1275,7 @@ function TestCalculator() {
           <FormTabsContainer
             tabTitle1={currentCalc.calcName}
             dropDown={true}
+            opened={open}
             onHandleOpen={handleClickOpen}
             animation={formAnimation}
           >
@@ -1315,13 +1284,13 @@ function TestCalculator() {
               <Box sx={{
                 zIndex: 1,
                 position: 'absolute',
-                width: 200,
+                width: 300,
                 top: 55,
                 left: 10,
                 backgroundColor: theme.palette.background.paper,
                 boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
                 borderRadius: 2.5,
-                marginLeft: 1,
+                marginLeft: 2.5,
               }}
                 className='text-center'
               >
@@ -1335,6 +1304,10 @@ function TestCalculator() {
                     <ListItem
                       onClick={() => handleClose(item.calcName)}
                       key={item.calcName}
+                      sx={{
+                        paddingBottom: 0.5,
+                        paddingTop: 0.5,
+                      }}
                     >
                       <ListItemButton
                         sx={{
@@ -1342,6 +1315,8 @@ function TestCalculator() {
                           background: COLORS.gradient,
                           padding: theme.spacing(0.5),
                           borderRadius: '20px !important',
+                          marginBottom: 0,
+                          marginTop: 0,
                         }}
                       >
                         <Font>
