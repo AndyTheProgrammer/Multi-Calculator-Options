@@ -25,7 +25,8 @@ import {
   ResultTabsContainer,
   StyledTabForThree,
   StyledTabs,
-  TabPanel
+  TabPanel,
+  CustomDivider
 } from '../../../../custom'
 import {
   finance_icon,
@@ -486,6 +487,13 @@ function LoanCalculator() {
 
             </Box>
           </animated.div>
+
+          <CustomDivider
+            label1='Amortization Schedule'
+            label2='Loan Break Down'
+          />
+
+          {/* Table and Chart */}
 
           {answer === true &&
             <ResultTabsContainer

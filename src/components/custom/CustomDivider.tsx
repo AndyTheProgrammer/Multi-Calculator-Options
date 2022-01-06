@@ -5,8 +5,10 @@ import iconLine from '../../common/assets/line.svg';
 
 const useStyles = makeStyles((theme: Theme) => ({
   label: {
-    marginLeft: 30,
-    marginRight: 30
+    fontSize: 14,
+    marginLeft: 1,
+    marginRight: 1,
+    width: '500px',
   },
   image: {
     width: '80%',
@@ -26,14 +28,13 @@ function CustomDivider(props: any) {
           width: '100%',
           borderRadius: 3,
           textAlign: 'center',
-          fontSize: 14,
           color: '#8591B0',
         }}>
           <Box>
             <img className={image} alt="lineIcon" src={iconLine} />
           </Box>
 
-          <Typography className={label} noWrap>
+          <Typography className={label}>
             {label1}
           </Typography>
 
@@ -41,7 +42,7 @@ function CustomDivider(props: any) {
             <img className={image} alt="lineIcon" src={iconLine} />
           </Box>
 
-          <Typography className={label} noWrap>
+          <Typography className={label} >
             {label2}
           </Typography>
 
