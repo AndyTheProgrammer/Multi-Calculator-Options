@@ -642,7 +642,7 @@ const othersRoutes = {
         {
           name: "Body Fat Calc + Army Body Fat",
           path: `${othersUrl}/bodyfatarmycalculator`,
-          component: PC.BodyFatPercentageCalculator
+          component: PC.BodyFatCalculator
         },
         {
           name: "Basal Metabolic Rate (BMR) Calculator",

@@ -24,7 +24,14 @@ function StaticTab(props: any) {
 
         <div>
           {dropDown === true &&
-            <IconButton sx={{ height: 18, width: 18, color: COLORS.text }} onClick={openDrop}>
+            <IconButton
+              sx={{
+                height: 18,
+                width: 18,
+                color: COLORS.text,
+              }}
+              onClick={openDrop}
+            >
               {opened ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </IconButton>
           }

@@ -66,7 +66,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
-                style={{ color: COLORS.text, fontWeight: 500, fontSize: 16 }}
+                style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
               </option>
@@ -99,7 +99,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
-                style={{ color: COLORS.text, fontWeight: 500, fontSize: 16 }}
+                style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
               </option>
@@ -112,9 +112,11 @@ const CustomSelect = (props: SelectProps) => {
   } else if (measurement === "length") {
     return (
       <div className="form-group col">
-        <select
+        <Field
+          as="select"
+          id={id}
           className="form-control-sm"
-          //  value={value}
+          value={value}
           style={{
             backgroundColor: COLORS.newInput,
             fontWeight: 500,
@@ -130,13 +132,13 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
-                style={{ color: COLORS.text, fontWeight: 500, fontSize: 16 }}
+                style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
               </option>
             ))
           ))}
-        </select>
+        </Field>
       </div>
     )
 
@@ -163,7 +165,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
-                style={{ color: COLORS.text, fontWeight: 500, fontSize: 16 }}
+                style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
               </option>
@@ -179,7 +181,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control-sm"
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -196,7 +198,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
-                style={{ color: COLORS.text, fontWeight: 500, fontSize: 16 }}
+                style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
               </option>
@@ -212,7 +214,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control-sm"
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -229,7 +231,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
-                style={{ color: COLORS.text, fontWeight: 500, fontSize: 16 }}
+                style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
               </option>
@@ -244,7 +246,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control-sm"
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -261,7 +263,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
-                style={{ color: COLORS.text, fontWeight: 500, fontSize: 16 }}
+                style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
               </option>
@@ -276,7 +278,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control-sm"
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -292,7 +294,7 @@ const CustomSelect = (props: SelectProps) => {
             <option
               key={type}
               value={type}
-              style={{ color: COLORS.text, fontWeight: 500, fontSize: 16 }}
+              style={{ fontWeight: 500, fontSize: 16 }}
             >
               {label}
             </option>
@@ -306,7 +308,7 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control form-control-sm"
+          className="form-control-sm"
           value={value}
           style={{
             backgroundColor: COLORS.newInput,
@@ -323,7 +325,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
-                style={{ color: COLORS.text, fontWeight: 500, fontSize: 16 }}
+                style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
               </option>

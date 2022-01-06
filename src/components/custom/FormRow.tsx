@@ -1,12 +1,15 @@
 import React from 'react'
+import CustomBtn from './CustomBtn'
+import CustomResetBtn from './CustomResetBtn'
 
 interface FormRowProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   buttons?: boolean;
+  reset?: any;
 }
 
 function FormRow(props: FormRowProps) {
-  const { children, buttons } = props;
+  const { children, buttons, reset } = props;
 
   if (buttons) {
     return (
@@ -17,7 +20,10 @@ function FormRow(props: FormRowProps) {
           justifyContent: 'space-between',
         }}
       >
-        {children}
+        <CustomResetBtn
+          onHandleClick={() => reset()}
+        />
+        <CustomBtn />
       </div>
     )
   } else {

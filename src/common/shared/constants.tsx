@@ -35,7 +35,7 @@ export const CALCULATORS = {
   leanBodyMassPetersFormula: "Lean Body Mass Peter's Formula",
   bodyMassIndexMethodTwo: "BMI Method Two",
   bmrKatchMcArdle: "Katch-McArdle Formula",
-  bloodAlcoholContent: "Blood Alcohol Content",
+  bloodAlcoholContent: "Blood Alcohol Content (BAC) Calculator",
   usCustomarySystemBfc: "US Customary System BFC",
   internationalSystemBfc: "International System BFC",
   bodyFatPercentageBmi: "Body Fat Percentage",
