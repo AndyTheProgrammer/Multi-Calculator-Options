@@ -1,13 +1,11 @@
 import React, { FC } from 'react'
 import Anime from 'react-animejs-wrapper'
 import { Grid, Paper, Box, Typography } from '@mui/material';
-import { useSpring, animated } from 'react-spring'
+import { animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
 import StyledTabs from './StyledTabs';
-import StyledTab from './StyledTab';
-import TabPanel from './TabPanel';
 import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
 import useStyles from '../../styling/CustomStyles'
@@ -31,9 +29,9 @@ const ResultTabsContainer = (props: ResultsProps) => {
     leftTabContainer,
     rightTabContainer,
     formCardStyle,
-    paperBackground,
     formResult,
-    formDisplay
+    formDisplay,
+    resultContainer,
   } = useStyles()
 
   return (
@@ -57,7 +55,10 @@ const ResultTabsContainer = (props: ResultsProps) => {
             <p style={{ fontSize: 14 }}>
               <Latex displayMode={true}>{latex}</Latex>
             </p>
-            {children}
+            <Box className={resultContainer}>
+              {children}
+            </Box>
+
           </NoIndexTabPanel>
         </div>
       </div>

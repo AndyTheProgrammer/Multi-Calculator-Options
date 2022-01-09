@@ -311,12 +311,7 @@ function TestCalculator() {
             />
           </FormRow>
 
-          <FormRow buttons>
-            <CustomResetBtn
-              onHandleClick={() => resetForm()}
-            />
-            <CustomBtn />
-          </FormRow>
+          <FormRow buttons reset={() => resetForm()} />
         </form>
       )}
     </Formik>,
@@ -398,12 +393,7 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <FormRow buttons>
-              <CustomResetBtn
-                onHandleClick={() => resetForm()}
-              />
-              <CustomBtn />
-            </FormRow>
+            <FormRow buttons reset={() => resetForm()} />
           </form>
         )}
       </Formik>,
@@ -520,12 +510,7 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <FormRow buttons>
-              <CustomResetBtn
-                onHandleClick={() => resetForm()}
-              />
-              <CustomBtn />
-            </FormRow>
+            <FormRow buttons reset={() => resetForm()} />
           </form>
         )
         }
@@ -658,12 +643,7 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <FormRow buttons>
-              <CustomResetBtn
-                onHandleClick={() => resetForm()}
-              />
-              <CustomBtn />
-            </FormRow>
+            <FormRow buttons reset={() => resetForm()} />
           </form>
         )}
       </Formik>,
@@ -795,12 +775,7 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <FormRow buttons>
-              <CustomResetBtn
-                onHandleClick={() => resetForm()}
-              />
-              <CustomBtn />
-            </FormRow>
+            <FormRow buttons reset={() => resetForm()} />
           </form>
         )}
       </Formik>,
@@ -921,12 +896,7 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <FormRow buttons>
-              <CustomResetBtn
-                onHandleClick={() => resetForm()}
-              />
-              <CustomBtn />
-            </FormRow>
+            <FormRow buttons reset={() => resetForm()} />
           </form>
         )}
       </Formik>,
@@ -1073,12 +1043,7 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <FormRow buttons>
-              <CustomResetBtn
-                onHandleClick={() => resetForm()}
-              />
-              <CustomBtn />
-            </FormRow>
+            <FormRow buttons reset={() => resetForm()} />
           </form>
         )}
       </Formik>,
@@ -1226,12 +1191,7 @@ function TestCalculator() {
               />
             </FormRow>
 
-            <FormRow buttons>
-              <CustomResetBtn
-                onHandleClick={() => resetForm()}
-              />
-              <CustomBtn />
-            </FormRow>
+            <FormRow buttons reset={() => resetForm()} />
           </form>
         )}
       </Formik>,
