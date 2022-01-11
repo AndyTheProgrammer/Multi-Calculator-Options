@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSpring, animated } from 'react-spring'
 
 import StyledTabs from './StyledTabs';
@@ -8,6 +8,7 @@ import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
 import { Grid, Paper, Box } from '@mui/material';
 import useStyles from '../../styling/CustomStyles'
+import DropDown from './DropDown';
 
 interface FormProps {
   children?: React.ReactNode;
@@ -18,7 +19,11 @@ interface FormProps {
   opened?: boolean;
   onHandleOpen?: (value: any) => any;
   animation?: {};
+  // showDropDown: boolean
+  calculatorList?: string[]
+  func?: any
 }
+
 
 function FormTabsContainer(props: FormProps) {
   const {
@@ -30,6 +35,9 @@ function FormTabsContainer(props: FormProps) {
     opened,
     onHandleOpen,
     animation,
+    // showDropDown
+    calculatorList,
+    func
   } = props;
   const {
     tabRoot,
@@ -38,6 +46,14 @@ function FormTabsContainer(props: FormProps) {
     paperBackground,
     formDisplay
   }: any = useStyles()
+
+  const [selected, setSelected ] = useState<string>()
+
+  const pullData = (data: string) => { 
+       setSelected(data)
+  }
+  // func(selected)
+  console.log('I was picked', selected )
 
   if (dropDown === true) {
     return (
@@ -59,6 +75,8 @@ function FormTabsContainer(props: FormProps) {
                 label={tabTitle2}
               />
             </StyledTabs>
+            {opened ? <DropDown calculators={calculatorList} func={pullData} /> : null }
+            
 
             <NoIndexTabPanel>
               {children}
