@@ -25,7 +25,7 @@ import {
 } from '../../../../../custom'
 
 const EllipseArea = (props: any) => {
-  const { openDrop, opened, onHandleClose, calcs } = props
+  const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -66,16 +66,19 @@ const EllipseArea = (props: any) => {
   }: any = useStyles()
   const [selectedResult, setSelectedResult] = React.useState<boolean>(false)
 
+  React.useEffect(() => {
+
+
+    return () => { }
+  })
+
   return (
     <>
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.ellipseArea}
         dropDown={true}
-        opened={opened}
         openDrop={openDrop}
-        calcs={calcs}
-        onHandleClose={onHandleClose}
         animation={formAnimation}
       >
         <Formik

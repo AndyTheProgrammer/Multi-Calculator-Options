@@ -28,7 +28,7 @@ import useStyles from '../../../../../../styling/CustomStyles';
 const Latex = require('react-latex');
 
 const CircleArea = (props: any) => {
-  const { onHandleOpen, opened, onHandleClose, calcs } = props
+  const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -66,10 +66,7 @@ const CircleArea = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.circleArea}
         dropDown={true}
-        opened={opened}
-        onHandleOpen={onHandleOpen}
-        calcs={calcs}
-        onHandleClose={onHandleClose}
+        openDrop={openDrop}
         animation={formAnimation}
       >
         <Formik

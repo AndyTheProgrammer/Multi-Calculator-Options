@@ -24,7 +24,7 @@ import {
 } from '../../../../../custom'
 
 const RectangularArea = (props: any) => {
-  const { openDrop, opened, onHandleClose, calcs } = props
+  const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -63,6 +63,12 @@ const RectangularArea = (props: any) => {
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
+  React.useEffect(() => {
+
+
+    return () => { }
+  })
+
   return (
     <>
 
@@ -70,10 +76,7 @@ const RectangularArea = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.rectangleArea}
         dropDown={true}
-        opened={opened}
         openDrop={openDrop}
-        calcs={calcs}
-        onHandleClose={onHandleClose}
         animation={formAnimation}
       >
         <Formik

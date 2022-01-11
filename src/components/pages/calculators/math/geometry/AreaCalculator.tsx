@@ -5,7 +5,12 @@ import { NavBar2 } from '../../../../navbar/navbar2'
 import AddLayout from '../../../../layouts/AddLayout'
 import { SimpleDialog } from "../../../../content";
 import { geometry_icon, math_icon } from '../../../../../common/assets';
-import { useAppSelector, useAppDispatch, setselectedCalculator, selectCalculators } from "../../../../../redux";
+import {
+  useAppSelector,
+  useAppDispatch,
+  selectCalculators,
+  setSelectedCalculator,
+} from "../../../../../redux";
 import {
   CircleArea,
   EllipseArea,
@@ -24,15 +29,13 @@ function AreaCalculator() {
   const [selectedCalc, setSelectedCalc] = React.useState("Circle Area");
 
   const handleClickOpen = () => {
-    setOpen(!open);
-    console.log("OPENED: ", open)
+    setOpen(true);
   };
 
   const handleClose = (value: any) => {
     setOpen(false)
     if (value) {
       setSelectedCalc(value)
-      console.log("CALC: ", value)
 
       // find calcName that matches the selected calc
       const getCalc = calculators.find(({ calcName }) => calcName === value)
@@ -40,51 +43,40 @@ function AreaCalculator() {
     }
   };
 
-  const calcs = [
-    "Circle Area",
-    "Ellipse Area",
-    "Parallelogram Area",
-    "Rectangle Area",
-    "Sector Area",
-    "Trapezoid Area",
-    "Triangle Area",
-  ];
-
-
   // main state
   const [currentCalc, setCurrentCalc] = React.useState({
     calcName: "Circle Area",
-    component: <CircleArea calcs={calcs} onHandleOpen={handleClickOpen} opened={open} onHandleClose={handleClose} />,
+    component: <CircleArea openDrop={handleClickOpen} />,
   });
 
   const calculators = [
     {
       calcName: "Circle Area",
-      component: <CircleArea calcs={calcs} onHandleOpen={handleClickOpen} />,
+      component: <CircleArea openDrop={handleClickOpen} />,
     },
     {
       calcName: "Ellipse Area",
-      component: <EllipseArea calcs={calcs} onHandleOpen={handleClickOpen} />,
+      component: <EllipseArea openDrop={handleClickOpen} />,
     },
     {
       calcName: "Parallelogram Area",
-      component: <ParallelogramArea calcs={calcs} onHandleOpen={handleClickOpen} />,
+      component: <ParallelogramArea openDrop={handleClickOpen} />,
     },
     {
       calcName: "Rectangle Area",
-      component: <RectangularArea calcs={calcs} onHandleOpen={handleClickOpen} />,
+      component: <RectangularArea openDrop={handleClickOpen} />,
     },
     {
       calcName: "Sector Area",
-      component: <SectorArea calcs={calcs} onHandleOpen={handleClickOpen} />,
+      component: <SectorArea openDrop={handleClickOpen} />,
     },
     {
       calcName: "Trapezoid Area",
-      component: <TrapezoidArea calcs={calcs} onHandleOpen={handleClickOpen} />,
+      component: <TrapezoidArea openDrop={handleClickOpen} />,
     },
     {
       calcName: "Triangle Area",
-      component: <TriangleArea calcs={calcs} onHandleOpen={handleClickOpen} />,
+      component: <TriangleArea openDrop={handleClickOpen} />,
     },
   ];
   return (
@@ -111,7 +103,8 @@ function AreaCalculator() {
           })}
 
 
-          {/* <SimpleDialog
+
+          {/*  <SimpleDialog
             dropOptions={calculators}
             selectedValue={selectedCalc}
             open={open}

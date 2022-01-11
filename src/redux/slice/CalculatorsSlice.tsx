@@ -32,14 +32,14 @@ export const calcsSlice = createSlice({
       }
 
     },
-    setselectedCalculator: (state, action: PayloadAction<any>) => {
+    setSelectedCalculator: (state, action: PayloadAction<any>) => {
       state.selectedCalculator = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { calculateData, setselectedCalculator } = calcsSlice.actions;
+export const { calculateData, setSelectedCalculator } = calcsSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

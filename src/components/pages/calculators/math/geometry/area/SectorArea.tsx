@@ -26,7 +26,7 @@ import {
 } from '../../../../../custom'
 
 const SectorArea = (props: any) => {
-  const { openDrop, opened, onHandleClose } = props
+  const { openDrop } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -65,6 +65,12 @@ const SectorArea = (props: any) => {
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
+  React.useEffect(() => {
+
+
+    return () => { }
+  })
+
   return (
     <>
 
@@ -72,9 +78,7 @@ const SectorArea = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.sectorArea}
         dropDown={true}
-        opened={opened}
         openDrop={openDrop}
-        onHandleClose={onHandleClose}
         animation={formAnimation}
       >
         <Formik
