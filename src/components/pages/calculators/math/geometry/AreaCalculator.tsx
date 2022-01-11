@@ -95,11 +95,10 @@ function AreaCalculator() {
           container
           justifyContent="center"
         >
-          {calculators.find(e => {
+          {calculators.map(e => {
             if (e.calcName === selectedCalculator) {
               return e.component
             }
-            return <CircleArea />
           })}
 
 
