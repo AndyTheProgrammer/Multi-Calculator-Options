@@ -26,7 +26,7 @@ import {
 } from '../../../../../custom'
 
 const TrapezoidArea = (props: any) => {
-  const { openDrop } = props
+  const { openDrop, opened, onHandleClose, calcs } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -70,21 +70,17 @@ const TrapezoidArea = (props: any) => {
     formDisplay
   }: any = useStyles()
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
-  React.useEffect(() => {
-
-
-    return () => { }
-  })
-
 
   return (
     <>
-
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.trapezoidArea}
         dropDown={true}
+        opened={opened}
         openDrop={openDrop}
+        calcs={calcs}
+        onHandleClose={onHandleClose}
         animation={formAnimation}
       >
         <Formik

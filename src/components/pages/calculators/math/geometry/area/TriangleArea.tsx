@@ -27,7 +27,7 @@ import {
 //Needs to be Refactored. Waiting on Martin's End!
 
 const TriangleArea = (props: any) => {
-  const { openDrop } = props
+  const { openDrop, opened, onHandleClose, calcs } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -76,7 +76,10 @@ const TriangleArea = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.triangleArea}
         dropDown={true}
+        opened={opened}
+        calcs={calcs}
         openDrop={openDrop}
+        onHandleClose={onHandleClose}
         animation={formAnimation}
       >
         <Formik

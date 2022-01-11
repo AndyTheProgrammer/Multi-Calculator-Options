@@ -273,8 +273,8 @@ const mathRoutes = {
         {
           name: "Area Calculator",
           path: `${mathUrl}/areacalculator`,
-          component: PC.TestCalculator
-          //component: PC.AreaCalculator
+          //  component: PC.TestCalculator
+          component: PC.AreaCalculator
         },
         {
           name: "Distance Calculator",

@@ -1,15 +1,17 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from '../store'
 
-interface CalculatorState {
+interface CalculatorStateI {
   results: any,
-  isCalculating: boolean
+  isCalculating: boolean,
+  selectedCalculator: string,
 }
 
 // Initial states
-const initialState: CalculatorState = {
+const initialState: CalculatorStateI = {
   results: '',
   isCalculating: false,
+  selectedCalculator: '',
 };
 
 export const calcsSlice = createSlice({
@@ -30,11 +32,14 @@ export const calcsSlice = createSlice({
       }
 
     },
+    setselectedCalculator: (state, action: PayloadAction<any>) => {
+      state.selectedCalculator = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { calculateData } = calcsSlice.actions;
+export const { calculateData, setselectedCalculator } = calcsSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

@@ -25,7 +25,7 @@ import {
 } from '../../../../../custom'
 
 const ParallelogramArea = (props: any) => {
-  const { openDrop } = props
+  const { openDrop, opened, onHandleClose, calcs } = props
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -80,7 +80,10 @@ const ParallelogramArea = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.parallelogramArea}
         dropDown={true}
+        opened={opened}
         openDrop={openDrop}
+        calcs={calcs}
+        onHandleClose={onHandleClose}
         animation={formAnimation}
       >
         <Formik
