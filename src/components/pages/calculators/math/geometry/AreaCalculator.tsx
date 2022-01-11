@@ -79,6 +79,7 @@ function AreaCalculator() {
       component: <TriangleArea openDrop={handleClickOpen} />,
     },
   ];
+
   return (
     <>
       <NavBar2
@@ -100,7 +101,6 @@ function AreaCalculator() {
               return e.component
             }
           })}
-
 
 
           {/*  <SimpleDialog
