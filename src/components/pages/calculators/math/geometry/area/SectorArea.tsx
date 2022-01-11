@@ -24,6 +24,7 @@ import {
   ResultTabsContainer,
   FormTabsContainer
 } from '../../../../../custom'
+import { areaCalculators } from '../../../../../../common/shared/constants';
 
 const SectorArea = (props: any) => {
   const { openDrop } = props
@@ -71,6 +72,12 @@ const SectorArea = (props: any) => {
     return () => { }
   })
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
 
@@ -78,8 +85,11 @@ const SectorArea = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.sectorArea}
         dropDown={true}
+        opened={open}
         openDrop={openDrop}
         animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={areaCalculators}
       >
         <Formik
           initialValues={sectorInitialValues}

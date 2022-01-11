@@ -23,6 +23,7 @@ import {
   ResultTabsContainer,
   FormTabsContainer
 } from '../../../../../custom'
+import { areaCalculators } from '../../../../../../common/shared/constants';
 
 //Needs to be Refactored. Waiting on Martin's End!
 
@@ -70,14 +71,23 @@ const TriangleArea = (props: any) => {
     return () => { }
   })
 
+  const [open, setOpen] = React.useState(false);
+  // Used for the dropDown event handler
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.triangleArea}
         dropDown={true}
+        opened={open}
         openDrop={openDrop}
         animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={areaCalculators}
       >
         <Formik
           initialValues={triangleInitialValues}

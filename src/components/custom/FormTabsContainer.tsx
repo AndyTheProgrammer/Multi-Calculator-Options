@@ -53,7 +53,7 @@ function FormTabsContainer(props: FormProps) {
        setSelected(data)
   }
   // func(selected)
-  console.log('I was picked', selected )
+  console.log('I was picked', opened )
 
   if (dropDown === true) {
     return (
@@ -68,7 +68,7 @@ function FormTabsContainer(props: FormProps) {
                 label={tabTitle1}
                 dropDown={true}
                 opened={opened}
-                openDrop={openDrop || onHandleOpen}
+                openDrop={onHandleOpen}
               />
               <StaticTab
                 className={rightTabContainer}

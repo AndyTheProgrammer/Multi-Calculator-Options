@@ -384,3 +384,14 @@ export const LATEX = {
   usCustomarySystem: `$$`,
   websiteBandwidth: `$Bandwidth = Average page size * Average page views * 30 * Redundancy$`,
 }
+// Object with area calculator names
+export const areaCalculators =
+ [
+  'Circle Area', 
+  'Ellipse Area', 
+'Parallelogram Area',
+'Rectangle Area', 
+'Sector Area',
+'Trapezoid Area',
+'Triangle Area'
+]

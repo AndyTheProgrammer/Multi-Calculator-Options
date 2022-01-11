@@ -23,6 +23,7 @@ import {
   ResultTabsContainer,
   FormTabsContainer
 } from '../../../../../custom'
+import { areaCalculators } from '../../../../../../common/shared/constants';
 
 const ParallelogramArea = (props: any) => {
   const { openDrop } = props
@@ -71,7 +72,11 @@ const ParallelogramArea = (props: any) => {
 
     return () => { }
   })
+  const [open, setOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
 
   return (
     <>
@@ -80,8 +85,11 @@ const ParallelogramArea = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.parallelogramArea}
         dropDown={true}
+        opened={open}
         openDrop={openDrop}
         animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={areaCalculators}
       >
         <Formik
           initialValues={parallelogramInitialValues}

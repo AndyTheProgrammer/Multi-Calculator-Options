@@ -22,6 +22,7 @@ import {
   ResultTabsContainer,
   FormTabsContainer
 } from '../../../../../custom'
+import { areaCalculators } from '../../../../../../common/shared/constants';
 
 const RectangularArea = (props: any) => {
   const { openDrop } = props
@@ -69,6 +70,12 @@ const RectangularArea = (props: any) => {
     return () => { }
   })
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
 
@@ -76,8 +83,11 @@ const RectangularArea = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.rectangleArea}
         dropDown={true}
+        opened={open}
         openDrop={openDrop}
         animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={areaCalculators}
       >
         <Formik
           initialValues={rectInitialValues}

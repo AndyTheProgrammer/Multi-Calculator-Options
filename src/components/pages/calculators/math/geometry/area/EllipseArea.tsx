@@ -23,6 +23,7 @@ import {
   ResultTabsContainer,
   FormTabsContainer
 } from '../../../../../custom'
+import { areaCalculators } from '../../../../../../common/shared/constants';
 
 const EllipseArea = (props: any) => {
   const { openDrop } = props
@@ -61,6 +62,14 @@ const EllipseArea = (props: any) => {
     submitted_semi_major_axes_b: 0,
 
   })
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
+  
   const {
     formDisplay
   }: any = useStyles()
@@ -78,8 +87,11 @@ const EllipseArea = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.ellipseArea}
         dropDown={true}
+        opened={open}
         openDrop={openDrop}
         animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={areaCalculators}
       >
         <Formik
           initialValues={ellipseInitialValues}

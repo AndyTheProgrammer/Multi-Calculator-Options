@@ -24,6 +24,7 @@ import {
   ResultTabsContainer,
   FormTabsContainer
 } from '../../../../../custom'
+import { areaCalculators } from '../../../../../../common/shared/constants';
 
 const TrapezoidArea = (props: any) => {
   const { openDrop } = props
@@ -76,7 +77,11 @@ const TrapezoidArea = (props: any) => {
     return () => { }
   })
 
+  const [open, setOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
   return (
     <>
 
@@ -84,8 +89,11 @@ const TrapezoidArea = (props: any) => {
       <FormTabsContainer
         tabTitle1={CALCULATORS.trapezoidArea}
         dropDown={true}
+        opened={open}
         openDrop={openDrop}
         animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={areaCalculators}
       >
         <Formik
           initialValues={trapezoidInitialValues}

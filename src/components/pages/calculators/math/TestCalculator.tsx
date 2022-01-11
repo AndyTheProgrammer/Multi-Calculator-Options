@@ -1245,7 +1245,7 @@ function TestCalculator() {
             animation={formAnimation}
           >
             {/* DROPDOWN */}
-            {open &&
+            {/* {open &&
               <Box sx={{
                 zIndex: 1,
                 position: 'absolute',
@@ -1295,7 +1295,7 @@ function TestCalculator() {
                   ))}
                 </List>
               </Box>
-            }
+            } */}
 
             {/* IMAGE */}
             <Box mt={0} mb={2}

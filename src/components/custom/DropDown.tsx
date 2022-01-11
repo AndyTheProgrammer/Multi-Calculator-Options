@@ -1,6 +1,7 @@
 import { Box, List, ListItem, ListItemButton, ListItemText, useTheme } from '@mui/material'
 import React, { useState } from 'react'
 import { COLORS } from '../../common/shared'
+import { setSelectedCalculator, useAppDispatch } from '../../redux'
 import { Font } from '../font'
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 const DropDown = (props: Props) => {
     const {calculators} = props
     const theme = useTheme();
+    const dispatch = useAppDispatch()
     const [selected, setSelected ] = useState<string>()
     props.func(selected)
    
@@ -36,7 +38,11 @@ const DropDown = (props: Props) => {
             >
               {calculators?.map((item: any, index) => (
                 <ListItem
-                  onClick={() => setSelected(item)}
+                  onClick={() => {
+                    // setSelected(item)
+                    dispatch(setSelectedCalculator(item))
+                  
+                  }}
                   key={index}
                   sx={{
                     paddingBottom: 0.5,
