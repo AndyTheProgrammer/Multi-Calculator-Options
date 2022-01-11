@@ -55,6 +55,8 @@ function AreaCalculator() {
     },
   ];
 
+  console.log("CALC: ", selectedCalculator)
+
   return (
     <>
       <NavBar2
@@ -72,8 +74,10 @@ function AreaCalculator() {
           justifyContent="center"
         >
           {calculators.map(e => {
-            if (e.calcName === selectedCalculator) {
+            if (e.calcName === selectedCalculator && selectedCalculator !== "") {
               return e.component
+            } else {
+              return calculators[0].component
             }
           })}
         </Grid>

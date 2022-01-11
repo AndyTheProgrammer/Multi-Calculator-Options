@@ -11,7 +11,7 @@ interface CalculatorStateI {
 const initialState: CalculatorStateI = {
   results: '',
   isCalculating: false,
-  selectedCalculator: 'Circle Area',
+  selectedCalculator: '',
 };
 
 export const calcsSlice = createSlice({
