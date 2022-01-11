@@ -6,6 +6,12 @@ import AddLayout from '../../../../layouts/AddLayout'
 import { SimpleDialog } from "../../../../content";
 import { geometry_icon, math_icon } from '../../../../../common/assets';
 import {
+  useAppSelector,
+  useAppDispatch,
+  selectCalculators,
+  setSelectedCalculator,
+} from "../../../../../redux";
+import {
   CircleArea,
   EllipseArea,
   ParallelogramArea,
@@ -16,6 +22,8 @@ import {
 } from '../../../index'
 
 function AreaCalculator() {
+  const { selectedCalculator } = useAppSelector(selectCalculators);
+  const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
   // state that changes using the dropdown
   const [selectedCalc, setSelectedCalc] = React.useState("Circle Area");
@@ -87,13 +95,21 @@ function AreaCalculator() {
           container
           justifyContent="center"
         >
-          {currentCalc.component}
-          <SimpleDialog
+          {calculators.find(e => {
+            if (e.calcName === selectedCalculator) {
+              return e.component
+            }
+            return <CircleArea />
+          })}
+
+
+
+          {/*  <SimpleDialog
             dropOptions={calculators}
             selectedValue={selectedCalc}
             open={open}
             onClose={handleClose}
-          />
+          /> */}
         </Grid>
       </AddLayout>
     </>

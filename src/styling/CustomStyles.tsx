@@ -152,6 +152,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     width: "auto",
     backgroundColor: "blue",
   },
+  resultContainer: {
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  }
 }));
 
 export default useStyles;

@@ -1,6 +1,7 @@
 export {
   selectCalculators,
-  calculateData
+  calculateData,
+  setSelectedCalculator,
 } from "./slice/CalculatorsSlice";
 
 export {
