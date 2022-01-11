@@ -23,60 +23,35 @@ import {
 
 function AreaCalculator() {
   const { selectedCalculator } = useAppSelector(selectCalculators);
-  const dispatch = useAppDispatch();
-  const [open, setOpen] = React.useState(false);
-  // state that changes using the dropdown
-  const [selectedCalc, setSelectedCalc] = React.useState("Circle Area");
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (value: any) => {
-    setOpen(false)
-    if (value) {
-      setSelectedCalc(value)
-
-      // find calcName that matches the selected calc
-      const getCalc = calculators.find(({ calcName }) => calcName === value)
-      setCurrentCalc(getCalc!)
-    }
-  };
-
-  // main state
-  const [currentCalc, setCurrentCalc] = React.useState({
-    calcName: "Circle Area",
-    component: <CircleArea openDrop={handleClickOpen} />,
-  });
 
   const calculators = [
     {
       calcName: "Circle Area",
-      component: <CircleArea openDrop={handleClickOpen} />,
+      component: <CircleArea />,
     },
     {
       calcName: "Ellipse Area",
-      component: <EllipseArea openDrop={handleClickOpen} />,
+      component: <EllipseArea />,
     },
     {
       calcName: "Parallelogram Area",
-      component: <ParallelogramArea openDrop={handleClickOpen} />,
+      component: <ParallelogramArea />,
     },
     {
       calcName: "Rectangle Area",
-      component: <RectangularArea openDrop={handleClickOpen} />,
+      component: <RectangularArea />,
     },
     {
       calcName: "Sector Area",
-      component: <SectorArea openDrop={handleClickOpen} />,
+      component: <SectorArea />,
     },
     {
       calcName: "Trapezoid Area",
-      component: <TrapezoidArea openDrop={handleClickOpen} />,
+      component: <TrapezoidArea />,
     },
     {
       calcName: "Triangle Area",
-      component: <TriangleArea openDrop={handleClickOpen} />,
+      component: <TriangleArea />,
     },
   ];
 
@@ -101,14 +76,6 @@ function AreaCalculator() {
               return e.component
             }
           })}
-
-
-          {/*  <SimpleDialog
-            dropOptions={calculators}
-            selectedValue={selectedCalc}
-            open={open}
-            onClose={handleClose}
-          /> */}
         </Grid>
       </AddLayout>
     </>

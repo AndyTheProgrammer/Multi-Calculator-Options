@@ -12,7 +12,7 @@ const Label = (props: any) => {
         alignItems: 'center',
       }}
     >
-      <FontProvider fonts={[{ font: 'Roboto, Helvetica' }]}>
+      <FontProvider fonts={[{ font: 'Roboto' }]}>
         <Typography
           variant='subtitle2'
           style={{ color: 'black', fontSize: 16 }}

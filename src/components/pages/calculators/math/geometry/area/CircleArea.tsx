@@ -1,18 +1,18 @@
 import React from 'react'
-import { Typography, Grid, Box } from '@mui/material'
+import { Typography } from '@mui/material'
 import { Formik } from 'formik'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 
 import { CircleAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
 import {
   CALCULATORS,
   LABELS,
-  PLACEHOLDERS,
   INPUT_TYPE,
-  LATEX
+  LATEX,
+  AREA_CALCULATORS
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -20,13 +20,9 @@ import {
   Label,
   FormRow,
   ResultTabsContainer,
-  FormTabsContainer
+  FormTabsContainer,
+  PlaceHolder
 } from '../../../../../custom'
-import PlaceHolder from '../../../../../custom/PlaceHolder';
-import useStyles from '../../../../../../styling/CustomStyles';
-import { areaCalculators } from '../../../../../../common/shared/constants';
-
-const Latex = require('react-latex');
 
 const CircleArea = (props: any) => {
   const { openDrop } = props
@@ -61,15 +57,11 @@ const CircleArea = (props: any) => {
     setOpen(!open);
   };
 
-  const {
-    fieldDisplay
-  }: any = useStyles()
-
   return (
     <>
-    {/* Do not forget to add placeHolder components on all other calculators */}
+      {/* Do not forget to add placeHolder components on all other calculators */}
       <PlaceHolder
-        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.     '
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.'
       />
       <FormTabsContainer
         tabTitle1={CALCULATORS.circleArea}
@@ -78,9 +70,7 @@ const CircleArea = (props: any) => {
         openDrop={openDrop}
         animation={formAnimation}
         onHandleOpen={handleClickOpen}
-        calculatorList={areaCalculators}
-       
-
+        calculatorList={AREA_CALCULATORS}
       >
         <Formik
           initialValues={circleInitialValues}

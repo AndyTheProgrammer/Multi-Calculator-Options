@@ -3,17 +3,17 @@ import { Formik } from 'formik'
 import { Typography } from '@material-ui/core'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 
 import { ParallelogramAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
-import useStyles from '../../../../../../styling/CustomStyles'
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
   LATEX,
+  AREA_CALCULATORS,
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -21,9 +21,9 @@ import {
   Label,
   FormRow,
   ResultTabsContainer,
-  FormTabsContainer
+  FormTabsContainer,
+  PlaceHolder,
 } from '../../../../../custom'
-import { areaCalculators } from '../../../../../../common/shared/constants';
 
 const ParallelogramArea = (props: any) => {
   const { openDrop } = props
@@ -63,15 +63,9 @@ const ParallelogramArea = (props: any) => {
     submitted_height: 0,
     unit: ''
   })
-  const {
-    formDisplay
-  }: any = useStyles()
+
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
-  React.useEffect(() => {
-
-    return () => { }
-  })
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -80,7 +74,9 @@ const ParallelogramArea = (props: any) => {
 
   return (
     <>
-
+      <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.'
+      />
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.parallelogramArea}
@@ -89,7 +85,7 @@ const ParallelogramArea = (props: any) => {
         openDrop={openDrop}
         animation={formAnimation}
         onHandleOpen={handleClickOpen}
-        calculatorList={areaCalculators}
+        calculatorList={AREA_CALCULATORS}
       >
         <Formik
           initialValues={parallelogramInitialValues}
@@ -146,6 +142,12 @@ const ParallelogramArea = (props: any) => {
               }
               if (success === true) {
                 setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                })
               }
             } catch (err) {
               console.log('====>', err)

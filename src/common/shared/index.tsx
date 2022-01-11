@@ -9,3 +9,9 @@ export {
   CALC_LABELS,
   LATEX,
 } from "./constants";
+
+export {
+  AREA_CALCULATORS,
+  SURFACEAREA_CALCULATORS,
+  VOLUME_CALCULATORS,
+} from "./calculatorNames";

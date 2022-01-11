@@ -17,7 +17,7 @@ const NoIndexTabPanel = (props: TabPanelProps) => {
       role="tabpanel"
       {...other}
     >
-      <FontProvider fonts={[{ font: 'Roboto, Helvetica' }]}>
+      <FontProvider fonts={[{ font: 'Roboto' }]}>
         <Box
           p={2}
         >

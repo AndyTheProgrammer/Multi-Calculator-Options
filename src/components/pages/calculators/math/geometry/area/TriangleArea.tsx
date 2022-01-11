@@ -1,9 +1,9 @@
 import React from 'react'
-import { Typography, Grid } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 
 import { TriangleAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
@@ -12,8 +12,8 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
-  COLORS,
-  LATEX
+  LATEX,
+  AREA_CALCULATORS
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -21,9 +21,9 @@ import {
   Label,
   FormRow,
   ResultTabsContainer,
-  FormTabsContainer
+  FormTabsContainer,
+  PlaceHolder
 } from '../../../../../custom'
-import { areaCalculators } from '../../../../../../common/shared/constants';
 
 //Needs to be Refactored. Waiting on Martin's End!
 
@@ -65,11 +65,6 @@ const TriangleArea = (props: any) => {
   })
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
-  React.useEffect(() => {
-
-
-    return () => { }
-  })
 
   const [open, setOpen] = React.useState(false);
   // Used for the dropDown event handler
@@ -79,6 +74,9 @@ const TriangleArea = (props: any) => {
 
   return (
     <>
+      <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.'
+      />
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.triangleArea}
@@ -87,7 +85,7 @@ const TriangleArea = (props: any) => {
         openDrop={openDrop}
         animation={formAnimation}
         onHandleOpen={handleClickOpen}
-        calculatorList={areaCalculators}
+        calculatorList={AREA_CALCULATORS}
       >
         <Formik
           initialValues={triangleInitialValues}
@@ -142,6 +140,12 @@ const TriangleArea = (props: any) => {
               }
               if (success === true) {
                 setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                })
               }
             } catch (err) {
               console.log('====>', err)

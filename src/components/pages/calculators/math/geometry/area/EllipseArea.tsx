@@ -3,17 +3,17 @@ import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { useSpring, animated } from 'react-spring'
+import { useSpring, } from 'react-spring'
 
 import { EllipseAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
-import useStyles from '../../../../../../styling/CustomStyles'
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
   LATEX,
+  AREA_CALCULATORS,
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -21,9 +21,9 @@ import {
   Label,
   FormRow,
   ResultTabsContainer,
-  FormTabsContainer
+  FormTabsContainer,
+  PlaceHolder,
 } from '../../../../../custom'
-import { areaCalculators } from '../../../../../../common/shared/constants';
 
 const EllipseArea = (props: any) => {
   const { openDrop } = props
@@ -69,20 +69,13 @@ const EllipseArea = (props: any) => {
     setOpen(!open);
   };
 
-  
-  const {
-    formDisplay
-  }: any = useStyles()
   const [selectedResult, setSelectedResult] = React.useState<boolean>(false)
-
-  React.useEffect(() => {
-
-
-    return () => { }
-  })
 
   return (
     <>
+      <PlaceHolder
+        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.'
+      />
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.ellipseArea}
@@ -91,7 +84,7 @@ const EllipseArea = (props: any) => {
         openDrop={openDrop}
         animation={formAnimation}
         onHandleOpen={handleClickOpen}
-        calculatorList={areaCalculators}
+        calculatorList={AREA_CALCULATORS}
       >
         <Formik
           initialValues={ellipseInitialValues}
@@ -147,6 +140,12 @@ const EllipseArea = (props: any) => {
               }
               if (success === true) {
                 setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                })
               }
             } catch (err) {
               console.log('====>', err)

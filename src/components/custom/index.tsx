@@ -1,4 +1,3 @@
-export { default as CalculatorDropdown } from "./CalculatorDropdown";
 export { default as CategoryBar } from "./CategoryBar";
 export { default as CustomBtn } from "./CustomBtn";
 export { default as CustomDivider } from "./CustomDivider";
