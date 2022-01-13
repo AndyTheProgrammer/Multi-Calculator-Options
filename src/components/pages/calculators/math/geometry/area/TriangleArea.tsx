@@ -7,13 +7,15 @@ import { useSpring } from 'react-spring'
 
 import { TriangleAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
+import { triangle } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
   LATEX,
-  AREA_CALCULATORS
+  AREA_CALCULATORS,
+  GEOMETRY_PLACEHOLDERS
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,13 +24,13 @@ import {
   FormRow,
   ResultTabsContainer,
   FormTabsContainer,
-  PlaceHolder
+  PlaceHolder,
+  Image,
 } from '../../../../../custom'
 
 //Needs to be Refactored. Waiting on Martin's End!
 
-const TriangleArea = (props: any) => {
-  const { openDrop } = props
+const TriangleArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -75,18 +77,18 @@ const TriangleArea = (props: any) => {
   return (
     <>
       <PlaceHolder
-        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.'
+        placeHolder={GEOMETRY_PLACEHOLDERS.triangleArea}
       />
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.triangleArea}
         dropDown={true}
         opened={open}
-        openDrop={openDrop}
         animation={formAnimation}
         onHandleOpen={handleClickOpen}
         calculatorList={AREA_CALCULATORS}
       >
+        <Image path={triangle} />
         <Formik
           initialValues={triangleInitialValues}
           onSubmit={async ({

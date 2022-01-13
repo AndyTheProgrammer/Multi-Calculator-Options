@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -12,14 +12,16 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  ELECTRONICS_OR_CIRCUITS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
-  CustomBtn,
-  CustomResetBtn,
   Label,
+  FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
+  Image,
 } from '../../../../custom'
 
 const ParrallelResitor = () => {
@@ -47,6 +49,10 @@ const ParrallelResitor = () => {
 
   return (
     <>
+      <PlaceHolder
+        placeHolder={ELECTRONICS_OR_CIRCUITS_PLACEHOLDERS.parrallelResitor}
+      />
+
       {/* Form grid */}
       <FormTabsContainer tabTitle1={CALCULATORS.parrallelResitor} animation={formAnimation}>
         <Formik
@@ -60,7 +66,7 @@ const ParrallelResitor = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: parallelResistorCalculator } = await calculateOthers(payload)
+              const { success, payload: parallelResistorCalculator } = await calculateOthers(payload)
               console.log('=====>', parallelResistorCalculator)
               const { totalResistance, unit,
               } = parallelResistorCalculator
@@ -70,6 +76,15 @@ const ParrallelResitor = () => {
                   unit: unit
                 })
               }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                })
+              }
             } catch (err) {
               console.log('====>', err)
             }
@@ -77,7 +92,7 @@ const ParrallelResitor = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <div className="form-row">
+              <FormRow>
                 <Label title={LABELS.resistanceValues} />
                 <CustomTextInput
                   col
@@ -87,31 +102,22 @@ const ParrallelResitor = () => {
                   value={values.resistance_values}
                   onChange={handleChange}
                 />
-              </div>
+              </FormRow>
 
-              <div
-                className="form-row"
-                style={{ alignItems: 'center', justifyContent: 'space-between' }}
-              >
-
-                <CustomResetBtn
-                  onHandleClick={() => resetForm()}
-                />
-                <CustomBtn />
-              </div>
+              <FormRow buttons reset={() => resetForm()} />
             </form>
           )}
         </Formik>
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="mb-3">
-          <Typography variant="subtitle1"> Total resistance: {Result.totalResistance}{Result.unit}</Typography>
-        </div>
-      </ResultTabsContainer>
-
-
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3">
+            <Typography variant="subtitle1"> Total resistance: {Result.totalResistance}{Result.unit}</Typography>
+          </div>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

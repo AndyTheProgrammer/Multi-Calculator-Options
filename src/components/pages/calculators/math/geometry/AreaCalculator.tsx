@@ -1,15 +1,12 @@
 import React from 'react'
-import { Grid, Box } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import { NavBar2 } from '../../../../navbar/navbar2'
 import AddLayout from '../../../../layouts/AddLayout'
-import { SimpleDialog } from "../../../../content";
 import { geometry_icon, math_icon } from '../../../../../common/assets';
 import {
   useAppSelector,
-  useAppDispatch,
   selectCalculators,
-  setSelectedCalculator,
 } from "../../../../../redux";
 import {
   CircleArea,
@@ -55,7 +52,7 @@ function AreaCalculator() {
     },
   ];
 
-  console.log("CALC: ", selectedCalculator)
+  const getCurrentCalc = calculators.find(({ calcName }) => calcName === selectedCalculator);
 
   return (
     <>
@@ -73,13 +70,19 @@ function AreaCalculator() {
           container
           justifyContent="center"
         >
-          {calculators.map(e => {
+          {typeof getCurrentCalc === "undefined"
+            ?
+            calculators[0].component
+            :
+            getCurrentCalc!.component
+          }
+          {/* {calculators.map(e => {
             if (e.calcName === selectedCalculator && selectedCalculator !== "") {
               return e.component
             } else {
               return calculators[0].component
             }
-          })}
+          })} */}
         </Grid>
       </AddLayout>
     </>

@@ -17,6 +17,7 @@ import {
   INPUT_TYPE,
   LATEX,
   COLORS,
+  FITNESS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -27,6 +28,8 @@ import {
   StyledTabs,
   TabPanel,
   CustomSelect,
+  PlaceHolder,
+  Image,
 } from '../../../../custom'
 import {
   other_icon,
@@ -100,7 +103,6 @@ const BodyMassIndexCalculator = () => {
     unit: ''
   })
 
-
   // Tab value change
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setTabValue(newValue);
@@ -121,6 +123,10 @@ const BodyMassIndexCalculator = () => {
           container
           justifyContent="center"
         >
+          {tabValue === 0 && <PlaceHolder placeHolder={FITNESS_PLACEHOLDERS.bodyMassIndex} />}
+
+          {tabValue === 1 && <PlaceHolder placeHolder={FITNESS_PLACEHOLDERS.bodyMassIndexMethodTwo} />}
+
           <animated.div
             style={formAnimation}
           >

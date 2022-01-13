@@ -1,18 +1,21 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
 import { ConicalFrustumVolumeI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
+import { circle } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
   LATEX,
+  VOLUME_CALCULATORS,
+  GEOMETRY_PLACEHOLDERS,
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -20,11 +23,12 @@ import {
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
+  Image,
 } from '../../../../../custom'
 
-const ConicalFrustumVolume = (props: any) => {
-  const { openDrop } = props
+const ConicalFrustumVolume = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -58,15 +62,30 @@ const ConicalFrustumVolume = (props: any) => {
     volumeInin: 0,
   })
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
+      {/* Do not forget to add placeHolder components on all other calculators */}
+      <PlaceHolder
+        placeHolder={GEOMETRY_PLACEHOLDERS.conicalFrustrumVol}
+      />
+
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.conicalFrustrumVol}
-        animation={formAnimation}
         dropDown={true}
-        openDrop={openDrop}
+        opened={open}
+        animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={VOLUME_CALCULATORS}
       >
+        <Image path={circle} />
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

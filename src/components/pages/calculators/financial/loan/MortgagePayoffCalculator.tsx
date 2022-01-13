@@ -17,6 +17,7 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
+  LOAN_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -25,7 +26,8 @@ import {
   ResultTabsContainer,
   StyledTab,
   StyledTabs,
-  TabPanel
+  TabPanel,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   finance_icon,
@@ -117,6 +119,17 @@ function MortgagePayoffCalculator() {
           container
           justifyContent="center"
         >
+          {tabValue === 0 &&
+            <PlaceHolder
+              placeHolder={LOAN_PLACEHOLDERS.mortgagePayoffWithLoanTerm}
+            />
+          }
+          {tabValue === 1 &&
+            <PlaceHolder
+              placeHolder={LOAN_PLACEHOLDERS.mortgagePayOffWithoutLoanTerm}
+            />
+          }
+
           <animated.div style={formAnimation}>
             <Box className={formDisplay2} >
               <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>

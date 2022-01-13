@@ -17,6 +17,7 @@ import {
   INPUT_TYPE,
   LATEX,
   COLORS,
+  TECHNOLOGY_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -26,7 +27,8 @@ import {
   ResultTabsContainer,
   StyledTab,
   StyledTabs,
-  TabPanel
+  TabPanel,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   other_icon,
@@ -109,6 +111,18 @@ const BandwidthCalculator = () => {
           container
           justifyContent="center"
         >
+          {tabValue === 0 &&
+            <PlaceHolder
+              placeHolder={TECHNOLOGY_PLACEHOLDERS.websiteBandwidth}
+            />
+          }
+
+          {tabValue === 1 &&
+            <PlaceHolder
+              placeHolder={TECHNOLOGY_PLACEHOLDERS.hostingBandwidth}
+            />
+          }
+
           {/* Form */}
           <animated.div style={formAnimation}>
             <Box className={formDisplay} >

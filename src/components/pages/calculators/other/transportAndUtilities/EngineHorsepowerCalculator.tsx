@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Box, Grid, Paper } from '@mui/material'
+import { Typography, Box, Grid, } from '@mui/material'
 import { Formik } from 'formik'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -17,17 +17,18 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
+  TRANSPORT_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
   Label,
   FormRow,
-  FormTabsContainer,
   ResultTabsContainer,
   StyledTab,
   StyledTabs,
   TabPanel,
   CustomSelect,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   other_icon,
@@ -111,6 +112,18 @@ function EngineHorsepowerCalculator() {
           container
           justifyContent="center"
         >
+          {tabValue === 0 &&
+            <PlaceHolder
+              placeHolder={TRANSPORT_PLACEHOLDERS.elapsedTimeMethod}
+            />
+          }
+
+          {tabValue === 1 &&
+            <PlaceHolder
+              placeHolder={TRANSPORT_PLACEHOLDERS.trapSpeedMethod}
+            />
+          }
+
           {/* Form */}
           <animated.div style={formAnimation}>
             <Box className={formDisplay} >

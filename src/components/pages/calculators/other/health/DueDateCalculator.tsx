@@ -1,9 +1,12 @@
 import React from 'react'
-import { Grid, Box } from '@mui/material';
+import { Grid, } from '@mui/material';
 
 import { NavBar2 } from '../../../../navbar/navbar2'
 import AddLayout from '../../../../layouts/AddLayout'
-import { SimpleDialog } from "../../../../content";
+import {
+  useAppSelector,
+  selectCalculators,
+} from "../../../../../redux";
 import {
   DueDateMittendorfWilliam,
   DueDateNaegeleRule,
@@ -16,49 +19,29 @@ import {
 } from "../../../../../common/assets"
 
 function DueDateCalculator() {
-  const [open, setOpen] = React.useState(false);
-  // state that changes using the dropdown
-  const [selectedCalc, setSelectedCalc] = React.useState("Mittendorf William Rule");
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (value: any) => {
-    setOpen(false);
-    if (value) {
-      setSelectedCalc(value);
-
-      // find calcName that matches the selected calc
-      const getCalc = calculators.find(({ calcName }) => calcName === value);
-      setCurrentCalc(getCalc!);
-    }
-  };
-
-  // main state
-  const [currentCalc, setCurrentCalc] = React.useState({
-    calcName: "Mittendorf William Rule",
-    component: <DueDateMittendorfWilliam openDrop={handleClickOpen} />,
-  });
+  const { selectedCalculator } = useAppSelector(selectCalculators);
 
   const calculators = [
     {
       calcName: "Mittendorf William Rule",
-      component: <DueDateMittendorfWilliam openDrop={handleClickOpen} />,
+      component: <DueDateMittendorfWilliam />,
     },
     {
       calcName: "Naegele Rule",
-      component: <DueDateNaegeleRule openDrop={handleClickOpen} />,
+      component: <DueDateNaegeleRule />,
     },
     {
       calcName: "Parikh's Rule",
-      component: <DueDateParikhsRule openDrop={handleClickOpen} />,
+      component: <DueDateParikhsRule />,
     },
     {
       calcName: "Woods Rule",
-      component: <DueDateWoodsRule openDrop={handleClickOpen} />,
+      component: <DueDateWoodsRule />,
     }
   ];
+
+  const getCurrentCalc = calculators.find(({ calcName }) => calcName === selectedCalculator);
+
   return (
     <>
       <NavBar2
@@ -75,13 +58,12 @@ function DueDateCalculator() {
           container
           justifyContent="center"
         >
-          {currentCalc.component}
-          <SimpleDialog
-            dropOptions={calculators}
-            selectedValue={selectedCalc}
-            open={open}
-            onClose={handleClose}
-          />
+          {typeof getCurrentCalc === "undefined"
+            ?
+            calculators[0].component
+            :
+            getCurrentCalc!.component
+          }
         </Grid>
       </AddLayout>
     </>

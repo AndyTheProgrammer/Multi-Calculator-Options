@@ -3,8 +3,11 @@ import { Grid } from '@mui/material';
 
 import { NavBar2 } from '../../../../navbar/navbar2'
 import AddLayout from '../../../../layouts/AddLayout'
-import { SimpleDialog } from "../../../../content";
 import { geometry_icon, math_icon } from '../../../../../common/assets';
+import {
+  useAppSelector,
+  selectCalculators,
+} from "../../../../../redux";
 import {
   CapsuleVolume,
   ConeVolume,
@@ -20,78 +23,56 @@ import {
 } from '../../../index'
 
 function VolumeCalculator() {
-  const [open, setOpen] = React.useState(false);
-  // state that changes using the dropdown
-  const [selectedCalc, setSelectedCalc] = React.useState("Capsule Volume");
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (value: any) => {
-    setOpen(false);
-    if (value) {
-      setSelectedCalc(value);
-
-      // find calcName that matches the selected calc
-      const getCalc = calculators.find(({ calcName }) => calcName === value);
-      setCurrentCalc(getCalc!);
-    }
-  };
-
-  // main state
-  const [currentCalc, setCurrentCalc] = React.useState({
-    calcName: "Capsule Volume",
-    component: <CapsuleVolume openDrop={handleClickOpen} />,
-  });
+  const { selectedCalculator } = useAppSelector(selectCalculators);
 
   const calculators = [
     {
       calcName: "Capsule Volume",
-      component: <CapsuleVolume openDrop={handleClickOpen} />,
+      component: <CapsuleVolume />,
     },
     {
       calcName: "Cone Volume",
-      component: <ConeVolume openDrop={handleClickOpen} />,
+      component: <ConeVolume />,
     },
     {
       calcName: "Conical Frustrum Volume",
-      component: <ConicalFrustumVolume openDrop={handleClickOpen} />,
+      component: <ConicalFrustumVolume />,
     },
     {
       calcName: "Cube Volume",
-      component: <CubeVolume openDrop={handleClickOpen} />,
+      component: <CubeVolume />,
     },
     {
       calcName: "Cylinder Volume",
-      component: <CylinderVolume openDrop={handleClickOpen} />,
+      component: <CylinderVolume />,
     },
     {
       calcName: "Ellipsoid Volume",
-      component: <EllipsoidVolume openDrop={handleClickOpen} />,
+      component: <EllipsoidVolume />,
     },
     {
       calcName: "Rectangular Tank Volume",
-      component: <RectangularTankVolume openDrop={handleClickOpen} />,
+      component: <RectangularTankVolume />,
     },
     {
       calcName: "Sphere Volume",
-      component: <SphereVolume openDrop={handleClickOpen} />,
+      component: <SphereVolume />,
     },
     {
       calcName: "Spherical Cap Volume",
-      component: <SphericalCapVolume openDrop={handleClickOpen} />,
+      component: <SphericalCapVolume />,
     },
     {
       calcName: "Square Pyramid Volume",
-      component: <SquarePyramidVolume openDrop={handleClickOpen} />,
+      component: <SquarePyramidVolume />,
     },
     {
       calcName: "Tube Volume",
-      component: <TubeVolume openDrop={handleClickOpen} />,
+      component: <TubeVolume />,
     },
   ];
 
+  const getCurrentCalc = calculators.find(({ calcName }) => calcName === selectedCalculator);
   return (
     <>
       <NavBar2
@@ -108,13 +89,12 @@ function VolumeCalculator() {
           container
           justifyContent="center"
         >
-          {currentCalc.component}
-          <SimpleDialog
-            dropOptions={calculators}
-            selectedValue={selectedCalc}
-            open={open}
-            onClose={handleClose}
-          />
+          {typeof getCurrentCalc === "undefined"
+            ?
+            calculators[0].component
+            :
+            getCurrentCalc!.component
+          }
         </Grid>
       </AddLayout>
     </>

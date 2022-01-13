@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Grid } from '@mui/material'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -14,6 +14,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  FITNESS_PLACEHOLDERS
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -21,7 +22,9 @@ import {
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
+  Image,
 } from '../../../../custom'
 import {
   other_icon,
@@ -42,7 +45,7 @@ const BodyFatPercentageBmi = () => {
     alignItems: 'center',
     justifyContent: 'center',
   }));
-  const [answer, setAnswer] = React.useState<boolean>(false)
+  const [answer, setAnswer] = React.useState<boolean>(false);
   const [initialFormValues] = React.useState({
     neck: '',
     neck_unit: '',
@@ -53,10 +56,10 @@ const BodyFatPercentageBmi = () => {
     gender: '',
     hip: '',
     hip_unit: ''
-  })
+  });
   const [Result, setResult] = React.useState({
     BFP: 0,
-  })
+  });
 
   return (
     <>
@@ -74,6 +77,8 @@ const BodyFatPercentageBmi = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder placeHolder={FITNESS_PLACEHOLDERS.bodyFatPercentage} />
+
           {/* Form grid */}
           <FormTabsContainer
             animation={formAnimation}

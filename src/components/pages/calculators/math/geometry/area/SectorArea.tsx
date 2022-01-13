@@ -7,13 +7,15 @@ import { useSpring } from 'react-spring'
 
 import { SectorAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
+import { sector } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
   LATEX,
-  AREA_CALCULATORS
+  AREA_CALCULATORS,
+  GEOMETRY_PLACEHOLDERS
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -23,10 +25,10 @@ import {
   ResultTabsContainer,
   FormTabsContainer,
   PlaceHolder,
+  Image,
 } from '../../../../../custom'
 
-const SectorArea = (props: any) => {
-  const { openDrop } = props
+const SectorArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -71,18 +73,18 @@ const SectorArea = (props: any) => {
   return (
     <>
       <PlaceHolder
-        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.'
+        placeHolder={GEOMETRY_PLACEHOLDERS.sectorArea}
       />
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.sectorArea}
         dropDown={true}
         opened={open}
-        openDrop={openDrop}
         animation={formAnimation}
         onHandleOpen={handleClickOpen}
         calculatorList={AREA_CALCULATORS}
       >
+        <Image path={sector} />
         <Formik
           initialValues={sectorInitialValues}
           onSubmit={async ({

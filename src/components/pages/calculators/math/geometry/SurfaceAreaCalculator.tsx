@@ -1,16 +1,13 @@
 import React from 'react'
-import { Box, Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 
 import { NavBar2 } from '../../../../navbar/navbar2'
 import AddLayout from '../../../../layouts/AddLayout'
-import { SimpleDialog } from "../../../../content";
 import { geometry_icon, math_icon } from '../../../../../common/assets';
 import {
-  CALCULATORS,
-  LABELS,
-  PLACEHOLDERS,
-  INPUT_TYPE,
-} from '../../../../../common/shared'
+  useAppSelector,
+  selectCalculators,
+} from "../../../../../redux";
 import {
   BallSurfaceArea,
   CapsuleSurfaceArea,
@@ -24,69 +21,48 @@ import {
 } from '../../../index'
 
 function SurfaceAreaCalculator() {
-  const [open, setOpen] = React.useState(false);
-  // state that changes using the dropdown
-  const [selectedCalc, setSelectedCalc] = React.useState("Ball Surface Area");
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (value: any) => {
-    setOpen(false);
-    if (value) {
-      setSelectedCalc(value);
-
-      // find calcName that matches the selected calc
-      const getCalc = calculators.find(({ calcName }) => calcName === value);
-      setCurrentCalc(getCalc!);
-    }
-  };
-
-  // main state
-  const [currentCalc, setCurrentCalc] = React.useState({
-    calcName: "Ball Surface Area",
-    component: <BallSurfaceArea openDrop={handleClickOpen} />,
-  });
+  const { selectedCalculator } = useAppSelector(selectCalculators);
 
   const calculators = [
     {
       calcName: "Ball Surface Area",
-      component: <BallSurfaceArea openDrop={handleClickOpen} />,
+      component: <BallSurfaceArea />,
     },
     {
       calcName: "Capsule Surface Area",
-      component: <CapsuleSurfaceArea openDrop={handleClickOpen} />,
+      component: <CapsuleSurfaceArea />,
     },
     {
       calcName: "Cone Surface Area",
-      component: <ConeSurfArea openDrop={handleClickOpen} />,
+      component: <ConeSurfArea />,
     },
     {
       calcName: "Conical Frustrum Surface Area",
-      component: <ConicalFrustrumSurfaceArea openDrop={handleClickOpen} />,
+      component: <ConicalFrustrumSurfaceArea />,
     },
     {
       calcName: "Cube Surface Area",
-      component: <CubeSurfArea openDrop={handleClickOpen} />,
+      component: <CubeSurfArea />,
     },
     {
       calcName: "Cylindrical Tank Surface Area",
-      component: <CylindricalTankSurfArea openDrop={handleClickOpen} />,
+      component: <CylindricalTankSurfArea />,
     },
     {
       calcName: "Ellipsoid Surface Area",
-      component: <EllipsoidSurfaceArea openDrop={handleClickOpen} />,
+      component: <EllipsoidSurfaceArea />,
     },
     {
       calcName: "Spherical Cap Surface Area",
-      component: <SphericalCapSurfaceArea openDrop={handleClickOpen} />,
+      component: <SphericalCapSurfaceArea />,
     },
     {
       calcName: "Square Pyramid Surface Area",
-      component: <SquarePyramidSurfaceArea openDrop={handleClickOpen} />,
+      component: <SquarePyramidSurfaceArea />,
     },
   ];
+
+  const getCurrentCalc = calculators.find(({ calcName }) => calcName === selectedCalculator);
 
   return (
     <>
@@ -104,13 +80,12 @@ function SurfaceAreaCalculator() {
           container
           justifyContent="center"
         >
-          {currentCalc.component}
-          <SimpleDialog
-            dropOptions={calculators}
-            selectedValue={selectedCalc}
-            open={open}
-            onClose={handleClose}
-          />
+          {typeof getCurrentCalc === "undefined"
+            ?
+            calculators[0].component
+            :
+            getCurrentCalc!.component
+          }
         </Grid>
       </AddLayout>
     </>

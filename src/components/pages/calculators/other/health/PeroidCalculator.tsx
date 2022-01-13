@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Grid } from '@mui/material'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -14,13 +14,15 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  HEALTH_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   other_icon,
@@ -68,6 +70,7 @@ const PeroidCalculator = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder placeHolder={HEALTH_PLACEHOLDERS.peroidCalculator} />
           {/* Form grid */}
           <FormTabsContainer
             animation={formAnimation}

@@ -15,6 +15,7 @@ import {
   PLACEHOLDERS,
   INPUT_TYPE,
   LATEX,
+  FITNESS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,7 +23,9 @@ import {
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
+  Image,
 } from '../../../../custom'
 import {
   other_icon,
@@ -76,8 +79,9 @@ const LeanBodyMass = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder placeHolder={FITNESS_PLACEHOLDERS.leanBodyMass} />
           {/* Form grid */}
-          <FormTabsContainer tabTitle1={CALCULATORS.leanBodyMass} animation={formAnimation}>
+          <FormTabsContainer animation={formAnimation}>
             <Formik
               initialValues={initialFormValues}
               onSubmit={async ({
@@ -189,22 +193,28 @@ const LeanBodyMass = () => {
           {answer === true &&
             <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
               <div className="text-center mb-3 text-wrap">
-                <Typography variant="subtitle2">Boer formula; Women and Men</Typography>
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" className="formula-text">Boer formula; Women and Men</Typography>
+                <Typography variant="subtitle2" className="formula-text">
                   <Latex displayMode={true}>{LATEX.leanBodyMass_boer_f}</Latex>
                   <Latex displayMode={true}>{LATEX.leanBodyMass_boer_m}</Latex>
                 </Typography>
 
-                <Typography variant="subtitle2">Hume formula; Women and Men</Typography>
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" className="formula-text">Hume formula; Women and Men</Typography>
+                <Typography variant="subtitle2" className="formula-text">
                   <Latex displayMode={true}>{LATEX.leanBodyMass_hume_f}</Latex>
                   <Latex displayMode={true}>{LATEX.leanBodyMass_hume_m}</Latex>
                 </Typography>
 
-                <Typography variant="subtitle2">James formula; Women and Men</Typography>
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" className="formula-text">James formula; Women and Men</Typography>
+                <Typography variant="subtitle2" className="formula-text">
                   <Latex displayMode={true}>{LATEX.leanBodyMass_james_f}</Latex>
                   <Latex displayMode={true}>{LATEX.leanBodyMass_james_m}</Latex>
+                </Typography>
+
+                <Typography variant="subtitle2" className="formula-text">Peters formula for children</Typography>
+                <Typography variant="subtitle2" className="formula-text">
+                  <Latex displayMode={true}>{LATEX.leanBodyMassPeterFormula_eECV}</Latex>
+                  <Latex displayMode={true}>{LATEX.leanBodyMassPeterFormula_eLBM}</Latex>
                 </Typography>
 
 

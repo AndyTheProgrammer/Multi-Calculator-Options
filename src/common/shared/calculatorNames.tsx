@@ -36,3 +36,18 @@ export const SURFACEAREA_CALCULATORS =
     'Spherical Cap Surface Area',
     'Square Pyramid Surface Area',
   ]
+
+export const DUE_DATE_CALCULATORS = [
+  "Mittendorf William Rule",
+  "Naegele Rule",
+  "Parikh's Rule",
+  "Woods Rule",
+];
+
+export const CONCRETE_CALCULATORS = [
+  "Circular Slab or Tube",
+  "Slabs, Square Footings, or Walls",
+  "Hole, Column, or Round Footings",
+  "Curb and Gutter Barrier",
+  "Stairs"
+];

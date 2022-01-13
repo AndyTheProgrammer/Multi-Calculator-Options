@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -12,15 +12,17 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  ELECTRONICS_OR_CIRCUITS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
   CustomSelect,
-  CustomBtn,
-  CustomResetBtn,
   Label,
+  FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
+  Image,
 } from '../../../../custom'
 
 const ConductorResitor = () => {
@@ -55,6 +57,10 @@ const ConductorResitor = () => {
 
   return (
     <>
+      <PlaceHolder
+        placeHolder={ELECTRONICS_OR_CIRCUITS_PLACEHOLDERS.conductorResitor}
+      />
+
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.conductorResitor}
@@ -79,7 +85,7 @@ const ConductorResitor = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: resistanceOfAConductor } = await calculateOthers(payload)
+              const { success, payload: resistanceOfAConductor } = await calculateOthers(payload)
               console.log('=====>', resistanceOfAConductor)
               const {
                 resistance,
@@ -95,6 +101,15 @@ const ConductorResitor = () => {
                   unit: unit
                 })
               }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                })
+              }
             } catch (err) {
               console.log('====>', err)
             }
@@ -102,7 +117,7 @@ const ConductorResitor = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <div className="form-row">
+              <FormRow>
                 <Label title={LABELS.length} />
                 <CustomTextInput
                   type={INPUT_TYPE.text}
@@ -118,9 +133,9 @@ const ConductorResitor = () => {
                   value={values.length_unit}
                   onChange={handleChange('length_unit')}
                 />
-              </div>
+              </FormRow>
 
-              <div className="form-row">
+              <FormRow>
                 <Label title={LABELS.diameter} />
                 <CustomTextInput
                   type={INPUT_TYPE.text}
@@ -136,10 +151,9 @@ const ConductorResitor = () => {
                   value={values.diameter_unit}
                   onChange={handleChange('diameter_unit')}
                 />
-              </div>
+              </FormRow>
 
-
-              <div className="form-row">
+              <FormRow>
                 <Label title={LABELS.conductivity} />
                 <CustomTextInput
                   col
@@ -149,18 +163,9 @@ const ConductorResitor = () => {
                   value={values.conductivity}
                   onChange={handleChange}
                 />
-              </div>
+              </FormRow>
 
-              <div
-                className="form-row"
-                style={{ alignItems: 'center', justifyContent: 'space-between' }}
-              >
-
-                <CustomResetBtn
-                  onHandleClick={() => resetForm()}
-                />
-                <CustomBtn />
-              </div>
+              <FormRow buttons reset={() => resetForm()} />
             </form>
           )}
 
@@ -168,23 +173,23 @@ const ConductorResitor = () => {
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="mb-3">
-          <Typography variant="subtitle1">
-            Resistance: {Result.resistance}{Result.unit}
-          </Typography>
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3">
+            <Typography variant="subtitle1">
+              Resistance: {Result.resistance}{Result.unit}
+            </Typography>
 
-          <Typography variant="subtitle1">
-            Length: {Result.length}
-          </Typography>
+            <Typography variant="subtitle1">
+              Length: {Result.length}
+            </Typography>
 
-          <Typography variant="subtitle1">
-            Diameter: {Result.diameter}
-          </Typography>
-        </div>
-      </ResultTabsContainer>
-
-
+            <Typography variant="subtitle1">
+              Diameter: {Result.diameter}
+            </Typography>
+          </div>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

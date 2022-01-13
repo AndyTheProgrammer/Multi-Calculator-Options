@@ -7,13 +7,15 @@ import { useSpring } from 'react-spring'
 
 import { RectangleAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
+import { rectangle } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
   LATEX,
-  AREA_CALCULATORS
+  AREA_CALCULATORS,
+  GEOMETRY_PLACEHOLDERS
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -23,10 +25,10 @@ import {
   ResultTabsContainer,
   FormTabsContainer,
   PlaceHolder,
+  Image,
 } from '../../../../../custom'
 
-const RectangularArea = (props: any) => {
-  const { openDrop } = props
+const RectangularArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -74,7 +76,7 @@ const RectangularArea = (props: any) => {
   return (
     <>
       <PlaceHolder
-        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.'
+        placeHolder={GEOMETRY_PLACEHOLDERS.rectangleArea}
       />
 
       {/* Form grid */}
@@ -82,11 +84,11 @@ const RectangularArea = (props: any) => {
         tabTitle1={CALCULATORS.rectangleArea}
         dropDown={true}
         opened={open}
-        openDrop={openDrop}
         animation={formAnimation}
         onHandleOpen={handleClickOpen}
         calculatorList={AREA_CALCULATORS}
       >
+        <Image path={rectangle} />
         <Formik
           initialValues={rectInitialValues}
           onSubmit={async ({

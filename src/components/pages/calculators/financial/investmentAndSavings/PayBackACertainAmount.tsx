@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Grid } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -15,14 +15,15 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  INVESTMENT_AND_SAVINGS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
-  CustomSelect,
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder
 } from '../../../../custom'
 
 const PayBackACertainAmount = () => {
@@ -69,6 +70,10 @@ const PayBackACertainAmount = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder
+            placeHolder={INVESTMENT_AND_SAVINGS_PLACEHOLDERS.payBackACertainAmount}
+          />
+
           {/* Form grid */}
           <FormTabsContainer animation={formAnimation} >
             <Formik

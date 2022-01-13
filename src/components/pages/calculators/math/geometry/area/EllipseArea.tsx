@@ -7,6 +7,7 @@ import { useSpring, } from 'react-spring'
 
 import { EllipseAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
+import { ellipse } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
@@ -14,6 +15,7 @@ import {
   INPUT_TYPE,
   LATEX,
   AREA_CALCULATORS,
+  GEOMETRY_PLACEHOLDERS,
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -23,10 +25,10 @@ import {
   ResultTabsContainer,
   FormTabsContainer,
   PlaceHolder,
+  Image,
 } from '../../../../../custom'
 
-const EllipseArea = (props: any) => {
-  const { openDrop } = props
+const EllipseArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -74,18 +76,18 @@ const EllipseArea = (props: any) => {
   return (
     <>
       <PlaceHolder
-        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.'
+        placeHolder={GEOMETRY_PLACEHOLDERS.ellipseArea}
       />
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.ellipseArea}
         dropDown={true}
         opened={open}
-        openDrop={openDrop}
         animation={formAnimation}
         onHandleOpen={handleClickOpen}
         calculatorList={AREA_CALCULATORS}
       >
+        <Image path={ellipse} />
         <Formik
           initialValues={ellipseInitialValues}
           onSubmit={async ({
@@ -155,7 +157,7 @@ const EllipseArea = (props: any) => {
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <FormRow>
-                <Label title={LABELS.semiMajorAxesA} />
+                <Label title={LABELS.semiMajorAxes} />
                 <CustomTextInput
                   type={INPUT_TYPE.text}
                   id="semi_major_axes_a"
@@ -173,7 +175,7 @@ const EllipseArea = (props: any) => {
               </FormRow>
 
               <FormRow>
-                <Label title={LABELS.semiMajorAxesB} />
+                <Label title={LABELS.semiMinorAxes} />
                 <CustomTextInput
                   type={INPUT_TYPE.text}
                   id="semi_major_axes_b"

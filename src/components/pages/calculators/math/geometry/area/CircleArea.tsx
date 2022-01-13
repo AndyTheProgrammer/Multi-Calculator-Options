@@ -7,12 +7,14 @@ import { useSpring } from 'react-spring'
 
 import { CircleAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
+import { circle } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
   INPUT_TYPE,
   LATEX,
-  AREA_CALCULATORS
+  AREA_CALCULATORS,
+  GEOMETRY_PLACEHOLDERS
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -21,11 +23,11 @@ import {
   FormRow,
   ResultTabsContainer,
   FormTabsContainer,
-  PlaceHolder
+  PlaceHolder,
+  Image,
 } from '../../../../../custom'
 
-const CircleArea = (props: any) => {
-  const { openDrop } = props
+const CircleArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -61,17 +63,18 @@ const CircleArea = (props: any) => {
     <>
       {/* Do not forget to add placeHolder components on all other calculators */}
       <PlaceHolder
-        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.'
+        placeHolder={GEOMETRY_PLACEHOLDERS.circleArea}
       />
+
       <FormTabsContainer
         tabTitle1={CALCULATORS.circleArea}
         dropDown={true}
         opened={open}
-        openDrop={openDrop}
         animation={formAnimation}
         onHandleOpen={handleClickOpen}
         calculatorList={AREA_CALCULATORS}
       >
+        <Image path={circle} />
         <Formik
           initialValues={circleInitialValues}
           onSubmit={async ({

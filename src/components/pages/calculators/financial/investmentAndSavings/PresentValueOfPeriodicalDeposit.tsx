@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Grid } from '@mui/material'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -15,13 +15,15 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  INVESTMENT_AND_SAVINGS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../custom'
 
 const PresentValueOfPeriodicalDeposit = () => {
@@ -72,6 +74,10 @@ const PresentValueOfPeriodicalDeposit = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder
+            placeHolder={INVESTMENT_AND_SAVINGS_PLACEHOLDERS.presentValueOfPeriodicalDeposit}
+          />
+
           {/* Form grid */}
           <FormTabsContainer animation={formAnimation} >
             <Formik

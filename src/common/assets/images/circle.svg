@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="167px" height="163px" viewBox="0 0 167 163" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g id="Group" transform="translate(1.5 1.5)">
+    <path d="M0 80C0 35.8172 35.8172 0 80 0C124.183 0 160 35.8172 160 80C160 124.183 124.183 160 80 160C35.8172 160 0 124.183 0 80Z" id="Ellipse" fill="#FFFFFF" fill-rule="evenodd" stroke="#000000" stroke-width="3" />
+    <g id="r" transform="translate(76 16)">
+      <path d="M39.392 59.6364L39.392 42.1818L44.0852 42.1818L44.0852 45.2273L44.267 45.2273Q44.7443 43.6023 45.8693 42.767Q46.9943 41.9318 48.4602 41.9318Q49.267 41.9318 49.983 42.1023L49.983 46.3977Q49.642 46.2841 49.0398 46.2102Q48.4375 46.1364 47.9375 46.1364Q46.3352 46.1364 45.2841 47.142Q44.233 48.1477 44.233 49.7614L44.233 59.6364L39.392 59.6364Z" />
+    </g>
+    <path d="M160 80L80 80" id="Line" fill="none" fill-rule="evenodd" stroke="#000000" stroke-width="3" stroke-linecap="square" />
+  </g>
+</svg>

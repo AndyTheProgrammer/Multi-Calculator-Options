@@ -7,6 +7,7 @@ import { useSpring } from 'react-spring'
 
 import { ParallelogramAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
+import { parallelogram } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
@@ -14,6 +15,7 @@ import {
   INPUT_TYPE,
   LATEX,
   AREA_CALCULATORS,
+  GEOMETRY_PLACEHOLDERS,
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -23,10 +25,10 @@ import {
   ResultTabsContainer,
   FormTabsContainer,
   PlaceHolder,
+  Image,
 } from '../../../../../custom'
 
-const ParallelogramArea = (props: any) => {
-  const { openDrop } = props
+const ParallelogramArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -75,18 +77,18 @@ const ParallelogramArea = (props: any) => {
   return (
     <>
       <PlaceHolder
-        placeHolder='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.'
+        placeHolder={GEOMETRY_PLACEHOLDERS.parallelogramArea}
       />
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.parallelogramArea}
         dropDown={true}
         opened={open}
-        openDrop={openDrop}
         animation={formAnimation}
         onHandleOpen={handleClickOpen}
         calculatorList={AREA_CALCULATORS}
       >
+        <Image path={parallelogram} />
         <Formik
           initialValues={parallelogramInitialValues}
           onSubmit={async ({

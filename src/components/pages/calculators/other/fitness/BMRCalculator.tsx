@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Typography, Box, Grid, Paper } from '@mui/material'
+import { Typography, Box, Grid, } from '@mui/material'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -17,6 +17,7 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
+  FITNESS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -27,6 +28,7 @@ import {
   StyledTabs,
   TabPanel,
   CustomSelect,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   other_icon,
@@ -59,7 +61,6 @@ function BMRCalculator() {
   const [answer, setAnswer] = React.useState<boolean>(false);
   const [tabValue, setTabValue] = React.useState(0);
   const {
-    formDisplay,
     formDisplay2
   }: any = useStyles()
 
@@ -123,6 +124,18 @@ function BMRCalculator() {
           container
           justifyContent="center"
         >
+          {tabValue === 0 &&
+            <PlaceHolder placeHolder={FITNESS_PLACEHOLDERS.bmrKatchMcArdle} />
+          }
+
+          {tabValue === 1 &&
+            <PlaceHolder placeHolder={FITNESS_PLACEHOLDERS.bmrHarrisBenedict} />
+          }
+
+          {tabValue === 2 &&
+            <PlaceHolder placeHolder={FITNESS_PLACEHOLDERS.bmrMifflinStJeorEquation} />
+          }
+
           <animated.div style={formAnimation}>
             <Box className={formDisplay2} >
               <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>

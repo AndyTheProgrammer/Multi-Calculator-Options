@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Grid } from '@mui/material'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -9,19 +9,20 @@ import { NavBar2 } from '../../../../navbar/navbar2'
 import AddLayout from '../../../../layouts/AddLayout'
 import { InflationCalculatorCpiDataI } from '../../../../../types'
 import { calculateFinances } from '../../../../../services/AppCalculatorsApi'
-import useStyles from '../../../../../styling/CustomStyles'
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  MONEY_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   finance_icon,
@@ -71,6 +72,10 @@ const InflationCalculatorCpiData = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder
+            placeHolder={MONEY_PLACEHOLDERS.inflationCalculatorCpiData}
+          />
+
           {/* Form grid */}
           <FormTabsContainer animation={formAnimation} >
             <Formik

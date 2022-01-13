@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Grid } from '@mui/material'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -15,6 +15,7 @@ import {
   PLACEHOLDERS,
   INPUT_TYPE,
   LATEX,
+  HEALTH_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,7 +23,8 @@ import {
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder
 } from '../../../../custom'
 import {
   other_icon,
@@ -78,6 +80,8 @@ const BloodAlcoholContent = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder placeHolder={HEALTH_PLACEHOLDERS.bloodAlcoholContent} />
+
           {/* Form grid */}
           <FormTabsContainer
             animation={formAnimation}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Typography, Box, Grid, Paper } from '@mui/material'
+import { Typography, Box, Grid, } from '@mui/material'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -17,6 +17,7 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
+  LOAN_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -26,7 +27,8 @@ import {
   StyledTabForThree,
   StyledTabs,
   TabPanel,
-  CustomDivider
+  CustomDivider,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   finance_icon,
@@ -63,10 +65,6 @@ function LoanCalculator() {
   const [calcName, setCalcName] = React.useState('Amortized Loan: Paying Back a Fixed Amount Periodically');
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const {
-    tabRoot,
-    rightTabContainer,
-    leftTabContainer,
-    formDisplay,
     formDisplay2
   }: any = useStyles()
 
@@ -135,18 +133,24 @@ function LoanCalculator() {
           container
           justifyContent="center"
         >
-          <Grid item xs={12}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              {calcName}
-            </Box>
-          </Grid>
 
+          {tabValue === 0 &&
+            <PlaceHolder
+              placeHolder={LOAN_PLACEHOLDERS.amortizedLoan}
+            />
+          }
+
+          {tabValue === 1 &&
+            <PlaceHolder
+              placeHolder={LOAN_PLACEHOLDERS.deferredPaymentsLoan}
+            />
+          }
+
+          {tabValue === 2 &&
+            <PlaceHolder
+              placeHolder={LOAN_PLACEHOLDERS.bondPayBackPredetermined}
+            />
+          }
 
           <animated.div style={formAnimation}>
             <Box className={formDisplay2} >
@@ -487,6 +491,18 @@ function LoanCalculator() {
 
             </Box>
           </animated.div>
+
+          <Grid item xs={12}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {calcName}
+            </Box>
+          </Grid>
 
           <CustomDivider
             label1='Amortization Schedule'

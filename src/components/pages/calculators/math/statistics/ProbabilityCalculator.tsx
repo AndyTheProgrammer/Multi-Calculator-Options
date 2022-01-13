@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Typography, Box, Grid, Paper } from '@mui/material'
+import { Typography, Box, Grid, } from '@mui/material'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -22,6 +22,7 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
+  STATISTICS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -31,7 +32,8 @@ import {
   ResultTabsContainer,
   StyledTabForThree,
   StyledTabs,
-  TabPanel
+  TabPanel,
+  PlaceHolder
 } from '../../../../custom'
 
 function a11yProps(index: any) {
@@ -62,9 +64,6 @@ function ProbabilityCalculator() {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const {
     tabRoot,
-    rightTabContainer,
-    leftTabContainer,
-    formDisplay,
     formDisplay2
   }: any = useStyles()
   // ProbabilityOfASeriesOfIndpendentEvents
@@ -151,6 +150,25 @@ function ProbabilityCalculator() {
           container
           justifyContent="center"
         >
+          {tabValue === 0 &&
+            <PlaceHolder
+              placeHolder={STATISTICS_PLACEHOLDERS.probabilityOfASeriesOfIndpendentEvents}
+            />
+          }
+
+          {tabValue === 1 &&
+            <PlaceHolder
+              placeHolder={STATISTICS_PLACEHOLDERS.probablityOfTwoEvents}
+            />
+          }
+
+          {tabValue === 2 &&
+            <PlaceHolder
+              placeHolder={STATISTICS_PLACEHOLDERS.probablitySolverForTwoEvents}
+            />
+          }
+
+
           <animated.div style={formAnimation}>
             <Box className={formDisplay2} >
               <div className={tabRoot}>

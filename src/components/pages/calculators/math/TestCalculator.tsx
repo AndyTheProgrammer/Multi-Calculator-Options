@@ -475,7 +475,7 @@ function TestCalculator() {
         {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
           <form onSubmit={handleSubmit} className="form-container">
             <FormRow>
-              <Label title={LABELS.semiMajorAxesA} />
+              <Label title={LABELS.semiMajorAxes} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
                 id="semi_major_axes_a"
@@ -493,7 +493,7 @@ function TestCalculator() {
             </FormRow>
 
             <FormRow>
-              <Label title={LABELS.semiMajorAxesB} />
+              <Label title={LABELS.semiMinorAxes} />
               <CustomTextInput
                 type={INPUT_TYPE.text}
                 id="semi_major_axes_b"

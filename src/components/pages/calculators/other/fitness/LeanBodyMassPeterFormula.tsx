@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -12,6 +12,7 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  FITNESS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -19,7 +20,8 @@ import {
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   other_icon,
@@ -55,6 +57,8 @@ const LeanBodyMassPeterFormula = () => {
 
   return (
     <>
+      <PlaceHolder placeHolder={FITNESS_PLACEHOLDERS.leanBodyMassPetersFormula} />
+
       {/* Form grid */}
       <FormTabsContainer tabTitle1={CALCULATORS.leanBodyMassPetersFormula} animation={formAnimation}>
         <Formik

@@ -15,13 +15,15 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  INVESTMENT_AND_SAVINGS_PLACEHOLDERS
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../custom'
 
 const PresentValue = () => {
@@ -70,6 +72,10 @@ const PresentValue = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder
+            placeHolder={INVESTMENT_AND_SAVINGS_PLACEHOLDERS.presentValue}
+          />
+
           {/* Form grid */}
           <FormTabsContainer animation={formAnimation} >
             <Formik

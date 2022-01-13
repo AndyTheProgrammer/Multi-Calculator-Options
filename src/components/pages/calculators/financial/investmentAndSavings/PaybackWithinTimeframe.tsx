@@ -15,13 +15,15 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  INVESTMENT_AND_SAVINGS_PLACEHOLDERS
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../custom'
 
 const PaybackWithinTimeframe = () => {
@@ -67,6 +69,10 @@ const PaybackWithinTimeframe = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder
+            placeHolder={INVESTMENT_AND_SAVINGS_PLACEHOLDERS.paybackWithinTimeFrame}
+          />
+
           {/* Form grid */}
           <FormTabsContainer animation={formAnimation}>
             <Formik

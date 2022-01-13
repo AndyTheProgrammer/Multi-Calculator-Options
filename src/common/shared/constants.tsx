@@ -52,7 +52,6 @@ export const CALCULATORS = {
   takaSchlichBodySurfaceArea: "Schlich Body Surface Area",
   slopeCalculatorWithASingleKnownPoint: "Single Known Point",
   probabilityOfASeriesOfIndpendentEvents: "Series of Indpendent Events",
-
   marginOfError: "Margin of Error",
   sampleSize: "Sample Size",
   probablityOfTwoEvents: "Of Two Events",
@@ -143,8 +142,8 @@ export const LABELS = {
   sampleVariance: "Sample Variance",
   sampleSize: "Sample Size",
   breadth: "Breadth",
-  semiMajorAxesA: "Semi Major Axes A",
-  semiMajorAxesB: "Semi Major Axes B",
+  semiMajorAxes: "Semi Major Axes (a)",
+  semiMinorAxes: "Semi Minor Axes (b)",
   base: "Base",
   base1: "Base 1",
   base2: "Base 2",
@@ -386,12 +385,12 @@ export const LATEX = {
 }
 // Object with area calculator names
 export const areaCalculators =
- [
-  'Circle Area', 
-  'Ellipse Area', 
-'Parallelogram Area',
-'Rectangle Area', 
-'Sector Area',
-'Trapezoid Area',
-'Triangle Area'
-]
+  [
+    'Circle Area',
+    'Ellipse Area',
+    'Parallelogram Area',
+    'Rectangle Area',
+    'Sector Area',
+    'Trapezoid Area',
+    'Triangle Area'
+  ]

@@ -12,6 +12,8 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  CONCRETE_CALCULATORS,
+  HOUSING_OR_BUILDINGS_PLACEHOLDERS
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -19,7 +21,8 @@ import {
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../../custom'
 
 const HoleColumn = (props: any) => {
@@ -51,14 +54,27 @@ const HoleColumn = (props: any) => {
     volumeInHeightUnit: 0,
   })
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
+      {/* Do not forget to add placeHolder components on all other calculators */}
+      <PlaceHolder
+        placeHolder={HOUSING_OR_BUILDINGS_PLACEHOLDERS.holeColumn}
+      />
+
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.holeColumn}
-        animation={formAnimation}
         dropDown={true}
-        openDrop={openDrop}
+        opened={open}
+        animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={CONCRETE_CALCULATORS}
       >
         <Formik
           initialValues={initialFormValues}

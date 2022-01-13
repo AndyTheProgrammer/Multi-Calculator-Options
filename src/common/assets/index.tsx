@@ -1,5 +1,5 @@
-import circle from "./images/circle.png";
-import ellipse from "./images/ellipse.png";
+import circle from "./images/circle.svg";
+import ellipse from "./images/ellipse.svg";
 import parallelogram from "./images/parallelogram.png";
 import rectangle from "./images/rectangle.png";
 import sector from "./images/sector.png";

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Typography, Box, Grid, Paper, Button } from '@mui/material'
+import { Typography, Box, Grid, } from '@mui/material'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -18,6 +18,7 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
+  STATISTICS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -27,7 +28,8 @@ import {
   ResultTabsContainer,
   StyledTab,
   StyledTabs,
-  TabPanel
+  TabPanel,
+  PlaceHolder,
 } from '../../../../custom'
 
 function a11yProps(index: any) {
@@ -39,7 +41,7 @@ function a11yProps(index: any) {
 
 const Latex = require('react-latex');
 
-function SampleSizeCalculator(props: any) {
+function SampleSizeCalculator() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -110,6 +112,18 @@ function SampleSizeCalculator(props: any) {
           container
           justifyContent="center"
         >
+          {tabValue === 0 &&
+            <PlaceHolder
+              placeHolder={STATISTICS_PLACEHOLDERS.sampleSize}
+            />
+          }
+
+          {tabValue === 1 &&
+            <PlaceHolder
+              placeHolder={STATISTICS_PLACEHOLDERS.marginOfError}
+            />
+          }
+
           <animated.div
             style={formAnimation}
           >

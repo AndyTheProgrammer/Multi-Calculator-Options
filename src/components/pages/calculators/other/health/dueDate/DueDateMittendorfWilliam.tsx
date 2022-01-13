@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -12,17 +12,19 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  HEALTH_PLACEHOLDERS,
+  DUE_DATE_CALCULATORS
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../../custom'
 
-const DueDateMittendorfWilliam = (props: any) => {
-  const { openDrop } = props
+const DueDateMittendorfWilliam = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -45,14 +47,26 @@ const DueDateMittendorfWilliam = (props: any) => {
     dueDate: 0
   })
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
+      {/* Do not forget to add placeHolder components on all other calculators */}
+      <PlaceHolder
+        placeHolder={HEALTH_PLACEHOLDERS.dueDateMittendorfWilliam}
+      />
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.dueDateMittendorfWilliam}
-        animation={formAnimation}
         dropDown={true}
-        openDrop={openDrop}
+        opened={open}
+        animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={DUE_DATE_CALCULATORS}
       >
         <Formik
           initialValues={initialFormValues}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Box, Grid, Paper } from '@mui/material'
+import { Typography, Box, Grid, } from '@mui/material'
 import { Formik } from 'formik'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -21,16 +21,18 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
+  GEOMETRY_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
   Label,
   FormRow,
-  FormTabsContainer,
   ResultTabsContainer,
   StyledTab,
   StyledTabs,
-  TabPanel
+  TabPanel,
+  PlaceHolder,
+  Image,
 } from '../../../../custom'
 
 function a11yProps(index: any) {
@@ -60,10 +62,6 @@ function SlopeCalculator() {
   const [tabValue, setTabValue] = React.useState(0);
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const {
-    tabRoot,
-    rightTabContainer,
-    leftTabContainer,
-    formDisplay,
     formDisplay2
   }: any = useStyles()
 
@@ -104,6 +102,7 @@ function SlopeCalculator() {
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setTabValue(newValue);
   };
+
   return (
     <>
       <NavBar2
@@ -120,6 +119,18 @@ function SlopeCalculator() {
           container
           justifyContent="center"
         >
+          {tabValue === 0 &&
+            <PlaceHolder
+              placeHolder={GEOMETRY_PLACEHOLDERS.singleKnownPointSlope}
+            />
+          }
+
+          {tabValue === 1 &&
+            <PlaceHolder
+              placeHolder={GEOMETRY_PLACEHOLDERS.twoKnownPointsSlope}
+            />
+          }
+
           <animated.div style={formAnimation}>
             <Box className={formDisplay2} >
               <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>

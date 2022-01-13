@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -12,14 +12,16 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  ELECTRONICS_OR_CIRCUITS_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
-  CustomBtn,
-  CustomResetBtn,
   Label,
+  FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
+  Image,
 } from '../../../../custom'
 
 const SeriesResistor = () => {
@@ -47,6 +49,10 @@ const SeriesResistor = () => {
 
   return (
     <>
+      <PlaceHolder
+        placeHolder={ELECTRONICS_OR_CIRCUITS_PLACEHOLDERS.seriesResistor}
+      />
+
       {/* Form grid */}
       <FormTabsContainer tabTitle1={CALCULATORS.seriesResistor} animation={formAnimation}>
         <Formik
@@ -60,13 +66,22 @@ const SeriesResistor = () => {
             }
             console.log(JSON.stringify(payload))
             try {
-              const { payload: resistorsInSeries } = await calculateOthers(payload)
+              const { success, payload: resistorsInSeries } = await calculateOthers(payload)
               console.log('=====>', resistorsInSeries)
               const { totalResistance, unit, } = resistorsInSeries
               if (typeof resistorsInSeries === 'object') {
                 setResult({
                   totalResistance: totalResistance,
                   unit: unit
+                })
+              }
+              if (success === true) {
+                setAnswer(success)
+                formApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
+                });
+                resultApi.start({
+                  transform: matches === true ? 'translateX(0px)' : 'translateY(0px)',
                 })
               }
             } catch (err) {
@@ -76,7 +91,7 @@ const SeriesResistor = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <div className="form-row">
+              <FormRow>
                 <Label title={LABELS.resistanceValues} />
                 <CustomTextInput
                   col
@@ -86,33 +101,24 @@ const SeriesResistor = () => {
                   value={values.resistance_values}
                   onChange={handleChange}
                 />
-              </div>
+              </FormRow>
 
-              <div
-                className="form-row"
-                style={{ alignItems: 'center', justifyContent: 'space-between' }}
-              >
-
-                <CustomResetBtn
-                  onHandleClick={() => resetForm()}
-                />
-                <CustomBtn />
-              </div>
+              <FormRow buttons reset={() => resetForm()} />
             </form>
           )}
         </Formik>
       </FormTabsContainer>
 
       {/* Results grid */}
-      <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-        <div className="mb-3">
-          <Typography variant="subtitle1">
-            Total series resistance: {Result.totalResistance}{Result.unit}
-          </Typography>
-        </div>
-      </ResultTabsContainer>
-
-
+      {answer === true &&
+        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+          <div className="mb-3">
+            <Typography variant="subtitle1">
+              Total series resistance: {Result.totalResistance}{Result.unit}
+            </Typography>
+          </div>
+        </ResultTabsContainer>
+      }
     </>
   )
 }

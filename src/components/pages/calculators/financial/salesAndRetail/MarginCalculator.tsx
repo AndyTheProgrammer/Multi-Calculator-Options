@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Typography, Box, Grid, Paper } from '@mui/material'
+import { Typography, Box, Grid, } from '@mui/material'
 import { useSpring, animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -17,6 +17,7 @@ import {
   INPUT_TYPE,
   COLORS,
   LATEX,
+  SALES_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -25,7 +26,8 @@ import {
   ResultTabsContainer,
   StyledTab,
   StyledTabs,
-  TabPanel
+  TabPanel,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   finance_icon,
@@ -61,10 +63,6 @@ function MarginCalculator() {
   const [tabValue, setTabValue] = React.useState(0);
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
   const {
-    tabRoot,
-    rightTabContainer,
-    leftTabContainer,
-    formDisplay,
     formDisplay2
   }: any = useStyles()
 
@@ -109,6 +107,19 @@ function MarginCalculator() {
           container
           justifyContent="center"
         >
+          {tabValue === 0 &&
+            <PlaceHolder
+              placeHolder={SALES_PLACEHOLDERS.profitMargin}
+            />
+          }
+
+          {tabValue === 1 &&
+            <PlaceHolder
+              placeHolder={SALES_PLACEHOLDERS.stockTradingMargin}
+            />
+          }
+
+
           <animated.div style={formAnimation}>
             <Box className={formDisplay2} >
               <StyledTabs variant="fullWidth" value={tabValue} onChange={handleChange}>

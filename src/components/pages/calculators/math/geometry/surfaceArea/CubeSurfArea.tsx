@@ -8,12 +8,15 @@ import { useTheme } from '@mui/material/styles';
 
 import { CubeAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
+import { circle } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
   LATEX,
+  SURFACEAREA_CALCULATORS,
+  GEOMETRY_PLACEHOLDERS,
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -21,11 +24,12 @@ import {
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
+  Image,
 } from '../../../../../custom'
 
-const CubeSurfArea = (props: any) => {
-  const { openDrop } = props
+const CubeSurfArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -49,15 +53,29 @@ const CubeSurfArea = (props: any) => {
     area: 0,
     unit: ''
   })
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
+      {/* Do not forget to add placeHolder components on all other calculators */}
+      <PlaceHolder
+        placeHolder={GEOMETRY_PLACEHOLDERS.cubeSurfArea}
+      />
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.cubeSurfArea}
-        animation={formAnimation}
         dropDown={true}
-        openDrop={openDrop}
+        opened={open}
+        animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={SURFACEAREA_CALCULATORS}
       >
+        <Image path={circle} />
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Grid } from '@mui/material'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -15,6 +15,7 @@ import {
   PLACEHOLDERS,
   INPUT_TYPE,
   LATEX,
+  TRANSPORT_PLACEHOLDERS
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -22,7 +23,8 @@ import {
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   other_icon,
@@ -77,9 +79,12 @@ const HorsepowerCalculation = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder
+            placeHolder={TRANSPORT_PLACEHOLDERS.horsepowerCalculation}
+          />
+
           {/* Form */}
           <FormTabsContainer
-            tabTitle1={CALCULATORS.horsepowerCalculation}
             animation={formAnimation}
           >
             <Formik

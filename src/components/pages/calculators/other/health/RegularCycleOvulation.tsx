@@ -14,13 +14,15 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  HEALTH_PLACEHOLDERS,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../custom'
 import {
   other_icon,
@@ -71,6 +73,7 @@ const RegularCycleOvulation = () => {
           container
           justifyContent="center"
         >
+          <PlaceHolder placeHolder={HEALTH_PLACEHOLDERS.regularCycleOvulation} />
           {/* Form grid */}
           <FormTabsContainer
             animation={formAnimation}

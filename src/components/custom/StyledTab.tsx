@@ -15,6 +15,7 @@ const StyledTab = withStyles((theme: Theme) =>
       color: COLORS.light_text_color,
       background: COLORS.gradient,
       opacity: 1,
+      padding: 4,
       fontFamily: [
         'Varela Round',
         '-apple-system',

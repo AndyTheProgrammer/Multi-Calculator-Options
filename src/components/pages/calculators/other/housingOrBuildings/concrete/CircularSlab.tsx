@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import { useSpring } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
@@ -12,6 +12,8 @@ import {
   LABELS,
   PLACEHOLDERS,
   INPUT_TYPE,
+  CONCRETE_CALCULATORS,
+  HOUSING_OR_BUILDINGS_PLACEHOLDERS,
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -19,7 +21,8 @@ import {
   Label,
   FormRow,
   FormTabsContainer,
-  ResultTabsContainer
+  ResultTabsContainer,
+  PlaceHolder,
 } from '../../../../../custom'
 
 const CircularSlab = (props: any) => {
@@ -57,14 +60,27 @@ const CircularSlab = (props: any) => {
     unit3: '',
   })
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
+      {/* Do not forget to add placeHolder components on all other calculators */}
+      <PlaceHolder
+        placeHolder={HOUSING_OR_BUILDINGS_PLACEHOLDERS.circularSlab}
+      />
+
       {/* Form grid */}
       <FormTabsContainer
         tabTitle1={CALCULATORS.circularSlab}
-        animation={formAnimation}
         dropDown={true}
-        openDrop={openDrop}
+        opened={open}
+        animation={formAnimation}
+        onHandleOpen={handleClickOpen}
+        calculatorList={CONCRETE_CALCULATORS}
       >
         <Formik
           initialValues={initialFormValues}
