@@ -7,62 +7,29 @@ import Anime from 'react-animejs-wrapper';
 import AddLayout from '../../layouts/AddLayout';
 import { Box, Grid, Typography } from '@mui/material';
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles';
-import { CustomFormikFormFraction, CustomFormikOptions } from '../../forms/CustomForm';
+import { CustomFormikFormFraction2, CustomFormikOptions } from '../../forms/CustomForm';
 import TextCard from '../../utilityComponents/TextCard';
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn';
 import fractions from '../../../common/assets/fractions_icon.svg';
 import math_icon from '../../../common/assets/math_icon.svg';
-
-const Latex = require('react-latex');
+import SimplifyFraction from '../wigets/fractions/SimplifyFraction'
+import validateNumbers from '../../../utilities/validators/validateNumbers'
+var classNames = require('classnames');
+var Latex = require('react-latex');
 
 function SimplifyFractionsCalculator(){
     const [value, setValue] = useState<any[]>([])
-    const [playAnimation, setPlayAnimation] = useState(false)
-    const [mediaQueryValue, setMediaQueryValue] = useState(false)
-    const animatedSquaresRef1 = useRef(null)
-    const animatedSquaresRef2= useRef(null)
-  
-    // @ts-ignore: Object is possibly 'null'.
-    const play1 = () => animatedSquaresRef1.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const play2 = () => animatedSquaresRef2.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse1 = () => animatedSquaresRef1.current.reverse();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse2 = () => animatedSquaresRef2.current.reverse();
+    const [inputValue, setInputValue] = useState(['2','10','4'])
+    const [controlAnimation, setControlAnimation] = useState(false)
+    const [errorMSG, setErrorMSG] = useState(false)
 
-    
-    const controlAnimation = () => {
-        if(mediaQueryValue){
-            if(playAnimation){
-                // console.log("Monkey")
-                play1();
-                play2();
-                reverse1();
-                reverse2();
-                setValue([]);
-                setPlayAnimation(false);
-            }
-        }
-        else{
-            setValue([]);
-        }
-    } 
-
-    useEffect(()=>{
-        const mediaQuery = window.matchMedia('(min-width: 1000px)');
-        setMediaQueryValue(mediaQuery.matches);
-        
-        if (mediaQuery.matches) {
-            if(value.length){
-                play1();
-                play2();
-                setPlayAnimation(true)
-            }
-          } 
-          
-    })
-
+    const clear = () => {
+        setControlAnimation(false)
+        setValue([])
+        setInputValue(['','','',''])
+        setErrorMSG(false)
+        console.log(inputValue)
+    }
 
     return(
         <>
@@ -81,36 +48,27 @@ function SimplifyFractionsCalculator(){
             </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>
-            <Anime
-                className='animated-pos animated-margin'
-                ref={animatedSquaresRef1}
-                config={{
-                    translateX: -250,
-                    duration: 250,
-                    easing: 'easeInOutSine',
-                    autoplay: false,
-                }}>
+            <Box
+                className={
+                    classNames({
+                        'animated-pos': true,
+                        'animated-margin': true,
+                        'forward-animation-card-1': controlAnimation,
+                        'reverse-animation': !controlAnimation
+                    })
+                }>
                 <Box 
                     sx={{ maxWidth: 450,paddingBottom: 1 }}
                     className="animated-box" >
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                    <Box sx={{height:25, width: '100%' }}>
-                                    <Typography>
-                                        <Box
-                                            sx={{
-                                                color:'#4072B5',
-                                                fontWeight:'bold', 
-                                                paddingLeft:2
-                                            }}>Calculator</Box>
-                                    </Typography>
-                                </Box>
-                        {/* <Box sx={{...formCardStyle}}></Box> */}
+                        <Box sx={{height:2, width: '100%' }}></Box>
                     </Box>
                     <Formik
+                        enableReinitialize
                         initialValues={{ 
-                            valueA: "",
-                            valuea: "",
-                            valueb: "",
+                            valueA: inputValue[0],
+                            valuea: inputValue[1],
+                            valueb: inputValue[2],
                             method: "SimplifyFractionsCalculator"
                         }}
                         onSubmit = {(values)=>{
@@ -120,22 +78,65 @@ function SimplifyFractionsCalculator(){
                                 valueb: values.valueb,
                                 method: values.method
                             }
+                            setInputValue([
+                                values.valueA,
+                                values.valuea,
+                                values.valueb
+                            ])
 
-                            console.log(data)
+                            var validate = validateNumbers([
+                                values.valueA,
+                                values.valuea,
+                                values.valueb
+                            ])
                             const postData = async () => {
                                 const responseData = await mathMainService(data)
                                 var msg:any = responseData.statusDescription;
                                 if(msg === "success"){
+                                    setControlAnimation(true)
                                     setValue([responseData.message.answer])
                                 }
                             }
-                            postData()
+                            if(validate){
+                                postData() 
+                                setErrorMSG(false)
+                                console.log("You can post data")
+                            }
+                            else{
+                                setErrorMSG(true)
+                                setControlAnimation(false)
+                                setValue([])
+                                console.log("You cant post data")
+                            }
                         }}>
                             
                         {(props: FormikProps<any>) => (
                             <Form>
                                   <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
-                                    <Grid container={true} rowSpacing={1} sx={{paddingTop:2, paddingLeft:5, paddingRight:5}}>
+                                    <Grid 
+                                        container={true} 
+                                        rowSpacing={1} 
+                                        sx={{ 
+                                                minWidth:'350px', 
+                                                paddingTop:2, 
+                                                paddingLeft:2, 
+                                                paddingRight:2,
+                                                marginBottom:4
+                                            }}>
+                                        <Grid item xs={12}>
+                                            <Typography sx={{marginBottom: 1}}>    
+                                                <Box
+                                                    sx={{
+                                                        fontWeight: 100,
+                                                        fontStyle: 'bold',
+                                                        fontSize: 14,
+                                                        marginBottom:3,
+                                                        display:'flex', justifyContent:'center'
+                                                    }}>
+                                                    <Latex displayMode={true}>{`$ {a}\\frac{b}{c} = \\frac{ac + b}{c}$`}</Latex>
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
                                         <Grid item xs={12}>
                                             <Box 
                                                 sx={{
@@ -146,12 +147,13 @@ function SimplifyFractionsCalculator(){
                                                             width: 100,
                                                             paddingLeft: '5px',
                                                             paddingRight: '5px',
-                                                            marginTop: 2.5
+                                                            marginTop: 2.5,
+                                                            border:'0px solid red'
                                                         }}>
                                                         <Field
                                                             type="text"
                                                             name="valueA"
-                                                            component={CustomFormikFormFraction}
+                                                            component={CustomFormikFormFraction2}
                                                         />
                                                     </Box>
                                                     <Box sx={{ 
@@ -163,13 +165,13 @@ function SimplifyFractionsCalculator(){
                                                             <Field
                                                                     type="text"
                                                                     name="valuea"
-                                                                    component={CustomFormikFormFraction}
+                                                                    component={CustomFormikFormFraction2}
                                                                 />
                                                         </Box>
                                                         <Box sx={{ 
                                                                 width: '100%',
-                                                                paddingLeft: '5px',
-                                                                paddingRight: '5px'
+                                                                paddingLeft: '0px',
+                                                                paddingRight: '0px'
                                                                 }}>
                                                             <Box 
                                                                 sx={{
@@ -186,7 +188,7 @@ function SimplifyFractionsCalculator(){
                                                             <Field
                                                                     type="text"
                                                                     name="valueb"
-                                                                    component={CustomFormikFormFraction}
+                                                                    component={CustomFormikFormFraction2}
                                                                 />
                                                         </Box>
                                                 </Box>
@@ -198,39 +200,54 @@ function SimplifyFractionsCalculator(){
                                       
                                  
                                     </Grid>
+                                    <Box sx={{ border:'0px solid red',flexGrow: 1 }}>
+                                        {/* 
+                                            error message
+                                        */}
+                                        {
+                                            (errorMSG)?
+                                            <Typography sx={{width:'100%'}}>
+                                                <Box sx={{ color: 'red', textAlign:'center' }}>
+                                                    Enter validate non zero numbers
+                                                </Box>
+                                            </Typography>
+                                            :<></>
+                                        }
+                                    </Box>
                                     <Box sx={{ flexGrow: 1}}>
                                         {/* 
                                             Flex box pushes submit button down
                                         */}
                                     </Box>
-
+                                    </Box>
                                     <Box 
                                         // className="toggle-box-primary"
-                                            sx={{
-                                                paddingLeft: 2, paddingRight: 2, 
-                                                minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
-                                                <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                    <CustomFormBtn 
-                                                    type="button" 
-                                                    handleClick={()=>{ 
-                                                        controlAnimation();
-
-                                                        }} 
-                                                    name="Clear"/>
-                                                </Box>
-                                            <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
-                                            
+                                        sx={{
+                                            paddingLeft: 4, paddingRight: 4, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{
+                                                    clear()
+                                                        
+                                                    }} 
+                                                name="Clear"/>
                                             </Box>
-                                            <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                <CustomFormImageBtn type="submit" name="Calculate"/>   
-                                            </Box>
+                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                        
                                         </Box>
-                                </Box>
+                                        <Box sx={{display:"flex", justifyContent:"end"}}>
+                                            <CustomFormImageBtn 
+                                                type="submit" 
+                                                name="Calculate"/>   
+                                        </Box>
+                                    </Box>
                             </Form>
                         )}
                     </Formik>
                 </Box>
-            </Anime>
+            </Box>
 
 
             {/*
@@ -238,50 +255,69 @@ function SimplifyFractionsCalculator(){
             
             */}
 
-            <Anime
-                className='animated-pos animated-margin'
+            <Box
+                className={
+                    classNames({
+                        'animated-pos': true,
+                        'animated-margin': true,
+                        'forward-animation-card-2': controlAnimation,
+                        'reverse-animation': !controlAnimation
+                    })
+                }
                 style={{
                     zIndex: -5
-                }}
-                ref={animatedSquaresRef2}
-                config={{
-                    translateX: 200,
-                    duration: 250,
-                    easing: 'easeInOutSine',
-                    autoplay: false,
                 }}>
                 {
                     (value.length)?
                     <Box 
                         sx={{ maxWidth: 400,paddingBottom: 1 }}
                         className="animated-box" >
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box 
+                            sx={{ 
+                                    display: 'flex',
+                                    borderRadius: 20,
+                                    marginBottom: 2,  
+                                    backgroundColor:'#4072B5',
+                                    justifyContent: 'center'
+                                }}>
                                 <Box sx={{height:25, width: '100%' }}>
                                     <Typography>
                                         <Box
                                             sx={{
-                                                color:'#4072B5',
-                                                fontWeight:'bold', 
-                                                paddingLeft:2
+                                                color:'white',
+                                                fontWeight:'bold',
+                                                textAlign:'center'
                                             }}>Result</Box>
                                     </Typography>
                                 </Box>
-                                {/* <Box sx={{ ...formCardStyle }}></Box> */}
-                            </Box>
-                        <Box sx={{marginLeft: 5}}>
-                            <Typography>
-                                <Box>
-                                    Answer
-                                </Box>
-                                <Box sx={{ fontSize: 24 }}>
-                                    {value}
+                        </Box>
+                        <Box sx={{paddingLeft: 3}}>
+                            <Typography sx={{ fontSize: 16, border:'none' }}>
+                                <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14,}}>
+                                    Calculation Steps:
                                 </Box>
                             </Typography>
+                            <Typography sx={{ fontSize: 16, border:'none', width: 100 }}>
+                                <Box sx={{marginBottom: 0}}>
+                                    <Latex displayMode={true}>{`$ {a}\\frac{b}{c} = \\frac{ac + b}{c}$`}</Latex>
+                                </Box>
+                            </Typography>
+                            <Typography sx={{ fontSize: 16, border:'none', width: 100 }}>
+                                <Box sx={{marginBottom: 0}}>
+                                    <Latex displayMode={true}>{`$={${inputValue[0]}}\\frac{${inputValue[1]}}{${inputValue[2]}} $`}</Latex>
+                                </Box>
+                            </Typography>
+                            <Typography sx={{ fontSize: 16, border:'none', width: 100 }}>
+                                <Box sx={{marginBottom: 0}}>
+                                    <Latex displayMode={true}>{`$=\\frac{(${inputValue[2]} \\times ${inputValue[0]}) + ${inputValue[1]}}{${inputValue[2]}} $`}</Latex>
+                                </Box>
+                            </Typography>
+                            <SimplifyFraction data={inputValue}/>
                         </Box>
                     </Box>
                     :<Box></Box>
                 }
-            </Anime>
+            </Box>
             
             </Box>
             </Box>

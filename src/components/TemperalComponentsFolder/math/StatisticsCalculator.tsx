@@ -124,13 +124,6 @@ export default function StatisticsCalculator(){
         
           if(copysdValue.length !== 0){
             for(var i = 0; i < copysdValue.length; i++){
-                // if(!checkArray(copysdValue, id)){
-                //     const data = {
-                //         id: id,
-                //         value: h
-                //     }
-                //     setSDValue([...copysdValue, data]);
-                // }
                 if(copysdValue[i].id === id ){      
                     copysdValue[i].value = h
                     console.log("Monkey")

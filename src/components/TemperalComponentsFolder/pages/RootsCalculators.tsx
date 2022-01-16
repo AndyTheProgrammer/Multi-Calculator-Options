@@ -1,12 +1,3 @@
-// import React from 'react'
-
-// export default function RootsCalculators(){
-//     return(
-//         <>
-//         </>
-//     );
-
-// }
 
 import React, { useRef, useState, useEffect } from 'react'
 import { NavBar2 } from '../../navbar/navbar2'
@@ -27,187 +18,174 @@ import square_root from '../../../common/assets/square_root.svg';
 import cube_root from '../../../common/assets/cube_root.svg';
 import algebra_icon from '../../../common/assets/algebra_icon.svg';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-const Latex = require('react-latex');
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 var classNames = require('classnames');
+var Latex = require('react-latex');
+
+
+const menubutton = {
+    width:'100%',
+    fontSize: 16,
+    paddingTop: 0.1, 
+    marginBottom:0.5,
+    boxShadow: '0 2px 3px 1px rgba(0, 0, 0, 0.2)',
+}
 
 export default function RootsCalculators(){
     const [index, setIndex] = useState([true,false,false])
-    const [calcName, setCalcName] = useState("Percentage Change")
+    const [calcName, setCalcName] = useState("General Root Calculator")
     const [showMenu, setShowMenu] = useState(false)
     const [value, setValue] = useState<any[]>([])
-    const [playAnimation, setPlayAnimation] = useState(false)
-    const [mediaQueryValue, setMediaQueryValue] = useState(false)
-    const animatedSquaresRef1 = useRef(null)
-    const animatedSquaresRef2= useRef(null)
-  
-    // @ts-ignore: Object is possibly 'null'.
-    const play1 = () => animatedSquaresRef1.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const play2 = () => animatedSquaresRef2.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse1 = () => animatedSquaresRef1.current.reverse();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse2 = () => animatedSquaresRef2.current.reverse();
+    const [inputValue, setInputValue] = useState(['4','100'])
+    const [controlAnimation, setControlAnimation] = useState(false)
+    const [errorMSG, setErrorMSG] = useState(false)
 
-    
-    const controlAnimation = () => {
-        if(mediaQueryValue){
-            if(playAnimation){
-                // console.log("Monkey")
-                play1();
-                play2();
-                reverse1();
-                reverse2();
-                setValue([]);
-                setPlayAnimation(false);
-            }
-        }
-        else{
-            setValue([]);
-        }
-    } 
-
-
-    useEffect(()=>{
-        const mediaQuery = window.matchMedia('(min-width: 1000px)');
-        setMediaQueryValue(mediaQuery.matches);
-        
-        if (mediaQuery.matches) {
-            if(value.length){
-                play1();
-                play2();
-                setPlayAnimation(true)
-            }
-          } 
-          
-    })
-    const [tab_1, setTab_1] = useState([false,false,true, false])
-    const [tab_2, setTab_2] = useState([true, false, false])
-    const [tab_3, setTab_3] = useState([true, false, false])
-
-    const tabstyles_1 = classNames({
-        'form-card-1': tab_1[0],
-        'form-card-1-b': tab_1[1],
-        'form-card-none': tab_1[2],
-        'form-card-1-c': tab_1[3],
-        'div-link': true
-    })
-
-    const tabstyles_2 = classNames({
-        'form-card-2': tab_2[0],
-        'form-card-2-b': tab_2[1],
-        'form-card-none': tab_2[2],
-        'div-link': true
-    })
-
-    const tabstyles_3 = classNames({
-        'form-card-3': tab_3[0],
-        'form-card-3-b': tab_3[1],
-        'form-card-none': tab_3[2],
-        'div-link': true
-    })
-
+    const clear = () => {
+        setControlAnimation(false)
+        setValue([])
+        setInputValue(['','','',''])
+        setErrorMSG(false)
+        console.log(inputValue)
+    }
     return(
         <>
         <NavBar2 pageimage={math_icon} categoryname="Algebra Calculators" pagename="Roots Calculators"/>
         <AddLayout categorykey='algebra' searchname='Algebra Calculators' searchimage={algebra_icon}>
+            <Typography 
+                sx={{
+                    paddingLeft: 1.5, 
+                    marginBottom: 2,
+                    fontFamily: 'Roboto, Helvetica',
+                    fontSize: 16
+                }}>
+                <Box>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
+                </Box>
+            </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Box className='animated-content-center'>
-                <Anime
-                    className='animated-pos animated-margin'
-                    ref={animatedSquaresRef1}
-                    config={{
-                        translateX: -250,
-                        duration: 250,
-                        easing: 'easeInOutSine',
-                        autoplay: false,
-                    }}>
+                <Box
+                    className={
+                        classNames({
+                            'animated-pos': true,
+                            'animated-margin': true,
+                            'forward-animation-card-1': controlAnimation,
+                            'reverse-animation': !controlAnimation
+                        })
+                    }>
                     <Box 
                         sx={{ maxWidth: 500, minHeight: 150, paddingBottom: 1 }}
                         className="animated-box" >
                         
                         <Box sx={{ width:'100%', display: 'flex', }}>
-                            <Typography
-                                onClick={
-                                    ()=>{
-                                        setTab_1([false,false,true, false])
-                                            setTab_2([true, false, false])
-                                            setTab_3([true, false, false])
-                                            setIndex([true, false, false])
-                                        setCalcName("General root calculator")
-                                    }
-                                }
-                                className={tabstyles_1 }
-                                sx={{ 
-                                        width:'100%',
-                                        fontSize: 14,
-                                        paddingTop: 0.1, 
-                                        marginBottom:0.5,
-                                        fontWeight: 'bold',
-                                        textAlign: 'center'
-                                    }}>
-                                <Box>
-                                    General root 
+                            <Box sx={{ width:'100%'}}>
+                                <Box sx={{ width:'100%'}}
+                                    onClick={
+                                        ()=>{
+                                            setShowMenu(!showMenu)
+                                        }
+                                    }>
+                                    <Typography 
+                                        sx={{ width: '50%'}}>
+                                                <Box
+                                                sx={{
+                                                    justifyContent: 'space-between',
+                                                    display: 'flex', }} 
+                                                    className="form-card div-link"> 
+                                                    {calcName} 
+                                                
+                                                    {
+                                                        (showMenu)?
+                                                            <KeyboardArrowUpIcon sx={{ color: 'white' }} />
+                                                        :   <KeyboardArrowDownIcon sx={{ color: 'white' }} />
+                                                    }
+                                                </Box>
+                                    </Typography>
                                 </Box>
-                            </Typography >
-                            <Typography
-                                onClick={
-                                    ()=>{
-                                        setTab_1([false, true, false])
-                                        setTab_2([false, false, true])
-                                        setTab_3([false, true, false])
-                                        setIndex([false, true, false])
-                                        setCalcName("Square root")
-                                        setShowMenu(false)
-                                    }
-                                }
-                                className={tabstyles_2}
-                                sx={{ width:'100%' }}>
-                                <Box
-                                    sx={{ 
-                                        width:'100%',
-                                        fontSize: 14,
-                                        paddingTop: 0.1, 
-                                        marginBottom:0.5,
-                                        fontWeight: 'bold',
-                                        textAlign: 'center'
+                                {
+                                    (showMenu)?
+                                    <Box sx={{ 
+                                        position:'absolute',    
+                                        width:'210px',
+                                        height: '140px',
+                                        backgroundColor: 'white',
+                                        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
+                                        borderRadius: 2.5,
+                                        marginLeft: 1,
+                                        paddingLeft: 1,
+                                        paddingRight: 1,
+                                        paddingTop: 1,
+                                        zIndex:20
                                     }}>
-                                    Square root
-                                </Box>
-                            </Typography>
-                            <Typography
-                                onClick={
-                                    ()=>{
-                                        setTab_1([false, false, false, true])
-                                        setTab_2([false, true, false])
-                                        setTab_3([false, false, true])
-                                        setIndex([false, false, true])
-                                        setCalcName("Cube root")
-                                        setShowMenu(false)
-                                    }
+                                        <Typography
+                                            onClick={
+                                                ()=>{
+                                                    setIndex([true, false, false, false])
+                                                    setCalcName("General Root Calculator")
+                                                    setShowMenu(false)
+                                                }
+                                            }
+                                            className={classNames({
+                                                'form-card': true,
+                                                'div-link': true
+                                            })}
+                                            sx={{ 
+                                               ...menubutton
+                                            }}>
+                                            <Box>
+                                               General Root Calculator
+                                            </Box>
+                                        </Typography >
+                                        <Typography
+                                            onClick={
+                                                ()=>{
+                                                    setIndex([false, true, false, false])
+                                                    setCalcName("Root Calculator")
+                                                    setShowMenu(false)
+                                                }
+                                            }
+                                            className={classNames({
+                                                'form-card': true,
+                                                'div-link': true
+                                            })}
+                                            sx={{ 
+                                                ...menubutton
+                                            }}>
+                                            <Box>
+                                                Root Calculator
+                                            </Box>
+                                        </Typography>
+                                        <Typography
+                                            onClick={
+                                                ()=>{
+                                                    setIndex([false, false, true, false])
+                                                    setCalcName("Cube Root Calculator")
+                                                    setShowMenu(false)
+                                                }
+                                            }
+                                            className={classNames({
+                                                'form-card': true,
+                                                'div-link': true
+                                            })}
+                                            sx={{ 
+                                                ...menubutton
+                                            }}>
+                                            <Box> Cube Root Calculator</Box>
+                                        </Typography>
+                                       
+                                    </Box>
+                                    :<Box></Box>
                                 }
-                                className={tabstyles_3}
-                                sx={{ width:'100%' }}>
-                                <Box
-                                    sx={{ 
-                                        width:'100%',
-                                        fontSize: 14,
-                                        paddingTop: 0.1, 
-                                        marginBottom:0.5,
-                                        fontWeight: 'bold',
-                                        textAlign: 'center'
-                                    }}
-                                >Cube root</Box>
-                            </Typography>
-                             
+                            </Box>
                         </Box>
                         {
                             (index[0])?
                             <Formik
+                            enableReinitialize
                             initialValues={{ 
                                 
-                                number: "",
-                                root_number: "",
+                                number: inputValue[0],
+                                root_number: inputValue[1],
                                 method: "GeneralRootCalculator"
                             }}
                             onSubmit = {(values)=>{
@@ -216,12 +194,16 @@ export default function RootsCalculators(){
                                     root_number: values.root_number,
                                     method: values.method
                                 }
+                                setInputValue([
+                                    values.number,
+                                    values.root_number
+                                ])
 
-                                console.log(data)
                                 const postData = async () => {
                                     const responseData = await mathMainService(data)
                                     var msg:any = responseData.statusDescription;
                                     if(msg === "success"){
+                                        setControlAnimation(true)
                                         setValue([
                                             responseData.message.answer
                                         ])
@@ -237,9 +219,38 @@ export default function RootsCalculators(){
                                 isSubmitting
                             }) => (
                                 <form onSubmit={handleSubmit}>
+                                    
                                     <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
+                                        <Box 
+                                            sx={{
+                                                minWidth:'350px', 
+                                                paddingTop:2, 
+                                                paddingLeft:2, 
+                                                paddingRight:2,
+                                            }}>
+                                            <Typography sx={{marginBottom: 1}}>    
+                                                <Box
+                                                    sx={{
+                                                        fontWeight: 100,
+                                                        fontStyle: 'bold',
+                                                        fontSize: 14,
+                                                        color: '#b0b0b0',
+                                                        marginBottom:1
+                                                    }}>
+                                                    amet aliquam id diam maecenas ultricies mi eget mauris pharetra
+                                                </Box>
+                                                <Box
+                                                    sx={{
+                                                        fontWeight: 100,
+                                                        display:'flex',
+                                                        justifyContent:'center'
+                                                    }}>
+                                                    <Latex displayMode={true}>{`$\\sqrt[${"n"}]{${"x"}}= ${"y"} $`}</Latex>
+                                                </Box>
+                                            </Typography>
+                                        </Box>
                                         <Box sx={{ minHeight: 100, display: 'flex', justifyContent:'center'}}>
-                                            <Box sx={{border:'none', maxHeight: '100%', width: '190px', marginTop:5, }}>
+                                            <Box sx={{border:'none', maxHeight: '100%', width: '190px', marginTop:1, }}>
                                                 <Box
                                                     sx={{
                                                         position: 'absolute',
@@ -281,60 +292,33 @@ export default function RootsCalculators(){
                                                 </Box>
                                             </Box>
                                         </Box>
-                                        {/* <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Number</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                                <CustomForm
-                                                    type="text"
-                                                    name="number"
-                                                    onChange={handleChange}
-                                                    value={values.number}
-                                                    placeholder=""
-                                                />
-                                            </Grid>
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Root Number</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                                <CustomForm
-                                                    type="text"
-                                                    name="root_number"
-                                                    onChange={handleChange}
-                                                    value={values.root_number}
-                                                    placeholder=""
-                                                />
-                                            </Grid>
-                                            
-                                                                
-                                        </Grid> */}
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
                                                 Flex box pushes submit button down
                                             */}
                                         </Box>
-
-                                        <Box 
-                                            // className="toggle-box-primary"
-                                            sx={{ width: '100%' }}
-                                            >
-                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                        <CustomFormBtn 
-                                                        type="button" 
-                                                        handleClick={()=>{ 
-                                                            controlAnimation();
-                                                            }} 
-                                                        name="Clear"/>
-                                                    </Box>
-                                            </Grid>
-                                            <Grid item xs={4}></Grid>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                    </Box>
-                                            </Grid>
-                                            </Grid>
+                                    </Box>
+                                    <Box 
+                                        // className="toggle-box-primary"
+                                        sx={{
+                                            paddingLeft: 4, paddingRight: 4, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{
+                                                    clear()
+                                                        
+                                                    }} 
+                                                name="Clear"/>
+                                            </Box>
+                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                        
+                                        </Box>
+                                        <Box sx={{display:"flex", justifyContent:"end"}}>
+                                            <CustomFormImageBtn 
+                                                type="submit" 
+                                                name="Calculate"/>   
                                         </Box>
                                     </Box>
                                 </form>
@@ -345,20 +329,27 @@ export default function RootsCalculators(){
                         {
                             (index[1])?
                             <Formik
-                        initialValues={{ 
-                            number:"",
-                            method: "SquareRootCalculator"
-                        }}
+                            enableReinitialize
+                            initialValues={{ 
+                                number:inputValue[0],
+                                method: "SquareRootCalculator"
+                            }}
                         onSubmit = {(values)=>{
                             const data = {
                                 number: values.number,
                                 method: values.method
                             }
-                            console.log(data)
+
+                            setInputValue([
+                                inputValue[0],
+                                ''
+                            ])
+
                             const postData = async () => {
                                 const responseData = await mathMainService(data)
                                 var msg:any = responseData.statusDescription;
                                 if(msg === "success"){
+                                    setControlAnimation(true)
                                     setValue([responseData.message.answer])
                                 }
                             }
@@ -373,8 +364,36 @@ export default function RootsCalculators(){
                         }) => (
                             <form onSubmit={handleSubmit}>
                                <Box sx={{  minHeight: 150 }}>
+                                    <Box 
+                                        sx={{
+                                            minWidth:'350px', 
+                                            paddingTop:2, 
+                                            paddingLeft:2, 
+                                            paddingRight:2,
+                                        }}>
+                                        <Typography sx={{marginBottom: 1}}>    
+                                            <Box
+                                                sx={{
+                                                    fontWeight: 100,
+                                                    fontStyle: 'bold',
+                                                    fontSize: 14,
+                                                    color: '#b0b0b0',
+                                                    marginBottom:1
+                                                }}>
+                                                amet aliquam id diam maecenas ultricies mi eget mauris pharetra
+                                            </Box>
+                                            <Box
+                                                sx={{
+                                                    fontWeight: 100,
+                                                    display:'flex',
+                                                    justifyContent:'center'
+                                                }}>
+                                                <Latex displayMode={true}>{`$\\sqrt{${"x"}}= ${"y"} $`}</Latex>
+                                            </Box>
+                                        </Typography>
+                                    </Box>
                                     <Box sx={{ minHeight: 100, display: 'flex', justifyContent:'center'}}>
-                                        <Box sx={{border:'none', maxHeight: '100%', width: '120px', marginTop:5, }}>
+                                        <Box sx={{border:'none', maxHeight: '100%', width: '120px', marginTop:1, }}>
                                             <Box
                                                 sx={{
                                                     position: 'absolute',
@@ -399,51 +418,35 @@ export default function RootsCalculators(){
                                             </Box>
                                         </Box>
                                     </Box>
-                                    {/* <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>Number</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <CustomForm
-                                                type="text"
-                                                name="number"
-                                                onChange={handleChange}
-                                                value={values.number}
-                                                placeholder=""
-                                            />
-                                        </Grid>
-                                  
-                                    </Grid> */}
                                     <Box sx={{ flexGrow: 1}}>
                                         {/* 
                                             Flex box pushes submit button down
                                         */}
                                     </Box>
-
-                                    <Box 
-                                        // className="toggle-box-primary"
-                                        sx={{ width: '100%' }}
-                                            >
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                    <CustomFormBtn 
-                                                    type="button" 
-                                                    handleClick={()=>{ 
-                                                        controlAnimation();
-                                                        }} 
-                                                    name="Clear"/>
-                                                </Box>
-                                        </Grid>
-                                        <Grid item xs={4}></Grid>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                    <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                </Box>
-                                        </Grid>
-                                        </Grid>
-                                    </Box>
                                 </Box>
+                                <Box 
+                                        // className="toggle-box-primary"
+                                        sx={{
+                                            paddingLeft: 4, paddingRight: 4, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{
+                                                    clear()
+                                                        
+                                                    }} 
+                                                name="Clear"/>
+                                            </Box>
+                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                        
+                                        </Box>
+                                        <Box sx={{display:"flex", justifyContent:"end"}}>
+                                            <CustomFormImageBtn 
+                                                type="submit" 
+                                                name="Calculate"/>   
+                                        </Box>
+                                    </Box>
                             </form>
                         )}
                     </Formik>
@@ -452,8 +455,9 @@ export default function RootsCalculators(){
                         {
                             (index[2])?
                             <Formik
+                            enableReinitialize
                             initialValues={{ 
-                                number:"",
+                                number:inputValue[1],
                                 method: "CubeRootCalculator"
                             }}
                             onSubmit = {(values)=>{
@@ -461,11 +465,15 @@ export default function RootsCalculators(){
                                     number: values.number,
                                     method: values.method
                                 }
-                                console.log(data)
+                                setInputValue([
+                                    '',
+                                    inputValue[1]
+                                ])
                                 const postData = async () => {
                                     const responseData = await mathMainService(data)
                                     var msg:any = responseData.statusDescription;
                                     if(msg === "success"){
+                                        setControlAnimation(true)
                                         setValue([responseData.message.answer])
                                     }
                                 }
@@ -480,8 +488,36 @@ export default function RootsCalculators(){
                             }) => (
                                 <form onSubmit={handleSubmit}>
                                    <Box sx={{  minHeight: 150}}>
+                                        <Box 
+                                            sx={{
+                                                minWidth:'350px', 
+                                                paddingTop:2, 
+                                                paddingLeft:2, 
+                                                paddingRight:2,
+                                            }}>
+                                            <Typography sx={{marginBottom: 1}}>    
+                                                <Box
+                                                    sx={{
+                                                        fontWeight: 100,
+                                                        fontStyle: 'bold',
+                                                        fontSize: 14,
+                                                        color: '#b0b0b0',
+                                                        marginBottom:1
+                                                    }}>
+                                                    amet aliquam id diam maecenas ultricies mi eget mauris pharetra
+                                                </Box>
+                                                <Box
+                                                    sx={{
+                                                        fontWeight: 100,
+                                                        display:'flex',
+                                                        justifyContent:'center'
+                                                    }}>
+                                                    <Latex displayMode={true}>{`$\\sqrt[${"3"}]{${"x"}}= ${"y"} $`}</Latex>
+                                                </Box>
+                                            </Typography>
+                                        </Box>
                                         <Box sx={{ minHeight: 100,  display: 'flex', justifyContent:'center'}}>
-                                            <Box sx={{ width: '120px', marginTop:4, }}>
+                                            <Box sx={{ width: '120px', marginTop:1, }}>
                                                 <Box
                                                     sx={{
                                                         position: 'absolute',
@@ -506,50 +542,35 @@ export default function RootsCalculators(){
                                                 </Box>
                                             </Box>
                                         </Box>
-                                        {/* <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-    
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle }}>Number</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                                <CustomForm
-                                                    type="text"
-                                                    name="number"
-                                                    onChange={handleChange}
-                                                    value={values.number}
-                                                    placeholder=""
-                                                />
-                                            </Grid>
-                                      
-                                        </Grid> */}
+                                        
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
                                                 Flex box pushes submit button down
                                             */}
                                         </Box>
-    
-                                        <Box 
-                                            // className="toggle-box-primary"
-                                            sx={{ width: '100%' }}
-                                            >
-                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                        <CustomFormBtn 
-                                                        type="button" 
-                                                        handleClick={()=>{ 
-                                                            controlAnimation();
-                                                            }} 
-                                                        name="Clear"/>
-                                                    </Box>
-                                            </Grid>
-                                            <Grid item xs={4}></Grid>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                    </Box>
-                                            </Grid>
-                                            </Grid>
-                                        </Box> 
+                                    </Box>
+                                    <Box 
+                                        // className="toggle-box-primary"
+                                        sx={{
+                                            paddingLeft: 4, paddingRight: 4, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{
+                                                    clear()
+                                                        
+                                                    }} 
+                                                name="Clear"/>
+                                            </Box>
+                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                        
+                                        </Box>
+                                        <Box sx={{display:"flex", justifyContent:"end"}}>
+                                            <CustomFormImageBtn 
+                                                type="submit" 
+                                                name="Calculate"/>   
+                                        </Box>
                                     </Box>
                                 </form>
                             )}
@@ -558,7 +579,7 @@ export default function RootsCalculators(){
                         }
                       
                     </Box>
-                </Anime>
+                </Box>
 
 
                 {/*
@@ -566,18 +587,18 @@ export default function RootsCalculators(){
                 
                 */}
 
-                <Anime
-                    className='animated-pos animated-margin'
-                    style={{
-                        zIndex: -5
-                    }}
-                    ref={animatedSquaresRef2}
-                    config={{
-                        translateX: 200,
-                        duration: 250,
-                        easing: 'easeInOutSine',
-                        autoplay: false,
-                    }}>
+            <Box
+                className={
+                    classNames({
+                        'animated-pos': true,
+                        'animated-margin': true,
+                        'forward-animation-card-2': controlAnimation,
+                        'reverse-animation': !controlAnimation
+                    })
+                }
+                style={{
+                    zIndex: -5
+                }}>
                     {
                         (value.length)?
                         <Box 
@@ -602,10 +623,16 @@ export default function RootsCalculators(){
                                         </Box>
                                         <Box sx={{ ...formCardStyle }}></Box>
                                     </Box>
-                                <Box sx={{marginLeft: 5}}>
-                                    <p>Answer</p>
-                                    <p>{value}</p>
-                                </Box>
+                                    <Box sx={{paddingLeft: 3}}>
+                                        <Typography sx={{ fontSize: 16, border:'none' }}>
+                                            <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14,}}>
+                                                Calculation Steps:
+                                            </Box>
+                                        </Typography>
+                                        <Box sx={{marginBottom: 2}}>
+                                            <Latex displayMode={true}>{`$\\sqrt[${inputValue[0]}]{${inputValue[1]}}= ${value[0]} $`}</Latex>
+                                        </Box>
+                                    </Box>
                             </Box>
                                 :<Box></Box>
                             }
@@ -628,9 +655,15 @@ export default function RootsCalculators(){
                                         </Box>
                                         <Box sx={{ ...formCardStyle }}></Box>
                                     </Box>
-                                    <Box sx={{marginLeft: 5}}>
-                                        <p>Square root</p>
-                                        <p>{value}</p>
+                                    <Box sx={{paddingLeft: 3}}>
+                                        <Typography sx={{ fontSize: 16, border:'none' }}>
+                                            <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14,}}>
+                                                Calculation Steps:
+                                            </Box>
+                                        </Typography>
+                                        <Box sx={{marginBottom: 2}}>
+                                            <Latex displayMode={true}>{`$\\sqrt{${inputValue[0]}}= ${value[0]} $`}</Latex>
+                                        </Box>
                                     </Box>
                                 </Box>
                                 :<Box></Box>
@@ -654,9 +687,15 @@ export default function RootsCalculators(){
                                         </Box>
                                         <Box sx={{ ...formCardStyle }}></Box>
                                     </Box>
-                                    <Box sx={{marginLeft: 5}}>
-                                        <p>Answer</p>
-                                        <p>{value}</p>
+                                    <Box sx={{paddingLeft: 3}}>
+                                        <Typography sx={{ fontSize: 16, border:'none' }}>
+                                            <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14,}}>
+                                                Calculation Steps:
+                                            </Box>
+                                        </Typography>
+                                        <Box sx={{marginBottom: 2}}>
+                                            <Latex displayMode={true}>{`$\\sqrt[3]{${inputValue[1]}}= ${value[0]} $`}</Latex>
+                                        </Box>
                                     </Box>
                                 </Box>
                                 :<Box></Box>
@@ -664,7 +703,7 @@ export default function RootsCalculators(){
                         </Box>
                         :<Box></Box>
                     }
-                </Anime>
+                </Box>
                 </Box>
             </Box>
             

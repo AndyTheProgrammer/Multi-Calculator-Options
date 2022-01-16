@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect }from 'react'
 import { NavBar2 } from '../../navbar/navbar2'
-import CustomForm, {CustomFormFraction} from '../../forms/CustomForm'
+import CustomForm, {CustomFormFraction2} from '../../forms/CustomForm'
 import { Field, Form, Formik, FormikProps } from 'formik'
 import { mathMainService } from '../../../services/mathService/mathMainService'
 import Anime from 'react-animejs-wrapper'
@@ -12,83 +12,59 @@ import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import algebra_icon from '../../../common/assets/algebra_icon.svg';
 import math_icon from '../../../common/assets/math_icon.svg';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-const Latex = require('react-latex');
-
+var classNames = require('classnames');
+var Latex = require('react-latex');
 
 function ExponentCalculator(){
     const [value, setValue] = useState<any[]>([])
-    const [playAnimation, setPlayAnimation] = useState(false)
-    const [mediaQueryValue, setMediaQueryValue] = useState(false)
-    const animatedSquaresRef1 = useRef(null)
-    const animatedSquaresRef2= useRef(null)
-  
-    // @ts-ignore: Object is possibly 'null'.
-    const play1 = () => animatedSquaresRef1.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const play2 = () => animatedSquaresRef2.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse1 = () => animatedSquaresRef1.current.reverse();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse2 = () => animatedSquaresRef2.current.reverse();
+    const [inputValue, setInputValue] = useState(['5','3'])
+    const [controlAnimation, setControlAnimation] = useState(false)
+    const [errorMSG, setErrorMSG] = useState(false)
 
-    
-    const controlAnimation = () => {
-        if(mediaQueryValue){
-            if(playAnimation){
-                // console.log("Monkey")
-                play1();
-                play2();
-                reverse1();
-                reverse2();
-                setValue([]);
-                setPlayAnimation(false);
-            }
-        }
-        else{
-            setValue([]);
-        }
-    } 
-
-    useEffect(()=>{
-        const mediaQuery = window.matchMedia('(min-width: 1000px)');
-        setMediaQueryValue(mediaQuery.matches);
-        
-        if (mediaQuery.matches) {
-            if(value.length){
-                play1();
-                play2();
-                setPlayAnimation(true)
-            }
-          } 
-          
-    })
-
+    const clear = () => {
+        setControlAnimation(false)
+        setValue([])
+        setInputValue(['',''])
+        setErrorMSG(false)
+        console.log(inputValue)
+    }
     return(
         <>
         <NavBar2 pageimage={math_icon} pagename="Exponent Calculator"/>
         <AddLayout categorykey='algebra' searchname='Algebra Calculators' searchimage={algebra_icon}>
+        <Typography 
+            sx={{
+                paddingLeft: 1.5, 
+                marginBottom: 2,
+                fontFamily: 'Roboto, Helvetica',
+                fontSize: 16
+            }}>
+            <Box>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
+            </Box>
+        </Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box className='animated-content-center'>
-            <Anime
-                className='animated-pos animated-margin'
-                ref={animatedSquaresRef1}
-                config={{
-                    translateX: -250,
-                    duration: 250,
-                    easing: 'easeInOutSine',
-                    autoplay: false,
-                }}>
+            <Box
+                className={
+                    classNames({
+                        'animated-pos': true,
+                        'animated-margin': true,
+                        'forward-animation-card-1': controlAnimation,
+                        'reverse-animation': !controlAnimation
+                    })
+                }>
                 <Box 
                     sx={{ maxWidth: 450,paddingBottom: 1 }}
                     className="animated-box" >
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:25, width: '100%' }}></Box>
-                        <Box sx={{...formCardStyle}}></Box>
+                        <Box sx={{height:2, width: '100%' }}></Box>
                     </Box>
                     <Formik
+                        enableReinitialize
                         initialValues={{ 
-                            base:"",
-                            number: "",
+                            base:inputValue[0],
+                            number: inputValue[1],
                             method: "ExponentCalculator"
                         }}
                         onSubmit = {(values)=>{
@@ -97,11 +73,16 @@ function ExponentCalculator(){
                                 number: values.number,
                                 method: values.method
                             }
-                            console.log(data)
+
+                            setInputValue([
+                                values.base,
+                                values.number
+                            ])
                             const postData = async () => {
                                 const responseData = await mathMainService(data)
                                 var msg:any = responseData.statusDescription;
                                 if(msg === "success"){
+                                    setControlAnimation(true)
                                     setValue([responseData.message.answer])
                                 }
                             }
@@ -116,91 +97,125 @@ function ExponentCalculator(){
                         }) => (
                             <form onSubmit={handleSubmit}>
                                   <Box sx={{  maxHeight: 150, display:'flex', flexDirection:'column' }}>
-                                    <Box sx={{ marginTop: 3, display:'flex', justifyContent:'center' }}>
-                                        <Box sx={{ width: 70, marginTop: 4}}>
-                                            <CustomFormFraction
+                                    <Box 
+                                        sx={{
+                                            minWidth:'350px', 
+                                            paddingTop:2, 
+                                            paddingLeft:2, 
+                                            paddingRight:2,
+                                        }}>
+                                        <Typography sx={{marginBottom: 1}}>    
+                                            <Box
+                                                sx={{
+                                                    fontWeight: 100,
+                                                    display:'flex',
+                                                    justifyContent:'center'
+                                                }}>
+                                                <Latex displayMode={true}>{`$${"n"}^{${"x"}}= ${"y"} $`}</Latex>
+                                            </Box>
+                                            <Box
+                                                    sx={{
+                                                        fontWeight: 100,
+                                                        fontStyle: 'bold',
+                                                        fontSize: 14,
+                                                        color: '#b0b0b0',
+                                                        marginBottom:1,
+                                                        marginLeft:0,
+                                                        textAlign:'center'
+                                                    }}>
+                                                    <i>Provide any two of the three values in the equation</i> 
+                                                </Box>
+                                        </Typography>
+                                    </Box>
+                                    <Box
+                                        sx={{
+                                            display:'flex',
+                                            justifyContent:'center'
+                                        }}>
+                                            <Box sx={{ marginTop: 1, display:'flex', justifyContent:'center' }}>
+                                        <Box sx={{ width: 70, marginTop: 2}}>
+                                            <CustomFormFraction2
                                                   type="text"
                                                   name="base"
                                                   onChange={handleChange}
                                                   value={values.base}
                                                   placeholder="x"
                                             />
+                                            </Box>
+                                            <Box sx={{  marginTop: 1.5}}>
+                                                <KeyboardArrowUpIcon sx={{ color: 'blue'  }}/>
+                                            </Box>
+                                            <Box sx={{ width: 70}}>
+                                                <CustomFormFraction2
+                                                    type="text"
+                                                    name="number"
+                                                    onChange={handleChange}
+                                                    value={values.number}
+                                                    placeholder="n"
+                                                />
+                                            </Box>
                                         </Box>
-                                        <Box sx={{  marginTop: 2}}>
-                                            <KeyboardArrowUpIcon sx={{ color: 'blue'  }}/>
-                                        </Box>
-                                        <Box sx={{ width: 70}}>
-                                            <CustomFormFraction
-                                                type="text"
-                                                name="number"
-                                                onChange={handleChange}
-                                                value={values.number}
-                                                placeholder="n"
-                                            />
+
+                                        <Typography sx={{width:10}}>
+                                                <Box 
+                                                    sx={{ 
+                                                            width: '100%',
+                                                            marginTop: 3
+                                                        }}>
+                                                        =
+                                                </Box>
+                                        </Typography>
+                                        <Box sx={{width:70}}>
+                                            <Box 
+                                                sx={{ 
+                                                        width: 70,
+                                                        marginTop: 3
+                                                    }}>
+                                                <CustomFormFraction2
+                                                    type="text"
+                                                    name="base"
+                                                    onChange={handleChange}
+                                                    value={values.base}
+                                                    placeholder="b"
+                                                />
+                                            </Box>
                                         </Box>
                                     </Box>
-                                    {/* <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>x (base)</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <CustomForm
-                                                type="text"
-                                                name="base"
-                                                onChange={handleChange}
-                                                value={values.base}
-                                                placeholder=""
-                                            />
-                                        </Grid>
-                
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>n (exponent)</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <CustomForm
-                                                type="text"
-                                                name="number"
-                                                onChange={handleChange}
-                                                value={values.number}
-                                                placeholder=""
-                                            />
-                                        </Grid>
-                                                            
-                                    </Grid> */}
                                     <Box sx={{ flexGrow: 1}}>
                                         {/* 
                                             Flex box pushes submit button down
                                         */}
                                     </Box>
-
-                                    <Box 
-                                        // className="toggle-box-primary"
-                                        sx={{ width: '100%' }}
-                                        >
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                    <CustomFormBtn 
-                                                    type="button" 
-                                                    handleClick={()=>{ 
-                                                        controlAnimation();
-                                                        }} 
-                                                    name="Clear"/>
-                                                </Box>
-                                        </Grid>
-                                        <Grid item xs={4}></Grid>
-                                        <Grid item xs={4}>
-                                                <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                    <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                </Box>
-                                        </Grid>
-                                        </Grid>
-                                    </Box>
-
                                 </Box>
+                                <Box 
+                                        // className="toggle-box-primary"
+                                        sx={{
+                                            marginTop: 4,
+                                            paddingLeft: 4, paddingRight: 4, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{
+                                                    clear()
+                                                        
+                                                    }} 
+                                                name="Clear"/>
+                                            </Box>
+                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                        
+                                        </Box>
+                                        <Box sx={{display:"flex", justifyContent:"end"}}>
+                                            <CustomFormImageBtn 
+                                                type="submit" 
+                                                name="Calculate"/>   
+                                        </Box>
+                                    </Box>
                             </form>
                         )}
                     </Formik>
                 </Box>
-            </Anime>
+            </Box>
 
 
             {/*
@@ -208,17 +223,17 @@ function ExponentCalculator(){
             
             */}
 
-            <Anime
-                className='animated-pos animated-margin'
+            <Box
+                className={
+                    classNames({
+                        'animated-pos': true,
+                        'animated-margin': true,
+                        'forward-animation-card-2': controlAnimation,
+                        'reverse-animation': !controlAnimation
+                    })
+                }
                 style={{
                     zIndex: -5
-                }}
-                ref={animatedSquaresRef2}
-                config={{
-                    translateX: 200,
-                    duration: 250,
-                    easing: 'easeInOutSine',
-                    autoplay: false,
                 }}>
                  {
                      (value.length)?
@@ -236,16 +251,42 @@ function ExponentCalculator(){
                                             }}>Result</Box>
                                     </Typography>
                                 </Box>
-                                <Box sx={{ ...formCardStyle }}></Box>
                             </Box>
-                        <Box sx={{marginLeft: 5}}>
-                            <p>Answer</p>
-                            <p>{value}</p>
-                        </Box>
+                            <Box sx={{paddingLeft: 3}}>
+                                <Typography sx={{ fontSize: 16, border:'none' }}>
+                                    <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14,}}>
+                                        Calculation Steps:
+                                    </Box>
+                                </Typography>
+                                <Box sx={{marginBottom: 2,}}>
+                                    <Box sx={{float:'left'}}>
+                                        <Box sx={{float:'left'}}>
+                                            <Latex displayMode={false}>{`$${inputValue[0]}^{${inputValue[1]}}= \\; $`}</Latex>
+                                        </Box>
+                                        {
+                                            [...Array(parseInt(inputValue[0]))].map((crr,index)=>{
+                                                return(
+                                                    <>
+                                                        <Box sx={{float:'left', marginLeft:1}}>{inputValue[1]} </Box>
+                                                        {
+                                                            (index < parseInt(inputValue[0])-1)?
+                                                            <Box sx={{float:'left', marginLeft:1}}> * </Box>
+                                                            :<></>
+                                                        }
+                                                    </>
+                                                );
+                                            })
+                                        }
+                                    </Box>
+                                </Box>
+                                <Box sx={{marginBottom: 2, clear:'left'}}>
+                                    <Latex displayMode={true}>{`$${inputValue[0]}^{${inputValue[1]}}= ${value[0]} $`}</Latex>
+                                </Box>
+                            </Box>
                     </Box>
                     :<Box></Box>
                  }
-            </Anime>
+            </Box>
             
             </Box>
             </Box>

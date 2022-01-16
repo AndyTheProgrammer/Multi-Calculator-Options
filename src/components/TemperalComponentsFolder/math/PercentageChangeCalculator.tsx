@@ -7,7 +7,7 @@ import AddLayout from '../../layouts/AddLayout'
 import { Box, Grid, Typography } from '@mui/material'
 import { NavBar2 } from '../../navbar/navbar2'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
-import { CustomFormikForm, CustomFormikOptions } from '../../forms/CustomForm'
+import { CustomFormikForm, CustomFormikOptions, CustomFormikFormFraction } from '../../forms/CustomForm'
 import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 const Latex = require('react-latex');
@@ -118,7 +118,7 @@ function PercentageChangeCalculator(){
                                                 <Field
                                                     type="text"
                                                     name="percentage"
-                                                    component={CustomFormikForm}
+                                                    component={CustomFormikFormFraction}
                                                 />
                                             </Grid>
                     
@@ -128,7 +128,7 @@ function PercentageChangeCalculator(){
                                             <Field
                                                 type="text"
                                                 name="value"
-                                                component={CustomFormikForm}
+                                                component={CustomFormikFormFraction}
                                             />
                                             </Grid>
 

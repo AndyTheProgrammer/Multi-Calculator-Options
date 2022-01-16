@@ -12,55 +12,25 @@ import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import algebra_icon from '../../../common/assets/algebra_icon.svg';
 import math_icon from '../../../common/assets/math_icon.svg';
-const Latex = require('react-latex');
+import Quadratic from '../wigets/quadratic/Quadratic'
+var classNames = require('classnames');
+var Latex = require('react-latex');
 
 function QuadraticFormulaCalculator(){
     const [value, setValue] = useState<any[]>([])
     const [playAnimation, setPlayAnimation] = useState(false)
-    const [mediaQueryValue, setMediaQueryValue] = useState(false)
-    const animatedSquaresRef1 = useRef(null)
-    const animatedSquaresRef2= useRef(null)
-  
-    // @ts-ignore: Object is possibly 'null'.
-    const play1 = () => animatedSquaresRef1.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const play2 = () => animatedSquaresRef2.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse1 = () => animatedSquaresRef1.current.reverse();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse2 = () => animatedSquaresRef2.current.reverse();
+    const [inputValue, setInputValue] = useState(['7','20','43'])
+    const [controlAnimation, setControlAnimation] = useState(false)
+    const [errorMSG, setErrorMSG] = useState(false)
 
-    
-    const controlAnimation = () => {
-        if(mediaQueryValue){
-            if(playAnimation){
-                // console.log("Monkey")
-                play1();
-                play2();
-                reverse1();
-                reverse2();
-                setValue([]);
-                setPlayAnimation(false);
-            }
-        }
-        else{
-            setValue([]);
-        }
-    } 
+    const clear = () => {
+        setControlAnimation(false)
+        setValue([])
+        setInputValue(['','',''])
+        setErrorMSG(false)
+        console.log(inputValue)
+    }
 
-    useEffect(()=>{
-        const mediaQuery = window.matchMedia('(min-width: 1000px)');
-        setMediaQueryValue(mediaQuery.matches);
-        
-        if (mediaQuery.matches) {
-            if(value.length){
-                play1();
-                play2();
-                setPlayAnimation(true)
-            }
-          } 
-          
-    })
 
 
     return(
@@ -69,27 +39,27 @@ function QuadraticFormulaCalculator(){
         <AddLayout categorykey='algebra' searchname='Algebra Calculators' searchimage={algebra_icon}>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>
-            <Anime
-                className='animated-pos animated-margin'
-                ref={animatedSquaresRef1}
-                config={{
-                    translateX: -250,
-                    duration: 250,
-                    easing: 'easeInOutSine',
-                    autoplay: false,
-                }}>
+            <Box
+                    className={
+                        classNames({
+                            'animated-pos': true,
+                            'animated-margin': true,
+                            'forward-animation-card-1': controlAnimation,
+                            'reverse-animation': !controlAnimation
+                        })
+                    }>
                 <Box 
                     sx={{ maxWidth: 450,paddingBottom: 1 }}
                     className="animated-box" >
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:25, width: '100%' }}></Box>
-                        <Box sx={{...formCardStyle}}></Box>
+                        <Box sx={{height:2, width: '100%' }}></Box>
                     </Box>
                     <Formik
+                        enableReinitialize
                         initialValues={{ 
-                            a:"",
-                            b: "",
-                            c:"",
+                            a: inputValue[0],
+                            b: inputValue[1],
+                            c: inputValue[2],
                             method: "QuadraticFormulaCalculator"
                         }}
                         onSubmit = {(values)=>{
@@ -99,12 +69,22 @@ function QuadraticFormulaCalculator(){
                                 c: values.c,
                                 method: values.method
                             }
-                            console.log(data)
+
+                            setInputValue([
+                                values.a,
+                                values.b,
+                                values.c
+                            ])
+
                             const postData = async () => {
                                 const responseData = await mathMainService(data)
                                 var msg:any = responseData.statusDescription;
                                 if(msg === "success"){
-                                    setValue([responseData.message.partB])
+                                    setControlAnimation(true)
+                                    setValue([
+                                        responseData.message.partB,
+                                        responseData.message.$partA
+                                    ])
                                 }
                             }
                             postData()
@@ -112,12 +92,33 @@ function QuadraticFormulaCalculator(){
                             
                         {(props: FormikProps<any>) => (
                             <Form >
-                                <Box sx={{ width: '100%' }}>
-                                    <Box sx={{ display:'flex', justifyContent: 'center', padding: 1, marginTop: 2 }}>
+                                <Box sx={{ width: '100%', marginBottom: 1 }}>
+                                    <Box 
+                                        sx={{
+                                            minWidth:'350px', 
+                                            paddingTop:2, 
+                                            paddingLeft:2, 
+                                            paddingRight:2,
+                                            
+                                        }}>
+                                        <Typography sx={{marginBottom: 1}}>    
+                                            <Box
+                                                sx={{
+                                                    fontStyle: 'bold',
+                                                    fontSize: 14,
+                                                    fontWeight: 100,
+                                                    display:'flex',
+                                                    justifyContent:'center'
+                                                }}>
+                                                <Latex displayMode={true}>{`$x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{{2}{a}}$`}</Latex>
+                                            </Box>
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{ display:'flex', justifyContent: 'center', padding: 1, marginTop: 1 }}>
                                         <Box sx={{ display:'flex', justifyContent: 'center', padding: 1}}>
                                             <Typography>
                                                 <Box sx={{...labelStyle}}>
-                                                    a
+                                                    a =
                                                 </Box>
                                             </Typography>
                                             <Box sx={{ width: 100}}>
@@ -128,10 +129,15 @@ function QuadraticFormulaCalculator(){
                                                 />
                                             </Box>
                                         </Box>
-                                        <Box sx={{ display:'flex', justifyContent: 'center', padding: 1}}>
+                                        <Box 
+                                            sx={{ 
+                                                    display:'flex', 
+                                                    justifyContent: 'center', 
+                                                    padding: 1,
+                                                }}>
                                             <Typography>
                                                 <Box sx={{...labelStyle}}>
-                                                    b
+                                                    b =
                                                 </Box>
                                             </Typography>
                                             <Box sx={{ width: 100}}>
@@ -145,7 +151,7 @@ function QuadraticFormulaCalculator(){
                                         <Box sx={{ display:'flex', justifyContent: 'center', padding: 1}}>
                                             <Typography>
                                                 <Box sx={{...labelStyle}}>
-                                                    c
+                                                    c =
                                                 </Box>
                                             </Typography>
                                             <Box sx={{ width: 100}}>
@@ -157,76 +163,40 @@ function QuadraticFormulaCalculator(){
                                             </Box>
                                         </Box>
                                     </Box>
-                                    {/* <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>a </Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <Field
-                                                type="text"
-                                                name="a"
-                                                component={CustomFormikForm}
-                                            />
-                                        </Grid>
-                
-                                        <Grid item xs={5}>
-                                            <Box sx={{...labelStyle}}>b</Box></Grid>
-                                        <Grid item xs={7}>
-                                        <Field
-                                            type="text"
-                                            name="b"
-                                            component={CustomFormikForm}
-                                        />
-                                        </Grid>
-
-                                        <Grid item={true} xs={5} >
-                                            <Box sx={{...labelStyle}}>c</Box></Grid>
-                                        <Grid item={true} xs={7}>
-                                            <Field
-                                                type="text"
-                                                name="c"
-                                                component={CustomFormikForm}
-                                            />
-                                        </Grid>
-                
-                                        
-                                                         
-                                    </Grid> */}
                                     <Box sx={{ flexGrow: 1}}>
                                         {/* 
                                             Flex box pushes submit button down
                                         */}
                                     </Box>
-
-                                    <Box 
-                                            // className="toggle-box-primary"
-                                            sx={{ width: '100%' }}
-                                            >
-                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                        <CustomFormBtn 
-                                                        type="button" 
-                                                        handleClick={()=>{ 
-                                                            controlAnimation();
-                                                            }} 
-                                                        name="Clear"/>
-                                                    </Box>
-                                            </Grid>
-                                            <Grid item xs={4}></Grid>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                    </Box>
-                                            </Grid>
-                                            </Grid>
-                                        </Box>
                                 </Box>
+                                <Box 
+                                        // className="toggle-box-primary"
+                                        sx={{
+                                            paddingLeft: 4, paddingRight: 4, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{
+                                                    clear()
+                                                        
+                                                    }} 
+                                                name="Clear"/>
+                                            </Box>
+                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                        
+                                        </Box>
+                                        <Box sx={{display:"flex", justifyContent:"end"}}>
+                                            <CustomFormImageBtn 
+                                                type="submit" 
+                                                name="Calculate"/>   
+                                        </Box>
+                                    </Box>
                             </Form>
                         )}
                     </Formik>
                 </Box>
-            </Anime>
+            </Box>
 
 
             {/*
@@ -234,17 +204,17 @@ function QuadraticFormulaCalculator(){
             
             */}
 
-            <Anime
-                className='animated-pos animated-margin'
+            <Box
+                className={
+                    classNames({
+                        'animated-pos': true,
+                        'animated-margin': true,
+                        'forward-animation-card-2': controlAnimation,
+                        'reverse-animation': !controlAnimation
+                    })
+                }
                 style={{
                     zIndex: -5
-                }}
-                ref={animatedSquaresRef2}
-                config={{
-                    translateX: 200,
-                    duration: 250,
-                    easing: 'easeInOutSine',
-                    autoplay: false,
                 }}>
                 {
                     (value.length)?
@@ -262,19 +232,26 @@ function QuadraticFormulaCalculator(){
                                             }}>Result</Box>
                                     </Typography>
                                 </Box>
-                                <Box sx={{ ...formCardStyle }}></Box>
                             </Box>
-                        <Box sx={{marginLeft: 5}}>
-                            <p>Answer</p>
-                            <p>{value}</p>
-                        </Box>
+                            <Box sx={{paddingLeft: 3}}>
+                                <Typography sx={{ fontSize: 16, border:'none' }}>
+                                    <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14,}}>
+                                        Calculation Steps:
+                                    </Box>
+                                </Typography>
+                                <Quadratic data={inputValue}/>
+                                <Box sx={{marginBottom: 2}}>
+                                    <Latex displayMode={true}>{`$\\textrm{Answer}= ${value[0].toFixed(8)} \\; or \\; ${value[1].toFixed(8)}$`}</Latex>
+                                </Box>
+
+                            </Box>
                     </Box>
                     :<Box></Box>
                 }
-            </Anime>
-            
             </Box>
-            </Box>
+
+        </Box>
+        </Box>
         </AddLayout>
         </>
     );
