@@ -29,6 +29,8 @@ import {
   FieldContainer,
 } from '../../../../../custom'
 
+const Latex = require('react-latex');
+
 const TrapezoidArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -244,19 +246,44 @@ const TrapezoidArea = () => {
           animation={resultAnimation}
         >
           {selectedResult === true &&
-            <div className="text-wrap text-center">
+            <div className="text-wrap">
               <Typography variant="subtitle1">
-                = {trapezoidResult.area}{trapezoidResult.unit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = \\frac{${trapezoidResult.base1} + ${trapezoidResult.base2}}{2} ${trapezoidResult.height}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${trapezoidResult.area} ${trapezoidResult.unit}^{2}$`}
+                </Latex>
               </Typography>
             </div>
           }
           {selectedResult === false &&
-            <div className="text-wrap text-center">
+            <div className="text-wrap">
               <Typography variant="subtitle1">
-                = {trapezoidResultTwo.areaInm}{trapezoidResult.unit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = \\frac{${trapezoidResult.base1} + ${trapezoidResult.base2}}{2} ${trapezoidResult.height}$`}
+                </Latex>
               </Typography>
+
               <Typography variant="subtitle1">
-                = {trapezoidResultTwo.areaIncm}{trapezoidResult.unit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${trapezoidResultTwo.areaInm} ${trapezoidResult.unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ or $`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${trapezoidResultTwo.areaIncm} ${trapezoidResult.unit}^{2}$`}
+                </Latex>
               </Typography>
             </div>
           }

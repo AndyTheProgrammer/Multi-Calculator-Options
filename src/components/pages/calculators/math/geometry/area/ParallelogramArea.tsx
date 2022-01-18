@@ -29,6 +29,8 @@ import {
   FieldContainer,
 } from '../../../../../custom'
 
+const Latex = require('react-latex');
+
 const ParallelogramArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -212,23 +214,44 @@ const ParallelogramArea = () => {
         >
 
           {selectedResult === true &&
-            <div className="text-wrap text-center">
+            <div className="text-wrap">
               <Typography variant="subtitle1">
-                = {parallelogramResult.breadth} * {parallelogramResult.height}
+                <Latex displayMode={false}>
+                  {`$A = ${parallelogramResult.breadth} * ${parallelogramResult.height}$`}
+                </Latex>
               </Typography>
 
               <Typography variant="subtitle1">
-                = {parallelogramResult.area}{parallelogramResult.unit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${parallelogramResult.area} ${parallelogramResult.unit}^{2}$`}
+                </Latex>
               </Typography>
             </div>
           }
           {selectedResult === false &&
-            <div className="text-wrap text-center">
+            <div className="text-wrap">
               <Typography variant="subtitle1">
-                = {parallelogramResultTwo.areaInbreadthUnit}{parallelogramResultTwo.unit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${parallelogramResult.breadth} * ${parallelogramResult.height}$`}
+                </Latex>
               </Typography>
+
               <Typography variant="subtitle1">
-                = {parallelogramResultTwo.areaInheightUnit}{parallelogramResultTwo.unit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${parallelogramResultTwo.areaInbreadthUnit} ${parallelogramResultTwo.unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ or $`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${parallelogramResultTwo.areaInheightUnit} ${parallelogramResultTwo.unit}^{2}$`}
+                </Latex>
               </Typography>
             </div>
           }

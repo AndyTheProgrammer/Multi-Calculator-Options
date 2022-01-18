@@ -31,10 +31,12 @@ const TabPanel = (props: TabPanelProps) => {
     >
       {value === index && (
         <Box
-          p={5}
-        //className={classes.container}
+          pt={4}
+          pl={4}
+          pr={4}
+          pb={0}
         >
-          <Grid>{children}</Grid>
+          {children}
         </Box>
       )}
     </div>

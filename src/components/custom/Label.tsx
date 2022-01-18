@@ -7,22 +7,20 @@ const Label = (props: any) => {
   return (
     <FontProvider fonts={[{ font: 'Roboto' }]}>
       <div
-        className="form-group col-3"
+        className="form-group col-4"
         style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
         }}
       >
 
         <Typography
           variant='subtitle2'
-          style={{ color: COLORS.text, fontSize: 14, fontWeight: 'bold' }}
+          style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }}
         >
           <Font>{title}</Font>
         </Typography>
 
-        <Box sx={{ marginRight: 1, color: COLORS.text }}>:</Box>
       </div>
     </FontProvider>
   )

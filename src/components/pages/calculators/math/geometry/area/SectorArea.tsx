@@ -29,6 +29,8 @@ import {
   FieldContainer,
 } from '../../../../../custom'
 
+const Latex = require('react-latex');
+
 const SectorArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -197,12 +199,23 @@ const SectorArea = () => {
           latex={LATEX.sectorArea}
           animation={resultAnimation}
         >
-          <div className="text-wrap text-center">
+          <div className="text-wrap">
             <Typography variant="subtitle1">
-              = {sectorResult.area}{sectorResult.unit}<sup>2</sup>
+              <Latex displayMode={false}>
+                {`$A = \\frac{${sectorResult.submitted_angle} * ${sectorResult.submittedradius}^{2}}{2}$`}
+              </Latex>
             </Typography>
+
             <Typography variant="subtitle1">
-              = {sectorResult.area}{sectorResult.unit}<sup>2</sup>
+              <Latex displayMode={false}>
+                {`$A = \\frac{${sectorResult.submitted_angle} * (${parseInt(sectorResult.submittedradius) * parseInt(sectorResult.submittedradius)})}{2}$`}
+              </Latex>
+            </Typography>
+
+            <Typography variant="subtitle1">
+              <Latex displayMode={false}>
+                {`$A = ${sectorResult.area} ${sectorResult.unit}^{2}$`}
+              </Latex>
             </Typography>
           </div>
         </ResultTabsContainer>

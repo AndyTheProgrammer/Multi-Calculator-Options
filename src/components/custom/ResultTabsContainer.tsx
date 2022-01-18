@@ -18,19 +18,18 @@ interface ResultsProps {
   tabTitle: String;
   latex?: String;
   animation?: {};
+  steps?: boolean;
 }
 
 const ResultTabsContainer = (props: ResultsProps) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
-  const { children, tabTitle, latex, animation } = props;
+  const { children, tabTitle, latex, animation, steps } = props;
   const {
     tabRoot,
     leftTabContainer,
     rightTabContainer,
-    formCardStyle,
     formResult,
-    formDisplay,
     resultContainer,
   } = useStyles()
 
@@ -52,9 +51,16 @@ const ResultTabsContainer = (props: ResultsProps) => {
           </StyledTabs>
 
           <NoIndexTabPanel>
-            <p style={{ fontSize: 14 }}>
-              <Latex displayMode={true}>{latex}</Latex>
+            <Typography sx={{ fontSize: 16 }}>
+              <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14, }}>
+                Calculation Steps:
+              </Box>
+            </Typography>
+
+            <p style={{ fontSize: 16 }}>
+              <Latex displayMode={false}>{latex}</Latex>
             </p>
+
             <Box className={resultContainer}>
               {children}
             </Box>

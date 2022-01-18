@@ -29,6 +29,8 @@ import {
   FieldContainer,
 } from '../../../../../custom'
 
+const Latex = require('react-latex');
+
 const EllipseArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -210,23 +212,45 @@ const EllipseArea = () => {
         >
 
           {selectedResult === true &&
-            <div className="text-wrap text-center">
+            <div className="text-wrap">
               <Typography variant="subtitle1">
-                =π * {ellipseResult.semi_major_axes_a} * {ellipseResult.semi_major_axes_b}
+                <Latex displayMode={false}>
+                  {`$A = \\pi * ${ellipseResult.semi_major_axes_a} * ${ellipseResult.semi_major_axes_b}$`}
+                </Latex>
               </Typography>
 
               <Typography variant="subtitle1">
-                = {ellipseResult.area}{ellipseResult.unit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${ellipseResult.area} ${ellipseResult.unit}^{2}$`}
+                </Latex>
               </Typography>
+
             </div>
           }
           {selectedResult === false &&
-            <div className="text-wrap text-center">
+            <div className="text-wrap">
               <Typography variant="subtitle1">
-                = {ellipseResultTwo.areaInsemi_major_axes_aUnit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = \\pi * ${ellipseResult.semi_major_axes_a} * ${ellipseResult.semi_major_axes_b}$`}
+                </Latex>
               </Typography>
+
               <Typography variant="subtitle1">
-                = {ellipseResultTwo.areaInsemi_major_axes_bUnit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${ellipseResultTwo.areaInsemi_major_axes_aUnit}${ellipseResult.unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ or $`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${ellipseResultTwo.areaInsemi_major_axes_bUnit}${ellipseResult.unit}^{2}$`}
+                </Latex>
               </Typography>
             </div>
           }

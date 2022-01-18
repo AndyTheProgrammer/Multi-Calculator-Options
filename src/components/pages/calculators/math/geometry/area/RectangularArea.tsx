@@ -29,6 +29,8 @@ import {
   FieldContainer,
 } from '../../../../../custom'
 
+const Latex = require('react-latex');
+
 const RectangularArea = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -213,23 +215,44 @@ const RectangularArea = () => {
           animation={resultAnimation}
         >
           {selectedResult === true &&
-            <div className="text-wrap text-center">
+            <div className="text-wrap">
               <Typography variant="subtitle1">
-                = {rectResult.submittedLength} * {rectResult.submitted_width}
+                <Latex displayMode={false}>
+                  {`$A = ${rectResult.submittedLength} * ${rectResult.submitted_width}$`}
+                </Latex>
               </Typography>
 
               <Typography variant="subtitle1">
-                = {rectResult.area}{rectResult.units}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${rectResult.area} ${rectResult.units}^{2}$`}
+                </Latex>
               </Typography>
             </div>
           }
           {selectedResult === false &&
-            <div className="text-wrap text-center">
+            <div className="text-wrap">
               <Typography variant="subtitle1">
-                = {rectResultTwo.areaInLengthUnit}{rectResult.units}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${rectResult.submittedLength} * ${rectResult.submitted_width}$`}
+                </Latex>
               </Typography>
+
               <Typography variant="subtitle1">
-                = {rectResultTwo.areaInWidthUnit}{rectResult.units}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${rectResultTwo.areaInLengthUnit} ${rectResult.units}^{2}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ or $`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${rectResultTwo.areaInWidthUnit} ${rectResult.units}^{2}$`}
+                </Latex>
               </Typography>
             </div>
           }

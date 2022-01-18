@@ -29,6 +29,8 @@ import {
   FieldContainer,
 } from '../../../../../custom'
 
+const Latex = require('react-latex');
+
 //Needs to be Refactored. Waiting on Martin's End!
 
 const TriangleArea = () => {
@@ -48,11 +50,11 @@ const TriangleArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [triangleInitialValues] = React.useState({
     sideA: "",
-    sideA_unit: "",
+    sideA_unit: "mm",
     sideB: "",
-    sideB_unit: "",
+    sideB_unit: "mm",
     sideC: "",
-    sideC_unit: "",
+    sideC_unit: "mm",
   })
   const [triangleResult, setTriangleResult] = React.useState({
     area: 0,
@@ -74,6 +76,8 @@ const TriangleArea = () => {
   const handleClickOpen = () => {
     setOpen(!open);
   };
+
+  let sResult = (triangleResult.sideA + triangleResult.sideB + triangleResult.sideC) / 2
 
   return (
     <>
@@ -228,19 +232,38 @@ const TriangleArea = () => {
         >
 
           {selectedResult === true &&
-            <div className="text-wrap text-center">
+            <div className="text-wrap">
               <Typography variant="subtitle1">
-                = {triangleResult.area}{triangleResult.unit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$s = \\frac{${triangleResult.sideA} + ${triangleResult.sideB} + ${triangleResult.sideC}} {2}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\sqrt{${sResult}(${sResult}-${triangleResult.sideA})(${sResult}-${triangleResult.sideB})(${sResult}-${triangleResult.sideC})}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${triangleResult.area} ${triangleResult.unit}^{2}$`}
+                </Latex>
               </Typography>
             </div>
           }
           {selectedResult === false &&
-            <div className="text-wrap text-center">
+            <div className="text-wrap">
               <Typography variant="subtitle1">
-                = {triangleResult2.areaInLenghtUnit}{triangleResult.unit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${triangleResult2.areaInLenghtUnit} ${triangleResult.unit}^{2}$`}
+                </Latex>
               </Typography>
+
               <Typography variant="subtitle1">
-                = {triangleResult2.areaInWidthUnit}{triangleResult.unit}<sup>2</sup>
+                <Latex displayMode={false}>
+                  {`$A = ${triangleResult2.areaInWidthUnit} ${triangleResult.unit}^{2}$`}
+                </Latex>
               </Typography>
             </div>
           }
