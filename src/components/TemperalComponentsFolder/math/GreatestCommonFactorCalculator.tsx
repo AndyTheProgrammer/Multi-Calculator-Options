@@ -11,11 +11,59 @@ import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import geometry_icon from '../../../common/assets/geometry_icon.svg';
 import math_icon from '../../../common/assets/math_icon.svg';
+import stats from '../../../common/assets/stats_icon.svg';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import { typography } from '@mui/system'
 
 const Latex = require('react-latex');
 
-function GreatestCommonFactorCalculator(){
+function checkArray(arr:any, num:any){
+    for(var i = 0; i < arr.length; i++){
+      if(arr[i].id === num){
+        return true;
+      }
+    }
+    return false
+  }
 
+function InputField(props:any){
+    const [value, setValue] = useState(props.inputvalue)
+  
+    const handleChange = (e:any) => {
+      setValue(e.target.value)
+      console.log(props.id)
+      props.getValue(e.target.value, props.id)     
+    }
+  
+    return (
+        <Box sx={{
+          display: 'flex',
+        }}>
+          <input
+            style={{
+              textAlign: 'center',
+              width:'100%',
+              backgroundColor:'#F0F3F6',
+              border: 'solid',
+              borderWidth: 0,
+              borderColor: 'red',
+              borderRadius: 7,
+              outline: 'none'
+            }}
+            type="text" 
+            name="value" 
+            value={value} 
+            onChange={handleChange}
+          />
+        </Box>
+    );
+  }
+
+export default function GreatestCommonFactorCalculator(){
     const [value, setValue] = useState<any[]>([])
     const [playAnimation, setPlayAnimation] = useState(false)
     const [mediaQueryValue, setMediaQueryValue] = useState(false)
@@ -41,11 +89,21 @@ function GreatestCommonFactorCalculator(){
                 reverse1();
                 reverse2();
                 setValue([]);
+                setSDValue([
+                    {id: 0, value: ''},
+                    {id: 1, value: ''},
+                    {id: 2, value: ''}
+                ])
                 setPlayAnimation(false);
             }
         }
         else{
             setValue([]);
+            setSDValue([
+                {id: 0, value: ''},
+                {id: 1, value: ''},
+                {id: 2, value: ''}
+            ])
         }
     } 
 
@@ -63,12 +121,60 @@ function GreatestCommonFactorCalculator(){
           
     })
 
+    const [sdValue, setSDValue] = useState([
+        {id: 0, value: '100'},
+        {id: 1, value: '24'},
+        {id: 2, value: '16'}
+      ]);
+
+      const handler = (h:any, id:any) =>{
+
+        const copysdValue = sdValue;
+        
+          if(copysdValue.length !== 0){
+            for(var i = 0; i < copysdValue.length; i++){
+                if(copysdValue[i].id === id ){      
+                    copysdValue[i].value = h
+                    console.log("Monkey")
+                    setSDValue(copysdValue)
+                }
+            }
+            // setSDValue([...copysdValue])
+        }
+    }
+    
+    function addField(){
+        setSDValue([...sdValue, {id: sdValue.length, value: ''}]);
+    }
+
+    function checkEmpty(arr:any){
+        for(var i = 0; i < arr.length; i++){
+            if(parseInt(arr[i++].value) && arr[i].value === ''  ){
+                return false
+            }
+            if(!parseInt(arr[i].value)){
+                return false
+            }
+        }
+        return true
+    }
+
+    async function submitHandler(){
+        var postData:any = [];
+        
+        for(var i = 0; i < sdValue.length; i++){
+            if( sdValue[i].value !== '' && parseInt(sdValue[i].value)){
+                postData.push(parseInt(sdValue[i].value))
+            }
+        }
+        setValue(postData)
+    }
 
     return(
         <>
-        <NavBar2 pageimage={math_icon}  categoryname="General Calculators" pagename="Greatest Common Factor Calculator"/>
-        <AddLayout categorykey='general' searchname='General Calculators' searchimage={geometry_icon}>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <NavBar2 pageimage={math_icon}  categoryname="General Calculators" pagename="Greatest Common Factor Calculator"/>
+            <AddLayout categorykey='general' searchname='General Calculators' searchimage={geometry_icon}>
+                <Box sx={{ display: "flex", justifyContent: "center" }}> 
                 <Box className='animated-content-center'>
                 <Anime
                     className='animated-pos animated-margin'
@@ -82,117 +188,77 @@ function GreatestCommonFactorCalculator(){
                     <Box 
                         sx={{ maxWidth: 450,paddingBottom: 1 }}
                         className="animated-box" >
-                        
-
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:25, width: '100%' }}></Box>
-                            <Box sx={{...formCardStyle}}></Box>
+                            <Box sx={{height:2, width: '100%' }}></Box>
                         </Box>
-                        <Formik
-                            initialValues={{ 
-                                
-                                factors: "",
-                                method: "GreatestCommonFactorCalculator"
-                            }}
-                            onSubmit = {(values)=>{
-                                const data = {
-                                    factors: values.factors,
-                                    method: values.method
-                                }
-
-                                console.log(data)
-                                const postData = async () => {
-                                    const responseData = await mathMainService(data)
-                                    var msg:any = responseData.statusDescription;
-                                    if(msg === "success"){
-                                        setValue([
-                                            responseData.message.gcd,
-                                            responseData.message.primeFactors
-                                        ])
-                                    
-                                    }
-                                }
-                                postData()
-                            }}>
-                                
-                            {({
-                                values,
-                                handleChange,
-                                handleSubmit,
-                                isSubmitting
-                            }) => (
-                                <form onSubmit={handleSubmit}>
-                                    <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid xs={12}>
-                                                <Typography>    
-                                                    <Box
-                                                    sx={{
-                                                            fontWeight: 100,
-                                                            fontStyle: 'italic',
-                                                            fontSize: 14,
-                                                            color: '#b0b0b0'
-                                                        }}>
-                                                        Provide numbers seperated by a coma
-                                                    </Box>
-                                                    <Box
-                                                    sx={{
-                                                            fontWeight: 100,
-                                                            fontStyle: 'italic',
-                                                            fontSize: 14,
-                                                            color: '#b0b0b0'
-                                                        }}>
-                                                        e.g 12,4,5,64,87
-                                                    </Box>
-                                                </Typography>
-                                            </Grid>
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Factors</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                                <CustomForm
-                                                    type="text"
-                                                    name="factors"
-                                                    onChange={handleChange}
-                                                    value={values.factors}
-                                                    placeholder=""
-                                                />
-                                            </Grid>
-                                        
-                                                                
-                                        </Grid>
-                                        <Box sx={{ flexGrow: 1}}>
-                                            {/* 
-                                                Flex box pushes submit button down
-                                            */}
-                                        </Box>
-
-                                        <Box 
-                                            // className="toggle-box-primary"
-                                            sx={{ width: '100%' }}
-                                            >
-                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                        <CustomFormBtn 
-                                                        type="button" 
-                                                        handleClick={()=>{ 
-                                                            controlAnimation();
-                                                            }} 
-                                                        name="Clear"/>
-                                                    </Box>
-                                            </Grid>
-                                            <Grid item xs={4}></Grid>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                    </Box>
-                                            </Grid>
-                                            </Grid>
-                                        </Box>
+                        <Grid columnSpacing={1} container sx={{ paddingTop:5, paddingBottom:5, paddingLeft:5, paddingRight:5}}>
+                            <Grid item xs={12}>
+                                <Typography sx={{marginBottom: 1}}>    
+                                    <Box
+                                        sx={{
+                                            fontWeight: 100,
+                                            fontStyle: 'italic',
+                                            fontSize: 14,
+                                            color: '#b0b0b0'
+                                        }}>
+                                        Provide numbers seperated by a coma
                                     </Box>
-                                </form>
-                            )}
-                        </Formik>
+                                    <Box
+                                        sx={{
+                                            fontWeight: 100,
+                                            fontStyle: 'italic',
+                                            fontSize: 14,
+                                            color: '#b0b0b0'
+                                        }}>
+                                        e.g 12,4,5,64,87
+                                    </Box>
+                                </Typography>
+                            </Grid>
+                        {
+                            sdValue.map((data) => (
+                                <Grid item xs={4} sm={3} md={2} sx={{ marginBottom: 1 }}>
+                                    <Box sx={{ display: 'flex' }}>
+                                        <Box sx={{ width: '100%' }}>
+                                            <InputField inputvalue={data.value} id={data.id} getValue={handler} />
+                                        </Box>
+                                        <Typography>
+                                            <Box>,</Box>
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+                            ))
+                        }
+                        </Grid>
+                        <Box 
+                              // className="toggle-box-primary"
+                              sx={{
+                                paddingLeft: 2, paddingRight: 2, 
+                                minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                      <Box sx={{display:"flex", justifyContent:"start"}}>
+                                          <CustomFormBtn 
+                                          type="button" 
+                                          handleClick={()=>{ 
+                                              controlAnimation();
+                                              }} 
+                                          name="Clear"/>
+                                      </Box>
+                                  <Box sx={{display:"flex", justifyContent:"start"}}>
+                                      <CustomFormBtn 
+                                      type="button" 
+                                      handleClick={()=>{ addField() }} 
+                                      name="Add Courses"/>
+                                  </Box>
+                                  <Box sx={{display:"flex", justifyContent:"end"}}>
+                                      <CustomFormImageBtn
+                                        type="button"
+                                        handleClick={
+                                          () =>{
+                                            submitHandler()
+                                          }
+                                        }  
+                                        name="Calculate"/>
+                                  </Box>
+                          </Box>
                     </Box>
                 </Anime>
 
@@ -219,7 +285,7 @@ function GreatestCommonFactorCalculator(){
                         <Box 
                             sx={{ maxWidth: 400,paddingBottom: 1 }}
                             className="animated-box" >
-                            <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                                <Box sx={{ display: 'flex', justifyContent: 'center'}}>
                                     <Box sx={{height:25, width: '100%' }}>
                                         <Typography>
                                             <Box
@@ -230,39 +296,71 @@ function GreatestCommonFactorCalculator(){
                                                 }}>Result</Box>
                                         </Typography>
                                     </Box>
-                                    <Box sx={{ ...formCardStyle }}></Box>
                                 </Box>
-                            <Box sx={{marginLeft: 5}}>
-                            <Typography>
-                                <Box>
-                                    Greatest common factor
-                                </Box>
-                                <Box>
-                                    {value[0]}
-                                </Box>
-                            </Typography>
-                            {/* <Typography>
-                                <Box>
-                                    Prime factors for index 1
-                                </Box>
-                                <Box>
+                                <Box sx={{paddingLeft: 3}}>
+                                    <Typography sx={{ fontSize: 16, border:'none' }}>
+                                        <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14,}}>
+                                            Calculation Steps:
+                                        </Box>
+                                        <Box sx={{ marginBottom: 2, fontSize: 14,}}>
+                                            Prime factorization of the numbers:
+                                        </Box>
+                                    </Typography>
+                                    
                                     {
-                                        value[0]
+                                        value.map((data)=>{
+                                            var factors = primeFactors(data)
+                                            var count=0
+                                            return(
+                                                <Typography sx={{display:'flex'}}>
+                                                    <Box sx={{marginRight:2}}>{data} : </Box>
+                                                    {
+                                                        factors.map((f)=>{
+                                                            count++
+                                                            return(
+                                                                <>
+                                                                    <Box sx={{marginRight:2}}>{f}</Box>
+                                                                    {
+                                                                        (count < factors.length)?
+                                                                        <Box sx={{marginRight:2}}>x</Box>
+                                                                        :<></>
+                                                                    }
+                                                                </>
+                                                            );
+                                                            
+                                                        })
+                                                    }
+                                                </Typography>
+                                            );
+                                        })
                                     }
                                 </Box>
-                            </Typography> */}
-                            </Box>
+                            
                         </Box>
                         :<Box></Box>
                     }
                 </Anime>
                 
                 </Box>
-            </Box>
+                </Box>
             
-        </AddLayout>
+            </AddLayout>
         </>
     );
 }
 
-export default GreatestCommonFactorCalculator
+function primeFactors(n:any){
+    var factors = [], 
+        divisor = 2;
+  
+    while(n>2){
+      if(n % divisor == 0){
+         factors.push(divisor); 
+         n= n/ divisor;
+      }
+      else{
+        divisor++;
+      }     
+    }
+    return factors;
+}

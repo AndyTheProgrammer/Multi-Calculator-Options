@@ -14,13 +14,13 @@ import AreaConverter from '../TemperalComponentsFolder/other/AreaConverter'
 import ReturnOnInvestmentCalculator from '../TemperalComponentsFolder/finance/investmentAndSavingsCalc/ReturnOnInvestmentCalculator'
 import SalesCalculator from '../TemperalComponentsFolder/finance/MoneyTaxCalc/SalesCalculator'
 import ArmyBodyFatCalculator from '../TemperalComponentsFolder/other/fitness/ArmyBodyFatCalculator'
-import PregnancyWeightGainCalculator from '../TemperalComponentsFolder/other/health/PregnancyWeightGainCalculator'
+import DayOfTheWeekCalculator from '../TemperalComponentsFolder/other/health/DayOfTheWeekCalculator'
 import RandomPasswordGenerator from '../TemperalComponentsFolder/other/technology/RandomPasswordGenerator'
-
+import Converters from '../TemperalComponentsFolder/pages/Converters'
 export default function TestPage() {
   return (
     <>
-      <RandomPasswordGenerator/>
+      <Converters/>
     </>
   );
 }

@@ -1,7 +1,6 @@
 //Math Category Components
 export { default as ArithmeticSequenceCalculator } from './math/ArithmeticSequenceCalculator'
 export { default as AverageCalculator } from './math/AverageCalculator'
-export { default as BinaryCalculator } from './math/BinaryCalculator'
 export { default as BinaryToDecimalCalculator } from './math/BinaryToDecimalCalculator'
 export { default as CombinationCalculator } from './math/CombinationsCalculator'
 export { default as ConfidenceIntervalCalculator } from './math/ConfidenceIntervalCalculator'

@@ -8,6 +8,7 @@ import { Box, Grid, Typography } from '@mui/material'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import { NavBar2 } from '../../navbar/navbar2'
 import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomStyles'
+import percentage from '../../../common/assets/percentage.png'
 
 const Latex = require('react-latex');
 
@@ -36,13 +37,11 @@ function CoursesInputField(props){
           <input
             style={{
               width:'100%',
-              backgroundColor:'#F0F3F6',
+              backgroundColor:'#EEEEEE',
               border: 'solid',
-              borderWidth: 0,
-              borderColor: 'red',
-              borderRadius: 7,
-              outline: 'none',
-              fontSize: 16
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 3,
             }}
             type="text" 
             name="courses" 
@@ -69,13 +68,11 @@ function CreditInputField(props){
         <input
           style={{
             width:'100%',
-            backgroundColor:'#F0F3F6',
-            border: 'solid',
-            borderWidth: 0,
-            borderColor: 'red',
-            borderRadius: 7,
-            outline: 'none',
-            fontSize: 16
+              backgroundColor:'#EEEEEE',
+              border: 'solid',
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 3,
           }}
           type="text" 
           name="credit" 
@@ -100,14 +97,18 @@ function GradeInputField(props){
       }}>
         <input
           style={{
-            width:'100%',
-            backgroundColor:'#F0F3F6',
-            border: 'solid',
-            borderWidth: 0,
-            borderColor: 'red',
-            borderRadius: 7,
-            outline: 'none',
-            fontSize: 16
+              width:'100%',
+              backgroundImage: `url(${percentage})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: '12px',
+              backgroundColor:'#EEEEEE',
+              backgroundPositionX:'calc(100% - 3px)',
+              backgroundPositionY: 'center',
+              border: 'solid',
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 3,
+              paddingRight:20
           }}
           type="text" 
           name="grade" 

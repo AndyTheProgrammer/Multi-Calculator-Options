@@ -15,19 +15,25 @@ function HomeIcon(props: SvgIconProps) {
 export function CustomFormBtn(props:any){
     return(
         <Button
-        sx={{ paddingTop:1, 
+        sx={{ 
+            paddingLeft: 0.5,
+            paddingRight: 0.5,
+            display: 'flex',
+            justifyContent: 'center',
             textTransform: 'none', 
+            border:'0px solid red',
             borderRadius: 15, 
-            width: {
-                lg: 130,
-                md: 130,
-                sm: 130,
-                xs: 110
-            },
-            height: 25, fontSize:12, color: 'white', backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' }} 
+            width: 80,
+            height: 25,
+            color: 'white',
+            textAlign: 'center', 
+            backgroundImage: 'linear-gradient(to left, #499FB8, #3128AF)' 
+        }} 
             type={props.type}
             onClick={props.handleClick}>
-            { props.name }
+            <Typography>
+                <Box sx={{ width: '100%', fontSize:12 }}>{ props.name }</Box>
+            </Typography>
         </Button>
     );
 }
@@ -36,19 +42,14 @@ export function CustomFormImageBtn(props:any){
     return(
         <Button 
             sx={{ 
-                    paddingLeft: 3,
-                    paddingRight: 3,
+                    paddingLeft: 0.5,
+                    paddingRight: 0.5,
                     display: 'flex',
                     justifyContent: 'center',
                     textTransform: 'none', 
                     border:'0px solid red',
                     borderRadius: 15, 
-                    width: {
-                        lg: 130,
-                        md: 130,
-                        sm: 130,
-                        xs: 110
-                    },
+                    width: 80,
                     height: 25,
                     color: 'white',
                     textAlign: 'center', 
@@ -59,7 +60,7 @@ export function CustomFormImageBtn(props:any){
                 <Typography>
                     <Box sx={{ width: '100%', fontSize:12,  paddingLeft: 0.5 }}>Calculate</Box>
                 </Typography>
-                <Box sx={{width: 20}}>
+                <Box sx={{width: 20, marginTop:0.5}}>
                     <img style={{width: '100%', height:'100%'}} alt="icon" src={form_btn}/>
                 </Box>
         </Button>

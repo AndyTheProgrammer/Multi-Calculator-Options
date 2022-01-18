@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from 'react'
 import { NavBar2 } from '../../navbar/navbar2'
 import CustomForm from '../../forms/CustomForm'
@@ -12,54 +13,35 @@ import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import fractions from '../../../common/assets/fractions_icon.svg';
 import math_icon from '../../../common/assets/math_icon.svg';
-const Latex = require('react-latex');
+import FractionsADD from '../wigets/fractions/FractionsADD'
+import validateNumbers from '../../../utilities/validators/validateNumbers'
+import SimpilfyFraction from '../wigets/fractions/SimplifyFraction'
+var classNames = require('classnames');
+var Latex = require('react-latex');
 
 function FractionCalculator() {
     const [value, setValue] = useState<any[]>([])
-    const [playAnimation, setPlayAnimation] = useState(false)
-    const [mediaQueryValue, setMediaQueryValue] = useState(false)
-    const animatedSquaresRef1 = useRef(null)
-    const animatedSquaresRef2= useRef(null)
-  
-    // @ts-ignore: Object is possibly 'null'.
-    const play1 = () => animatedSquaresRef1.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const play2 = () => animatedSquaresRef2.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse1 = () => animatedSquaresRef1.current.reverse();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse2 = () => animatedSquaresRef2.current.reverse();
+    const [inputValue, setInputValue] = useState(['2','10','4','5'])
+    const [operator, setOperator] = useState("addition")
+    const [controlAnimation, setControlAnimation] = useState(false)
+    const [errorMSG, setErrorMSG] = useState(false)
 
-    
-    const controlAnimation = () => {
-        if(mediaQueryValue){
-            if(playAnimation){
-                // console.log("Monkey")
-                play1();
-                play2();
-                reverse1();
-                reverse2();
-                setValue([]);
-                setPlayAnimation(false);
-            }
-        }
-        else{
-            setValue([]);
-        }
-    } 
+    const clear = () => {
+        setControlAnimation(false)
+        setValue([])
+        setInputValue(['','','',''])
+        setErrorMSG(false)
+        console.log(inputValue)
+    }
+
+    const inChangeOperator = (e:any) =>{
+        setOperator(e)
+    }
 
     useEffect(()=>{
-        const mediaQuery = window.matchMedia('(min-width: 1000px)');
-        setMediaQueryValue(mediaQuery.matches);
-        
-        if (mediaQuery.matches) {
-            if(value.length){
-                play1();
-                play2();
-                setPlayAnimation(true)
-            }
-          }   
-    })
+        console.log("This is operator ", operator)
+    },[operator])
+    
 
     return (
         <>
@@ -73,73 +55,159 @@ function FractionCalculator() {
                         fontSize: 16
                     }}>
                     <Box>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
                     </Box>
                 </Typography>
                 <Box sx={{ display: 'flex', justifyContent:'center'}}>
+
+               
                 <Box className='animated-content-center'>
-                    <Anime
-                        className='animated-pos animated-margin'
-                        ref={animatedSquaresRef1}
-                        config={{
-                            translateX: -250,
-                            duration: 250,
-                            easing: 'easeInOutSine',
-                            autoplay: false,
-                        }}>
+
+                    {/* ANIMTION STARTS HERE */}
+                    <Box
+                        className={
+                            classNames({
+                                'animated-pos': true,
+                                'animated-margin': true,
+                                'forward-animation-card-1': controlAnimation,
+                                'reverse-animation': !controlAnimation
+                            })
+                        }>
                         <Box 
                         sx={{ maxWidth: 450,paddingBottom: 1 }}
                         className="animated-box" >
                             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                            <Box sx={{height:25, width: '100%' }}>
+                            <Box sx={{height:2, width: '100%' }}>
                                 <Typography>
                                     <Box
                                         sx={{
                                             color:'#4072B5',
                                             fontWeight:'bold', 
                                             paddingLeft:2
-                                        }}>Calculator</Box>
+                                        }}></Box>
                                 </Typography>
                             </Box>
                                 {/* <Box sx={{ ...formCardStyle }}></Box> */}
                             </Box>
                             <Formik
+                                enableReinitialize
                                 initialValues={{
-                                    valuea: "",
-                                    valueb: "",
-                                    valuec: "",
-                                    valued: "",
-                                    operation: "multiply",
+                                    valuea: inputValue[0],
+                                    valueb: inputValue[1],
+                                    valuec: inputValue[2],
+                                    valued: inputValue[3],
+                                    operation: operator,
                                     method: "FractionCalculator"
                                 }}
-                                onSubmit={(values) => {
+
+
+                                onSubmit={(values:any, actions) => {
+                                    
+                                    const valuea = values.valuea
+                                    const valueb = values.valueb
+                                    const valuec = values.valuec
+                                    const valued = values.valued
                                     const data = {
-                                        valuea: values.valuea,
-                                        valueb: values.valueb,
-                                        valuec: values.valuec,
-                                        valued: values.valued,
+                                        valuea: valuea,
+                                        valueb: valueb,
+                                        valuec: valuec,
+                                        valued: valued,
                                         operation: values.operation,
                                         method: values.method
                                     }
 
-                                    console.log(data)
+                                    setInputValue([
+                                        values.valuea,
+                                        values.valueb,
+                                        values.valuec,
+                                        values.valued
+                                    ])
+
+                                    setOperator(values.operation)
+
+                                    var validate = validateNumbers([
+                                        values.valuea,
+                                        values.valueb,
+                                        values.valuec,
+                                        values.valued
+                                    ])
+                                    
                                     const postData = async () => {
                                         const responseData = await mathMainService(data)
                                         var msg: any = responseData.statusDescription;
                                         if (msg === "success") {
+                                            setControlAnimation(true)
                                             setValue([
                                                 responseData.message.numerator,
                                                 responseData.message.denominator
                                             ])
                                         }
                                     }
-                                    postData()
+
+                                    if(validate){
+                                        postData() 
+                                        setErrorMSG(false)
+                                        console.log("You can post data")
+                                    }
+                                    else{
+                                        setErrorMSG(true)
+                                        setControlAnimation(false)
+                                        setValue([])
+                                        console.log("You cant post data")
+                                    }
+                                  
+                                    
                                 }}>
 
                                 {(props: FormikProps<any>) => (
                                     <Form>
                                         <Box sx={{ minHeight: 100, border:'0px solid red',}}>
-                                            <Grid container={true} rowSpacing={1} sx={{ minWidth:'350px',  paddingTop: 2, paddingLeft: 2, paddingRight: 2 }}>
+                                            <Grid 
+                                                container={true} 
+                                                rowSpacing={1} 
+                                                sx={{ 
+                                                    minWidth:'350px', 
+                                                    paddingTop:2, 
+                                                    paddingLeft:2, 
+                                                    paddingRight:2,
+                                                    marginBottom:4
+                                                }}>
+                                                <Grid item xs={12}>
+                                                    <Typography sx={{marginBottom: 1}}>    
+                                                        <Box
+                                                            sx={{
+                                                                fontWeight: 100,
+                                                                fontStyle: 'bold',
+                                                                fontSize: 14,
+                                                                // color: '#b0b0b0',
+                                                                marginBottom:3,
+                                                                display:'flex',
+                                                                justifyContent:'center'
+                                                            }}>
+                                                            {
+                                                                (operator === 'addition')?
+                                                                <Latex displayMode={true}>{`$\\frac{a}{b} + \\frac{c}{d} = \\frac{ad + bc}{bd}$`}</Latex>
+                                                                :<></>
+                                                            }
+                                                            {
+                                                                (operator === 'subtraction')?
+                                                                <Latex displayMode={true}>{`$\\frac{a}{b} - \\frac{c}{d} = \\frac{ad - bc}{bd}$`}</Latex>
+                                                                :<></>
+                                                            }
+                                                            {
+                                                                (operator === 'multiply')?
+                                                                <Latex displayMode={true}>{`$\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$`}</Latex>
+                                                                :<></>
+                                                            }
+                                                            {
+                                                                (operator === 'divide')?
+                                                                <Latex displayMode={true}>{`$\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c}$`}</Latex>
+                                                                :<></>
+                                                            }
+                                                        </Box>
+                                                      
+                                                    </Typography>
+                                                </Grid>
                                                 <Grid xs={12}>
                                                     <Box sx={{
                                                         display: 'flex',
@@ -184,7 +252,11 @@ function FractionCalculator() {
                                                             </Box>
                                                         </Box>
                                                         <Box sx={{ width: 50, marginTop: 2.5,marginLeft:1, marginRight:1 }}>
-                                                            <Field as={CustomFormikOptionsFractions} name="operation" />
+                                                            <Field 
+                                                                as={CustomFormikOptionsFractions}
+                                                                changeStateValue={setOperator} 
+                                                                statevalue={operator} 
+                                                                name="operation" />
                                                         </Box>
                                                         <Box sx={{ width: 100}}>
                                                             <Box sx={{ width: '100%'}}>
@@ -219,11 +291,27 @@ function FractionCalculator() {
                                                                 />
                                                             </Box>
                                                         </Box>
-                                                        <Latex displayMode={true}>{`$\\hspace{.1cm}=\\hspace{.1cm} \\frac{?} {?}$`}</Latex>
+                                                        <Typography sx={{ fontSize: 18, border:'none' }}>
+                                                            <Latex displayMode={true}>{`$\\textbf{\\hspace{.1cm}=\\hspace{.1cm}?}$`}</Latex>
+                                                        </Typography>
                                                     </Box>
                                                 </Grid>
                                             
                                             </Grid>
+                                            <Box sx={{ border:'0px solid red',flexGrow: 1 }}>
+                                                {/* 
+                                                    error message
+                                                */}
+                                                {
+                                                    (errorMSG)?
+                                                    <Typography sx={{width:'100%'}}>
+                                                        <Box sx={{ color: 'red', textAlign:'center' }}>
+                                                            Enter validate non zero numbers
+                                                        </Box>
+                                                    </Typography>
+                                                    :<></>
+                                                }
+                                            </Box>
                                                 
                                             <Box sx={{ border:'0px solid red',flexGrow: 1 }}>
                                                 {/* 
@@ -233,16 +321,16 @@ function FractionCalculator() {
                                             </Box>
                                         </Box>
                                         <Box 
-                                        // className="toggle-box-primary"
+                                            // className="toggle-box-primary"
                                             sx={{
-                                                paddingLeft: 2, paddingRight: 2, 
+                                                paddingLeft: 4, paddingRight: 4, 
                                                 minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
                                                 <Box sx={{display:"flex", justifyContent:"start"}}>
                                                     <CustomFormBtn 
                                                     type="button" 
-                                                    handleClick={()=>{ 
-                                                        controlAnimation();
-
+                                                    handleClick={()=>{
+                                                        clear()
+                                                         
                                                         }} 
                                                     name="Clear"/>
                                                 </Box>
@@ -250,14 +338,16 @@ function FractionCalculator() {
                                             
                                             </Box>
                                             <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                <CustomFormImageBtn type="submit" name="Calculate"/>   
+                                                <CustomFormImageBtn 
+                                                    type="submit" 
+                                                    name="Calculate"/>   
                                             </Box>
                                         </Box>
                                     </Form>
                                 )}
                             </Formik>
                         </Box>
-                    </Anime>
+                    </Box>
 
 
                     {/*
@@ -265,63 +355,138 @@ function FractionCalculator() {
             
             */}
 
-                    <Anime
-                        className='animated-pos animated-margin'
+                    <Box
+                        className={
+                            classNames({
+                                'animated-pos': true,
+                                'animated-margin': true,
+                                'forward-animation-card-2': controlAnimation,
+                                'reverse-animation': !controlAnimation
+                            })
+                        }
                         style={{
                             zIndex: -5
-                        }}
-                        ref={animatedSquaresRef2}
-                        config={{
-                            translateX: 200,
-                            duration: 250,
-                            easing: 'easeInOutSine',
-                            autoplay: false,
                         }}>
                         {
                             (value.length)?
                             <Box 
                                 sx={{ maxWidth: 400,paddingBottom: 1 }}
                                 className="animated-box" >
-                                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                <Box sx={{ 
+                                        display: 'flex', 
+                                        justifyContent: 'center',
+                                        backgroundColor:'#4072B5',
+                                        borderRadius: 20,
+                                        marginBottom: 2,   
+                                    }}>
                                     <Box sx={{ height: 25, width: '100%' }}>
                                         <Typography>
                                             <Box
                                                 sx={{
-                                                    color: '#4072B5',
+                                                    color: 'white',
                                                     fontWeight: 'bold',
-                                                    paddingLeft:2
+                                                    textAlign: 'center',
+                                                    
                                                 }}>Result</Box>
                                         </Typography>
                                     </Box>
-                                    {/* <Box sx={{ ...formCardStyle }}></Box> */}
                                 </Box>
-                                <Box sx={{ marginLeft: 5 }}>
+                                <Box sx={{ paddingLeft:5 }}>
                                    <Typography >
-                                       <Box>
-                                                Answer
-                                       </Box>
                                        <Box sx={{ display: 'flex', justifyContent:'center', fontWeight: 'bold', flexDirection: 'column'}}>
-                                            <Box> { value[0] }</Box>
-                                            <Box>
-                                                <Box 
-                                                    sx={{
-                                                        backgroundColor: 'black',
-                                                        width: '20px',
-                                                        borderRadius: 1,
-                                                        height: 2,
-                                                        marginTop: 0.5,
-                                                        marginBottom: 0.5,
-                                                        color: '#3023AE'
-                                                    }}></Box>
-                                            </Box>
-                                            <Box> { value[1] }</Box>
+                                            <Typography sx={{ fontSize: 16, border:'none' }}>
+                                                <Box sx={{ fontWeight: 'bold', marginBottom: 1, fontSize: 14,}}>
+                                                    Calculation Steps:
+                                                </Box>
+                                            </Typography>
+                                            {
+                                                (operator === 'addition')?
+                                                <Latex displayMode={true}>{`$\\frac{a}{b} + \\frac{c}{d} = \\frac{ad + bc}{bd}$`}</Latex>
+                                                :<></>
+                                            }
+                                            {
+                                                (operator === 'subtraction')?
+                                                <Latex displayMode={true}>{`$\\frac{a}{b} - \\frac{c}{d} = \\frac{ad - bc}{bd}$`}</Latex>
+                                                :<></>
+                                            }
+                                            {
+                                                (operator === 'multiply')?
+                                                <Latex displayMode={true}>{`$\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$`}</Latex>
+                                                :<></>
+                                            }
+                                            {
+                                                (operator === 'divide')?
+                                                <Latex displayMode={true}>{`$\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c}$`}</Latex>
+                                                :<></>
+                                            }
+                                            {
+                                                (operator === "addition")?
+                                                <>
+                                                    <Typography sx={{ fontSize: 16, border:'none', width: 100 }}>
+                                                        <Box sx={{marginBottom: 0}}>
+                                                            <Latex displayMode={true}>{`$=\\frac{a}{b} + \\frac{c}{d} = \\frac{ad + bc}{bd}$`}</Latex>
+                                                        </Box>
+                                                    </Typography>
+                                                    <FractionsADD data={inputValue} />
+                                                </>
+                                                :<></>   
+                                            }
+                                            {
+                                                (operator === "subtraction")?
+                                                <></>
+                                                :<></>
+                                        
+
+                                            }
+                                            {
+                                                (operator === "multiply")?
+                                                <Typography sx={{ fontSize: 16, border:'none', width: 100 }}>
+                                                
+                                                    <Box sx={{marginBottom: 2}}>
+                                                        <Latex displayMode={true}>{`$=\\frac{${inputValue[0]}}{${inputValue[1]}} \\times \\frac{${inputValue[2]}}{${inputValue[3]}}$`}</Latex>
+                                                    </Box>
+                                                    <Box sx={{marginBottom: 2}}>
+                                                        <Latex displayMode={true}>{`$=\\frac{${inputValue[0]} \\times ${inputValue[2]}} {${inputValue[1]} \\times  ${inputValue[3]}}$`}</Latex>
+                                                    </Box>
+                                                    <Box sx={{marginBottom: 2}}>
+                                                        <Latex displayMode={true}>{`$=\\frac{${parseFloat(inputValue[0]) * parseFloat(inputValue[2])}} {${parseFloat(inputValue[1]) * parseFloat(inputValue[3])}}$`}</Latex>
+                                                    </Box>
+                                                    <Box sx={{marginBottom: 2}}>
+                                                    <Latex displayMode={true}>{`$\\textrm{Answer}=\\frac{${parseFloat(inputValue[0]) * parseFloat(inputValue[2])}} {${parseFloat(inputValue[1]) * parseFloat(inputValue[3])}}$`}</Latex>
+                                                    </Box>
+                                                    <SimpilfyFraction data={[parseFloat(inputValue[0]) * parseFloat(inputValue[2]), parseFloat(inputValue[1]) * parseFloat(inputValue[3])]}/>
+                                                </Typography>
+                                                :<Box></Box>
+                                            }
+                                            {
+                                                (operator === "divide")?
+                                                <Typography sx={{ fontSize: 16, border:'none', width: 100 }}>
+                                                
+                                                    <Box sx={{marginBottom: 2}}>
+                                                        <Latex displayMode={true}>{`$=\\frac{${inputValue[0]}}{${inputValue[1]}} \\div \\frac{${inputValue[2]}}{${inputValue[3]}}$`}</Latex>
+                                                    </Box>
+                                                    <Box sx={{marginBottom: 2}}>
+                                                        <Latex displayMode={true}>{`$=\\frac{${inputValue[0]}}{${inputValue[1]}} \\times \\frac{${inputValue[3]}}{${inputValue[2]}}$`}</Latex>
+                                                    </Box>
+                                                    <Box sx={{marginBottom: 2}}>
+                                                        <Latex displayMode={true}>{`$=\\frac{${inputValue[0]} \\times ${inputValue[3]}} {${inputValue[1]} \\times  ${inputValue[2]}}$`}</Latex>
+                                                    </Box>
+                                                    <Box sx={{marginBottom: 2}}>
+                                                        <Latex displayMode={true}>{`$=\\frac{${parseFloat(inputValue[0]) * parseFloat(inputValue[3])}} {${parseFloat(inputValue[1]) * parseFloat(inputValue[2])}}$`}</Latex>
+                                                    </Box>
+                                                    <Box sx={{marginBottom: 2}}>
+                                                        <Latex displayMode={true}>{`$\\textrm{Answer}=\\frac{${parseFloat(inputValue[0]) * parseFloat(inputValue[3])}} {${parseFloat(inputValue[1]) * parseFloat(inputValue[2])}}$`}</Latex>
+                                                    </Box>
+                                                </Typography>
+                                                :<Box></Box>
+                                            }
                                        </Box>
                                    </Typography>
                                 </Box>
                             </Box>
                             :<Box></Box>
                         }
-                    </Anime>
+                    </Box>
 
                 </Box>
                 </Box>

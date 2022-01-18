@@ -26,17 +26,21 @@ function UniversalConverterForm(props:any){
     const CustomFormikOptions = (props:any) => ( 
       <Box sx={{
         display: 'flex',
+        paddingLeft: '5px',
+        paddingRight: '5px',
+        width:'100%'
       }}>
-        <Box sx={{ marginRight:1, color:'#4072B5'  }}>:</Box>
         <select 
         style={{
           width:'100%',
-          backgroundColor:'#F0F3F6',
-          border: 'none',
-          borderColor: 'red',
-          borderRadius: 7,
-          outline: 'none',
-          color:'black' 
+          // backgroundColor:'#F0F3F6',
+          backgroundColor:'#EEEEEE',
+          border: 'solid',
+          borderWidth: 1,
+          borderColor: 'gray',
+          borderRadius: 3,
+          height: 30
+          // outline: 'none'
         }}
         {...props} >
           <option value=""></option>
@@ -112,27 +116,10 @@ function UniversalConverterForm(props:any){
 
 
     return(
-      <>
-      <NavBar2 pageimage={other_icon} categoryname="Converter Calculators"  pagename={props.pagename} />
-      <AddLayout categorykey='converter' searchname='Converter Calculators' searchimage={convertion_calc_icon}>
-          <Box sx={{ display: "flex", justifyContent: "center" }}> 
-          <Box className='animated-content-center'>
-          <Anime
-              className='animated-pos animated-margin'
-              ref={animatedSquaresRef1}
-              config={{
-                  translateX: -250,
-                  easing: 'easeInOutSine',
-                  autoplay: false,
-                  duration: 250
-              }}>
+      
               <Box 
                   sx={{ maxWidth: 450,paddingBottom: 1 }}
-                  className="animated-box" >
-                    <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:25, width: '100%' }}></Box>
-                        <Box sx={{ ...formCardStyle }}></Box>
-                    </Box>
+                  >
                   <Formik
                     initialValues={{ value: '', fromUnit: "", toUnit: "" }}
                     onSubmit={(values, actions) => {
@@ -223,58 +210,6 @@ function UniversalConverterForm(props:any){
                     )}
                     </Formik>
               </Box>
-          </Anime>
-
-
-          {/*
-              Component displays the results 
-          
-          */}
-
-              <Anime
-                  className='animated-pos animated-margin'
-                  style={{
-                      zIndex: -5
-                  }}
-                  ref={animatedSquaresRef2}
-                  config={{
-                      translateX: 200,
-                      easing: 'easeInOutSine',
-                      autoplay: false,
-                      duration: 250
-                  }}>
-                  {
-                    (value.length)?
-                    <Box 
-                        sx={{ maxWidth: 450,paddingBottom: 1 }}
-                        className="animated-box" >
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:25, width: '100%' }}>
-                                <Typography>
-                                    <Box
-                                        sx={{
-                                            color:'#4072B5',
-                                            fontWeight:'bold', 
-                                            textAlign:'center'
-                                        }}>Result</Box>
-                                </Typography>
-                            </Box>
-                            <Box sx={{ ...formCardStyle }}></Box>
-                        </Box>
-                        <Box sx={{marginLeft: 5}}>
-                            
-                            <Box sx={{marginBottom: 2}}>
-                                <Latex displayMode={false}>{`$answer = ${value}$`}</Latex>
-                            </Box>
-                        </Box>
-                    </Box>
-                    :<Box></Box>
-                  }
-              </Anime>
-          </Box>
-          </Box>
-      </AddLayout>
-      </>
     );
 }
 

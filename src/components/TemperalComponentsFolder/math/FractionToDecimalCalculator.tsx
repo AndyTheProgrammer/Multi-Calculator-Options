@@ -11,57 +11,24 @@ import TextCard from '../../utilityComponents/TextCard';
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn';
 import fractions from '../../../common/assets/fractions_icon.svg';
 import math_icon from '../../../common/assets/math_icon.svg';
-
-const Latex = require('react-latex');
+import FractionToDecimal from '../wigets/fractions/FractionToDecimal'
+import validateNumbers from '../../../utilities/validators/validateNumbers'
+var classNames = require('classnames');
+var Latex = require('react-latex');
 
 function FractionToDecimalCalculator(){
     const [value, setValue] = useState<any[]>([])
-    const [playAnimation, setPlayAnimation] = useState(false)
-    const [mediaQueryValue, setMediaQueryValue] = useState(false)
-    const animatedSquaresRef1 = useRef(null)
-    const animatedSquaresRef2= useRef(null)
-  
-    // @ts-ignore: Object is possibly 'null'.
-    const play1 = () => animatedSquaresRef1.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const play2 = () => animatedSquaresRef2.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse1 = () => animatedSquaresRef1.current.reverse();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse2 = () => animatedSquaresRef2.current.reverse();
+    const [inputValue, setInputValue] = useState(['55','4'])
+    const [controlAnimation, setControlAnimation] = useState(false)
+    const [errorMSG, setErrorMSG] = useState(false)
 
-    
-    const controlAnimation = () => {
-        if(mediaQueryValue){
-            if(playAnimation){
-                // console.log("Monkey")
-                play1();
-                play2();
-                reverse1();
-                reverse2();
-                setValue([]);
-                setPlayAnimation(false);
-            }
-        }
-        else{
-            setValue([]);
-        }
-    } 
-
-    useEffect(()=>{
-        const mediaQuery = window.matchMedia('(min-width: 1000px)');
-        setMediaQueryValue(mediaQuery.matches);
-        
-        if (mediaQuery.matches) {
-            if(value.length){
-                play1();
-                play2();
-                setPlayAnimation(true)
-            }
-          } 
-          
-    })
-
+    const clear = () => {
+        setControlAnimation(false)
+        setValue([])
+        setInputValue(['','','',''])
+        setErrorMSG(false)
+        console.log(inputValue)
+    }
 
     return(
         <>
@@ -80,37 +47,29 @@ function FractionToDecimalCalculator(){
                 </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}> 
             <Box className='animated-content-center'>
-            <Anime
-                className='animated-pos animated-margin'
-                ref={animatedSquaresRef1}
-                config={{
-                    translateX: -250,
-                    duration: 250,
-                    easing: 'easeInOutSine',
-                    autoplay: false,
-                }}>
+            <Box
+                className={
+                    classNames({
+                        'animated-pos': true,
+                        'animated-margin': true,
+                        'forward-animation-card-1': controlAnimation,
+                        'reverse-animation': !controlAnimation
+                    })
+                }>
                 <Box 
-                    sx={{ maxWidth: 450, paddingBottom: 1 }}
+                    sx={{ maxWidth: 350, paddingBottom: 1 }}
                     className="animated-box" >
                 
                     <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                        <Box sx={{height:25, width: '100%' }}>
-                            <Typography>
-                                <Box
-                                    sx={{
-                                        color:'#4072B5',
-                                        fontWeight:'bold', 
-                                        paddingLeft:2
-                                    }}>Calculator</Box>
-                            </Typography>
-                        </Box>
-                        {/* <Box sx={{...formCardStyle}}></Box> */}
+                        <Box sx={{height:2, width: '100%' }}></Box>
+
                     </Box>
                     <Formik
+                        enableReinitialize
                         initialValues={{ 
-                            
-                            top: "",
-                            bottom: "",
+                            // @ts-ignore: Object is possibly 'null'.
+                            top: inputValue[0],
+                            bottom: inputValue[1],
                             method: "FractionToDecimalCalculator"
                         }}
                         onSubmit = {(values)=>{
@@ -120,15 +79,30 @@ function FractionToDecimalCalculator(){
                                 method: values.method
                             }
 
-                            console.log(data)
+                            setInputValue([values.top, values.bottom])
+                            var validate = validateNumbers(
+                                [values.top, values.bottom]
+                            )
+
                             const postData = async () => {
                                 const responseData = await mathMainService(data)
                                 var msg:any = responseData.statusDescription;
                                 if(msg === "success"){
+                                    setControlAnimation(true)
                                     setValue([responseData.message.answer])
                                 }
                             }
-                            postData()
+                            if(validate){
+                                postData() 
+                                setErrorMSG(false)
+                                console.log("You can post data")
+                            }
+                            else{
+                                setErrorMSG(true)
+                                setControlAnimation(false)
+                                setValue([])
+                                console.log("You cant post data")
+                            }
                         }}>
                             
                         {({
@@ -139,17 +113,35 @@ function FractionToDecimalCalculator(){
                         }) => (
                             <form onSubmit={handleSubmit}>
                                   <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
-                                    <Grid container={true} rowSpacing={1} sx={{ minWidth:'350px', paddingTop:2, paddingLeft:2, paddingRight:2}}>
-                                        
+                                    <Grid 
+                                        container={true} 
+                                        rowSpacing={1} 
+                                        sx={{ 
+                                                minWidth:'350px', 
+                                                paddingTop:2, 
+                                                paddingLeft:2, 
+                                                paddingRight:2,
+                                                marginBottom:4
+                                            }}>
+                                        <Grid item xs={12}>
+                                            <Typography sx={{marginBottom: 1,}}>    
+                                                <Box sx={{display:'flex', justifyContent:'center'}}>
+                                                    <Latex displayMode={true}>{`$\\frac{a}{b} = c$`}</Latex>
+                                                </Box>
+                                            </Typography>
+                                        </Grid>
                                         <Grid item xs={12}>
                                             <Box sx={{display:'flex', justifyContent: 'center'}}>
-                                                <Box sx={{marginRight: 1}}>
+                                                <Box sx={{
+                                                        marginRight: 1,
+                                                        width: '100px'
+                                                    }}>
                                                     <Box sx={{
                                                         width: '100%',
                                                         display:'flex', 
                                                         justifyContent: 'center' 
                                                         }}>
-                                                        <Box sx={{ width: '50px' }}>
+                                                        <Box sx={{ width: '100%' }}>
                                                             <CustomFormFraction
                                                                 type="text"
                                                                 name="top"
@@ -162,24 +154,27 @@ function FractionToDecimalCalculator(){
                                                     <Box
                                                         sx={{
                                                             display:'flex', 
-                                                            justifyContent: 'center' 
+                                                            justifyContent: 'center', 
+                                                            width: '100%',
+                                                            paddingLeft: '5px',
+                                                            paddingRight: '5px' 
                                                         }}>
                                                         <Box 
                                                             sx={{
                                                                 backgroundColor: '#b5b5b5',
-                                                                width: '60px',
+                                                                width: '100%',
                                                                 borderRadius: 1,
                                                                 height: 2,
                                                                 marginTop: 0.5,
                                                                 marginBottom: 0.5,
-                                                                color: '#3023AE'
+                                                                color: '#3023AE',
                                                             }}></Box>
                                                     </Box>
                                                     <Box sx={{
                                                         display:'flex', 
                                                         justifyContent: 'center' 
                                                         }}>
-                                                        <Box sx={{ width: '50px' }}>
+                                                        <Box sx={{ width: '100%' }}>
                                                             <CustomFormFraction
                                                                 type="text"
                                                                 name="bottom"
@@ -190,47 +185,61 @@ function FractionToDecimalCalculator(){
                                                         </Box>
                                                     </Box>
                                                 </Box>
-                                                <Typography>
-                                                    <Latex displayMode={true}>{`$\\hspace{.1cm}=\\hspace{.1cm}\\frac{?}{?}$`}</Latex>
+                                                <Typography sx={{ fontSize: 18, border:'none' }}>
+                                                    <Latex displayMode={true}>{`$\\textbf{\\hspace{.1cm}=\\hspace{.1cm}?}$`}</Latex>
                                                 </Typography>
                                             </Box>
                                             
                                         </Grid>
-                                                            
                                     </Grid>
+                                    <Box sx={{ border:'0px solid red',flexGrow: 1 }}>
+                                        {/* 
+                                            error message
+                                        */}
+                                        {
+                                            (errorMSG)?
+                                            <Typography sx={{width:'100%'}}>
+                                                <Box sx={{ color: 'red', textAlign:'center' }}>
+                                                    Enter validate non zero numbers
+                                                </Box>
+                                            </Typography>
+                                            :<></>
+                                        }
+                                    </Box>
                                     <Box sx={{ flexGrow: 1}}>
                                         {/* 
                                             Flex box pushes submit button down
                                         */}
                                     </Box>
-
-                                    <Box 
+                                </Box>
+                                <Box 
                                     // className="toggle-box-primary"
                                     sx={{
-                                        paddingLeft: 2, paddingRight: 2, 
+                                        paddingLeft: 4, paddingRight: 4, 
                                         minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
-                                            <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                <CustomFormBtn 
-                                                type="button" 
-                                                handleClick={()=>{ 
-                                                    controlAnimation();
-
-                                                    }} 
-                                                name="Clear"/>
-                                            </Box>
-                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
-                                        
+                                        <Box sx={{display:"flex", justifyContent:"start"}}>
+                                            <CustomFormBtn 
+                                            type="button" 
+                                            handleClick={()=>{
+                                                clear()
+                                                    
+                                                }} 
+                                            name="Clear"/>
                                         </Box>
-                                        <Box sx={{display:"flex", justifyContent:"end"}}>
-                                            <CustomFormImageBtn type="submit" name="Calculate"/>   
-                                        </Box>
+                                    <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                    
+                                    </Box>
+                                    <Box sx={{display:"flex", justifyContent:"end"}}>
+                                        <CustomFormImageBtn 
+                                            type="submit" 
+                                            name="Calculate"/>   
                                     </Box>
                                 </Box>
                             </form>
                         )}
                     </Formik>
                 </Box>
-            </Anime>
+            </Box>
 
 
             {/*
@@ -238,50 +247,58 @@ function FractionToDecimalCalculator(){
             
             */}
 
-            <Anime
-                className='animated-pos animated-margin'
+           
+            <Box
+                className={
+                    classNames({
+                        'animated-pos': true,
+                        'animated-margin': true,
+                        'forward-animation-card-2': controlAnimation,
+                        'reverse-animation': !controlAnimation
+                    })
+                }
                 style={{
                     zIndex: -5
-                }}
-                ref={animatedSquaresRef2}
-                config={{
-                    translateX: 200,
-                    duration: 250,
-                    easing: 'easeInOutSine',
-                    autoplay: false,
                 }}>
                  {
                      (value.length)?
                      <Box 
                         sx={{ maxWidth: 400,paddingBottom: 1 }}
                         className="animated-box" >
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{ 
+                                display: 'flex', 
+                                justifyContent: 'center',
+                                borderRadius: 20,
+                                marginBottom: 2,  
+                                backgroundColor:'#4072B5'
+                            }}>
                                 <Box sx={{height:25, width: '100%' }}>
                                     <Typography>
                                         <Box
                                             sx={{
-                                                color:'#4072B5',
-                                                fontWeight:'bold', 
-                                                paddingLeft:2
+                                                color:'white',
+                                                fontWeight:'400', 
+                                                textAlign: 'center'
                                             }}>Result</Box>
                                     </Typography>
                                 </Box>
                                 {/* <Box sx={{ ...formCardStyle }}></Box> */}
                             </Box>
-                            <Box sx={{marginLeft: 5}}>
-                                <Typography>
-                                    <Box>
-                                        Answer
-                                    </Box>
-                                    <Box>
-                                        {value}
+                            <Box sx={{paddingLeft: 3}}>
+                                <Typography sx={{ fontSize: 16, border:'none' }}>
+                                    <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14,}}>
+                                        Calculation Steps:
                                     </Box>
                                 </Typography>
+                                <Box>
+                                    <Latex displayMode={true}>{`$\\textrm{Formula}=\\frac{a}{b} = c$`}</Latex>
+                                </Box>
+                                <FractionToDecimal data={inputValue}/>
                             </Box>
                      </Box>
                      :<Box></Box>
                  }
-            </Anime>
+            </Box>
             
             </Box>
             </Box>
@@ -289,5 +306,7 @@ function FractionToDecimalCalculator(){
         </>
     );
 }
+
+
 
 export default FractionToDecimalCalculator

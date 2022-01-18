@@ -11,85 +11,62 @@ import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import algebra_icon from '../../../common/assets/algebra_icon.svg';
 import math_icon from '../../../common/assets/math_icon.svg';
-
-const Latex = require('react-latex');
+var classNames = require('classnames');
+var Latex = require('react-latex');
 
 function LogCalculator(){
     const [value, setValue] = useState<any[]>([])
-    const [playAnimation, setPlayAnimation] = useState(false)
-    const [mediaQueryValue, setMediaQueryValue] = useState(false)
-    const animatedSquaresRef1 = useRef(null)
-    const animatedSquaresRef2= useRef(null)
-  
-    // @ts-ignore: Object is possibly 'null'.
-    const play1 = () => animatedSquaresRef1.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const play2 = () => animatedSquaresRef2.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse1 = () => animatedSquaresRef1.current.reverse();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse2 = () => animatedSquaresRef2.current.reverse();
+    const [inputValue, setInputValue] = useState(['15','3'])
+    const [controlAnimation, setControlAnimation] = useState(false)
+    const [errorMSG, setErrorMSG] = useState(false)
 
-    
-    const controlAnimation = () => {
-        if(mediaQueryValue){
-            if(playAnimation){
-                // console.log("Monkey")
-                play1();
-                play2();
-                reverse1();
-                reverse2();
-                setValue([]);
-                setPlayAnimation(false);
-            }
-        }
-        else{
-            setValue([]);
-        }
-    } 
-
-    useEffect(()=>{
-        const mediaQuery = window.matchMedia('(min-width: 1000px)');
-        setMediaQueryValue(mediaQuery.matches);
-        
-        if (mediaQuery.matches) {
-            if(value.length){
-                play1();
-                play2();
-                setPlayAnimation(true)
-            }
-          } 
-          
-    })
+    const clear = () => {
+        setControlAnimation(false)
+        setValue([])
+        setInputValue(['',''])
+        setErrorMSG(false)
+        console.log(inputValue)
+    }
 
 
     return(
         <>
         <NavBar2 pageimage={math_icon} pagename="Log Calculator"/>
         <AddLayout categorykey='algebra' searchname='Algebra Calculators' searchimage={algebra_icon}>
+            <Typography 
+                sx={{
+                    paddingLeft: 1.5, 
+                    marginBottom: 2,
+                    fontFamily: 'Roboto, Helvetica',
+                    fontSize: 16
+                }}>
+                <Box>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis varius quam quisque id. Odio euismod lacinia at quis risus sed vulputate odio.
+                </Box>
+            </Typography>
             <Box sx={{ display: "flex", justifyContent: "center" }}>  
                 <Box className='animated-content-center'>
-                <Anime
-                    className='animated-pos animated-margin'
-                    ref={animatedSquaresRef1}
-                    config={{
-                        translateX: -250,
-                        duration: 250,
-                        easing: 'easeInOutSine',
-                        autoplay: false,
-                    }}>
+                <Box
+                    className={
+                        classNames({
+                            'animated-pos': true,
+                            'animated-margin': true,
+                            'forward-animation-card-1': controlAnimation,
+                            'reverse-animation': !controlAnimation
+                        })
+                    }>
                     <Box 
                         sx={{ maxWidth: 450,paddingBottom: 1 }}
                         className="animated-box" >
 
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:25, width: '100%' }}></Box>
-                            <Box sx={{...formCardStyle}}></Box>
+                            <Box sx={{height:2, width: '100%' }}></Box>
                         </Box>
                         <Formik
+                            enableReinitialize
                             initialValues={{ 
-                                base:"",
-                                number: "",
+                                base: inputValue[0],
+                                number: inputValue[1],
                                 method: "LogCalculator"
                             }}
                             onSubmit = {(values)=>{
@@ -98,12 +75,16 @@ function LogCalculator(){
                                     number: values.number,
                                     method: values.method
                                 }
-                                console.log(data)
+                                setInputValue([
+                                    values.base,
+                                    values.number
+                                ])
                                 const postData = async () => {
                                     const responseData = await mathMainService(data)
                                     var msg:any = responseData.statusDescription;
                                     console.log(responseData.message.answer);
                                     if(msg === "success"){
+                                        setControlAnimation(true)
                                         setValue([responseData.message.answer]);
                                     }
                                 }
@@ -118,93 +99,129 @@ function LogCalculator(){
                             }) => (
                                 <form onSubmit={handleSubmit}>
                                     <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
+                                        <Box 
+                                            sx={{
+                                                minWidth:'350px', 
+                                                paddingTop:2, 
+                                                paddingLeft:2, 
+                                                paddingRight:2,
+                                            }}>
+                                            <Typography sx={{marginBottom: 1}}>    
+                                                <Box
+                                                    sx={{
+                                                        fontWeight: 100,
+                                                        display:'flex',
+                                                        justifyContent:'center'
+                                                    }}>
+                                                    <Latex displayMode={true}>{`$\\textrm{Log}_${"n"}^{${"x"}}= ${"y"} $`}</Latex>
+                                                </Box>
+                                                <Box
+                                                    sx={{
+                                                        fontWeight: 100,
+                                                        fontStyle: 'bold',
+                                                        fontSize: 14,
+                                                        color: '#b0b0b0',
+                                                        marginBottom:1,
+                                                        marginLeft:0,
+                                                        textAlign:'center'
+                                                    }}>
+                                                    <i>Provide any two of the three values in the equation</i> 
+                                                </Box>
+                                            </Typography>
+                                        </Box>
                                         <Box sx={{ marginTop: 3, display:'flex', justifyContent:'center' }}>
                                             <Typography>
-                                                <Box sx={{...labelStyle}}>
+                                                <Box 
+                                                    sx={{
+                                                            ...labelStyle,
+                                                            marginTop: 2
+                                                        }}>
                                                     Log
                                                 </Box>
                                             </Typography>
-                                            <Box sx={{ width: 70, marginTop: 4}}>
-                                                <CustomFormFraction
-                                                    type="text"
-                                                    name="base"
-                                                    onChange={handleChange}
-                                                    value={values.base}
-                                                    
-                                                    placeholder="b"
-                                                />
+                                            <Box sx={{width:70}}>
+                                                <Box 
+                                                    sx={{ 
+                                                            width: 70,
+                                                            marginBottom: 0.5
+                                                        }}>
+                                                    <CustomFormFraction
+                                                        type="text"
+                                                        name="base"
+                                                        onChange={handleChange}
+                                                        value={values.base}
+                                                        placeholder="b"
+                                                    />
+                                                </Box>
+                                                <Box sx={{ width: 70}}>
+                                                    <CustomFormFraction
+                                                        type="text"
+                                                        name="number"
+                                                        onChange={handleChange}
+                                                        value={values.number}
+                                                        placeholder="X"
+                                                    />
+                                                </Box>
                                             </Box>
-                                            <Box sx={{ width: 70}}>
-                                            <CustomFormFraction
-                                                    type="text"
-                                                    name="number"
-                                                    onChange={handleChange}
-                                                    value={values.number}
-                                                    placeholder="X"
-                                                />
+                                            <Typography sx={{width:10}}>
+                                                <Box 
+                                                    sx={{ 
+                                                            width: '100%',
+                                                            marginTop: 2
+                                                        }}>
+                                                        =
+                                                </Box>
+                                            </Typography>
+                                            <Box sx={{width:70}}>
+                                                <Box 
+                                                    sx={{ 
+                                                            width: 70,
+                                                            marginTop: 2
+                                                        }}>
+                                                    <CustomFormFraction
+                                                        type="text"
+                                                        name="base"
+                                                        onChange={handleChange}
+                                                        value={values.base}
+                                                        placeholder="b"
+                                                    />
+                                                </Box>
                                             </Box>
                                         </Box>
-                                        {/* <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Base</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                                <CustomForm
-                                                    type="text"
-                                                    name="base"
-                                                    onChange={handleChange}
-                                                    value={values.base}
-                                                    placeholder=""
-                                                />
-                                            </Grid>
-                    
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>Number</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                                <CustomForm
-                                                    type="text"
-                                                    name="number"
-                                                    onChange={handleChange}
-                                                    value={values.number}
-                                                    placeholder=""
-                                                />
-                                            </Grid>
-                                                                
-                                        </Grid> */}
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
                                                 Flex box pushes submit button down
                                             */}
                                         </Box>
-
-                                        <Box 
-                                            // className="toggle-box-primary"
-                                            sx={{ width: '100%' }}
-                                            >
-                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                        <CustomFormBtn 
-                                                        type="button" 
-                                                        handleClick={()=>{ 
-                                                            controlAnimation();
-                                                            }} 
-                                                        name="Clear"/>
-                                                    </Box>
-                                            </Grid>
-                                            <Grid item xs={4}></Grid>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                    </Box>
-                                            </Grid>
-                                            </Grid>
+                                    </Box>
+                                    <Box 
+                                        // className="toggle-box-primary"
+                                        sx={{
+                                            marginTop: 4,
+                                            paddingLeft: 4, paddingRight: 4, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{
+                                                    clear()  
+                                                    }} 
+                                                name="Clear"/>
+                                            </Box>
+                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                        
+                                        </Box>
+                                        <Box sx={{display:"flex", justifyContent:"end"}}>
+                                            <CustomFormImageBtn 
+                                                type="submit" 
+                                                name="Calculate"/>   
                                         </Box>
                                     </Box>
                                 </form>
                             )}
                         </Formik>
                     </Box>
-                </Anime>
+                </Box>
 
 
                 {/*
@@ -212,18 +229,18 @@ function LogCalculator(){
                 
                 */}
 
-                <Anime
-                    className='animated-pos animated-margin'
-                    style={{
-                        zIndex: -5
-                    }}
-                    ref={animatedSquaresRef2}
-                    config={{
-                        translateX: 200,
-                        duration: 250,
-                        easing: 'easeInOutSine',
-                        autoplay: false,
-                    }}>
+            <Box
+                className={
+                    classNames({
+                        'animated-pos': true,
+                        'animated-margin': true,
+                        'forward-animation-card-2': controlAnimation,
+                        'reverse-animation': !controlAnimation
+                    })
+                }
+                style={{
+                    zIndex: -5
+                }}>
                     {
                         (value.length)?
                         <Box 
@@ -242,14 +259,20 @@ function LogCalculator(){
                                     </Box>
                                     <Box sx={{ ...formCardStyle }}></Box>
                                 </Box>
-                            <Box sx={{marginLeft: 5}}>
-                                <p>Answer</p>
-                                <p>{value}</p>
-                            </Box>
+                                <Box sx={{paddingLeft: 3}}>
+                                    <Typography sx={{ fontSize: 16, border:'none' }}>
+                                        <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14,}}>
+                                            Calculation Steps:
+                                        </Box>
+                                    </Typography>
+                                    <Box sx={{width:'100%'}}>
+                                        <Latex displayMode={true}>{`$\\textrm{Log}_{${inputValue[0]}} {${inputValue[1]}}= ${value} $`}</Latex>
+                                    </Box>
+                                </Box>
                         </Box>
                         :<Box></Box>
                     }
-                </Anime>
+                </Box>
                 
                 </Box>
             </Box>

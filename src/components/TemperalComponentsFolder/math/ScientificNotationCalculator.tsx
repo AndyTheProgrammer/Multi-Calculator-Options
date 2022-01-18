@@ -12,81 +12,50 @@ import TextCard from '../../utilityComponents/TextCard'
 import { CustomFormBtn, CustomFormImageBtn } from '../../custom/CustomFormBtn'
 import geometry_icon from '../../../common/assets/geometry_icon.svg';
 import math_icon from '../../../common/assets/math_icon.svg';
-
-const Latex = require('react-latex');
+var classNames = require('classnames');
+var Latex = require('react-latex');
 
 export default function ScientificNotationCalculator(){
     const [value, setValue] = useState<any[]>([])
     const [playAnimation, setPlayAnimation] = useState(false)
-    const [mediaQueryValue, setMediaQueryValue] = useState(false)
-    const animatedSquaresRef1 = useRef(null)
-    const animatedSquaresRef2= useRef(null)
-  
-    // @ts-ignore: Object is possibly 'null'.
-    const play1 = () => animatedSquaresRef1.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const play2 = () => animatedSquaresRef2.current.play();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse1 = () => animatedSquaresRef1.current.reverse();
-    // @ts-ignore: Object is possibly 'null'.
-    const reverse2 = () => animatedSquaresRef2.current.reverse();
+    const [inputValue, setInputValue] = useState("124")
+    const [controlAnimation, setControlAnimation] = useState(false)
+    const [errorMSG, setErrorMSG] = useState(false)
 
-    
-    const controlAnimation = () => {
-        if(mediaQueryValue){
-            if(playAnimation){
-                // console.log("Monkey")
-                play1();
-                play2();
-                reverse1();
-                reverse2();
-                setValue([]);
-                setPlayAnimation(false);
-            }
-        }
-        else{
-            setValue([]);
-        }
-    } 
+    const clear = () => {
+        setControlAnimation(false)
+        setValue([])
+        setInputValue("0")
+        setErrorMSG(false)
+        console.log(inputValue)
+    }
 
-    useEffect(()=>{
-        const mediaQuery = window.matchMedia('(min-width: 1000px)');
-        setMediaQueryValue(mediaQuery.matches);
-        
-        if (mediaQuery.matches) {
-            if(value.length){
-                play1();
-                play2();
-                setPlayAnimation(true)
-            }
-          } 
-          
-    })
+
     return(
         <>
             <NavBar2 pageimage={math_icon} categoryname="General Calculators" pagename="Scientific Notation Calculator"/>
             <AddLayout categorykey='general' searchname='General Calculators' searchimage={geometry_icon}>
                 <Box sx={{ display: "flex", justifyContent: "center" }}> 
                 <Box className='animated-content-center'>
-                <Anime
-                    className='animated-pos animated-margin'
-                    ref={animatedSquaresRef1}
-                    config={{
-                        translateX: -250,
-                        duration: 250,
-                        easing: 'easeInOutSine',
-                        autoplay: false,
-                    }}>
+                <Box
+                    className={
+                        classNames({
+                            'animated-pos': true,
+                            'animated-margin': true,
+                            'forward-animation-card-1': controlAnimation,
+                            'reverse-animation': !controlAnimation
+                        })
+                    }>
                     <Box 
                         sx={{ maxWidth: 450,paddingBottom: 1 }}
                         className="animated-box" >
                         <Box sx={{ display: 'flex', justifyContent: 'center'}}>
-                            <Box sx={{height:25, width: '100%' }}></Box>
-                            <Box sx={{...formCardStyle}}></Box>
+                            <Box sx={{height:2, width: '100%' }}></Box>
                         </Box>
                         <Formik
+                            enableReinitialize
                             initialValues={{ 
-                                value:"",
+                                value:inputValue,
                                 method: "ScientificNotationCalculator"
                             }}
                             onSubmit = {(values)=>{
@@ -94,11 +63,15 @@ export default function ScientificNotationCalculator(){
                                     value: values.value,
                                     method: values.method
                                 }
+                                setInputValue(values.value)
                                 const postData = async () => {
                                     const responseData = await mathMainService(data)
                                     var msg:any = responseData.statusDescription;
                                     if(msg === "success"){
-                                        setValue([responseData.message.realNumber])
+                                        setControlAnimation(true)
+                                        setValue([
+                                            responseData.message
+                                        ])
                                     }
                                 }
                                 postData()
@@ -112,56 +85,84 @@ export default function ScientificNotationCalculator(){
                             }) => (
                                 <form onSubmit={handleSubmit}>
                                     <Box sx={{  minHeight: 150, display:'flex', flexDirection:'column' }}>
-                                        <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-
-                                            <Grid item={true} xs={5} >
-                                                <Box sx={{...labelStyle}}>number</Box></Grid>
-                                            <Grid item={true} xs={7}>
-                                                <CustomForm
-                                                    type="text"
-                                                    name="value"
-                                                    onChange={handleChange}
-                                                    value={values.value}
-                                                    placeholder=""
-                                                />
+                                    <Grid 
+                                            container={true} 
+                                            rowSpacing={1} 
+                                            sx={{
+                                                minWidth:'350px', 
+                                                paddingTop:2, 
+                                                paddingLeft:2, 
+                                                paddingRight:2,
+                                                marginBottom:4
+                                            }}>
+                                            <Grid item xs={12}>
+                                                <Typography sx={{marginBottom: 1}}>    
+                                                    <Box
+                                                        sx={{
+                                                            fontWeight: 100,
+                                                            fontStyle: 'bold',
+                                                            fontSize: 14,
+                                                            color: '#b0b0b0',
+                                                            marginBottom:3
+                                                        }}>
+                                                        amet aliquam id diam maecenas ultricies mi eget mauris pharetra
+                                                    </Box>
+                                                </Typography>
                                             </Grid>
-                                                            
+                                            <Grid item xs={12}>
+                                                <Box sx={{display:'flex', justifyContent:'center'}}>
+                                                    <Box sx={{display:'flex'}}>
+                                                        <Box sx={{...labelStyle }}>Number : </Box>
+                                                        <Box sx={{width: 150, marginLeft:1}}>
+                                                            <CustomForm
+                                                                type="text"
+                                                                name="value"
+                                                                onChange={handleChange}
+                                                                value={values.value}
+                                                                placeholder=""
+                                                            />
+                                                        </Box>
+                                                        <Typography sx={{ marginTop: 0}}>
+                                                            <Latex displayMode={false}>{`$=\\hspace{.1cm}?$`}</Latex>
+                                                        </Typography>   
+                                                    </Box>
+                                                </Box>
+                                            </Grid>
                                         </Grid>
                                         <Box sx={{ flexGrow: 1}}>
                                             {/* 
                                                 Flex box pushes submit button down
                                             */}
                                         </Box>
-
-                                        <Box 
-                                            // className="toggle-box-primary"
-                                            sx={{ width: '100%' }}
-                                                >
-                                            <Grid container={true} rowSpacing={1} sx={{paddingTop:5, paddingLeft:5, paddingRight:5}}>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"start"}}>
-                                                        <CustomFormBtn 
-                                                        type="button" 
-                                                        handleClick={()=>{ 
-                                                            controlAnimation();
-                                                            }} 
-                                                        name="Clear"/>
-                                                    </Box>
-                                            </Grid>
-                                            <Grid item xs={4}></Grid>
-                                            <Grid item xs={4}>
-                                                    <Box sx={{display:"flex", justifyContent:"end"}}>
-                                                        <CustomFormImageBtn type="submit" name="Calculate"/>
-                                                    </Box>
-                                            </Grid>
-                                            </Grid>
+                                    </Box>
+                                    <Box 
+                                        // className="toggle-box-primary"
+                                        sx={{
+                                            paddingLeft: 4, paddingRight: 4, 
+                                            minWidth: '300px', display: 'flex', justifyContent: 'space-between' }}>
+                                            <Box sx={{display:"flex", justifyContent:"start"}}>
+                                                <CustomFormBtn 
+                                                type="button" 
+                                                handleClick={()=>{
+                                                    clear()
+                                                        
+                                                    }} 
+                                                name="Clear"/>
+                                            </Box>
+                                        <Box sx={{display:"flex", flexGrow:1, justifyContent:"start"}}>
+                                        
+                                        </Box>
+                                        <Box sx={{display:"flex", justifyContent:"end"}}>
+                                            <CustomFormImageBtn 
+                                                type="submit" 
+                                                name="Calculate"/>   
                                         </Box>
                                     </Box>
                                 </form>
                             )}
                         </Formik>
                     </Box>
-                </Anime>
+                </Box>
 
 
                 {/*
@@ -169,18 +170,18 @@ export default function ScientificNotationCalculator(){
                 
                 */}
 
-                <Anime
-                    className='animated-pos animated-margin'
-                    style={{
-                        zIndex: -5
-                    }}
-                    ref={animatedSquaresRef2}
-                    config={{
-                        translateX: 200,
-                        duration: 250,
-                        easing: 'easeInOutSine',
-                        autoplay: false,
-                    }}>
+            <Box
+                className={
+                    classNames({
+                        'animated-pos': true,
+                        'animated-margin': true,
+                        'forward-animation-card-2': controlAnimation,
+                        'reverse-animation': !controlAnimation
+                    })
+                }
+                style={{
+                    zIndex: -5
+                }}>
                     {
                         (value.length)?
                         <Box 
@@ -197,30 +198,35 @@ export default function ScientificNotationCalculator(){
                                                 }}>Result</Box>
                                         </Typography>
                                     </Box>
-                                    <Box sx={{ ...formCardStyle }}></Box>
                                 </Box>
-                            <Box sx={{marginLeft: 5}}>
-                                <Typography sx={{ display:'flex'}}>
-                                    <Box sx={{ width: 120 }}>
-                                        Real number
-                                    </Box>
-                                    <Box>
-                                        : { value[0] }
-                                    </Box>
-                                </Typography>
-                                <Typography sx={{ display:'flex'}}>
-                                    <Box sx={{ width: 120 }}>
-                                        E-notation 
-                                    </Box>
-                                    <Box>
-                                        :
-                                    </Box>
-                                </Typography>
-                            </Box>
+                                {
+                                    value.map((d)=>{
+                                        return(
+                                            <Box sx={{paddingLeft: 3}}>
+                                                <Typography sx={{ display:'flex'}}>
+                                                    <Box sx={{ width: 120 }}>
+                                                        Real number
+                                                    </Box>
+                                                    <Box>
+                                                        : { d.realNumber }
+                                                    </Box>
+                                                </Typography>
+                                                <Typography sx={{ display:'flex'}}>
+                                                    <Box sx={{ width: 120 }}>
+                                                        E-notation 
+                                                    </Box>
+                                                    <Box>
+                                                        :{ d.test}
+                                                    </Box>
+                                                </Typography>
+                                            </Box>
+                                        );
+                                    })
+                                }
                         </Box>
                         :<Box></Box>
                     }
-                </Anime>
+                </Box>
                 
                 </Box>
                 </Box>

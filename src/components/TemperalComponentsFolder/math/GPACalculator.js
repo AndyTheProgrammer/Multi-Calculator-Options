@@ -11,6 +11,7 @@ import { labelStyle, formCardStyle, formDisplay } from '../../../styling/CustomS
 import math_icon from '../../../common/assets/math_icon.svg';
 import stats from '../../../common/assets/stats_icon.svg';
 
+
 const Latex = require('react-latex');
 
 function checkArray(arr, num){
@@ -38,13 +39,11 @@ function CoursesInputField(props){
           <input
             style={{
               width:'100%',
-              backgroundColor:'#F0F3F6',
+              backgroundColor:'#EEEEEE',
               border: 'solid',
-              borderWidth: 0,
-              borderColor: 'red',
-              borderRadius: 7,
-              outline: 'none',
-              fontSize: 16
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 3,
             }}
             type="text" 
             name="courses" 
@@ -71,13 +70,11 @@ function CreditInputField(props){
         <input
           style={{
             width:'100%',
-            backgroundColor:'#F0F3F6',
-            border: 'solid',
-            borderWidth: 0,
-            borderColor: 'red',
-            borderRadius: 7,
-            outline: 'none',
-            fontSize: 16
+              backgroundColor:'#EEEEEE',
+              border: 'solid',
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 3,
           }}
           type="text" 
           name="credit" 
@@ -103,13 +100,11 @@ function GradeInputField(props){
         <input
           style={{
             width:'100%',
-            backgroundColor:'#F0F3F6',
-            border: 'solid',
-            borderWidth: 0,
-            borderColor: 'red',
-            borderRadius: 7,
-            outline: 'none',
-            fontSize: 18
+              backgroundColor:'#EEEEEE',
+              border: 'solid',
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 3,
           }}
           type="text" 
           name="grade" 
@@ -136,13 +131,12 @@ function GradeInputFieldOptions(props){
     <select 
     style={{
       width:'100%',
-            backgroundColor:'#F0F3F6',
-            border: 'solid',
-            borderWidth: 0,
-            borderColor: 'red',
-            borderRadius: 7,
-            outline: 'none',
-            fontSize: 18
+      backgroundColor:'#EEEEEE',
+      border: 'solid',
+      borderWidth: 1,
+      borderColor: 'gray',
+      borderRadius: 3,
+      height: 30
     }}
       value={value} 
       onChange={handleChange}>
