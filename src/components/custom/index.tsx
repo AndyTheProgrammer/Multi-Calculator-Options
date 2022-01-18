@@ -5,6 +5,7 @@ export { default as CustomResetBtn } from "./CustomResetBtn";
 export { default as CustomSearchInput } from "./CustomSearchInput";
 export { default as CustomSelect } from "./CustomSelect";
 export { default as CustomTextInput } from "./CustomTextInput";
+export { default as FieldContainer } from "./FieldContainer";
 export { default as FormTabsContainer } from "./FormTabsContainer";
 export { default as FormRow } from "./FormRow";
 

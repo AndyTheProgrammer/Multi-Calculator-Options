@@ -26,6 +26,7 @@ import {
   FormTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const SectorArea = () => {
@@ -45,9 +46,9 @@ const SectorArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [sectorInitialValues] = React.useState({
     radius: "",
-    radius_unit: "",
+    radius_unit: "mm",
     angle: "",
-    angle_unit: "",
+    angle_unit: "deg",
   })
   const [sectorResult, setSectorResult] = React.useState({
     area: 0,
@@ -143,41 +144,43 @@ const SectorArea = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.radius} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="radius"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.radius}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.radius} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="radius"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.radius}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="radius_unit"
-                  measurement="length"
-                  value={values.radius_unit}
-                  onChange={handleChange('radius_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="radius_unit"
+                    measurement="length"
+                    value={values.radius_unit}
+                    onChange={handleChange('radius_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.angle} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="angle"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.angle}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.angle} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="angle"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.angle}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="angle_unit"
-                  measurement="angle"
-                  value={values.angle_unit}
-                  onChange={handleChange('angle_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="angle_unit"
+                    measurement="angle"
+                    value={values.angle_unit}
+                    onChange={handleChange('angle_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>
@@ -195,6 +198,9 @@ const SectorArea = () => {
           animation={resultAnimation}
         >
           <div className="text-wrap text-center">
+            <Typography variant="subtitle1">
+              = {sectorResult.area}{sectorResult.unit}<sup>2</sup>
+            </Typography>
             <Typography variant="subtitle1">
               = {sectorResult.area}{sectorResult.unit}<sup>2</sup>
             </Typography>

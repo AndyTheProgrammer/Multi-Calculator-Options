@@ -11,7 +11,7 @@ const ColorButton = withStyles((theme) => ({
     height: 25,
     margin: theme.spacing(1),
     textTransform: 'none',
-    width: 100,
+    width: 130,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
@@ -25,7 +25,7 @@ const ColorButton = withStyles((theme) => ({
 const CustomResetBtn = (props: any) => {
   const { onHandleClick } = props
   return (
-    <FontProvider fonts={[{ font: 'Varela Round' }]}>
+    <FontProvider fonts={[{ font: 'Roboto' }]}>
       <div className="form d-grid gap-2 d-md-flex justify-content-md-end">
         <ColorButton
           size="small"

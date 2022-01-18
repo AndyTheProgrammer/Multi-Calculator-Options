@@ -26,6 +26,7 @@ import {
   FormTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const RectangularArea = () => {
@@ -45,9 +46,9 @@ const RectangularArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [rectInitialValues] = React.useState({
     length: '',
-    length_unit: '',
+    length_unit: 'mm',
     width: '',
-    width_unit: '',
+    width_unit: 'mm',
   })
   const [rectResult, setRectResult] = React.useState({
     area: 0,
@@ -157,42 +158,44 @@ const RectangularArea = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.length} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="length"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.length}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.length} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="length"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.length}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="length_unit"
-                  measurement="length"
-                  value={values.length_unit}
-                  onChange={handleChange('length_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="length_unit"
+                    measurement="length"
+                    value={values.length_unit}
+                    onChange={handleChange('length_unit')}
+                  />
+                </FormRow>
 
 
-              <FormRow>
-                <Label title={LABELS.width} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="width"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.width}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.width} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="width"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.width}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="width_unit"
-                  measurement="length"
-                  value={values.width_unit}
-                  onChange={handleChange('width_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="width_unit"
+                    measurement="length"
+                    value={values.width_unit}
+                    onChange={handleChange('width_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>
@@ -211,6 +214,10 @@ const RectangularArea = () => {
         >
           {selectedResult === true &&
             <div className="text-wrap text-center">
+              <Typography variant="subtitle1">
+                = {rectResult.submittedLength} * {rectResult.submitted_width}
+              </Typography>
+
               <Typography variant="subtitle1">
                 = {rectResult.area}{rectResult.units}<sup>2</sup>
               </Typography>

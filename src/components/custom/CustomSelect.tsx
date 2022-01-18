@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Field } from 'formik';
-import { ArrowDownward } from '@material-ui/icons'
 
 import Angle from '../../lib/Angle.json'
 import Capacity from '../../lib/Capacity.json'
@@ -11,13 +10,12 @@ import Time from '../../lib/Time.json'
 import Units from '../../lib/Units.json'
 import Weight from '../../lib/Weight.json'
 
-import { COLORS } from "../../common/shared";
-
 interface SelectProps {
-  id?: String;
+  id?: string;
   value?: any;
   measurement?: any;
-  col?: Boolean;
+  col?: boolean;
+  td?: boolean;
   onChange?: {
     (e: React.ChangeEvent<any>): void;
     <T_1 = string | React.ChangeEvent<any>>(field: T_1): T_1 extends React.ChangeEvent<any> ? void : (e: string | React.ChangeEvent<any>) => void;
@@ -25,7 +23,7 @@ interface SelectProps {
 }
 
 const CustomSelect = (props: SelectProps) => {
-  const { id, value, measurement, onChange } = props
+  const { id, value, measurement, onChange, td } = props
 
   const genders = [
     {
@@ -49,16 +47,16 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control-sm"
+          //   className="form-control-sm"
           value={value}
           style={{
-            backgroundColor: COLORS.newInput,
-            fontWeight: 500,
-            fontSize: 16,
+            width: '100%',
+            backgroundColor: '#EEEEEE',
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',
-            width: '100%'
+            borderRadius: 3,
+            height: 30,
           }}
         >
           {Angle.map(({ type, units }) => (
@@ -66,6 +64,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
+                selected
                 style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
@@ -82,16 +81,16 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control-sm"
+          //    className="form-control-sm"
           value={value}
           style={{
-            backgroundColor: COLORS.newInput,
-            fontWeight: 500,
-            fontSize: 16,
+            width: '100%',
+            backgroundColor: '#EEEEEE',
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',
-            width: '100%'
+            borderRadius: 3,
+            height: 30,
           }}
         >
           {Capacity.map(({ type, units }) => (
@@ -99,6 +98,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
+                selected
                 style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
@@ -115,16 +115,16 @@ const CustomSelect = (props: SelectProps) => {
         <Field
           as="select"
           id={id}
-          className="form-control-sm"
+          //   className="form-control-sm"
           value={value}
           style={{
-            backgroundColor: COLORS.newInput,
-            fontWeight: 500,
-            fontSize: 16,
+            width: '100%',
+            backgroundColor: '#EEEEEE',
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',
-            width: '100%'
+            borderRadius: 3,
+            height: 30,
           }}
         >
           {Length.map(({ type, units }) => (
@@ -132,6 +132,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
+                selected
                 style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
@@ -151,13 +152,13 @@ const CustomSelect = (props: SelectProps) => {
           className="form-control-sm"
           value={value}
           style={{
-            backgroundColor: COLORS.newInput,
-            fontWeight: 500,
-            fontSize: 16,
+            width: '100%',
+            backgroundColor: '#EEEEEE',
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',
-            width: '100%'
+            borderRadius: 3,
+            height: 30,
           }}
         >
           {Speed.map(({ type, units }) => (
@@ -165,6 +166,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
+                selected
                 style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
@@ -184,13 +186,13 @@ const CustomSelect = (props: SelectProps) => {
           className="form-control-sm"
           value={value}
           style={{
-            backgroundColor: COLORS.newInput,
-            fontWeight: 500,
-            fontSize: 16,
+            width: '100%',
+            backgroundColor: '#EEEEEE',
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',
-            width: '100%'
+            borderRadius: 3,
+            height: 30,
           }}
         >
           {Data.map(({ type, units }) => (
@@ -198,6 +200,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
+                selected
                 style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
@@ -217,13 +220,13 @@ const CustomSelect = (props: SelectProps) => {
           className="form-control-sm"
           value={value}
           style={{
-            backgroundColor: COLORS.newInput,
-            fontWeight: 500,
-            fontSize: 16,
+            width: '100%',
+            backgroundColor: '#EEEEEE',
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',
-            width: '100%'
+            borderRadius: 3,
+            height: 30,
           }}
         >
           {Time.map(({ type, units }) => (
@@ -231,6 +234,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
+                selected
                 style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
@@ -249,13 +253,13 @@ const CustomSelect = (props: SelectProps) => {
           className="form-control-sm"
           value={value}
           style={{
-            backgroundColor: COLORS.newInput,
-            fontWeight: 500,
-            fontSize: 16,
+            width: '100%',
+            backgroundColor: '#EEEEEE',
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',
-            width: '100%'
+            borderRadius: 3,
+            height: 30,
           }}
         >
           {Weight.map(({ type, units }) => (
@@ -263,6 +267,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
+                selected
                 style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}
@@ -281,19 +286,20 @@ const CustomSelect = (props: SelectProps) => {
           className="form-control-sm"
           value={value}
           style={{
-            backgroundColor: COLORS.newInput,
-            fontWeight: 500,
-            fontSize: 16,
+            width: '100%',
+            backgroundColor: '#EEEEEE',
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',
-            width: '100%'
+            borderRadius: 3,
+            height: 30,
           }}
         >
           {genders.map(({ type, label }) => (
             <option
               key={type}
               value={type}
+              selected
               style={{ fontWeight: 500, fontSize: 16 }}
             >
               {label}
@@ -311,13 +317,13 @@ const CustomSelect = (props: SelectProps) => {
           className="form-control-sm"
           value={value}
           style={{
-            backgroundColor: COLORS.newInput,
-            fontWeight: 500,
-            fontSize: 16,
+            width: '100%',
+            backgroundColor: '#EEEEEE',
             border: 'solid',
             borderWidth: 1,
             borderColor: 'gray',
-            width: '100%'
+            borderRadius: 3,
+            height: 30,
           }}
         >
           {Units.map(({ type, units }) => (
@@ -325,6 +331,7 @@ const CustomSelect = (props: SelectProps) => {
               <option
                 key={unit}
                 value={unit}
+                selected
                 style={{ fontWeight: 500, fontSize: 16 }}
               >
                 {name}

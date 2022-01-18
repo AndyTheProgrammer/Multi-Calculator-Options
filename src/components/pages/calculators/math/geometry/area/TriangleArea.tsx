@@ -26,6 +26,7 @@ import {
   FormTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 //Needs to be Refactored. Waiting on Martin's End!
@@ -98,7 +99,7 @@ const TriangleArea = () => {
             sideB_unit,
             sideC,
             sideC_unit,
-          }, { setSubmitting, resetForm }) => {
+          }, { setSubmitting }) => {
             const payload: TriangleAreaI = {
               sideA,
               sideA_unit,
@@ -156,59 +157,61 @@ const TriangleArea = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.sideA} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="sideA"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.sideA}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.sideA} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="sideA"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.sideA}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="sideA_unit"
-                  measurement="length"
-                  value={values.sideA_unit}
-                  onChange={handleChange('sideA_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="sideA_unit"
+                    measurement="length"
+                    value={values.sideA_unit}
+                    onChange={handleChange('sideA_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.sideB} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="sideB"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.sideB}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.sideB} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="sideB"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.sideB}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="sideB_unit"
-                  measurement="length"
-                  value={values.sideB_unit}
-                  onChange={handleChange('sideB_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="sideB_unit"
+                    measurement="length"
+                    value={values.sideB_unit}
+                    onChange={handleChange('sideB_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.sideC} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="sideC"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.sideC}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.sideC} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="sideC"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.sideC}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="sideC_unit"
-                  measurement="length"
-                  value={values.sideC_unit}
-                  onChange={handleChange('sideC_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="sideC_unit"
+                    measurement="length"
+                    value={values.sideC_unit}
+                    onChange={handleChange('sideC_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>

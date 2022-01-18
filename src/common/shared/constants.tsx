@@ -253,7 +253,7 @@ export const COLORS = {
   background: "linear-gradient(90deg, #fbfbfb 0%, #d1d1d1 100%)",
   gradientBackground: "linear-gradient(90deg, #fbfbfb 0%, #d1d1d1 100%)",
   paper_background: "#A8A79F",
-  text: "#3267ac",
+  text: "#4072B5",
   onGradient: "#ffffff",
   input: "#dde9ec",
   newInput: '#EEEEEE'
@@ -273,7 +273,7 @@ export const LATEX = {
   triangleArea: `$A = \\frac{1}{2}bh$`,
   trapezoidArea: `$A = \\frac{1}{2}(x_1 + x_2 )h$`,
   sectorArea: `$A = \\frac{{\\theta r^2 }}{2}$`,
-  ellipseArea: `$A = \\pi r_1 r_2$`,
+  ellipseArea: `$A = \\pi a b$`,
   parallelogramArea: `$A = bh$`,
 
   capsuleVolume: `$V = \\pi r^{2}(\\frac{4}{3}r + h)$`,

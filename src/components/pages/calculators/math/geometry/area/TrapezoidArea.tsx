@@ -26,6 +26,7 @@ import {
   FormTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const TrapezoidArea = () => {
@@ -45,11 +46,11 @@ const TrapezoidArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [trapezoidInitialValues] = React.useState({
     base1: "",
-    base1_unit: "",
+    base1_unit: "mm",
     base2: "",
-    base2_unit: "",
+    base2_unit: "mm",
     height: "",
-    height_unit: "",
+    height_unit: "mm",
   })
   const [trapezoidResult, setTrapezoidResult] = React.useState({
     area: 0,
@@ -171,59 +172,61 @@ const TrapezoidArea = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.base1} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="base1"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.base1}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.base1} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="base1"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.base1}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="base1_unit"
-                  measurement="length"
-                  value={values.base1_unit}
-                  onChange={handleChange('base1_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="base1_unit"
+                    measurement="length"
+                    value={values.base1_unit}
+                    onChange={handleChange('base1_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.base2} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="base2"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.base2}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.base2} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="base2"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.base2}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="base2_unit"
-                  measurement="length"
-                  value={values.base2_unit}
-                  onChange={handleChange('base2_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="base2_unit"
+                    measurement="length"
+                    value={values.base2_unit}
+                    onChange={handleChange('base2_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.height} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.height}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.height} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="height"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.height}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="height_unit"
-                  measurement="length"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="height_unit"
+                    measurement="length"
+                    value={values.height_unit}
+                    onChange={handleChange('height_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>

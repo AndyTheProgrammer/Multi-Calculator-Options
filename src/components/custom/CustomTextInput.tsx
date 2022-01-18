@@ -6,8 +6,8 @@ import { COLORS } from "../../common/shared";
 
 interface TextInputProps {
   type?: string | any;
-  id?: String;
-  name?: String;
+  id?: string;
+  name?: string;
   placeholder?: any;
   value?: any;
   col?: any;
@@ -23,48 +23,52 @@ const CustomTextInput = (props: TextInputProps) => {
   if (col) {
     return (
       <div className="form-group col-8">
-        <Field
-          className="form-control form-control-sm"
-          type={type}
-          name={name}
-          id={id}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          style={{
-            backgroundColor: COLORS.newInput,
-            // fontWeight: 500,
-            fontSize: 16,
-            border: 'solid',
-            borderWidth: 1,
-            borderColor: 'gray',
-            borderRadius: 3,
-
-          }}
-        />
+        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+          <Field
+            //   className="form-control form-control-sm"
+            type={type}
+            name={name}
+            id={id}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+            style={{
+              width: '100%',
+              backgroundColor: '#EEEEEE',
+              border: 'solid',
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 3,
+              height: 30,
+            }}
+          />
+        </Box>
       </div>
     )
   } else {
     return (
       <div className="form-group col" >
-        <Field
-          className="form-control form-control-sm"
-          type={type}
-          name={name}
-          id={id}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          style={{
-            backgroundColor: COLORS.newInput,
-            // fontWeight: 500,
-            fontSize: 16,
-            border: 'solid',
-            borderWidth: 1,
-            borderColor: 'gray',
-            borderRadius: 3,
-          }}
-        />
+        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+
+          <Field
+            //    className="form-control form-control-sm"
+            type={type}
+            name={name}
+            id={id}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+            style={{
+              width: '100%',
+              backgroundColor: '#EEEEEE',
+              border: 'solid',
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 3,
+              height: 30,
+            }}
+          />
+        </Box>
       </div>
     )
   }

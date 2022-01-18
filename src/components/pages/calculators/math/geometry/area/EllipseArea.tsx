@@ -26,6 +26,7 @@ import {
   FormTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const EllipseArea = () => {
@@ -45,9 +46,9 @@ const EllipseArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [ellipseInitialValues] = React.useState({
     semi_major_axes_a: "",
-    semi_major_axes_a_unit: "",
+    semi_major_axes_a_unit: "mm",
     semi_major_axes_b: "",
-    semi_major_axes_b_unit: "",
+    semi_major_axes_b_unit: "mm",
   })
   const [ellipseResult, setEllipseResult] = React.useState({
     semi_major_axes_a: 0,
@@ -124,8 +125,8 @@ const EllipseArea = () => {
                 setSelectedResult(unitType)
                 setEllipseResult({
                   area: area,
-                  semi_major_axes_a: semi_major_axes_a,
-                  semi_major_axes_b: semi_major_axes_b,
+                  semi_major_axes_a: submittedsemi_major_axes_a,
+                  semi_major_axes_b: submitted_semi_major_axes_b,
                   unit: units
                 })
               }
@@ -156,41 +157,43 @@ const EllipseArea = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.semiMajorAxes} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="semi_major_axes_a"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.semi_major_axes_a}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.semiMajorAxes} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="semi_major_axes_a"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.semi_major_axes_a}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="semi_major_axes_a_unit"
-                  measurement="length"
-                  value={values.semi_major_axes_a_unit}
-                  onChange={handleChange('semi_major_axes_a_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="semi_major_axes_a_unit"
+                    measurement="length"
+                    value={values.semi_major_axes_a_unit}
+                    onChange={handleChange('semi_major_axes_a_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.semiMinorAxes} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="semi_major_axes_b"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.semi_major_axes_b}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.semiMinorAxes} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="semi_major_axes_b"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.semi_major_axes_b}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="semi_major_axes_b_unit"
-                  measurement="length"
-                  value={values.semi_major_axes_b_unit}
-                  onChange={handleChange('semi_major_axes_b_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="semi_major_axes_b_unit"
+                    measurement="length"
+                    value={values.semi_major_axes_b_unit}
+                    onChange={handleChange('semi_major_axes_b_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>
@@ -208,6 +211,10 @@ const EllipseArea = () => {
 
           {selectedResult === true &&
             <div className="text-wrap text-center">
+              <Typography variant="subtitle1">
+                =π * {ellipseResult.semi_major_axes_a} * {ellipseResult.semi_major_axes_b}
+              </Typography>
+
               <Typography variant="subtitle1">
                 = {ellipseResult.area}{ellipseResult.unit}<sup>2</sup>
               </Typography>

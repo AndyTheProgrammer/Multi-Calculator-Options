@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@mui/material'
+import { Typography, Box } from '@mui/material'
 import { Formik } from 'formik'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -25,6 +25,7 @@ import {
   FormTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const CircleArea = () => {
@@ -44,12 +45,12 @@ const CircleArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [circleInitialValues] = React.useState({
     radius: "25",
-    radius_unit: "",
+    radius_unit: "mm",
   })
   const [circleResult, setCircleResult] = React.useState({
     area: 0,
-    units: '',
-    Submitted_radius: '',
+    unit: '',
+    Submitted_radius: 0,
     Submitted_unit: ''
   })
 
@@ -95,7 +96,7 @@ const CircleArea = () => {
                 const { area, units, submittedradius, submittedunit } = circleArea
                 setCircleResult({
                   area: area,
-                  units: units,
+                  unit: units,
                   Submitted_radius: submittedradius,
                   Submitted_unit: submittedunit
                 })
@@ -117,23 +118,25 @@ const CircleArea = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.radius} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="radius"
-                  placeholder=''
-                  value={values.radius}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.radius} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="radius"
+                    placeholder=''
+                    value={values.radius}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="radius_unit"
-                  measurement="length"
-                  value={values.radius_unit}
-                  onChange={handleChange('radius_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="radius_unit"
+                    measurement="length"
+                    value={values.radius_unit}
+                    onChange={handleChange('radius_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>
@@ -149,7 +152,13 @@ const CircleArea = () => {
         >
           <div className="text-wrap text-center">
             <Typography variant="subtitle1">
-              = {circleResult.area}{circleResult.units}<sup>2</sup>
+              = π{circleResult.Submitted_radius}<sup>2</sup>
+            </Typography>
+            <Typography variant="subtitle1">
+              = π * {circleResult.Submitted_radius * circleResult.Submitted_radius}
+            </Typography>
+            <Typography variant="subtitle1">
+              = {circleResult.area}{circleResult.unit}<sup>2</sup>
             </Typography>
           </div>
         </ResultTabsContainer>

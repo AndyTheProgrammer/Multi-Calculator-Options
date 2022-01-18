@@ -504,10 +504,10 @@ function LoanCalculator() {
             </Box>
           </Grid>
 
-          <CustomDivider
+          {/*  <CustomDivider
             label1='Amortization Schedule'
             label2='Loan Break Down'
-          />
+          /> */}
 
           {/* Table and Chart */}
 

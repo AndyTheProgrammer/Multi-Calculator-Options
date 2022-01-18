@@ -1,14 +1,29 @@
-import circle from "./images/circle.svg";
-import ellipse from "./images/ellipse.svg";
-import parallelogram from "./images/parallelogram.png";
-import rectangle from "./images/rectangle.png";
-import sector from "./images/sector.png";
-import trapezoid from "./images/trapezoid.png";
-import triangle from "./images/triangle.png";
+
+
 import image_placeholder from "./image-placeholder.jpg";
 
 
 // SVG
+
+// geometry
+import circle from "./geometry/circle.svg";
+import ellipse from "./geometry/ellipse.svg";
+import parallelogram from "./geometry/parallelogram.svg";
+import rectangle from "./geometry/rectangle.svg";
+import sector from "./geometry/sector.svg";
+import trapezoid from "./geometry/trapezoid.svg";
+import triangle from "./geometry/triangle.svg";
+
+import capsule from "./geometry/capsule.svg";
+import capsule_v from "./geometry/capsule_v.svg";
+import cone_v from "./geometry/cone_v.svg";
+import conical_frustrum_v from "./geometry/conical_frustrum_v.svg";
+import cube_v from "./geometry/cube_v.svg";
+import cylinder_v from "./geometry/cylinder_v.svg";
+import square_pyramid_v from "./geometry/square_pyramid_v.svg";
+import tube_v from "./geometry/tube_v.svg";
+
+
 import add from './add.svg'
 import add_1 from './add_1.svg'
 import add_2 from './add_2.svg'
@@ -63,6 +78,14 @@ export {
   sector,
   trapezoid,
   triangle,
+  capsule,
+  capsule_v,
+  cone_v,
+  conical_frustrum_v,
+  cube_v,
+  cylinder_v,
+  square_pyramid_v,
+  tube_v,
   image_placeholder,
   add,
   add_1,

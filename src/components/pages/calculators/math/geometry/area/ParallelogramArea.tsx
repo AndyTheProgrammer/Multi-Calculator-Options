@@ -26,6 +26,7 @@ import {
   FormTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const ParallelogramArea = () => {
@@ -45,9 +46,9 @@ const ParallelogramArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [parallelogramInitialValues] = React.useState({
     breadth: '',
-    breadth_unit: '',
+    breadth_unit: 'mm',
     height: '',
-    height_unit: ''
+    height_unit: 'mm'
   })
   const [parallelogramResult, setParallelogramResult] = React.useState({
     area: 0,
@@ -110,7 +111,7 @@ const ParallelogramArea = () => {
               console.log('=====>', parallelogramArea)
               const {
                 area,
-                unit,
+                units,
                 submittedbreadth,
                 submitted_height,
                 unitType,
@@ -126,7 +127,7 @@ const ParallelogramArea = () => {
                   area: area,
                   breadth: submittedbreadth,
                   height: submitted_height,
-                  unit: unit
+                  unit: units
                 })
               }
 
@@ -139,7 +140,7 @@ const ParallelogramArea = () => {
                   $heightInbreadthUnit: $heightInbreadthUnit,
                   submitted_height: submitted_height,
                   submittedbreadth: submittedbreadth,
-                  unit: unit
+                  unit: units
                 })
               }
               if (success === true) {
@@ -158,41 +159,43 @@ const ParallelogramArea = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.breadth} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="breadth"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.breadth}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.breadth} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="breadth"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.breadth}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="breadth_unit"
-                  measurement="length"
-                  value={values.breadth_unit}
-                  onChange={handleChange('breadth_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="breadth_unit"
+                    measurement="length"
+                    value={values.breadth_unit}
+                    onChange={handleChange('breadth_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.height} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.height}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.height} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="height"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.height}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="height_unit"
-                  measurement="length"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="height_unit"
+                    measurement="length"
+                    value={values.height_unit}
+                    onChange={handleChange('height_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>
@@ -210,6 +213,10 @@ const ParallelogramArea = () => {
 
           {selectedResult === true &&
             <div className="text-wrap text-center">
+              <Typography variant="subtitle1">
+                = {parallelogramResult.breadth} * {parallelogramResult.height}
+              </Typography>
+
               <Typography variant="subtitle1">
                 = {parallelogramResult.area}{parallelogramResult.unit}<sup>2</sup>
               </Typography>

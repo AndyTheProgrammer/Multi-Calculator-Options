@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import React from 'react'
 import CustomBtn from './CustomBtn'
 import CustomResetBtn from './CustomResetBtn'
@@ -34,6 +35,8 @@ function FormRow(props: FormRowProps) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          marginLeft: "0.5px !important",
+          marginRight: "0.5px !important",
         }}
       >
         {children}

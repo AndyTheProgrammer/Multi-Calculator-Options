@@ -20,8 +20,8 @@ function Image(props: ImageProps) {
       <img
         className="img img-fluid"
         style={{
-          width: 100,
-          height: 90,
+          width: 120,
+          height: 100,
         }}
         src={path}
       />

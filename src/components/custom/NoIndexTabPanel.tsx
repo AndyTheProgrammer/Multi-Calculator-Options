@@ -19,7 +19,7 @@ const NoIndexTabPanel = (props: TabPanelProps) => {
     >
       <FontProvider fonts={[{ font: 'Roboto' }]}>
         <Box
-          p={2}
+          p={0.9}
         >
           <Font>{children}</Font>
         </Box>

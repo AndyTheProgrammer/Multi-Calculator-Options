@@ -15,7 +15,7 @@ const ColorButton = withStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundImage: COLORS.gradient,
-    width: 100,
+    width: 130,
     '&:hover': {
       backgroundColor: green[400],
     },
@@ -28,7 +28,7 @@ const ColorButton = withStyles((theme) => ({
 
 const CustomBtn = (props: any) => {
   return (
-    <FontProvider fonts={[{ font: 'Varela Round' }]}>
+    <FontProvider fonts={[{ font: 'Roboto' }]}>
       <div className="form d-grid gap-2 d-md-flex justify-content-md-start">
         <ColorButton
           size="small"
