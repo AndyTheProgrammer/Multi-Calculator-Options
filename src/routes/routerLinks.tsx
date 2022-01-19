@@ -1,9 +1,13 @@
+/**
+ *  All Routes are loaded on this page
+ */
+
+
 import React from 'react'
-import { routes } from './routes'
 import TestPage from '../components/pages/testPage'
 import { HomePage } from '../components/pages/homePage'
 import { Switch, Route, useHistory, Redirect, useParams, useRouteMatch } from "react-router-dom";
-import { mathRoutes, othersRoutes, financialRoutes } from './routes'
+import { routes, mathRoutes } from './routes_new'
 
 export default function RouterLinks() {
     return (
@@ -30,7 +34,7 @@ export default function RouterLinks() {
                     <Route key={r} path={r.path}>
                         <r.component />
                     </Route>
-                );
+                  );
                 })
             }
                       {
@@ -60,101 +64,6 @@ export default function RouterLinks() {
               );
             })
           }
-           {
-            mathRoutes.subCategories[4].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-
-            {/*Financial routes */}
-            {
-            financialRoutes.subCategories[0].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-          {
-            financialRoutes.subCategories[1].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-          {
-            financialRoutes.subCategories[2].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-          {
-            financialRoutes.subCategories[3].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-          {
-            financialRoutes.subCategories[4].sub_calculator.map((r:any) => {
-              return (
-                <Route key={r} path={r.path}>
-                  <r.component />
-                </Route>
-              );
-            })
-          }
-
-            {/* Other routes */}
-            { othersRoutes.subCategories[0].sub_calculator.map((route, i) => (
-                <Route key={route.name} path={route.path} >{
-                      <route.component />
-                }</Route>
-            ))}
-            { othersRoutes.subCategories[1].sub_calculator.map((route, i) => (
-                <Route key={route.name} path={route.path} >{
-                      <route.component />
-                }</Route>
-            ))}
-            { othersRoutes.subCategories[2].sub_calculator.map((route, i) => (
-                <Route key={route.name} path={route.path} >{
-                      <route.component />
-                }</Route>
-            ))}
-            { othersRoutes.subCategories[3].sub_calculator.map((route, i) => (
-                <Route key={route.name} path={route.path} >{
-                      <route.component />
-                }</Route>
-            ))}
-            { othersRoutes.subCategories[4].sub_calculator.map((route, i) => (
-                <Route key={route.name} path={route.path} >{
-                      <route.component />
-                }</Route>
-            ))}
-            { othersRoutes.subCategories[5].sub_calculator.map((route, i) => (
-                <Route key={route.name} path={route.path} >{
-                      <route.component />
-                }</Route>
-            ))}
-            { othersRoutes.subCategories[6].sub_calculator.map((route, i) => (
-                <Route key={route.name} path={route.path} >{
-                      <route.component />
-                }</Route>
-            ))}
-            
-
         </Switch>
     );
 }

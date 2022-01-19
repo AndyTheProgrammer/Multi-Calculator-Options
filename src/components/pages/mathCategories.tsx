@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavBar2 } from '../navbar/navbar2'
 import { Box, Typography } from '@mui/material'
-import { MathOptions } from '../calculator/mathOptions'
+import { MathMenu } from '../calculator/MathMenu'
 import { mathRoutes } from '../../routes/routes'
 import { Slide } from '../slider/slider'
 import AddLayout from '../layouts/AddLayout';
@@ -41,7 +41,7 @@ function MathCategories(){
               }}>
                 <SearchForm />
             </Box>
-            <MathOptions />
+            <MathMenu />
           </Route>
      
         </Switch>

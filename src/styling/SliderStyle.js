@@ -28,7 +28,7 @@ export const boxStyle = {
     //     xs: "100%"
     // },
     maxWidth: '100%',
-    height: 250,
+    height: '100%',
     borderRadius: 3,
     paddingTop: 1,
     paddingRight: 2,
@@ -38,7 +38,7 @@ export const boxStyle = {
 
   //
   export const categoryHeaderShadow = {
-    width:'100%',
+    width:'280px',
     height: 30, 
     fontSize: 22,
     display: 'flex',

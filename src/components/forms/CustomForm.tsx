@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/material'
 import percentage from '../../common/assets/percentage.png'
 
@@ -34,20 +34,24 @@ export const CustomFormikOptions = (props:any) => (
 export function CustomFormikOptionsFractions({
   field,
   changeStateValue,
-  //value,
-  //onChange,
+  value,
+  onChange,
   statevalue, // { name, value, onChange, onBlur }
   ...props
 }:any){
 
-  const[value, setValue] = useState("addition")
+  // const[value, setValue] = useState("addition")
 
-  const handleChange = (e:any) => {
-    setValue(e.target.value)
-    changeStateValue(e.target.value)
-  }
-  changeStateValue(statevalue)
-  console.log("*************************" )
+  // const handleChange = (e:any) => {
+  //   setValue(e.target.value)
+  //   changeStateValue(e.target.value)
+  //   console.log("*************************" )
+  // }
+
+  
+  useEffect(()=>{
+    changeStateValue(value)
+  },[value])
   return(
     <Box sx={{
       display: 'flex',
@@ -67,7 +71,7 @@ export function CustomFormikOptionsFractions({
         // outline: 'none'
       }}
       value={value}
-      onChange={handleChange}
+      onChange={onChange}
       {...props} >
         <option value="addition">+</option>
         <option value="subtraction">-</option>
