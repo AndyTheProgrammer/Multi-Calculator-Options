@@ -1,3 +1,5 @@
+export { default as NoComponent } from './NoComponent'
+
 //Math Category Components
 export { default as ArithmeticSequenceCalculator } from './math/ArithmeticSequenceCalculator'
 export { default as AverageCalculator } from './math/AverageCalculator'

@@ -34,13 +34,14 @@ function FractionCalculator() {
         console.log(inputValue)
     }
 
-    const inChangeOperator = (e:any) =>{
+    const onChangeOperator = (e:any) =>{
+        console.log("This is onChangeOperator ", e)
         setOperator(e)
     }
 
-    useEffect(()=>{
-        console.log("This is operator ", operator)
-    },[operator])
+    // useEffect(()=>{
+    //     console.log("This is operator ", operator)
+    // },[operator])
     
 
     return (
@@ -251,10 +252,17 @@ function FractionCalculator() {
                                                                     />
                                                             </Box>
                                                         </Box>
-                                                        <Box sx={{ width: 50, marginTop: 2.5,marginLeft:1, marginRight:1 }}>
+                                                        {/* <Box sx={{ width: 50, marginTop: 2.5,marginLeft:1, marginRight:1 }}>
                                                             <Field 
                                                                 as={CustomFormikOptionsFractions}
                                                                 changeStateValue={setOperator} 
+                                                                statevalue={operator} 
+                                                                name="operation" />
+                                                        </Box> */}
+                                                        <Box sx={{ width: 50, marginTop: 2.5,marginLeft:1, marginRight:1 }}>
+                                                            <Field 
+                                                                as={CustomFormikOptionsFractions}
+                                                                changeStateValue={onChangeOperator} 
                                                                 statevalue={operator} 
                                                                 name="operation" />
                                                         </Box>

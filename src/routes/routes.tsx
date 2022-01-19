@@ -21,11 +21,7 @@ const othersUrl = "/otherpage"
 
 // Page routes
 const routes = [
-  // {
-  //     name:"TestPage",
-  //     path: "/testpage",
-  //     component: TestPage
-  // },
+
   {
     name: "HomePage",
     path: "/home",
@@ -76,7 +72,7 @@ const mathRoutes = {
 
         {
           name: "Fractions Calculator",
-          path: `${mathUrl}/fractifdgfdgonscalculator`,
+          path: `/mathcategories/fractifdgfdgonscalculator`,
           component: TPC.FractionCalculator
         },
         {
