@@ -1,27 +1,28 @@
-
-
 import image_placeholder from "./image-placeholder.jpg";
 
-
 // SVG
-
 // geometry
-import circle from "./geometry/circle.svg";
-import ellipse from "./geometry/ellipse.svg";
-import parallelogram from "./geometry/parallelogram.svg";
-import rectangle from "./geometry/rectangle.svg";
-import sector from "./geometry/sector.svg";
-import trapezoid from "./geometry/trapezoid.svg";
-import triangle from "./geometry/triangle.svg";
+import circle from "./geometry/images/area/circle-area.png";
+import ellipse from "./geometry/images/area/ellipse-area.png";
+import parallelogram from "./geometry/images/area/parallelogram-area.png";
+import rectangle from "./geometry/images/area/rectagular-area.png";
+import sector from "./geometry/images/area/sector-area.png";
+import trapezoid from "./geometry/images/area/trapezoid-area.png";
+import triangle from "./geometry/images/area/triangle-area.png";
 
-import capsule from "./geometry/capsule.svg";
-import capsule_v from "./geometry/capsule_v.svg";
-import cone_v from "./geometry/cone_v.svg";
-import conical_frustrum_v from "./geometry/conical_frustrum_v.svg";
-import cube_v from "./geometry/cube_v.svg";
-import cylinder_v from "./geometry/cylinder_v.svg";
-import square_pyramid_v from "./geometry/square_pyramid_v.svg";
-import tube_v from "./geometry/tube_v.svg";
+import capsule from "./geometry/images/volumeAndSurfaceArea/capsule.png";
+import cone from "./geometry/images/volumeAndSurfaceArea/cone.png";
+import conical_frustrum from "./geometry/images/volumeAndSurfaceArea/conical-frustum.png";
+import cube from "./geometry/images/volumeAndSurfaceArea/cube.png";
+import cylinder from "./geometry/images/volumeAndSurfaceArea/cylinder.png";
+import rectangular_box from "./geometry/images/volumeAndSurfaceArea/rectangular-box-surface-area.png";
+import rectangular_tank from "./geometry/images/volumeAndSurfaceArea/rectangular-tank-volume.png";
+import sphere from "./geometry/images/volumeAndSurfaceArea/sphere-volume.png";
+import tube from "./geometry/images/volumeAndSurfaceArea/tube.png";
+import square_pyramid from "./geometry/images/volumeAndSurfaceArea/square-pyramid.png";
+import ellipsoid from "./geometry/images/volumeAndSurfaceArea/ellipsoid.png";
+import spherical_cap from "./geometry/images/volumeAndSurfaceArea/spherical-cap.png";
+
 
 
 import add from './add.svg'
@@ -79,13 +80,17 @@ export {
   trapezoid,
   triangle,
   capsule,
-  capsule_v,
-  cone_v,
-  conical_frustrum_v,
-  cube_v,
-  cylinder_v,
-  square_pyramid_v,
-  tube_v,
+  cone,
+  conical_frustrum,
+  cube,
+  cylinder,
+  square_pyramid,
+  tube,
+  rectangular_box,
+  rectangular_tank,
+  sphere,
+  ellipsoid,
+  spherical_cap,
   image_placeholder,
   add,
   add_1,

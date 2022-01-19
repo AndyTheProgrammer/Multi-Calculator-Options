@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 
 import { EllipsoidVolumeCalculatorI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
-import { circle } from '../../../../../../common/assets';
+import { ellipsoid } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
@@ -26,6 +26,7 @@ import {
   ResultTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const EllipsoidVolume = () => {
@@ -85,7 +86,7 @@ const EllipsoidVolume = () => {
         onHandleOpen={handleClickOpen}
         calculatorList={VOLUME_CALCULATORS}
       >
-        <Image path={circle} />
+        <Image path={ellipsoid} />
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -151,59 +152,61 @@ const EllipsoidVolume = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.axis1} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="axis1"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.axis1}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.axis1} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="axis1"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.axis1}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="axis1_unit"
-                  measurement="length"
-                  value={values.axis1_unit}
-                  onChange={handleChange('axis1_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="axis1_unit"
+                    measurement="length"
+                    value={values.axis1_unit}
+                    onChange={handleChange('axis1_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.axis2} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="axis2"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.axis2}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.axis2} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="axis2"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.axis2}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="axis2_unit"
-                  measurement="length"
-                  value={values.axis2_unit}
-                  onChange={handleChange('axis2_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="axis2_unit"
+                    measurement="length"
+                    value={values.axis2_unit}
+                    onChange={handleChange('axis2_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.axis3} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="axis3"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.axis3}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.axis3} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="axis3"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.axis3}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="axis3_unit"
-                  measurement="length"
-                  value={values.axis3_unit}
-                  onChange={handleChange('axis3_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="axis3_unit"
+                    measurement="length"
+                    value={values.axis3_unit}
+                    onChange={handleChange('axis3_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>

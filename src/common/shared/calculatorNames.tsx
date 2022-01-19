@@ -13,7 +13,7 @@ export const VOLUME_CALCULATORS =
   [
     'Capsule Volume',
     'Cone Volume',
-    'Conical Frustum Volume',
+    'Conical Frustrum Volume',
     'Cube Volume',
     'Cylinder Volume',
     'Ellipsoid Volume',

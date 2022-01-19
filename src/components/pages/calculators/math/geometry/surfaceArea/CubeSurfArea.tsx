@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 
 import { CubeAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
-import { circle } from '../../../../../../common/assets';
+import { cube } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
@@ -27,6 +27,7 @@ import {
   ResultTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const CubeSurfArea = () => {
@@ -75,7 +76,7 @@ const CubeSurfArea = () => {
         onHandleOpen={handleClickOpen}
         calculatorList={SURFACEAREA_CALCULATORS}
       >
-        <Image path={circle} />
+        <Image path={cube} />
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -124,23 +125,25 @@ const CubeSurfArea = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.edgeLength} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="edge_length"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.edge_length}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.edgeLength} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="edge_length"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.edge_length}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="edge_unit"
-                  measurement="length"
-                  value={values.edge_unit}
-                  onChange={handleChange('edge_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="edge_unit"
+                    measurement="length"
+                    value={values.edge_unit}
+                    onChange={handleChange('edge_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>

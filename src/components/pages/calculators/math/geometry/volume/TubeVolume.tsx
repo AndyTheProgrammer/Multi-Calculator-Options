@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 
 import { TubeVolumeCalculatorI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
-import { circle } from '../../../../../../common/assets';
+import { tube } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
@@ -26,6 +26,7 @@ import {
   ResultTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const TubeVolume = () => {
@@ -85,7 +86,7 @@ const TubeVolume = () => {
         onHandleOpen={handleClickOpen}
         calculatorList={VOLUME_CALCULATORS}
       >
-        <Image path={circle} />
+        <Image path={tube} />
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -144,59 +145,61 @@ const TubeVolume = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.outerDiameter} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="outer_diameter"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.outer_diameter}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.outerDiameter} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="outer_diameter"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.outer_diameter}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="outer_diameter_unit"
-                  measurement="length"
-                  value={values.outer_diameter_unit}
-                  onChange={handleChange('outer_diameter_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="outer_diameter_unit"
+                    measurement="length"
+                    value={values.outer_diameter_unit}
+                    onChange={handleChange('outer_diameter_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.innerDiameter} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="inner_diameter"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.inner_diameter}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.innerDiameter} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="inner_diameter"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.inner_diameter}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="inner_diameter_unit"
-                  measurement="length"
-                  value={values.inner_diameter_unit}
-                  onChange={handleChange('inner_diameter_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="inner_diameter_unit"
+                    measurement="length"
+                    value={values.inner_diameter_unit}
+                    onChange={handleChange('inner_diameter_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.length} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="length"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.length}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.length} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="length"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.length}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="length_unit"
-                  measurement="length"
-                  value={values.length_unit}
-                  onChange={handleChange('length_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="length_unit"
+                    measurement="length"
+                    value={values.length_unit}
+                    onChange={handleChange('length_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>

@@ -25,6 +25,7 @@ import {
   FormRow,
   FormTabsContainer,
   ResultTabsContainer,
+  FieldContainer,
   PlaceHolder,
   Image,
 } from '../../../../../custom'
@@ -119,23 +120,25 @@ const BallSurfaceArea = (props: any) => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.radius} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="radius"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.radius}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.radius} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="radius"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.radius}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="radius_unit"
-                  measurement="length"
-                  value={values.radius_unit}
-                  onChange={handleChange('radius_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="radius_unit"
+                    measurement="length"
+                    value={values.radius_unit}
+                    onChange={handleChange('radius_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>

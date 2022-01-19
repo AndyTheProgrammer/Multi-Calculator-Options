@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 
 import { ConicalFrustrumSurfaceAreaI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
-import { circle } from '../../../../../../common/assets';
+import { conical_frustrum } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
@@ -26,6 +26,7 @@ import {
   ResultTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const Latex = require('react-latex');
@@ -99,7 +100,7 @@ const ConicalFrustrumSurfaceArea = () => {
         onHandleOpen={handleClickOpen}
         calculatorList={SURFACEAREA_CALCULATORS}
       >
-        <Image path={circle} />
+        <Image path={conical_frustrum} />
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -185,59 +186,61 @@ const ConicalFrustrumSurfaceArea = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.topRadius} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="top_radius"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.top_radius}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.topRadius} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="top_radius"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.top_radius}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="top_radius_unit"
-                  measurement="length"
-                  value={values.top_radius_unit}
-                  onChange={handleChange('top_radius_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="top_radius_unit"
+                    measurement="length"
+                    value={values.top_radius_unit}
+                    onChange={handleChange('top_radius_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.bottomRadius} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="bottom_radius"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.bottom_radius}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.bottomRadius} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="bottom_radius"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.bottom_radius}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="bottom_radius_unit"
-                  measurement="length"
-                  value={values.bottom_radius_unit}
-                  onChange={handleChange('bottom_radius_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="bottom_radius_unit"
+                    measurement="length"
+                    value={values.bottom_radius_unit}
+                    onChange={handleChange('bottom_radius_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.height} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.height}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.height} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="height"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.height}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="height_unit"
-                  measurement="length"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="height_unit"
+                    measurement="length"
+                    value={values.height_unit}
+                    onChange={handleChange('height_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>

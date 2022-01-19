@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 
 import { SquarePyramidVolumeI } from '../../../../../../types'
 import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
-import { circle } from '../../../../../../common/assets';
+import { square_pyramid } from '../../../../../../common/assets';
 import {
   CALCULATORS,
   LABELS,
@@ -26,6 +26,7 @@ import {
   ResultTabsContainer,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../../custom'
 
 const SquarePyramidVolume = () => {
@@ -83,7 +84,7 @@ const SquarePyramidVolume = () => {
         onHandleOpen={handleClickOpen}
         calculatorList={VOLUME_CALCULATORS}
       >
-        <Image path={circle} />
+        <Image path={square_pyramid} />
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
@@ -145,41 +146,43 @@ const SquarePyramidVolume = () => {
         >
           {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <FormRow>
-                <Label title={LABELS.base} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="base"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.base}
-                  onChange={handleChange}
-                />
+              <FieldContainer>
+                <FormRow>
+                  <Label title={LABELS.base} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="base"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.base}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="base_unit"
-                  measurement="length"
-                  value={values.base_unit}
-                  onChange={handleChange('base_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="base_unit"
+                    measurement="length"
+                    value={values.base_unit}
+                    onChange={handleChange('base_unit')}
+                  />
+                </FormRow>
 
-              <FormRow>
-                <Label title={LABELS.height} />
-                <CustomTextInput
-                  type={INPUT_TYPE.text}
-                  id="height"
-                  placeholder={PLACEHOLDERS.number}
-                  value={values.height}
-                  onChange={handleChange}
-                />
+                <FormRow>
+                  <Label title={LABELS.height} />
+                  <CustomTextInput
+                    type={INPUT_TYPE.text}
+                    id="height"
+                    placeholder={PLACEHOLDERS.number}
+                    value={values.height}
+                    onChange={handleChange}
+                  />
 
-                <CustomSelect
-                  id="height_unit"
-                  measurement="length"
-                  value={values.height_unit}
-                  onChange={handleChange('height_unit')}
-                />
-              </FormRow>
+                  <CustomSelect
+                    id="height_unit"
+                    measurement="length"
+                    value={values.height_unit}
+                    onChange={handleChange('height_unit')}
+                  />
+                </FormRow>
+              </FieldContainer>
 
               <FormRow buttons reset={() => resetForm()} />
             </form>
