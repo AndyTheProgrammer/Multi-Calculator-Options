@@ -115,9 +115,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     borderRadius: '0 20px 3px',
   },
   formDisplay: {
-    //  position: 'absolute',
     maxWidth: 450,
-    // height: '100%',
     borderRadius: '20px !important',
     backgroundColor: theme.palette.background.paper,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
@@ -125,9 +123,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     margin: theme.spacing(2),
   },
   formResult: {
-    //  position: 'absolute',
-    maxHeight: 300,
-    minHeight: 300,
     borderRadius: '20px !important',
     backgroundColor: theme.palette.background.paper,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
@@ -135,9 +130,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     margin: theme.spacing(2),
   },
   formDisplay2: {
-    // position: 'absolute',
     maxWidth: 500,
-    // height: '100%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: ' 0 4px 8px 0px rgba(0, 0, 0, 0.2)',
     borderRadius: '20px !important',
@@ -154,7 +147,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   resultContainer: {
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    margin: theme.spacing(2),
   }
 }));
 

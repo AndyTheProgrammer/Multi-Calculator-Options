@@ -1,15 +1,15 @@
-import React, { FC } from 'react'
-import Anime from 'react-animejs-wrapper'
+import React from 'react'
 import { Grid, Paper, Box, Typography } from '@mui/material';
 import { animated } from 'react-spring'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import StyledTabs from './StyledTabs';
+import TabsContainer from './TabsContainer';
 import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
-import useStyles from '../../styling/CustomStyles'
+import useStyles, { labelStyle, formCardStyle } from '../../styling/CustomStyles'
 import { Font, FontProvider } from '../font'
+import { SIZES } from '../../common/shared';
 
 const Latex = require('react-latex');
 
@@ -27,8 +27,6 @@ const ResultTabsContainer = (props: ResultsProps) => {
   const { children, tabTitle, latex, animation, steps } = props;
   const {
     tabRoot,
-    leftTabContainer,
-    rightTabContainer,
     formResult,
     resultContainer,
   } = useStyles()
@@ -40,28 +38,30 @@ const ResultTabsContainer = (props: ResultsProps) => {
         style={{ minWidth: matches ? 250 : 350 }} // width
       >
         <div className={tabRoot}>
-          <StyledTabs>
+          <TabsContainer>
             <StaticTab
-              className={leftTabContainer}
               label={tabTitle}
             />
-            <StaticTab
-              className={rightTabContainer}
-            />
-          </StyledTabs>
+          </TabsContainer>
 
           <NoIndexTabPanel>
-            <Typography sx={{ fontSize: 16 }}>
-              <Box sx={{ fontWeight: 'bold', marginBottom: 2, fontSize: 14, }}>
-                Calculation Steps:
-              </Box>
-            </Typography>
-
-            <p style={{ fontSize: 16 }}>
-              <Latex displayMode={false}>{latex}</Latex>
-            </p>
-
             <Box className={resultContainer}>
+              <Typography >
+                <Box
+                  sx={{
+                    fontWeight: 'bold',
+                    marginBottom: 2,
+                    fontSize: SIZES.defaultFont,
+                  }}
+                >
+                  Calculation Steps:
+                </Box>
+              </Typography>
+
+              <p style={{ fontSize: SIZES.secondFont }}>
+                <Latex displayMode={true}>{latex}</Latex>
+              </p>
+
               {children}
             </Box>
 

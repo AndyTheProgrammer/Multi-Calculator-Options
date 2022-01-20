@@ -8,6 +8,7 @@ export {
   COLORS,
   CALC_LABELS,
   LATEX,
+  SIZES,
 } from "./constants";
 
 export {

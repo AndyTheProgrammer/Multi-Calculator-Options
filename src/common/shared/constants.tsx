@@ -1,11 +1,11 @@
 export const CALCULATORS = {
-  rectangleArea: "Rectangular Area",
-  parallelogramArea: "Parallelogram Area",
-  ellipseArea: "Ellipse Area",
-  trapezoidArea: "Trapezoid Area",
-  triangleArea: "Triangle Area",
-  circleArea: "Circle Area",
-  sectorArea: "Sector Area",
+  rectangleArea: "Area of a Rectangle",
+  parallelogramArea: "Area of a Parallelogram",
+  ellipseArea: "Area of an Ellipse",
+  trapezoidArea: "Area of a Trapezoid",
+  triangleArea: "Area of a Triangle",
+  circleArea: "Area of a Circle",
+  sectorArea: "Area of a Sector",
 
   ballSurfArea: "Ball Surface Area",
   coneSurfArea: "Cone Surface Area",
@@ -384,14 +384,31 @@ export const LATEX = {
   usCustomarySystem: `$$`,
   websiteBandwidth: `$Bandwidth = Average page size * Average page views * 30 * Redundancy$`,
 }
-// Object with area calculator names
-export const areaCalculators =
-  [
-    'Circle Area',
-    'Ellipse Area',
-    'Parallelogram Area',
-    'Rectangle Area',
-    'Sector Area',
-    'Trapezoid Area',
-    'Triangle Area'
-  ]
+
+// constants for paddings and margins
+export const SIZES = {
+  // global SIZES
+  base: 4,
+  radius: 8,
+  padding: 24,
+  margin: 24,
+  defaultFont: 14,
+  secondFont: 16,
+
+  // font SIZES
+  navTitle: 24,
+  h1: 24,
+  h2: 22,
+  h3: 18,
+  h4: 16,
+  h5: 14,
+  h6: 12,
+  body1: 24,
+  body2: 20,
+  body3: 18,
+  body4: 16,
+  body5: 14,
+  body6: 12,
+  body7: 10,
+  body8: 8,
+}
