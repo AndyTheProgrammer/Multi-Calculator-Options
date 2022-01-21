@@ -21,53 +21,54 @@ import {
   SquarePyramidVolume,
   TubeVolume,
 } from '../../../index'
+import { CALCULATORS } from '../../../../../common/shared';
 
 function VolumeCalculator() {
   const { selectedCalculator } = useAppSelector(selectCalculators);
 
   const calculators = [
     {
-      calcName: "Capsule Volume",
+      calcName: CALCULATORS.capsuleVol,
       component: <CapsuleVolume />,
     },
     {
-      calcName: "Cone Volume",
+      calcName: CALCULATORS.coneVol,
       component: <ConeVolume />,
     },
     {
-      calcName: "Conical Frustrum Volume",
+      calcName: CALCULATORS.conicalFrustrumVol,
       component: <ConicalFrustumVolume />,
     },
     {
-      calcName: "Cube Volume",
+      calcName: CALCULATORS.cubeVol,
       component: <CubeVolume />,
     },
     {
-      calcName: "Cylinder Volume",
+      calcName: CALCULATORS.cylinderVol,
       component: <CylinderVolume />,
     },
     {
-      calcName: "Ellipsoid Volume",
+      calcName: CALCULATORS.ellipsoidVol,
       component: <EllipsoidVolume />,
     },
     {
-      calcName: "Rectangular Tank Volume",
+      calcName: CALCULATORS.rectangularTankVol,
       component: <RectangularTankVolume />,
     },
     {
-      calcName: "Sphere Volume",
+      calcName: CALCULATORS.sphereVol,
       component: <SphereVolume />,
     },
     {
-      calcName: "Spherical Cap Volume",
+      calcName: CALCULATORS.sphericalCapVol,
       component: <SphericalCapVolume />,
     },
     {
-      calcName: "Square Pyramid Volume",
+      calcName: CALCULATORS.squarePyramidVol,
       component: <SquarePyramidVolume />,
     },
     {
-      calcName: "Tube Volume",
+      calcName: CALCULATORS.tubeVol,
       component: <TubeVolume />,
     },
   ];

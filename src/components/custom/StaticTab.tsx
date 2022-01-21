@@ -2,14 +2,13 @@ import React from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import IconButton from '@mui/material/IconButton';
-import { Grid, Paper, Box, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { Font, FontProvider } from '../font'
 import { COLORS } from '../../common/shared';
-import useStyles, { labelStyle, formCardStyle } from '../../styling/CustomStyles'
 
 function StaticTab(props: any) {
   const { className, label, dropDown, opened, openDrop } = props

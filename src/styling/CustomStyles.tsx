@@ -148,7 +148,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   resultContainer: {
     alignItems: 'center',
     justifyContent: 'space-between',
-    margin: theme.spacing(2),
+    margin: theme.spacing(1, 2, 2, 2),
   }
 }));
 

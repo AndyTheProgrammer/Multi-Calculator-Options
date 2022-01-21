@@ -50,7 +50,7 @@ const ResultTabsContainer = (props: ResultsProps) => {
                 <Box
                   sx={{
                     fontWeight: 'bold',
-                    marginBottom: 2,
+                    marginBottom: 1,
                     fontSize: SIZES.defaultFont,
                   }}
                 >
@@ -58,13 +58,16 @@ const ResultTabsContainer = (props: ResultsProps) => {
                 </Box>
               </Typography>
 
-              <p style={{ fontSize: SIZES.secondFont }}>
-                <Latex displayMode={true}>{latex}</Latex>
-              </p>
+              <Typography
+                style={{ fontSize: SIZES.secondFont }}
+              >
+                <Latex displayMode={false}>
+                  {latex}
+                </Latex>
+              </Typography>
 
               {children}
             </Box>
-
           </NoIndexTabPanel>
         </div>
       </div>

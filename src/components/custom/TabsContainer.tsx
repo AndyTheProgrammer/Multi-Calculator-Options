@@ -8,17 +8,22 @@ interface Props {
 function TabsContainer(props: Props) {
   const { children } = props;
   return (
-    <Box sx={{ width: '100%', display: 'flex', }}>
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{
+    <Box
+      sx={{
+        width: '100%',
+        //   display: 'flex',
+        marginBottom: 2,
+      }}
+    >
+      <Box
+        sx={{
           display: 'flex',
           width: '100%',
           alignItems: 'center',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
         }}
-        >
-          {children}
-        </Box>
+      >
+        {children}
       </Box>
     </Box>
   )
