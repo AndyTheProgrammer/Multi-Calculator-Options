@@ -19,3 +19,4 @@ export { default as StyledTab } from "./StyledTab";
 export { default as StyledTabForThree } from "./StyledTabForThree";
 export { default as StyledTabs } from "./StyledTabs";
 export { default as TabPanel } from "./TabPanel";
+export { default as TabsContainer } from "./TabsContainer";

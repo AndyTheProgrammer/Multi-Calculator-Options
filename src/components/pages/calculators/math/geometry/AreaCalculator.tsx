@@ -17,37 +17,38 @@ import {
   TrapezoidArea,
   TriangleArea,
 } from '../../../index'
+import { CALCULATORS } from '../../../../../common/shared';
 
 function AreaCalculator() {
   const { selectedCalculator } = useAppSelector(selectCalculators);
 
   const calculators = [
     {
-      calcName: "Circle Area",
+      calcName: CALCULATORS.circleArea,
       component: <CircleArea />,
     },
     {
-      calcName: "Ellipse Area",
+      calcName: CALCULATORS.ellipseArea,
       component: <EllipseArea />,
     },
     {
-      calcName: "Parallelogram Area",
+      calcName: CALCULATORS.parallelogramArea,
       component: <ParallelogramArea />,
     },
     {
-      calcName: "Rectangle Area",
+      calcName: CALCULATORS.rectangleArea,
       component: <RectangularArea />,
     },
     {
-      calcName: "Sector Area",
+      calcName: CALCULATORS.sectorArea,
       component: <SectorArea />,
     },
     {
-      calcName: "Trapezoid Area",
+      calcName: CALCULATORS.trapezoidArea,
       component: <TrapezoidArea />,
     },
     {
-      calcName: "Triangle Area",
+      calcName: CALCULATORS.triangleArea,
       component: <TriangleArea />,
     },
   ];

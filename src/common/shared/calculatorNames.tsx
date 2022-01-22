@@ -1,12 +1,12 @@
 export const AREA_CALCULATORS =
   [
-    'Circle Area',
-    'Ellipse Area',
-    'Parallelogram Area',
-    'Rectangle Area',
-    'Sector Area',
-    'Trapezoid Area',
-    'Triangle Area'
+    'Area of a Circle',
+    'Area of an Ellipse',
+    'Area of a Parallelogram',
+    'Area of a Rectangle',
+    'Area of a Sector',
+    'Area of a Trapezoid',
+    'Area of a Triangle'
   ];
 
 export const VOLUME_CALCULATORS =

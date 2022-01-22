@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { animated } from 'react-spring'
+import { Paper, Box, Typography } from '@mui/material';
 
 import StyledTabs from './StyledTabs';
 import NoIndexTabPanel from './NoIndexTabPanel';
 import StaticTab from './StaticTab';
-import { Paper } from '@mui/material';
-import useStyles from '../../styling/CustomStyles'
+import useStyles, { labelStyle, formCardStyle } from '../../styling/CustomStyles'
 import DropDown from './DropDown';
+import TabsContainer from './TabsContainer';
 
 interface FormProps {
   children?: React.ReactNode;
@@ -58,21 +59,20 @@ function FormTabsContainer(props: FormProps) {
       >
         <Paper className={formDisplay}>
           <div className={tabRoot}>
-            <StyledTabs>
+            <TabsContainer>
               <StaticTab
-                className={leftTabContainer}
                 label={tabTitle1}
                 dropDown={true}
                 opened={opened}
                 openDrop={onHandleOpen}
               />
-              <StaticTab
-                className={rightTabContainer}
-                label={tabTitle2}
-              />
-            </StyledTabs>
+              {tabTitle2 &&
+                <StaticTab
+                  label={tabTitle2}
+                />
+              }
+            </TabsContainer>
             {opened ? <DropDown calculators={calculatorList} func={pullData} /> : null}
-
 
             <NoIndexTabPanel>
               {children}

@@ -1,13 +1,57 @@
 import React from 'react'
-import { Typography, Box } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import IconButton from '@mui/material/IconButton';
+import { Box, Typography } from '@mui/material';
+
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { Font, FontProvider } from '../font'
 import { COLORS } from '../../common/shared';
 
 function StaticTab(props: any) {
+  const { className, label, dropDown, opened, openDrop } = props
+
+  return (
+
+    <Typography sx={{ width: '50%' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+        className="form-card div-link"
+      >
+        {label}
+
+        {dropDown === true &&
+          <IconButton
+            sx={{
+              color: COLORS.text,
+            }}
+            onClick={openDrop}
+          >
+            {
+              opened
+                ?
+                <ExpandLessIcon />
+                :
+                <ExpandMoreIcon />
+            }
+          </IconButton>
+        }
+      </Box>
+    </Typography>
+
+  )
+}
+
+export default StaticTab
+
+
+/* function StaticTab(props: any) {
   const { className, label, dropDown, opened, openDrop } = props
 
   if (label) {
@@ -45,6 +89,4 @@ function StaticTab(props: any) {
     )
   }
 
-}
-
-export default StaticTab
+} */

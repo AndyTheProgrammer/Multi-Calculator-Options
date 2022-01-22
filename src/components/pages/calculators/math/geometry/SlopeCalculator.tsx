@@ -22,6 +22,7 @@ import {
   COLORS,
   LATEX,
   GEOMETRY_PLACEHOLDERS,
+  SIZES,
 } from '../../../../../common/shared'
 import {
   CustomTextInput,
@@ -33,7 +34,10 @@ import {
   TabPanel,
   PlaceHolder,
   Image,
+  FieldContainer,
 } from '../../../../custom'
+
+const Latex = require('react-latex');
 
 function a11yProps(index: any) {
   return {
@@ -41,8 +45,6 @@ function a11yProps(index: any) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-
-const Latex = require('react-latex');
 
 function SlopeCalculator() {
   const theme = useTheme();
@@ -66,17 +68,17 @@ function SlopeCalculator() {
   }: any = useStyles()
 
   const [twoKnownPointsInitialValues] = React.useState({
-    y_1: '',
-    y_2: '',
-    x_1: '',
-    x_2: '',
+    y_1: '1',
+    y_2: '2',
+    x_1: '1',
+    x_2: '2',
   })
 
   const [singleKnownPointInitialValues] = React.useState({
-    x_1: '',
-    y_1: '',
-    slope: '',
-    distance: ''
+    x_1: '1',
+    y_1: '1',
+    slope: '0.75',
+    distance: '5'
   })
 
   const [twoKnownPointsResult, settwoKnownPointsResult] = React.useState({
@@ -150,6 +152,15 @@ function SlopeCalculator() {
                 value={tabValue}
                 index={0}
               >
+                <Typography
+                  className='text-center mb-2'
+                  sx={{ fontSize: SIZES.defaultFont }}
+                >
+                  <Latex displayMode={false}>
+                    {`$m = \\ \\frac{y_2 - y_1}{x_2 - x_1} = tan (\\theta)$`}
+                  </Latex>
+                </Typography>
+
                 <Formik
                   initialValues={singleKnownPointInitialValues}
                   onSubmit={async ({
@@ -216,53 +227,55 @@ function SlopeCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <FormRow>
-                        <Label title={LABELS.x1} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="x_1"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.x_1}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                      <FieldContainer>
+                        <FormRow>
+                          <Label title={LABELS.x1} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="x_1"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.x_1}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.y1} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="y_1"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.y_1}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.y1} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="y_1"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.y_1}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.distance} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="distance"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.distance}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.distance} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="distance"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.distance}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.slope} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="slope"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.slope}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.slope} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="slope"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.slope}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
+                      </FieldContainer>
 
                       <FormRow buttons reset={() => resetForm()} />
                     </form>
@@ -274,6 +287,15 @@ function SlopeCalculator() {
                 value={tabValue}
                 index={1}
               >
+                <Typography
+                  className='text-center mb-2'
+                  sx={{ fontSize: SIZES.defaultFont }}
+                >
+                  <Latex displayMode={false}>
+                    {`$m = \\ \\frac{y_2 - y_1}{x_2 - x_1} = tan (\\theta$)`}
+                  </Latex>
+                </Typography>
+
                 <Formik
                   initialValues={twoKnownPointsInitialValues}
                   onSubmit={async ({
@@ -294,6 +316,8 @@ function SlopeCalculator() {
                       const { success, payload: slopeWithTwoKnownPoints } = await calculateMath(payload)
                       console.log('=====>', slopeWithTwoKnownPoints)
                       const { d, m, angle, } = slopeWithTwoKnownPoints
+
+                      // data returned is in an array!!!
                       if (typeof slopeWithTwoKnownPoints === 'object') {
                         settwoKnownPointsResult({
                           slope: m,
@@ -321,53 +345,55 @@ function SlopeCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <FormRow>
-                        <Label title={LABELS.x1} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="x_1"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.x_1}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                      <FieldContainer>
+                        <FormRow>
+                          <Label title={LABELS.x1} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="x_1"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.x_1}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.y1} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="y_1"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.y_1}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.y1} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="y_1"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.y_1}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.x2} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="x_2"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.x_2}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.x2} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="x_2"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.x_2}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.y2} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="y_2"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.y_2}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.y2} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="y_2"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.y_2}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
+                      </FieldContainer>
 
                       <FormRow buttons reset={() => resetForm()} />
                     </form>
@@ -385,47 +411,46 @@ function SlopeCalculator() {
             >
               <Box className="text-wrap">
                 {tabValue === 0 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <div className="mb-3">
-                      <Typography variant="subtitle1">
-                        X2: {singleKnownPointResult.x_2}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        Y2: {singleKnownPointResult.y_2}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        ΔX: {singleKnownPointResult.Δx}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        ΔY: {singleKnownPointResult.Δy}
-                      </Typography>
-                      <Typography variant="subtitle1" gutterBottom>
-                        θ: {singleKnownPointResult.angle}{singleKnownPointResult.angle_unit}
-                      </Typography>
+                  <Box>
+                    <Typography variant="subtitle1">
+                      X2: {singleKnownPointResult.x_2}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      Y2: {singleKnownPointResult.y_2}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      ΔX: {singleKnownPointResult.Δx}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      ΔY: {singleKnownPointResult.Δy}
+                    </Typography>
+                    <Typography variant="subtitle1" gutterBottom>
+                      θ: {singleKnownPointResult.angle}{singleKnownPointResult.angle_unit}
+                    </Typography>
 
-                      <Typography variant="subtitle1" component='h6' gutterBottom>or</Typography>
+                    <Typography variant="subtitle1" component='h6' gutterBottom>or</Typography>
 
-                      <Typography variant="subtitle1">
-                        X2: {singleKnownPointResult.left_x_2}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        Y2: {singleKnownPointResult.left_y_2}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        ΔX: {singleKnownPointResult.left_Δx}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        ΔY: {singleKnownPointResult.left_Δy}
-                      </Typography>
-                      <Typography variant="subtitle1">
-                        θ: {singleKnownPointResult.angle_left}{singleKnownPointResult.angle_unit}
-                      </Typography>
-                    </div>
+                    <Typography variant="subtitle1">
+                      X2: {singleKnownPointResult.left_x_2}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      Y2: {singleKnownPointResult.left_y_2}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      ΔX: {singleKnownPointResult.left_Δx}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      ΔY: {singleKnownPointResult.left_Δy}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      θ: {singleKnownPointResult.angle_left}{singleKnownPointResult.angle_unit}
+                    </Typography>
+
                   </Box>
                 }
 
                 {tabValue === 1 &&
-                  <Box sx={{ color: COLORS.text }}>
+                  <Box>
                     <Typography variant="subtitle1">
                       Slope: {twoKnownPointsResult.slope}
                     </Typography>

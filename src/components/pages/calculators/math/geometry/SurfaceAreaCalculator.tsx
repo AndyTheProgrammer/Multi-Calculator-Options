@@ -19,45 +19,46 @@ import {
   SphericalCapSurfaceArea,
   SquarePyramidSurfaceArea,
 } from '../../../index'
+import { CALCULATORS } from '../../../../../common/shared';
 
 function SurfaceAreaCalculator() {
   const { selectedCalculator } = useAppSelector(selectCalculators);
 
   const calculators = [
     {
-      calcName: "Ball Surface Area",
+      calcName: CALCULATORS.ballSurfArea,
       component: <BallSurfaceArea />,
     },
     {
-      calcName: "Capsule Surface Area",
+      calcName: CALCULATORS.capsuleSurfArea,
       component: <CapsuleSurfaceArea />,
     },
     {
-      calcName: "Cone Surface Area",
+      calcName: CALCULATORS.coneSurfArea,
       component: <ConeSurfArea />,
     },
     {
-      calcName: "Conical Frustrum Surface Area",
+      calcName: CALCULATORS.conicalFrustrumSurfArea,
       component: <ConicalFrustrumSurfaceArea />,
     },
     {
-      calcName: "Cube Surface Area",
+      calcName: CALCULATORS.cubeSurfArea,
       component: <CubeSurfArea />,
     },
     {
-      calcName: "Cylindrical Tank Surface Area",
+      calcName: CALCULATORS.cylindricalTankSurfArea,
       component: <CylindricalTankSurfArea />,
     },
     {
-      calcName: "Ellipsoid Surface Area",
+      calcName: CALCULATORS.ellipsoidSurfArea,
       component: <EllipsoidSurfaceArea />,
     },
     {
-      calcName: "Spherical Cap Surface Area",
+      calcName: CALCULATORS.sphericalCapSurfArea,
       component: <SphericalCapSurfaceArea />,
     },
     {
-      calcName: "Square Pyramid Surface Area",
+      calcName: CALCULATORS.squarePyramidSurfArea,
       component: <SquarePyramidSurfaceArea />,
     },
   ];

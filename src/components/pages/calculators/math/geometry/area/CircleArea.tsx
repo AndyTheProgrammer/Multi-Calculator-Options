@@ -152,25 +152,30 @@ const CircleArea = () => {
           latex={LATEX.cirleArea}
           animation={resultAnimation}
         >
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              <Latex displayMode={false}>
-                {`$A = \\pi * ${circleResult.Submitted_radius}^{2}$`}
-              </Latex>
-            </Typography>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$Taking \\ \\pi \\ as \\ 3.14159265$`}
+            </Latex>
+          </Typography>
 
-            <Typography variant="subtitle1">
-              <Latex displayMode={false}>
-                {`$A = \\pi * ${circleResult.Submitted_radius * circleResult.Submitted_radius}$`}
-              </Latex>
-            </Typography>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$A = \\pi * ${circleResult.Submitted_radius}^{2}$`}
+            </Latex>
+          </Typography>
 
-            <Typography variant="subtitle1">
-              <Latex displayMode={false}>
-                {`$A = ${circleResult.area} ${circleResult.unit}^{2}$`}
-              </Latex>
-            </Typography>
-          </div>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$A = \\pi * ${circleResult.Submitted_radius * circleResult.Submitted_radius}$`}
+            </Latex>
+          </Typography>
+
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$A = ${circleResult.area} ${circleResult.unit}^{2}$`}
+            </Latex>
+          </Typography>
+
         </ResultTabsContainer>
       }
     </>

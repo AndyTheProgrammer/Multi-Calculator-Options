@@ -1,9 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -11,15 +7,8 @@ interface TabPanelProps {
   value: any;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    padding: theme.spacing(2),
-  }
-}))
-
 const TabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props;
-  const classes = useStyles()
 
   return (
     <div
@@ -31,9 +20,9 @@ const TabPanel = (props: TabPanelProps) => {
     >
       {value === index && (
         <Box
-          pt={4}
-          pl={4}
-          pr={4}
+          pt={1}
+          pl={1}
+          pr={1}
           pb={0}
         >
           {children}

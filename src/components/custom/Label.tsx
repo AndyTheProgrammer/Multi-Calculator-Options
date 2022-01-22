@@ -18,7 +18,7 @@ const Label = (props: any) => {
           variant='subtitle2'
           style={{ color: 'black', fontSize: 14, fontWeight: 'bold' }}
         >
-          <Font>{title}</Font>
+          <Font>{title}:</Font>
         </Typography>
 
       </div>
