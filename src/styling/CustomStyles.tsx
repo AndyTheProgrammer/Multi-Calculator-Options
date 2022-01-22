@@ -155,6 +155,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   resultContainer: {
     alignItems: 'center',
     justifyContent: 'space-between'
+  },
+  dropDownOptions: {
+    cursor: 'pointer',
+    textAlign: 'start'
   }
 }));
 

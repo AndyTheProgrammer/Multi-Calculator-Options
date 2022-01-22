@@ -21,7 +21,7 @@ function Image(props: ImageProps) {
         className="img img-fluid"
         style={{
           width: 140,
-          height: 120,
+          height: 140,
           aspectRatio: 'auto',
         }}
         src={path}
