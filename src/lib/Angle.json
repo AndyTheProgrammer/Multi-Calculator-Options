@@ -4,11 +4,11 @@
     "units": [
       {
         "name": "degree",
-        "unit": "deg"
+        "unit": "degrees"
       },
       {
         "name": "radian",
-        "unit": "rad"
+        "unit": "radians"
       }
     ]
   }

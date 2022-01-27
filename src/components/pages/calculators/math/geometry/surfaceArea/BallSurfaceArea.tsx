@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-use-before-define
-import React from 'react'
-import { Formik } from 'formik'
-import { Typography } from '@material-ui/core'
-import { useSpring } from 'react-spring'
+import React from 'react';
+import { Formik } from 'formik';
+import { Typography } from '@material-ui/core';
+import { useSpring } from 'react-spring';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { SurfaceAreaI } from '../../../../../../types'
-import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
+import { SurfaceAreaI } from '../../../../../../types';
+import { calculateMath } from '../../../../../../services/AppCalculatorsApi';
 import { circle } from '../../../../../../common/assets';
 import {
   CALCULATORS,
@@ -17,7 +17,7 @@ import {
   LATEX,
   SURFACEAREA_CALCULATORS,
   GEOMETRY_PLACEHOLDERS,
-} from '../../../../../../common/shared'
+} from '../../../../../../common/shared';
 import {
   CustomTextInput,
   CustomSelect,
@@ -28,10 +28,12 @@ import {
   FieldContainer,
   PlaceHolder,
   Image,
-} from '../../../../../custom'
+} from '../../../../../custom';
+
+const Latex = require('react-latex');
 
 const BallSurfaceArea = (props: any) => {
-  const { openDrop } = props
+  const { openDrop } = props;
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [formAnimation, formApi] = useSpring(() => ({
@@ -48,13 +50,15 @@ const BallSurfaceArea = (props: any) => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: '',
-    radius_unit: ''
-  })
+    radius_unit: 'mm'
+  });
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
+    radius: '',
+    radius_unit: '',
     area: 0,
     unit: '',
-  })
+  });
 
   const [open, setOpen] = React.useState(false);
 
@@ -98,6 +102,8 @@ const BallSurfaceArea = (props: any) => {
                 console.log(ballSurfaceArea)
                 setResult({
                   surfaceArea: surfaceArea,
+                  radius,
+                  radius_unit,
                   area: area,
                   unit: unit
                 })
@@ -153,13 +159,35 @@ const BallSurfaceArea = (props: any) => {
           latex={LATEX.ballSurfArea}
           animation={resultAnimation}
         >
+          <Typography variant="subtitle2">
+            <Latex displayMode={false}>
+              {`$Taking \\ \\pi \\ as \\ 3.14159265$`}
+            </Latex>
+          </Typography>
 
-          <div className="text-wrap text-center">
-            <Typography variant="subtitle1">
-              = {Result.surfaceArea}{Result.unit}<sup>2</sup>
-            </Typography>
-          </div>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$SA = 4 * \\pi * ${Result.radius}^{2}$`}
+            </Latex>
+          </Typography>
 
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$SA = 4 * \\pi * ${parseInt(Result.radius) * parseInt(Result.radius)}$`}
+            </Latex>
+          </Typography>
+
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$SA = \\pi ${parseInt(Result.radius) * parseInt(Result.radius) * 4}$`}
+            </Latex>
+          </Typography>
+
+          <Typography variant="subtitle1" className='final-answer'>
+            <Latex displayMode={false}>
+              {`$SA = ${Result.surfaceArea}${Result.radius_unit}^{2}$`}
+            </Latex>
+          </Typography>
         </ResultTabsContainer>
       }
     </>

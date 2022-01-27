@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import { Box, Typography } from '@material-ui/core'
 import { Formik } from 'formik'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -48,22 +48,19 @@ const SectorArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [sectorInitialValues] = React.useState({
     radius: "",
-    radius_unit: "mm",
+    radius_unit: "cm",
     angle: "",
-    angle_unit: "deg",
+    angle_unit: "rad",
   })
   const [sectorResult, setSectorResult] = React.useState({
     area: 0,
-    radiusUnits: 0,
-    angleUnit: 0,
+    radiusUnits: '',
+    angleUnit: '',
     submittedradius: '',
     submitted_angle: '',
     unit: ''
   })
-
-  const [sectorResultTwo, setSectorResultTwo] = React.useState({
-
-  })
+  const pi = 3.14159265;
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
@@ -127,9 +124,6 @@ const SectorArea = () => {
                   unit: unit,
                 })
               }
-              if (typeof sectorArea === 'object' && unitType === true) {
-                setSelectedResult(unitType)
-              }
               if (success === true) {
                 setAnswer(success)
                 formApi.start({
@@ -190,34 +184,101 @@ const SectorArea = () => {
         </Formik>
       </FormTabsContainer>
 
-
-
       {/* Results grid */}
       {answer === true &&
         <ResultTabsContainer
           tabTitle={"Result"}
-          latex={LATEX.sectorArea}
+          // latex={LATEX.sectorArea}
           animation={resultAnimation}
         >
-          <div className="text-wrap">
-            <Typography variant="subtitle1">
-              <Latex displayMode={false}>
-                {`$A = \\frac{${sectorResult.submitted_angle} * ${sectorResult.submittedradius}^{2}}{2}$`}
-              </Latex>
-            </Typography>
+          {sectorResult.angleUnit === 'degrees' &&
+            <Box>
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\frac{{\\theta}}{360} *  \\pi r^2 $`}
+                </Latex>
+              </Typography>
 
-            <Typography variant="subtitle1">
-              <Latex displayMode={false}>
-                {`$A = \\frac{${sectorResult.submitted_angle} * (${parseInt(sectorResult.submittedradius) * parseInt(sectorResult.submittedradius)})}{2}$`}
-              </Latex>
-            </Typography>
+              <Typography variant="subtitle2">
+                <Latex displayMode={false}>
+                  {`$Taking \\ \\pi \\ as \\ 3.14159265$`}
+                </Latex>
+              </Typography>
 
-            <Typography variant="subtitle1">
-              <Latex displayMode={false}>
-                {`$A = ${sectorResult.area} ${sectorResult.unit}^{2}$`}
-              </Latex>
-            </Typography>
-          </div>
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\frac{${sectorResult.submitted_angle}}{360} * \\pi ${sectorResult.submittedradius}^{2}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${parseInt(sectorResult.submitted_angle) / 360} * \\pi ${parseInt(sectorResult.submittedradius) * parseInt(sectorResult.submittedradius)}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${parseInt(sectorResult.submitted_angle) / 360} * ${pi * parseInt(sectorResult.submittedradius) * parseInt(sectorResult.submittedradius)}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${sectorResult.area} ${sectorResult.radiusUnits}^{2}$`}
+                </Latex>
+              </Typography>
+            </Box>
+          }
+
+          {sectorResult.angleUnit === 'radians' &&
+            <Box>
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\frac{{\\theta}}{2\\pi} * \\pi r^2 $`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle2">
+                <Latex displayMode={false}>
+                  {`$Taking \\ \\pi \\ as \\ 3.14159265$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\frac{${sectorResult.submitted_angle}}{2\\pi} * \\pi ${sectorResult.submittedradius}^{2}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\frac{${sectorResult.submitted_angle}}{6.283185307} * \\pi ${parseInt(sectorResult.submittedradius) * parseInt(sectorResult.submittedradius)}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\frac{${sectorResult.submitted_angle}}{6.283185307} * ${pi * parseInt(sectorResult.submittedradius) * parseInt(sectorResult.submittedradius)}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${parseInt(sectorResult.submitted_angle) / 6.283185307} * ${pi * parseInt(sectorResult.submittedradius) * parseInt(sectorResult.submittedradius)}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${sectorResult.area} ${sectorResult.radiusUnits}^{2}$`}
+                </Latex>
+              </Typography>
+            </Box>
+          }
+
+
+
         </ResultTabsContainer>
       }
 

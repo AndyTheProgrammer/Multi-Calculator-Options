@@ -8,43 +8,49 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { Font, FontProvider } from '../font'
-import { COLORS } from '../../common/shared';
+import { COLORS, SIZES } from '../../common/shared';
 
 function StaticTab(props: any) {
   const { className, label, dropDown, opened, openDrop } = props
 
   return (
-
-    <Typography sx={{ width: '50%' }}>
-      <Box
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '50%',
+        //padding: 1,
+      }}
+      className="form-card div-link"
+    >
+      <Typography
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          fontSize: SIZES.defaultFont
         }}
-        className="form-card div-link"
       >
         {label}
+      </Typography>
 
-        {dropDown === true &&
-          <IconButton
-            sx={{
-              color: COLORS.text,
-            }}
-            onClick={openDrop}
-          >
-            {
-              opened
-                ?
-                <ExpandLessIcon />
-                :
-                <ExpandMoreIcon />
-            }
-          </IconButton>
-        }
-      </Box>
-    </Typography>
+      {dropDown === true &&
+        <IconButton
+          sx={{
+            color: COLORS.text,
+          }}
+          onClick={openDrop}
+        >
+          {
+            opened
+              ?
+              <ExpandLessIcon />
+              :
+              <ExpandMoreIcon />
+          }
+        </IconButton>
+      }
 
+
+    </Box>
   )
 }
 

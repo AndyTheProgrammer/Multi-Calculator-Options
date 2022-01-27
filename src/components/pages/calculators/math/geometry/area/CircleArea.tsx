@@ -152,7 +152,7 @@ const CircleArea = () => {
           latex={LATEX.cirleArea}
           animation={resultAnimation}
         >
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle2">
             <Latex displayMode={false}>
               {`$Taking \\ \\pi \\ as \\ 3.14159265$`}
             </Latex>
@@ -170,7 +170,7 @@ const CircleArea = () => {
             </Latex>
           </Typography>
 
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle1" className='final-answer'>
             <Latex displayMode={false}>
               {`$A = ${circleResult.area} ${circleResult.unit}^{2}$`}
             </Latex>

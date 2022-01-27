@@ -253,7 +253,7 @@ const TrapezoidArea = () => {
                 </Latex>
               </Typography>
 
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" className='final-answer'>
                 <Latex displayMode={false}>
                   {`$A = ${trapezoidResult.area} ${trapezoidResult.unit}^{2}$`}
                 </Latex>
@@ -280,7 +280,7 @@ const TrapezoidArea = () => {
                 </Latex>
               </Typography>
 
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" className='final-answer'>
                 <Latex displayMode={false}>
                   {`$A = ${trapezoidResultTwo.areaIncm} ${trapezoidResult.unit}^{2}$`}
                 </Latex>

@@ -245,7 +245,7 @@ const TriangleArea = () => {
                 </Latex>
               </Typography>
 
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" className='final-answer'>
                 <Latex displayMode={false}>
                   {`$A = ${triangleResult.area} ${triangleResult.unit}^{2}$`}
                 </Latex>
@@ -260,7 +260,7 @@ const TriangleArea = () => {
                 </Latex>
               </Typography>
 
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" className='final-answer'>
                 <Latex displayMode={false}>
                   {`$A = ${triangleResult2.areaInWidthUnit} ${triangleResult.unit}^{2}$`}
                 </Latex>

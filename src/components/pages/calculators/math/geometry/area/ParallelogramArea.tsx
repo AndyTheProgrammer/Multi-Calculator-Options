@@ -63,10 +63,11 @@ const ParallelogramArea = () => {
     areaInbreadthUnit: 0,
     areaInheightUnit: 0,
     breadthInheightUnit: 0,
-    $heightInbreadthUnit: 0,
+    heightInbreadthUnit: 0,
     submittedbreadth: 0,
     submitted_height: 0,
-    unit: ''
+    breadth_unit: '',
+    height_unit: '',
   })
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
@@ -139,10 +140,11 @@ const ParallelogramArea = () => {
                   areaInbreadthUnit: areaInbreadthUnit,
                   areaInheightUnit: areaInheightUnit,
                   breadthInheightUnit: breadthInheightUnit,
-                  $heightInbreadthUnit: $heightInbreadthUnit,
+                  heightInbreadthUnit: $heightInbreadthUnit,
                   submitted_height: submitted_height,
                   submittedbreadth: submittedbreadth,
-                  unit: units
+                  breadth_unit,
+                  height_unit,
                 })
               }
               if (success === true) {
@@ -221,7 +223,7 @@ const ParallelogramArea = () => {
                 </Latex>
               </Typography>
 
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" className='final-answer'>
                 <Latex displayMode={false}>
                   {`$A = ${parallelogramResult.area} ${parallelogramResult.unit}^{2}$`}
                 </Latex>
@@ -232,13 +234,19 @@ const ParallelogramArea = () => {
             <div className="text-wrap">
               <Typography variant="subtitle1">
                 <Latex displayMode={false}>
-                  {`$A = ${parallelogramResult.breadth} * ${parallelogramResult.height}$`}
+                  {`$${parallelogramResultTwo.submitted_height}${parallelogramResultTwo.height_unit} = ${parallelogramResultTwo.heightInbreadthUnit}${parallelogramResultTwo.breadth_unit}$`}
                 </Latex>
               </Typography>
 
               <Typography variant="subtitle1">
                 <Latex displayMode={false}>
-                  {`$A = ${parallelogramResultTwo.areaInbreadthUnit} ${parallelogramResultTwo.unit}^{2}$`}
+                  {`$A = ${parallelogramResultTwo.heightInbreadthUnit} * ${parallelogramResultTwo.submittedbreadth}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1" className='final-answer'>
+                <Latex displayMode={false}>
+                  {`$A = ${parallelogramResultTwo.areaInbreadthUnit} ${parallelogramResultTwo.breadth_unit}^{2}$`}
                 </Latex>
               </Typography>
 
@@ -250,7 +258,19 @@ const ParallelogramArea = () => {
 
               <Typography variant="subtitle1">
                 <Latex displayMode={false}>
-                  {`$A = ${parallelogramResultTwo.areaInheightUnit} ${parallelogramResultTwo.unit}^{2}$`}
+                  {`$${parallelogramResultTwo.submittedbreadth}${parallelogramResultTwo.breadth_unit} = ${parallelogramResultTwo.breadthInheightUnit}${parallelogramResultTwo.height_unit}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${parallelogramResultTwo.breadthInheightUnit} * ${parallelogramResultTwo.submitted_height}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1" className='final-answer'>
+                <Latex displayMode={false}>
+                  {`$A = ${parallelogramResultTwo.areaInheightUnit} ${parallelogramResultTwo.height_unit}^{2}$`}
                 </Latex>
               </Typography>
             </div>

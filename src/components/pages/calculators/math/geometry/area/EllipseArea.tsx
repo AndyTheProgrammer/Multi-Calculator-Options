@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import { Typography, Box } from '@mui/material'
 import { Formik } from 'formik'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -16,6 +16,7 @@ import {
   LATEX,
   AREA_CALCULATORS,
   GEOMETRY_PLACEHOLDERS,
+  COLORS,
 } from '../../../../../../common/shared'
 import {
   CustomTextInput,
@@ -65,7 +66,8 @@ const EllipseArea = () => {
     $semi_major_axes_bInsemi_major_axes_aUnit: 0,
     submittedsemi_major_axes_a: 0,
     submitted_semi_major_axes_b: 0,
-
+    semi_major_axes_a_unit: '',
+    semi_major_axes_b_unit: '',
   })
 
   const [open, setOpen] = React.useState(false);
@@ -114,7 +116,8 @@ const EllipseArea = () => {
                 area,
                 units,
                 semi_major_axes_a,
-                semi_major_axes_b, unitType,
+                semi_major_axes_b,
+                unitType,
                 areaInsemi_major_axes_aUnit,
                 areaInsemi_major_axes_bUnit,
                 semi_major_axes_aInsemi_major_axes_bUnit,
@@ -140,7 +143,9 @@ const EllipseArea = () => {
                   semi_major_axes_aInsemi_major_axes_bUnit: semi_major_axes_aInsemi_major_axes_bUnit,
                   $semi_major_axes_bInsemi_major_axes_aUnit: $semi_major_axes_bInsemi_major_axes_aUnit,
                   submitted_semi_major_axes_b: submitted_semi_major_axes_b,
-                  submittedsemi_major_axes_a: submittedsemi_major_axes_a
+                  submittedsemi_major_axes_a: submittedsemi_major_axes_a,
+                  semi_major_axes_a_unit,
+                  semi_major_axes_b_unit,
                 })
               }
               if (success === true) {
@@ -212,10 +217,22 @@ const EllipseArea = () => {
         >
 
           {selectedResult === true &&
-            <div className="text-wrap">
+            <Box>
+              <Typography variant="subtitle2">
+                <Latex displayMode={false}>
+                  {`$Taking \\ \\pi \\ as \\ 3.14159265$`}
+                </Latex>
+              </Typography>
+
               <Typography variant="subtitle1">
                 <Latex displayMode={false}>
                   {`$A = \\pi * ${ellipseResult.semi_major_axes_a} * ${ellipseResult.semi_major_axes_b}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\pi * ${ellipseResult.semi_major_axes_a * ellipseResult.semi_major_axes_b}$`}
                 </Latex>
               </Typography>
 
@@ -224,18 +241,39 @@ const EllipseArea = () => {
                   {`$A = ${ellipseResult.area} ${ellipseResult.unit}^{2}$`}
                 </Latex>
               </Typography>
-
-            </div>
+            </Box>
           }
+
           {selectedResult === false &&
-            <div className="text-wrap">
-              <Typography variant="subtitle1">
+            <Box>
+              <Typography variant="subtitle2">
                 <Latex displayMode={false}>
-                  {`$A = \\pi * ${ellipseResult.semi_major_axes_a} * ${ellipseResult.semi_major_axes_b}$`}
+                  {`$Taking \\ \\pi \\ as \\ 3.14159265$`}
                 </Latex>
               </Typography>
 
               <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ ${ellipseResultTwo.submitted_semi_major_axes_b} ${ellipseResultTwo.semi_major_axes_b_unit} = ${ellipseResultTwo.$semi_major_axes_bInsemi_major_axes_aUnit} ${ellipseResultTwo.semi_major_axes_a_unit} $`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\pi * ${ellipseResultTwo.submittedsemi_major_axes_a} * ${ellipseResultTwo.$semi_major_axes_bInsemi_major_axes_aUnit}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\pi * ${ellipseResultTwo.submittedsemi_major_axes_a * ellipseResultTwo.$semi_major_axes_bInsemi_major_axes_aUnit}$`}
+                </Latex>
+              </Typography>
+
+              <Typography
+                variant="subtitle1"
+                className='final-answer'
+              >
                 <Latex displayMode={false}>
                   {`$A = ${ellipseResultTwo.areaInsemi_major_axes_aUnit}${ellipseResult.unit}^{2}$`}
                 </Latex>
@@ -249,10 +287,31 @@ const EllipseArea = () => {
 
               <Typography variant="subtitle1">
                 <Latex displayMode={false}>
+                  {`$ ${ellipseResultTwo.submittedsemi_major_axes_a} ${ellipseResultTwo.semi_major_axes_a_unit} = ${ellipseResultTwo.semi_major_axes_aInsemi_major_axes_bUnit} ${ellipseResultTwo.semi_major_axes_b_unit} $`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\pi * ${ellipseResultTwo.semi_major_axes_aInsemi_major_axes_bUnit} * ${ellipseResultTwo.submitted_semi_major_axes_b}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = \\pi * ${ellipseResultTwo.semi_major_axes_aInsemi_major_axes_bUnit * ellipseResultTwo.submitted_semi_major_axes_b}$`}
+                </Latex>
+              </Typography>
+
+              <Typography
+                variant="subtitle1"
+                className='final-answer'
+              >
+                <Latex displayMode={false}>
                   {`$A = ${ellipseResultTwo.areaInsemi_major_axes_bUnit}${ellipseResult.unit}^{2}$`}
                 </Latex>
               </Typography>
-            </div>
+            </Box>
           }
         </ResultTabsContainer>
       }

@@ -28,6 +28,7 @@ import {
   Image,
   FieldContainer,
 } from '../../../../../custom'
+const Latex = require('react-latex');
 
 const CapsuleSurfaceArea = () => {
   const theme = useTheme();
@@ -47,9 +48,9 @@ const CapsuleSurfaceArea = () => {
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true);
   const [initialFormValues] = React.useState({
     radius: '',
-    radius_unit: '',
+    radius_unit: 'mm',
     height: "",
-    height_unit: ''
+    height_unit: 'mm'
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
@@ -62,9 +63,11 @@ const CapsuleSurfaceArea = () => {
     surfaceAreaInradiusUnit: 0,
     surfaceAreaInheightUnit: 0,
     radiusInheightUnit: 0,
-    $heightInradiusUnit: 0,
+    heightInradiusUnit: 0,
     submittedradius: '',
     submitted_height: '',
+    radius_unit: '',
+    height_unit: ''
   })
 
   const [open, setOpen] = React.useState(false);
@@ -135,9 +138,11 @@ const CapsuleSurfaceArea = () => {
                   surfaceAreaInheightUnit: surfaceAreaInheightUnit,
                   surfaceAreaInradiusUnit: surfaceAreaInradiusUnit,
                   radiusInheightUnit: radiusInheightUnit,
-                  $heightInradiusUnit: $heightInradiusUnit,
+                  heightInradiusUnit: $heightInradiusUnit,
                   submitted_height: submitted_height,
-                  submittedradius: submittedradius
+                  submittedradius: submittedradius,
+                  radius_unit,
+                  height_unit,
                 })
               }
               if (success === true) {
@@ -206,29 +211,124 @@ const CapsuleSurfaceArea = () => {
       {answer === true &&
         <ResultTabsContainer
           tabTitle={'Result'}
-          latex={LATEX.capsuleSurfArea}
+          // latex={LATEX.capsuleSurfArea}
           animation={resultAnimation}
         >
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$ Top \\ SA = 2  \\pi  r^{2}$`}
+            </Latex>
+          </Typography>
 
-          <div className='text-center'>
-            {selectedResult ? (
-              <div className="text-wrap">
-                <Typography variant="subtitle1">
-                  SA = {Result.surfaceArea}{Result.units}<sup>2</sup>
-                </Typography>
-              </div>
-            ) : (
-              <div className="text-wrap">
-                <Typography variant="subtitle1">
-                  SA = {resultTwo.surfaceAreaInradiusUnit}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle2">or</Typography>
-                <Typography variant="subtitle1">
-                  SA = {resultTwo.surfaceAreaInheightUnit}<sup>2</sup>
-                </Typography>
-              </div>
-            )}
-          </div>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$ Bottom \\ SA = 2  \\pi r^{2}$`}
+            </Latex>
+          </Typography>
+
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$Lateral \\ SA = 2\\pi  r  h$`}
+            </Latex>
+          </Typography>
+
+          <Typography variant="subtitle1" gutterBottom>
+            <Latex displayMode={false}>
+              {LATEX.capsuleSurfArea}
+            </Latex>
+          </Typography>
+
+          <Typography variant="subtitle2">
+            <Latex displayMode={false}>
+              {`$Taking \\ \\pi \\ as \\ 3.14159265$`}
+            </Latex>
+          </Typography>
+
+          <Typography gutterBottom />
+
+          {selectedResult ? (
+            <div>
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ Total \\ SA = 4 \\pi ${Result.submittedradius}^{2} + 2\\pi*${Result.submittedradius}*${Result.submitted_height}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle2">
+                <Latex displayMode={false}>
+                  {`$ Total \\ SA = ${4 * 3.14159265 * (Result.submittedradius * Result.submittedradius)} + ${2 * 3.14159265 * Result.submittedradius * Result.submitted_height}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1" className='final-answer'>
+                <Latex displayMode={false}>
+                  {`$ Total \\ SA = ${Result.surfaceArea}${Result.units}^{2}$`}
+                </Latex>
+              </Typography>
+            </div>
+
+          ) : (
+
+            <div>
+              {/* Base radius */}
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$${resultTwo.submitted_height}${resultTwo.height_unit} = ${resultTwo.heightInradiusUnit}${resultTwo.radius_unit}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ Total \\ SA = 4 \\pi ${resultTwo.submittedradius}^{2} + 2\\pi*${resultTwo.submittedradius}*${resultTwo.heightInradiusUnit}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle2">
+                <Latex displayMode={false}>
+                  {`$ Total \\ SA = ${4 * 3.14159265 * (parseFloat(resultTwo.submittedradius) * parseFloat(resultTwo.submittedradius))} + ${2 * 3.14159265 * parseFloat(resultTwo.submittedradius) * resultTwo.heightInradiusUnit}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1" className='final-answer'>
+                <Latex displayMode={false}>
+                  {`$ Total \\ SA = ${resultTwo.surfaceAreaInradiusUnit}${resultTwo.radius_unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={true}>
+                  {`$ or $`}
+                </Latex>
+              </Typography>
+
+
+              {/* Height */}
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$${resultTwo.submittedradius}${resultTwo.radius_unit} = ${resultTwo.radiusInheightUnit}${resultTwo.height_unit}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ Total \\ SA = 4 \\pi ${resultTwo.radiusInheightUnit}^{2} + 2\\pi*${resultTwo.radiusInheightUnit}*${resultTwo.submitted_height}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle2">
+                <Latex displayMode={false}>
+                  {`$ Total \\ SA = ${4 * 3.14159265 * (resultTwo.radiusInheightUnit * resultTwo.radiusInheightUnit)} + ${2 * 3.14159265 * resultTwo.radiusInheightUnit * parseFloat(resultTwo.submitted_height)}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1" className='final-answer'>
+                <Latex displayMode={false}>
+                  {`$ Total \\ SA = ${resultTwo.surfaceAreaInheightUnit}${resultTwo.height_unit}^{2}$`}
+                </Latex>
+              </Typography>
+            </div>
+          )}
         </ResultTabsContainer>
       }
 

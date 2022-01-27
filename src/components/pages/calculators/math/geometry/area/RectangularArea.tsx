@@ -56,7 +56,7 @@ const RectangularArea = () => {
     area: 0,
     submittedLength: 0,
     submitted_width: 0,
-    units: ''
+    unit: ''
   })
 
   const [rectResultTwo, setRectResultTwo] = React.useState({
@@ -65,7 +65,9 @@ const RectangularArea = () => {
     lengthInWidthUnit: 0,
     $widthInlengthUnit: 0,
     submittedLength: '',
-    submitted_width: ''
+    submitted_width: '',
+    length_unit: '',
+    width_unit: '',
   })
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
@@ -128,7 +130,7 @@ const RectangularArea = () => {
                   area: area,
                   submittedLength: submittedLength,
                   submitted_width: submitted_width,
-                  units: units
+                  unit: units
                 })
               }
 
@@ -140,7 +142,9 @@ const RectangularArea = () => {
                   lengthInWidthUnit: lengthInWidthUnit,
                   $widthInlengthUnit: $widthInlengthUnit,
                   submittedLength: submittedLength,
-                  submitted_width: submitted_width
+                  submitted_width: submitted_width,
+                  length_unit,
+                  width_unit,
                 })
               }
               if (success === true) {
@@ -222,9 +226,9 @@ const RectangularArea = () => {
                 </Latex>
               </Typography>
 
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" className='final-answer'>
                 <Latex displayMode={false}>
-                  {`$A = ${rectResult.area} ${rectResult.units}^{2}$`}
+                  {`$A = ${rectResult.area} ${rectResult.unit}^{2}$`}
                 </Latex>
               </Typography>
             </div>
@@ -233,13 +237,19 @@ const RectangularArea = () => {
             <div className="text-wrap">
               <Typography variant="subtitle1">
                 <Latex displayMode={false}>
-                  {`$A = ${rectResult.submittedLength} * ${rectResult.submitted_width}$`}
+                  {`$${rectResultTwo.submitted_width}${rectResultTwo.width_unit} = ${rectResultTwo.$widthInlengthUnit}${rectResultTwo.length_unit}$`}
                 </Latex>
               </Typography>
 
               <Typography variant="subtitle1">
                 <Latex displayMode={false}>
-                  {`$A = ${rectResultTwo.areaInLengthUnit} ${rectResult.units}^{2}$`}
+                  {`$A = ${rectResultTwo.submittedLength} * ${rectResultTwo.$widthInlengthUnit}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1" className='final-answer'>
+                <Latex displayMode={false}>
+                  {`$A = ${rectResultTwo.areaInLengthUnit} ${rectResultTwo.length_unit}^{2}$`}
                 </Latex>
               </Typography>
 
@@ -251,7 +261,19 @@ const RectangularArea = () => {
 
               <Typography variant="subtitle1">
                 <Latex displayMode={false}>
-                  {`$A = ${rectResultTwo.areaInWidthUnit} ${rectResult.units}^{2}$`}
+                  {`$${rectResultTwo.submittedLength}${rectResultTwo.length_unit} = ${rectResultTwo.lengthInWidthUnit}${rectResultTwo.width_unit}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$A = ${rectResultTwo.lengthInWidthUnit} * ${rectResultTwo.submitted_width}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1" className='final-answer'>
+                <Latex displayMode={false}>
+                  {`$A = ${rectResultTwo.areaInWidthUnit} ${rectResultTwo.width_unit}^{2}$`}
                 </Latex>
               </Typography>
             </div>
