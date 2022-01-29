@@ -29,6 +29,7 @@ import {
   TabPanel,
   CustomDivider,
   PlaceHolder,
+  FieldContainer,
 } from '../../../../custom'
 import {
   finance_icon,
@@ -224,53 +225,55 @@ function LoanCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <FormRow>
-                        <Label title={LABELS.interestRate} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="interest_rate"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.interest_rate}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                      <FieldContainer>
+                        <FormRow>
+                          <Label title={LABELS.interestRate} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="interest_rate"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.interest_rate}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.numberOfMonths} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="number_of_months"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.number_of_months}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.numberOfMonths} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="number_of_months"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.number_of_months}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.presentValue} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="present_value"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.present_value}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.presentValue} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="present_value"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.present_value}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.numberOfYears} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="number_of_years"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.number_of_years}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.numberOfYears} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="number_of_years"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.number_of_years}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
+                      </FieldContainer>
 
                       <FormRow buttons reset={() => resetForm()} />
                     </form>
@@ -329,53 +332,55 @@ function LoanCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <FormRow>
-                        <Label title={LABELS.interestRate} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="interest_rate"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.interest_rate}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                      <FieldContainer>
+                        <FormRow>
+                          <Label title={LABELS.interestRate} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="interest_rate"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.interest_rate}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.predeterminedAmount} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="predetermined_amount"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.predetermined_amount}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.predeterminedAmount} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="predetermined_amount"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.predetermined_amount}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.numberOfMonths} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="number_of_months"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.number_of_months}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.numberOfMonths} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="number_of_months"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.number_of_months}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.numberOfYears} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="number_of_years"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.number_of_years}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.numberOfYears} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="number_of_years"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.number_of_years}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
+                      </FieldContainer>
 
                       <FormRow buttons reset={() => resetForm()} />
                     </form>
@@ -434,54 +439,55 @@ function LoanCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <FormRow>
-                        <Label title={LABELS.interestRate} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="interest_rate"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.interest_rate}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                      <FieldContainer>
+                        <FormRow>
+                          <Label title={LABELS.interestRate} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="interest_rate"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.interest_rate}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.creditCardBalance} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="loan_amount"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.loan_amount}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.creditCardBalance} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="loan_amount"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.loan_amount}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.numberOfMonths} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="number_of_months"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.number_of_months}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.numberOfMonths} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="number_of_months"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.number_of_months}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.numberOfYears} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="number_of_years"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.number_of_years}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
-
+                        <FormRow>
+                          <Label title={LABELS.numberOfYears} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="number_of_years"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.number_of_years}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
+                      </FieldContainer>
 
                       <FormRow buttons reset={() => resetForm()} />
                     </form>
@@ -516,47 +522,44 @@ function LoanCalculator() {
               tabTitle={'Result'}
               animation={resultAnimation}
             >
+              {tabValue === 0 &&
+                <Box sx={{ color: COLORS.text }}>
+                  <Latex displayMode={true}>{LATEX.amortizedLoan}</Latex>
+                  <Typography variant="subtitle1">
+                    Payment Every Month: {amortizedLoanResult.currency}{amortizedLoanResult.paymentEveryMonth}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Payments Total: {amortizedLoanResult.currency}{amortizedLoanResult.totalPayments}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Total Interest: {amortizedLoanResult.currency}{amortizedLoanResult.totalInterest}
+                  </Typography>
+                </Box>
+              }
 
-              <Box className="text-wrap">
-                {tabValue === 0 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Latex displayMode={true}>{LATEX.amortizedLoan}</Latex>
-                    <Typography variant="subtitle1">
-                      Payment Every Month: {amortizedLoanResult.currency}{amortizedLoanResult.paymentEveryMonth}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Payments Total: {amortizedLoanResult.currency}{amortizedLoanResult.totalPayments}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Total Interest: {amortizedLoanResult.currency}{amortizedLoanResult.totalInterest}
-                    </Typography>
-                  </Box>
-                }
+              {tabValue === 1 &&
+                <Box sx={{ color: COLORS.text }}>
+                  <Latex displayMode={true}>{LATEX.bondPayback}</Latex>
+                  <Typography variant="subtitle1">
+                    Your monthly repayments: {bondResult.currency}{bondResult.monthlyRepayments}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Total amount repayments: {bondResult.currency}{bondResult.totalAmountRepayable}
+                  </Typography>
+                </Box>
+              }
 
-                {tabValue === 1 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Latex displayMode={true}>{LATEX.bondPayback}</Latex>
-                    <Typography variant="subtitle1">
-                      Your monthly repayments: {bondResult.currency}{bondResult.monthlyRepayments}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Total amount repayments: {bondResult.currency}{bondResult.totalAmountRepayable}
-                    </Typography>
-                  </Box>
-                }
-
-                {tabValue === 2 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Latex displayMode={true}>{LATEX.deferredPayment}</Latex>
-                    <Typography variant="subtitle1">
-                      Amount due at loan maturity: {deferredResult.currency}{deferredResult.amountDueAtLoanMaturity}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Total interest: {deferredResult.currency}{deferredResult.totalInterest}
-                    </Typography>
-                  </Box>
-                }
-              </Box>
+              {tabValue === 2 &&
+                <Box sx={{ color: COLORS.text }}>
+                  <Latex displayMode={true}>{LATEX.deferredPayment}</Latex>
+                  <Typography variant="subtitle1">
+                    Amount due at loan maturity: {deferredResult.currency}{deferredResult.amountDueAtLoanMaturity}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Total interest: {deferredResult.currency}{deferredResult.totalInterest}
+                  </Typography>
+                </Box>
+              }
             </ResultTabsContainer>
           }
         </Grid>

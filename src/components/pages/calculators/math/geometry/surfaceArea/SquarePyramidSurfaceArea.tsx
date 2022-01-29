@@ -28,7 +28,6 @@ import {
   Image,
   FieldContainer,
 } from '../../../../../custom'
-
 const Latex = require('react-latex');
 
 const SquarePyramidSurfaceArea = () => {
@@ -47,10 +46,10 @@ const SquarePyramidSurfaceArea = () => {
   }));
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
-    base_edge: '',
-    base_edge_unit: '',
+    base: '',
+    base_unit: 'mm',
     height: '',
-    height_unit: ''
+    height_unit: 'mm'
   })
   const [Result, setResult] = React.useState({
     baseSurfaceArea: 0,
@@ -61,7 +60,10 @@ const SquarePyramidSurfaceArea = () => {
   const [resultTwo, setResultTwo] = React.useState({
     areaInBaseUnit: 0,
     areaInHeightUnit: 0,
-    unit: '',
+    base: '',
+    base_unit: '',
+    height: '',
+    height_unit: ''
   })
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
 
@@ -90,14 +92,14 @@ const SquarePyramidSurfaceArea = () => {
         <Formik
           initialValues={initialFormValues}
           onSubmit={async ({
-            base_edge,
-            base_edge_unit,
+            base,
+            base_unit,
             height,
             height_unit
           }, { setSubmitting, resetForm }) => {
             const payload: SquarePyramidSurfaceAreaI = {
-              base_edge,
-              base_edge_unit,
+              base,
+              base_unit,
               height,
               height_unit,
               method: 'SquarePyramidSurfaceArea'
@@ -129,7 +131,10 @@ const SquarePyramidSurfaceArea = () => {
                 setResultTwo({
                   areaInBaseUnit: areaInbaseUnit,
                   areaInHeightUnit: areaInheightUnit,
-                  unit: units,
+                  base,
+                  base_unit,
+                  height,
+                  height_unit,
                 })
               }
               if (success === true) {
@@ -153,17 +158,17 @@ const SquarePyramidSurfaceArea = () => {
                   <Label title={LABELS.baseEdge} />
                   <CustomTextInput
                     type={INPUT_TYPE.text}
-                    id="base_edge"
+                    id="base"
                     placeholder={PLACEHOLDERS.number}
-                    value={values.base_edge}
+                    value={values.base}
                     onChange={handleChange}
                   />
 
                   <CustomSelect
-                    id="base_edge_unit"
+                    id="base_unit"
                     measurement="length"
-                    value={values.base_edge_unit}
-                    onChange={handleChange('base_edge_unit')}
+                    value={values.base_unit}
+                    onChange={handleChange('base_unit')}
                   />
                 </FormRow>
 
@@ -198,42 +203,52 @@ const SquarePyramidSurfaceArea = () => {
           tabTitle={'Result'}
           animation={resultAnimation}
         >
-          <div className="text-center">
-            {selectedResult === true &&
-              <div className="text-wrap">
-                <Latex >{LATEX.squarePyramidSurfArea_base}</Latex>
-                <Latex >{LATEX.squarePyramidSurfArea_lateral}</Latex>
-                <Latex >{LATEX.squarePyramidSurfArea_total}</Latex>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>{LATEX.squarePyramidSurfArea_base}</Latex>
+          </Typography>
 
-                <Typography variant="subtitle1">
-                  Base SA = {Result.baseSurfaceArea}{Result.unit}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle1">
-                  Lateral SA = {Result.lateralSurfaceArea}{Result.unit}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle1">
-                  Total SA = {Result.totalSurfaceArea}{Result.unit}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-            {selectedResult === false &&
-              <div className="text-wrap">
-                <Latex >{LATEX.squarePyramidSurfArea_base}</Latex>
-                <Latex >{LATEX.squarePyramidSurfArea_lateral}</Latex>
-                <Latex >{LATEX.squarePyramidSurfArea_total}</Latex>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>{LATEX.squarePyramidSurfArea_lateral}</Latex>
+          </Typography>
 
-                <Typography variant="subtitle1">
-                  SA = {resultTwo.areaInBaseUnit}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle2">
-                  or
-                </Typography>
-                <Typography variant="subtitle1">
-                  = {resultTwo.areaInHeightUnit}<sup>2</sup>
-                </Typography>
-              </div>
-            }
-          </div>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>{LATEX.squarePyramidSurfArea_total}</Latex>
+          </Typography>
+
+          <Typography gutterBottom />
+
+          {selectedResult === true &&
+            <div>
+
+              <Typography variant="subtitle1">
+                Base SA = {Result.baseSurfaceArea}{Result.unit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                Lateral SA = {Result.lateralSurfaceArea}{Result.unit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle1">
+                Total SA = {Result.totalSurfaceArea}{Result.unit}<sup>2</sup>
+              </Typography>
+            </div>
+          }
+          {selectedResult === false &&
+            <div >
+              <Latex >{LATEX.squarePyramidSurfArea_base}</Latex>
+              <Latex >{LATEX.squarePyramidSurfArea_lateral}</Latex>
+              <Latex >{LATEX.squarePyramidSurfArea_total}</Latex>
+
+              <Typography variant="subtitle1">
+                SA = {resultTwo.areaInBaseUnit}<sup>2</sup>
+              </Typography>
+              <Typography variant="subtitle2">
+                or
+              </Typography>
+              <Typography variant="subtitle1">
+                = {resultTwo.areaInHeightUnit}<sup>2</sup>
+              </Typography>
+            </div>
+          }
+
         </ResultTabsContainer>
       }
     </>

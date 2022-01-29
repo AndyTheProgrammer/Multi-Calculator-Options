@@ -24,6 +24,7 @@ import {
   FormTabsContainer,
   ResultTabsContainer,
   PlaceHolder,
+  FieldContainer,
 } from '../../../../custom'
 
 const PaybackWithinTimeframe = () => {
@@ -121,53 +122,55 @@ const PaybackWithinTimeframe = () => {
             >
               {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                 <form onSubmit={handleSubmit} className="form-container">
-                  <FormRow>
-                    <Label title={LABELS.interestRate} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="interest_rate"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.interest_rate}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                  <FieldContainer>
+                    <FormRow>
+                      <Label title={LABELS.interestRate} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="interest_rate"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.interest_rate}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
 
-                  <FormRow>
-                    <Label title={LABELS.months} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="months"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.months}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                    <FormRow>
+                      <Label title={LABELS.months} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="months"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.months}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
 
-                  <FormRow>
-                    <Label title={LABELS.creditCardBalance} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="credit_card_balance"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.credit_card_balance}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                    <FormRow>
+                      <Label title={LABELS.creditCardBalance} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="credit_card_balance"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.credit_card_balance}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
 
-                  <FormRow>
-                    <Label title={LABELS.year} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="year"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.year}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                    <FormRow>
+                      <Label title={LABELS.year} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="year"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.year}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
+                  </FieldContainer>
 
                   <FormRow buttons reset={() => resetForm()} />
                 </form>

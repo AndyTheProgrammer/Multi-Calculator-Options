@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-use-before-define
-import React from 'react'
-import { Typography } from '@material-ui/core'
-import { Formik } from 'formik'
-import { useSpring, animated } from 'react-spring'
+import React from 'react';
+import { Typography } from '@material-ui/core';
+import { Formik } from 'formik';
+import { useSpring, animated } from 'react-spring';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
-import { CubeAreaI } from '../../../../../../types'
-import { calculateMath } from '../../../../../../services/AppCalculatorsApi'
+import { CubeAreaI } from '../../../../../../types';
+import { calculateMath } from '../../../../../../services/AppCalculatorsApi';
 import { cube } from '../../../../../../common/assets';
 import {
   CALCULATORS,
@@ -17,7 +17,7 @@ import {
   LATEX,
   SURFACEAREA_CALCULATORS,
   GEOMETRY_PLACEHOLDERS,
-} from '../../../../../../common/shared'
+} from '../../../../../../common/shared';
 import {
   CustomTextInput,
   CustomSelect,
@@ -28,7 +28,8 @@ import {
   PlaceHolder,
   Image,
   FieldContainer,
-} from '../../../../../custom'
+} from '../../../../../custom';
+const Latex = require('react-latex');
 
 const CubeSurfArea = () => {
   const theme = useTheme();
@@ -47,11 +48,12 @@ const CubeSurfArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     edge_length: '',
-    edge_unit: ''
+    edge_unit: 'mm'
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
     area: 0,
+    edge_length: '',
     unit: ''
   })
 
@@ -97,7 +99,6 @@ const CubeSurfArea = () => {
               const {
                 cubeSurfaceArea,
                 unit,
-                edge_length,
                 unitType,
                 area
               } = CubeSurfaceArea
@@ -106,7 +107,8 @@ const CubeSurfArea = () => {
                 setResult({
                   surfaceArea: cubeSurfaceArea,
                   area: area,
-                  unit: unit
+                  unit: unit,
+                  edge_length,
                 })
               }
               if (success === true) {
@@ -158,11 +160,24 @@ const CubeSurfArea = () => {
           animation={resultAnimation}
           latex={LATEX.cubeSurfArea}
         >
-          <div className="text-wrap text-center">
-            <Typography variant="subtitle1">
-              SA = {Result.surfaceArea}{Result.unit}<sup>2</sup>
-            </Typography>
-          </div>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$ = 6 * ${Result.edge_length}^{2}$`}
+            </Latex>
+          </Typography>
+
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>
+              {`$ = 6 * ${parseFloat(Result.edge_length) * parseFloat(Result.edge_length)}$`}
+            </Latex>
+          </Typography>
+
+          <Typography variant="subtitle1" className='final-answer'>
+            <Latex displayMode={false}>
+              {`$ = ${Result.surfaceArea}${Result.unit}^{2} $`}
+            </Latex>
+          </Typography>
+
         </ResultTabsContainer>
       }
     </>

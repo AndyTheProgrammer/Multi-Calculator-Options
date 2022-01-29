@@ -48,11 +48,11 @@ const ConicalFrustrumSurfaceArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     top_radius: '',
-    top_radius_unit: '',
+    top_radius_unit: 'mm',
     bottom_radius: '',
-    bottom_radius_unit: '',
+    bottom_radius_unit: 'mm',
     height: '',
-    height_unit: ''
+    height_unit: 'mm'
   })
   const [Result, setResult] = React.useState({
     totalSurfaceArea: 0,
@@ -73,8 +73,13 @@ const ConicalFrustrumSurfaceArea = () => {
     totalSurfaceAreaInin: 0,
     top_radiusInin: 0,
     bottom_radiusInin: 0,
-    heightInin: 0
-
+    heightInin: 0,
+    top_radius: '',
+    top_radius_unit: '',
+    bottom_radius: '',
+    bottom_radius_unit: '',
+    height: '',
+    height_unit: '',
   })
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
@@ -121,9 +126,12 @@ const ConicalFrustrumSurfaceArea = () => {
               method: 'ConicalFrustumSurfaceArea'
             }
             console.log(JSON.stringify(payload))
+
             try {
               const { success, payload: ConicalFrustumSurfaceArea } = await calculateMath(payload)
               console.log('=====>', ConicalFrustumSurfaceArea)
+
+              // needs refactoring
               const {
                 totalSurfaceArea,
                 lateralSurfaceArea,
@@ -142,6 +150,12 @@ const ConicalFrustrumSurfaceArea = () => {
                 top_radiusInin,
                 bottom_radiusInin,
                 heightInin,
+                top_radius,
+                top_radius_unit,
+                bottom_radius,
+                bottom_radius_unit,
+                height,
+                height_unit,
               } = ConicalFrustumSurfaceArea
               if (typeof ConicalFrustumSurfaceArea === 'object' && unitType === true) {
                 setSelectedResult(unitType)
@@ -168,6 +182,12 @@ const ConicalFrustrumSurfaceArea = () => {
                   top_radiusInin,
                   bottom_radiusInin,
                   heightInin,
+                  top_radius,
+                  top_radius_unit,
+                  bottom_radius,
+                  bottom_radius_unit,
+                  height,
+                  height_unit,
                 })
               }
               if (success === true) {

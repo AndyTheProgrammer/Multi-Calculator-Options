@@ -23,7 +23,8 @@ import {
   FormRow,
   FormTabsContainer,
   ResultTabsContainer,
-  PlaceHolder
+  PlaceHolder,
+  FieldContainer
 } from '../../../../custom'
 
 const PayBackACertainAmount = () => {
@@ -49,7 +50,7 @@ const PayBackACertainAmount = () => {
   })
   const [Result, setResult] = React.useState({
     monthlyPay: 0,
-    $profit: 0,
+    profit: 0,
     totalPayments: 0,
     currency: ''
   })
@@ -97,7 +98,7 @@ const PayBackACertainAmount = () => {
                   if (typeof paybackACertainAmount === 'object') {
                     setResult({
                       monthlyPay: monthlyPay,
-                      $profit: $profit,
+                      profit: $profit,
                       totalPayments: totalPayments,
                       currency: currency
                     })
@@ -122,41 +123,43 @@ const PayBackACertainAmount = () => {
             >
               {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                 <form onSubmit={handleSubmit} className="form-container">
-                  <FormRow>
-                    <Label title={LABELS.interestRate} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="interest_rate"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.interest_rate}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                  <FieldContainer>
+                    <FormRow>
+                      <Label title={LABELS.interestRate} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="interest_rate"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.interest_rate}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
 
-                  <FormRow>
-                    <Label title={LABELS.creditCardBalance} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="credit_card_balance"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.credit_card_balance}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                    <FormRow>
+                      <Label title={LABELS.creditCardBalance} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="credit_card_balance"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.credit_card_balance}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
 
-                  <FormRow>
-                    <Label title={LABELS.monthlyPayment} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="monthly_payment"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.monthly_payment}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                    <FormRow>
+                      <Label title={LABELS.monthlyPayment} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="monthly_payment"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.monthly_payment}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
+                  </FieldContainer>
 
                   <FormRow buttons reset={() => resetForm()} />
                 </form>
@@ -166,19 +169,19 @@ const PayBackACertainAmount = () => {
 
           {/* Results grid */}
           {answer === true &&
-            <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-              <div className="mb-3">
-                <Typography variant="subtitle1">
-                  Monthly pay: {Result.currency}{Result.monthlyPay}
-                </Typography>
-                <Typography variant="subtitle1">
-                  Profit: {Result.currency}{Result.$profit}
-                </Typography>
-                <Typography variant="subtitle1">
-                  Total payments: {Result.currency}{Result.totalPayments}
-                </Typography>
-              </div>
-
+            <ResultTabsContainer
+              tabTitle={'Result'}
+              animation={resultAnimation}
+            >
+              <Typography variant="subtitle1">
+                Monthly pay: {Result.currency}{Result.monthlyPay}
+              </Typography>
+              <Typography variant="subtitle1">
+                Profit: {Result.currency}{Result.profit}
+              </Typography>
+              <Typography variant="subtitle1">
+                Total payments: {Result.currency}{Result.totalPayments}
+              </Typography>
             </ResultTabsContainer>
           }
         </Grid>

@@ -23,6 +23,7 @@ import {
   FormTabsContainer,
   ResultTabsContainer,
   PlaceHolder,
+  FieldContainer,
 } from '../../../../custom'
 import {
   finance_icon,
@@ -120,29 +121,31 @@ const InflationCalculatorCpiData = () => {
             >
               {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                 <form onSubmit={handleSubmit} className="form-container">
-                  <FormRow>
-                    <Label title={LABELS.currentPrice} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="current_price"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.current_price}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                  <FieldContainer>
+                    <FormRow>
+                      <Label title={LABELS.currentPrice} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="current_price"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.current_price}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
 
-                  <FormRow>
-                    <Label title={LABELS.priceInBase} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="price_in_base"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.price_in_base}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                    <FormRow>
+                      <Label title={LABELS.priceInBase} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="price_in_base"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.price_in_base}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
+                  </FieldContainer>
 
                   <FormRow buttons reset={() => resetForm()} />
                 </form>
@@ -153,9 +156,9 @@ const InflationCalculatorCpiData = () => {
           {/* Results grid */}
           {answer === true &&
             <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-              <div className="mb-3 text-center">
-                <Typography variant="subtitle1"> Inflation: {Result.currency}{Result.inflation}</Typography>
-              </div>
+              <Typography variant="subtitle1">
+                Inflation: {Result.currency}{Result.inflation}
+              </Typography>
             </ResultTabsContainer>
           }
         </Grid>

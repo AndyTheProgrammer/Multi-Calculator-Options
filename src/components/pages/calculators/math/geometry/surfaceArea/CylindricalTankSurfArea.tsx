@@ -48,23 +48,35 @@ const CylindricalTankSurfArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     radius: "",
-    radius_unit: "",
+    radius_unit: "mm",
     height: "",
-    height_unit: "",
+    height_unit: "mm",
   })
+
   const [Result, setResult] = React.useState({
     baseSurfaceArea: 0,
     lateralSurfaceArea: 0,
     totalSurfaceArea: 0,
-    units: ''
+    unit: '',
+    radius: '',
+    radius_unit: '',
+    height: '',
+    height_unit: '',
   })
+
   const [resultTwo, setResultTwo] = React.useState({
     heightUnitBaseSurfaceArea: 0,
     heightUnitLateralSurfaceArea: 0,
     heightUnitTotalArea: 0,
     radiusUnitBaseSurfaceArea: 0,
     radiusUnitLateralSurfaceArea: 0,
-    radiusUnitTotalArea: 0
+    radiusUnitTotalArea: 0,
+    radius: '',
+    radius_unit: '',
+    height: '',
+    height_unit: '',
+    heightToRadiusUnit: '',
+    radiusToHeightUnit: '',
   })
 
   const [selectedResult, setSelectedResult] = React.useState<boolean>(true)
@@ -122,6 +134,8 @@ const CylindricalTankSurfArea = () => {
                 radiusUnitBaseSurfaceArea,
                 radiusUnitLateralSurfaceArea,
                 radiusUnitTotalArea,
+                heightToRadiusUnit,
+                radiusToHeightUnit,
               } = cylindricalTank
               if (typeof cylindricalTank === 'object' && unitType === true) {
                 setSelectedResult(unitType)
@@ -129,7 +143,11 @@ const CylindricalTankSurfArea = () => {
                   baseSurfaceArea: base_surface_area,
                   lateralSurfaceArea: lateral_surface_area,
                   totalSurfaceArea: cylindricalTankSurfaceArea,
-                  units: units
+                  unit: units,
+                  radius,
+                  radius_unit,
+                  height,
+                  height_unit,
                 })
               }
 
@@ -142,6 +160,12 @@ const CylindricalTankSurfArea = () => {
                   radiusUnitBaseSurfaceArea,
                   radiusUnitLateralSurfaceArea,
                   radiusUnitTotalArea,
+                  radius,
+                  radius_unit,
+                  height,
+                  height_unit,
+                  heightToRadiusUnit,
+                  radiusToHeightUnit,
                 })
               }
               if (success === true) {
@@ -206,55 +230,201 @@ const CylindricalTankSurfArea = () => {
 
       {/* Results grid */}
       {answer === true &&
-        <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
+        <ResultTabsContainer
+          tabTitle={'Result'}
+          animation={resultAnimation}
+        >
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>{LATEX.cylinderSurfArea_base}</Latex>
+          </Typography>
 
-          <div className='text-center'>
-            {selectedResult ? (
-              <div className="text-wrap">
-                <Latex displayMode={true}>{LATEX.cylinderSurfArea_base}</Latex>
-                <Latex displayMode={true}>{LATEX.cylinderSurfArea_lateral}</Latex>
-                <Latex displayMode={true}>{LATEX.cylinderSurfArea_total}</Latex>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>{LATEX.cylinderSurfArea_lateral}</Latex>
+          </Typography>
 
-                <Typography variant="subtitle1">
-                  Base SA = {Result.baseSurfaceArea}{Result.units}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle1">
-                  Lateral SA = {Result.lateralSurfaceArea}{Result.units}<sup>2</sup>
-                </Typography>
-                <Typography variant="subtitle1">
-                  Total SA = {Result.totalSurfaceArea}{Result.units}<sup>2</sup>
-                </Typography>
-              </div>
+          <Typography variant="subtitle1">
+            <Latex displayMode={false}>{LATEX.cylinderSurfArea_total}</Latex>
+          </Typography>
 
-            ) : (
+          <Typography variant="subtitle2">
+            <Latex displayMode={false}>
+              {`$Taking \\ \\pi \\ as \\ 3.14159265$`}
+            </Latex>
+          </Typography>
 
-              <div className="text-wrap">
-                <Latex displayMode={true}>{LATEX.cylinderSurfArea_base}</Latex>
-                <Latex displayMode={true}>{LATEX.cylinderSurfArea_lateral}</Latex>
-                <Latex displayMode={true}>{LATEX.cylinderSurfArea_total}</Latex>
+          <Typography gutterBottom />
 
-                <Typography variant="subtitle1">
-                  Base SA = {resultTwo.radiusUnitBaseSurfaceArea}
-                </Typography>
-                <Typography variant="subtitle1">
-                  Lateral SA = {resultTwo.radiusUnitLateralSurfaceArea}
-                </Typography>
-                <Typography variant="subtitle1">
-                  Total SA = {resultTwo.radiusUnitTotalArea}
-                </Typography>
+          {selectedResult ? (
+            <div>
+              {/* Base surface area */}
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$Base \\ SA = 2\\pi ${Result.radius}^{2}$`}
+                </Latex>
+              </Typography>
 
-                <Typography variant="subtitle1">
-                  Base SA = {resultTwo.heightUnitBaseSurfaceArea}
-                </Typography>
-                <Typography variant="subtitle1">
-                  Lateral SA = {resultTwo.heightUnitLateralSurfaceArea}
-                </Typography>
-                <Typography variant="subtitle1">
-                  Total SA = {resultTwo.heightUnitTotalArea}
-                </Typography>
-              </div>
-            )}
-          </div>
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ = \\pi ${2 * parseFloat(Result.radius) * parseFloat(Result.radius)}$`}
+                </Latex>
+              </Typography>
+
+              {/* Base answer */}
+              <Typography variant="subtitle2" className='final-answer' gutterBottom>
+                <Latex displayMode={false}>
+                  {`$= ${Result.baseSurfaceArea}${Result.unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              {/* lateral surface area */}
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$Lateral \\ SA = 2 \\pi ${Result.height}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$= \\pi ${parseFloat(Result.height) * 2}$`}
+                </Latex>
+              </Typography>
+
+              {/* lateral answer */}
+              <Typography variant="subtitle2" className='final-answer' gutterBottom>
+                <Latex displayMode={false}>
+                  {`$= ${Result.lateralSurfaceArea}${Result.unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              {/* Answer */}
+              <Typography variant="subtitle1" className='final-answer'>
+                <Latex displayMode={false}>
+                  {`$Total \\ SA = ${Result.totalSurfaceArea}${Result.unit}^{2}$`}
+                </Latex>
+              </Typography>
+            </div>
+
+          ) : (
+
+            <div >
+              {/* Radius */}
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$${resultTwo.height}${resultTwo.height_unit} = ${resultTwo.heightToRadiusUnit}${resultTwo.radius_unit}$`}
+                </Latex>
+              </Typography>
+
+              {/* Base surface area */}
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$Base \\ SA = 2 \\pi ${resultTwo.heightToRadiusUnit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ = \\pi ${2 * parseFloat(resultTwo.heightToRadiusUnit) * parseFloat(resultTwo.heightToRadiusUnit)}$`}
+                </Latex>
+              </Typography>
+
+              {/* Base answer */}
+              <Typography variant="subtitle2" className='final-answer' gutterBottom>
+                <Latex displayMode={false}>
+                  {`$= ${resultTwo.radiusUnitBaseSurfaceArea}${resultTwo.radius_unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              {/* lateral surface area */}
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$Lateral \\ SA = 2\\pi ${resultTwo.heightToRadiusUnit}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$= \\pi ${parseFloat(resultTwo.heightToRadiusUnit) * 2}$`}
+                </Latex>
+              </Typography>
+
+              {/* lateral answer */}
+              <Typography variant="subtitle2" className='final-answer' gutterBottom>
+                <Latex displayMode={false}>
+                  {`$= ${resultTwo.radiusUnitLateralSurfaceArea}${resultTwo.radius_unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              {/* Answer */}
+              <Typography variant="subtitle1" className='final-answer'>
+                <Latex displayMode={false}>
+                  {`$Total \\ SA = ${resultTwo.radiusUnitTotalArea}${resultTwo.radius_unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={true}>
+                  {`$or$`}
+                </Latex>
+              </Typography>
+
+
+              {/* Height */}
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$${resultTwo.radius}${resultTwo.radius_unit} = ${resultTwo.radiusToHeightUnit}${resultTwo.height_unit}$`}
+                </Latex>
+              </Typography>
+
+              {/* Base surface area */}
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$Base \\ SA = 2 \\pi ${resultTwo.radiusToHeightUnit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$ = \\pi ${2 * parseFloat(resultTwo.radiusToHeightUnit) * parseFloat(resultTwo.radiusToHeightUnit)}$`}
+                </Latex>
+              </Typography>
+
+              {/* Base answer */}
+              <Typography variant="subtitle2" className='final-answer' gutterBottom>
+                <Latex displayMode={false}>
+                  {`$= ${resultTwo.heightUnitBaseSurfaceArea}${resultTwo.height_unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              {/* lateral surface area */}
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$Lateral \\ SA = 2 \\pi ${resultTwo.height}$`}
+                </Latex>
+              </Typography>
+
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {`$= 2 \\pi ${parseFloat(resultTwo.height) * 2}$`}
+                </Latex>
+              </Typography>
+
+              {/* lateral answer */}
+              <Typography variant="subtitle2" className='final-answer' gutterBottom>
+                <Latex displayMode={false}>
+                  {`$= ${resultTwo.heightUnitLateralSurfaceArea}${resultTwo.height_unit}^{2}$`}
+                </Latex>
+              </Typography>
+
+              {/* Answer */}
+              <Typography variant="subtitle1" className='final-answer'>
+                <Latex displayMode={false}>
+                  {`$Total \\ SA = ${resultTwo.heightUnitTotalArea}${resultTwo.height_unit}^{2}$`}
+                </Latex>
+              </Typography>
+            </div>
+          )}
+
         </ResultTabsContainer>
       }
     </>

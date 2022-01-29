@@ -48,8 +48,8 @@ export interface CylindricalTankAreaI {
 }
 
 export interface SquarePyramidSurfaceAreaI {
-  base_edge: string;
-  base_edge_unit: string;
+  base: string;
+  base_unit: string;
   height: string;
   height_unit: string;
   method: string;

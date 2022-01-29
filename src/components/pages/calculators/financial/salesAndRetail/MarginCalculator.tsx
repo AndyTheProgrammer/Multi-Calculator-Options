@@ -28,6 +28,7 @@ import {
   StyledTabs,
   TabPanel,
   PlaceHolder,
+  FieldContainer,
 } from '../../../../custom'
 import {
   finance_icon,
@@ -183,30 +184,31 @@ function MarginCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <FormRow>
-                        <Label title={LABELS.salesRevenue} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="sales_revenue"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.sales_revenue}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                      <FieldContainer>
+                        <FormRow>
+                          <Label title={LABELS.salesRevenue} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="sales_revenue"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.sales_revenue}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.cost} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="cost"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.cost}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
-
+                        <FormRow>
+                          <Label title={LABELS.cost} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="cost"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.cost}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
+                      </FieldContainer>
 
                       <FormRow buttons reset={() => resetForm()} />
                     </form>
@@ -262,41 +264,43 @@ function MarginCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <FormRow>
-                        <Label title={LABELS.marginRequirement} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="margin_requirement"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.margin_requirement}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                      <FieldContainer>
+                        <FormRow>
+                          <Label title={LABELS.marginRequirement} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="margin_requirement"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.margin_requirement}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.stockPrice} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="stock_price"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.stock_price}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.stockPrice} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="stock_price"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.stock_price}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.shares} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="shares"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.shares}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.shares} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="shares"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.shares}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
+                      </FieldContainer>
 
                       <FormRow buttons reset={() => resetForm()} />
                     </form>
@@ -312,36 +316,34 @@ function MarginCalculator() {
               tabTitle={'Result'}
               animation={resultAnimation}
             >
+              <Typography variant="subtitle1">
+                <Latex displayMode={false}>
+                  {LATEX.profitMargin}
+                </Latex>
+              </Typography>
 
-              <Box className="text-wrap text-center">
-                {tabValue === 0 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Latex displayMode={true}>{LATEX.profitMargin}</Latex>
+              {tabValue === 0 &&
+                <Box>
+                  <Typography variant="subtitle1">
+                    Profit margin: {profitResult.profitMargin}%
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Gross profit: {profitResult.currency}{profitResult.grossProfit}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Mark up: {profitResult.markUp}%
+                  </Typography>
 
-                    <Typography variant="subtitle1">
-                      Profit margin: {profitResult.profitMargin}%
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Gross profit: {profitResult.currency}{profitResult.grossProfit}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Mark up: {profitResult.markUp}%
-                    </Typography>
+                </Box>
+              }
 
-                  </Box>
-                }
-
-                {tabValue === 1 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Latex displayMode={true}>{LATEX.stockTradinfMargin}</Latex>
-
-                    <Typography variant="subtitle1">
-                      Amount required: {stockResult.currency}{stockResult.amountRequired}
-                    </Typography>
-
-                  </Box>
-                }
-              </Box>
+              {tabValue === 1 &&
+                <Box>
+                  <Typography variant="subtitle1">
+                    Amount required: {stockResult.currency}{stockResult.amountRequired}
+                  </Typography>
+                </Box>
+              }
             </ResultTabsContainer>
           }
         </Grid>

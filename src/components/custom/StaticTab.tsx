@@ -20,13 +20,14 @@ function StaticTab(props: any) {
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '50%',
+        height: 29,
         //padding: 1,
       }}
       className="form-card div-link"
     >
       <Typography
         sx={{
-          fontSize: SIZES.defaultFont
+          fontSize: '14px !important'
         }}
       >
         {label}

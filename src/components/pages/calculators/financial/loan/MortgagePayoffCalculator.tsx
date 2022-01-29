@@ -28,6 +28,7 @@ import {
   StyledTabs,
   TabPanel,
   PlaceHolder,
+  FieldContainer,
 } from '../../../../custom'
 import {
   finance_icon,
@@ -195,53 +196,55 @@ function MortgagePayoffCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <FormRow>
-                        <Label title={LABELS.interestRate} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="interest_rate"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.interest_rate}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                      <FieldContainer>
+                        <FormRow>
+                          <Label title={LABELS.interestRate} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="interest_rate"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.interest_rate}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.paymentsMade} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="payments_made_years"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.payments_made_years}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.paymentsMade} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="payments_made_years"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.payments_made_years}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.totalPaymentsperYear} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="total_payments_years"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.total_payments_years}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.totalPaymentsperYear} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="total_payments_years"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.total_payments_years}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.loanAmount} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="loan_amount"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.loan_amount}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.loanAmount} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="loan_amount"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.loan_amount}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
+                      </FieldContainer>
 
                       <FormRow buttons reset={() => resetForm()} />
                     </form>
@@ -298,41 +301,43 @@ function MortgagePayoffCalculator() {
                 >
                   {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                     <form onSubmit={handleSubmit} className="form-container">
-                      <FormRow>
-                        <Label title={LABELS.interestRate} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="interest_rate"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.interest_rate}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                      <FieldContainer>
+                        <FormRow>
+                          <Label title={LABELS.interestRate} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="interest_rate"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.interest_rate}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.principalBalance} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="principal_balance"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.principal_balance}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.principalBalance} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="principal_balance"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.principal_balance}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
 
-                      <FormRow>
-                        <Label title={LABELS.monthlyPayment} />
-                        <CustomTextInput
-                          col
-                          type={INPUT_TYPE.text}
-                          id="monthly_payment"
-                          placeholder={PLACEHOLDERS.number}
-                          value={values.monthly_payment}
-                          onChange={handleChange}
-                        />
-                      </FormRow>
+                        <FormRow>
+                          <Label title={LABELS.monthlyPayment} />
+                          <CustomTextInput
+                            col
+                            type={INPUT_TYPE.text}
+                            id="monthly_payment"
+                            placeholder={PLACEHOLDERS.number}
+                            value={values.monthly_payment}
+                            onChange={handleChange}
+                          />
+                        </FormRow>
+                      </FieldContainer>
 
                       <FormRow buttons reset={() => resetForm()} />
                     </form>
@@ -349,27 +354,24 @@ function MortgagePayoffCalculator() {
               tabTitle={'Result'}
               animation={resultAnimation}
             >
+              {tabValue === 0 &&
+                <Box>
+                  <Typography variant="subtitle1">
+                    Balance: {knownResult.currency}{knownResult.balance}
+                  </Typography>
+                </Box>
+              }
 
-              <Box className="text-wrap">
-                {tabValue === 0 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Typography variant="subtitle1">
-                      Balance: {knownResult.currency}{knownResult.balance}
-                    </Typography>
-                  </Box>
-                }
-
-                {tabValue === 1 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Typography variant="subtitle1">
-                      Answer: {unknownResult.answer}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Payoff in: {unknownResult.years} years and {unknownResult.months} months
-                    </Typography>
-                  </Box>
-                }
-              </Box>
+              {tabValue === 1 &&
+                <Box>
+                  <Typography variant="subtitle1">
+                    Answer: {unknownResult.answer}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    Payoff in: {unknownResult.years} years and {unknownResult.months} months
+                  </Typography>
+                </Box>
+              }
             </ResultTabsContainer>
           }
 

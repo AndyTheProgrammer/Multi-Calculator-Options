@@ -30,6 +30,8 @@ import {
   StyledTabs,
   TabPanel,
   PlaceHolder,
+  FormRow,
+  FieldContainer,
 } from '../../../../custom'
 
 function a11yProps(index: any) {
@@ -191,52 +193,45 @@ function SampleSizeCalculator() {
                   >
                     {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                       <form onSubmit={handleSubmit} className="form-container">
+                        <FieldContainer>
+                          <FormRow>
+                            <Label title={LABELS.confidenceLevel} />
+                            <CustomTextInput
+                              //  col
+                              type={INPUT_TYPE.text}
+                              id="confidence_level"
+                              placeholder={PLACEHOLDERS.number}
+                              value={values.confidence_level}
+                              onChange={handleChange}
+                            />
+                          </FormRow>
 
-                        <div className="form-row">
-                          <Label title={LABELS.confidenceLevel} />
-                          <CustomTextInput
-                            col
-                            type={INPUT_TYPE.text}
-                            id="confidence_level"
-                            placeholder={PLACEHOLDERS.number}
-                            value={values.confidence_level}
-                            onChange={handleChange}
-                          />
-                        </div>
+                          <FormRow>
+                            <Label title={LABELS.marginOfError} />
+                            <CustomTextInput
+                              // col
+                              type={INPUT_TYPE.text}
+                              id="margin_of_error"
+                              placeholder={PLACEHOLDERS.number}
+                              value={values.margin_of_error}
+                              onChange={handleChange}
+                            />
+                          </FormRow>
 
-                        <div className="form-row">
-                          <Label title={LABELS.populationProportion} />
-                          <CustomTextInput
-                            col
-                            type={INPUT_TYPE.text}
-                            id="population_proportion"
-                            placeholder={PLACEHOLDERS.number}
-                            value={values.population_proportion}
-                            onChange={handleChange}
-                          />
-                        </div>
+                          <FormRow>
+                            <Label title={LABELS.populationProportion} />
+                            <CustomTextInput
+                              //   col
+                              type={INPUT_TYPE.text}
+                              id="population_proportion"
+                              placeholder={PLACEHOLDERS.number}
+                              value={values.population_proportion}
+                              onChange={handleChange}
+                            />
+                          </FormRow>
+                        </FieldContainer>
 
-                        <div className="form-row">
-                          <Label title={LABELS.marginOfError} />
-                          <CustomTextInput
-                            col
-                            type={INPUT_TYPE.text}
-                            id="margin_of_error"
-                            placeholder={PLACEHOLDERS.number}
-                            value={values.margin_of_error}
-                            onChange={handleChange}
-                          />
-                        </div>
-
-                        <div
-                          className="form-row"
-                          style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                        >
-                          <CustomBtn />
-                          <CustomResetBtn
-                            onHandleClick={() => resetForm()}
-                          />
-                        </div>
+                        <FormRow buttons reset={() => resetForm()} />
                       </form>
                     )}
                   </Formik>
@@ -293,51 +288,45 @@ function SampleSizeCalculator() {
                   >
                     {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                       <form onSubmit={handleSubmit} className="form-container">
-                        <div className="form-row">
-                          <Label title={LABELS.confidenceLevel} />
-                          <CustomTextInput
-                            col
-                            type={INPUT_TYPE.text}
-                            id="confidence_level"
-                            placeholder={PLACEHOLDERS.number}
-                            value={values.confidence_level}
-                            onChange={handleChange}
-                          />
-                        </div>
+                        <FieldContainer>
+                          <FormRow>
+                            <Label title={LABELS.confidenceLevel} />
+                            <CustomTextInput
+                              //  col
+                              type={INPUT_TYPE.text}
+                              id="confidence_level"
+                              placeholder={PLACEHOLDERS.number}
+                              value={values.confidence_level}
+                              onChange={handleChange}
+                            />
+                          </FormRow>
 
-                        <div className="form-row">
-                          <Label title={LABELS.populationProportion} />
-                          <CustomTextInput
-                            col
-                            type={INPUT_TYPE.text}
-                            id="population_proportion"
-                            placeholder={PLACEHOLDERS.number}
-                            value={values.population_proportion}
-                            onChange={handleChange}
-                          />
-                        </div>
+                          <FormRow>
+                            <Label title={LABELS.sampleSize} />
+                            <CustomTextInput
+                              //  col
+                              type={INPUT_TYPE.text}
+                              id="sample_size"
+                              placeholder={PLACEHOLDERS.number}
+                              value={values.sample_size}
+                              onChange={handleChange}
+                            />
+                          </FormRow>
 
-                        <div className="form-row">
-                          <Label title={LABELS.sampleSize} />
-                          <CustomTextInput
-                            col
-                            type={INPUT_TYPE.text}
-                            id="sample_size"
-                            placeholder={PLACEHOLDERS.number}
-                            value={values.sample_size}
-                            onChange={handleChange}
-                          />
-                        </div>
+                          <FormRow>
+                            <Label title={LABELS.populationProportion} />
+                            <CustomTextInput
+                              //   col
+                              type={INPUT_TYPE.text}
+                              id="population_proportion"
+                              placeholder={PLACEHOLDERS.number}
+                              value={values.population_proportion}
+                              onChange={handleChange}
+                            />
+                          </FormRow>
+                        </FieldContainer>
 
-                        <div
-                          className="form-row"
-                          style={{ alignItems: 'center', justifyContent: 'space-between' }}
-                        >
-                          <CustomBtn />
-                          <CustomResetBtn
-                            onHandleClick={() => resetForm()}
-                          />
-                        </div>
+                        <FormRow buttons reset={() => resetForm()} />
                       </form>
                     )}
 
@@ -353,25 +342,25 @@ function SampleSizeCalculator() {
               animation={resultAnimation}
             >
 
-              <Box>
-                {tabValue === 0 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Typography variant="subtitle1" className="text-center">
-                      <Latex displayMode={true}>{LATEX.sampleSizeCalc}</Latex>
-                      Sample size: {Result1.sampleSize}
-                    </Typography>
-                  </Box>
-                }
 
-                {tabValue === 1 &&
-                  <Box sx={{ color: COLORS.text }}>
-                    <Typography variant="subtitle1" className="text-center">
-                      <Latex displayMode={true}>{LATEX.marginOfError}</Latex>
-                      Margin of error: {Result2.marginOfError}
-                    </Typography>
-                  </Box>
-                }
-              </Box>
+              {tabValue === 0 &&
+                <Box >
+                  <Typography variant="subtitle1" className="text-center">
+                    <Latex displayMode={true}>{LATEX.sampleSizeCalc}</Latex>
+                    Sample size: {Result1.sampleSize}
+                  </Typography>
+                </Box>
+              }
+
+              {tabValue === 1 &&
+                <Box >
+                  <Typography variant="subtitle1" className="text-center">
+                    <Latex displayMode={true}>{LATEX.marginOfError}</Latex>
+                    Margin of error: {Result2.marginOfError}
+                  </Typography>
+                </Box>
+              }
+
             </ResultTabsContainer>
           }
         </Grid>

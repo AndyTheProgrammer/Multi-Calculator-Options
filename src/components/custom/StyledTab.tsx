@@ -3,7 +3,6 @@ import { makeStyles, withStyles, Theme, createStyles } from '@material-ui/core/s
 import Tab from '@mui/material/Tab';
 
 import { COLORS } from './../../common/shared'
-import { fontSize } from '@mui/system';
 
 interface StyledTabProps {
   label: string;
@@ -12,35 +11,29 @@ interface StyledTabProps {
 const StyledTab = withStyles((theme: Theme) =>
   createStyles({
     root: {
-      color: COLORS.light_text_color,
-      background: COLORS.gradient,
+      color: COLORS.text,
+      background: theme.palette.background.paper,
       opacity: 1,
-      padding: 4,
+      padding: 3,
+      height: 20,
       fontFamily: [
-        'Varela Round',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
         'Roboto',
         '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
       ].join(','),
       '&:nth-child(1)': {
-        borderTopLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        borderRadius: 20,
+        // borderTopLeftRadius: 20,
+        // borderBottomRightRadius: 20,
       },
       '&:nth-child(2)': {
-        borderBottomLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderRadius: 20,
+        // borderBottomLeftRadius: 20,
+        // borderTopRightRadius: 20,
       },
     },
     selected: {
-      color: COLORS.text,
-      background: theme.palette.background.paper,
+      color: 'white !important',
+      background: COLORS.gradient,
     },
 
   }),

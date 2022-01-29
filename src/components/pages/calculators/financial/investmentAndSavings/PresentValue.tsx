@@ -24,6 +24,7 @@ import {
   FormTabsContainer,
   ResultTabsContainer,
   PlaceHolder,
+  FieldContainer,
 } from '../../../../custom'
 
 const PresentValue = () => {
@@ -126,53 +127,55 @@ const PresentValue = () => {
             >
               {({ values, handleChange, handleSubmit, isSubmitting, resetForm }) => (
                 <form onSubmit={handleSubmit} className="form-container">
-                  <FormRow>
-                    <Label title={LABELS.interestRate} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="interest_rate"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.interest_rate}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                  <FieldContainer>
+                    <FormRow>
+                      <Label title={LABELS.interestRate} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="interest_rate"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.interest_rate}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
 
-                  <FormRow>
-                    <Label title={LABELS.predeterminedAmount} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="predetermined_amount"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.predetermined_amount}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                    <FormRow>
+                      <Label title={LABELS.predeterminedAmount} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="predetermined_amount"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.predetermined_amount}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
 
-                  <FormRow>
-                    <Label title={LABELS.numberOfMonths} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="number_of_months"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.number_of_months}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                    <FormRow>
+                      <Label title={LABELS.numberOfMonths} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="number_of_months"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.number_of_months}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
 
-                  <FormRow>
-                    <Label title={LABELS.numberOfYears} />
-                    <CustomTextInput
-                      col
-                      type={INPUT_TYPE.text}
-                      id="number_of_years"
-                      placeholder={PLACEHOLDERS.number}
-                      value={values.number_of_years}
-                      onChange={handleChange}
-                    />
-                  </FormRow>
+                    <FormRow>
+                      <Label title={LABELS.numberOfYears} />
+                      <CustomTextInput
+                        col
+                        type={INPUT_TYPE.text}
+                        id="number_of_years"
+                        placeholder={PLACEHOLDERS.number}
+                        value={values.number_of_years}
+                        onChange={handleChange}
+                      />
+                    </FormRow>
+                  </FieldContainer>
 
                   <FormRow buttons reset={() => resetForm()} />
                 </form>
@@ -182,11 +185,16 @@ const PresentValue = () => {
 
           {/* Results grid */}
           {answer === true &&
-            <ResultTabsContainer tabTitle={'Result'} animation={resultAnimation}>
-              <div className="mb-3">
-                <Typography variant="subtitle1"> Present value: {Result.currency}{Result.PV}</Typography>
-                <Typography variant="subtitle1"> Total interest: {Result.currency}{Result.totalInterest}</Typography>
-              </div>
+            <ResultTabsContainer
+              tabTitle={'Result'}
+              animation={resultAnimation}
+            >
+              <Typography variant="subtitle1">
+                Present value: {Result.currency}{Result.PV}
+              </Typography>
+              <Typography variant="subtitle1">
+                Total interest: {Result.currency}{Result.totalInterest}
+              </Typography>
             </ResultTabsContainer>
           }
         </Grid>

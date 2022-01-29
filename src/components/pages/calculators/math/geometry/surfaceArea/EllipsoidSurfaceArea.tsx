@@ -28,7 +28,7 @@ import {
   PlaceHolder,
   Image,
 } from '../../../../../custom'
-
+const Latex = require('react-latex');
 
 const EllipsoidSurfaceArea = () => {
   const theme = useTheme();
@@ -47,11 +47,11 @@ const EllipsoidSurfaceArea = () => {
   const [answer, setAnswer] = React.useState<boolean>(false)
   const [initialFormValues] = React.useState({
     axis1: '',
-    axis1_unit: '',
+    axis1_unit: 'mm',
     axis2: '',
-    axis2_unit: '',
+    axis2_unit: 'mm',
     axis3: '',
-    axis3_unit: ''
+    axis3_unit: 'mm'
   })
   const [Result, setResult] = React.useState({
     surfaceArea: 0,
